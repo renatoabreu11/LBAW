@@ -19,4 +19,4 @@ This project is intended to develop an information system with a web interface t
 
 [José Carlos](https://github.com/Evenilink)
 
-[Renato Abreus](https://github.com/renatoabreu11)
+[Renato Abreu](https://github.com/renatoabreu11)
