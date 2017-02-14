@@ -15,8 +15,8 @@ This project is intended to develop an information system with a web interface t
 ## Team 
 [Diogo Cepa](https://github.com/dcepa95)
 
-[Hélder Ribeiro](https://github.com/HelderAntunes)
+[Hélder Antunes](https://github.com/HelderAntunes)
 
 [José Carlos](https://github.com/Evenilink)
 
-[Renato Abreu](https://github.com/renatoabreu11)
+[Renato Abreus](https://github.com/renatoabreu11)
