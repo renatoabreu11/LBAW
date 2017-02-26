@@ -18,4 +18,70 @@ html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+.inner-addon {
+  position: relative;
+}
+
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -50px;
+}
+
+#push,
+#footer {
+  height: 50px;
+}
+#footer {
+  background-color: #eee;
+}
+
+.notifications {
+  min-width:420px;
+}
+
+.notifications-wrapper {
+  overflow:auto;
+  max-height:250px;
+}
+
+.menu-title {
+  color:dodgerblue;
+  font-size:1.5rem;
+  display:inline-block;
+}
+
+.notification-heading, .notification-footer  {
+  padding:2px 10px;
+}
+
+.dropdown-menu.divider {
+  margin:5px 0;
+}
+
+.notification-item {
+  padding:10px;
+  margin:5px;
+  background:#ccc;
+  color:#000;
+  border-radius:4px;
+  font-size:1.3rem;
 }
