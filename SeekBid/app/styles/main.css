@@ -85,3 +85,32 @@ html, body {
   border-radius:4px;
   font-size:1.3rem;
 }
+
+.modal-header, h4{
+  background-color: #f9f9f9;
+  color:black !important;
+  text-align: center;
+  font-size: 22px;
+}
+.modal-footer {
+  background-color: #f9f9f9;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
