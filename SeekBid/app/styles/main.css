@@ -113,3 +113,30 @@ html, body {
   text-align: left;
   vertical-align: middle;
 }
+
+/*profile.html*/
+
+#following {
+  padding-top: 20px;
+}
+
+#following .media .media-body a {
+  text-decoration: none;
+}
+
+#following .media .media-body a:first-child {
+  color: dimgray;
+}
+
+#following .media .media-body a:first-child + a {
+  color: #cccccc;
+}
+
+#following .media .media-body a:hover p {
+  color: navy;
+}
+
+#following .media .media-left img {
+  width: 60px;
+  height: 60px;
+}

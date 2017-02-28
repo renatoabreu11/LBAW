@@ -33,9 +33,6 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -139,6 +136,7 @@
       </div>
     </div>
   </nav>
+
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
@@ -160,17 +158,16 @@
 
       <div class="col-sm-9">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
+          <li><a data-toggle="tab" href="#overview">Overview</a></li>
           <li><a data-toggle="tab" href="#history">History</a></li>
           <li><a data-toggle="tab" href="#reviews">Reviews</a></li>
           <li><a data-toggle="tab" href="#wins">Wins</a></li>
           <li><a data-toggle="tab" href="#watch-list">Watch List</a></li>
-          <li><a data-toggle="tab" href="#followers">Followers</a></li>
-          <li><a data-toggle="tab" href="#following">Following</a></li>
+          <li class="active"><a data-toggle="tab" href="#following">Following</a></li>
         </ul>
 
         <div class="tab-content">
-          <div id="overview" class="tab-pane fade in active">
+          <div id="overview" class="tab-pane fade">
             <h3>Overview</h3>
             <p>Nulla id mi eget magna tincidunt placerat. In hac habitasse platea dictumst. Vestibulum ut tincidunt sapien. Morbi massa ligula, elementum at arcu ac, aliquet pharetra nisi. Nunc id tellus gravida, volutpat velit eget, auctor orci. Ut accumsan, ipsum ac scelerisque molestie, sapien purus tempus magna, et varius tortor metus nec ante. Donec ut accumsan eros, non tristique dui. Donec imperdiet nibh a orci pharetra, et fermentum lectus suscipit. Sed ultricies venenatis sagittis. In convallis lacus id lectus cursus, id congue orci gravida.</p>
           </div>
@@ -242,18 +239,41 @@
             </div>
           </div>
 
-          <div id="followers" class="tab-pane fade">
-            <h3>Followers</h3>
-            <p>These are the followers</p>
-          </div>
-
-          <div id="following" class="tab-pane fade">
-            <h3>Following</h3>
-            <p>These are the user's you're following</p>
+          <div id="following" class="tab-pane fade in active">
+            <div class="media">
+              <div class="media-left">
+                <a href="#" class="media-object"><img class="media-object" src="http://orig04.deviantart.net/b943/f/2013/320/1/3/steampunk_avatar2_by_scottbee2-d6uhajz.png"></a>
+              </div>
+              <div class="media-body">
+                <a href="#" class="media-object"><p class="media-heading lead">Anthony</p></a>
+                <a href="#" class="media-object"><p>anthony76</p></a>
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-left">
+                <a href="#" class="media-object"><img class="media-object" src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-rainbow-unicorn.png"></a>
+              </div>
+              <div class="media-body">
+                <a href="#" class="media-object"><p class="media-heading lead">John</p></a>
+                <a href="#" class="media-object"><p>john_was</p></a>
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-left">
+                <a href="#" class="media-object"><img class="media-object" src="http://cdn.ruvr.ru/2014/10/31/1497249432/2023-10-24T162510Z_699566863_GM1EAAP00HX01_RTRMADP_3_EU-SUMMIT.JPG"></a>
+              </div>
+              <div class="media-body">
+                <a href="#" class="media-object"><p class="media-heading lead">Durao</p></a>
+                <a href="#" class="media-object"><p>europe10</p></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
