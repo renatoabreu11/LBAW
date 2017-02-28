@@ -113,3 +113,20 @@ html, body {
   text-align: left;
   vertical-align: middle;
 }
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  width: 70%;
+  margin: auto;
+}
+
+.product-auction{
+  padding-bottom: 2em;
+}
+.product-info{
+  padding-bottom: 2em;
+}
+
+.auction-info{
+  padding-left: 2em;
+}
