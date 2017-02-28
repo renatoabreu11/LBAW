@@ -38,6 +38,106 @@
 <body>
 
 <div class="container-fluid">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Seek Bid</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <form class="navbar-form navbar-left">
+          <div class="form-group inner-addon left-addon">
+            <i class="glyphicon glyphicon-search"></i>
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
+
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <img src="favicon.ico" class="img-rounded" alt="Cinque Terre" width="64" height="64">
+                  <h4>Sign in to Seek Bid</h4>
+                </div>
+
+                <div class="modal-body">
+                  <form role="form">
+                    <div class="form-group">
+                      <label for="usrname">Username or email address</label>
+                      <input type="text" class="form-control" id="usrname">
+                    </div>
+                    <div class="form-group">
+                      <label for="psw">Password</label>
+                      <input type="text" class="form-control" id="psw">
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="" checked>Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-success btn-block">Sign in</button>
+                  </form>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal">Cancel</button>
+                  <p>Not a member? <a href="#">Sign Up</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <li><a href="#">Sign up</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+              <i class="glyphicon glyphicon-bell"></i>
+            </a>
+            <ul class="dropdown-menu notifications" role="menu">
+              <div class="notification-heading text-center">
+                <h4 class="menu-title">Notifications</h4>
+              </div>
+              <li class="divider"></li>
+              <div class="notifications-wrapper">
+                <a class="content" href="#">
+                  <div class="notification-item">
+                    <h3>Sup mates</h3>
+                    <p>do you guys like it?</p>
+                  </div>
+                </a>
+              </div>
+
+              <li class="divider"></li>
+              <div class="notification-footer">
+                <h4 class="menu-title">View all notifications</h4>
+                <h4 class="menu-title pull-right">Mark all as read</h4>
+              </div>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-user"></span> User </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">My Auctions</a></li>
+              <li><a href="#">Watch List</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
   <div class="row">
     <div class="col-md-12">
       <ul class="breadcrumb">
@@ -48,51 +148,145 @@
           <a href="#">Auctions</a> <span class="divider"></span>
         </li>
         <li class="active">
-          Auct
+          Product
         </li>
       </ul>
-      <div class="row">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="tabbable" id="tabs-118543">
-            <ul class="nav nav-tabs">
-              <li>
-                <a href="#panel-571626" data-toggle="tab">Section 1</a>
-              </li>
-              <li class="active">
-                <a href="#panel-152396" data-toggle="tab">Section 2</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane" id="panel-571626">
-                <p>
-                  I'm in Section 1.
-                </p>
-              </div>
-              <div class="tab-pane active" id="panel-152396">
-                <p>
-                  Howdy, I'm in Section 2.
-                </p>
-              </div>
+    </div>
+  </div>
+
+  <div class="row product-auction">
+    <div class="col-md-4">
+      <br>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+
+          <div class="item active">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg" alt="Chania" width="460" height="345">
+            <div class="carousel-caption">
+              <h3>Chania</h3>
+              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/815UyQUdfoL._SL1500_.jpg" alt="Chania" width="460" height="345">
+            <div class="carousel-caption">
+              <h3>Chania</h3>
+              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/811PGIDq-RL._SL1500_.jpg" alt="Flower" width="460" height="345">
+            <div class="carousel-caption">
+              <h3>Flowers</h3>
+              <p>Beautiful flowers in Kolymbari, Crete.</p>
             </div>
           </div>
         </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+    </div>
+    <div class="col-md-8">
+      <h3>CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
+      <div class="col-md-6 auction-info">
+        <h5>Auctioned by <a href="#">CYBERPOWERPC</a></h5>
+
+        <h3 class="price">Current Bid</h3>
+        <h3 style="margin-top:0px;">U$S 799</h3>
+
+        <div class="section" style="padding-bottom:20px;">
+          <button class="btn btn-success"> Bid</button>
+          <h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Add to watch list</a></h6>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
+      <div class="col-md-6 bidders">
+        <h3>Last Bidders</h3>
+        <ul>
+          <li><a href="#">123456</a></li>
+          <li><a href="#">4566</a></li>
+          <li><a href="#">789</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row product-info">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#product">Product Information</a></li>
+        <li><a data-toggle="tab" href="#seller">Seller</a></li>
+        <li><a data-toggle="tab" href="#otherInfo">Other</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="product" class="tab-pane fade in active">
+          <h3>CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
+          <p>The CyberPowerPC Gamer Xtreme VR is optimized for gaming, and is also VR ready. The Intel CPU and High Performance GPU gives the computer the raw power it needs to function at a high level. Added on, the high speed memory and large hard drive gives the CyberPowerPC Gamer Xtreme VR all the space needed to only focus on gaming.</p>
+          <ul>
+            <li>
+              System: Intel i5-6402P 2.8GHz Quad-Core | Intel B150 Chipset | 8GB DDR4 | 1TB HDD | WI-FI USB Adapter | Genuine Windows 10 Home 64-bit
+            </li>
+            <li>
+              Graphics: AMD Radeon RX 480 4GB Video Card | VR Ready | 1x HDMI | 1x Display Port
+            </li>
+            <li>
+              Connectivity: 6 x USB 3.0 | 4 x USB 2.0 | 1x RJ-45 Network Ethernet 10/100/1000 | Audio: 7.1 Channel Keyboard and Mouse
+            </li>
+            <li>
+              Warranty: 1 Year Parts & Labor Warranty Free Lifetime Tech Support"
+            </li>
+          </ul>
+        </div>
+        <div id="seller" class="tab-pane fade">
+          <h3>CyberPowerPC</h3>
+          <p>CyberPowerPC is one of the nation-wide leading computer system manufacturers. As published in the Los Angeles Business Journal in 2003, we were the fastest growing private company in Los Angeles. With vision, commitment, and steadfast determination, we manufacture and distribute various customized high-end gaming machines, notebook systems and high performance workstations to meet the unique needs for gamers, businesses, government agencies, educational institutions and other end-users.</p>
+        </div>
+        <div id="otherInfo" class="tab-pane fade">
+          <h3>Other info. Random shit</h3>
+          <p>Personalized info given by the user or amazon extra info about the product, p.e</p>
         </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+    </div>
+  </div>
 </div>
+
+<div id="footer">
+  <div class="container">
+    <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
+    <a class="pull-right">About</a>
+    <a class="pull-right">Leave a Feedback</a>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
