@@ -133,6 +133,14 @@ html, body {
 
 /*profile.html*/
 
+.info-name p:first-child {
+  font-weight: bold;
+}
+
+.info-zone span {
+  padding-right: 8px;
+}
+
 #following {
   padding-top: 20px;
 }
