@@ -133,12 +133,20 @@ html, body {
 
 /*profile.html*/
 
+.col-sm-3 {
+  padding-bottom: 20px;
+}
+
 .info-name p:first-child {
   font-weight: bold;
 }
 
 .info-zone span {
   padding-right: 8px;
+}
+
+#history {
+  padding-top: 20px;
 }
 
 #following {
