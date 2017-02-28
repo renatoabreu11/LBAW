@@ -171,16 +171,10 @@ html, body {
   margin: 5px 0 5px;
 }
 
-.product-questions .comment-meta {
-  border-bottom: 1px solid #eee;
-  margin-bottom: 5px;
-}
-
 .product-questions .media {
   border: 1px solid #000;
   margin-bottom: 5px;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 10px;
 }
 
 .product-questions .media-heading {
