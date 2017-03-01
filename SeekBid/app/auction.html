@@ -37,9 +37,8 @@
 </head>
 <body>
 
-<div class="container-fluid">
+<div class="header">
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -60,22 +59,21 @@
         </form>
 
         <ul class="nav navbar-nav navbar-right">
-
           <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
 
           <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header">
-                  <img src="favicon.ico" class="img-rounded" alt="Cinque Terre" width="64" height="64">
+                  <img src="favicon.ico" class="img-rounded" width="64" height="64">
                   <h4>Sign in to Seek Bid</h4>
                 </div>
 
                 <div class="modal-body">
                   <form role="form">
                     <div class="form-group">
-                      <label for="usrname">Username or email address</label>
-                      <input type="text" class="form-control" id="usrname">
+                      <label for="username">Username or email address</label>
+                      <input type="text" class="form-control" id="username">
                     </div>
                     <div class="form-group">
                       <label for="psw">Password</label>
@@ -110,8 +108,8 @@
               <div class="notifications-wrapper">
                 <a class="content" href="#">
                   <div class="notification-item">
-                    <h3>Sup mates</h3>
-                    <p>do you guys like it?</p>
+                    <h4 class="text-center">Auction Notification</h4>
+                    <p>Your bid in the product "Lg Monitor" has been surpassed in 2$ by the user abradolf.</p>
                   </div>
                 </a>
               </div>
@@ -135,10 +133,11 @@
           </li>
         </ul>
       </div>
-    </div>
   </nav>
+</div>
 
-  <div class="row">
+<div id="wrap">
+  <div class="row index">
     <div class="col-md-12">
       <ul class="breadcrumb">
         <li>
@@ -148,7 +147,7 @@
           <a href="#">Auctions</a> <span class="divider"></span>
         </li>
         <li class="active">
-          Product
+          Product Auction
         </li>
       </ul>
     </div>
@@ -156,24 +155,18 @@
 
   <div class="row product-auction">
     <div class="col-md-4">
-      <br>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
+      <div id="productGallery" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
+          <li data-target="#productGallery" data-slide-to="0" class="active"></li>
+          <li data-target="#productGallery" data-slide-to="1"></li>
+          <li data-target="#productGallery" data-slide-to="2"></li>
         </ol>
 
-        <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-
           <div class="item active">
             <img src="https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg" alt="Chania" width="460" height="345">
             <div class="carousel-caption">
               <h3>Chania</h3>
-              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
             </div>
           </div>
 
@@ -181,7 +174,6 @@
             <img src="https://images-na.ssl-images-amazon.com/images/I/815UyQUdfoL._SL1500_.jpg" alt="Chania" width="460" height="345">
             <div class="carousel-caption">
               <h3>Chania</h3>
-              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
             </div>
           </div>
 
@@ -189,45 +181,55 @@
             <img src="https://images-na.ssl-images-amazon.com/images/I/811PGIDq-RL._SL1500_.jpg" alt="Flower" width="460" height="345">
             <div class="carousel-caption">
               <h3>Flowers</h3>
-              <p>Beautiful flowers in Kolymbari, Crete.</p>
             </div>
           </div>
         </div>
 
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <a class="left carousel-control" href="#productGallery" role="button" data-slide="prev">
           <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <a class="right carousel-control" href="#productGallery" role="button" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
       </div>
+      <h5 class="text-center"><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Add to watch list</a></h5>
     </div>
-    <div class="col-md-8">
-      <h3>CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
-      <div class="col-md-6 auction-info">
-        <h5>Auctioned by <a href="#">CYBERPOWERPC</a></h5>
 
-        <h3 class="price">Current Bid</h3>
-        <h3 style="margin-top:0px;">U$S 799</h3>
+    <div class="col-md-8">
+      <h3 style="margin: 0">CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
+      <div class="col-md-6 text-center">
+        <h3>Current Bid $799</h3>
+        <h3>05:31</h3>
 
         <div class="section" style="padding-bottom:20px;">
           <button class="btn btn-success"> Bid</button>
-          <h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Add to watch list</a></h6>
+        </div>
+        <h5>Auctioned by <a href="#">CYBERPOWERPC</a></h5>
+        <div class="user-rating-stars text-center">
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star-empty"></span>
+          <span class="glyphicon glyphicon-star-empty"></span>
         </div>
       </div>
-      <div class="col-md-6 bidders">
-        <h3>Last Bidders</h3>
-        <ul>
-          <li><a href="#">123456</a></li>
-          <li><a href="#">4566</a></li>
-          <li><a href="#">789</a></li>
+      <div class="col-md-6 text-center">
+        <h3>Recent Bidders</h3>
+        <ul class="bidders text-left" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
         </ul>
       </div>
     </div>
   </div>
+
+  <hr>
 
   <div class="row product-info">
     <div class="col-md-12">
@@ -267,6 +269,9 @@
       </div>
     </div>
   </div>
+
+  <hr>
+
   <div class="row product-questions">
     <div class="col-md-12">
       <h2>Product Q&A</h2>
@@ -278,24 +283,20 @@
         <button type="submit" class="btn btn-default">Send</button>
       </form>
 
-      <hr>
-
-      <div class="row">
-        <div class="media">
-          <div class="media-heading">
-            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
-              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-            </button>
-            <a href="">hant</a> 5 hours ago
-          </div>
-          <div class="panel-collapse collapse in" id="collapseComment">
-            <div class="media-body">
-              <p>Dá para ver porno em 4k?</p>
-              <div class="comment-meta">
-                <span><a href="#">delete</a></span>
-                <span><a href="#">report</a></span>
-                <span><a href="#">hide</a></span>
-              </div>
+      <div class="media">
+        <div class="media-heading">
+          <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+          </button>
+          <a href="">hant</a> 5 hours ago
+        </div>
+        <div class="panel-collapse collapse in" id="collapseComment">
+          <div class="media-body">
+            <p>Dá para ver porno em 4k?</p>
+            <div class="comment-meta">
+              <span><a href="#">delete</a></span>
+              <span><a href="#">report</a></span>
+              <span><a href="#">hide</a></span>
             </div>
           </div>
         </div>
@@ -303,39 +304,41 @@
     </div>
   </div>
 
+  <hr>
+
   <div class="row suggestions">
-    <h2>Similar Auctions</h2>
-    <div class='col-md-10 col-centered'>
+    <div class='col-md-12 col-centered'>
+      <h2>Similar Auctions</h2>
       <div class="carousel slide media-carousel" id="media">
         <div class="carousel-inner">
-          <div class="item  active">
+          <div class="item active">
             <div class="row">
               <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
               </div>
               <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
               </div>
               <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
               </div>
               <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
               </div>
             </div>
@@ -346,6 +349,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <div id="footer">
