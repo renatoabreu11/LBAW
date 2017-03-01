@@ -227,12 +227,28 @@ html, body {
   padding-bottom: 20px;
 }
 
+.info-name .user-real-name {
+  padding-top: 15px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.info-name .user-nick-name {
+  font-size: 18px;
+  font-weight: 200;
+  color: #9e9e96;
+}
+
 .info-name p:first-child {
   font-weight: bold;
 }
 
 .info-zone span {
   padding-right: 8px;
+}
+
+.user-rating .user-rating-numeric {
+  padding-top: 8px;
 }
 
 #history {
@@ -249,8 +265,11 @@ html, body {
 
 #reviews .row .review-rating {
   padding-top: 15px;
-  color: #0f0f0a;
   vertical-align: middle;
+}
+
+#reviews .reviewer-info {
+  padding-top: 7px;
 }
 
 #reviews .review-product-name p{
@@ -262,6 +281,10 @@ html, body {
 #reviews .review-comment {
   color: #1f1f14;
   padding-right: 10px;
+}
+
+#watch-list {
+  padding-top: 20px;
 }
 
 #following {

@@ -142,8 +142,8 @@
       <div class="col-sm-3">
         <div class="info-name">
           <img src="http://vignette3.wikia.nocookie.net/deadliestfiction/images/3/3c/Raiden_MGRR.jpg/revision/latest?cb=20121230200223" class="img-rounded center-block" alt="User avatar" width="156">
-          <p class="text-center">Raiden</p>
-          <p class="text-center">raidenFTW</p>
+          <p class="text-center user-real-name">Raiden</p>
+          <p class="text-center user-nick-name">raidenFTW</p>
         </div>
         <hr>
         <div class="info-zone">
@@ -151,16 +151,16 @@
           <span class="glyphicon glyphicon-envelope"></span>
           <a href="mailto:raiden@gmail.com">raiden@gmail.com</a>
         </div>
-        <div class="ratings">
+        <div class="user-rating">
           <hr>
-          <p>Rating:</p>
-          <p>
+          <div class="user-rating-stars text-center">
             <span class="glyphicon glyphicon-star"></span>
             <span class="glyphicon glyphicon-star"></span>
             <span class="glyphicon glyphicon-star"></span>
             <span class="glyphicon glyphicon-star-empty"></span>
             <span class="glyphicon glyphicon-star-empty"></span>
-          </p>
+          </div>
+          <p class="user-rating-numeric text-center">6/10</p>
         </div>
         <hr>
         <button type="button" class="btn btn-primary btn-block">Follow</button>
@@ -177,7 +177,6 @@
         </ul>
 
         <div class="tab-content">
-
           <div id="overview" class="tab-pane fade">
             <h3>Overview</h3>
             <p>Nulla id mi eget magna tincidunt placerat. In hac habitasse platea dictumst. Vestibulum ut tincidunt sapien. Morbi massa ligula, elementum at arcu ac, aliquet pharetra nisi. Nunc id tellus gravida, volutpat velit eget, auctor orci. Ut accumsan, ipsum ac scelerisque molestie, sapien purus tempus magna, et varius tortor metus nec ante. Donec ut accumsan eros, non tristique dui. Donec imperdiet nibh a orci pharetra, et fermentum lectus suscipit. Sed ultricies venenatis sagittis. In convallis lacus id lectus cursus, id congue orci gravida.</p>
@@ -251,7 +250,6 @@
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                   </p>
-
                   <p class="text-left">By <a href="#">anthony76</a> on 25/04/2015</p>
                 </div>
                 <div class="col-md-8 col-sm-8">
@@ -265,15 +263,14 @@
               <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-4">
                   <a href="#"><img class="review-image" src="http://www.nvidia.co.uk/content/EMEAI/images/geforce-refresh/mini-features/laptops-800m-graphics-cards.jpg"></a>
-                  <p class="review-rating">Rating:
+                  <div class="review-rating text-center">
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
-                  </p>
-
-                  <p class="text-left">By <a href="#">anthony76</a> on 25/04/2015</p>
+                  </div>
+                  <p class="text-center reviewer-info">By <a href="#">anthony76</a> on 25/04/2015</p>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-8">
                   <a href="#" class="review-product-name"><p>Surface Book</p></a>
@@ -290,55 +287,73 @@
           </div>
 
           <div id="watch-list" class="tab-pane fade">
-            <div class="row">
-              <div class="col-md-2 col-sm-4">
-                <div class="thumbnail">
-                  <img class="img-rounded group list-group-image" src="https://blogs-images.forbes.com/erikkain/files/2016/11/mass-effect-box-art-1.jpg" alt="Product item" width="124">
-                  <h4>Mass Effect: Andromeda</h4>
-                  <p class="lead">$49.99</p>
-                  <button type="button" class="btn btn-primary">Bid</button>
+            <div class="col-md-4 col-sm-4">
+              <span class="thumbnail">
+                <h4>Surface Book</h4>
+                <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+                <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+                <p class="text-center">Current bid: $75,99</p>
+                <p class="text-center">Auction counter here</p>
+                <div class="row text-center">
+                  <button class="btn btn-info btn-sm">Watch Auction</button>
+                  <button class="btn btn-info btn-sm">Remove from Watchlist</button>
                 </div>
-              </div>
-              <div class="col-md-2 col-sm-4">
-                <div class="thumbnail">
-                  <img class="img-rounded" src="https://blogs-images.forbes.com/erikkain/files/2016/11/mass-effect-box-art-1.jpg" alt="Product item" width="124">
-                  <h4>Mass Effect: Andromeda</h4>
-                  <p class="lead">$49.99</p>
-                  <button type="button" class="btn btn-primary">Bid</button>
+                <hr class="line">
+                <div class="seller text-center">
+                  <p>Product auctioned by <a href="#">Microsoft</a></p>
                 </div>
-              </div>
-              <div class="col-md-2 col-sm-4">
-                <div class="thumbnail">
-                  <img class="img-rounded" src="https://blogs-images.forbes.com/erikkain/files/2016/11/mass-effect-box-art-1.jpg" alt="Product item" width="124">
-                  <h4>Mass Effect: Andromeda</h4>
-                  <p class="lead">$49.99</p>
-                  <button type="button" class="btn btn-primary">Bid</button>
+              </span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <span class="thumbnail">
+                <h4>Surface Book</h4>
+                <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+                <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+                <p class="text-center">Current bid: $75,99</p>
+                <p class="text-center">Auction counter here</p>
+                <div class="row text-center">
+                    <button class="btn btn-info btn-sm">Watch Auction</button>
+                    <button class="btn btn-info btn-sm">Remove from Watchlist</button>
                 </div>
-              </div>
-              <div class="col-md-2 col-sm-4">
-                <div class="thumbnail">
-                  <img class="img-rounded" src="https://blogs-images.forbes.com/erikkain/files/2016/11/mass-effect-box-art-1.jpg" alt="Product item" width="124">
-                  <h4>Mass Effect: Andromeda</h4>
-                  <p class="lead">$49.99</p>
-                  <button type="button" class="btn btn-primary">Bid</button>
+                <hr class="line">
+                <div class="seller text-center">
+                  <p>Product auctioned by <a href="#">Microsoft</a></p>
                 </div>
-              </div>
-              <div class="col-md-2 col-sm-4">
-                <div class="thumbnail">
-                  <img class="img-rounded" src="https://blogs-images.forbes.com/erikkain/files/2016/11/mass-effect-box-art-1.jpg" alt="Product item" width="124">
-                  <h4>Mass Effect: Andromeda</h4>
-                  <p class="lead">$49.99</p>
-                  <button type="button" class="btn btn-primary">Bid</button>
+              </span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <span class="thumbnail">
+                <h4>Surface Book</h4>
+                <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+                <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+                <p class="text-center">Current bid: $75,99</p>
+                <p class="text-center">Auction counter here</p>
+                <div class="row text-center">
+                    <button class="btn btn-info btn-sm">Watch Auction</button>
+                    <button class="btn btn-info btn-sm">Remove from Watchlist</button>
                 </div>
-              </div>
-              <div class="col-md-2 col-sm-4">
-                <div class="thumbnail">
-                  <img class="img-rounded" src="https://blogs-images.forbes.com/erikkain/files/2016/11/mass-effect-box-art-1.jpg" alt="Product item" width="124">
-                  <h4>Mass Effect: Andromeda</h4>
-                  <p class="lead">$49.99</p>
-                  <button type="button" class="btn btn-primary">Bid</button>
+                <hr class="line">
+                <div class="seller text-center">
+                  <p>Product auctioned by <a href="#">Microsoft</a></p>
                 </div>
-              </div>
+              </span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <span class="thumbnail">
+                <h4>Surface Book</h4>
+                <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+                <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+                <p class="text-center">Current bid: $75,99</p>
+                <p class="text-center">Auction counter here</p>
+                <div class="row text-center">
+                    <button class="btn btn-info btn-sm">Watch Auction</button>
+                    <button class="btn btn-info btn-sm">Remove from Watchlist</button>
+                </div>
+                <hr class="line">
+                <div class="seller text-center">
+                  <p>Product auctioned by <a href="#">Microsoft</a></p>
+                </div>
+              </span>
             </div>
           </div>
 
