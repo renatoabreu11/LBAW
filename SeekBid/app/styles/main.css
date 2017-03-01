@@ -236,7 +236,11 @@ html, body {
 .info-name .user-nick-name {
   font-size: 18px;
   font-weight: 200;
-  color: #9e9e96;
+  color: #5d5d56;
+}
+
+.info-name .user-overview {
+  color: #5d5d56;
 }
 
 .info-name p:first-child {
@@ -249,6 +253,10 @@ html, body {
 
 .user-rating .user-rating-numeric {
   padding-top: 8px;
+}
+
+#recent-activity {
+  padding-top: 20px;
 }
 
 #history {
