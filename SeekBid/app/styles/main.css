@@ -259,10 +259,6 @@ html, body {
   padding-top: 20px;
 }
 
-#history {
-  padding-top: 20px;
-}
-
 #reviews {
   padding-top: 20px;
 }
@@ -289,6 +285,30 @@ html, body {
 #reviews .review-comment {
   color: #1f1f14;
   padding-right: 10px;
+}
+
+#wins {
+  padding-top: 20px;
+}
+
+#wins .win-image {
+  padding-top: 8px;
+}
+
+#wins .win-product-name p{
+  padding-top: 8px;
+  color: dimgrey;
+  font-size: x-large;
+}
+
+#wins .win-comment {
+  color: #1f1f14;
+  padding-right: 10px;
+}
+
+#wins .win-info-price {
+  padding-top: 8px;
+  color: #5d5d56;
 }
 
 #watch-list {
