@@ -257,7 +257,7 @@ ul {
   min-height: 180px;
 }
 
-/*profile.html*/
+/************************profile.html************************/
 
 .col-sm-3 {
   padding-bottom: 20px;
@@ -376,7 +376,7 @@ ul {
   height: 60px;
 }
 
-/*signup.html*/
+/***********************signup.html***********************/
 
 .main {
   margin-top: 20px;
@@ -419,11 +419,6 @@ input, input::-webkit-input-placeholder {
   padding: 40px 40px;
 }
 
-
 .panel-heading {
   margin: 0;
 }
-
-
-
-
