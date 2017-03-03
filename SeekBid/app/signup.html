@@ -31,9 +31,10 @@
   <!-- Color the status bar on mobile devices -->
   <meta name="theme-color" content="#2F3BA2">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -143,13 +144,12 @@
     <div class="panel-heading">
       <div class="panel-title text-center">
         <img src="favicon.ico" class="img-rounded" width="64" height="64">
-        <h2 class="title">Join Seek Bid</h2>
-        <hr />
+        <h2 class="title" id="title-signup">Join Seek Bid for free!</h2>
       </div>
     </div>
+
     <div class="main-login main-center">
       <form class="form-horizontal" method="post" action="#">
-
         <div class="form-group">
           <label for="name" class="cols-sm-2 control-label">Name</label>
           <div class="cols-sm-10">
@@ -200,20 +200,20 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="form-group" style="padding:12px;">
+        <div class="form-group" id="textarea-signup">
+          <div class="form-group" style="padding:12px">
             <label for="confirm" class="cols-sm-2 control-label">Short bio</label>
-            <textarea class="form-control animated" placeholder="Talk a little about you..."></textarea>
+            <textarea class="form-control" rows="5" placeholder="Talk a little about you..."></textarea>
           </div>
         </div>
 
-        <div class="form-group ">
-          <button type="submit" class="btn btn-default btn-success btn-block">Sign up</button>
+        <div class="form-group" id="signup-btn">
+          <button type="submit" class="btn btn-success">Sign up</button>
         </div>
       </form>
     </div>
   </div>
-</div>
+
 
 
 <div id="footer">
