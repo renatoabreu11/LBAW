@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seek Bid</title>
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Web Starter Kit">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#2F3BA2">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#2F3BA2">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Seek Bid</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+      <form class="navbar-form navbar-left">
+        <div class="form-group inner-addon left-addon">
+          <i class="glyphicon glyphicon-search"></i>
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+            <i class="glyphicon glyphicon-bell"></i>
+          </a>
+          <ul class="dropdown-menu notifications" role="menu">
+            <div class="notification-heading text-center">
+              <h4 class="menu-title">Notifications</h4>
+            </div>
+            <li class="divider"></li>
+            <div class="notifications-wrapper">
+              <a class="content" href="#">
+                <div class="notification-item">
+                  <h3>Sup mates</h3>
+                  <p>do you guys like it?</p>
+                </div>
+              </a>
+            </div>
+
+            <li class="divider"></li>
+            <div class="notification-footer">
+              <h4 class="menu-title">View all notifications</h4>
+              <h4 class="menu-title pull-right">Mark all as read</h4>
+            </div>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-user"></span> Admin </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Sign out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+
+    <!-- Left side -->
+    <div class="col-md-3">
+
+      <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> Website administrator</strong></a>
+      <hr>
+
+      <div class="list-group">
+        <a href="#" class="list-group-item active"><i class="glyphicon glyphicon-exclamation-sign"></i> Reports</a>
+        <a href="#" class="list-group-item">Auctions</a>
+        <a href="#" class="list-group-item">Users</a>
+        <a href="#" class="list-group-item">Comments</a>
+        <a href="#" class="list-group-item">Reviews</a>
+      </div>
+      <hr>
+
+      <div class="list-group">
+        <a href="#" class="list-group-item active"><i class="glyphicon glyphicon-cog"></i> Settings</a>
+        <a href="#" class="list-group-item"><i class="glyphicon glyphicon-plus"></i> Add category</a>
+        <a href="#" class="list-group-item"><i class="glyphicon glyphicon-plus"></i> Add admin</a>
+        <a href="#" class="list-group-item"><i class="glyphicon glyphicon-user"></i> Staff List</a>
+      </div>
+
+    </div>
+
+    <!-- Right side -->
+    <div class="col-md-9">
+
+      <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> User reports</strong></a>
+
+      <div class="row">
+        <div class="box-body no-padding">
+          <div class="mailbox-controls">
+            <!-- Check all button -->
+            <button class="btn btn-default btn-sm checkbox-toggle"><i class="glyphicon glyphicon-unchecked"></i></button>
+            <div class="btn-group">
+              <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+              <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
+              <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
+            </div><!-- /.btn-group -->
+            <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+            <div class="pull-right">
+              1-8/20
+              <div class="btn-group">
+                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
+                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
+              </div><!-- /.btn-group -->
+            </div><!-- /.pull-right -->
+          </div>
+          <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">5 mins ago</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">28 mins ago</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">11 hours ago</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">15 hours ago</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">Yesterday</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">2 days ago</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">2 days ago</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td class="mailbox-star"></td>
+                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
+                <td class="mailbox-subject"><b>:(</b> - This guy insulted me.</td>
+                <td class="mailbox-date">2 days ago</td>
+              </tr>
+              </tbody>
+            </table><!-- /.table -->
+          </div><!-- /.mail-box-messages -->
+        </div><!-- /.box-body -->
+        <hr>
+      </div><!-- /. box -->
+    </div><!--/col-span-9-->
+  </div>
+</div>
+
+<div id="footer">
+  <div class="container">
+    <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
+    <a class="pull-right">About</a>
+    <a class="pull-right">Leave a Feedback</a>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
