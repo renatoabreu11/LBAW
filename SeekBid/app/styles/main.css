@@ -457,3 +457,6 @@ input, input::-webkit-input-placeholder {
 .panel-heading {
   margin: 0;
 }
+
+/***************watchList.html***********/
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
