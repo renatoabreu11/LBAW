@@ -278,6 +278,37 @@ ul {
   min-height: 180px;
 }
 
+.shop__sorting {
+  list-style: none;
+  padding-left: 0;
+  margin-top: -20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+.shop__sorting > li {
+  display: inline-block;
+}
+.shop__sorting > li > a {
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-bottom: 2px solid transparent;
+  color: #757575;
+  -webkit-transition: all .05s linear;
+  -o-transition: all .05s linear;
+  transition: all .05s linear;
+}
+.shop__sorting > li > a:hover,
+.shop__sorting > li > a:focus {
+  color: #333333;
+  text-decoration: none;
+}
+.shop__sorting > li.active > a {
+  color: dodgerblue;
+  border-bottom-color: dodgerblue;
+}
+
 /************************profile.html************************/
 
 .col-sm-3 {
@@ -504,4 +535,5 @@ input, input::-webkit-input-placeholder {
 }
 
 /***************watchList.html***********/
+
 .pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
