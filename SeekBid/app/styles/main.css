@@ -259,6 +259,33 @@ html, body {
   padding-top: 20px;
 }
 
+#recent-activity .recent-activity-type {
+  display: inline-block;
+}
+
+#recent-activity .recent-activity-date {
+  float: right;
+  text-align: center;
+  font-size: 12px;
+}
+
+#details {
+  padding-top: 20px;
+}
+
+#details .details-description {
+  color: dimgrey;
+  font-size: x-large;
+}
+
+#details .details-description-info {
+  color: #1f1f14;
+}
+
+#details .details-short-info {
+  padding-top: 50px;
+}
+
 #reviews {
   padding-top: 20px;
 }
