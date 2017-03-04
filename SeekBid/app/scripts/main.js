@@ -164,10 +164,10 @@
   /***************watchList.html***************/
   function updateClock() {
 
-    $("#time1").text(decreaseTime_1second($("#time1").text()));
-    $("#time2").text(decreaseTime_1second($("#time2").text()));
-    $("#time3").text(decreaseTime_1second($("#time3").text()));
-    $("#time4").text(decreaseTime_1second($("#time4").text()));
+    var times = $(".time");
+    for(var i = 0; i < times.length; i++){
+      $(times[i]).text(decreaseTime_1second($(times[i]).text()));
+    }
 
     // call this function again in 1000ms
     setTimeout(updateClock, 1000);

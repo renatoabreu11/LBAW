@@ -69,6 +69,10 @@ ul {
   list-style-type: none;
 }
 
+.breadcrumb {
+  background: white;
+}
+
 /************************* Header *******************************/
 
 .notifications {
@@ -236,25 +240,26 @@ ul {
 }
 
 .grid .grid-body {
-  padding: 15px 20px 15px 20px;
+  padding: 5px 20px 15px 20px;
   font-size: 0.9em;
   line-height: 1.9em;
 }
 
+#auctions table tr td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+#auctions table tr td.product {
+  text-align: left;
+}
+
+#auctions table tr td.seller span {
+  color: #ffe422;
+}
+
 #auctions table tr td.image {
   width: 84px;
-}
-
-#auctions table tr td.seller {
-  vertical-align: middle;
-}
-
-#auctions table tr td.price {
-  vertical-align: middle;
-}
-
-#auctions table tr td.watch {
-  vertical-align: middle;
 }
 
 #auctions table tr td img {
@@ -274,17 +279,30 @@ ul {
   min-height: 180px;
 }
 
-.shop__sorting {
+.thumbnail .watchAuction {
+  padding-bottom: 1em;
+}
+
+.thumbnail .seller {
+  border-top: solid 1px lightgrey;
+  padding-top: 1em;
+}
+
+.thumbnail .seller span{
+  color: #ffe422;
+}
+
+.auctionSort {
   list-style: none;
   padding-left: 0;
   margin-top: -20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: left;
 }
-.shop__sorting > li {
+.auctionSort > li {
   display: inline-block;
 }
-.shop__sorting > li > a {
+.auctionSort > li > a {
   display: block;
   padding-top: 20px;
   padding-bottom: 10px;
@@ -295,12 +313,12 @@ ul {
   -o-transition: all .05s linear;
   transition: all .05s linear;
 }
-.shop__sorting > li > a:hover,
-.shop__sorting > li > a:focus {
+.auctionSort > li > a:hover,
+.auctionSort > li > a:focus {
   color: #333333;
   text-decoration: none;
 }
-.shop__sorting > li.active > a {
+.auctionSort > li.active > a {
   color: dodgerblue;
   border-bottom-color: dodgerblue;
 }
