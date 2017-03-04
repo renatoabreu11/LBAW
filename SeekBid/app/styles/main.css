@@ -76,7 +76,7 @@ ul {
 }
 
 .notifications-wrapper {
-  overflow:auto;
+  overflow: auto;
   max-height:350px;
 }
 
@@ -89,10 +89,6 @@ ul {
 .notification-heading, .notification-footer  {
   padding:2px 10px;
 }
-
-/*.dropdown-menu.divider {
-  margin:5px 0;
-}*/
 
 .dropdown .notifications-empty {
   font-size: large;

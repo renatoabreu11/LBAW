@@ -57,8 +57,9 @@
 
   // Remove notification when clicking on the 'x' button.
   $(".dropdown .notifications-wrapper .notification-item-remove").click(function(e) {
-    var notification = $(this).parent().parent();
+    var notification = $(this).parent().parent().parent();
     notification.fadeOut(500, function() {
+      notification.next().remove();   // Removes the associated divider.
       notification.remove();
     });
 
@@ -71,7 +72,9 @@
 
   // Remove notification once it's clicked (via link).
   $(".dropdown .notifications-wrapper .notification-item a").click(function() {
-    $(this).parent().parent().remove();
+    var notification = $(this).parent().parent().parent();
+    notification.next().remove();
+    notification.remove();
 
     if($(".notifications-wrapper").children().length == 0)
       $(".notifications-wrapper").html('<p class="notifications-empty">You have no new notifications</p>');
