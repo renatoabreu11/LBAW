@@ -37,9 +37,8 @@
 </head>
 <body>
 
-<div class="container-fluid">
+<div class="header">
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -60,22 +59,21 @@
         </form>
 
         <ul class="nav navbar-nav navbar-right">
-
           <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
 
           <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
                 <div class="modal-header">
-                  <img src="favicon.ico" class="img-rounded" alt="Cinque Terre" width="64" height="64">
+                  <img src="favicon.ico" class="img-rounded" width="64" height="64">
                   <h4>Sign in to Seek Bid</h4>
                 </div>
 
                 <div class="modal-body">
                   <form role="form">
                     <div class="form-group">
-                      <label for="usrname">Username or email address</label>
-                      <input type="text" class="form-control" id="usrname">
+                      <label for="username">Username or email address</label>
+                      <input type="text" class="form-control" id="username">
                     </div>
                     <div class="form-group">
                       <label for="psw">Password</label>
@@ -110,8 +108,8 @@
               <div class="notifications-wrapper">
                 <a class="content" href="#">
                   <div class="notification-item">
-                    <h3>Sup mates</h3>
-                    <p>do you guys like it?</p>
+                    <h4 class="text-center">Auction Notification</h4>
+                    <p>Your bid in the product "Lg Monitor" has been surpassed in 2$ by the user abradolf.</p>
                   </div>
                 </a>
               </div>
@@ -135,9 +133,10 @@
           </li>
         </ul>
       </div>
-    </div>
   </nav>
+</div>
 
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <ul class="breadcrumb">
@@ -148,201 +147,236 @@
           <a href="#">Auctions</a> <span class="divider"></span>
         </li>
         <li class="active">
-          Product
+          Product Auction
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="row product-auction">
-    <div class="col-md-4">
-      <br>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-        </ol>
+  <div class="grid">
+    <div class="grid-body">
+      <div class="row product-auction">
+        <div class="col-md-4">
+          <div id="productGallery" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#productGallery" data-slide-to="0" class="active"></li>
+              <li data-target="#productGallery" data-slide-to="1"></li>
+              <li data-target="#productGallery" data-slide-to="2"></li>
+            </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg" alt="Chania" width="460" height="345">
+                <div class="carousel-caption">
+                  <h3>Chania</h3>
+                </div>
+              </div>
 
-          <div class="item active">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg" alt="Chania" width="460" height="345">
-            <div class="carousel-caption">
-              <h3>Chania</h3>
-              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+              <div class="item">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/815UyQUdfoL._SL1500_.jpg" alt="Chania" width="460" height="345">
+                <div class="carousel-caption">
+                  <h3>Chania</h3>
+                </div>
+              </div>
+
+              <div class="item">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/811PGIDq-RL._SL1500_.jpg" alt="Flower" width="460" height="345">
+                <div class="carousel-caption">
+                  <h3>Flowers</h3>
+                </div>
+              </div>
+            </div>
+
+            <a class="left carousel-control" href="#productGallery" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#productGallery" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+          <h5 class="text-center"><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Add to watch list</a></h5>
+        </div>
+
+        <div class="col-md-8">
+          <h3 style="margin: 0">CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
+          <div class="col-md-6 text-center">
+            <h3>Current Bid $799</h3>
+            <h3>05:31</h3>
+
+            <div class="section" style="padding-bottom:20px;">
+              <button class="btn btn-success" data-toggle="modal" data-target="#bidModal"> Bid</button>
+              <div class="modal fade" id="bidModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <img src="favicon.ico" class="img-rounded" width="64" height="64">
+                      <h4>Select the value of your bid!</h4>
+                    </div>
+
+                      <div class="row" style="margin: 10px;">
+                          <div class="input-group number-spinner">
+                            <span class="input-group-btn">
+                              <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                            </span>
+                            <input type="text" class="form-control text-center" value="800$">
+                            <span class="input-group-btn">
+					                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+				                    </span>
+                          </div>
+                      </div>
+
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-success btn-default pull-right" data-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-success btn-default pull-left" data-dismiss="modal">Bid</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h5>Auctioned by <a href="#">CYBERPOWERPC</a></h5>
+            <div class="user-rating-stars text-center">
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star"></span>
+              <span class="glyphicon glyphicon-star-empty"></span>
+              <span class="glyphicon glyphicon-star-empty"></span>
             </div>
           </div>
-
-          <div class="item">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/815UyQUdfoL._SL1500_.jpg" alt="Chania" width="460" height="345">
-            <div class="carousel-caption">
-              <h3>Chania</h3>
-              <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
-            </div>
-          </div>
-
-          <div class="item">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/811PGIDq-RL._SL1500_.jpg" alt="Flower" width="460" height="345">
-            <div class="carousel-caption">
-              <h3>Flowers</h3>
-              <p>Beautiful flowers in Kolymbari, Crete.</p>
-            </div>
+          <div class="col-md-6 text-center">
+            <h3>Recent Bidders</h3>
+            <ul class="bidders text-left" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+            </ul>
           </div>
         </div>
-
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
       </div>
-    </div>
-    <div class="col-md-8">
-      <h3>CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
-      <div class="col-md-6 auction-info">
-        <h5>Auctioned by <a href="#">CYBERPOWERPC</a></h5>
-
-        <h3 class="price">Current Bid</h3>
-        <h3 style="margin-top:0px;">U$S 799</h3>
-
-        <div class="section" style="padding-bottom:20px;">
-          <button class="btn btn-success"> Bid</button>
-          <h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Add to watch list</a></h6>
-        </div>
-      </div>
-      <div class="col-md-6 bidders">
-        <h3>Last Bidders</h3>
-        <ul>
-          <li><a href="#">123456</a></li>
-          <li><a href="#">4566</a></li>
-          <li><a href="#">789</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="row product-info">
-    <div class="col-md-12">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#product">Product Information</a></li>
-        <li><a data-toggle="tab" href="#seller">Seller</a></li>
-        <li><a data-toggle="tab" href="#otherInfo">Other</a></li>
-      </ul>
-
-      <div class="tab-content">
-        <div id="product" class="tab-pane fade in active">
-          <h3>CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
-          <p>The CyberPowerPC Gamer Xtreme VR is optimized for gaming, and is also VR ready. The Intel CPU and High Performance GPU gives the computer the raw power it needs to function at a high level. Added on, the high speed memory and large hard drive gives the CyberPowerPC Gamer Xtreme VR all the space needed to only focus on gaming.</p>
-          <ul>
-            <li>
-              System: Intel i5-6402P 2.8GHz Quad-Core | Intel B150 Chipset | 8GB DDR4 | 1TB HDD | WI-FI USB Adapter | Genuine Windows 10 Home 64-bit
-            </li>
-            <li>
-              Graphics: AMD Radeon RX 480 4GB Video Card | VR Ready | 1x HDMI | 1x Display Port
-            </li>
-            <li>
-              Connectivity: 6 x USB 3.0 | 4 x USB 2.0 | 1x RJ-45 Network Ethernet 10/100/1000 | Audio: 7.1 Channel Keyboard and Mouse
-            </li>
-            <li>
-              Warranty: 1 Year Parts & Labor Warranty Free Lifetime Tech Support"
-            </li>
-          </ul>
-        </div>
-        <div id="seller" class="tab-pane fade">
-          <h3>CyberPowerPC</h3>
-          <p>CyberPowerPC is one of the nation-wide leading computer system manufacturers. As published in the Los Angeles Business Journal in 2003, we were the fastest growing private company in Los Angeles. With vision, commitment, and steadfast determination, we manufacture and distribute various customized high-end gaming machines, notebook systems and high performance workstations to meet the unique needs for gamers, businesses, government agencies, educational institutions and other end-users.</p>
-        </div>
-        <div id="otherInfo" class="tab-pane fade">
-          <h3>Other info. Random shit</h3>
-          <p>Personalized info given by the user or amazon extra info about the product, p.e</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row product-questions">
-    <div class="col-md-12">
-      <h2>Product Q&A</h2>
-      <form class="newQuestion">
-        <div class="form-group">
-          <label>Your Question</label>
-          <textarea name="comment" class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Send</button>
-      </form>
 
       <hr>
 
-      <div class="row">
-        <div class="media">
-          <div class="media-heading">
-            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
-              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-            </button>
-            <a href="">hant</a> 5 hours ago
+      <div class="row product-info">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#product">Product Information</a></li>
+            <li><a data-toggle="tab" href="#seller">Seller</a></li>
+            <li><a data-toggle="tab" href="#otherInfo">Other</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="product" class="tab-pane fade in active">
+              <h3>CYBERPOWERPC Gamer Xtreme VR GXiVR8020A Gaming Desktop</h3>
+              <p>The CyberPowerPC Gamer Xtreme VR is optimized for gaming, and is also VR ready. The Intel CPU and High Performance GPU gives the computer the raw power it needs to function at a high level. Added on, the high speed memory and large hard drive gives the CyberPowerPC Gamer Xtreme VR all the space needed to only focus on gaming.</p>
+              <ul>
+                <li>
+                  System: Intel i5-6402P 2.8GHz Quad-Core | Intel B150 Chipset | 8GB DDR4 | 1TB HDD | WI-FI USB Adapter | Genuine Windows 10 Home 64-bit
+                </li>
+                <li>
+                  Graphics: AMD Radeon RX 480 4GB Video Card | VR Ready | 1x HDMI | 1x Display Port
+                </li>
+                <li>
+                  Connectivity: 6 x USB 3.0 | 4 x USB 2.0 | 1x RJ-45 Network Ethernet 10/100/1000 | Audio: 7.1 Channel Keyboard and Mouse
+                </li>
+                <li>
+                  Warranty: 1 Year Parts & Labor Warranty Free Lifetime Tech Support"
+                </li>
+              </ul>
+            </div>
+            <div id="seller" class="tab-pane fade">
+              <h3>CyberPowerPC</h3>
+              <p>CyberPowerPC is one of the nation-wide leading computer system manufacturers. As published in the Los Angeles Business Journal in 2003, we were the fastest growing private company in Los Angeles. With vision, commitment, and steadfast determination, we manufacture and distribute various customized high-end gaming machines, notebook systems and high performance workstations to meet the unique needs for gamers, businesses, government agencies, educational institutions and other end-users.</p>
+            </div>
+            <div id="otherInfo" class="tab-pane fade">
+              <h3>Other info. Random shit</h3>
+              <p>Personalized info given by the user or amazon extra info about the product, p.e</p>
+            </div>
           </div>
-          <div class="panel-collapse collapse in" id="collapseComment">
-            <div class="media-body">
-              <p>Dá para ver porno em 4k?</p>
-              <div class="comment-meta">
-                <span><a href="#">delete</a></span>
-                <span><a href="#">report</a></span>
-                <span><a href="#">hide</a></span>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row product-questions">
+        <div class="col-md-12">
+          <h2>Product Q&A</h2>
+          <form class="newQuestion">
+            <div class="form-group">
+              <label>Your Question</label>
+              <textarea name="comment" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Send</button>
+          </form>
+
+          <div class="media">
+            <div class="media-heading">
+              <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+              </button>
+              <a href="">hant</a> 5 hours ago
+            </div>
+            <div class="panel-collapse collapse in" id="collapseComment">
+              <div class="media-body">
+                <p>Dá para ver porno em 4k?</p>
+                <div class="comment-meta">
+                  <span><a href="#">delete</a></span>
+                  <span><a href="#">report</a></span>
+                  <span><a href="#">hide</a></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row suggestions">
-    <h2>Similar Auctions</h2>
-    <div class='col-md-10 col-centered'>
-      <div class="carousel slide media-carousel" id="media">
-        <div class="carousel-inner">
-          <div class="item  active">
-            <div class="row">
-              <div class="col-md-3">
+      <hr>
+
+      <div class="row suggestions">
+        <div class='col-md-12 col-centered'>
+          <h2>Similar Auctions</h2>
+          <div class="carousel slide media-carousel" id="media">
+            <div class="carousel-inner">
+              <div class="item active">
+                <div class="row">
+                  <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
-              </div>
-              <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
-              </div>
-              <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
-              </div>
-              <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
     		        <span class="thumbnail text-center">
                   <h4>Product Tittle</h4>
                   <img src="http://placehold.it/256x256" alt="...">
-                  <button class="btn btn-success btn-md" style="margin: 0.5em;"> Watch Auction</button>
+                  <button class="btn btn-success" style="margin: 0.5em;"> Watch Auction</button>
                 </span>
+                  </div>
+                </div>
               </div>
             </div>
+            <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+            <a data-slide="next" href="#media" class="right carousel-control">›</a>
           </div>
         </div>
-        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
-        <a data-slide="next" href="#media" class="right carousel-control">›</a>
       </div>
     </div>
   </div>
@@ -358,5 +392,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="scripts/main.js"></script>
+
 </body>
 </html>
