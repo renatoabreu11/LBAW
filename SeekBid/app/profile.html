@@ -308,12 +308,12 @@
               <div class="col-md-4">
                 <span class="glyphicon glyphicon-road"></span>
                 <p class="details-short-info-title">Active auctions</p>
-                <p class="details-short-info-description">12</p>
+                <p class="details-short-info-description"><a href="#">12</a></p>
               </div>
               <div class="col-md-4">
                 <span class="glyphicon glyphicon-paperclip"></span>
                 <p class="details-short-info-title">Total auctions</p>
-                <p class="details-short-info-description">54</p>
+                <p class="details-short-info-description"><a href="#">54</a></p>
               </div>
             </div>
           </div>
@@ -378,11 +378,11 @@
                   <hr>
                   <p class="win-comment text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse venenatis nisi in congue semper. Ut tempus est nec lectus molestie, quis auctor lorem mattis. Ut sagittis urna sed metus vestibulum, molestie ultricies ex pulvinar. Sed ornare in lectus sed blandit. Proin tincidunt feugiat ultricies. Maecenas lacinia semper sapien ut finibus. Proin id dolor in enim tincidunt ornare vestibulum in nunc. Mauris ac euismod nisl. Morbi ornare tempus dolor, eget iaculis purus. Sed fermentum dui nec diam rhoncus, sed vulputate velit porttitor. Vestibulum ut dictum tortor. Morbi sed velit felis.</p>
                   <hr>
-                  <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-warning pull-right">Review auction</button>
-                  <form id="win-review-form" class="collapse pull-right">
+                  <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-warning btn-block">Review auction</button>
+                  <form id="win-review-form" class="collapse">
                     <div class="win-review-rating">
-                      <p class="win-review-rating-title pull-left">Rating: </p>
-                      <div class="win-review-rating-stars pull-left">
+                      <p class="win-review-rating-title">Rating: </p>
+                      <div class="win-review-rating-stars">
                         <span class="glyphicon glyphicon-star-empty"></span>
                         <span class="glyphicon glyphicon-star-empty"></span>
                         <span class="glyphicon glyphicon-star-empty"></span>
@@ -390,11 +390,22 @@
                         <span class="glyphicon glyphicon-star-empty"></span>
                       </div>
                     </div>
-                    <div class="input-group pull-left">
+                    <div class="win-review-question">
+                      <p>Item as described by the seller? </p>
+                      <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
+                      <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
+                    </div>
+                    <div class="win-review-question">
+                      <p>Courteous service (if you contacted the seller)?</p>
+                      <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
+                      <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
+                      <label class="checkbox-inline"><input type="checkbox" value="null">Did not contact</label>
+                    </div>
+                    <div class="input-group win-review-comment">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
                       <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-info pull-left" value="Submit">Submit</button>
+                    <button type="submit" class="btn btn-info btn-block" value="Submit">Submit</button>
                   </form>
                 </div>
               </div>
@@ -415,11 +426,11 @@
                   <hr>
                   <p class="win-comment text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse venenatis nisi in congue semper. Ut tempus est nec lectus molestie, quis auctor lorem mattis. Ut sagittis urna sed metus vestibulum, molestie ultricies ex pulvinar. Sed ornare in lectus sed blandit. Proin tincidunt feugiat ultricies. Maecenas lacinia semper sapien ut finibus. Proin id dolor in enim tincidunt ornare vestibulum in nunc. Mauris ac euismod nisl. Morbi ornare tempus dolor, eget iaculis purus. Sed fermentum dui nec diam rhoncus, sed vulputate velit porttitor. Vestibulum ut dictum tortor. Morbi sed velit felis.</p>
                   <hr>
-                  <button type="button" data-toggle="collapse" data-target="#win-review-form2" class="win-review-button-form btn btn-warning pull-right">Review auction</button>
-                  <form id="win-review-form2" class="collapse pull-right">
+                  <button type="button" data-toggle="collapse" data-target="#win-review-form2" class="win-review-button-form btn btn-warning btn-block">Review auction</button>
+                  <form id="win-review-form2" class="collapse">
                     <div class="win-review-rating">
-                      <p class="win-review-rating-title pull-left">Rating: </p>
-                      <div class="win-review-rating-stars pull-left">
+                      <p class="win-review-rating-title">Rating: </p>
+                      <div class="win-review-rating-stars">
                         <span class="glyphicon glyphicon-star-empty"></span>
                         <span class="glyphicon glyphicon-star-empty"></span>
                         <span class="glyphicon glyphicon-star-empty"></span>
@@ -427,11 +438,22 @@
                         <span class="glyphicon glyphicon-star-empty"></span>
                       </div>
                     </div>
-                    <div class="input-group pull-left">
+                    <div class="win-review-question">
+                      <p>Item as described by the seller? </p>
+                      <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
+                      <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
+                    </div>
+                    <div class="win-review-question">
+                      <p>Courteous service (if you contacted the seller)?</p>
+                      <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
+                      <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
+                      <label class="checkbox-inline"><input type="checkbox" value="null">Did not contact</label>
+                    </div>
+                    <div class="input-group win-review-comment">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
                       <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-info pull-left" value="Submit">Submit</button>
+                    <button type="submit" class="btn btn-info btn-block" value="Submit">Submit</button>
                   </form>
                 </div>
               </div>

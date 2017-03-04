@@ -14,14 +14,14 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6018018">
+    <splitter split-orientation="horizontal" split-proportion="0.7003003">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="profile.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/profile.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="313">
-                  <caret line="420" column="93" lean-forward="false" selection-start-line="420" selection-start-column="93" selection-end-line="420" selection-end-column="93" />
+                <state relative-caret-position="228">
+                  <caret line="431" column="93" lean-forward="false" selection-start-line="431" selection-start-column="93" selection-end-line="431" selection-end-column="93" />
                   <folding />
                 </state>
               </provider>
@@ -34,8 +34,8 @@
           <file leaf-file-name="profile.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/profile.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+                <state relative-caret-position="153">
+                  <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -44,8 +44,8 @@
           <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/styles/main.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="564">
-                  <caret line="398" column="1" lean-forward="false" selection-start-line="398" selection-start-column="1" selection-end-line="398" selection-end-column="1" />
+                <state relative-caret-position="649">
+                  <caret line="427" column="20" lean-forward="false" selection-start-line="427" selection-start-column="20" selection-end-line="427" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -66,10 +66,10 @@
     <findStrings>
       <find>review</find>
       <find>ma</find>
-      <find>review-comment</find>
       <find>hr</find>
       <find>important</find>
       <find>win-review-button-form</find>
+      <find>review-comment</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -80,6 +80,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app/auctionsPage.html" />
         <option value="$PROJECT_DIR$/app/profile.js" />
         <option value="$PROJECT_DIR$/app/styles/main.css" />
         <option value="$PROJECT_DIR$/app/profile.html" />
@@ -546,12 +547,12 @@
       <option name="presentableId" value="Default" />
       <updated>1488593328091</updated>
       <workItem from="1488593331418" duration="1713000" />
-      <workItem from="1488632790268" duration="7118000" />
+      <workItem from="1488632790268" duration="9315000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8831000" />
+    <option name="totallyTimeSpent" value="11028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -622,26 +623,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/auctionsPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/watchList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="56" lean-forward="true" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/profile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" lean-forward="false" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+        <state relative-caret-position="153">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="398" column="1" lean-forward="false" selection-start-line="398" selection-start-column="1" selection-end-line="398" selection-end-column="1" />
+        <state relative-caret-position="649">
+          <caret line="427" column="20" lean-forward="false" selection-start-line="427" selection-start-column="20" selection-end-line="427" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="420" column="93" lean-forward="false" selection-start-line="420" selection-start-column="93" selection-end-line="420" selection-end-column="93" />
+        <state relative-caret-position="228">
+          <caret line="431" column="93" lean-forward="false" selection-start-line="431" selection-start-column="93" selection-end-line="431" selection-end-column="93" />
           <folding />
         </state>
       </provider>
