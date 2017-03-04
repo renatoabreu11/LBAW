@@ -405,14 +405,27 @@ ul {
 }
 
 #wins .win-review-rating-title {
+  padding-top: 10px;
   font-size: larger;
   font-weight: bold;
   color: dimgrey;
 }
 
 #wins .win-review-rating-stars {
-  padding-top: 3px;
   padding-left: 15px;
+  padding-bottom: 13px;
+}
+
+#wins .win-review-question {
+  padding-bottom: 10px;
+}
+
+#wins .win-review-question p {
+  display: inline;
+}
+
+#wins .win-review-comment {
+  padding-bottom: 15px;
 }
 
 #watch-list {
