@@ -55,14 +55,26 @@
 
   /********************index.html****************/
 
-  // Remove one notification.
+  // Remove notification when clicking on the 'x' button.
   $(".dropdown .notifications-wrapper .notification-item-remove").click(function(e) {
     var notification = $(this).parent().parent();
     notification.fadeOut(500, function() {
       notification.remove();
     });
-    
-    e.stopPropagation();    // Keeps the notification dropdown open.
+
+    if($(".notifications-wrapper").children().length == 1)
+      $(".notifications-wrapper").html('<p class="notifications-empty">You have no new notifications</p>');
+    else
+      e.stopPropagation();    // Keeps the notification dropdown open.
+
+  })
+
+  // Remove notification once it's clicked (via link).
+  $(".dropdown .notifications-wrapper .notification-item a").click(function() {
+    $(this).parent().parent().remove();
+
+    if($(".notifications-wrapper").children().length == 0)
+      $(".notifications-wrapper").html('<p class="notifications-empty">You have no new notifications</p>');
   })
 
   // Remove all notifications.
