@@ -241,8 +241,25 @@ ul {
   line-height: 1.9em;
 }
 
-.search table tr:hover {
-  cursor: pointer;
+#auctions table tr td.image {
+  width: 84px;
+}
+
+#auctions table tr td.seller {
+  vertical-align: middle;
+}
+
+#auctions table tr td.price {
+  vertical-align: middle;
+}
+
+#auctions table tr td.watch {
+  vertical-align: middle;
+}
+
+#auctions table tr td img {
+  width: 84px;
+  height: 64px;
 }
 
 .row.vdivide [class*='col-']:not(:last-child):after {
@@ -468,3 +485,6 @@ input, input::-webkit-input-placeholder {
 .panel-heading {
   margin: 0;
 }
+
+/***************watchList.html***********/
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}

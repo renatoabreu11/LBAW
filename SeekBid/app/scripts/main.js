@@ -96,6 +96,36 @@
     btn.closest('.number-spinner').find('input').val(newVal+'$');
   });
 
+  /****************admin.html*****************/
+
+  $("#auctionsAdmin").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Auctions reports</strong></a>');
+  });
+
+  $("#usersAdmin").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Users reports</strong></a>');
+  });
+
+  $("#commentsAdmin").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Comments reports</strong></a>');
+  });
+
+  $("#reviewsAdmin").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Reviews reports</strong></a>');
+  });
+
+  $("#addCategory").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Add category</strong></a>');
+  });
+
+  $("#addAdmin").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Add admin</strong></a>');
+  });
+
+  $("#staffList").click(function() {
+    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Staff List</strong></a>');
+  });
+
 })();
 
 
