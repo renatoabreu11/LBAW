@@ -301,28 +301,9 @@ ul {
   text-decoration: none;
 }
 .shop__sorting > li.active > a {
-  color: #ed3e49;
-  border-bottom-color: #ed3e49;
+  color: dodgerblue;
+  border-bottom-color: dodgerblue;
 }
-@media (max-width: 767px) {
-  .shop__sorting {
-    text-align: left;
-    border-bottom: 0;
-  }
-  .shop__sorting > li {
-    display: block;
-  }
-  .shop__sorting > li > a {
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  .shop__sorting > li.active > a {
-    font-weight: 600;
-  }
-}
-
-
 
 /************************profile.html************************/
 
