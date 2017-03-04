@@ -128,6 +128,47 @@
     $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Staff List</strong></a>');
   });
 
+  /***************watchList.html***************/
+  function updateClock() {
+
+    $("#time1").text(decreaseTime_1second($("#time1").text()));
+    $("#time2").text(decreaseTime_1second($("#time2").text()));
+    $("#time3").text(decreaseTime_1second($("#time3").text()));
+    $("#time4").text(decreaseTime_1second($("#time4").text()));
+
+    // call this function again in 1000ms
+    setTimeout(updateClock, 1000);
+  };
+  updateClock();
+
+  // time format: "xxh:xxm:xxs"
+  function decreaseTime_1second(time) {
+
+    if (time.length != 11)
+      return time;
+
+    var hour = parseInt(time.substring(0, 2)),
+        min = parseInt(time.substring(4, 6)),
+        sec = parseInt(time.substring(8, 10));
+
+    if (sec > 0) {
+      sec--;
+    }
+    else if (min > 0) {
+      min--; sec = 59;
+    }
+    else if (hour > 0) {
+      hour--; min = 59; sec = 59;
+    }
+
+    if (hour < 10) hour = "0" + hour;
+    if (min < 10) min = "0" + min;
+    if (sec < 10) sec = "0" + sec;
+
+    if (hour == 0 && min == 0 && sec == 0) return "Auction closed";
+    else return hour + "h:" + min + "m:" + sec + "s";
+  }
+
 })();
 
 
