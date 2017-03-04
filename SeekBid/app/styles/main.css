@@ -439,11 +439,6 @@ ul {
   margin-top: 20px;
 }
 
-hr {
-  width: 20%;
-  color: #fff;
-}
-
 .form-group {
   margin-bottom: 15px;
 }
@@ -479,3 +474,6 @@ input, input::-webkit-input-placeholder {
 .panel-heading {
   margin: 0;
 }
+
+/***************watchList.html***********/
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
