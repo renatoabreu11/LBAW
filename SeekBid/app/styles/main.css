@@ -314,12 +314,20 @@ ul {
   font-size: x-large;
 }
 
-#details .details-description-info {
-  color: #1f1f14;
-}
-
 #details .details-short-info {
   padding-top: 50px;
+  text-align: center;
+  display: block;
+}
+
+#details .details-short-info .glyphicon{
+  font-size: 40px;
+}
+
+#details .details-short-info-title {
+  padding-top: 10px;
+  color: dimgrey;
+  font-size: large;
 }
 
 #reviews {
@@ -369,9 +377,14 @@ ul {
   padding-right: 10px;
 }
 
-#wins .win-info-price {
+#wins .win-info {
   padding-top: 8px;
-  color: #5d5d56;
+}
+
+#wins .win-info-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: dimgrey;
 }
 
 #watch-list {
