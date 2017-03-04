@@ -60,6 +60,11 @@
       $(this).addClass("active");
       $(this).siblings().removeClass("active");
       var dataTarget = $(this).data("target");
+      $(dataTarget).addClass("in");
+      if(dataTarget == "#auctionsList")
+        $("#auctionsThumbnails").removeClass("in");
+      else if(dataTarget == "#auctionsThumbnails")
+        $("#auctionsList").removeClass("in");
     }
   })
 
