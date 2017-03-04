@@ -53,6 +53,24 @@
     });
   }
 
+  /********************index.html****************/
+
+  // Remove one notification.
+  $(".dropdown .notifications-wrapper .notification-item-remove").click(function(e) {
+    var notification = $(this).parent().parent();
+    notification.fadeOut(500, function() {
+      notification.remove();
+    });
+    
+    e.stopPropagation();    // Keeps the notification dropdown open.
+  })
+
+  // Remove all notifications.
+  $(".dropdown .notification-footer a").click(function(e) {
+    var notifications = $(".dropdown .notifications-wrapper").children();
+    notifications.parent().html('<p class="notifications-empty">You have no new notifications</p>');
+  })
+
   /********************AuctionsPage.html****************/
 
   $("#listType .btn").click(function(){

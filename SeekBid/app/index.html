@@ -33,7 +33,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
-
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -106,18 +105,32 @@
                 </div>
                 <li class="divider"></li>
                 <div class="notifications-wrapper">
-                  <a class="content" href="#">
-                    <div class="notification-item">
-                      <h3>Sup mates</h3>
-                      <p>do you guys like it?</p>
+                  <div class="notification-item">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
                     </div>
-                  </a>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                      <button type="button" class="notification-item-remove btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-remove"></i></button>
+                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-euro"></i> Bid surpassed</p>
+                      <a href="#" class="notification-item-description">Your bid of <mark>25.99€</mark> was raised to <mark>26.54€</mark></a>
+                    </div>
+                  </div>
+                  <div class="notification-item">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                      <button type="button" class="notification-item-remove btn btn-default btn-xs pull-right"><i class="glyphicon glyphicon-remove"></i></button>
+                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-euro"></i> Bid surpassed</p>
+                      <a href="#" class="notification-item-description">Your bid of <mark>25.99€</mark> was raised to <mark>26.54€</mark></a>
+                    </div>
+                  </div>
                 </div>
 
                 <li class="divider"></li>
                 <div class="notification-footer">
-                  <h4 class="menu-title">View all notifications</h4>
-                  <h4 class="menu-title pull-right">Mark all as read</h4>
+                  <a href="#">View all notifications</a>
+                  <a href="#" class="pull-right">Mark all as read</a>
                 </div>
               </ul>
             </li>
@@ -224,9 +237,9 @@
     </div>
 
     <!-- build:js scripts/main.min.js -->
-    <script src="scripts/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

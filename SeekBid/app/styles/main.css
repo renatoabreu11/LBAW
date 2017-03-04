@@ -94,13 +94,17 @@ ul {
   margin:5px 0;
 }
 
-.notification-item {
-  padding:5px;
-  margin:5px;
-  background:#ccc;
-  color:#000;
-  border-radius:4px;
-  font-size:1.3rem;
+.dropdown .notifications-empty {
+  font-size: large;
+  text-align: center;
+}
+
+.dropdown .notifications-wrapper .notification-item-description {
+  font-size: large;
+}
+
+.dropdown .notifications-wrapper .notification-item-title {
+  font-size: medium;
 }
 
 .modal-header{
