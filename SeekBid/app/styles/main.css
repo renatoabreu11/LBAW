@@ -387,6 +387,17 @@ ul {
   color: dimgrey;
 }
 
+#wins .win-review-rating-title {
+  font-size: larger;
+  font-weight: bold;
+  color: dimgrey;
+}
+
+#wins .win-review-rating-stars {
+  padding-top: 3px;
+  padding-left: 15px;
+}
+
 #watch-list {
   padding-top: 20px;
 }

@@ -33,6 +33,9 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
+
+  <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="profile.js"></script>
 </head>
 
 <body>
@@ -377,7 +380,25 @@
                   <a href="#" class="win-product-name"><p>Surface Book</p></a>
                   <hr>
                   <p class="win-comment text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse venenatis nisi in congue semper. Ut tempus est nec lectus molestie, quis auctor lorem mattis. Ut sagittis urna sed metus vestibulum, molestie ultricies ex pulvinar. Sed ornare in lectus sed blandit. Proin tincidunt feugiat ultricies. Maecenas lacinia semper sapien ut finibus. Proin id dolor in enim tincidunt ornare vestibulum in nunc. Mauris ac euismod nisl. Morbi ornare tempus dolor, eget iaculis purus. Sed fermentum dui nec diam rhoncus, sed vulputate velit porttitor. Vestibulum ut dictum tortor. Morbi sed velit felis.</p>
-                  <button type="button" class="btn btn-warning pull-right pull-bottom">Review auction</button>
+                  <hr>
+                  <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-warning pull-right">Review auction</button>
+                  <form id="win-review-form" class="collapse pull-right">
+                    <div class="win-review-rating">
+                      <p class="win-review-rating-title pull-left">Rating: </p>
+                      <div class="win-review-rating-stars pull-left">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                      </div>
+                    </div>
+                    <div class="input-group pull-left">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                      <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info pull-left" value="Submit">Submit</button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -396,7 +417,25 @@
                   <a href="#" class="win-product-name"><p>Surface Book</p></a>
                   <hr>
                   <p class="win-comment text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse venenatis nisi in congue semper. Ut tempus est nec lectus molestie, quis auctor lorem mattis. Ut sagittis urna sed metus vestibulum, molestie ultricies ex pulvinar. Sed ornare in lectus sed blandit. Proin tincidunt feugiat ultricies. Maecenas lacinia semper sapien ut finibus. Proin id dolor in enim tincidunt ornare vestibulum in nunc. Mauris ac euismod nisl. Morbi ornare tempus dolor, eget iaculis purus. Sed fermentum dui nec diam rhoncus, sed vulputate velit porttitor. Vestibulum ut dictum tortor. Morbi sed velit felis.</p>
-                  <button type="button" class="btn btn-warning pull-right">Review auction</button>
+                  <hr>
+                  <button type="button" data-toggle="collapse" data-target="#win-review-form2" class="win-review-button-form btn btn-warning pull-right">Review auction</button>
+                  <form id="win-review-form2" class="collapse pull-right">
+                    <div class="win-review-rating">
+                      <p class="win-review-rating-title pull-left">Rating: </p>
+                      <div class="win-review-rating-stars pull-left">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                      </div>
+                    </div>
+                    <div class="input-group pull-left">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                      <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-info pull-left" value="Submit">Submit</button>
+                  </form>
                 </div>
               </div>
             </div>
