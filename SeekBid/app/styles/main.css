@@ -563,3 +563,37 @@ input, input::-webkit-input-placeholder {
 /***************watchList.html***********/
 
 .pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
+
+/************************notifications.html************************/
+
+.notification-page-container .notification-page-title {
+  margin: 0px;
+  font-size: large;
+  color: midnightblue;
+}
+
+.notification-page-container .notifications-title-info-divider {
+  margin-bottom: 30px;
+  border: none;
+  height: 1px;
+  color: #222222;
+  background-color: #222222;
+}
+
+.notification-page-container .notification-media {
+  margin: 0px;
+}
+
+.notification-page-container .notification-media .notification-next-divider {
+  margin-top: 0px;
+  margin-bottom: 6px;
+}
+
+.notification-item-user {
+  color: #333333;
+  font-weight: bolder;
+}
+
+.notification-page-container .notification-media .notification-item-date {
+  color: #757575;
+}
