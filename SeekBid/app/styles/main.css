@@ -107,6 +107,10 @@ ul {
   font-size: medium;
 }
 
+.dropdown .notifications-wrapper .media-right {
+  padding-right: 20px;
+}
+
 .modal-header{
   background-color: #f9f9f9;
   color:black !important;
@@ -566,13 +570,15 @@ input, input::-webkit-input-placeholder {
 
 /************************notifications.html************************/
 
-.notification-page-container .notification-page-title {
+/*.notification-page-container */
+.notification-page-title {
   margin: 0px;
   font-size: large;
   color: midnightblue;
 }
 
-.notification-page-container .notifications-title-info-divider {
+/*.notification-page-container */
+.notifications-title-info-divider {
   margin-bottom: 30px;
   border: none;
   height: 1px;
@@ -580,11 +586,13 @@ input, input::-webkit-input-placeholder {
   background-color: #222222;
 }
 
-.notification-page-container .notification-media {
+/*.notification-page-container */
+.notification-media {
   margin: 0px;
 }
 
-.notification-page-container .notification-media .notification-next-divider {
+/*.notification-page-container */
+.notification-media .notification-next-divider {
   margin-top: 0px;
   margin-bottom: 6px;
 }
@@ -594,6 +602,7 @@ input, input::-webkit-input-placeholder {
   font-weight: bolder;
 }
 
-.notification-page-container .notification-media .notification-item-date {
+/*.notification-page-container
+.notification-media .notification-item-date {
   color: #757575;
 }
