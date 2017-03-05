@@ -163,14 +163,43 @@ ul {
   margin: 0;
 }
 
-.product-info{
-  padding: 1em;
+.auctionDetails {
+  padding-top: 0.5em;
 }
 
-.bidders {
-  height: auto;
-  max-height: 200px;
-  overflow-x: hidden;
+.auctionDetails .btn{
+  width: 100px;
+  margin-bottom: 2em;
+}
+
+.visitors {
+  padding: 1em;
+  margin: 1em;
+}
+
+
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+
+.bidders .table td{
+  color: #999999;
+}
+
+.product-info{
+  padding: 1em;
 }
 
 .product-questions {
