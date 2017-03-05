@@ -267,6 +267,14 @@ ul {
   height: 64px;
 }
 
+#auctionsList small {
+  font-size: 15px;
+}
+
+#auctionsThumbnails small {
+  font-size: 15px;
+}
+
 .row.vdivide [class*='col-']:not(:last-child):after {
   background: #e0e0e0;
   width: 1px;
@@ -321,6 +329,10 @@ ul {
 .auctionSort > li.active > a {
   color: dodgerblue;
   border-bottom-color: dodgerblue;
+}
+
+.xsFilter li.checkbox {
+  padding-left: 0.5em;
 }
 
 /************************profile.html************************/
