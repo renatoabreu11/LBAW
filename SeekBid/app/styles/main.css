@@ -441,6 +441,10 @@ ul {
   font-size: large;
 }
 
+#selling .selling-wrapper {
+  padding-top: 20px;
+}
+
 #reviews {
   padding-top: 20px;
 }
@@ -481,6 +485,12 @@ ul {
   padding-top: 8px;
   color: dimgrey;
   font-size: x-large;
+}
+
+.title-comment-divider {
+  margin-top: 2px;
+  margin-bottom: 10px;
+
 }
 
 #wins .win-comment {
