@@ -133,32 +133,16 @@
 
   /****************admin.html*****************/
 
-  $("#auctionsAdmin").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Auctions reports</strong></a>');
-  });
+  $(".btnLeft").click(function(){
+    if(!$(this).hasClass("active")){
 
-  $("#usersAdmin").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Users reports</strong></a>');
-  });
+      $(".btnLeft").removeClass("active");
+      $(this).addClass("active");
 
-  $("#commentsAdmin").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Comments reports</strong></a>');
-  });
-
-  $("#reviewsAdmin").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Reviews reports</strong></a>');
-  });
-
-  $("#addCategory").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Add category</strong></a>');
-  });
-
-  $("#addAdmin").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Add admin</strong></a>');
-  });
-
-  $("#staffList").click(function() {
-    $("#rightSide").html('<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Staff List</strong></a>');
+      var dataTarget = $(this).data("target");
+      $(dataTarget).addClass("in");
+      $(dataTarget).siblings(".collapse").removeClass("in");
+    }
   });
 
   /***************watchList.html***************/
