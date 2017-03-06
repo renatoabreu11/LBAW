@@ -151,7 +151,7 @@
     <div class="main-login main-center">
       <form class="form-horizontal" method="post" action="#">
         <div class="form-group">
-          <label for="product_name" class="cols-sm-2 control-label">Product name</label>
+          <label for="product_name" class="cols-sm-2 control-label" style="margin-bottom: 12px">Product name</label>
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-shopping-bag fa-fw" aria-hidden="true"></i></span>
@@ -161,7 +161,7 @@
         </div>
 
         <div class="form-group">
-          <label for="auction_type" class="cols-sm-2 control-label">Auction type</label>
+          <label for="auction_type" class="cols-sm-2 control-label" style="margin-bottom: 12px">Auction type</label>
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-legal fa-fw" aria-hidden="true"></i></span>
@@ -176,17 +176,7 @@
         </div>
 
         <div class="form-group">
-          <label for="product_images" class="cols-sm-2 control-label">Images</label>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-image fa-fw" aria-hidden="true"></i></span>
-              <input type="file" class="form-control" name="product_images" id="product_images"  placeholder="Choose your images"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="product_base_price" class="cols-sm-2 control-label">Base Price</label>
+          <label for="product_base_price" class="cols-sm-2 control-label" style="margin-bottom: 12px">Base Price</label>
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-eur fa-fw" aria-hidden="true"></i></span>
@@ -196,7 +186,7 @@
         </div>
 
         <div class="form-group">
-          <label for="auction_end" class="cols-sm-2 control-label">Auction End</label>
+          <label for="auction_end" class="cols-sm-2 control-label" style="margin-bottom: 12px">Auction End</label>
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-calendar-o fa-fw" aria-hidden="true"></i></span>
@@ -205,15 +195,30 @@
           </div>
         </div>
 
-        <div class="form-group" id="textarea-signup">
-          <div class="form-group" style="padding:12px">
-            <label for="product_user_info" class="cols-sm-2 control-label">Product information</label>
+        <div class="form-group">
+          <label for="product_images" class="cols-sm-2 control-label" style="margin-bottom: 12px">Images</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-image fa-fw" aria-hidden="true"></i></span>
+              <input type="file" class="form-control" name="product_images" id="product_images"  placeholder="Choose your images"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" id="textarea-create_auction">
+          <div class="form-group" style="padding:0px 13px">
+            <label for="product_user_info" class="cols-sm-2 control-label" style="margin-bottom: 0px">Product information</label>
+            <div class="radio" style="margin-bottom:12px;padding-top:0px">
+              <label class="radio-inline"><input type="radio" name="optradio" checked>Custom info</label>
+              <label class="radio-inline"><input type="radio" name="optradio">API info</label>
+              <label class="radio-inline"><input type="radio" name="optradio">Both</label>
+            </div>
             <textarea class="form-control" rows="4" name="product_user_info" id="product_user_info" placeholder="Tell us about your product"></textarea>
           </div>
         </div>
 
         <div class="form-group" id="signup-btn">
-          <button type="submit" class="btn btn-success">Sign up</button>
+          <button type="submit" class="btn btn-success">Create Auction</button>
         </div>
       </form>
     </div>

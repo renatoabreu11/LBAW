@@ -221,12 +221,10 @@
             </div>
             <a>12 Reviews</a>
           </div>
-          <div class="col-md-6 text-center">
-            <h3>Current Bid $799</h3>
-            <h3>05:31</h3>
-
-            <div class="section" style="padding-bottom:20px;">
-              <button class="btn btn-success" data-toggle="modal" data-target="#bidModal"> Bid</button>
+          <div class="col-md-6 text-center auctionDetails">
+            <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: $799</h3>
+            <div class="section">
+              <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
               <div class="modal fade" id="bidModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-sm">
                   <div class="modal-content">
@@ -234,17 +232,17 @@
                       <h4>Select the value of your bid!</h4>
                     </div>
 
-                      <div class="row" style="margin: 10px;">
-                          <div class="input-group number-spinner">
+                    <div class="row" style="margin: 10px;">
+                      <div class="input-group number-spinner">
                             <span class="input-group-btn">
                               <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                             </span>
-                            <input type="text" class="form-control text-center" value="800$">
-                            <span class="input-group-btn">
+                        <input type="text" class="form-control text-center" value="800$">
+                        <span class="input-group-btn">
 					                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
 				                    </span>
-                          </div>
                       </div>
+                    </div>
 
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-success btn-default pull-right" data-dismiss="modal">Cancel</button>
@@ -254,17 +252,57 @@
                 </div>
               </div>
             </div>
+
+            <h3 class="time">02h:54m:10s</h3>
+            <h4>Ending date: Monday, Mar 6, 2017
+              4:12:50 AM WET</h4>
+
+            <div class="visitors">
+              <span class="pull-left"><i class="fa fa-lg fa-eye" aria-hidden="true"></i> 49 visitors</span>
+              <span class="pull-right"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> 87 bidders</span>
+            </div>
           </div>
-          <div class="col-md-6 text-center">
-            <h3>Recent Bidders</h3>
-            <ul class="bidders text-left" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-            </ul>
+          <div class="col-md-6 bidders">
+            <h4 style="padding-top: 1em;">Recent Bidders</h4>
+            <table class="table table-fixed">
+              <thead>
+              <tr>
+                <th class="col-xs-5">Date</th><th class="col-xs-5">User</th><th class="col-xs-2">Bid</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr>
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr>
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr>
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr>
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr class="hidden-xs">
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr class="hidden-xs">
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr class="hidden-xs">
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr class="hidden-xs">
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              <tr  class="hidden-xs">
+                <td class="col-xs-5">12:10 17/10/17</td><td class="col-xs-5">Mike Adams</td><td class="col-xs-2">23</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -275,6 +313,7 @@
         <div class="col-md-12">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#product">Product Information</a></li>
+            <li><a data-toggle="tab" href="#auctionInformation">Auction</a></li>
             <li><a data-toggle="tab" href="#seller">Seller</a></li>
             <li><a data-toggle="tab" href="#otherInfo">Other</a></li>
           </ul>
@@ -297,6 +336,10 @@
                   Warranty: 1 Year Parts & Labor Warranty Free Lifetime Tech Support"
                 </li>
               </ul>
+            </div>
+            <div id="auctionInformation" class="tab-pane fade">
+              <h3>info about the auction</h3>
+              <p>Personalized info given by the user or amazon extra info about the product, p.e</p>
             </div>
             <div id="seller" class="tab-pane fade">
               <h3>CyberPowerPC</h3>

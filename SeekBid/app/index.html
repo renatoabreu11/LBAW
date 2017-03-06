@@ -33,6 +33,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -244,7 +245,7 @@
       </div>
     </nav>
 
-    <div id="wrap">
+      <!--remove wrap container already does that-->
       <div class="container">
         <ol class="breadcrumb">
           <li><a href="#">Home</a></li>
@@ -252,76 +253,98 @@
           <li class="active">Product</li>
         </ol>
 
-        <div class="col-md-3 col-sm-6">
-    		<span class="thumbnail">
-          <h4>Surface Book</h4>
-          <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
-          <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
-          <p class="text-center">Current bid: $75,99</p>
-          <p class="text-center">Auction counter here</p>
-          <div class="row text-center">
-              <button class="btn btn-info btn-sm"> Watch Auction</button>
-              <button class="btn btn-info btn-sm"> Add to Watchlist</button>
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <h3>Popular</h3>
           </div>
-          <hr class="line">
-          <div class="seller text-center">
-            <p>Product auctioned by <a href="#">Microsoft</a></p>
-          </div>
-    		</span>
         </div>
-        <div class="col-md-3 col-sm-6">
-    		<span class="thumbnail">
-          <h4>Surface Book</h4>
-          <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
-          <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
-          <p class="text-center">Current bid: $75,99</p>
-          <p class="text-center">Auction counter here</p>
-          <div class="row text-center">
-              <button class="btn btn-info btn-sm"> Watch Auction</button>
-              <button class="btn btn-info btn-sm"> Add to Watchlist</button>
+
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+          <span class="thumbnail text-center" style="padding: 12px 0px;">
+            <h4>Surface Book</h4>
+            <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+            <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+            <p>Current bid: <span><mark class="bg-warning">75,99 €</mark></span></p>
+            <div class="row" style="margin-left: 2px; margin-right: 2px; padding: 0px">
+                <i class="col-xs-2 fa fa-eye fa-2x" style="color: cadetblue; padding: 0; margin-left:-3px"></i>
+                <h4 class="col-xs-8 time" style="padding: 0; margin-top: 5px">05h:54m:10s</h4>
+                <button class="col-xs-2 btn btn-info btn-sm" style="margin-right:0px;" >Bid</button>
+            </div>
+            <hr class="line" style="margin:14px 5px;">
+            <div class="seller2" style="margin-bottom: 5px;">
+              <p style="margin: 0">Auctioned by<a href="#"> Microsoft</a></p>
+              <span style="color: #ffe422;">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+              </span>
+            </div>
+          </span>
           </div>
-          <hr class="line">
-          <div class="seller text-center">
-            <p>Product auctioned by <a href="#">Microsoft</a></p>
+
+          <div class="col-md-3 col-sm-6 col-xs-6">
+                  <span class="thumbnail text-center">
+                    <h4>Surface Book</h4>
+                    <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+                    <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+                    <small>Current bid: $75,99</small>
+                    <h4 class="time">05h:54m:10s</h4>
+                    <div class="watchAuction">
+                      <button class="btn btn-info btn-sm"> Watch Auction</button>
+                    </div>
+                    <div class="seller">
+                      <p>Product auctioned by <a href="#">Microsoft</a></p>
+                      <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                      </span>
+                    </div>
+                  </span>
           </div>
-    		</span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-    		<span class="thumbnail">
-          <h4>Surface Book</h4>
-          <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
-          <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
-          <p class="text-center">Current bid: $75,99</p>
-          <p class="text-center">Auction counter here</p>
-          <div class="row text-center">
-              <button class="btn btn-info btn-sm"> Watch Auction</button>
-              <button class="btn btn-info btn-sm"> Add to Watchlist</button>
+
+          <div class="col-md-3 col-sm-6">
+          <span class="thumbnail">
+            <h4>Surface Book</h4>
+            <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+            <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+            <p class="text-center">Current bid: $75,99</p>
+            <p class="text-center">Auction counter here</p>
+            <div class="row text-center">
+                <button class="btn btn-info btn-sm"> Watch Auction</button>
+                <button class="btn btn-info btn-sm"> Add to Watchlist</button>
+            </div>
+            <hr class="line">
+            <div class="seller text-center">
+              <p>Product auctioned by <a href="#">Microsoft</a></p>
+            </div>
+          </span>
           </div>
-          <hr class="line">
-          <div class="seller text-center">
-            <p>Product auctioned by <a href="#">Microsoft</a></p>
+
+          <div class="col-md-3 col-sm-6">
+          <span class="thumbnail">
+            <h4>Surface Book</h4>
+            <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+            <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
+            <p class="text-center">Current bid: $75,99</p>
+            <p class="text-center">Auction counter here</p>
+            <div class="row text-center">
+                <button class="btn btn-info btn-sm"> Watch Auction</button>
+                <button class="btn btn-info btn-sm"> Add to Watchlist</button>
+            </div>
+            <hr class="line">
+            <div class="seller text-center">
+              <p>Product auctioned by <a href="#">Microsoft</a></p>
+            </div>
+          </span>
           </div>
-    		</span>
-        </div>
-        <div class="col-md-3 col-sm-6">
-    		<span class="thumbnail">
-          <h4>Surface Book</h4>
-          <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
-          <p class="text-center">Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
-          <p class="text-center">Current bid: $75,99</p>
-          <p class="text-center">Auction counter here</p>
-          <div class="row text-center">
-              <button class="btn btn-info btn-sm"> Watch Auction</button>
-              <button class="btn btn-info btn-sm"> Add to Watchlist</button>
-          </div>
-          <hr class="line">
-          <div class="seller text-center">
-            <p>Product auctioned by <a href="#">Microsoft</a></p>
-          </div>
-    		</span>
         </div>
       </div>
-    </div>
 
     <div id="footer">
       <div class="container">
