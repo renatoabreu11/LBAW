@@ -55,35 +55,50 @@
 
   /********************index.html****************/
 
+  //Update the notification badge number
+  function updateNotificationBadge(numNotifications) {
+    $(".dropdown .notification-badge").html(numNotifications);
+  }
+
   // Remove notification when clicking on the 'x' button.
   $(".dropdown .notifications-wrapper .notification-item-remove").click(function(e) {
-    var notification = $(this).parent().parent().parent();
+    var numNotifications = $(".notifications-wrapper").children().length;
+    var notification = $(this).parent().parent();
+
     notification.fadeOut(500, function() {
-      notification.next().remove();   // Removes the associated divider.
       notification.remove();
+
+      // To avoid setting to zero after 500 mls passed.
+      if(numNotifications != 1)
+        updateNotificationBadge(numNotifications-1);
     });
 
-    if($(".notifications-wrapper").children().length == 1)
+    if(numNotifications == 1) {
       $(".notifications-wrapper").html('<p class="notifications-empty">You have no new notifications</p>');
-    else
+      updateNotificationBadge("");
+    } else
       e.stopPropagation();    // Keeps the notification dropdown open.
-
   })
 
   // Remove notification once it's clicked (via link).
-  $(".dropdown .notifications-wrapper .notification-item a").click(function() {
+  $(".dropdown .notifications-wrapper .notification-item .notification-item-info").click(function() {
     var notification = $(this).parent().parent().parent();
-    notification.next().remove();
     notification.remove();
 
-    if($(".notifications-wrapper").children().length == 0)
+    var numNotifications = $(".notifications-wrapper").children().length;
+    updateNotificationBadge(numNotifications);
+
+    if(numNotifications == 0) {
       $(".notifications-wrapper").html('<p class="notifications-empty">You have no new notifications</p>');
+      updateNotificationBadge("");
+    }
   })
 
   // Remove all notifications.
   $(".dropdown .notification-footer a").click(function(e) {
     var notifications = $(".dropdown .notifications-wrapper").children();
     notifications.parent().html('<p class="notifications-empty">You have no new notifications</p>');
+    updateNotificationBadge("");
   })
 
   /********************AuctionsPage.html****************/

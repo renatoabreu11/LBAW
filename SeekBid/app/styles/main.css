@@ -85,8 +85,8 @@ ul {
 }
 
 .menu-title {
-  color:dodgerblue;
-  font-size:1.5rem;
+  color:midnightblue;
+  font-size: large;
   display:inline-block;
 }
 
@@ -631,7 +631,7 @@ input, input::-webkit-input-placeholder {
 }
 
 /*.notification-page-container */
-.notification-media .notification-next-divider {
+.notification-item .notification-next-divider {
   margin-top: 0px;
   margin-bottom: 6px;
 }
