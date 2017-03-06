@@ -148,16 +148,20 @@
 
   /****************admin.html*****************/
 
-  $(".btnLeft").click(function(){
-    if(!$(this).hasClass("active")){
-
-      $(".btnLeft").removeClass("active");
-      $(this).addClass("active");
-
+  $(".sidebar-nav li a").click(function(){
       var dataTarget = $(this).data("target");
+      console.log(dataTarget)
       $(dataTarget).addClass("in");
       $(dataTarget).siblings(".collapse").removeClass("in");
-    }
+
+      if(dataTarget == "#rightSideUsers" || dataTarget == "#rightSideAuctions" || dataTarget == "#rightSideComments" || dataTarget == "#rightSideReviews"){
+        $(".box-body").show();
+      } else $(".box-body").hide();
+  });
+
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
   });
 
   /***************watchList.html***************/

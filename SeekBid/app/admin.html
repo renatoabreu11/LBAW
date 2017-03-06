@@ -38,7 +38,7 @@
 
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" style="padding-bottom: 0; margin-bottom: 0;">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
@@ -51,16 +51,12 @@
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
-      <form class="navbar-form navbar-left">
-        <div class="form-group inner-addon left-addon">
-          <i class="glyphicon glyphicon-search"></i>
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
 
       <ul class="nav navbar-nav navbar-right">
 
+        <li>
+          <a href="#menu-toggle" class="btn" id="menu-toggle">Admin Panel</a>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
             <i class="glyphicon glyphicon-bell"></i>
@@ -88,9 +84,8 @@
         </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-user"></span> Admin </a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-user"></span> Manel</a>
           <ul class="dropdown-menu">
-            <li><a href="#">Profile</a></li>
             <li><a href="#">Sign out</a></li>
           </ul>
         </li>
@@ -99,583 +94,370 @@
   </div>
 </nav>
 
-<div class="container">
-  <div class="row">
 
-    <!-- Left side -->
-    <div class="col-md-3">
+<div id="wrapper" class="toggled">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a href="#">
+          Admin Panel
+        </a>
+      </li>
+      <li>
+        <a href="#" id="usersAdmin" data-target="#rightSideUsers">Users</a>
+      </li>
+      <li>
+        <a href="#" id="auctionsAdmin" data-target="#rightSideAuctions"> Auctions</a>
+      </li>
+      <li>
+        <a href="#" id="commentsAdmin" data-target="#rightSideComments"> Comments</a>
+      </li>
+      <li>
+        <a href="#" id="reviewsAdmin" data-target="#rightSideReviews"> Reviews</a>
+      </li>
+      <li>
+        <a href="#" id="addCategory" data-target="#rightSideAddCategory"> Add category</a>
+      </li>
+      <li>
+        <a href="#" id="addAdmin" data-target="#rightSideAddAdmin"> Add admin</a>
+      </li>
+      <li>
+        <a href="#" id="usersList" data-target="#rightSideUsersList"> Users List</a>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-      <a href="#"><strong><i class="glyphicon glyphicon-wrench" style="padding-bottom: 20px;"></i> Website administrator</strong></a>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
 
-      <div class="list-group">
-        <div class="list-group-item"><i class="glyphicon glyphicon-exclamation-sign"></i> Reports</div>
-        <a href="#" id="auctionsAdmin" class="list-group-item btnLeft" data-target="#rightSideAuctions">Auctions</a>
-        <a href="#" id="usersAdmin" class="list-group-item active btnLeft" data-target="#rightSideUsers">Users</a>
-        <a href="#" id="commentsAdmin" class="list-group-item btnLeft" data-target="#rightSideComments">Comments</a>
-        <a href="#" id="reviewsAdmin" class="list-group-item btnLeft" data-target="#rightSideReviews">Reviews</a>
-      </div>
-      <hr>
+      <h2>Website Administration</h2>
 
-      <div class="list-group">
-        <div class="list-group-item"><i class="glyphicon glyphicon-cog"></i> Settings</div>
-        <a href="#" id="addCategory" class="list-group-item btnLeft" data-target="#rightSideAddCategory"><i class="glyphicon glyphicon-plus"></i> Add category</a>
-        <a href="#" id="addAdmin" class="list-group-item btnLeft" data-target="#rightSideAddAdmin"><i class="glyphicon glyphicon-plus"></i> Add admin</a>
-        <a href="#" id="staffList" class="list-group-item btnLeft" data-target="#rightSideStaffList"><i class="glyphicon glyphicon-user"></i> Staff List</a>
-      </div>
-
-    </div>
-
-    <!-- Right side -->
-    <div id="rightSideUsers" class="col-md-9 collapse in">
-
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> User reports</strong></a>
-
-      <div class="row">
-        <div class="box-body no-padding">
-          <div class="mailbox-controls">
-            <!-- Check all button -->
-            <div class="btn-group">
-              <button class="btn btn-default btn-sm checkbox-toggle" style="padding: 10px;"><i class="glyphicon glyphicon-unchecked"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-trash"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-refresh"></i></button>
-            </div><!-- /.btn-group -->
-
-            <div class="pull-right">
-              1-8/20
-              <div class="btn-group">
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-left"></i></button>
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-right"></i></button>
-              </div><!-- /.btn-group -->
-            </div><!-- /.pull-right -->
-          </div>
-          <div class="table-responsive mailbox-messages">
-            <table class="table table-hover table-striped">
-              <thead>
-              <tr class="">
-                <th>Select</th>
-                <th>Complainant</th>
-                <th>Accused</th>
-                <th>Date</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Accused</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+      <div id="rightSideUsers" class="adminOption collapse in">
+        <strong><i class="fa fa-users" aria-hidden="true"></i> User reports</strong>
+        <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped">
+                <thead>
+                <tr class="">
+                  <th>Select</th>
+                  <th>Report</th>
+                  <th>User</th>
+                  <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td><a href="#">Details</a></td>
+                  <td><a href="#">Rogério Manuel</a></td>
+                  <td>12:10 17/10/17</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td><a href="#">Details</a></td>
+                  <td><a href="#">Rogério Manuel</a></td>
+                  <td>12:10 17/10/17</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
         </div>
       </div>
-    </div>
 
-    <div id="rightSideAuctions" class="col-md-9 collapse">
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> Auction reports</strong></a>
-
-      <div class="row">
-        <div class="box-body no-padding">
-          <div class="mailbox-controls">
-            <!-- Check all button -->
-            <div class="btn-group">
-              <button class="btn btn-default btn-sm checkbox-toggle" style="padding: 10px;"><i class="glyphicon glyphicon-unchecked"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-trash"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-refresh"></i></button>
-            </div><!-- /.btn-group -->
-
-            <div class="pull-right">
-              1-8/20
-              <div class="btn-group">
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-left"></i></button>
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-right"></i></button>
-              </div><!-- /.btn-group -->
-            </div><!-- /.pull-right -->
-          </div>
-          <div class="table-responsive mailbox-messages">
+      <div id="rightSideAuctions" class="adminOption collapse">
+        <strong><i class="fa fa-legal"></i> Auction reports</strong>
+        <div class="row">
+          <div class="table-responsive">
             <table class="table table-hover table-striped">
               <thead>
               <tr class="">
                 <th>Select</th>
-                <th>Complainant</th>
+                <th>Report</th>
                 <th>Auction</th>
+                <th>User</th>
                 <th>Date</th>
               </tr>
               </thead>
               <tbody>
               <tr>
                 <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
+                <td><a href="#">Details</a></td>
+                <td><a href="#">#51</a></td>
+                <td><a href="#">Rogério Manuel</a></td>
+                <td>12:10 17/10/17</td>
               </tr>
               <tr>
                 <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
+                <td><a href="#">Details</a></td>
+                <td><a href="#">#51</a></td>
+                <td><a href="#">Rogério Manuel</a></td>
+                <td>12:10 17/10/17</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="rightSideComments" class="col-md-9 collapse">
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> Comment reports</strong></a>
-
-      <div class="row">
-        <div class="box-body no-padding">
-          <div class="mailbox-controls">
-            <!-- Check all button -->
-            <div class="btn-group">
-              <button class="btn btn-default btn-sm checkbox-toggle" style="padding: 10px;"><i class="glyphicon glyphicon-unchecked"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-trash"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-refresh"></i></button>
-            </div><!-- /.btn-group -->
-
-            <div class="pull-right">
-              1-8/20
-              <div class="btn-group">
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-left"></i></button>
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-right"></i></button>
-              </div><!-- /.btn-group -->
-            </div><!-- /.pull-right -->
-          </div>
-          <div class="table-responsive mailbox-messages">
+      <div id="rightSideComments" class="adminOption collapse">
+        <strong><i class="fa fa-comments"></i> Comments reports</strong>
+        <div class="row">
+          <div class="table-responsive">
             <table class="table table-hover table-striped">
               <thead>
               <tr class="">
                 <th>Select</th>
-                <th>Complainant</th>
-                <th>Auction of comment</th>
-                <th>Author of comment</th>
+                <th>Report</th>
+                <th>Comment</th>
+                <th>User</th>
                 <th>Date</th>
               </tr>
               </thead>
               <tbody>
               <tr>
+              <tr>
                 <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
+                <td><a href="#">Details</a></td>
+                <td><a href="#">#51</a></td>
+                <td><a href="#">Rogério Manuel</a></td>
+                <td>12:10 17/10/17</td>
               </tr>
               <tr>
                 <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Auction of comment</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Author of comment</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
+                <td><a href="#">Details</a></td>
+                <td><a href="#">#51</a></td>
+                <td><a href="#">Rogério Manuel</a></td>
+                <td>12:10 17/10/17</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="rightSideReviews" class="col-md-9 collapse">
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> Review reports</strong></a>
+      <div id="rightSideReviews" class="adminOption collapse">
+        <strong><i class="glyphicon glyphicon-dashboard"></i> Review reports</strong>
 
-      <div class="row">
-        <div class="box-body no-padding">
-          <div class="mailbox-controls">
-            <!-- Check all button -->
-            <div class="btn-group">
-              <button class="btn btn-default btn-sm checkbox-toggle" style="padding: 10px;"><i class="glyphicon glyphicon-unchecked"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-trash"></i></button>
-              <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-refresh"></i></button>
-            </div><!-- /.btn-group -->
-
-            <div class="pull-right">
-              1-8/20
-              <div class="btn-group">
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-left"></i></button>
-                <button class="btn btn-default btn-sm" style="padding: 10px;"><i class="glyphicon glyphicon-arrow-right"></i></button>
-              </div><!-- /.btn-group -->
-            </div><!-- /.pull-right -->
-          </div>
-          <div class="table-responsive mailbox-messages">
+        <div class="row">
+          <div class="table-responsive">
             <table class="table table-hover table-striped">
               <thead>
               <tr class="">
                 <th>Select</th>
-                <th>Complainant</th>
+                <th>Report</th>
                 <th>Review</th>
+                <th>User</th>
                 <th>Date</th>
               </tr>
               </thead>
               <tbody>
               <tr>
+              <tr>
                 <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
+                <td><a href="#">Details</a></td>
+                <td><a href="#">#51</a></td>
+                <td><a href="#">Rogério Manuel</a></td>
+                <td>12:10 17/10/17</td>
               </tr>
               <tr>
                 <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td class="mailbox-name"><a href="read-mail.html">Complainant</a></td>
-                <td class="mailbox-name"><a href="read-mail.html">Review</a></td>
-                <td class="mailbox-date">25 Jan 2017</td>
+                <td><a href="#">Details</a></td>
+                <td><a href="#">#51</a></td>
+                <td><a href="#">Rogério Manuel</a></td>
+                <td>12:10 17/10/17</td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div>
 
-    <div id="rightSideAddCategory" class="col-md-9 collapse">
+      <div id="rightSideAddCategory" class="adminOption collapse">
+        <strong><i class="glyphicon glyphicon-dashboard"></i> Add category</strong>
 
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> Add category</strong></a>
-      <form class="form-horizontal">
-        <fieldset>
+        <form class="form-horizontal" style="padding-top: 1em;">
+          <fieldset>
 
-          <div class="form-group">
-            <label class="col-md-3 control-label">Title</label>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Title</label>
 
-            <div class="col-md-5">
-              <input name="title" type="text" placeholder="Category Title" class="form-control input-md"
-                     required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label">Description</label>
-
-            <div class="col-md-5">
-              <textarea class="form-control" name="description"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3 control-label"></label>
-
-            <div class="col-md-8">
-              <button name="saveBtn" class="btn btn-primary">Add</button>
-            </div>
-          </div>
-
-        </fieldset>
-      </form>
-    </div>
-
-    <div id="rightSideAddAdmin" class="col-md-9 collapse">
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> Add admin</strong></a>
-      <form class="form-horizontal">
-        <fieldset>
-
-          <div class="form-group">
-            <label for="name" class="col-md-3 control-label">Name</label>
-            <div class="col-md-8">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+              <div class="col-md-5">
+                <input name="title" type="text" placeholder="Enter a new category title" class="form-control input-md"
+                       required>
               </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">Description</label>
 
-          <div class="form-group">
-            <label for="email" class="col-md-3 control-label">Email</label>
-            <div class="col-md-8">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+              <div class="col-md-5">
+                <textarea class="form-control" name="description"></textarea>
               </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label"></label>
 
-          <div class="form-group">
-            <label for="username" class="col-md-3 control-label">Username</label>
-            <div class="col-md-8">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+              <div class="col-md-8">
+                <button name="saveBtn" class="btn btn-primary">Add</button>
               </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label for="password" class="col-md-3 control-label">Password</label>
-            <div class="col-md-8">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-              </div>
-            </div>
-          </div>
+          </fieldset>
+        </form>
+      </div>
 
-          <div class="form-group">
-            <label for="confirm" class="col-md-3 control-label">Confirm Password</label>
-            <div class="col-md-8">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
-              </div>
-            </div>
-          </div>
+      <div id="rightSideAddAdmin" class="adminOption collapse">
 
-          <div class="form-group">
-            <label class="col-md-3 control-label"></label>
+        <strong><i class="fa fa-user-secret" aria-hidden="true"></i> Add admin</strong>
 
-            <div class="col-md-8">
-              <button name="saveBtn" class="btn btn-primary">Add</button>
-            </div>
-          </div>
+        <form class="form-horizontal" style="padding-top: 1em;">
+          <fieldset>
 
-        </fieldset>
-      </form>
-    </div>
-
-    <div id="rightSideStaffList" class="col-md-9 collapse">
-      <a href="#"><strong><i class="glyphicon glyphicon-dashboard " style="padding-bottom: 20px;"></i> Staff list</strong></a>
-
-      <div class="row">
-        <div class="col-sm-offset-2 col-sm-8">
-          <div class="panel panel-default">
-            <div class="panel-heading c-list">
-              <span class="title">Staff</span>
-            </div>
-
-            <div class="row" style="display: none;">
-              <div class="col-xs-10">
-                <div class="input-group c-search">
-                  <input type="text" class="form-control" id="contact-list-search">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
-                      <span class="glyphicon glyphicon-search text-muted"></span>
-                    </button>
-                  </span>
+            <div class="form-group">
+              <label for="name" class="col-md-3 control-label">Name</label>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
                 </div>
               </div>
             </div>
 
-            <ul class="list-group" id="contact-list">
-              <li class="list-group-item">
-                <div class="col-xs-12 col-sm-3">
-                  <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
+            <div class="form-group">
+              <label for="email" class="col-md-3 control-label">Email</label>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
                 </div>
-                <div class="col-xs-12 col-sm-9">
-                  <span class="name">Scott Stevens</span><br/>
-                  <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="5842 Hillcrest Rd"></span>
-                  <span class="visible-xs"> <span class="text-muted">5842 Hillcrest Rd</span><br/></span>
-                  <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="(870) 288-4149"></span>
-                  <span class="visible-xs"> <span class="text-muted">(870) 288-4149</span><br/></span>
-                  <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="scott.stevens@example.com"></span>
-                  <span class="visible-xs"> <span class="text-muted">scott.stevens@example.com</span><br/></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="col-md-3 control-label">Username</label>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
                 </div>
-                <div class="clearfix"></div>
-              </li>
-              <li class="list-group-item">
-                <div class="col-xs-12 col-sm-3">
-                  <img src="http://api.randomuser.me/portraits/men/97.jpg" alt="Seth Frazier" class="img-responsive img-circle" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="col-md-3 control-label">Password</label>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
                 </div>
-                <div class="col-xs-12 col-sm-9">
-                  <span class="name">Seth Frazier</span><br/>
-                  <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="7396 E North St"></span>
-                  <span class="visible-xs"> <span class="text-muted">7396 E North St</span><br/></span>
-                  <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="(560) 180-4143"></span>
-                  <span class="visible-xs"> <span class="text-muted">(560) 180-4143</span><br/></span>
-                  <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="seth.frazier@example.com"></span>
-                  <span class="visible-xs"> <span class="text-muted">seth.frazier@example.com</span><br/></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm" class="col-md-3 control-label">Confirm Password</label>
+              <div class="col-md-8">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
                 </div>
-                <div class="clearfix"></div>
-              </li>
-              <li class="list-group-item">
-                <div class="col-xs-12 col-sm-3">
-                  <img src="http://api.randomuser.me/portraits/women/90.jpg" alt="Jean Myers" class="img-responsive img-circle" />
-                </div>
-                <div class="col-xs-12 col-sm-9">
-                  <span class="name">Jean Myers</span><br/>
-                  <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="4949 W Dallas St"></span>
-                  <span class="visible-xs"> <span class="text-muted">4949 W Dallas St</span><br/></span>
-                  <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="(477) 792-2822"></span>
-                  <span class="visible-xs"> <span class="text-muted">(477) 792-2822</span><br/></span>
-                  <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="jean.myers@example.com"></span>
-                  <span class="visible-xs"> <span class="text-muted">jean.myers@example.com</span><br/></span>
-                </div>
-                <div class="clearfix"></div>
-              </li>
-              <li class="list-group-item">
-                <div class="col-xs-12 col-sm-3">
-                  <img src="http://api.randomuser.me/portraits/men/24.jpg" alt="Todd Shelton" class="img-responsive img-circle" />
-                </div>
-                <div class="col-xs-12 col-sm-9">
-                  <span class="name">Todd Shelton</span><br/>
-                  <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="5133 Pecan Acres Ln"></span>
-                  <span class="visible-xs"> <span class="text-muted">5133 Pecan Acres Ln</span><br/></span>
-                  <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="(522) 991-3367"></span>
-                  <span class="visible-xs"> <span class="text-muted">(522) 991-3367</span><br/></span>
-                  <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="todd.shelton@example.com"></span>
-                  <span class="visible-xs"> <span class="text-muted">todd.shelton@example.com</span><br/></span>
-                </div>
-                <div class="clearfix"></div>
-              </li>
-            </ul>
-            <div class="row text-center">
-              <ul class="pagination">
-                <li class="disabled"><a href="#">«</a></li>
-                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 control-label"></label>
+
+              <div class="col-md-8">
+                <button name="saveBtn" class="btn btn-primary">Add</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+
+      <div id="rightSideUsersList" class="adminOption collapse">
+        <strong><i class="fa fa-users" aria-hidden="true"></i> Users list</strong>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Block</th>
+              <th>Notify</th>
+              <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>Jan Michael Vincent</td>
+              <td>jan@gmail.com</td>
+              <td><i class="fa fa-ban" aria-hidden="true"></i></td>
+              <td><i class="fa fa-flag" aria-hidden="true"></i></td>
+              <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Mr.Poopybuthole</td>
+              <td>boopboop@hotmail.com</td>
+              <td><i class="fa fa-ban" aria-hidden="true"></i></td>
+              <td><i class="fa fa-flag" aria-hidden="true"></i></td>
+              <td><i class="fa fa-times" aria-hidden="true"></i></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row text-center">
+          <ul class="pagination">
+            <li class="disabled"><a href="#">«</a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box-body">
+        <div class="mailbox-controls">
+          <div class="btn-group">
+            <button class="btn btn-default btn-sm checkbox-toggle"><i class="glyphicon glyphicon-unchecked"></i></button>
+            <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+            <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+          </div>
+
+          <div class="pull-right">
+            1-8/20
+            <div class="btn-group">
+              <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
+              <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
             </div>
           </div>
         </div>
+      </div></div>
+
+    <div id="footer" style="margin-top: 65px">
+      <div class="container">
+        <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
+        <a href="#" class="pull-right">About</a>
+        <a href="#" class="pull-right">Leave a Feedback</a>
       </div>
     </div>
 
-
-    </div>
   </div>
 </div>
-
-<div id="footer" style="margin-top: 65px">
-  <div class="container">
-    <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
-    <a href="#" class="pull-right">About</a>
-    <a href="#" class="pull-right">Leave a Feedback</a>
-  </div>
-</div>
+<!-- /#page-content-wrapper -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="scripts/main.js"></script>
+
 </body>
 </html>
