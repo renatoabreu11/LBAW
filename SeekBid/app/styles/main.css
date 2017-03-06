@@ -502,6 +502,11 @@ ul {
   padding-right: 8px;
 }
 
+.user-rating .user-rating-stars {
+  display: block;
+  text-align: center;
+}
+
 .user-rating .user-rating-numeric {
   padding-top: 8px;
 }
