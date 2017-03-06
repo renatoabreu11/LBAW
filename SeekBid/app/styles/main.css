@@ -193,6 +193,10 @@ ul {
   margin-top: 1em;
 }
 
+.tab-content h4{
+  padding-top: 0.5em;
+}
+
 #auctionInformation{
   padding-left: 1em;
 }
