@@ -248,86 +248,182 @@
   </nav>
 
   <div class="container">
-    <div class="thumbnail">
-      <form class="form-horizontal" method="post" action="#" enctype="multipart/form-data">
-        <div class="panel panel-primary">
-          <div class="panel-heading">General Info</div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a href="#profile-edit" data-toggle="collapse">Profile</a>
+        </h4>
+      </div>
+      <div id="profile-edit" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form class="form-horizontal" method="post" action="#" enctype="multipart/form-data">
+
+            <div class="panel panel-info">
+              <div class="panel-heading">General Info</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Avatar: </label>
+                  <div class="col-md-6">
+                    <img src="http://vignette3.wikia.nocookie.net/deadliestfiction/images/3/3c/Raiden_MGRR.jpg/revision/latest?cb=20121230200223" alt="Profile image" width="156">
+                    <input type="file">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Real name: </label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="real-name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Small bio: </label>
+                  <div class="col-md-6">
+                    <textarea class="form-control" rows="2" id="small-bio"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-info">
+              <div class="panel-heading">Contact Info</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="col-md-3 control-label">City: </label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="city">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Country: </label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="country">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">e-mail: </label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="e-mail">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Cellphone number: </label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="cellphone-number">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-info">
+              <div class="panel-heading">Details Info</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Who am I: </label>
+                  <div class="col-md-6">
+                    <textarea class="form-control" rows="4" id="who-am-I"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">What do I sell: </label>
+                  <div class="col-md-6">
+                    <textarea class="form-control" rows="4" id="what-sell"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="button" class="btn btn-primary">Discard</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-group">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#password-edit" data-toggle="collapse">Password</a>
+          </h4>
+        </div>
+        <div id="password-edit" class="panel-collapse collapse">
           <div class="panel-body">
-            <div class="form-group">
-              <label class="col-md-3 control-label">Avatar: </label>
-              <div class="col-md-6">
-                <img src="http://vignette3.wikia.nocookie.net/deadliestfiction/images/3/3c/Raiden_MGRR.jpg/revision/latest?cb=20121230200223" alt="Profile image" width="156">
-                <input type="file">
+            <form class="form-horizontal" method="post" action="#">
+              <div class="form-group">
+                <label class="col-md-3 control-label">Current password: </label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" id="curr-pass">
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Real name: </label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="real-name">
+              <div class="form-group">
+                <label class="col-md-3 control-label">New password: </label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" id="new-pass-1">
+                </div>
               </div>
-            </div>
+              <div class="form-group">
+                <label class="col-md-3 control-label">New password again: </label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" id="new-pass-2">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-primary">Discard</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-group">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a href="#notifications-edit" data-toggle="collapse">Notifications</a>
+          </h4>
+        </div>
+        <div id="notifications-edit" class="panel-collapse collapse">
+          <div class="panel-body">
+            <h4>Receive notifications: </h4>
             <div class="form-group">
-              <label class="col-md-3 control-label">Small bio: </label>
-              <div class="col-md-6">
-                <textarea class="form-control" rows="2" id="small-bio"></textarea>
+              <div class="row checkbox-row">
+                <div class="col-md-2 col-md-offset-5">
+                  <label class="checkbox-inline"><input type="checkbox" value="" checked> Auction won.</label>
+                </div>
+              </div>
+              <div class="row checkbox-row">
+                <div class="col-md-2 col-md-offset-5">
+                  <label class="checkbox-inline"><input type="checkbox" value="" checked> Bid surpassed.</label>
+                </div>
+              </div>
+              <div class="row checkbox-row">
+                <div class="col-md-2 col-md-offset-5">
+                  <label class="checkbox-inline"><input type="checkbox" value="" checked> Question.</label>
+                </div>
+              </div>
+              <div class="row checkbox-row">
+                <div class="col-md-2 col-md-offset-5">
+                  <label class="checkbox-inline"><input type="checkbox" value="" checked> Question reply.</label>
+                </div>
+              </div>
+              <div class="row checkbox-row">
+                <div class="col-md-2 col-md-offset-5">
+                  <label class="checkbox-inline"><input type="checkbox" value="" checked> Review.</label>
+                </div>
+              </div>
+              <div class="row checkbox-row">
+                <div class="col-md-2 col-md-offset-5">
+                  <label class="checkbox-inline"><input type="checkbox" value="" checked> Auction removed.</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="panel panel-primary">
-          <div class="panel-heading">Contact Info</div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label class="col-md-3 control-label">City: </label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="city">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Country: </label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="country">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">e-mail: </label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="e-mail">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Cellphone number: </label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="cellphone-number">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel panel-primary">
-          <div class="panel-heading">Details info</div>
-          <div class="panel-body">
-            <div class="form-group">
-              <label class="col-md-3 control-label">Who am I: </label>
-              <div class="col-md-6">
-                <textarea class="form-control" rows="4" id="who-am-I"></textarea>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">What do I sell: </label>
-              <div class="col-md-6">
-                <textarea class="form-control" rows="4" id="what-sell"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-          <button type="button" class="btn btn-primary">Discard</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 
