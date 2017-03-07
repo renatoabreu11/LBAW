@@ -898,7 +898,17 @@ a.navlink {
 .notification-page-title {
   margin: 0px;
   font-size: large;
-  color: midnightblue;
+  color: black;
+}
+
+.notification-page-container h5{
+  color: dodgerblue;
+  margin: 0;
+  padding-bottom: 0.5em;
+}
+
+.notification-page-container small{
+  color: grey;
 }
 
 /*.notification-page-container */
@@ -908,11 +918,6 @@ a.navlink {
   height: 1px;
   color: #222222;
   background-color: #222222;
-}
-
-.notification-item-user {
-  color: #333333;
-  font-weight: bolder;
 }
 
 /*=============== Create Auction =================*/
