@@ -164,139 +164,59 @@
 
       <!-- List of auctions -->
       <div class="row">
-        <div class="col-sm-9 col-xs-12">
+          <form class="col-sm-3">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input type="text" class="form-control" name="userWatchList" placeholder="Enter a person to see his watch list...">
+            </div>
+          </form>
+
+          <div class="col-sm-6">
           <ul class="auctionSort">
             <li class="active"><a href="#">Popular</a></li>
             <li><a href="#">Newest</a></li>
             <li><a href="#">Ending</a></li>
             <li><a href="#">Price (low)</a></li>
             <li><a href="#">Price (high)</a></li>
+            <li><a href="#">Recently added</a></li>
           </ul>
         </div>
 
-        <div class="col-md-3 text-center" id="listType">
-          <div class="btn-group">
-            <button type="button" class="btn btn-default btn-responsive active" data-target="#auctionsList"><i class="fa fa-list"></i></button>
-            <button type="button" class="btn btn-default btn-responsive" data-target="#auctionsThumbnails"><i class="fa fa-th"></i></button>
-            <button type="button" class="btn btn-primary btn-responsive">Show closed auctions</button>
-          </div>
+        <div class="dropdown text-center">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Show all auctions <span class="caret"></span></button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="disabled"><a href="#">Show all auctions</a></li>
+            <li><a href="#">Show only closed auctions</a></li>
+            <li><a href="#">Show only open auctions</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="table-responsive" id="auctions">
-        <table class="table table-hover collapse in" id="auctionsList">
-          <tbody>
-          <tr>
-            <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
-            <td class="product col-md-4">
-              <strong>Product 1</strong><br>
-              This is the product description.This is the product description.This is the product description.
-            </td>
-            <td class="seller col-md-2">
-              <a href="#">Gazorpazorpfield</a><br>
-              <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                          </span>
-            </td>
-            <td class="price col-md-2">
-              <small>Current bid: $75,99</small><br>
-              <h5 class="time">02h:54m:10s</h5>
-            </td>
-            <td class="watch col-md-2">
-              <button class="btn btn-info">Watch Auction</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
-            <td class="product col-md-4">
-              <strong>Product 1</strong><br>
-              This is the product description.This is the product description.This is the product description.
-            </td>
-            <td class="seller col-md-2">
-              <a href="#">Gazorpazorpfield</a><br>
-              <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                          </span>
-            </td>
-            <td class="price col-md-2">
-              <small>Current bid: $75,99</small><br>
-              <h5 class="time">02h:54m:10s</h5>
-            </td>
-            <td class="watch col-md-2">
-              <button class="btn btn-info">Watch Auction</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
-            <td class="product col-md-4">
-              <strong>Product 1</strong><br>
-              This is the product description.This is the product description.This is the product description.
-            </td>
-            <td class="seller col-md-2">
-              <a href="#">Gazorpazorpfield</a><br>
-              <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                          </span>
-            </td>
-            <td class="price col-md-2">
-              <small>Current bid: $75,99</small><br>
-              <h5 class="time">02h:54m:10s</h5>
-            </td>
-            <td class="watch col-md-2">
-              <button class="btn btn-info">Watch Auction</button>
-            </td>
-          </tr>
-          <tr>
-            <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
-            <td class="product col-md-4">
-              <strong>Product 1</strong><br>
-              This is the product description.This is the product description.This is the product description.
-            </td>
-            <td class="seller col-md-2">
-              <a href="#">Gazorpazorpfield</a><br>
-              <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                          </span>
-            </td>
-            <td class="price col-md-2">
-              <small>Current bid: $75,99</small><br>
-              <h5 class="time">02h:54m:10s</h5>
-            </td>
-            <td class="watch col-md-2">
-              <button class="btn btn-info">Watch Auction</button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="collapse" id="auctionsThumbnails">
+      <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-6">
                       <span class="thumbnail text-center">
-                        <h4>Surface Book</h4>
+
+                        <div class="dropdown">
+                          <h4 style="display: inline;">Surface Book</h4>
+                          <a href="#" class="pull-right dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-chevron-down"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">Auction</li>
+                            <li><a href="#">Remove auction</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Notifications</li>
+                            <li class="disabled"><a href="#">Disable notifications</a></li>
+                            <li><a href="#">Enable notifications</a></li>
+                          </ul>
+                        </div>
+
                         <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
                         <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
                         <p>Current bid: $75,99</p>
                         <h3 class="time">05h:54m:10s</h3>
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-sm"> Bid</button>
-                            <button class="btn btn-danger btn-sm"> Remove</button>
+                            <button class="btn btn-primary btn-sm"> Watch</button>
                         </div>
                         <div class="seller">
                           <p>Product auctioned by <a href="#">Microsoft</a></p>
@@ -313,14 +233,26 @@
 
         <div class="col-md-3 col-sm-6 col-xs-6">
                       <span class="thumbnail text-center">
-                        <h4>Surface Book</h4>
+                        <div class="dropdown">
+                          <h4 style="display: inline;">Surface Book</h4>
+                          <a href="#" class="pull-right dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-chevron-down"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">Auction</li>
+                            <li><a href="#">Remove auction</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Notifications</li>
+                            <li class="disabled"><a href="#">Disable notifications</a></li>
+                            <li><a href="#">Enable notifications</a></li>
+                          </ul>
+                        </div>
                         <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
                         <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
                         <p>Current bid: $75,99</p>
                         <h3 class="time">05h:54m:10s</h3>
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-sm"> Bid</button>
-                            <button class="btn btn-danger btn-sm"> Remove</button>
+                            <button class="btn btn-primary btn-sm"> Watch</button>
                         </div>
                         <div class="seller">
                           <p>Product auctioned by <a href="#">Microsoft</a></p>
@@ -337,14 +269,26 @@
 
         <div class="col-md-3 col-sm-6 col-xs-6">
                       <span class="thumbnail text-center">
-                        <h4>Surface Book</h4>
+                        <div class="dropdown">
+                          <h4 style="display: inline;">Surface Book</h4>
+                          <a href="#" class="pull-right dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-chevron-down"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">Auction</li>
+                            <li><a href="#">Remove auction</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Notifications</li>
+                            <li class="disabled"><a href="#">Disable notifications</a></li>
+                            <li><a href="#">Enable notifications</a></li>
+                          </ul>
+                        </div>
                         <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
                         <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
                         <p>Current bid: $75,99</p>
                         <h3 class="time">05h:54m:10s</h3>
                         <div class="row text-center">
-                            <button class="btn btn-primary btn-sm"> Bid</button>
-                            <button class="btn btn-danger btn-sm"> Remove</button>
+                            <button class="btn btn-primary btn-sm"> Watch</button>
                         </div>
                         <div class="seller">
                           <p>Product auctioned by <a href="#">Microsoft</a></p>
@@ -361,14 +305,26 @@
 
           <div class="col-md-3 col-sm-6 col-xs-6">
                         <span class="thumbnail text-center">
-                          <h4>Surface Book</h4>
+                          <div class="dropdown">
+                          <h4 style="display: inline;">Surface Book</h4>
+                          <a href="#" class="pull-right dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-chevron-down"></i>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">Auction</li>
+                            <li><a href="#">Remove auction</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Notifications</li>
+                            <li class="disabled"><a href="#">Disable notifications</a></li>
+                            <li><a href="#">Enable notifications</a></li>
+                          </ul>
+                          </div>
                           <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
                           <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
                           <p>Current bid: $75,99</p>
                           <h3 class="time">05h:54m:10s</h3>
                           <div class="row text-center">
-                            <button class="btn btn-primary btn-sm"> Bid</button>
-                            <button class="btn btn-danger btn-sm"> Remove</button>
+                            <button class="btn btn-primary btn-sm"> Watch</button>
                           </div>
                           <div class="seller">
                             <p>Product auctioned by <a href="#">Microsoft</a></p>
