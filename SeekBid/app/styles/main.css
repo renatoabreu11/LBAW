@@ -79,16 +79,17 @@ ul {
 .notifications-wrapper {
   overflow: auto;
   max-height:350px;
+  padding-top: 0.5em;
+}
+
+.notification-footer > h4{
+ padding: 0 0.2em 0 0.2em;
 }
 
 .menu-title {
-  color:midnightblue;
+  color: #000000;
   font-size: large;
   display:inline-block;
-}
-
-.notification-heading, .notification-footer  {
-  padding:2px 10px;
 }
 
 .dropdown .notifications-empty {
@@ -107,6 +108,8 @@ ul {
 .dropdown .notifications-wrapper .media-right {
   padding-right: 20px;
 }
+
+
 
 .modal-header{
   background-color: #f9f9f9;
@@ -908,26 +911,11 @@ a.navlink {
   background-color: #222222;
 }
 
-/*.notification-page-container */
-.notification-media {
-  margin: 0px;
-}
-
-/*.notification-page-container */
-.notification-item .notification-next-divider {
-  margin-top: 0px;
-  margin-bottom: 6px;
-}
-
 .notification-item-user {
   color: #333333;
   font-weight: bolder;
 }
 
-/*.notification-page-container
-.notification-media .notification-item-date {
-  color: #757575;
-}
 /*=============== Create Auction =================*/
 
 .newAuctionH{
@@ -949,24 +937,4 @@ a.navlink {
 
 .well .controls {
   padding-bottom: 1em;
-}
-
-/* layout.css Style */
-.upload-drop-zone {
-  height: 200px;
-  border-width: 2px;
-  margin-bottom: 20px;
-}
-
-/* skin.css Style*/
-.upload-drop-zone {
-  color: #ccc;
-  border-style: dashed;
-  border-color: #ccc;
-  line-height: 200px;
-  text-align: center
-}
-.upload-drop-zone.drop {
-  color: #222;
-  border-color: #222;
 }
