@@ -125,6 +125,14 @@ ul {
   vertical-align: middle;
 }
 
+#navbar-collapse-1 li {
+  display: inline;
+}
+
+#navbar-collapse-1 li a {
+  display: inline-block;
+}
+
 /****************************** Product Auction ***************************/
 
 .auction{
