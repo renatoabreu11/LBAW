@@ -916,6 +916,19 @@ a.navlink {
 }
 /*=============== Create Auction =================*/
 
+.newAuctionH{
+  padding: 1.5em;
+}
+
+.newAuctionH .heading{
+  border-bottom: 1px lightgrey solid;
+}
+
+.newAuctionH .heading p {
+  padding-top: 0;
+  color: grey;
+}
+
 .stepwizard-step p {
   margin-top: 10px;
 }
@@ -923,8 +936,8 @@ a.navlink {
   display: table-row;
 }
 .stepwizard {
+  padding: 2em 0 0 0;
   display: table;
-  padding:0;
 }
 .stepwizard-step button[disabled] {
   opacity: 1 !important;
