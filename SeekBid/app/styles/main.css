@@ -125,6 +125,20 @@ ul {
   vertical-align: middle;
 }
 
+/******************************** index.html ******************************/
+
+.table-best-users p {
+  margin-bottom: 2px;
+}
+
+.index-info-title {
+  font-size: large;
+}
+
+.index-info-details {
+  color: #666666;
+}
+
 /****************************** Product Auction ***************************/
 
 .auction{
