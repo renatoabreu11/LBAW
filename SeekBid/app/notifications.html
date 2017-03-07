@@ -32,6 +32,7 @@
   <meta name="theme-color" content="#2F3BA2">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 
@@ -106,105 +107,64 @@
               </div>
               <li class="divider"></li>
               <div class="notifications-wrapper">
-                <div class="notification-item">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-euro"></i> Bid surpassed</p>
-                      <a href="#" class="notification-item-description">anthony67</a>
-                      <a href="#" class="notification-item-description"> surpassed your <mark>25.99€</mark> bid with a <mark>26.54€</mark> bid.</a>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                      <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                    </div>
+                <div class="media notification-media">
+                  <div class="media-left">
+                    <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+                  </div>
+                  <div class="media-body">
+                    <a href="#" class="notifications-item-title">
+                      <i class="glyphicon glyphicon-shopping-cart"></i> Auction won
+                    </a>
+                    <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
+                  </div>
+                  <div class="media-right">
+                    <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                   </div>
                 </div>
-                <hr>
-                <div class="notification-item">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-shopping-cart"></i> Auction won</p>
-                      <a href="#" class="notification-item-description">You won the auction.</a>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                      <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                    </div>
+              </div>
+
+              <li class="divider"></li>
+
+              <div class="notifications-wrapper">
+                <div class="media notification-media">
+                  <div class="media-left">
+                    <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+                  </div>
+                  <div class="media-body">
+                    <a href="#" class="notifications-item-title">
+                      <i class="glyphicon glyphicon-euro"></i> anthony67 surpassed your bid by 0.56€
+                    </a>
+                    <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
+                  </div>
+                  <div class="media-right">
+                    <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                   </div>
                 </div>
-                <hr>
-                <div class="notification-item">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <a href="#"><img src="https://secure.gravatar.com/avatar/9cbb051a377f30336c7c1c152c82fac0?s=200&r=pg&d=https%3A%2F%2Fs.gjcdn.net%2Fimg%2Fno-avatar-3.png" alt="Auction removed" width="128"></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-lock"></i> Auction removed</p>
-                      <a href="#" class="notification-item-description">An administrator deleted your auction due to website violations.</a>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                      <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                    </div>
+              </div>
+
+              <li class="divider"></li>
+
+              <div class="notifications-wrapper">
+                <div class="media notification-media">
+                  <div class="media-left">
+                    <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
                   </div>
-                </div>
-                <hr>
-                <div class="notification-item">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-question-sign"></i> Question</p>
-                      <a href="#" class="notification-item-description">anthony67</a>
-                      <a href="#" class="notification-item-description"> posted a question on your auction.</a>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                      <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                    </div>
+                  <div class="media-body">
+                    <a href="#" class="notifications-item-title">
+                      <i class="glyphicon glyphicon-remove"></i> Your comment was removed by an admin
+                    </a>
+                    <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
                   </div>
-                </div>
-                <hr>
-                <div class="notification-item">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-question-sign"></i> Question reply</p>
-                      <a href="#" class="notification-item-description">anthony67</a>
-                      <a href="#" class="notification-item-description"> replied to a question on your auction.</a>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                      <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="notification-item">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                      <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="Product item" width="128"></a>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                      <p class="notification-item-title text-danger"><i class="glyphicon glyphicon-check"></i> Review</p>
-                      <a href="#" class="notification-item-description">anthony67</a>
-                      <a href="#" class="notification-item-description"> just posted a review about one of your auctions.</a>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                      <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-                    </div>
+                  <div class="media-right">
+                    <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                   </div>
                 </div>
               </div>
 
               <li class="divider"></li>
               <div class="notification-footer">
-                <a href="#">View all notifications</a>
-                <a href="#" class="pull-right">Mark all as read</a>
+                <h4 class="menu-title"><a>View all notifications</a></h4>
+                <h4 class="menu-title pull-right"><a>Mark all as read</a></h4>
               </div>
             </ul>
           </li>
@@ -227,112 +187,76 @@
     <div class="col-lg-8 col-md-8">
       <p class="notification-page-title">Notifications</p>
       <hr class="notifications-title-info-divider">
-      <!--div class="notification-wrapper">
-        <div class="notification-item">
-          <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="pull-left" alt="Auction item" width="64" height="64">
-          <div class="notification-item-info-text">
-            <p>
-              <span class="notifications-item-title text-danger">
-                <i class="glyphicon glyphicon-euro"></i> Bid surpassed
-              </span>
-              <a href="#">anthony67</a> <a href="#">surpassed your <mark>25.99€</mark> bid with a <mark>26.54€</mark> bid.</a>
-            </p>
-            <p class="notification-item-date">02/02/2016 14:45</p>
+
+      <div class="notifications-wrapper">
+        <div class="media notification-media">
+          <div class="media-left">
+            <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+          </div>
+          <div class="media-body">
+            <h5 class="notifications-item-title">
+              <i class="glyphicon glyphicon-remove"></i> Comment Removed
+            </h5>
+            <p>The comment "Yo mama is so ugly, her portraits hang themselves." violates the website rules and, as such, was removed by an admin.</p>
+            <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
           </div>
         </div>
       </div>
-    </div-->
 
-      <div class="media notification-item">
-        <div class="media-left">
-          <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="media-object" width="60"></a>
+      <hr class="divider">
+
+      <div class="notifications-wrapper">
+        <div class="media notification-media">
+          <div class="media-left">
+            <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+          </div>
+          <div class="media-body">
+            <h5 class="notifications-item-title">
+              <i class="glyphicon glyphicon-remove"></i> Auction Removed
+            </h5>
+            <p>The auction "Turbinator 3000K" violates the website rules and, as such, was removed by an admin.</p>
+            <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
+          </div>
         </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <span class="notifications-item-title text-danger">
-                  <i class="glyphicon glyphicon-euro"></i> Bid surpassed
-                </span>
-            <a href="#" class="notification-item-user">anthony67</a> <a href="#">surpassed your <mark>25.99€</mark> bid with a <mark>26.54€</mark> bid.</a>
-          <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
-        </div>
-        <hr class="notification-next-divider">
       </div>
 
-      <div class="media notification-item">
-        <div class="media-left">
-          <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="media-object" width="60"></a>
+      <hr class="divider">
+
+      <div class="notifications-wrapper">
+        <div class="media notification-media">
+          <div class="media-left">
+            <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+          </div>
+          <div class="media-body">
+            <h5 class="notifications-item-title">
+              <i class="fa fa-trophy" aria-hidden="true"></i>
+              Auction Won
+            </h5>
+            <p>You have won the auction "Logitech Mouse" with a bid of 12.56€. Congratulations!</p>
+            <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
+          </div>
         </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <span class="notifications-item-title text-danger">
-                  <i class="glyphicon glyphicon-shopping-cart"></i> Auction won
-                </span>
-            <a href="#">You won the auction.</a>
-          <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
-        </div>
-        <hr class="notification-next-divider">
       </div>
 
-      <div class="media notification-item">
-        <div class="media-left">
-          <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="media-object" width="60"></a>
+      <hr class="divider">
+
+      <div class="notifications-wrapper">
+        <div class="media notification-media">
+          <div class="media-left">
+            <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+          </div>
+          <div class="media-body">
+            <h5 class="notifications-item-title">
+              <i class="fa fa-frown-o" aria-hidden="true"></i>
+              Bid Surpassed
+            </h5>
+            <p>Your bid of 12.56€, in the auction "Asus X55A", has been surpassed by the user DildoGaggins. The current bid of the auction is 12.98€.</p>
+            <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
+          </div>
         </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <span class="notifications-item-title text-danger">
-                  <i class="glyphicon glyphicon-lock"></i> Auction removed.
-                </span>
-            <a href="#">An administrator deleted your auction due to website violations.</a>
-          <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
-        </div>
-        <hr class="notification-next-divider">
       </div>
 
-      <div class="media notification-item">
-        <div class="media-left">
-          <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="media-object" width="60"></a>
-        </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <span class="notifications-item-title text-danger">
-                  <i class="glyphicon glyphicon-question-sign"></i> Question
-                </span>
-            <a href="#" class="notification-item-user">anthony67</a> <a href="#">posted a question on your auction.</a>
-          <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
-        </div>
-        <hr class="notification-next-divider">
-      </div>
-
-      <div class="media notification-item">
-        <div class="media-left">
-          <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="media-object" width="60"></a>
-        </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <span class="notifications-item-title text-danger">
-                  <i class="glyphicon glyphicon-question-sign"></i> Question reply
-                </span>
-            <a href="#" class="notification-item-user">anthony67</a> <a href="#">replied to a question on your auction.</a>
-          <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
-        </div>
-        <hr class="notification-next-divider">
-      </div>
-
-      <div class="media notification-item">
-        <div class="media-left">
-          <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" class="media-object" width="60"></a>
-        </div>
-        <div class="media-body">
-          <p class="media-heading">
-            <span class="notifications-item-title text-danger">
-                  <i class="glyphicon glyphicon-check"></i> Review
-                </span>
-            <a href="#" class="notification-item-user">anthony67</a> <a href="#">just posted a review about one of your auctions.</a>
-          <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
-        </div>
-        <hr class="notification-next-divider">
-      </div>
-
+      <hr class="divider">
     </div>
   </div>
 

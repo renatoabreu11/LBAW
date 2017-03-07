@@ -204,53 +204,39 @@
     if (hour == 0 && min == 0 && sec == 0) return "Auction closed";
     else return hour + "h:" + min + "m:" + sec + "s";
   }
-
 })();
 
 /* ==================== Create Auction ============================
-
- step script
  */
 
 $(document).ready(function () {
-  var navListItems = $('div.setup-panel div .btn-circle'),
-    allWells = $('.setup-content'),
-    allNextBtn = $('.nextBtn');
+  var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
 
-  allWells.hide();
-
-  navListItems.click(function (e) {
+  navListItems.click(function(e)
+  {
     e.preventDefault();
     var $target = $($(this).attr('href')),
-      $item = $(this);
+      $item = $(this).closest('li');
 
     if (!$item.hasClass('disabled')) {
-      navListItems.removeClass('btn-primary').addClass('btn-default');
-      $item.addClass('btn-primary');
+      navListItems.closest('li').removeClass('active');
+      $item.addClass('active');
       allWells.hide();
       $target.show();
-      $target.find('input:eq(0)').focus();
     }
   });
 
-  allNextBtn.click(function(){
-    var curStep = $(this).closest(".setup-content"),
-      curStepBtn = curStep.attr("id"),
-      nextStepWizard = $('div.setup-panel div .btn-circle[href="#' + curStepBtn + '"]').parent().next().children(".btn-circle"),
-      curInputs = curStep.find("input[type='text'],input[type='url']"),
-      isValid = true;
+  $('ul.setup-panel li.active a').trigger('click');
 
-    $(".form-group").removeClass("has-error");
-    for(var i=0; i<curInputs.length; i++){
-      if (!curInputs[i].validity.valid){
-        isValid = false;
-        $(curInputs[i]).closest(".form-group").addClass("has-error");
-      }
-    }
+  $('#activate-step-2').on('click', function(e) {
+    $('ul.setup-panel li:eq(1)').removeClass('disabled');
+    $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+    $(this).remove();
+  })
 
-    if (isValid)
-      nextStepWizard.removeAttr('disabled').trigger('click');
-  });
-
-  $('div.setup-panel div .btn-circle.btn-primary').trigger('click');
+  $('#activate-step-3').on('click', function(e) {
+    $('ul.setup-panel li:eq(2)').removeClass('disabled');
+    $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+    $(this).remove();
+  })
 });
