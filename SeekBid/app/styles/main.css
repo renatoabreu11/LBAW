@@ -592,6 +592,10 @@ ul {
   padding-top: 7px;
 }
 
+#reviews .review-rating {
+  color: #ffc82c;
+}
+
 #reviews .review-product-name p{
   padding-top: 8px;
   color: dimgrey;
