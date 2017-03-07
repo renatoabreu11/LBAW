@@ -720,6 +720,20 @@ input, input::-webkit-input-placeholder {
 /******************************** admin *******************************/
 /* Toggle Styles */
 
+.navlink {
+  float: left;
+  height: 50px;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+a.navlink {
+  text-decoration: none;
+  color: grey;
+}
+
+
 .adminOption {
   padding: 1em;
 }
