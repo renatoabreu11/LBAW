@@ -132,7 +132,9 @@ ul {
 }
 
 .index-info-title {
+  padding-top: 20px;
   font-size: large;
+
 }
 
 .index-info-details {
