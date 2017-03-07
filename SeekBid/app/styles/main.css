@@ -135,7 +135,9 @@ ul {
 }
 
 .index-info-title {
+  padding-top: 20px;
   font-size: large;
+
 }
 
 .index-info-details {
@@ -591,6 +593,10 @@ ul {
 
 #reviews .reviewer-info {
   padding-top: 7px;
+}
+
+#reviews .review-rating {
+  color: #ffc82c;
 }
 
 #reviews .review-product-name p{
