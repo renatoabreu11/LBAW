@@ -70,6 +70,10 @@ ul {
   background: white;
 }
 
+.container a {
+  text-decoration: none;
+}
+
 /************************* Header *******************************/
 
 .notifications {
@@ -159,14 +163,19 @@ ul {
   color: #666666;
 }
 
+.panel-body .gridIndex{
+  position: relative;
+  width: 100%;
+  background: #fff;
+  color: #666666;
+  margin-bottom: 25px;
+  color: black;
+}
+
 /****************************** Product Auction ***************************/
 
 .auction{
   padding: 0.5em;
-}
-
-.auction a{
-  text-decoration: none;
 }
 
 .share {
@@ -604,7 +613,7 @@ ul {
 }
 
 #wins .win-info-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   color: dimgrey;
 }
