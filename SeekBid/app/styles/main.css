@@ -391,6 +391,11 @@ ul {
   line-height: 1.9em;
 }
 
+.table-responsive .product-title {
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
 #auctions table tr td {
   vertical-align: middle;
   text-align: center;
