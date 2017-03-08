@@ -890,6 +890,18 @@ a.navlink {
 
 /***************watchList.html***********/
 
+.watchList .title{
+  padding-bottom: 1em;
+}
+
+.watchList .auctions {
+  padding: 2em;
+}
+
+.watchList .auctions .thumbnail .dropdown{
+  padding-top: 0.25em;
+}
+
 .pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px;}
 
 /************************notifications.html************************/
