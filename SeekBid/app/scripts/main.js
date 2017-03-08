@@ -214,6 +214,13 @@
  */
 
 $(document).ready(function () {
+  $('.slider1').bxSlider({
+    slideWidth: 200,
+    minSlides: 2,
+    maxSlides: 4,
+    slideMargin: 15
+  });
+
   var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
 
   navListItems.click(function(e)
