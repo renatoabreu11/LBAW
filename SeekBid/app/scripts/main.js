@@ -101,6 +101,10 @@
     updateNotificationBadge("");
   })
 
+  //Collapses 'Categories' panel if in mobile.
+  if($(window).width() <= 425)
+    $("#categories-wrapper").removeClass('in');
+
   /********************AuctionsPage.html****************/
 
   $("#listType .btn").click(function(){
