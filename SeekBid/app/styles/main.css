@@ -879,9 +879,7 @@ a.navlink {
 
 /*.notification-page-container */
 .notification-page-title {
-  margin: 0;
-  font-size: large;
-  color: black;
+  margin-top: 0;
 }
 
 .notification-page-container h5{
@@ -894,13 +892,9 @@ a.navlink {
   color: grey;
 }
 
-/*.notification-page-container */
-.notifications-title-info-divider {
-  margin-bottom: 30px;
-  border: none;
-  height: 1px;
-  color: #222222;
-  background-color: #222222;
+.notification-page-container .heading{
+  border-bottom: 1px lightgrey solid;
+  margin-bottom: 1.5em;
 }
 
 /*=============== Create Auction =================*/
@@ -911,8 +905,16 @@ a.navlink {
 
 .index .breadcrumb {
   padding-left: 0;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
   margin: 0;
+}
+
+@media(max-width:768px) {
+  .index .breadcrumb {
+    padding-left: 0;
+    padding-bottom: 1em;
+    margin: 0;
+  }
 }
 
 .newAuctionH .heading{
