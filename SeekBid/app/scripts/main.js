@@ -81,8 +81,23 @@
   })
 
   // Remove notification once it's clicked (via link).
-  $(".dropdown .notifications-wrapper .notification-item .notification-item-info").click(function() {
+  $(".dropdown .notifications-wrapper .notification-media .notification-item-info").click(function() {
+    var notification = $(this).parent().parent();
+    notification.remove();
+
+    var numNotifications = $(".notifications-wrapper").children().length;
+    updateNotificationBadge(numNotifications);
+
+    if(numNotifications == 0) {
+      $(".notifications-wrapper").html('<p class="notifications-empty">You have no new notifications</p>');
+      updateNotificationBadge("");
+    }
+  })
+
+  // Remove notification once it's clicked (via image).
+  $(".dropdown .notifications-wrapper .notification-media .notification-item-image").click(function() {
     var notification = $(this).parent().parent().parent();
+    console.log(notification);
     notification.remove();
 
     var numNotifications = $(".notifications-wrapper").children().length;

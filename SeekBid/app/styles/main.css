@@ -113,7 +113,10 @@ ul {
   padding-right: 20px;
 }
 
-
+.notifications-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 .modal-header{
   background-color: #f9f9f9;
