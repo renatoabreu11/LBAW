@@ -146,6 +146,9 @@
 
   // Handles the 'Win' info when on hand devices.
   if($(window).width() <= 768) {
+    $("#wins .win-wrapper").removeClass("col-lg-3").removeClass("col-md-3");
+    $("#wins .win-wrapper #win-info-image").addClass("col-sm-6");
+    $("#wins .win-wrapper #win-info-text").addClass("col-sm-6");
     $("#wins .win-info").removeClass("text-right").addClass("text-center");
     $("#wins .win-image").width(156);
   }
