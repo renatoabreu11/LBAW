@@ -137,12 +137,18 @@
 
   /********************profile.html*****************/
 
+  // Hovers stars to make a review.
   $("#wins .win-review-rating-stars .glyphicon").mouseover(function() {
     $(this).removeClass("glyphicon-star-empty").addClass("glyphicon-star");
     $(this).prevAll().removeClass("glyphicon-star-empty").addClass("glyphicon-star");
     $(this).nextAll().removeClass("glyphicon-star").addClass("glyphicon-star-empty");
   })
 
+  // Handles the 'Win' info when on hand devices.
+  if($(window).width() <= 768) {
+    $("#wins .win-info").removeClass("text-right").addClass("text-center");
+    $("#wins .win-image").width(156);
+  }
 
   /**************auction.html***************/
 
