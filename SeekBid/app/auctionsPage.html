@@ -51,42 +51,10 @@
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
 
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
-          <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-              <div class="modal-header">
-                <img src="favicon.ico" class="img-rounded" width="64" height="64">
-                <h4>Sign in to Seek Bid</h4>
-              </div>
-
-              <div class="modal-body">
-                <form role="form">
-                  <div class="form-group">
-                    <label for="username">Username or email address</label>
-                    <input type="text" class="form-control" id="username">
-                  </div>
-                  <div class="form-group">
-                    <label for="psw">Password</label>
-                    <input type="text" class="form-control" id="psw">
-                  </div>
-                  <div class="checkbox">
-                    <label><input type="checkbox" value="" checked>Remember me</label>
-                  </div>
-                  <button type="submit" class="btn btn-default btn-success btn-block">Sign in</button>
-                </form>
-              </div>
-
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal">Cancel</button>
-                <p>Not a member? <a href="#">Sign Up</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <li><a href="#">Sign up</a></li>
+        <li>
+          <a href="#"><span class="glyphicon glyphicon-plus"></span> Auction</a>
+        </li>
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -250,7 +218,7 @@
               <h6 style="color: darkgray;">Showing all results matching "computer"</h6>
 
               <div class="row">
-                <div class="col-sm-10 col-xs-12">
+                <div class="col-sm-8 col-xs-12">
                     <ul class="auctionSort">
                       <li class="active"><a href="#">Popular</a></li>
                       <li><a href="#">Newest</a></li>
@@ -260,7 +228,7 @@
                     </ul>
                 </div>
 
-                <div class="visible-xs col-xs-6">
+                <div class="visible-xs col-xs-4">
                   <div class="dropdown xsFilter">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Filters
                       <span class="caret"></span></button>
@@ -288,7 +256,8 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-md-2 text-center pull-right" id="listType">
+                <div class="col-md-4 text-center pull-right col-xs-8" id="listType">
+                  <button type="button" class="btn btn-default btn-responsive" style="margin-right: 1em;">New Auction</button>
                   <div class="btn-group">
                     <button type="button" class="btn btn-default btn-responsive active" data-target="#auctionsList"><i class="fa fa-list"></i></button>
                     <button type="button" class="btn btn-default btn-responsive" data-target="#auctionsThumbnails"><i class="fa fa-th"></i></button>
