@@ -32,6 +32,7 @@
   <meta name="theme-color" content="#2F3BA2">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -114,10 +115,10 @@
             <div class="notifications-wrapper">
               <div class="media notification-media">
                 <div class="media-left">
-                  <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+                  <a href="#"><img class="notification-item-image" src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
                 </div>
                 <div class="media-body">
-                  <a href="#" class="notifications-item-title">
+                  <a href="#" class="notification-item-info">
                     <i class="glyphicon glyphicon-shopping-cart"></i> Auction won
                   </a>
                   <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
@@ -125,18 +126,15 @@
                 <div class="media-right">
                   <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                 </div>
+                <hr class="notifications-divider">
               </div>
-            </div>
 
-            <li class="divider"></li>
-
-            <div class="notifications-wrapper">
               <div class="media notification-media">
                 <div class="media-left">
-                  <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+                  <a href="#"><img class="notification-item-image" src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
                 </div>
                 <div class="media-body">
-                  <a href="#" class="notifications-item-title">
+                  <a href="#" class="notification-item-info">
                     <i class="glyphicon glyphicon-euro"></i> anthony67 surpassed your bid by 0.56€
                   </a>
                   <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
@@ -144,18 +142,15 @@
                 <div class="media-right">
                   <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                 </div>
+                <hr class="notifications-divider">
               </div>
-            </div>
 
-            <li class="divider"></li>
-
-            <div class="notifications-wrapper">
               <div class="media notification-media">
                 <div class="media-left">
-                  <a href="#"><img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
+                  <a href="#"><img class="notification-item-image" src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" width="64"></a>
                 </div>
                 <div class="media-body">
-                  <a href="#" class="notifications-item-title">
+                  <a href="#" class="notification-item-info">
                     <i class="glyphicon glyphicon-remove"></i> Your comment was removed by an admin
                   </a>
                   <p class="notification-item-date"><small>02/02/2016 14:45</small></p>
@@ -163,11 +158,10 @@
                 <div class="media-right">
                   <button type="button" class="notification-item-remove btn btn-default btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
                 </div>
+                <hr class="notifications-divider">
               </div>
             </div>
 
-
-            <li class="divider"></li>
             <div class="notification-footer">
               <h4 class="menu-title"><a>View all notifications</a></h4>
               <h4 class="menu-title pull-right"><a>Mark all as read</a></h4>
@@ -207,9 +201,9 @@
   </div>
 
   <!-- Title -->
-  <div class="row">
+  <div class="row" style="padding-left: 1em;">
     <div class="col-md-12 title">
-      <h3><span class="glyphicon glyphicon-eye-open"></span> Watch List</h3>
+      <h3 style="margin: 0;"><span class="glyphicon glyphicon-eye-open"></span> Watch List</h3>
     </div>
   </div>
 
@@ -224,22 +218,23 @@
     </ul>
   </div>
 
-  <div class="col-sm-6 col-xs-6">
-    <form>
-      <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input type="text" class="form-control" name="userWatchList" placeholder="Filter auctions by seller...">
-      </div>
-    </form>
-  </div>
+  <div class="row" style="padding-left: 2em; padding-right: 2em;">
+    <div class="col-sm-6 col-xs-6">
+      <form>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" class="form-control" name="userWatchList" placeholder="Filter auctions by seller...">
+        </div>
+      </form>
+    </div>
 
-  <div class="dropdown col-sm-6 col-xs-6" style="padding-bottom: 1em;">
-    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Show all auctions <span class="caret"></span></button>
-    <ul class="dropdown-menu dropdown-menu-left">
-      <li class="disabled"><a href="#">Show all auctions</a></li>
-      <li><a href="#">Show only closed auctions</a></li>
-      <li><a href="#">Show only open auctions</a></li>
-    </ul>
+    <div class="controls col-sm-6 col-xs-6">
+      <select class="selectpicker input-md textinput textInput form-control" title="Type of auctions">
+        <option>All auctions</option>
+        <option>Closed auctions</option>
+        <option>Open auctions</option>
+      </select>
+    </div>
   </div>
 
   <div class="row auctions">
@@ -420,6 +415,7 @@
 <!-- build:js scripts/main.min.js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 <script src="scripts/main.js"></script>
 <!-- endbuild -->
 
