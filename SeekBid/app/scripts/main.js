@@ -232,20 +232,9 @@
     if (hour == 0 && min == 0 && sec == 0) return "Auction closed";
     else return hour + "h:" + min + "m:" + sec + "s";
   }
-})();
-
-/* ==================== Create Auction ============================
- */
-
-$(document).ready(function () {
-  $('.slider1').bxSlider({
-    slideWidth: 200,
-    minSlides: 2,
-    maxSlides: 4,
-    slideMargin: 15
-  });
 
   var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
+  allWells.hide();
 
   navListItems.click(function(e)
   {
@@ -274,4 +263,16 @@ $(document).ready(function () {
     $('ul.setup-panel li a[href="#step-3"]').trigger('click');
     $(this).remove();
   })
+})();
+
+/* ==================== Create Auction ============================
+ */
+
+$(document).ready(function () {
+  $('.slider1').bxSlider({
+    slideWidth: 200,
+    minSlides: 2,
+    maxSlides: 4,
+    slideMargin: 15
+  });
 });
