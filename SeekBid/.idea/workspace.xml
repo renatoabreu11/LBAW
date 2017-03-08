@@ -83,11 +83,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="auctionsPage.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="auctionsPage.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/auctionsPage.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-15">
-                  <caret line="346" column="125" lean-forward="false" selection-start-line="346" selection-start-column="125" selection-end-line="346" selection-end-column="125" />
+                <state relative-caret-position="308">
+                  <caret line="365" column="23" lean-forward="true" selection-start-line="365" selection-start-column="23" selection-end-line="365" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="admin.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/admin.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="189">
+                  <caret line="390" column="39" lean-forward="false" selection-start-line="390" selection-start-column="39" selection-end-line="390" selection-end-column="39" />
                   <folding />
                 </state>
               </provider>
@@ -699,16 +709,16 @@
       <workItem from="1488818530364" duration="18866000" />
       <workItem from="1488845176977" duration="335000" />
       <workItem from="1488907530024" duration="16248000" />
-      <workItem from="1488985015066" duration="4601000" />
+      <workItem from="1488985015066" duration="6639000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49250000" />
+    <option name="totallyTimeSpent" value="51288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1068,14 +1078,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="401" column="54" lean-forward="false" selection-start-line="401" selection-start-column="54" selection-end-line="401" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/auction.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -1183,8 +1185,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/auctionsPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="346" column="125" lean-forward="false" selection-start-line="346" selection-start-column="125" selection-end-line="346" selection-end-column="125" />
+        <state relative-caret-position="308">
+          <caret line="365" column="23" lean-forward="true" selection-start-line="365" selection-start-column="23" selection-end-line="365" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="390" column="39" lean-forward="false" selection-start-line="390" selection-start-column="39" selection-end-line="390" selection-end-column="39" />
           <folding />
         </state>
       </provider>
