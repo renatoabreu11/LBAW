@@ -1,1 +1,0 @@
-User(id, username, bio, hashedPass, name, phone, registerDate)
