@@ -44,7 +44,7 @@ try {
         $_SESSION['error_messages'][] = 'Duplicate username';
         $_SESSION['field_errors']['username'] = 'Username already exists';
     }
-    else $_SESSION['error_messages'][] = 'Error creating user';
+    else $_SESSION['error_messages'][] = 'Error creating user' . $e->getMessage();
 
     $_SESSION['form_values'] = $_POST;
     header("Location: $BASE_URL" . 'pages/authentication/signup.php');
