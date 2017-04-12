@@ -1,17 +1,17 @@
 <?php
-  session_set_cookie_params(3600, '/lbaw1662/proto');
+  session_set_cookie_params(3600);
   session_start();
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
-  $BASE_DIR = '/var/www/lbaw1662/proto/';
-  $BASE_URL = '/lbaw1662/proto/';
+  $BASE_DIR = '/home/helder/Desktop/LBAW/proto/';
+  $BASE_URL = 'http://localhost:8000/';
 
-  $conn = new PDO('pgsql:host=localhost;dbname=lbaw1662', 'lbaw1662', 'oc86ve46');
+  $conn = new PDO('pgsql:host=localhost;dbname=proto', 'postgres', 'admin');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $conn->exec('SET SCHEMA \'proto\'');
+  $conn->exec('SET SCHEMA \'public\'');
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
   
