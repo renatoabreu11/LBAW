@@ -9,12 +9,12 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{$BASE_URL}css/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="/javascript/main.js"></script>
+    <script src="{$BASE_URL}javascript/main.js"></script>
 </head>
 <body>
 
@@ -47,7 +47,7 @@
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <img src="/images/assets/favicon.jpg" class="img-rounded" alt="Cinque Terre" width="64" height="64">
+                                <img src="{$BASE_URL}images/assets/favicon.jpg" class="img-rounded" alt="Cinque Terre" width="64" height="64">
                                 <h4>Sign in to Seek Bid</h4>
                             </div>
 

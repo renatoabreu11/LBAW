@@ -4,13 +4,13 @@
     <div class="row main">
         <div class="panel-heading">
             <div class="panel-title text-center">
-                <img src="/images/assets/favicon.jpg" class="img-rounded" width="32" height="32" style="position: relative; bottom: 5px;">
+                <img src="{$BASE_URL}images/assets/favicon.jpg" class="img-rounded" width="32" height="32" style="position: relative; bottom: 5px;">
                 <h2 class="title" id="title-signup" style="display: inline;">Join Seek Bid for free!</h2>
             </div>
         </div>
 
         <div class="main-login main-center">
-            <form class="form-horizontal" id="signupForm" action="/actions/authentication/signup.php" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" id="signupForm" action="{$BASE_URL}actions/authentication/signup.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Name</label>
                     <div class="cols-sm-10">
@@ -79,6 +79,6 @@
     </div>
 </div>
 
-<script src="/javascript/auth.js"></script>
+<script src="{$BASE_URL}javascript/auth.js"></script>
 
 {include file='common/footer.tpl'}

@@ -5,7 +5,7 @@ include_once($BASE_DIR .'database/users.php');
 if (!$_POST['username'] || !$_POST['name'] || !$_POST['password'] || !$_POST['confirm'] || !$_POST['email'] || !$_POST['description']) {
     $_SESSION['error_messages'][] = "All fields are mandatory!";
     $_SESSION['form_values'] = $_POST;
-    header("Location: /pages/authentication/signup.php");
+    header("Location: $BASE_URL" . 'pages/authentication/signup.php');
     exit;
 }
 
@@ -30,7 +30,7 @@ if ( !preg_match ("/^[a-zA-Z\s]+$/", $description)) {
 
 if($invalidCharacters){
     $_SESSION['form_values'] = $_POST;
-    header("Location: /pages/authentication/signup.php");
+    header("Location: $BASE_URL" . 'pages/authentication/signup.php');
     exit;
 }
 
@@ -47,9 +47,9 @@ try {
     else $_SESSION['error_messages'][] = 'Error creating user';
 
     $_SESSION['form_values'] = $_POST;
-    header("Location: /pages/authentication/signup.php");
+    header("Location: $BASE_URL" . 'pages/authentication/signup.php');
     exit;
 }
 
 $_SESSION['success_messages'][] = 'User registered successfully';
-header("Location: /pages/auctions/best_auctions.php");
+header("Location: $BASE_URL" . 'pages/auctions/best_auctions.php');
