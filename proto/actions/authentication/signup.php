@@ -17,15 +17,9 @@ if ( !preg_match ("/^[a-zA-Z\s]+$/", $name)) {
 }
 
 $username= trim(strip_tags($_POST["username"]));
-if ( !preg_match ("/^[a-zA-Z\s]+$/", $username)) {
+if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $username)) {
     $invalidCharacters = true;
     $_SESSION['field_errors']['username'] = 'Invalid username characters';
-}
-
-$description = trim(strip_tags($_POST["description"]));
-if ( !preg_match ("/^[a-zA-Z\s]+$/", $description)) {
-    $invalidCharacters = true;
-    $_SESSION['field_errors']['description'] = 'Invalid description characters';
 }
 
 if($invalidCharacters){
@@ -34,17 +28,21 @@ if($invalidCharacters){
     exit;
 }
 
+$description = trim(strip_tags($_POST["description"]));
 $password = $_POST['password'];
 $email = $_POST['email'];
 
 try {
     createUser($name, $username, $password, $email, $description);
 } catch (PDOException $e) {
-    if (strpos($e->getMessage(), 'user_pkey') !== false) {
+    if (strpos($e->getMessage(), 'user_username_uindex') !== false) {
         $_SESSION['error_messages'][] = 'Duplicate username';
         $_SESSION['field_errors']['username'] = 'Username already exists';
     }
-    else $_SESSION['error_messages'][] = 'Error creating user' . $e->getMessage();
+    else if (strpos($e->getMessage(), 'user_email_uindex') !== false){
+        $_SESSION['error_messages'][] = 'Duplicate email';
+        $_SESSION['field_errors']['email'] = 'Email already exists';
+    } else $_SESSION['error_messages'][] = 'Error creating user' . $e->getMessage();
 
     $_SESSION['form_values'] = $_POST;
     header("Location: $BASE_URL" . 'pages/authentication/signup.php');
