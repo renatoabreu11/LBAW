@@ -159,6 +159,8 @@ ul {
     color: black;
 }
 
+
+
 /****************************** Product Auction ***************************/
 
 .auction{
@@ -1881,6 +1883,36 @@ a.navlink {
 
 .well .controls {
     padding-bottom: 1em;
+}
+
+/******************* Admin sign in ***************************/
+
+#adminLogin {
+    padding-top: 50px
+}
+#adminLogin .form-wrap {
+    width: 30%;
+    margin: 0 auto;
+}
+#adminLogin h1 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+#adminLogin .form-group {
+    margin-bottom: 25px;
+}
+
+#adminLogin .btn.btn-info {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#adminLogin .forget {
+    font-size: 13px;
+    text-align: center;
+    display: block;
 }
 
 
