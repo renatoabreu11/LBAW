@@ -10,13 +10,13 @@
         </div>
 
         <div class="main-login main-center">
-            <form class="form-horizontal" method="post" action="#">
+            <form class="form-horizontal" id="signupForm" action="/actions/authentication/signup.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+                            <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name" value="{$FORM_VALUES.name}"/>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" value="{$FORM_VALUES.email}"/>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+                            <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" value="{$FORM_VALUES.username}"/>
                         </div>
                     </div>
                 </div>
@@ -63,8 +63,8 @@
 
                 <div class="form-group" id="textarea-signup">
                     <div class="form-group" style="padding:12px">
-                        <label for="confirm" class="cols-sm-2 control-label">Short bio</label>
-                        <textarea class="form-control" rows="5" placeholder="Talk a little about you..."></textarea>
+                        <label for="description" class="cols-sm-2 control-label">Short bio</label>
+                        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Talk a little about you..." ></textarea>
                     </div>
                 </div>
 
@@ -75,5 +75,7 @@
         </div>
     </div>
 </div>
+
+<script src="/javascript/auth.js"></script>
 
 {include file='common/footer.tpl'}
