@@ -14,7 +14,7 @@ $username = $_POST["username"];
 $password = $_POST['password'];
 
 if (adminExists($username, $password)) {
-    $_SESSION['adminUsername'] = $username;
+    $_SESSION['admin_username'] = $username;
     $_SESSION['success_messages'][] = 'Login successful';
     header("Location: $BASE_URL" . 'pages/admin/users.php');
 } else {
