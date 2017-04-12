@@ -2,6 +2,8 @@
 
 function createUser($name, $username, $password, $email, $description) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO users VALUES (?, ?, ?)");
-    $stmt->execute(array($username, $realname, sha1($password)));
+    $options = ['cost' => 12];
+    $stmt = $conn->prepare('INSERT INTO proto."user" (name, username, hashed_pass, email, short_bio) VALUES (?, ?, ?, ?, ?)');
+    $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
+    $stmt->execute(array($name, $username, $encryptedPass, $email, $description));
 }

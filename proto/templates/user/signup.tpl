@@ -18,6 +18,7 @@
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                             <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name" value="{$FORM_VALUES.name}"/>
                         </div>
+                        <span class="field_error">{$FIELD_ERRORS.name}</span>
                     </div>
                 </div>
 
@@ -38,6 +39,7 @@
                             <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
                             <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" value="{$FORM_VALUES.username}"/>
                         </div>
+                        <span class="field_error">{$FIELD_ERRORS.username}</span>
                     </div>
                 </div>
 
@@ -64,7 +66,8 @@
                 <div class="form-group" id="textarea-signup">
                     <div class="form-group" style="padding:12px">
                         <label for="description" class="cols-sm-2 control-label">Short bio</label>
-                        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Talk a little about you..." ></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Talk a little about you..." >{$FORM_VALUES.description}</textarea>
+                        <span class="field_error">{$FIELD_ERRORS.description}</span>
                     </div>
                 </div>
 
