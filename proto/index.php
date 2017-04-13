@@ -1,2 +1,2 @@
 <?php
-  header('Location: pages/authentication/signup.php');
+  header('Location: pages/auctions/best_auctions.php');
