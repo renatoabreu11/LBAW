@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{$BASE_URL}css/style.css">
     <link rel="stylesheet" href="{$BASE_URL}lib/dialog/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="{$BASE_URL}lib/bxslider/jquery.bxslider.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
