@@ -9,45 +9,28 @@
           <a href="#categories-wrapper" data-toggle="collapse">Categories</a>
         </h4>
       </div>
-      <div id="categories-wrapper" class="panel-collapse collapse in">
+      <div id="categories-wrapper" class="panel-collapse collapse">
         <div class="panel-body">
-          <div class="col-lg-3 col-md-3 col-sm-3">
-            <a href="#">Antiques</a><br>
-            <a href="#">Art</a><br>
-            <a href="#">Handcraft</a><br>
-            <a href="#">Baby</a><br>
-            <a href="#">Tickets and trips</a><br>
-            <a href="#">Dolls and bears</a><br>
-            <a href="#">Toys and hobbies</a><br>
-            <a href="#">Cars and vehicles</a>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            {foreach $categories as $key => $categorie}
+              {if ($key % 3 == 0) }
+                 <a href="#">{$categorie.unnest}</a><br>
+              {/if}
+            {/foreach}
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-3">
-            <a href="#">Sport souvenirs</a><br>
-            <a href="#">Home and garden</a><br>
-            <a href="#">Collectibles</a><br>
-            <a href="#">Computers</a><br>
-            <a href="#">Electronics</a><br>
-            <a href="#">Spiritual</a><br>
-            <a href="#">Movies and DVD's</a><br>
-            <a href="#">Photos and optics</a>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            {foreach $categories as $key => $categorie}
+              {if ($key % 3 == 1) }
+                 <a href="#">{$categorie.unnest}</a><br>
+              {/if}
+            {/foreach}
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-3">
-            <a href="#">Musical instruments</a><br>
-            <a href="#">Jewells and watches</a><br>
-            <a href="#">Charity auctions</a><br>
-            <a href="#">Comics book and magazines</a><br>
-            <a href="#">Bills and coins</a><br>
-            <a href="#">Music and CD's</a><br>
-            <a href="#">Office and industry</a><br>
-            <a href="#">Seasonal occasions</a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-3">
-            <a href="#">Pottery and ceramics</a><br>
-            <a href="#">Sports products</a><br>
-            <a href="#">Cloths and accessories</a><br>
-            <a href="#">Health and beauty</a><br>
-            <a href="#">Stamps</a><br>
-            <a href="#">Video games</a>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            {foreach $categories as $key => $categorie}
+              {if ($key % 3 == 2) }
+                 <a href="#">{$categorie.unnest}</a><br>
+              {/if}
+            {/foreach}
           </div>
         </div>
       </div>
@@ -91,7 +74,7 @@
       {foreach $topTenRankingUsers as $key => $user}
       <tr>
         <td class="col-md-3">
-          <p>{$key}</p>
+          <p>{$key+1}</p>
         </td>
         <td class="col-md-6">
           <a href="#">{$user.username}</a>
@@ -130,34 +113,53 @@
               <table class="table table-hover collapse in" id="auctionsList">
                 <tbody>
 
+                {foreach $mostPopularAuctions as $auction}
                 <tr>
                   <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
-                  <td class="product col-md-4">
-                    <strong>Product 1</strong><br>
-                  </td>
+                  <td class="product col-md-4">{$auction.product_name}<br></td>
+
+                  <!-- user rating -->
                   <td class="seller col-md-2">
-                    <a href="#">Gazorpazorpfield</a><br>
+                    <a href="#">{$auction.username}</a>
                     <span>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-o"></i>
+                    {if ($auction.user_rating != null) }
+                      <br>
+                      {for $var=2 to $auction.user_rating step 2}
+                        <i class="fa fa-star"></i>
+                      {/for} 
+                      {if ($auction.user_rating % 2 == 1)}
+                        <i class="fa fa-star-half-o"></i>
+                        {for $var=$auction.user_rating+3 to 10 step 2}
+                          <i class="fa fa-star-o"></i>
+                        {/for} 
+                      {else}
+                        {for $var=$auction.user_rating+2 to 10 step 2}
+                          <i class="fa fa-star-o"></i>
+                        {/for}
+                      {/if}
+                    {/if}
                     </span>
                   </td>
+
                   <td class="price col-md-2">
-                    <small>Current bid: $75,99</small>
-                    <h5 class="time">02h:54m:10s</h5>
+                    <small>Current bid: {$auction.curr_bid} €</small>
+                    <h5 class="time">{$auction.time_remain}</h5>
                   </td>
                   <td class="watch col-md-2">
-                    <button class="btn btn-info">Watch Auction</button>
+                    <button class="btn btn-info"><a href="#" style="color: white;">Watch Auction</a></button>
                   </td>
                 </tr>
+                {/foreach}
 
-      
+                </tbody>
+              </table>
+            </div>
 
-
-
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {include file='common/footer.tpl'}
