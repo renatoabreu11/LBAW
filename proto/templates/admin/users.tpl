@@ -1,5 +1,5 @@
 <div class="adminOption">
-    <strong><i class="fa fa-users" aria-hidden="true"></i> Users list</strong>
+    <h4><i class="fa fa-users" aria-hidden="true"></i> Users list</h4>
     <div class="table-responsive">
         <table class="table">
             <thead>
