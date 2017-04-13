@@ -1888,7 +1888,8 @@ a.navlink {
 /******************* Admin sign in ***************************/
 
 #adminLogin {
-    padding-top: 50px
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 #adminLogin .form-wrap {
     width: 30%;

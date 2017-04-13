@@ -8,25 +8,19 @@
                 <h4>Admin Panel</h4>
             </li>
             <li>
-                <a href="#" id="usersAdmin" data-target="#rightSideUsers">Users</a>
+                <a href="{$BASE_URL}pages/admin/users.php" id="usersList"> Users List</a>
             </li>
             <li>
-                <a href="#" id="auctionsAdmin" data-target="#rightSideAuctions"> Auctions</a>
+                <a href="{$BASE_URL}pages/admin/auctions.php" id="auctionsList"> Auctions List</a>
             </li>
             <li>
-                <a href="#" id="commentsAdmin" data-target="#rightSideComments"> Comments</a>
+                <a href="{$BASE_URL}pages/admin/categories.php" id="categoriesList"> Categories</a>
             </li>
             <li>
-                <a href="#" id="reviewsAdmin" data-target="#rightSideReviews"> Reviews</a>
+                <a href="{$BASE_URL}pages/admin/add_admin.php" id="addAdmin"> Add Admin</a>
             </li>
             <li>
-                <a href="#" id="addCategory" data-target="#rightSideAddCategory"> Add category</a>
-            </li>
-            <li>
-                <a href="#" id="addAdmin" data-target="#rightSideAddAdmin"> Add admin</a>
-            </li>
-            <li>
-                <a href="#" id="usersList" data-target="#rightSideUsersList"> Users List</a>
+                <a href="{$BASE_URL}pages/admin/reports.php" id="reports"> Reports</a>
             </li>
         </ul>
     </div>
@@ -42,24 +36,20 @@
                 {include file='admin/users.tpl'}
             {elseif $admin_section === "auctions"}
                 {include file='admin/auctions.tpl'}
+            {elseif $admin_section === "categories"}
+                {include file='admin/categories.tpl'}
+            {elseif $admin_section === "add_admin"}
+                {include file='admin/add_admin.tpl'}
+            {elseif $admin_section === "reports"}
+                {include file='admin/reports.tpl'}
             {/if}
 
-            <div class="box-body">
-                <div class="mailbox-controls">
-                    <div class="btn-group">
-                        <button class="btn btn-default btn-sm checkbox-toggle"><i class="glyphicon glyphicon-unchecked"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-                    </div>
-
-                    <div class="pull-right">
-                        1-8/20
-                        <div class="btn-group">
-                            <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div id="footer" style="margin-top: 65px">
+            <div class="container">
+                <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
+                <a href="#" class="pull-right">About</a>
+                <a href="#" class="pull-right">Leave a Feedback</a>
             </div>
         </div>
     </div>
@@ -67,4 +57,3 @@
 
 </body>
 </html>
-
