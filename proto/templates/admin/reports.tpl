@@ -1,9 +1,4 @@
 <div class="adminOption">
-    <select class="selectpicker">
-        <option>Mustard</option>
-        <option>Ketchup</option>
-        <option>Relish</option>
-    </select>
     <h4><i class="fa fa-users" aria-hidden="true"></i> User reports</h4>
     <div class="row">
         <div class="table-responsive">
