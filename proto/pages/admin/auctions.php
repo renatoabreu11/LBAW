@@ -4,14 +4,26 @@ include_once($BASE_DIR .'database/auctions.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/users.php');
 
-$auctionsIDs = getAuctionsInfo();
+$auctionsIDs = getAllAuctions();
 $auctions = array();
 
 foreach ($auctionsIDs as $auctionArr){
     $product_name = getProductName($auctionArr["product_id"])["name"];
     $seller = getUser($auctionArr["user_id"])["name"];
+    $type = $auctionArr["type"];
+    $start_date = $auctionArr["start_date"];
+    $end_date = $auctionArr["end_date"];
+    $auction = array(
+        "id" => $auctionArr["id"],
+        "product" => $product_name,
+        "seller" => $seller,
+        "type" => $type,
+        "start_date" => $start_date,
+        "end_date" => $end_date,
+    );
+    array_push($auctions, $auction);
 }
 
-//$smarty->assign("auctions", $auctions);
-//$smarty->assign("admin_section", "auctions");
-//$smarty->display('admin/admin_page.tpl');
+$smarty->assign("auctions", $auctions);
+$smarty->assign("admin_section", "auctions");
+$smarty->display('admin/admin_page.tpl');

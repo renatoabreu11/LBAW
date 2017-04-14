@@ -245,6 +245,19 @@
     }
 
     /**
+    * Makes the user follow another user.
+    * Insert in the database.
+    */
+    function followUser($followingUserId, $followedUserId) {
+        global $conn;
+        $stmt = $conn->prepare('INSERT INTO follow
+                                VALUES (:followed_user_id, :following_user_id, now())');
+        $stmt->bindParam('following_user_id', $followingUserId);
+        $stmt->bindParam('followed_user_id', $followedUserId);
+        $stmt->execute();
+    }
+
+    /**
     * Makes the user unfollow another user.
     * Deletes from the database.
     */
@@ -256,6 +269,18 @@
         $stmt->bindParam('following_user_id', $followingUserId);
         $stmt->bindParam('followed_user_id', $followedUserId);
         $stmt->execute();
+    }
+
+    function getIsFollowing($followingUserId, $followedUserId) {
+        global $conn;
+        $stmt = $conn->prepare('SELECT count(*)
+                                FROM follow
+                                WHERE user_followed_id = :followed_user_id
+                                AND user_following_id = :following_user_id');
+        $stmt->bindParam('followed_user_id', $followedUserId);
+        $stmt->bindParam('following_user_id', $followingUserId);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
 ?>

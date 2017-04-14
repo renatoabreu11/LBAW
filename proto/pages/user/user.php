@@ -3,13 +3,23 @@
     include_once($BASE_DIR . 'database/users.php');
 
     if(!$_GET['id']) {
-        die('lacks id');
+        $_SESSION['error_messages'][] = "Undefined id";
+        header("Location: $BASE_URL");
+        exit;
     }
 
     $userId = $_GET['id'];
+    $loggedUserId = 1;//$_SESSION['id'];        // Change.
+
+    if(!preg_match("/[0-9]/", $userId) || !preg_match("/[0-9]/", $loggedUserId)) {
+        $_SESSION['error_messages'][] = "id has invalid characters";
+        header("Location: $BASE_URL");
+        exit;
+    }
 
     $user = getUser($userId);
     $location = getCityAndCountry($userId);
+    $isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user not logged in.
     $totalAuctions = getNumTotalAuctions($userId);
     $activeAuctions = getActiveAuctions($userId);
     $reviews = getReviews($userId);
@@ -24,8 +34,10 @@
     $lastQuestion = getLastQuestions($userId);
     $lastWatchlistAuctions = getLastWatchlistAuctions($userId);
 
+    $smarty->assign('loggedUserId', $loggedUserId);
     $smarty->assign('user', $user);
     $smarty->assign('location', $location);
+    $smarty->assign('isFollowing', $isFollowing);
     $smarty->assign('totalAuctions', $totalAuctions);
     $smarty->assign('activeAuctionsa', $activeAuctions);
     $smarty->assign('reviews', $reviews);
