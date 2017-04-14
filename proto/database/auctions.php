@@ -47,3 +47,19 @@ function getAuctionsInfo(){
     $result = $stmt->fetchAll();
     return $result;
 }
+
+function searchAuctions($textSearch) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank
+                            FROM auction, product, "user",
+                                  plainto_tsquery(\'english\', :textSearch) AS query,
+                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
+                            WHERE auction.product_id = product.id AND query @@ textsearch AND now() < auction.end_date
+                            AND auction.user_id = "user".id
+                            ORDER BY rank DESC
+                            LIMIT 10;');
+    $stmt->bindParam('textSearch', $textSearch);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
