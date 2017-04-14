@@ -143,7 +143,9 @@
 
                   <td class="price col-md-2">
                     <small>Current bid: {$auction.curr_bid} €</small>
-                    <h5 class="time">{$auction.time_remain}</h5>
+                    <div class="countdown">
+                      <span class="clock"><p hidden>{$auction.end_date}</p></span>
+                    </div>
                   </td>
                   <td class="watch col-md-2">
                     <button class="btn btn-info"><a href="#" style="color: white;">Watch Auction</a></button>
@@ -161,5 +163,9 @@
     </div>
   </div>
 </div>
+
+<script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
+<script src="{$BASE_URL}javascript/best_auctions.js"></script>
+
 
 {include file='common/footer.tpl'}
