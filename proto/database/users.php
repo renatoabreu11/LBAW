@@ -30,6 +30,15 @@
         return $stmt->fetch();
     }
 
+    function getAllUsers(){
+        global $conn;
+        $stmt = $conn->prepare('SELECT *
+                                FROM "user" 
+                                ORDER BY id ASC');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     function getCityAndCountry($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT city.name as city, country.name as country
