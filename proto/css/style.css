@@ -1684,10 +1684,6 @@ a.navlink {
     border-bottom: 1px lightgrey solid;
 }
 
-.adminOption strong > i{
-    padding-bottom: 1em;
-}
-
 .adminOption td {
     text-align: center;
 }

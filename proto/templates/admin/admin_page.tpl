@@ -55,6 +55,8 @@
     </div>
 </div>
 
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script src="{$BASE_URL}javascript/admin.js"></script>
 </body>
 </html>

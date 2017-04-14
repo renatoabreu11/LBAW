@@ -19,3 +19,13 @@ function getAuctionProduct($auction_id){
     $stmt->execute(array($auction_id));
     return $stmt->fetch();
 }
+
+function getProductName($product_id){
+    global $conn;
+    $stmt = $conn->prepare('
+                          SELECT product.name
+                            FROM product
+                            WHERE product.id = ?;');
+    $stmt->execute(array($product_id));
+    return $stmt->fetch();
+}

@@ -140,4 +140,7 @@ $(document).ready(function() {
             );
         });
     });
+
+    $('#usersTable').DataTable();
+    $('#auctionsTable').DataTable();
 });

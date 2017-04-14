@@ -37,3 +37,13 @@ function getTotalValueOfActiveAuctions() {
     $result = $stmt->fetch();    
   	return $result['sum'];
 }
+
+function getAuctionsInfo(){
+    global $conn;
+    $stmt = $conn->prepare('SELECT id, product_id, user_id 
+    						FROM auction
+    						ORDER BY id ASC;');
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
