@@ -19,6 +19,7 @@
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="{$BASE_URL}lib/magnific-popup/jquery.magnific-popup.js"></script>
     <script src="{$BASE_URL}javascript/main.js"></script>
+
 </head>
 <body>
 
@@ -31,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Seek Bid</a>
+            <a class="navbar-brand" href="{$BASE_URL}index.php">Seek Bid</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-1">

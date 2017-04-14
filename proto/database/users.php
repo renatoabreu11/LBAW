@@ -11,7 +11,7 @@
 
     function getTopTenRankingUsers() {
         global $conn;
-        $stmt = $conn->prepare('SELECT "user".username, "user".rating
+        $stmt = $conn->prepare('SELECT "user".id, "user".username, "user".rating
                                 FROM "user"
                                 WHERE "user".rating IS NOT NULL
                                 ORDER BY rating DESC
