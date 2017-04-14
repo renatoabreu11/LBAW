@@ -177,7 +177,7 @@
     */
     function getLastFollows($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT following.username AS following, followed.username AS followed
+        $stmt = $conn->prepare('SELECT followed.username AS followed_username, followed.id as followed_id
                                 FROM follow
                                 JOIN "user" followed ON follow.user_followed_id = followed.id
                                 JOIN "user" following ON follow.user_following_id = following.id
@@ -194,9 +194,8 @@
     */
     function getLastWins($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT product.name, product.description, auction.start_bid, auction.curr_bid, auction.end_date, seller.username, auction.end_date
+        $stmt = $conn->prepare('SELECT auction.end_date, seller.username, auction.id as auction_id
                                 FROM auction
-                                JOIN product ON auction.product_id = product.id
                                 JOIN bid ON auction.id = bid.auction_id AND auction.curr_bid = bid.amount
                                 JOIN "user" winner ON bid.user_id = winner.id
                                 JOIN "user" seller ON auction.user_id = seller.id

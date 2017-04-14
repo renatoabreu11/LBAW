@@ -59,122 +59,75 @@
 
           <!-- ****************** Recent Activity ****************** -->
           <div id="recent-activity" class="tab-pane fade in active">
-            <div class="col-md-6">
-              {foreach $lastReviews as $lastReview}
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <span class="recent-activity-type"><span class="glyphicon glyphicon-check"></span> Review</span>
-                    <span class="recent-activity-date">{$lastReview.date}</span>
+            {for $var=0 to 2 step 1}
+              <div class="col-md-6">
+                {if ($lastReviews[$var] != null)}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <span class="recent-activity-type"><span class="glyphicon glyphicon-check"></span> Review</span>
+                      <span class="recent-activity-date">{$lastReviews[$var].date}</span>
+                    </div>
+                    <div class="panel-body">
+                      <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="../../pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].username}</a>.</p>
+                    </div>
                   </div>
-                  <div class="panel-body">
-                    <p><a href="#">{$user.username}</a> wrote a <a href="#">review</a> regarding an <a href="../../pages/auction/auction.php?id={lastReview.auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReview.seller_id}">{$lastReview.username}</a>.</p>
+                {/if}
+                {if ($lastBids[$var] != null)}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <span class="recent-activity-type"><span class="glyphicon glyphicon-euro"></span> Bid</span>
+                      <span class="recent-activity-date">{$lastBid[$var].date}</span>
+                    </div>
+                    <div class="panel-body">
+                      <p><a href="#">{$user.username}</a> bid {$lastBid[$var].amount}€ on an <a href="../../pages/auction/auction.php?id={$lastBid[$var].auction_id}">auction</a> hosted by <a href="../../user/user.php?id={$lastBid[$var].seller_id}">{$lastBid[$var].seller_id}</a>.</p>
+                    </div>
                   </div>
-                </div>
-              {/foreach}
-              {foreach $lastBids as $lastBid}
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <span class="recent-activity-type"><span class="glyphicon glyphicon-euro"></span> Bid</span>
-                    <span class="recent-activity-date">{$lastBid.date}</span>
+                {/if}
+                {if ($lastFollowing[$var] != null)}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <span class="recent-activity-type"><span class="glyphicon glyphicon-user"></span> Following</span>
+                    </div>
+                    <div class="panel-body">
+                      <p class="recent-activity-type"><a href="#">{$user.username}</a> started to follow <a href="../../pages/user/user.php?id={$lastFollowing[$var].followed_id}">{$lastFollowing[$var].followed_username}</a>.</p>
+                    </div>
                   </div>
-                  <div class="panel-body">
-                    <p><a href="#">{user.username}</a> bid {$lastBid.amount}€ on an <a href="../../pages/auction/auction.php?id={$lastBid.auction_id}">auction</a> hosted by <a href="../../user/user.php?id={$lastBid.seller_id}">{$lastBid.seller_id}</a>.</p>
+                {/if}
+                {if ($lastWins[$var] != null)}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <span class="recent-activity-type"><span class="glyphicon glyphicon-shopping-cart"></span> Auction Won</span>
+                      <span class="recent-activity-date">{$lastWins[$var].end_date}</span>
+                    </div>
+                    <div class="panel-body">
+                      <p><a href="#">{$user.username}</a> won an <a href="../../pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="#">{$lastWins[$var].username}</a>.</p>
+                    </div>
                   </div>
-                </div>
-              {/foreach}
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-user"></span> Following</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p class="recent-activity-type"><a href="#">raidenFTW</a> started to follow <a href="#">anthony67</a>.</p>
-                </div>
+                {/if}
+                {if ($lastQuestions[$var] != null)}
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <span class="recent-activity-type"><span class="glyphicon glyphicon-question-sign"></span> Question</span>
+                        <span class="recent-activity-date">{$lastQuestions[$var].date}</span>
+                      </div>
+                      <div class="panel-body">
+                        <p><a href="#">{$user.username}</a> posted a question on an <a href="../../pages/auction/auction.php?id={$lastQuestions[$var].auction_id}">auction</a> hosted by <a href="#">{$lastQuestions[$var].seller_username}</a>.</p>
+                      </div>
+                    </div>
+                {/if}
+                {if ($lastWatchlistAuctions[$var] != null)}
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <span class="recent-activity-type"><span class="glyphicon glyphicon-eye-open"></span> Watchlist</span>
+                      <span class="recent-activity-date">{$lastWatchlistAuctions[$var].date}</span>
+                    </div>
+                    <div class="panel-body">
+                      <p><a href="#">{$user.username}</a> added an <a href="../../pages/auction/auction.php?id={$lastWatchlistAuctions[0].id}">auction</a> to his <a href="#">watchlist</a>.</p>
+                    </div>
+                  </div>
+                {/if}
               </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-shopping-cart"></span> Auction Won</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> won an <a href="#">auction</a> hosted by <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-question-sign"></span> Question</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> posted a <a href="#">question</a> on an <a href="#">auction</a> hosted by <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-eye-open"></span> Watchlist</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> added an <a href="#">auction</a> to his <a href="#">watchlist</a>.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-check"></span> Review</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> wrote a <a href="#">review</a> regarding an <a href="#">auction</a> hosted by <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-euro"></span> Bid</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> bid 19.99€ on an <a href="#">auction</a> hosted by <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-user"></span> Following</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> started to follow <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-shopping-cart"></span> Auction Won</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> won an <a href="#">auction</a> hosted by <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-question-sign"></span> Question</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> posted a <a href="#">question</a> on an <a href="#">auction</a> hosted by <a href="#">anthony67</a>.</p>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <span class="recent-activity-type"><span class="glyphicon glyphicon-eye-open"></span> Watchlist</span>
-                  <span class="recent-activity-date">21/02/2016 14:45</span>
-                </div>
-                <div class="panel-body">
-                  <p><a href="#">raidenFTW</a> added an <a href="#">auction</a> to his <a href="#">watchlist</a>.</p>
-                </div>
-              </div>
-            </div>
+            {/for}
           </div>
 
           <!-- ****************** Details ****************** -->
