@@ -76,13 +76,13 @@ $(document).ready(function() {
                 } else if(data === "Email already exists")
                     form.find(".field_error.email").text(data);
                 else if(data === "Admin successfully added!"){
-                    BootstrapDialog.show({
-                        message: data
+                    $.magnificPopup.open({
+                        items: {
+                            src: '<div class="white-popup">' + data + '</div>',
+                            type: 'inline'
+                        }
                     });
-                    form.find("#password").val("");
-                    form.find("#username").val("");
-                    form.find("#email").val("");
-                    form.find("#confirm").val("");
+                    form.trigger("reset");
                 }
             },
             error: function(data){
@@ -90,6 +90,54 @@ $(document).ready(function() {
             }
         });
         return false;
-
     }
+
+    var request;
+    $("#newCategory").submit(function(event){
+        // Prevent default posting of form - put here to work in case of errors
+        event.preventDefault();
+
+        // Abort any pending request
+        if (request) {
+            request.abort();
+        }
+
+        var form = $("#newCategory");
+        var title = form.find("input[name='title']").val();
+
+        request = $.ajax({
+            type : 'POST',
+            url  : '/api/admin/add_category.php',
+            data : {
+                "title": title
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            if(response === "Category already exists"){
+                form.find(".field_error").text(response);
+            } else if(response === "Category successfully added!"){
+                $.magnificPopup.open({
+                    items: {
+                        src: '<div class="white-popup">' + response + '</div>',
+                        type: 'inline'
+                    }
+                });
+                form.trigger("reset");
+                var div = '<li class="list-group-item col-md-3">'+title+'</li>';
+                $(".categories ul").append(div);
+            }
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            // Log the error to the console
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    });
 });

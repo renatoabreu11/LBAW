@@ -56,6 +56,5 @@
 </div>
 
 <script src="{$BASE_URL}javascript/admin.js"></script>
-
 </body>
 </html>

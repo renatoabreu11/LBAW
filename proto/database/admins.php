@@ -70,7 +70,7 @@ function getAuctionReports(){
         'SELECT auction_report.message, "user".username, auction.id AS auction_id
                     FROM auction_report
                     INNER JOIN auction ON auction_report.auction_id = auction.id
-                    INNER JOIN "​user"​ ON auction.user_id = "​user"​.id
+                    INNER JOIN "​user"​ ON auction.user_id = "user".id
                     ORDER BY auction_report.date DESC;');
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -87,4 +87,12 @@ function getUserReports(){
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
+}
+
+function createCategory($title){
+    global $conn;
+    $stmt = $conn->prepare(
+        'ALTER TYPE category_type ADD VALUE \'' . $title . '\'');
+    $stmt->execute();
+
 }

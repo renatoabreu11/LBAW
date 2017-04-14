@@ -21,6 +21,7 @@ try {
 } catch (PDOException $e) {
     if (strpos($e->getMessage(), 'admin_username_uindex') !== false){
         echo "Username already exists";
+        return;
     }
     else if (strpos($e->getMessage(), 'admin_email_uindex') !== false){
         echo "Email already exists";
