@@ -11,7 +11,7 @@
 
     function getTopTenRankingUsers() {
         global $conn;
-        $stmt = $conn->prepare('SELECT "user".username, "user".rating
+        $stmt = $conn->prepare('SELECT "user".id, "user".username, "user".rating
                                 FROM "user"
                                 WHERE "user".rating IS NOT NULL
                                 ORDER BY rating DESC
@@ -177,7 +177,7 @@
     */
     function getLastFollows($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT followed.username AS followed_username, followed.id as followed_id
+        $stmt = $conn->prepare('SELECT followed.username AS followed_username, followed.id as followed_id, follow.date
                                 FROM follow
                                 JOIN "user" followed ON follow.user_followed_id = followed.id
                                 JOIN "user" following ON follow.user_following_id = following.id
@@ -242,6 +242,20 @@
         $stmt->bindParam('user_id', $userId);
         $stmt->execute();
         return $stmt->fetchAll();
+    }
+
+    /**
+    * Makes the user unfollow another user.
+    * Deletes from the database.
+    */
+    function unfollowUser($followingUserId, $followedUserId) {
+        global $conn;
+        $stmt = $conn->prepare('DELETE FROM follow
+                                WHERE user_following_id = :following_user_id
+                                AND user_followed_id = :followed_user_id');
+        $stmt->bindParam('following_user_id', $followingUserId);
+        $stmt->bindParam('followed_user_id', $followedUserId);
+        $stmt->execute();
     }
 
 ?>

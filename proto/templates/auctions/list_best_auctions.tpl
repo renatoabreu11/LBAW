@@ -12,23 +12,23 @@
       <div id="categories-wrapper" class="panel-collapse collapse">
         <div class="panel-body">
           <div class="col-lg-4 col-md-4 col-sm-4">
-            {foreach $categories as $key => $categorie}
+            {foreach $categories as $key => $category}
               {if ($key % 3 == 0) }
-                 <a href="#">{$categorie.unnest}</a><br>
+                 <a href="#">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
-            {foreach $categories as $key => $categorie}
+            {foreach $categories as $key => $category}
               {if ($key % 3 == 1) }
-                 <a href="#">{$categorie.unnest}</a><br>
+                 <a href="#">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
-            {foreach $categories as $key => $categorie}
+            {foreach $categories as $key => $category}
               {if ($key % 3 == 2) }
-                 <a href="#">{$categorie.unnest}</a><br>
+                 <a href="#">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
@@ -77,7 +77,7 @@
           <p>{$key+1}</p>
         </td>
         <td class="col-md-6">
-          <a href="#">{$user.username}</a>
+          <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
         </td>
         <td class="col-md-3">
           <p>{$user.rating}/10</p>
@@ -120,7 +120,7 @@
 
                   <!-- user rating -->
                   <td class="seller col-md-2">
-                    <a href="#">{$auction.username}</a>
+                    <a href="{$BASE_URL}pages/user/user.php?id={$auction.user_id}">{$auction.username}</a>
                     <span>
                     {if ($auction.user_rating != null) }
                       <br>
@@ -148,7 +148,7 @@
                     </div>
                   </td>
                   <td class="watch col-md-2">
-                    <button class="btn btn-info"><a href="#" style="color: white;">Watch Auction</a></button>
+                    <button class="btn btn-info"><a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a></button>
                   </td>
                 </tr>
                 {/foreach}
