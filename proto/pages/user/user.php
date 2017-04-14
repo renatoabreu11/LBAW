@@ -34,6 +34,9 @@
     $lastQuestion = getLastQuestions($userId);
     $lastWatchlistAuctions = getLastWatchlistAuctions($userId);
 
+    if($userId == $loggedUserId)
+        $reviewsPosted = getWonReviews($userId);
+
     $smarty->assign('loggedUserId', $loggedUserId);
     $smarty->assign('user', $user);
     $smarty->assign('location', $location);
@@ -50,6 +53,9 @@
     $smarty->assign('lastWins', $lastWins);
     $smarty->assign('lastQuestion', $lastQuestion);
     $smarty->assign('lastWatchlistAuctions', $lastWatchlistAuctions);
+
+    if($userId == $loggedUserId)
+        $smarty->assign('reviewsPosted', $reviewsPosted);
 
     $smarty->display('user/user.tpl');
 ?>

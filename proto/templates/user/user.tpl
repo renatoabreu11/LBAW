@@ -71,7 +71,7 @@
           {if ($totalAuctions > 0)} <li><a data-toggle="tab" href="#selling">Selling <span class="badge">{count($activeAuctions)}</span></a></li> {/if}
           {if ($totalAuctions > 0)} <li><a data-toggle="tab" href="#reviews">Reviews <span class="badge">{count($reviews)}</span></a></li> {/if}
           <li><a data-toggle="tab" href="#wins">Wins <span class="badge">{count($wins)}</span></a></li>
-          <li><a data-toggle="tab" href="#following">Following <span class="badge">{count($followingUsers)}</span></a></li>
+          <li><a data-toggle="tab" href="#following">Following <span class="badge following-badge">{count($followingUsers)}</span></a></li>
         </ul>
 
         <div class="tab-content">
@@ -263,14 +263,14 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-3 win-wrapper">
                       <div id="win-info-image">
-                        <a href="#"><img class="win-image img-rounded" src="http://www.nvidia.co.uk/content/EMEAI/images/geforce-refresh/mini-features/laptops-800m-graphics-cards.jpg" alt="Product image"></a>
+                        <a href="../../pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="../../images/products/{$win.image_filename}" alt="Product image"></a>
                       </div>
                       <div id="win-info-text">
                         <div class="text-right win-info">
                           <span class="win-info-title">Base price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
                           <span class="win-info-title">Bought price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
                           <span class="win-info-title">Date: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
-                          <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="#">{$win.seller_username}</a></button><br>
+                          <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="../../pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a></button><br>
                         </div>
                       </div>
                     </div>
@@ -279,35 +279,36 @@
                       <hr class="title-comment-divider">
                       <p class="win-comment text-justify">{$win.description}</p>
                       <hr>
-                      <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
-                      <form id="win-review-form" class="collapse">
-                        <div class="win-review-rating">
-                          <p class="win-review-rating-title">Rating: </p>
-                          <div class="win-review-rating-stars">
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
+                      {if ($loggedUserId == $user.id)}
+                        {$isReviewed = false}
+                        {foreach from=$reviewsPosted key=k item=a}
+                          {if ($a.bid_id == $win.bid_id)}
+                            {$isReviewed = true}
+                          {/if}
+                        {/foreach}
+                        {if (!$isReviewed)}
+                          <div class="form-wrapper">
+                            <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
+                            <form id="win-review-form" class="collapse" action="javascript:void(0);">
+                              <input type="hidden" class="bid-id" value="{$win.bid_id}">
+                              <div class="win-review-rating">
+                                <p class="win-review-rating-title">Rating: </p>
+                                <div class="win-review-rating-stars">
+                                  {for $var=0 to 9 step 1}
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                  {/for}
+                                </div>
+                              </div>
+                              <div class="input-group win-review-comment">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                                <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
+                              </div>
+                              <button type="submit" class="btn btn-info btn-block btn-review-submit" value="Submit">Submit</button>
+                            </form>
                           </div>
-                        </div>
-                        <div class="win-review-question">
-                          <p>Item as described by the seller? </p>
-                          <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
-                          <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
-                        </div>
-                        <div class="win-review-question">
-                          <p>Courteous service (if you contacted the seller)?</p>
-                          <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
-                          <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
-                          <label class="checkbox-inline"><input type="checkbox" value="null">Did not contact</label>
-                        </div>
-                        <div class="input-group win-review-comment">
-                          <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                          <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-info btn-block" value="Submit">Submit</button>
-                      </form>
+                        {/if}
+                      {/if}
+
                     </div>
                   </div>
                 </div>
