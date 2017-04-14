@@ -19,7 +19,7 @@
       <!-- ****************** Left Information ****************** -->
       <div class="col-sm-3">
         <div class="info-name">
-          <img src="http://vignette3.wikia.nocookie.net/deadliestfiction/images/3/3c/Raiden_MGRR.jpg/revision/latest?cb=20121230200223" class="img-rounded center-block" alt="User avatar" width="156">
+          <img src="{$user.profile_pic}" class="img-rounded center-block" alt="User Avatar" width="156">
           <p class="text-center user-real-name">{$user.name}</p>
           <p class="text-center user-nick-name">{$user.username}</p>
           <p class="text-justify user-overview">{$user.short_bio}</p>
@@ -32,14 +32,27 @@
         </div>
         <hr>
         <div class="user-rating">
-          <div class="user-rating-stars text-center">
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-          </div>
-          <p class="user-rating-numeric text-center">{$user.rating}/10</p>
+          {if ($totalAuctions != 0)}
+            {if ($user.rating == null)}
+              <p>No rating.</p>
+            {else}
+              <div class="user-rating-stars text-center">
+                {for $var=2 to $user.rating step 2}
+                  <span class="glyphicon glyphicon-star"></span>
+                {/for}
+                {if ($user.rating % 2 == 1)}
+                  {for $var=$user.rating+1 to 10 step 2}
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                  {/for}
+                {else}
+                  {for $var=$user.rating to 10 step 2}
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                  {/for}
+                {/if}
+              </div>
+              <p class="user-rating-numeric text-center"><strong>{$user.rating}</strong>/10</p>
+            {/if}
+          {/if}
         </div>
         <hr>
         <button type="button" class="btn btn-primary btn-block">Follow</button>
@@ -49,8 +62,8 @@
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#recent-activity">Recent Activity</a></li>
           <li><a data-toggle="tab" href="#details">Details</a></li>
-          <li><a data-toggle="tab" href="#selling">Selling <span class="badge">{count($activeAuctions)}</span></a></li>
-          <li><a data-toggle="tab" href="#reviews">Reviews <span class="badge">{count($reviews)}</span></a></li>
+          {if ($totalAuctions > 0)} <li><a data-toggle="tab" href="#selling">Selling <span class="badge">{count($activeAuctions)}</span></a></li> {/if}
+          {if ($totalAuctions > 0)} <li><a data-toggle="tab" href="#reviews">Reviews <span class="badge">{count($reviews)}</span></a></li> {/if}
           <li><a data-toggle="tab" href="#wins">Wins <span class="badge">{count($wins)}</span></a></li>
           <li><a data-toggle="tab" href="#following">Following <span class="badge">{count($followingUsers)}</span></a></li>
         </ul>
@@ -87,6 +100,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <span class="recent-activity-type"><span class="glyphicon glyphicon-user"></span> Following</span>
+                      <span class="recent-activity-date">{$lastFollowing[$var].date}</span>
                     </div>
                     <div class="panel-body">
                       <p class="recent-activity-type"><a href="#">{$user.username}</a> started to follow <a href="../../pages/user/user.php?id={$lastFollowing[$var].followed_id}">{$lastFollowing[$var].followed_username}</a>.</p>
@@ -133,7 +147,11 @@
           <!-- ****************** Details ****************** -->
           <div id="details" class="tab-pane fade">
             <p class="details-description">Who am I</p>
-            <p class="details-description-info">{$user.full_bio}</p>
+            {if ($user.full_bio != null)}
+              <p class="details-description-info">{$user.full_bio}</p>
+            {else}
+              <p class="details-description-info">{$user.short_bio}</p>
+            {/if}
             <div class="details-short-info">
               <div class="col-md-6 col-xs-6">
                 <span class="glyphicon glyphicon-home"></span>
@@ -143,155 +161,178 @@
               <div class="col-md-6 col-xs-6">
                 <span class="glyphicon glyphicon-paperclip"></span>
                 <p class="details-short-info-title">Total auctions</p>
-                <p class="details-short-info-description"><a href="#">{$totalAuctions.number}</a></p>
+                <p class="details-short-info-description">{$totalAuctions.number}</p>
               </div>
             </div>
           </div>
 
           <!-- ****************** Selling ****************** -->
-          <div id="selling" class="tab-pane fade">
-            <div class="selling-wrapper">
-              <div class="table-responsive" id="auctions">
-                <table class="table table-hover collapse in" id="auctionsList">
-                  <tbody>
-                  {foreach $activeAuctions as $auction}
-                    <tr>
-                      <td class="image col-md-2"><img src="../../images/products/{$auction.image}" alt="product image"></td>
-                      <td class="product col-md-4">
-                        <strong>{$auction.name}</strong><br>
-                        {$auction.description}
-                      </td>
-                      <td class="seller col-md-2">
-                        <a href="#">{$user.username}</a><br>
-                        <span>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-half-o"></i>
-                        </span>
-                      </td>
-                      <td class="price col-md-2">
-                        <small>Current bid: ${$auction.curr_bid}</small>
-                        <h5 class="time">{$auction.remaining_time}</h5>
-                      </td>
-                      <td class="watch col-md-2">
-                        <button class="btn btn-info">Watch Auction</button>
-                      </td>
-                    </tr>
-                  {/foreach}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <!-- ****************** Reviews ****************** -->
-          <div id="reviews" class="tab-pane fade">
-            {foreach $reviews as $review}
-              <div class="thumbnail review-item">
-                <div class="row">
-                  <div class="col-lg-3 col-md-3">
-                    <a href="../../pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="../../images/products/{$review.image_filename}"></a>
-                    <div class="review-rating text-center">
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star-empty"></span>
-                    </div>
-                    <p class="text-center reviewer-info">By <a href="../../pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> on {$review.date}</p>
-                  </div>
-                  <div class="col-md-9 col-sm-9">
-                    <a href="#" class="review-product-name"><p>{$review.product_name}</p></a>
-                    <hr class="title-comment-divider">
-                    <p class="review-comment text-justify">{$review.message}</p>
+          {if ($totalAuctions > 0)}
+            <div id="selling" class="tab-pane fade">
+                <div class="selling-wrapper">
+                  <div class="table-responsive" id="auctions">
+                    {if ($activeAuctions == null)}
+                      <p>No active auctions curretly available.</p>
+                    {else}
+                      <table class="table table-hover collapse in" id="auctionsList">
+                        <tbody>
+                        {foreach $activeAuctions as $auction}
+                          <tr>
+                            <td class="image col-md-2"><img src="../../images/products/{$auction.image}" alt="Product image"></td>
+                            <td class="product col-md-4">
+                              <strong>{$auction.name}</strong><br>
+                              {$auction.description}
+                            </td>
+                            <td class="seller col-md-2">
+                              <a href="#">{$user.username}</a><br>
+                              <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                              </span>
+                            </td>
+                            <td class="price col-md-2">
+                              <small>Current bid: ${$auction.curr_bid}</small>
+                              <h5 class="time">{$auction.remaining_time}</h5>
+                            </td>
+                            <td class="watch col-md-2">
+                              <button class="btn btn-info">Watch Auction</button>
+                            </td>
+                          </tr>
+                        {/foreach}
+                        </tbody>
+                      </table>
+                    {/if}
                   </div>
                 </div>
-              </div>
-            {/foreach}
-          </div>
+            </div>
+          {/if}
+
+          <!-- ****************** Reviews ****************** -->
+          {if ($totalAuctions > 0)}
+            <div id="reviews" class="tab-pane fade">
+              {if ($reviews == null)}
+                <p>No reviews were written.</p>
+              {else}
+                {foreach $reviews as $review}
+                  <div class="thumbnail review-item">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-3">
+                        <a href="../../pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="../../images/products/{$review.image_filename}"></a>
+                        <div class="review-rating text-center">
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star"></span>
+                          <span class="glyphicon glyphicon-star-empty"></span>
+                        </div>
+                        <p class="text-center reviewer-info">By <a href="../../pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> on {$review.date}</p>
+                      </div>
+                      <div class="col-md-9 col-sm-9">
+                        <a href="#" class="review-product-name"><p>{$review.product_name}</p></a>
+                        <hr class="title-comment-divider">
+                        <p class="review-comment text-justify">{$review.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                {/foreach}
+              {/if}
+            </div>
+          {/if}
 
           <!-- ****************** Wins ****************** -->
           <div id="wins" class="tab-pane fade">
-            {foreach $wins as $win}
-              <div class="thumbnail win-item">
-                <div class="row">
-                  <div class="col-lg-3 col-md-3 win-wrapper">
-                    <div id="win-info-image">
-                      <a href="#"><img class="win-image img-rounded" src="http://www.nvidia.co.uk/content/EMEAI/images/geforce-refresh/mini-features/laptops-800m-graphics-cards.jpg" alt="Product image"></a>
-                    </div>
-                    <div id="win-info-text">
-                      <div class="text-right win-info">
-                        <span class="win-info-title">Base price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
-                        <span class="win-info-title">Bought price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
-                        <span class="win-info-title">Date: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
-                        <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="#">{$win.seller_username}</a></button><br>
+            {if ($wins == null)}
+              <p>No auctions won.</p>
+            {else}
+              {foreach $wins as $win}
+                <div class="thumbnail win-item">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 win-wrapper">
+                      <div id="win-info-image">
+                        <a href="#"><img class="win-image img-rounded" src="http://www.nvidia.co.uk/content/EMEAI/images/geforce-refresh/mini-features/laptops-800m-graphics-cards.jpg" alt="Product image"></a>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-9 col-md-9">
-                    <a href="#" class="win-product-name"><p>{$win.product_name}</p></a>
-                    <hr class="title-comment-divider">
-                    <p class="win-comment text-justify">{$win.description}</p>
-                    <hr>
-                    <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
-                    <form id="win-review-form" class="collapse">
-                      <div class="win-review-rating">
-                        <p class="win-review-rating-title">Rating: </p>
-                        <div class="win-review-rating-stars">
-                          <span class="glyphicon glyphicon-star-empty"></span>
-                          <span class="glyphicon glyphicon-star-empty"></span>
-                          <span class="glyphicon glyphicon-star-empty"></span>
-                          <span class="glyphicon glyphicon-star-empty"></span>
-                          <span class="glyphicon glyphicon-star-empty"></span>
+                      <div id="win-info-text">
+                        <div class="text-right win-info">
+                          <span class="win-info-title">Base price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
+                          <span class="win-info-title">Bought price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
+                          <span class="win-info-title">Date: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
+                          <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="#">{$win.seller_username}</a></button><br>
                         </div>
                       </div>
-                      <div class="win-review-question">
-                        <p>Item as described by the seller? </p>
-                        <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
-                      </div>
-                      <div class="win-review-question">
-                        <p>Courteous service (if you contacted the seller)?</p>
-                        <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="null">Did not contact</label>
-                      </div>
-                      <div class="input-group win-review-comment">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                        <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-info btn-block" value="Submit">Submit</button>
-                    </form>
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                      <a href="#" class="win-product-name"><p>{$win.product_name}</p></a>
+                      <hr class="title-comment-divider">
+                      <p class="win-comment text-justify">{$win.description}</p>
+                      <hr>
+                      <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
+                      <form id="win-review-form" class="collapse">
+                        <div class="win-review-rating">
+                          <p class="win-review-rating-title">Rating: </p>
+                          <div class="win-review-rating-stars">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                          </div>
+                        </div>
+                        <div class="win-review-question">
+                          <p>Item as described by the seller? </p>
+                          <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
+                          <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
+                        </div>
+                        <div class="win-review-question">
+                          <p>Courteous service (if you contacted the seller)?</p>
+                          <label class="checkbox-inline"><input type="checkbox" value="yes">Yes</label>
+                          <label class="checkbox-inline"><input type="checkbox" value="no">No</label>
+                          <label class="checkbox-inline"><input type="checkbox" value="null">Did not contact</label>
+                        </div>
+                        <div class="input-group win-review-comment">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                          <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-block" value="Submit">Submit</button>
+                      </form>
+                    </div>
                   </div>
                 </div>
-              </div>
-            {/foreach}
+              {/foreach}
+            {/if}
           </div>
 
           <!-- ****************** Following ****************** -->
           <div id="following" class="tab-pane fade">
-            {foreach $followingUsers as $followingUser}
-              <div class="media">
-                <div class="media-left">
-                  <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$followingUser.profile_pic}"></a>
+            {if ($followingUsers == null)}
+              <p>No users being followed.</p>
+            {else}
+              {foreach $followingUsers as $followingUser}
+                <div class="media">
+                  <div class="media-left">
+                    <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$followingUser.profile_pic}"></a>
+                  </div>
+                  <div class="media-body">
+                    <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
+                    <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p>{$followingUser.username}</p></a>
+                  </div>
+                  <div class="media-right">
+                    <button type="button" class="btn btn-danger">Unfollow</button>
+                  </div>
                 </div>
-                <div class="media-body">
-                  <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
-                  <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p>{$followingUser.username}</p></a>
-                </div>
-                <div class="media-right">
-                  <button type="button" class="btn btn-danger">Unfollow</button>
-                </div>
-              </div>
-              <hr>
-            {/foreach}
+                <hr>
+              {/foreach}
+            {/if}
           </div>
 
         </div>
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">var userId = 1;</script> <!-- CHANGE -->
+  <script type="text/javascript" src="{$BASE_URL}javascript/user.js"></script>
 
 {include file='common/footer.tpl'}
