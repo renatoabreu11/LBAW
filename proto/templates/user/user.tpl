@@ -55,7 +55,13 @@
           {/if}
         </div>
         <hr>
-        <button type="button" class="btn btn-primary btn-block">Follow</button>
+        {if ($loggedUserId != $user.id)}
+          {if ($isFollowing.count == 0)}
+            <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
+          {else}
+            <button type="button" id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
+          {/if}
+        {/if}
       </div>
 
       <div class="col-sm-9">
@@ -153,15 +159,20 @@
               <p class="details-description-info">{$user.short_bio}</p>
             {/if}
             <div class="details-short-info">
-              <div class="col-md-6 col-xs-6">
+              <div class="col-md-4 col-xs-4">
                 <span class="glyphicon glyphicon-home"></span>
                 <p class="details-short-info-title">Member since</p>
-                <p class="details-short-info-description">{$user.register_date}</p>
+                <p class="details-short-info-member-since">{$user.register_date}</p>
               </div>
-              <div class="col-md-6 col-xs-6">
+              <div class="col-md-4 col-xs-4">
+                <span class="glyphicon glyphicon-user"></span>
+                <p class="details-short-info-title">Member number</p>
+                <p class="details-short-info-member-number">{$user.id}</p>
+              </div>
+              <div class="col-md-4 col-xs-4">
                 <span class="glyphicon glyphicon-paperclip"></span>
                 <p class="details-short-info-title">Total auctions</p>
-                <p class="details-short-info-description">{$totalAuctions.number}</p>
+                <p class="details-short-info-total-auctions">{$totalAuctions.number}</p>
               </div>
             </div>
           </div>
@@ -318,11 +329,13 @@
                     <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
                     <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p>{$followingUser.username}</p></a>
                   </div>
-                  <div class="media-right">
-                    <button type="button" class="btn btn-danger">Unfollow</button>
-                  </div>
+                  {if ($loggedUserId == $user.id)}
+                    <div class="media-right">
+                      <button type="button" class="btn btn-danger">Unfollow</button>
+                    </div>
+                  {/if}
+                  <hr>
                 </div>
-                <hr>
               {/foreach}
             {/if}
           </div>
@@ -332,7 +345,6 @@
     </div>
   </div>
 
-  <script type="text/javascript">var userId = 1;</script> <!-- CHANGE -->
   <script type="text/javascript" src="{$BASE_URL}javascript/user.js"></script>
 
 {include file='common/footer.tpl'}
