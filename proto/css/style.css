@@ -1921,3 +1921,7 @@ a.navlink {
     margin: 20px auto;
 }
 
+.selected {
+    background-color: lightsteelblue;
+}
+

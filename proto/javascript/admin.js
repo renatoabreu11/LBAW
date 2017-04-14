@@ -141,6 +141,70 @@ $(document).ready(function() {
         });
     });
 
+    function deleteAuction(id) {
+        var request;
+        request = $.ajax({
+            type : 'POST',
+            url  : '/api/admin/remove_auction.php',
+            data : {
+                "id": id
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $.magnificPopup.open({
+                items: {
+                    src: '<div class="white-popup">' + response + '</div>',
+                    type: 'inline'
+                }
+            });
+            if(response === "Auction deleted!"){
+                var row = $('#auctionsTable').find('tr.selected');
+            }
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    }
+
+    $(".removePopup").on("click", function () {
+        var row = $('#auctionsTable').find('tr.selected');
+        var auction_id = row.find("td:first").html();
+        if(auction_id === undefined)
+            return;
+
+        $('.removePopup').magnificPopup({
+            type:'inline',
+            midClick: true
+        }).magnificPopup('open');
+
+        $(".removeAuction").one("click", function () {
+            $.magnificPopup.close();
+            deleteAuction(auction_id);
+        })
+    });
+    
+    $(".closePopup").on("click", function () {
+        $.magnificPopup.close();
+    });
+
     $('#usersTable').DataTable();
     $('#auctionsTable').DataTable();
+
+    $('#auctionsTable tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            $('#auctionsTable').find('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
 });

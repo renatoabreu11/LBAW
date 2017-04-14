@@ -38,12 +38,20 @@ function getTotalValueOfActiveAuctions() {
   	return $result['sum'];
 }
 
-function getAuctionsInfo(){
+function getAllAuctions(){
     global $conn;
-    $stmt = $conn->prepare('SELECT id, product_id, user_id 
+    $stmt = $conn->prepare('SELECT * 
     						FROM auction
     						ORDER BY id ASC;');
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
+}
+
+function deleteAuction($auction_id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+    						FROM auction
+    						WHERE id = ?');
+    $stmt->execute(array($auction_id));
 }
