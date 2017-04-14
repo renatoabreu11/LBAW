@@ -332,4 +332,77 @@
         $stmt->execute();
     }
 
+    /************************************* UPDATES *************************************/
+
+    /**
+    * Updates user details.
+    */
+    function updateUserDetails($userId, $realName, $smallBio, $email, $phone, $fullBio) {
+        global $conn;
+        $stmt = $conn->prepare('UPDATE "user"
+                                SET name = :real_name,
+                                short_bio = :small_bio,
+                                email = :email,
+                                phone = :phone,
+                                full_bio = :full_bio
+                                WHERE id = :user_id');
+        $stmt->bindParam('real_name', $realName);
+        $stmt->bindParam('small_bio', $smallBio);
+        $stmt->bindParam('email', $email);
+        $stmt->bindParam('phone', $phone);
+        $stmt->bindParam('full_bio', $fullBio);
+        $stmt->bindParam('user_id', $userId);
+        $stmt->execute();
+    }
+
+    /**
+    * Updates user location.
+    */
+    function updateUserLocation($userId, $city, $country) {
+        global $conn;
+
+        // Get location id.
+        $stmt = $conn->prepare('SELECT location_id
+                                FROM "user"
+                                WHERE id = :user_id');
+        $stmt->bindParam('user_id', $userId);
+        $stmt->execute();
+        $locationId = $stmt->fetch();
+
+        // Get city id.
+        $stmt = $conn->prepare('SELECT city_id
+                                FROM location
+                                WHERE id = :location_id');
+        $stmt->bindParam('location_id', $locationId['location_id']);
+        $stmt->execute();
+        $cityId = $stmt->fetch();
+
+        var_dump($cityId);
+
+
+        // Update city name.
+        $stmt = $conn->prepare('UPDATE city
+                                SET name = :city
+                                WHERE id = :city_id');
+        $stmt->bindParam('city', $city);
+        $stmt->bindParam('city_id', $cityId['city_id']);
+        $stmt->execute();
+
+        // Get country id.
+        $stmt = $conn->prepare('SELECT country_id
+                                FROM city
+                                WHERE id = :city_id');
+        $stmt->bindParam('city_id', $cityId['city_id']);
+        $stmt->execute();
+        $countryId = $stmt->fetch();
+
+        // Update country name.
+        $stmt = $conn->prepare('UPDATE country
+                                SET name = :country
+                                WHERE id = :country_id');
+        $stmt->bindParam('country', $country);
+        $stmt->bindParam('country_id', $countryId['country_id']);
+        $stmt->execute();
+    }
+
 ?>
