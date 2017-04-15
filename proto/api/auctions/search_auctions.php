@@ -1,1 +1,76 @@
 <?php
+include_once('../../config/init.php');
+include_once($BASE_DIR .'database/auctions.php');
+
+if (!is_numeric($_GET['fromPrice']) || !is_numeric($_GET['toPrice'])
+	|| !is_numeric($_GET['fromTimeRem']) || !is_numeric($_GET['toTimeRem'])) {
+	echo "Error: some(s) value(s) is not a number when it should be.";
+	return;
+}
+
+if (!isset($_GET['name']) || !$_GET['category']){
+    echo 'All fields are mandatory!';
+    return;
+}
+
+$nameAuction = trim(strip_tags($_GET["name"]));
+if ( !preg_match ("/^[a-zA-Z0-9\s]*$/", $nameAuction)){
+    echo 'Invalid username characters';
+    return;
+}
+
+$category = trim(strip_tags($_GET['category']));
+
+$fromPrice = (int)$_GET['fromPrice'];
+$toPrice = (int)$_GET['toPrice'];
+
+$fromTimeRem = (int)$_GET['fromTimeRem'];
+$toTimeRem = (int)$_GET['toTimeRem'];
+
+$fromDate = new DateTime();
+$fromDate->add(new DateInterval('PT'. $fromTimeRem .'S')); 
+$fromDateTimeStamp = $fromDate->getTimestamp();
+
+$toDate = new DateTime();
+$toDate->add(new DateInterval('PT'. $toTimeRem .'S')); 
+$toDateTimeStamp = $toDate->getTimestamp();
+
+if ($toPrice < $fromPrice) {
+	$fromPrice = $toPrice + $fromPrice;
+	$toPrice = $fromPrice - $toPrice;
+	$fromPrice = $fromPrice - $toPrice; //:D
+}
+
+if ($toDateTimeStamp < $fromDateTimeStamp) {
+	$fromDateTimeStamp = $toDateTimeStamp + $fromDateTimeStamp;
+	$toDateTimeStamp = $fromDateTimeStamp - $toDateTimeStamp;
+	$fromDateTimeStamp = $fromDateTimeStamp - $toDate;
+}
+
+$fromDate = date('Y-m-d H:i:s', $fromDateTimeStamp);
+$toDate = date('Y-m-d H:i:s', $toDateTimeStamp);
+
+$auctions = null;
+if (strcmp($nameAuction, "") == 0) {
+	if (strcmp($category, "All") == 0) {
+		$auctions = searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice);
+	}
+	else {
+		$auctions = searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPrice, $category);
+	}
+}
+else {
+	if (strcmp($category, "All") == 0) {
+		$auctions = searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice, $nameAuction);
+	}
+	else {
+		$auctions = searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $toPrice, $nameAuction, $category);
+	}
+}
+
+$smarty->assign('auctions', $auctions);
+$list = $smarty->fetch('auctions/list.tpl');
+$listThumbnail = $smarty->fetch('auctions/list_thumbnail.tpl');
+$dataToRetrieve = array('list' => $list, 'listThumbnail' => $listThumbnail);
+echo json_encode($dataToRetrieve);
+

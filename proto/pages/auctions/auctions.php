@@ -5,7 +5,7 @@
 
 	if (!$_GET['search']) {
 	    $_SESSION['error_messages'][] = "Field of search not specified!";
-	    header("Location: $BASE_URL" . 'pages/authentication/signup.php');
+	    header("Location:"  . $_SERVER['HTTP_REFERER']);
 	    exit;
 	}
 

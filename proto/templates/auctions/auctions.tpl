@@ -14,11 +14,13 @@
 	              <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#categories">Category</button>
 
 	              <div class="collapse" id="categories">
-	              	{foreach $categories as $category}
-					<div class="checkbox">
-						<label><input type="checkbox" class="category">{$category.unnest}</label>
-					</div>
-	            	{/foreach}
+	              	<select class="form-control" id="category">
+	              		<option value="All" selected="selected">All</option>
+	              		{foreach $categories as $category}
+						<option value="{$category.unnest}">{$category.unnest}</option>
+	            		{/foreach}
+	              	</select>
+	              	<br>
 	              </div>
 
 	              <div class="padding"></div>
@@ -50,13 +52,6 @@
 
 	              <div class="padding"></div>
 
-	              <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#type">Type</button>
-	              <div class="collapse" id="type">
-	              	Not defined!!!
-	              </div>
-
-	              <div class="padding"></div>
-
 	              <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Time remaining</button>
 	              <div class="collapse" id="timeRemaining">
 	                <b>From</b>
@@ -70,9 +65,9 @@
 				    <b>To</b>
 					<select class="form-control" id="toTimeRem">
 						<option value="1800">30 minutes</option>
-				        <option value="3600" selected="selected">1 hour</option>
+				        <option value="3600">1 hour</option>
 				        <option value="86400">1 day</option>
-				        <option value="604800">1 week</option>
+				        <option value="604800" selected="selected">1 week</option>
 				    </select>
 	            </div>
 	        </div>
@@ -82,9 +77,9 @@
 	              <hr>
 					<div class="input-group">
 						<span class="input-group-btn">
-						<button class="btn btn-secondary" type="button">Search</button>
+						<button class="btn btn-secondary" type="button" id="searchBtn">Search</button>
 						</span>
-						<input type="text" class="form-control" placeholder="Search for auction...">
+						<input type="text" class="form-control" placeholder="Search for auction..." id="inputSearch">
 				    </div>
 	              <h6 style="color: darkgray;">Showing all results matching "{$search}"</h6>
 
@@ -107,89 +102,14 @@
 	                </div>
 	              </div>
 
-	               <div class="table-responsive" id="auctions">
-	                <table class="table table-hover collapse in" id="auctionsList">
-	                  <tbody>
-	                   {foreach $auctions as $auction}
-		                <tr>
-		                  <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
-		                  <td class="product col-md-4">{$auction.product_name}<br></td>
-
-		                  <!-- user rating -->
-		                  <td class="seller col-md-2">
-		                    <a href="{$BASE_URL}pages/user/user.php?id={$auction.user_id}">{$auction.username}</a>
-		                    <span>
-		                    {if ($auction.user_rating != null) }
-		                      <br>
-		                      {for $var=2 to $auction.user_rating step 2}
-		                        <i class="fa fa-star"></i>
-		                      {/for} 
-		                      {if ($auction.user_rating % 2 == 1)}
-		                        <i class="fa fa-star-half-o"></i>
-		                        {for $var=$auction.user_rating+3 to 10 step 2}
-		                          <i class="fa fa-star-o"></i>
-		                        {/for} 
-		                      {else}
-		                        {for $var=$auction.user_rating+2 to 10 step 2}
-		                          <i class="fa fa-star-o"></i>
-		                        {/for}
-		                      {/if}
-		                    {/if}
-		                    </span>
-		                  </td>
-
-		                  <td class="price col-md-2">
-		                    <small>Current bid: <br>{$auction.curr_bid} €</small>
-		                    <div class="countdown">
-		                      <span class="clock"><p hidden>{$auction.end_date}</p></span>
-		                    </div>
-		                  </td>
-		                  <td class="watch col-md-2">
-		                    <button class="btn btn-info"><a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a></button>
-		                  </td>
-		                </tr>
-	               		{/foreach}
-	               	</tbody>
-	               </table>
+	              <div class="table-responsive" id="auctions">
+	              	{include file='auctions/list.tpl'} 
 	              </div>
 
 		          <div class="collapse" id="auctionsThumbnails">
-		          	{foreach $auctions as $auction}
-		          	<div class="col-md-3 col-sm-6 col-xs-6">
-		              <span class="thumbnail text-center">
-		                <h4 style="height: 50px;">{$auction.product_name}</h4>
-		                <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
-		                <small>Current bid: {$auction.curr_bid} €</small>
-		                <div class="countdown" style="height: 50px;">
-		                    <span class="clock"><p hidden>{$auction.end_date}</p></span>
-		                </div>
-		                <div class="watchAuction">
-		                  <button class="btn btn-info btn-sm"><a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a></button>
-		                </div>
-		                <div class="seller" style="height: 75px;">
-		                  <p>Product auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$auction.user_id}">{$auction.username}</a></p>
-		                  <span>
-		                     {if ($auction.user_rating != null) }
-		                      {for $var=2 to $auction.user_rating step 2}
-		                        <i class="fa fa-star"></i>
-		                      {/for} 
-		                      {if ($auction.user_rating % 2 == 1)}
-		                        <i class="fa fa-star-half-o"></i>
-		                        {for $var=$auction.user_rating+3 to 10 step 2}
-		                          <i class="fa fa-star-o"></i>
-		                        {/for} 
-		                      {else}
-		                        {for $var=$auction.user_rating+2 to 10 step 2}
-		                          <i class="fa fa-star-o"></i>
-		                        {/for}
-		                      {/if}
-		                    {/if}
-		                  </span>
-		                </div>
-		              </span>
-		            </div>
-		            {/foreach}
-		           </div>
+		          	{include file='auctions/list_thumbnail.tpl'} 
+		          </div>
+		           
 		           <div class="text-center">
 	                <ul class="pagination">
 	                  <li class="disabled"><a href="#">«</a></li>

@@ -33,5 +33,37 @@ $(document).ready(function(){
     });
   });
 
+  $('#searchBtn').click(function(){
+
+    var name = $('#inputSearch').val();
+    var category = $("#category option:selected").val();
+    var fromPrice = $("#fromPrice option:selected").val();
+    var toPrice = $("#toPrice option:selected").val();
+    var fromTimeRem = $("#fromTimeRem option:selected").val();
+    var toTimeRem = $("#toTimeRem option:selected").val();
+    $.ajax({
+          type : 'GET',
+          url  : '/api/auctions/search_auctions.php',
+          data : {
+              "name": name,
+              "category": category,
+              "fromPrice": fromPrice,
+              "toPrice": toPrice,
+              "fromTimeRem": fromTimeRem,
+              "toTimeRem": toTimeRem
+          },
+          dataType: 'json',
+          success: function(data){
+            $('#auctions').empty();
+            $('#auctionsThumbnails').empty();
+            $('#auctions').append(data['list']);
+            $('#auctionsThumbnails').append(data['listThumbnail']);
+          },
+          error: function(data){
+              alert(data);
+          }
+      });
+  });
+
 
 });

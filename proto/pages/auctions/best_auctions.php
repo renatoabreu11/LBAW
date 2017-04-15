@@ -14,6 +14,6 @@
 	$smarty->assign('numActiveAuctions', $numActiveAuctions);
 	$smarty->assign('totalValOfActiveAuctions', $totalValOfActiveAuctions);
 	$smarty->assign('topTenRankingUsers', $topTenRankingUsers);
-	$smarty->assign('mostPopularAuctions', $mostPopularAuctions);
+	$smarty->assign('auctions', $mostPopularAuctions);
 	$smarty->display('auctions/list_best_auctions.tpl');
 ?>
