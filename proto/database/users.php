@@ -47,13 +47,14 @@
 
     function getNumTotalAuctions($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT COUNT(*) as number
+        $stmt = $conn->prepare('SELECT COUNT(*)
                                 FROM auction
                                 JOIN "user" ON auction.user_id = "user".id
                                 WHERE "user".id = :user_id');
         $stmt->bindParam('user_id', $userId);
         $stmt->execute();
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        return $result['count'];
     }
 
     function getActiveAuctions($userId) {
@@ -332,6 +333,14 @@
         $stmt->execute();
     }
 
+    function deleteUser($user_id){
+        global $conn;
+        $stmt = $conn->prepare('DELETE 
+                                FROM "user"
+                                WHERE id=?');
+        $stmt->execute(array($user_id));
+    }
+
     /************************************* UPDATES *************************************/
 
     /**
@@ -403,6 +412,14 @@
         $stmt->bindParam('country', $country);
         $stmt->bindParam('country_id', $countryId['country_id']);
         $stmt->execute();
+    }
+
+    function notifyUser($user_id, $message, $type){
+        global $conn;
+        $stmt = $conn->prepare('INSERT INTO notification
+                                (message, type, is_new, user_id, date)
+                                VALUES (?, ?, ?, ?, now())');
+        $stmt->execute(array($message, $type, 'true', $user_id));
     }
 
 ?>

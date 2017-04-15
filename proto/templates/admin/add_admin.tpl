@@ -46,7 +46,7 @@
         </div>
 
         <div class="col-sm-6 text-center" style="padding-top: 1em;">
-            <button name="saveBtn" class="btn btn-primary">Add new admin</button>
+            <button name="saveBtn" class="btn btn-info">Add new admin</button>
         </div>
     </form>
 </div>

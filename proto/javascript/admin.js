@@ -141,6 +141,9 @@ $(document).ready(function() {
         });
     });
 
+    var auctionTable = $('#auctionsTable').DataTable();
+    var userTable = $('#usersTable').DataTable();
+
     function deleteAuction(id) {
         var request;
         request = $.ajax({
@@ -161,7 +164,40 @@ $(document).ready(function() {
                 }
             });
             if(response === "Auction deleted!"){
-                var row = $('#auctionsTable').find('tr.selected');
+                auctionTable.row('.selected').remove().draw(false);
+            }
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    }
+
+    function deleteUser(id) {
+        var request;
+        request = $.ajax({
+            type : 'POST',
+            url  : '/api/admin/remove_user.php',
+            data : {
+                "id": id
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $.magnificPopup.open({
+                items: {
+                    src: '<div class="white-popup">' + response + '</div>',
+                    type: 'inline'
+                }
+            });
+            if(response === "User deleted!"){
+                userTable.row('.selected').remove().draw(false);
             }
         });
 
@@ -190,13 +226,85 @@ $(document).ready(function() {
             deleteAuction(auction_id);
         })
     });
-    
+
+    $(".removeUserPopup").on("click", function () {
+        var row = $('#usersTable').find('tr.selected');
+        var user_id = row.find("td:first").html();
+        if(user_id === undefined)
+            return;
+
+        $('.removeUserPopup').magnificPopup({
+            type:'inline',
+            midClick: true
+        }).magnificPopup('open');
+
+        $(".removeUser").one("click", function () {
+            $.magnificPopup.close();
+            deleteUser(user_id);
+        })
+    });
+
+    $(".notifyUserPopup").on("click", function () {
+        var row = $('#usersTable').find('tr.selected');
+        var user_id = row.find("td:first").html();
+        if(user_id === undefined)
+            return;
+
+        $('.notifyUserPopup').magnificPopup({
+            type:'inline',
+            midClick: true
+        }).magnificPopup('open');
+    });
+
+    $("#notificationForm").validate({
+       rules:{
+        notification:{
+            required: true,
+            maxlength: 256
+        }
+       },
+        submitHandler: notifyUser
+    });
+
+    function notifyUser() {
+        $.magnificPopup.close();
+        var row = $('#usersTable').find('tr.selected');
+        var id = row.find("td:first").html();
+        var message = $("#notificationForm").find("textarea#notification").val();
+        var request;
+        request = $.ajax({
+            type : 'POST',
+            url  : '/api/admin/notify_user.php',
+            data : {
+                "id": id,
+                "message": message
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $.magnificPopup.open({
+                items: {
+                    src: '<div class="white-popup">' + response + '</div>',
+                    type: 'inline'
+                }
+            });
+            $("#notificationForm").trigger("reset");
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    }
+
     $(".closePopup").on("click", function () {
         $.magnificPopup.close();
     });
-
-    $('#usersTable').DataTable();
-    $('#auctionsTable').DataTable();
 
     $('#auctionsTable tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
@@ -204,6 +312,16 @@ $(document).ready(function() {
         }
         else {
             $('#auctionsTable').find('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+
+    $('#usersTable').find('tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            $('#usersTable').find('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     } );

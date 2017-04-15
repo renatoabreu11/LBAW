@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-6 text-center">
-                    <button name="saveBtn" class="btn btn-primary">Add new category</button>
+                    <button name="saveBtn" class="btn btn-info">Add new category</button>
                 </div>
             </div>
         </form>
