@@ -19,7 +19,7 @@
       <!-- ****************** Left Information ****************** -->
       <div class="col-sm-3">
         <div class="info-name">
-          <img src="../../images/avatars/{$user.profile_pic}" class="img-rounded center-block" alt="User Avatar" width="156">
+          <img src="../../images/users/{$user.profile_pic}" class="img-rounded center-block" alt="User Avatar" width="156">
           <p class="text-center user-real-name">{$user.name}</p>
           <p class="text-center user-nick-name">{$user.username}</p>
           <p class="text-justify user-overview">{$user.short_bio}</p>

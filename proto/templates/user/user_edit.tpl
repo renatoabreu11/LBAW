@@ -35,8 +35,8 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label">Avatar: </label>
                   <div class="col-md-6">
-                    <img src="../../images/avatars/{$user.profile_pic}" alt="Profile image" width="156">
-                    <input type="file">
+                    <img src="../../images/users/{$user.profile_pic}" alt="Profile image" width="156">
+                    <input type="file" name="picture">
                   </div>
                 </div>
                 <div class="form-group">

@@ -71,10 +71,31 @@
         updateUserLocation($userId, $city, $country);
     } catch(PDOException $e) {
         $_SESSION['error_messages'][] = "error: can't update user location.";
-        $_SESSION['error_messages'][] = "error: can't update user location.";
         $_SESSION['form_values'] = $_POST;
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;
+    }
+
+    $picture = $_FILES['picture'];
+    if($picture['size'] > 0) {
+        $extension = end(explode(".", $picture['name']));
+        try {
+            updateUserPicture($userId, $userId . "." . $extension);
+        } catch(PDOException $e) {
+            echo $e;
+            $_SESSION['error_messages'][] = "error: can't update user profile avatar.";
+            $_SESSION['form_values'] = $_POST;
+            header("Location:"  . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
+
+        $picturePath = $BASE_DIR . "images/users/" . $userId . "." . $extension;
+        if(!move_uploaded_file($picture['tmp_name'], $picturePath)) {
+            $_SESSION['error_messages'][] = "error: can't move user profile avatar.";
+            $_SESSION['form_values'] = $_POST;
+            header("Location:"  . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
     }
 
     $_SESSION['success_messages'][] = 'Update successful';

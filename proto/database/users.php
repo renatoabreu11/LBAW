@@ -309,9 +309,9 @@
         global $conn;
         $options = ['cost' => $PASSWORD_HASH_COST];
         $register_date = $date = date('Y-m-d H:i:s');
-        $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?)');
         $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
-        $stmt->execute(array($name, $username, $encryptedPass, $email, $description, $register_date));
+        $stmt->execute(array($name, $username, $encryptedPass, $email, $description, $register_date, $BASIC_PROFILE_PIC));
     }
 
     /**
@@ -378,6 +378,16 @@
         $stmt->bindParam('email', $email);
         $stmt->bindParam('phone', $phone);
         $stmt->bindParam('full_bio', $fullBio);
+        $stmt->bindParam('user_id', $userId);
+        $stmt->execute();
+    }
+
+    function updateUserPicture($userId, $pictureId) {
+        global $conn;
+        $stmt = $conn->prepare('UPDATE "user"
+                                SET profile_pic = :picture_id
+                                WHERE id = :user_id');
+        $stmt->bindParam('picture_id', $pictureId);
         $stmt->bindParam('user_id', $userId);
         $stmt->execute();
     }
