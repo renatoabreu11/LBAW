@@ -142,7 +142,7 @@
                       <span class="recent-activity-date">{$lastWatchlistAuctions[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> added an <a href="../../pages/auction/auction.php?id={$lastWatchlistAuctions[0].id}">auction</a> to his <a href="#">watchlist</a>.</p>
+                      <p><a href="#">{$user.username}</a> added an <a href="../../pages/auction/auction.php?id={$lastWatchlistAuctions[$var].id}">auction</a> to his <a href="#">watchlist</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -172,7 +172,7 @@
               <div class="col-md-4 col-xs-4">
                 <span class="glyphicon glyphicon-paperclip"></span>
                 <p class="details-short-info-title">Total auctions</p>
-                <p class="details-short-info-total-auctions">{$totalAuctions.number}</p>
+                <p class="details-short-info-total-auctions">{$totalAuctions}</p>
               </div>
             </div>
           </div>

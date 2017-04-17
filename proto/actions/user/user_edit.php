@@ -56,8 +56,6 @@
         exit;
     }
 
-    // MAKE FIELD ERROR MESSAGES APPEAR!!!
-
     try {
         updateUserDetails($userId, $realName, $smallBio, $email, $phone, $fullBio);
     } catch(PDOException $e) {
@@ -76,6 +74,7 @@
         exit;
     }
 
+    // Updates profile picture.
     $picture = $_FILES['picture'];
     if($picture['size'] > 0) {
         $extension = end(explode(".", $picture['name']));
