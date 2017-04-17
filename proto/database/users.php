@@ -293,11 +293,21 @@
         return $stmt->fetch();
     }
 
+    function getPassword($userId) {
+        global $conn;
+        $stmt = $conn->prepare('SELECT hashed_pass
+                                FROM "user"
+                                WHERE id = :user_id');
+        $stmt->bindParam('user_id', $userId);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     /************************************* INSERTS *************************************/
 
     function createUser($name, $username, $password, $email, $description) {
         global $conn;
-        $options = ['cost' => 12];
+        $options = ['cost' => $PASSWORD_HASH_COST];
         $register_date = $date = date('Y-m-d H:i:s');
         $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date) VALUES (?, ?, ?, ?, ?, ?)');
         $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
@@ -315,6 +325,14 @@
         $stmt->bindParam('message', $message);
         $stmt->bindParam('bid_id', $bidId);
         $stmt->execute();
+    }
+
+    function notifyUser($user_id, $message, $type){
+        global $conn;
+        $stmt = $conn->prepare('INSERT INTO notification
+                                (message, type, is_new, user_id, date)
+                                VALUES (?, ?, ?, ?, now())');
+        $stmt->execute(array($message, $type, 'true', $user_id));
     }
 
     /************************************* DELETES *************************************/
@@ -386,9 +404,6 @@
         $stmt->execute();
         $cityId = $stmt->fetch();
 
-        var_dump($cityId);
-
-
         // Update city name.
         $stmt = $conn->prepare('UPDATE city
                                 SET name = :city
@@ -414,12 +429,16 @@
         $stmt->execute();
     }
 
-    function notifyUser($user_id, $message, $type){
+    function updatePassword($userId, $newPass) {
         global $conn;
-        $stmt = $conn->prepare('INSERT INTO notification
-                                (message, type, is_new, user_id, date)
-                                VALUES (?, ?, ?, ?, now())');
-        $stmt->execute(array($message, $type, 'true', $user_id));
+        $options = ['cost' => $PASSWORD_HASH_COST];
+        $encryptedNewPass = password_hash($newPass, PASSWORD_DEFAULT, $options);
+        $stmt = $conn->prepare('UPDATE "user"
+                                SET hashed_pass = :new_hashed_pass
+                                WHERE id = :user_id');
+        $stmt->bindParam('new_hashed_pass', $encryptedNewPass);
+        $stmt->bindParam('user_id', $userId);
+        $stmt->execute();
     }
 
 ?>

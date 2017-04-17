@@ -4,7 +4,7 @@
     include_once($BASE_DIR . 'database/users.php');
 
     if(!$_POST['user-id'] || !$_POST['real-name'] || !$_POST['small-bio'] || !$_POST['city'] || !$_POST['country'] || !$_POST['email'] || !$_POST['phone'] || !$_POST['full-bio']) {
-        $_SESSION['error_messages'][] = "Invalid edit!";
+        $_SESSION['error_messages'][] = "All fields are required!";
         $_SESSION['form_values'] = $_POST;
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;

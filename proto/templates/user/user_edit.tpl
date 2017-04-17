@@ -17,6 +17,7 @@
       </div>
     </div>
 
+    <!-- ****************** General information ****************** -->
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -112,6 +113,7 @@
       </div>
     </div>
 
+    <!-- ****************** Password ****************** -->
     <div class="panel-group">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -122,23 +124,25 @@
         </div>
         <div id="password-edit" class="panel-collapse collapse">
           <div class="panel-body">
-            <form class="form-horizontal" method="post" action="#">
+
+            <form class="form-horizontal" method="post" action="{$BASE_URL}actions/user/user_edit_password.php">
+              <input type="hidden" name="user-id" value="{$user.id}">
               <div class="form-group">
                 <label class="col-md-3 control-label">Current password: </label>
                 <div class="col-md-6">
-                  <input type="password" class="form-control" id="curr-pass">
+                  <input type="password" class="form-control" name="curr-pass" id="curr-pass">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-md-3 control-label">New password: </label>
                 <div class="col-md-6">
-                  <input type="password" class="form-control" id="new-pass-1">
+                  <input type="password" class="form-control" name="new-pass" id="new-pass-1">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-md-3 control-label">Repeat password: </label>
                 <div class="col-md-6">
-                  <input type="password" class="form-control" id="new-pass-2">
+                  <input type="password" class="form-control" name="new-pass-repeat" id="new-pass-2">
                 </div>
               </div>
 
@@ -150,16 +154,18 @@
                 </div>
                 <div class="col-xs-6 text-right">
                   <div class="next">
-                    <button type="button" class="btn btn-primary">Discard</button>
+                    <button type="button" class="btn btn-primary btn-discard">Discard</button>
                   </div>
                 </div>
               </div>
             </form>
+
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ****************** Notifications ****************** -->
     <div class="panel-group">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -217,7 +223,7 @@
                 </div>
                 <div class="col-xs-6 text-right">
                   <div class="next">
-                    <button type="button" class="btn btn-primary">Discard</button>
+                    <button type="button" class="btn btn-primary btn-discard">Discard</button>
                   </div>
                 </div>
               </div>
