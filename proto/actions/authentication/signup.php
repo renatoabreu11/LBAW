@@ -14,9 +14,9 @@ $invalidCharacters = false;
 if ( !preg_match ("/^[a-zA-Z\s]+$/", $name)) {
     $_SESSION['field_errors']['name'] = 'Invalid name characters';
     $invalidCharacters = true;
-}\
+}
 
-$username= trim(strip_tags($_POST["username"]));
+$username = trim(strip_tags($_POST["username"]));
 if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $username)) {
     $invalidCharacters = true;
     $_SESSION['field_errors']['username'] = 'Invalid username characters';
