@@ -17,7 +17,7 @@ $(document).ready(function() {
         if(btnText == "Follow") {
             var request = $.ajax({
                 type: 'POST',
-                url: '/api/user/follow.php',
+                url: BASE_URL + 'api/user/follow.php',
                 data: {
                     "followedUserId": userId
                 }
@@ -35,7 +35,7 @@ $(document).ready(function() {
         } else {
             var request = $.ajax({
                 type: 'POST',
-                url: '/api/user/unfollow.php',
+                url: BASE_URL + 'api/user/unfollow.php',
                 data: {
                     "followedUserId": userId
                 }
@@ -60,7 +60,7 @@ $(document).ready(function() {
 
         var request = $.ajax({
             type: 'POST',
-            url: '/api/user/unfollow.php',
+            url: BASE_URL + 'api/user/unfollow.php',
             data: {
                 "followedUserId": followedUserId
             }
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
         var request = $.ajax({
             type: 'POST',
-            url: '/api/user/review_auction.php',
+            url: BASE_URL + 'api/user/review_auction.php',
             data: {
                 "rating": rating,
                 "message": message,

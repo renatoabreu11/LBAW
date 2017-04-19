@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
     $(".btn-discard").click(function() {
-        location.reload();
+        window.location.href=window.location.href;
     })
 })

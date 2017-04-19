@@ -43,7 +43,7 @@ $(document).ready(function(){
     var toTimeRem = $("#toTimeRem option:selected").val();
     $.ajax({
           type : 'GET',
-          url  : '/api/auctions/search_auctions.php',
+          url  : BASE_URL + 'api/auctions/search_auctions.php',
           data : {
               "name": name,
               "category": category,

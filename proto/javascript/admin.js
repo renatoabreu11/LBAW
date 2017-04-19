@@ -61,7 +61,7 @@ $(document).ready(function() {
         var confirm = form.find("#confirm").val();
         $.ajax({
             type : 'POST',
-            url  : '/api/admin/add_admin.php',
+            url  : BASE_URL + '/api/admin/add_admin.php',
             data : {
                 "username": username,
                 "password": password,
@@ -203,7 +203,7 @@ $(document).ready(function() {
             if(response === "User deleted!"){
                 userTable.DataTable().row('.selected').remove().draw(false);
             }
-        });user
+        });
 
         // Callback handler that will be called on failure
         request.fail(function (jqXHR, textStatus, errorThrown){

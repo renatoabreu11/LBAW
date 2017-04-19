@@ -1,3 +1,5 @@
+BASE_URL = '/~lbaw1662/proto/';
+
 $(document).ready(function() {
     $("#signinForm").validate({
         rules:
@@ -37,7 +39,7 @@ $(document).ready(function() {
         var request;
         request = $.ajax({
             type : 'POST',
-            url  : '/api/authentication/signin.php',
+            url  : BASE_URL + 'api/authentication/signin.php',
             data : {
                 "username": username,
                 "password": password
@@ -48,7 +50,7 @@ $(document).ready(function() {
         // Callback handler that will be called on success
         request.done(function (response, textStatus, jqXHR){
             if(response === "Login Successful!"){
-                location.reload(true);
+                window.location.href=window.location.href;
             }else {
                 $("#loginModal").find(".field_error").text(response);
             }
