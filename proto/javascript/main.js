@@ -1,4 +1,4 @@
-BASE_URL = '/';
+BASE_URL = '/~lbaw1662/proto/';
 
 $(document).ready(function() {
     $("#signinForm").validate({
@@ -85,10 +85,10 @@ $(document).ready(function() {
     function leaveFeedback() {
         $.magnificPopup.close();
         var username = $("#feedbackForm").find('input[name=username]').val();
-        var feedback = $("#feedbackForm").find('input[name=feedback]').val();
+        var feedback = $("#feedbackForm").find('textarea#feedback').val();
         var request = $.ajax({
             type : 'POST',
-            url  : BASE_URL + '/api/user/feedback.php',
+            url  : BASE_URL + 'api/user/feedback.php',
             data : {
                 "username": username,
                 "feedback": feedback

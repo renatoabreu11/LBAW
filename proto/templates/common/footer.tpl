@@ -9,7 +9,7 @@
                     <input type="hidden" name="username" value={$USERNAME}>
                     <div class="form-group">
                         <label for="feedback">Feedback:</label>
-                        <textarea class="form-control" rows="5" name="feedback"></textarea>
+                        <textarea class="form-control" rows="5" id="feedback"></textarea>
                     </div>
                     <div class="text-center">
                         <input type="submit" id="submitFeedback" class="btn btn-info" value="Submit feedback">

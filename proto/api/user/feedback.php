@@ -12,8 +12,8 @@ $username = $_POST["username"];
 $feedback = trim(strip_tags($_POST["feedback"]));
 $user_id = getUserID($username);
 
-if($user_id === null){
-    echo "User doesn't exist!";
+if($user_id === null ){
+    echo "Invalid User!";
     return;
 }
 

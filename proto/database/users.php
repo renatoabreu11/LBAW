@@ -23,22 +23,13 @@
         return $stmt->fetch();
     }
 
-    function getUserWithUsername($username) {
-        global $conn;
-        $stmt = $conn->prepare('SELECT id
-                                FROM "user" 
-                                WHERE username = :username_received');
-        $stmt->bindParam('username_received', $username);
-        $stmt->execute();
-    }
-
     function getUserID($username) {
         global $conn;
         $stmt = $conn->prepare('SELECT "user".id
                                     FROM "user"
                                     WHERE username = ?');
         $stmt->execute(array($username));
-        return $stmt->fetch();
+        return ($stmt->fetch())['id'];
     }
 
     function getAllUsers(){

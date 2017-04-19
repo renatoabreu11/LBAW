@@ -10,7 +10,7 @@
     }
 
     $userId = trim(strip_tags($_GET['id']));
-    $loggedUserId = 1;//$_SESSION['user_id'];
+    $loggedUserId = $_SESSION['user_id'];
 
     if(!preg_match("/[0-9]/", $userId) || !preg_match("/[0-9]/", $loggedUserId)) {
         $_SESSION['error_messages'][] = "id has invalid characters";
