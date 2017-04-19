@@ -9,7 +9,7 @@
     }
 
     $userId = trim(strip_tags($_GET['id']));
-    $loggedUserId = 1;//$_SESSION['id'];        // Change.
+    $loggedUserId = 1;//$_SESSION['id'];
 
     if(!preg_match("/[0-9]/", $userId) || !preg_match("/[0-9]/", $loggedUserId)) {
         $_SESSION['error_messages'][] = "id has invalid characters";
@@ -56,6 +56,8 @@
 
     if($userId == $loggedUserId)
         $smarty->assign('reviewsPosted', $reviewsPosted);
+
+        var_dump($lastWins);
 
     $smarty->display('user/user.tpl');
 ?>

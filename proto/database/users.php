@@ -23,6 +23,16 @@
         return $stmt->fetch();
     }
 
+    function getUserWithUsername($username) {
+        global $conn;
+        $stmt = $conn->prepare('SELECT id
+                                FROM "user" 
+                                WHERE username = :username_received');
+        $stmt->bindParam('username_received', $username);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     function getAllUsers(){
         global $conn;
         $stmt = $conn->prepare('SELECT *
@@ -179,7 +189,7 @@
     */
     function getLastBids($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT bid.amount, auction.id AS auction_id, bid.date, seller.id as seller_id
+        $stmt = $conn->prepare('SELECT bid.amount, auction.id AS auction_id, bid.date, seller.id as seller_id, seller.username as seller_username
                                 FROM bid
                                 INNER JOIN "user" own ON bid.user_id = own.id
                                 JOIN auction ON bid.auction_id = auction.id
@@ -214,7 +224,7 @@
     */
     function getLastWins($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT auction.end_date, seller.username, auction.id as auction_id
+        $stmt = $conn->prepare('SELECT auction.end_date, seller.username as seller_username, auction.id as auction_id, seller.id as seller_id
                                 FROM auction
                                 JOIN bid ON auction.id = bid.auction_id AND auction.curr_bid = bid.amount
                                 JOIN "user" winner ON bid.user_id = winner.id

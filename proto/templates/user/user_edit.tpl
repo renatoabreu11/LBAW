@@ -5,10 +5,10 @@
       <div class="col-md-12">
         <ul class="breadcrumb">
           <li>
-            <a href="#">Home</a> <span class="divider"></span>
+            <a href="../../pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
           </li>
           <li>
-            <a href="#">Profile</a> <span class="divider"></span>
+            <a href="../../pages/user/user.php?id={$user.id}">Profile</a> <span class="divider"></span>
           </li>
           <li class="active">
             Settings

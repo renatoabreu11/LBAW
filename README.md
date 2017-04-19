@@ -20,6 +20,6 @@ System managers are allowed to stop auctions, block accounts or delete content.
 
 [Hélder Antunes](https://github.com/HelderAntunes)
 
-[José Carlos](https://github.com/Evenilink)
+[José Vieira](https://github.com/Evenilink)
 
 [Renato Abreu](https://github.com/renatoabreu11)

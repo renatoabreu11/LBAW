@@ -5,7 +5,7 @@
       <div class="col-md-12">
         <ul class="breadcrumb">
           <li>
-            <a href="#">Home</a> <span class="divider"></span>
+            <a href="../../pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
           </li>
           <li class="active">
             Profile
@@ -95,10 +95,10 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <span class="recent-activity-type"><span class="glyphicon glyphicon-euro"></span> Bid</span>
-                      <span class="recent-activity-date">{$lastBid[$var].date}</span>
+                      <span class="recent-activity-date">{$lastBids[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> bid {$lastBid[$var].amount}€ on an <a href="../../pages/auction/auction.php?id={$lastBid[$var].auction_id}">auction</a> hosted by <a href="../../user/user.php?id={$lastBid[$var].seller_id}">{$lastBid[$var].seller_id}</a>.</p>
+                      <p><a href="#">{$user.username}</a> bid {$lastBids[$var].amount}€ on an <a href="../../pages/auction/auction.php?id={$lastBids[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastBids[$var].seller_id}">{$lastBids[$var].seller_username}</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -120,7 +120,7 @@
                       <span class="recent-activity-date">{$lastWins[$var].end_date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> won an <a href="../../pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="#">{$lastWins[$var].username}</a>.</p>
+                      <p><a href="#">{$user.username}</a> won an <a href="../../pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastWins[$var].seller_id}">{$lastWins[$var].seller_username}</a>.</p>
                     </div>
                   </div>
                 {/if}
