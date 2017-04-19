@@ -5,7 +5,7 @@
       <div class="col-md-12">
         <ul class="breadcrumb">
           <li>
-            <a href="../../pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
+            <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
           </li>
           <li class="active">
             Profile
@@ -87,7 +87,7 @@
                       <span class="recent-activity-date">{$lastReviews[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="../../pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].username}</a>.</p>
+                      <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].username}</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -98,7 +98,7 @@
                       <span class="recent-activity-date">{$lastBids[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> bid {$lastBids[$var].amount}€ on an <a href="../../pages/auction/auction.php?id={$lastBids[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastBids[$var].seller_id}">{$lastBids[$var].seller_username}</a>.</p>
+                      <p><a href="#">{$user.username}</a> bid {$lastBids[$var].amount}€ on an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastBids[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastBids[$var].seller_id}">{$lastBids[$var].seller_username}</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -109,7 +109,7 @@
                       <span class="recent-activity-date">{$lastFollowing[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p class="recent-activity-type"><a href="#">{$user.username}</a> started to follow <a href="../../pages/user/user.php?id={$lastFollowing[$var].followed_id}">{$lastFollowing[$var].followed_username}</a>.</p>
+                      <p class="recent-activity-type"><a href="#">{$user.username}</a> started to follow <a href="{$BASE_URL}pages/user/user.php?id={$lastFollowing[$var].followed_id}">{$lastFollowing[$var].followed_username}</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -120,7 +120,7 @@
                       <span class="recent-activity-date">{$lastWins[$var].end_date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> won an <a href="../../pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastWins[$var].seller_id}">{$lastWins[$var].seller_username}</a>.</p>
+                      <p><a href="#">{$user.username}</a> won an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastWins[$var].seller_id}">{$lastWins[$var].seller_username}</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -131,7 +131,7 @@
                         <span class="recent-activity-date">{$lastQuestions[$var].date}</span>
                       </div>
                       <div class="panel-body">
-                        <p><a href="#">{$user.username}</a> posted a question on an <a href="../../pages/auction/auction.php?id={$lastQuestions[$var].auction_id}">auction</a> hosted by <a href="#">{$lastQuestions[$var].seller_username}</a>.</p>
+                        <p><a href="#">{$user.username}</a> posted a question on an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastQuestions[$var].auction_id}">auction</a> hosted by <a href="#">{$lastQuestions[$var].seller_username}</a>.</p>
                       </div>
                     </div>
                 {/if}
@@ -142,7 +142,7 @@
                       <span class="recent-activity-date">{$lastWatchlistAuctions[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> added an <a href="../../pages/auction/auction.php?id={$lastWatchlistAuctions[$var].id}">auction</a> to his <a href="#">watchlist</a>.</p>
+                      <p><a href="#">{$user.username}</a> added an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastWatchlistAuctions[$var].id}">auction</a> to his <a href="#">watchlist</a>.</p>
                     </div>
                   </div>
                 {/if}
@@ -189,7 +189,7 @@
                         <tbody>
                         {foreach $activeAuctions as $auction}
                           <tr>
-                            <td class="image col-md-2"><img src="../../images/products/{$auction.image}" alt="Product image"></td>
+                            <td class="image col-md-2"><img src="{$BASE_URL}images/products/{$auction.image}" alt="Product image"></td>
                             <td class="product col-md-4">
                               <strong>{$auction.name}</strong><br>
                               {$auction.description}
@@ -231,7 +231,7 @@
                   <div class="thumbnail review-item">
                     <div class="row">
                       <div class="col-lg-3 col-md-3">
-                        <a href="../../pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="../../images/products/{$review.image_filename}"></a>
+                        <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="../../images/products/{$review.image_filename}"></a>
                         <div class="review-rating text-center">
                           <span class="glyphicon glyphicon-star"></span>
                           <span class="glyphicon glyphicon-star"></span>
@@ -239,7 +239,7 @@
                           <span class="glyphicon glyphicon-star"></span>
                           <span class="glyphicon glyphicon-star-empty"></span>
                         </div>
-                        <p class="text-center reviewer-info">By <a href="../../pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> on {$review.date}</p>
+                        <p class="text-center reviewer-info">By <a href="{$BASE_URL}pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> on {$review.date}</p>
                       </div>
                       <div class="col-md-9 col-sm-9">
                         <a href="#" class="review-product-name"><p>{$review.product_name}</p></a>
@@ -263,7 +263,7 @@
                   <div class="row">
                     <div class="col-lg-3 col-md-3 win-wrapper">
                       <div id="win-info-image">
-                        <a href="../../pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="../../images/products/{$win.image_filename}" alt="Product image"></a>
+                        <a href="{$BASE_URL}pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="../../images/products/{$win.image_filename}" alt="Product image"></a>
                       </div>
                       <div id="win-info-text">
                         <div class="text-right win-info">
@@ -324,11 +324,11 @@
               {foreach $followingUsers as $followingUser}
                 <div class="media">
                   <div class="media-left">
-                    <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$followingUser.profile_pic}"></a>
+                    <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$followingUser.profile_pic}"></a>
                   </div>
                   <div class="media-body">
-                    <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
-                    <a href="../../pages/user/user.php?id={$followingUser.id}" class="media-object"><p>{$followingUser.username}</p></a>
+                    <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
+                    <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><p>{$followingUser.username}</p></a>
                   </div>
                   {if ($loggedUserId == $user.id)}
                     <div class="media-right">

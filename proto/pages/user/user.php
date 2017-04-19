@@ -58,7 +58,5 @@
     if($userId == $loggedUserId)
         $smarty->assign('reviewsPosted', $reviewsPosted);
 
-        //var_dump($lastWins);
-
     $smarty->display('user/user.tpl');
 ?>
