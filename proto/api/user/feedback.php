@@ -12,7 +12,7 @@ $username = $_POST["username"];
 $feedback = trim(strip_tags($_POST["feedback"]));
 $user_id = getUserID($username);
 
-if($user_id === null ){
+if($user_id === null || $user_id != $_SESSION["user_id"]){
     echo "Invalid User!";
     return;
 }
