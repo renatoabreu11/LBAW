@@ -5,10 +5,10 @@
       <div class="col-md-12">
         <ul class="breadcrumb">
           <li>
-            <a href="../../pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
+            <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
           </li>
           <li>
-            <a href="../../pages/user/user.php?id={$user.id}">Profile</a> <span class="divider"></span>
+            <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">Profile</a> <span class="divider"></span>
           </li>
           <li class="active">
             Settings
@@ -35,7 +35,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label">Avatar: </label>
                   <div class="col-md-6">
-                    <img src="../../images/users/{$user.profile_pic}" alt="Profile image" width="156">
+                    <img src="{$BASE_URL}images/users/{$user.profile_pic}" alt="Profile image" width="156">
                     <input type="file" name="picture">
                   </div>
                 </div>
