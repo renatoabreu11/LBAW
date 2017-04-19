@@ -30,6 +30,14 @@
                                 WHERE username = :username_received');
         $stmt->bindParam('username_received', $username);
         $stmt->execute();
+    }
+
+    function getUserID($username) {
+        global $conn;
+        $stmt = $conn->prepare('SELECT "user".id
+                                    FROM "user"
+                                    WHERE username = ?');
+        $stmt->execute(array($username));
         return $stmt->fetch();
     }
 
@@ -470,6 +478,12 @@
         $stmt->execute(array($username));
         $result = $stmt->fetch();
         return ($result !== false && password_verify($password, $result["hashed_pass"]));
+    }
+
+    function createFeedback($user_id, $message){
+        global $conn;
+        $stmt = $conn->prepare('INSERT INTO feedback (user_id, message, date) VALUES(?, ?, now())');
+        $stmt->execute(array($user_id, $message));
     }
 
 ?>

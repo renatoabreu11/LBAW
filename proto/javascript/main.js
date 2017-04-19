@@ -1,4 +1,4 @@
-BASE_URL = '/~lbaw1662/proto/';
+BASE_URL = '/';
 
 $(document).ready(function() {
     $("#signinForm").validate({
@@ -54,6 +54,57 @@ $(document).ready(function() {
             }else {
                 $("#loginModal").find(".field_error").text(response);
             }
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    }
+
+    $(".leaveFeedbackPopup").on("click", function () {
+        $('.leaveFeedbackPopup').magnificPopup({
+            type:'inline',
+            midClick: true
+        }).magnificPopup('open');
+    });
+
+    $("#feedbackForm").validate({
+        rules:{
+            notification:{
+                required: true,
+                maxlength: 256
+            }
+        },
+        submitHandler: leaveFeedback
+    });
+
+    function leaveFeedback() {
+        $.magnificPopup.close();
+        var username = $("#feedbackForm").find('input[name=username]').val();
+        var feedback = $("#feedbackForm").find('input[name=feedback]').val();
+        var request = $.ajax({
+            type : 'POST',
+            url  : BASE_URL + '/api/user/feedback.php',
+            data : {
+                "username": username,
+                "feedback": feedback
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $.magnificPopup.open({
+                items: {
+                    src: '<div class="white-popup">' + response + '</div>',
+                    type: 'inline'
+                }
+            });
+            $("#feedbackForm").trigger("reset");
         });
 
         // Callback handler that will be called on failure

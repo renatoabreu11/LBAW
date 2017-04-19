@@ -13,6 +13,7 @@ $password = $_POST['password'];
 
 if (userExists($username, $password)) {
     $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = getUserWithUsername($username);
     echo 'Login Successful!';
     return;
 } else {
