@@ -29,7 +29,8 @@
                                     FROM "user"
                                     WHERE username = ?');
         $stmt->execute(array($username));
-        return ($stmt->fetch())['id'];
+        $result = $stmt->fetch();
+        return $result['id'];
     }
 
     function getAllUsers(){
