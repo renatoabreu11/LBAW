@@ -11,12 +11,11 @@
     $userId = trim(strip_tags($_GET['id']));
     $loggedUserId = $_SESSION['user_id'];
     
-    /*
-    if(!preg_match("/[0-9]/", $userId) || !preg_match("/[0-9]/", $loggedUserId)) {
+    if(!preg_match("/[0-9]/", $userId)) {
         $_SESSION['error_messages'][] = "id has invalid characters";
         header("Location: $BASE_URL");
         exit;
-    }*/
+    }
 
     $user = getUser($userId);
     $location = getCityAndCountry($userId);
