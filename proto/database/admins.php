@@ -67,10 +67,8 @@ function getReviewReports(){
 function getAuctionReports(){
     global $conn;
     $stmt = $conn->prepare(
-        'SELECT auction_report.message, "user".username, auction.id AS auction_id
+        'SELECT *
                     FROM auction_report
-                    INNER JOIN auction ON auction_report.auction_id = auction.id
-                    INNER JOIN "​user"​ ON auction.user_id = "user".id
                     ORDER BY auction_report.date DESC;');
     $stmt->execute();
     $result = $stmt->fetchAll();
@@ -80,7 +78,7 @@ function getAuctionReports(){
 function getUserReports(){
     global $conn;
     $stmt = $conn->prepare(
-        'SELECT user_report.message, "user".username, user_report.date
+        'SELECT user_report.*, "user".username
                     FROM user_report
                     INNER JOIN "user" ON user_report.user_id = "user".id
                     ORDER BY user_report.date DESC;');
@@ -94,5 +92,39 @@ function createCategory($title){
     $stmt = $conn->prepare(
         'ALTER TYPE category_type ADD VALUE \'' . $title . '\'');
     $stmt->execute();
+}
 
+function deleteUserReport($report_id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+                                FROM user_report WHERE id=?');
+    $stmt->execute(array($report_id));
+}
+
+function deleteAuctionReport($report_id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+                                FROM auction_report WHERE id=?');
+    $stmt->execute(array($report_id));
+}
+
+function deleteAnswerReport($report_id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+                                FROM answer_report WHERE id=?');
+    $stmt->execute(array($report_id));
+}
+
+function deleteQuestionReport($report_id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+                                FROM question_report WHERE id=?');
+    $stmt->execute(array($report_id));
+}
+
+function deleteReviewReport($report_id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+                                FROM review_report WHERE id=?');
+    $stmt->execute(array($report_id));
 }

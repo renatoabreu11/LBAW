@@ -8,24 +8,22 @@
       </div>
 
       <div class="modal-body">
-        <form role="form">
+        <h4 class="field_error"></h4>
+        <form role="form" action="{$BASE_URL}api/authentication/signin.php" method="post" id="signinForm">
           <div class="form-group">
-            <label for="usrname">Username or email address</label>
-            <input type="text" class="form-control" id="usrname">
+            <label for="usrname">Username</label>
+            <input type="text" name="username" class="form-control" id="usrname">
           </div>
           <div class="form-group">
             <label for="psw">Password</label>
-            <input type="text" class="form-control" id="psw">
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" checked>Remember me</label>
+            <input type="password" name="password" class="form-control" id="psw">
           </div>
           <button type="submit" class="btn btn-default btn-success btn-block">Sign in</button>
         </form>
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
         <p>Not a member? <a href="{$BASE_URL}pages/authentication/signup.php">Sign Up</a></p>
       </div>
     </div>

@@ -1,49 +1,36 @@
 <div class="adminOption">
-    <h4><i class="fa fa-users" aria-hidden="true"></i> User reports</h4>
-    <div class="row">
-        <div class="table-responsive">
-            <table class="table table-hover table-striped">
-                <thead>
-                <tr class="">
-                    <th>Select</th>
-                    <th>Report</th>
-                    <th>User</th>
-                    <th>Date</th>
-                </tr>
-                </thead>
-                <tbody>
+    <h4><i class="fa fa-users" aria-hidden="true"></i> {$report_type} reports</h4>
+    <div class="table-responsive">
+        <table id="reportsTable" class="table row-border" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th class="reportType">{$report_type}</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $reports as $report}
+                {print_r($report)}
                 <tr>
-                    <td><input type="checkbox"></td>
-                    <td><a href="#">Details</a></td>
-                    <td><a href="#">Rogério Manuel</a></td>
-                    <td>12:10 17/10/17</td>
+                    <td>{$report.id}</td>
+                    <td><a href="{$BASE_URL}pages/user/user.php?id={$report.user_id}">{$report.username}</a></td>
+                    <td>{$report.message}</td>
+                    <td>{$report.date}</td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td><a href="#">Details</a></td>
-                    <td><a href="#">Rogério Manuel</a></td>
-                    <td>12:10 17/10/17</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            {/foreach}
+            </tbody>
+        </table>
     </div>
 
-    <div class="box-body">
-        <div class="mailbox-controls">
-            <div class="btn-group">
-                <button class="btn btn-default btn-sm checkbox-toggle"><i class="glyphicon glyphicon-unchecked"></i></button>
-                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-                <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-            </div>
-
-            <div class="pull-right">
-                1-8/20
-                <div class="btn-group">
-                    <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-left"></i></button>
-                    <button class="btn btn-default btn-sm"><i class="glyphicon glyphicon-arrow-right"></i></button>
-                </div>
-            </div>
+    <a class="btn btn-info removeReportPopup" href="#removeReportConfirmation">Remove selected report</a>
+    <div id="removeReportConfirmation" class="white-popup mfp-hide">
+        <h4>Are you sure that you want to delete this report?</h4>
+        <p>You will not be able to undo this action!</p>
+        <div class="text-center">
+            <button class="btn btn-info removeReport">Yes, I'm sure</button>
+            <button class="btn btn-info closePopup">No, go back</button>
         </div>
     </div>
 </div>

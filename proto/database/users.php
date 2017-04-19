@@ -307,6 +307,8 @@
 
     function createUser($name, $username, $password, $email, $description) {
         global $conn;
+        global $PASSWORD_HASH_COST;
+        global $BASIC_PROFILE_PIC;
         $options = ['cost' => $PASSWORD_HASH_COST];
         $register_date = $date = date('Y-m-d H:i:s');
         $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?)');
@@ -441,6 +443,7 @@
 
     function updatePassword($userId, $newPass) {
         global $conn;
+        global $PASSWORD_HASH_COST;
         $options = ['cost' => $PASSWORD_HASH_COST];
         $encryptedNewPass = password_hash($newPass, PASSWORD_DEFAULT, $options);
         $stmt = $conn->prepare('UPDATE "user"
@@ -449,6 +452,14 @@
         $stmt->bindParam('new_hashed_pass', $encryptedNewPass);
         $stmt->bindParam('user_id', $userId);
         $stmt->execute();
+    }
+
+    function userExists($username, $password){
+        global $conn;
+        $stmt = $conn->prepare('SELECT * FROM "user" WHERE "user".username = ?');
+        $stmt->execute(array($username));
+        $result = $stmt->fetch();
+        return ($result !== false && password_verify($password, $result["hashed_pass"]));
     }
 
 ?>

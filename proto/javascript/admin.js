@@ -141,8 +141,12 @@ $(document).ready(function() {
         });
     });
 
-    var auctionTable = $('#auctionsTable').DataTable();
-    var userTable = $('#usersTable').DataTable();
+    var auctionTable = $('#auctionsTable');
+    auctionTable.DataTable();
+    var userTable = $('#usersTable');
+    userTable.DataTable();
+    var reportTable = $('#reportsTable');
+    reportTable.DataTable();
 
     function deleteAuction(id) {
         var request;
@@ -164,7 +168,7 @@ $(document).ready(function() {
                 }
             });
             if(response === "Auction deleted!"){
-                auctionTable.row('.selected').remove().draw(false);
+                auctionTable.DataTable().row('.selected').remove().draw(false);
             }
         });
 
@@ -197,7 +201,41 @@ $(document).ready(function() {
                 }
             });
             if(response === "User deleted!"){
-                userTable.row('.selected').remove().draw(false);
+                userTable.DataTable().row('.selected').remove().draw(false);
+            }
+        });user
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    }
+
+    function deleteReport(id, type) {
+        var request;
+        request = $.ajax({
+            type : 'POST',
+            url  : '/api/admin/remove_report.php',
+            data : {
+                "id": id,
+                "type": type
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $.magnificPopup.open({
+                items: {
+                    src: '<div class="white-popup">' + response + '</div>',
+                    type: 'inline'
+                }
+            });
+            if(response === "Report deleted!"){
+                reportTable.DataTable().row('.selected').remove().draw(false);
             }
         });
 
@@ -211,7 +249,7 @@ $(document).ready(function() {
     }
 
     $(".removePopup").on("click", function () {
-        var row = $('#auctionsTable').find('tr.selected');
+        var row = auctionTable.find('tr.selected');
         var auction_id = row.find("td:first").html();
         if(auction_id === undefined)
             return;
@@ -228,7 +266,7 @@ $(document).ready(function() {
     });
 
     $(".removeUserPopup").on("click", function () {
-        var row = $('#usersTable').find('tr.selected');
+        var row = userTable.find('tr.selected');
         var user_id = row.find("td:first").html();
         if(user_id === undefined)
             return;
@@ -245,7 +283,7 @@ $(document).ready(function() {
     });
 
     $(".notifyUserPopup").on("click", function () {
-        var row = $('#usersTable').find('tr.selected');
+        var row = userTable.find('tr.selected');
         var user_id = row.find("td:first").html();
         if(user_id === undefined)
             return;
@@ -254,6 +292,28 @@ $(document).ready(function() {
             type:'inline',
             midClick: true
         }).magnificPopup('open');
+    });
+
+    $(".removeReportPopup").on("click", function () {
+        var row = reportTable.find('tr.selected');
+        var report_id = row.find("td:first").html();
+        if(report_id === undefined)
+            return;
+
+        var report_type = reportTable.find('th.reportType').html();
+        var types = ['Answer', 'Auction', 'User', 'Question', 'Review'];
+        if(types.indexOf(report_type) === -1)
+            return;
+
+        $('.removeReportPopup').magnificPopup({
+            type:'inline',
+            midClick: true
+        }).magnificPopup('open');
+
+        $(".removeReport").one("click", function () {
+            $.magnificPopup.close();
+            deleteReport(report_id, report_type);
+        })
     });
 
     $("#notificationForm").validate({
@@ -306,7 +366,7 @@ $(document).ready(function() {
         $.magnificPopup.close();
     });
 
-    $('#auctionsTable tbody').on( 'click', 'tr', function () {
+    auctionTable.find('tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected');
         }
@@ -316,7 +376,17 @@ $(document).ready(function() {
         }
     } );
 
-    $('#usersTable').find('tbody').on( 'click', 'tr', function () {
+    userTable.find('tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            $('#usersTable').find('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+
+    reportTable.find('tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected');
         }
