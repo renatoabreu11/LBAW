@@ -104,6 +104,14 @@ ul {
     padding-right: 20px;
 }
 
+.dropdown .dropdown-menu li{
+    width:  100%;
+}
+
+.dropdown .dropdown-menu li a{
+    width:  100%;
+}
+
 .notifications-divider {
     margin-top: 5px;
     margin-bottom: 5px;
