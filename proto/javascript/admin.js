@@ -107,7 +107,7 @@ $(document).ready(function() {
 
         request = $.ajax({
             type : 'POST',
-            url  : '/api/admin/add_category.php',
+            url  : BASE_URL + 'api/admin/add_category.php',
             data : {
                 "title": title
             },
@@ -152,7 +152,7 @@ $(document).ready(function() {
         var request;
         request = $.ajax({
             type : 'POST',
-            url  : '/api/admin/remove_auction.php',
+            url  : BASE_URL + 'api/admin/remove_auction.php',
             data : {
                 "id": id
             },
@@ -185,7 +185,7 @@ $(document).ready(function() {
         var request;
         request = $.ajax({
             type : 'POST',
-            url  : '/api/admin/remove_user.php',
+            url  : BASE_URL + 'api/admin/remove_user.php',
             data : {
                 "id": id
             },
@@ -218,7 +218,7 @@ $(document).ready(function() {
         var request;
         request = $.ajax({
             type : 'POST',
-            url  : '/api/admin/remove_report.php',
+            url  : BASE_URL + 'api/admin/remove_report.php',
             data : {
                 "id": id,
                 "type": type
@@ -334,7 +334,7 @@ $(document).ready(function() {
         var request;
         request = $.ajax({
             type : 'POST',
-            url  : '/api/admin/notify_user.php',
+            url  : BASE_URL + 'api/admin/notify_user.php',
             data : {
                 "id": id,
                 "message": message
