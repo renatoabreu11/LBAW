@@ -19,7 +19,7 @@
       <!-- ****************** Left Information ****************** -->
       <div class="col-sm-3">
         <div class="info-name">
-          <img src="../../images/users/{$user.profile_pic}" class="img-rounded center-block" alt="User Avatar" width="156">
+          <img src="{$BASE_URL}images/users/{$user.profile_pic}" class="img-rounded center-block" alt="User Avatar" width="156">
           <p class="text-center user-real-name">{$user.name}</p>
           <p class="text-center user-nick-name">{$user.username}</p>
           <p class="text-justify user-overview">{$user.short_bio}</p>
@@ -324,7 +324,7 @@
               {foreach $followingUsers as $followingUser}
                 <div class="media">
                   <div class="media-left">
-                    <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$followingUser.profile_pic}"></a>
+                    <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$BASE_URL}images/users/{$followingUser.profile_pic}"></a>
                   </div>
                   <div class="media-body">
                     <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>

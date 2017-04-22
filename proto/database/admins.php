@@ -90,7 +90,8 @@ function getUserReports(){
 function createCategory($title){
     global $conn;
     $stmt = $conn->prepare(
-        'ALTER TYPE category_type ADD VALUE \'' . $title . '\'');
+        'ALTER TYPE category_type ADD VALUE :title');
+    $stmt->bindParam('title', $title);
     $stmt->execute();
 }
 
