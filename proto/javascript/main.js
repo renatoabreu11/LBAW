@@ -1,4 +1,5 @@
 BASE_URL = '/~lbaw1662/proto/';
+//BASE_URL = 'http://localhost:8000/';
 
 $(document).ready(function() {
     $("#signinForm").validate({
