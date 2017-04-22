@@ -3,3 +3,4 @@ proto/templates_c/
 final/templates_c/
 .idea/
 proto/config/
+proto/.htaccess
