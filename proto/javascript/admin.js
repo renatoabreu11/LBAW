@@ -234,6 +234,7 @@ $(document).ready(function() {
                     type: 'inline'
                 }
             });
+            console.log(response);
             if(response === "Report deleted!"){
                 reportTable.DataTable().row('.selected').remove().draw(false);
             }
@@ -361,6 +362,15 @@ $(document).ready(function() {
             );
         });
     }
+    
+    $(".showReports").on("click", function () {
+        var selected = $("#report_type").val();
+        var current_type = $("#reportsTable").find("th.reportType").html();
+        if(selected === current_type)
+            return;
+
+        window.location.replace(BASE_URL + "pages/admin/reports.php?type=" + selected);
+    });
 
     $(".closePopup").on("click", function () {
         $.magnificPopup.close();
@@ -391,8 +401,58 @@ $(document).ready(function() {
             $(this).removeClass('selected');
         }
         else {
-            $('#usersTable').find('tr.selected').removeClass('selected');
+            $('#reportsTable').find('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
     } );
+
+    $(".removeFeedbackPopup").on("click", function () {
+        var notificationObject = $(this).parents("div.notifications-wrapper");
+        var parent = $(this).parent(".media-body");
+        var feed_id = parent.find("h5 span.feed_id").html();
+
+        $('.removeFeedbackPopup').magnificPopup({
+            type:'inline',
+            midClick: true
+        }).magnificPopup('open');
+
+        $(".removeFeedback").one("click", function () {
+            $.magnificPopup.close();
+            deleteFeedback(feed_id, notificationObject);
+        })
+    });
+
+    function deleteFeedback(feed_id, object){
+        $.magnificPopup.close();
+        var request;
+        request = $.ajax({
+            type : 'POST',
+            url  : BASE_URL + 'api/admin/remove_feedback.php',
+            data : {
+                "id": feed_id
+            },
+            datatype: "text"
+        });
+
+        // Callback handler that will be called on success
+        request.done(function (response, textStatus, jqXHR){
+            $.magnificPopup.open({
+                items: {
+                    src: '<div class="white-popup">' + response + '</div>',
+                    type: 'inline'
+                }
+            });
+            if(response === "Feedback deleted!"){
+                object.hide("slow", function(){ object.remove(); })
+            }
+        });
+
+        // Callback handler that will be called on failure
+        request.fail(function (jqXHR, textStatus, errorThrown){
+            console.error(
+                "The following error occurred: "+
+                textStatus, errorThrown
+            );
+        });
+    }
 });

@@ -22,6 +22,9 @@
             <li>
                 <a href="{$BASE_URL}pages/admin/reports.php" id="reports"> Reports</a>
             </li>
+            <li>
+                <a href="{$BASE_URL}pages/admin/feedback.php" id="feedback"> Feedback</a>
+            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -42,6 +45,8 @@
                 {include file='admin/add_admin.tpl'}
             {elseif $admin_section === "reports"}
                 {include file='admin/reports.tpl'}
+            {elseif $admin_section === "feedback"}
+                {include file='admin/feedback.tpl'}
             {/if}
 
         </div>
