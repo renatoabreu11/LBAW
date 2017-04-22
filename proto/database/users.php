@@ -476,4 +476,37 @@
         $stmt->execute(array($user_id, $message));
     }
 
+    function getActiveNotifications($user_id){
+        global $conn;
+        $stmt = $conn->prepare('SELECT notification.*
+                                FROM notification
+                                INNER JOIN "user" ON notification.user_id = "user".id
+                                WHERE is_new = TRUE AND "user".id = ?
+                                LIMIT 5;');
+        $stmt->execute(array($user_id));
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function validUser($username, $id){
+        global $conn;
+        $stmt = $conn->prepare('SELECT *
+                                        FROM "user"
+                                        WHERE username = ? AND id = ?');
+        $stmt->execute(array($username, $id));
+        $result = $stmt->fetch();
+        return $result !== false;
+    }
+
+    function getAllNotifications($user_id){
+        global $conn;
+        $stmt = $conn->prepare('SELECT *
+                                FROM proto.notification
+                                WHERE user_id = ?
+                                  GROUP BY id, is_new
+                                  ORDER BY DATE DESC;');
+        $stmt->execute(array($user_id));
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 ?>
