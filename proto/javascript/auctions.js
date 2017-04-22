@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+  setChangeListType();
+  setCountdown();
+  setSearchRequest();
+
+});
+
+function setChangeListType() {
+
   $("#listType .btn").click(function(){
     if(!$(this).hasClass("active")){
       $(this).addClass("active");
@@ -12,6 +20,9 @@ $(document).ready(function(){
         $("#auctionsList").removeClass("in");
     }
   });
+}
+
+function setCountdown() {
 
   $('.clock').each(function() {
     var date = $(this).find('p').text();
@@ -32,6 +43,9 @@ $(document).ready(function(){
 
     });
   });
+}
+
+function setSearchRequest() {
 
   $('#searchBtn').click(function(){
 
@@ -41,6 +55,7 @@ $(document).ready(function(){
     var toPrice = $("#toPrice option:selected").val();
     var fromTimeRem = $("#fromTimeRem option:selected").val();
     var toTimeRem = $("#toTimeRem option:selected").val();
+
     $.ajax({
           type : 'GET',
           url  : BASE_URL + 'api/auctions/search_auctions.php',
@@ -58,6 +73,8 @@ $(document).ready(function(){
             $('#auctionsThumbnails').empty();
             $('#auctions').append(data['list']);
             $('#auctionsThumbnails').append(data['listThumbnail']);
+
+            setCountdown();
           },
           error: function(data){
               alert(data);
@@ -65,5 +82,4 @@ $(document).ready(function(){
       });
   });
 
-
-});
+}
