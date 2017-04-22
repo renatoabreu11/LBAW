@@ -2,7 +2,20 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
-$users = getAllUsers();
+$username = $_SESSION['admin_username'];
+$id = $_SESSION['admin_id'];
+
+if(!$username || !$id){
+    $smarty->display('common/404.tpl');
+    return;
+}
+
+if(!validAdmin($username, $id)){
+    $smarty->display('common/404.tpl');
+    return;
+}
+
+$users = getAllUsers(); 
 $nrOfAuctionsByUser = array();
 
 foreach ($users as $user){

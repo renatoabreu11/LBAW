@@ -318,12 +318,10 @@
     function createUser($name, $username, $password, $email, $description) {
         global $conn;
         global $PASSWORD_HASH_COST;
-        global $BASIC_PROFILE_PIC;
         $options = ['cost' => $PASSWORD_HASH_COST];
-        $register_date = $date = date('Y-m-d H:i:s');
-        $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date) VALUES (?, ?, ?, ?, ?, now())');
         $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
-        $stmt->execute(array($name, $username, $encryptedPass, $email, $description, $register_date, $BASIC_PROFILE_PIC));
+        $stmt->execute(array($name, $username, $encryptedPass, $email, $description));
     }
 
     /**

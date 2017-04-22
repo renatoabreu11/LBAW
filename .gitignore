@@ -2,4 +2,5 @@ frmk/templates_c/
 proto/templates_c/
 final/templates_c/
 .idea/
-proto/config/init.php
+proto/config/
+proto/.htaccess

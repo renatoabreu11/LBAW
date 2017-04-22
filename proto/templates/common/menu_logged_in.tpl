@@ -56,6 +56,9 @@
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-user"></span> {$USERNAME} {$ADMIN_USERNAME}</a>
     <ul class="dropdown-menu">
-        <li><a href="{$BASE_URL}actions/authentication/signout.php">Sign out</a></li>
+        <li><a href="{$BASE_URL}pages/user/user.php?id={$USER_ID}">Profile</a></li>
+        <li><a href="">My Auctions</a></li>
+        <li><a href="">Watch List</a></li>
+        <li><a href="{$BASE_URL}actions/authentication/signout.php">Sign Out</a></li>
     </ul>
 </li>

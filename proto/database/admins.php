@@ -8,6 +8,26 @@ function adminExists($username, $password){
     return ($result !== false && password_verify($password, $result["hashed_pass"]));
 }
 
+function getAdminID($username) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT admin.id
+                                    FROM admin
+                                    WHERE username = ?');
+    $stmt->execute(array($username));
+    $result = $stmt->fetch();
+    return $result['id'];
+}
+
+function validAdmin($username, $id){
+    global $conn;
+    $stmt = $conn->prepare('SELECT *
+                                    FROM admin
+                                    WHERE username = ? AND id = ?');
+    $stmt->execute(array($username, $id));
+    $result = $stmt->fetch();
+    return $result !== false;
+}
+
 function createAdmin($username, $password, $email){
     global $conn;
     $options = ['cost' => 12];
@@ -90,7 +110,8 @@ function getUserReports(){
 function createCategory($title){
     global $conn;
     $stmt = $conn->prepare(
-        'ALTER TYPE category_type ADD VALUE \'' . $title . '\'');
+        'ALTER TYPE category_type ADD VALUE :title');
+    $stmt->bindParam('title', $title);
     $stmt->execute();
 }
 
