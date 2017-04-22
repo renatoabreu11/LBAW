@@ -6,12 +6,12 @@ $username = $_SESSION['admin_username'];
 $id = $_SESSION['admin_id'];
 
 if(!$username || !$id){
-    $smarty->display('common/error.tpl');
+    $smarty->display('common/404.tpl');
     return;
 }
 
 if(!validAdmin($username, $id)){
-    $smarty->display('common/error.tpl');
+    $smarty->display('common/404.tpl');
     return;
 }
 
