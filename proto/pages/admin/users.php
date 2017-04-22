@@ -15,7 +15,7 @@ if(!validAdmin($username, $id)){
     return;
 }
 
-$users = getAllUsers();
+$users = getAllUsers(); 
 $nrOfAuctionsByUser = array();
 
 foreach ($users as $user){
