@@ -501,7 +501,7 @@
     function getAllNotifications($user_id){
         global $conn;
         $stmt = $conn->prepare('SELECT *
-                                FROM proto.notification
+                                FROM notification
                                 WHERE user_id = ?
                                   GROUP BY id, is_new
                                   ORDER BY DATE DESC;');
