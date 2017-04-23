@@ -36,6 +36,25 @@ function createAdmin($username, $password, $email){
     $stmt->execute(array($username, $encryptedPass, $email));
 }
 
+function getFeedback(){
+    global $conn;
+    $stmt = $conn->prepare('SELECT feedback.*, "user".username, "user".profile_pic
+                            FROM feedback
+                            INNER JOIN "user" ON feedback.user_id = "user".id
+                            ORDER BY DATE DESC;');
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function deleteFeedback($id){
+    global $conn;
+    $stmt = $conn->prepare('DELETE 
+                            FROM feedback
+                            WHERE id = ?');
+    $stmt->execute(array($id));
+}
+
 function getCategories(){
     global $conn;
     $stmt = $conn->prepare('SELECT unnest(enum_range(NULL::category_type))::text');
@@ -47,7 +66,7 @@ function getCategories(){
 function getAnswerReports(){
     global $conn;
     $stmt = $conn->prepare(
-        'SELECT answer_report.message, answer.id AS answer_id, "user".username, answer_report.date
+        'SELECT answer_report.*, "user".username, "user".id as user_id
                     FROM answer_report
                     JOIN answer ON answer_report.answer_id = answer.id
                     JOIN "user" ON answer.user_id = "user".id
@@ -60,7 +79,7 @@ function getAnswerReports(){
 function getQuestionReports(){
     global $conn;
     $stmt = $conn->prepare(
-        'SELECT question_report.message, question.id AS question_id, "user".username, question_report.date
+        'SELECT question_report.*, "user".username, "user".id as user_id
                     FROM question_report
                     JOIN question ON question_report.question_id = question.id
                     JOIN "user" ON question.user_id = "user".id
@@ -73,7 +92,7 @@ function getQuestionReports(){
 function getReviewReports(){
     global $conn;
     $stmt = $conn->prepare(
-        'SELECT review_report.message, review.id, "user".username
+        'SELECT review_report.*, "user".username, "user".id as user_id
                     FROM review_report
                     JOIN review ON review_report.review_id = review.id
                     JOIN bid ON review.bid_id = bid.id

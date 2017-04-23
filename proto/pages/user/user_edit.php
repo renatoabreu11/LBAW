@@ -24,6 +24,11 @@
         exit;
     }
 
+    if($_SESSION['username'] && $_SESSION['user_id']){
+        $notifications = getActiveNotifications($loggedUserId);
+        $smarty->assign('notifications', $notifications);
+    }
+
     $user = getUser($loggedUserId);
     $location = getCityAndCountry($loggedUserId);
 

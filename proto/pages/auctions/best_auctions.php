@@ -9,6 +9,11 @@
 	$totalValOfActiveAuctions = getTotalValueOfActiveAuctions();
 	$topTenRankingUsers = getTopTenRankingUsers();
 	$mostPopularAuctions = getMostPopularAuctions();
+
+    if($_SESSION['username'] && $_SESSION['user_id']){
+        $notifications = getActiveNotifications($_SESSION['user_id']);
+        $smarty->assign('notifications', $notifications);
+    }
 	
 	$smarty->assign('categories', $categories);
 	$smarty->assign('numActiveAuctions', $numActiveAuctions);

@@ -37,6 +37,11 @@
     if($userId == $loggedUserId)
         $reviewsPosted = getWonReviews($userId);
 
+    if($_SESSION['username'] && $_SESSION['user_id']){
+        $notifications = getActiveNotifications($loggedUserId);
+        $smarty->assign('notifications', $notifications);
+    }
+
     $smarty->assign('loggedUserId', $loggedUserId);
     $smarty->assign('user', $user);
     $smarty->assign('location', $location);

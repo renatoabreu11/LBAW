@@ -116,4 +116,47 @@ $(document).ready(function() {
             );
         });
     }
+
+    //Update the notification badge number
+    function updateNotificationBadge(numNotifications) {
+        $(".dropdown .notification-badge").html(numNotifications);
+    }
+
+    $(".notifications-wrapper .hideNotification").click(function(e) {
+        var notifications_wrapper = $(".notifications-wrapper");
+        var numNotifications = notifications_wrapper.children().length;
+        var notification = $(this).parents(".notifications-wrapper");
+
+        notification.fadeOut(500, function() {
+            notification.remove();
+
+            // To avoid setting to zero after 500 mls passed.
+            if(numNotifications !== 1)
+                updateNotificationBadge(numNotifications-1);
+        });
+
+        numNotifications = notifications_wrapper.children().length;
+
+        if(numNotifications === 1) {
+            $('<p class="notifications-empty">You have no new notifications</p>').insertAfter(".notifications hr.divider:first");
+            updateNotificationBadge("");
+        } else
+            e.stopPropagation();    // Keeps the notification dropdown open.
+    });
+
+    // Remove all notifications.
+    $(".notification-footer h4.markRecentNotificationsAsRead").click(function(e) {
+        var notifications = $(".notifications");
+        notifications.children(".notifications-wrapper").each( function () {
+            this.remove();
+        });
+
+        $('<p class="notifications-empty">You have no new notifications</p>').insertAfter(".notifications hr.divider:first");
+
+        updateNotificationBadge("");
+    });
+
+    //Collapses 'Categories' panel if in mobile.
+    if($(window).width() <= 425)
+        $("#categories-wrapper").removeClass('in');
 });

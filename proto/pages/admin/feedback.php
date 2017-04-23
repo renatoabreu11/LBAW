@@ -1,7 +1,6 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/admins.php');
-include_once($BASE_DIR .'database/users.php');
 
 $username = $_SESSION['admin_username'];
 $id = $_SESSION['admin_id'];
@@ -16,15 +15,8 @@ if(!validAdmin($username, $id)){
     return;
 }
 
-$users = getAllUsers();
-$nrOfAuctionsByUser = array();
+$feedback = getFeedback();
 
-foreach ($users as $user){
-    $nrAuctions = getNumTotalAuctions($user["id"]);
-    array_push($nrOfAuctionsByUser, $nrAuctions);
-}
-
-$smarty->assign("auctions_user", $nrOfAuctionsByUser);
-$smarty->assign("users", $users);
-$smarty->assign("admin_section", "users");
+$smarty->assign("feedback", $feedback);
+$smarty->assign("admin_section", "feedback");
 $smarty->display('admin/admin_page.tpl');

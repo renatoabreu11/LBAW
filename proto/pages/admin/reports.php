@@ -16,32 +16,27 @@ if(!validAdmin($username, $id)){
 }
 
 $report_type = $_GET['type'];
-$type;
 $reports;
 
 switch ($report_type){
-    case "answer_reports":
-        $type = "Answer";
+    case "Answer":
         $reports = getAnswerReports();
         break;
-    case "auction_reports":
-        $type = "Auction";
+    case "Auction":
         $reports = getAuctionReports();
         break;
-    case "question_reports":
-        $type = "Question";
+    case "Question":
         $reports = getQuestionReports();
         break;
-    case "review_reports":
-        $type = "Review";
+    case "Review":
         $reports = getReviewReports();
         break;
     default:
-        $type = "User";
+        $report_type = "User";
         $reports = getUserReports();
 }
 
-$smarty->assign("report_type", $type);
+$smarty->assign("report_type", $report_type);
 $smarty->assign("reports", $reports);
 $smarty->assign("admin_section", "reports");
 $smarty->display('admin/admin_page.tpl');

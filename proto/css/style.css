@@ -883,6 +883,10 @@ a.navlink {
     }
 }
 
+.reportSelection{
+    padding-top: 2em;
+}
+
 /***************watchList.html***********/
 
 .watchList .title{
