@@ -55,14 +55,16 @@ $(document).ready(function() {
 
     // Unfollow button (using tabs).
     $("#following .btn").click(function() {
-        var followedUserId = 2;        // Change. get attr href (id).
+        var followedUserId = $(this).parent().prev().children("a").eq(0).attr("href");
+        var firstIndex = followedUserId.lastIndexOf("id=");
+        var id = followedUserId.substring(firstIndex+3);
         var mediaObj = $(this).parent().parent();
 
         var request = $.ajax({
             type: 'POST',
             url: BASE_URL + 'api/user/unfollow.php',
             data: {
-                "followedUserId": followedUserId
+                "followedUserId": id
             }
         });
 

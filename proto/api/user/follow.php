@@ -8,10 +8,10 @@
         return;
     }
 
-    $followingUserId = trim(strip_tags(1));//$_SESSION['user_id'']));   // We don't have the login functionality.'
+    $followingUserId = $_SESSION['user_id'];
     $followedUserId = trim(strip_tags($_POST['followedUserId']));
 
-    if(!preg_match("/[0-9]+/", $followingUserId) || !preg_match("/[0-9]+/", $followedUserId)) {
+    if(!preg_match("/[0-9]+/", $followedUserId)) {
         echo "error: invalid id characters.";
         return;
     }
