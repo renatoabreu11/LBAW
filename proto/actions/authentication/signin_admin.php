@@ -17,6 +17,9 @@ if (adminExists($username, $password)) {
     $admin_id = getAdminID($username);
     $_SESSION['admin_username'] = $username;
     $_SESSION['admin_id'] = $admin_id;
+    if (empty($_SESSION['token'])) {
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
     $_SESSION['success_messages'][] = 'Login successful';
     header("Location: $BASE_URL" . 'pages/admin/users.php');
 } else {
