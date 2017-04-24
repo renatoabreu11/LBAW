@@ -87,3 +87,51 @@ function getQuestionsAnswers($auction_id){
     $conn->commit();
     return $questions;
 }
+
+function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
+    global $conn;
+
+    $conn->beginTransaction();
+    $conn->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
+
+    // Insert new answer.
+    $stmt = $conn->prepare('INSERT INTO answer(date, message, question_id, user_id, auction_id)
+                            VALUES(now(), :message, :question_id, :user_id, :auction_id)');
+    $stmt->bindParam('message', $answerMessage);
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->bindParam('user_id', $userId);
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+
+    // Send notification to the question answered user.
+    $stmt = $conn->prepare('SELECT user_id
+                            FROM question
+                            WHERE id = :question_id');
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->execute();
+    $doubtUser = $stmt->fetch();
+
+    $stmt = $conn->prepare('SELECT notifications
+                            FROM watchlist
+                            WHERE user_id = :user_id');
+    $stmt->bindParam('user_id', $doubtUser);
+    $stmt->execute();
+    $notificationsEnabled = $stmt->fetch();
+
+    if($notificationsEnabled) {
+        $stmt = $conn->prepare("INSERT INTO notification(message, type, user_id, is_new, date)
+                                VALUES('Your question at the auction was answered!',
+                                        'Answer',
+                                        :user_id,
+                                        TRUE,
+                                        now()");
+        $stmt->bindParam('user_id', $doubtUser);
+        $stmt->execute();
+
+        $conn->commit();
+        return 'Success: answer was posted and question user has received a notification.';
+    } else {
+        $conn->commit();
+        return 'Success: answer was posted, but question user has disabled notifications.';
+    }
+}
