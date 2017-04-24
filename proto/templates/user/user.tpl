@@ -55,11 +55,13 @@
           {/if}
         </div>
         <hr>
-        {if ($loggedUserId != $user.id)}
-          {if ($isFollowing.count == 0)}
-            <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
-          {else}
-            <button type="button" id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
+        {if ($loggedUserId)}
+          {if ($loggedUserId != $user.id)}
+            {if ($isFollowing.count == 0)}
+              <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
+            {else}
+              <button type="button" id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
+            {/if}
           {/if}
         {/if}
       </div>
