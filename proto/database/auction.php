@@ -65,5 +65,25 @@ function bid($amount_bid, $bidder_id, $auction_id) {
         $conn->commit();
         return "Error: insufficient funds.";
     }
+}
 
+function getQuestionsAnswers($auction_id){
+    global $conn;
+
+    $conn->beginTransaction();
+    $conn->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
+
+    $stmt = $conn->prepare('SELECT * FROM question WHERE auction_id = ?;');
+    $stmt->execute(array($auction_id));
+    $questions = $stmt->fetchAll();
+
+    for ($i = 0; $i < count($questions); $i++){
+        $question_id = $questions[$i]['id'];
+        $stmt = $conn->prepare('SELECT * FROM answer WHERE question_id = ?;');
+        $stmt->execute(array($question_id));
+        $answer = $stmt->fetch();
+        $questions[$i]["answer"] = $answer;
+    }
+    $conn->commit();
+    return $questions;
 }
