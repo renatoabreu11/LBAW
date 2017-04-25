@@ -115,8 +115,10 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
 
     $stmt = $conn->prepare('SELECT notifications
                             FROM watchlist
-                            WHERE user_id = :user_id');
+                            WHERE user_id = :user_id
+                            AND auction_id = :auction_id');
     $stmt->bindParam('user_id', $doubtUser);
+    $stmt->bindParam('auction_id', $auctionId);
     $stmt->execute();
     $result = $stmt->fetch();
     $notificationsEnabled = $result['notifications'];
