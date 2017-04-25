@@ -11,6 +11,14 @@ if (!$_POST['username'] || !$_POST['password']) {
 $username = $_POST["username"];
 $password = $_POST['password'];
 
+if($_SESSION['admin_username'] != null)
+    unset($_SESSION['admin_username']);
+if($_SESSION['admin_id'] != null)
+    unset($_SESSION['admin_id']);
+if (!empty($_SESSION['token'])) {
+    unset($_SESSION['token']);
+}
+
 if (userExists($username, $password)) {
     $_SESSION['username'] = $username;
     $_SESSION['user_id'] = getUserID($username);

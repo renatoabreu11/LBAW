@@ -16,9 +16,13 @@ if(!validUser($username, $id)) {
     return;
 }
 
-$allNotifications = getAllNotifications($id);
-$notifications = getActiveNotifications($id);
+$page = $_GET['page'];
+echo $page;
 
-$smarty->assign('notifications', $notifications);
-$smarty->assign('all_notifications', $allNotifications);
-$smarty->display('user/notifications.tpl');
+if (empty($page) || is_numeric($page) == FALSE) {
+    $page = 1;
+}else {
+    $page = $_GET['page'];
+}
+
+echo $page;

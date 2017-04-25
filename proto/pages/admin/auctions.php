@@ -22,7 +22,7 @@ $auctionsIDs = getAllAuctions();
 $auctions = array();
 
 foreach ($auctionsIDs as $auctionArr){
-    $product_name = getProductName($auctionArr["product_id"])["name"];
+    $product_name = getProductName($auctionArr["product_id"]);
     $seller = getUser($auctionArr["user_id"])["name"];
     $type = $auctionArr["type"];
     $start_date = $auctionArr["start_date"];

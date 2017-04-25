@@ -20,14 +20,14 @@
             <p>You’ll see here updates of your auctions, bids, questions, answers and warnings.</p>
         </div>
 
-        {foreach $all_notifications as $notif}
+        {foreach $page_notifications as $notif}
             <div class="notifications-wrapper">
                 <div class="media notification-media">
                     <div class="media-left" style="padding: 1em;">
                         <img src="{$BASE_URL}images/assets/{$notif.type}.png" width="64">
                     </div>
                     <div class="media-body">
-                        <h5 class="notifications-item-title">
+                        <a class="notifications-item-title">
                             {if $notif.type === "Warning"}
                                 You have received a warning!
                             {elseif $notif.type === "Auction"}
@@ -39,9 +39,14 @@
                             {elseif $notif.type === "Win"}
                                 You are the winner of an auction. Congratulations!
                             {/if}
-                        </h5>
-                        <p>{$notif.message}</p>
-                        <p class="notification-item-date"><small>{$notif.date}</small></p>
+                        </a>
+                        <small style="padding-left: 1em;">Feb 20th, 2017 at 9:37:41</small>
+                        <p style="padding-top: 1em;">{$notif.message}</p>
+                        <div class="notification-options">
+                            <span><a>delete</a></span>
+                            <span><a>read</a></span>
+                            <span><a>hide</a></span>
+                        </div>
                     </div>
                 </div>
             </div>
