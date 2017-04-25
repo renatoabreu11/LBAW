@@ -4,7 +4,7 @@
     </li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
-            <i class="glyphicon glyphicon-bell"></i>
+            <i class="glyphicon glyphicon-bell"></i> <span class="badge">{count($notifications)}</span>
         </a>
         <ul class="dropdown-menu notifications" role="menu">
             <div class="notification-heading text-center">

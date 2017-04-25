@@ -17,6 +17,11 @@
         exit;
     }
 
+    if($_SESSION['username'] && $_SESSION['user_id']){
+        $notifications = getActiveNotifications($_SESSION['user_id']);
+        $smarty->assign('notifications', $notifications);
+    }
+
     $user = getUser($userId);
     $userCurrLocation = getCityAndCountry($userId);
     $isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user not logged in.

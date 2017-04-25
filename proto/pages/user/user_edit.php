@@ -25,6 +25,11 @@
     }
 
     if($_SESSION['username'] && $_SESSION['user_id']){
+        $notifications = getActiveNotifications($_SESSION['user_id']);
+        $smarty->assign('notifications', $notifications);
+    }
+
+    if($_SESSION['username'] && $_SESSION['user_id']){
         $notifications = getActiveNotifications($loggedUserId);
         $smarty->assign('notifications', $notifications);
     }
