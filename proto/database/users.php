@@ -86,8 +86,10 @@
     }
 
     /**
-    * Returns all the reviews made to a user.
-    */
+     * Returns all the reviews made to a user.
+     * @param $userId
+     * @return array
+     */
     function getReviews($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT review.rating, buyer.id as reviewer_id, buyer.username AS reviewer_username, review.date, product.name as product_name, review.message, auction.id as auction_id, 
@@ -108,8 +110,10 @@
     }
 
     /**
-    * Returns all the auction the user has won.
-    */
+     * Returns all the auction the user has won.
+     * @param $userId
+     * @return array
+     */
     function getWins($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT product.name as product_name, product.description, auction.id as auction_id, auction.start_bid, auction.curr_bid, auction.end_date, seller.username as seller_username, seller.id as seller_id, bid.id as bid_id,
@@ -131,10 +135,12 @@
     }
 
     /**
-    * Returns the bid id's of the won auctions that were already reviewed by the user.
-    * Used to compare bid id's with the won auction, in order to determine if it's possible 
-    * to write a review to that auction.
-    */
+     * Returns the bid id's of the won auctions that were already reviewed by the user.
+     * Used to compare bid id's with the won auction, in order to determine if it's possible
+     * to write a review to that auction.
+     * @param $userId
+     * @return array
+     */
     function getWonReviews($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT DISTINCT bid.id as bid_id
@@ -150,8 +156,10 @@
     }
 
     /**
-    * Returns all the users the user is following.
-    */
+     * Returns all the users the user is following.
+     * @param $followingUserId
+     * @return array
+     */
     function getFollowingUsers($followingUserId) {
         global $conn;
         $stmt = $conn->prepare('SELECT us1.id, us1.profile_pic, us1.name, us1.username
@@ -165,8 +173,10 @@
     }
 
     /**
-    * Returns the last 2 review made by the user.
-    */
+     * Returns the last 2 review made by the user.
+     * @param $userId
+     * @return array
+     */
     function getLastReviews($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT review.id AS review_id, auction.id AS auction_id, seller.username AS seller_username, seller.id as seller_id, review.date
@@ -185,8 +195,10 @@
 
 
     /**
-    * Returns the last 2 bids made by the user.
-    */
+     * Returns the last 2 bids made by the user.
+     * @param $userId
+     * @return array
+     */
     function getLastBids($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT bid.amount, auction.id AS auction_id, bid.date, seller.id as seller_id, seller.username as seller_username
@@ -203,8 +215,10 @@
     }
 
     /**
-    * Returns the last 2 followed users.
-    */
+     * Returns the last 2 followed users.
+     * @param $userId
+     * @return array
+     */
     function getLastFollows($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT followed.username AS followed_username, followed.id as followed_id, follow.date
@@ -220,8 +234,10 @@
     }
 
     /**
-    * Returns the last 2 wins.
-    */
+     * Returns the last 2 wins.
+     * @param $userId
+     * @return array
+     */
     function getLastWins($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT auction.end_date, seller.username as seller_username, auction.id as auction_id, seller.id as seller_id
@@ -239,8 +255,10 @@
     }
 
     /**
-    * Returns the last 2 question posted by the user.
-    */
+     * Returns the last 2 question posted by the user.
+     * @param $userId
+     * @return array
+     */
     function getLastQuestions($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT own.username AS own_username, question.id AS question_id, auction.id AS auction_id, seller.username AS seller_username, question.date
@@ -257,8 +275,10 @@
     }
 
     /**
-    * Returns the last 2 auctions added to the watchlist.
-    */
+     * Returns the last 2 auctions added to the watchlist.
+     * @param $userId
+     * @return array
+     */
     function getLastWatchlistAuctions($userId) {
         global $conn;
         $stmt = $conn->prepare('SELECT "user".username, auction.id, product.name, watchlist.date
@@ -275,9 +295,11 @@
     }
 
     /**
-    * Makes the user follow another user.
-    * Insert in the database.
-    */
+     * Makes the user follow another user.
+     * Insert in the database.
+     * @param $followingUserId
+     * @param $followedUserId
+     */
     function followUser($followingUserId, $followedUserId) {
         global $conn;
         $stmt = $conn->prepare('INSERT INTO follow
@@ -288,9 +310,12 @@
     }
 
     /**
-    * Return 1 if the 'followingUserId' is following 'followedUserId'.
-    * Return 0 otherwise.
-    */
+     * Return 1 if the 'followingUserId' is following 'followedUserId'.
+     * Return 0 otherwise.
+     * @param $followingUserId
+     * @param $followedUserId
+     * @return mixed
+     */
     function getIsFollowing($followingUserId, $followedUserId) {
         global $conn;
         $stmt = $conn->prepare('SELECT count(*)
@@ -310,11 +335,18 @@
                                 WHERE id = :user_id');
         $stmt->bindParam('user_id', $userId);
         $stmt->execute();
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        return $result['hashed_pass'];
     }
 
-    /************************************* INSERTS *************************************/
+/************************************* INSERTS ************************************
 
+     * @param $name
+     * @param $username
+     * @param $password
+     * @param $email
+     * @param $description
+     */
     function createUser($name, $username, $password, $email, $description) {
         global $conn;
         global $PASSWORD_HASH_COST;
@@ -325,8 +357,11 @@
     }
 
     /**
-    * Insert a review.
-    */
+     * Insert a review.
+     * @param $rating
+     * @param $message
+     * @param $bidId
+     */
     function insertReview($rating, $message, $bidId) {
         global $conn;
         $stmt = $conn->prepare('INSERT INTO review (rating, message, date, bid_id)
@@ -346,11 +381,13 @@
     }
 
     /************************************* DELETES *************************************/
-    
+
     /**
-    * Makes the user unfollow another user.
-    * Deletes from the database.
-    */
+     * Makes the user unfollow another user.
+     * Deletes from the database.
+     * @param $followingUserId
+     * @param $followedUserId
+     */
     function unfollowUser($followingUserId, $followedUserId) {
         global $conn;
         $stmt = $conn->prepare('DELETE FROM follow
@@ -372,8 +409,14 @@
     /************************************* UPDATES *************************************/
 
     /**
-    * Updates user details.
-    */
+     * Updates user details.
+     * @param $userId
+     * @param $realName
+     * @param $smallBio
+     * @param $email
+     * @param $phone
+     * @param $fullBio
+     */
     function updateUserDetails($userId, $realName, $smallBio, $email, $phone, $fullBio) {
         global $conn;
         $stmt = $conn->prepare('UPDATE "user"
@@ -403,8 +446,11 @@
     }
 
     /**
-    * Updates user location.
-    */
+     * Updates user location.
+     * @param $userId
+     * @param $city
+     * @param $country
+     */
     function updateUserLocation($userId, $city, $country) {
         global $conn;
 

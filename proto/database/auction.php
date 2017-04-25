@@ -27,7 +27,8 @@ function getProductName($product_id){
                             FROM product
                             WHERE product.id = ?;');
     $stmt->execute(array($product_id));
-    return $stmt->fetch();
+    $result = $stmt->fetch();
+    return $result['name'];
 }
 
 
@@ -109,14 +110,16 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
                             WHERE id = :question_id');
     $stmt->bindParam('question_id', $questionId);
     $stmt->execute();
-    $doubtUser = $stmt->fetch();
+    $result = $stmt->fetch();
+    $doubtUser = $result['user_id'];
 
     $stmt = $conn->prepare('SELECT notifications
                             FROM watchlist
                             WHERE user_id = :user_id');
     $stmt->bindParam('user_id', $doubtUser);
     $stmt->execute();
-    $notificationsEnabled = $stmt->fetch();
+    $result = $stmt->fetch();
+    $notificationsEnabled = $result['notifications'];
 
     if($notificationsEnabled) {
         $stmt = $conn->prepare("INSERT INTO notification(message, type, user_id, is_new, date)
@@ -124,7 +127,7 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
                                         'Answer',
                                         :user_id,
                                         TRUE,
-                                        now()");
+                                        now())");
         $stmt->bindParam('user_id', $doubtUser);
         $stmt->execute();
 
