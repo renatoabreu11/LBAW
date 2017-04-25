@@ -77,6 +77,7 @@
 
     // Updates profile picture.
     $picture = $_FILES['picture'];
+    var_dump($_FILES);
     if($picture['size'] > 0) {
         $extension = end(explode(".", $picture['name']));
         try {
@@ -96,6 +97,11 @@
             header("Location:"  . $_SERVER['HTTP_REFERER']);
             exit;
         }
+    } else if($picture['name']) {
+        $_SESSION['error_messages'][] = "error: image is bigger than the allowed.";
+        $_SESSION['form_values'] = $_POST;
+        header("Location:"  . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
     $_SESSION['success_messages'][] = 'Update successful';
