@@ -1,8 +1,8 @@
 {include file = 'common/header.tpl'}
 
 <div class="container watchList">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row heading">
+        <div class="col-md-12 index">
             <ul class="breadcrumb">
                 <li>
                     <a href="#">Home</a> <span class="divider"></span>
@@ -15,15 +15,11 @@
                 </li>
             </ul>
         </div>
-    </div>
-
-    <div class="row heading" style="padding-left: 0.5em;">
         <h3>Watchlist</h3>
         <p>You’ll see here the auctions in your watchlist as well as your own auctions</p>
-        <hr>
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="padding-top: 1.5em;">
         <ul class="auctionSort">
             <li class="active"><a href="#">Popular</a></li>
             <li><a href="#">Newest</a></li>
@@ -34,7 +30,7 @@
         </ul>
     </div>
 
-    <div class="row" style="padding-left: 2em; padding-right: 2em;">
+    <div class="row" style="padding-left: 1.5em; padding-right: 1.5em;">
         <div class="col-sm-6 col-xs-6">
             <form>
                 <div class="input-group">

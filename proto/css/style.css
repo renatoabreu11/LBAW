@@ -656,10 +656,6 @@ ul {
     padding-bottom: 15px;
 }
 
-#watch-list {
-    padding-top: 20px;
-}
-
 #following {
     padding-top: 20px;
 }
@@ -887,8 +883,12 @@ a.navlink {
 
 /***************watchList.html***********/
 
-.watchList .title{
-    padding-bottom: 1em;
+.watchList{
+    padding: 0.5em 1.5em;
+}
+
+.watchList .heading{
+    border-bottom: 1px lightgrey solid;
 }
 
 .watchList .auctions {
