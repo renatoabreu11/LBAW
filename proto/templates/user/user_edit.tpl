@@ -58,15 +58,20 @@
               <div class="panel-heading">Contact Info</div>
               <div class="panel-body">
                 <div class="form-group">
-                  <label class="col-md-3 control-label">City: </label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="city" id="city" value="{$location.city}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Country: </label>
-                  <div class="col-md-6">
-                    <input type="text" class="form-control" name="country" id="country" value="{$location.country}" >
+                  <label class="col-md-3 control-label">Country and city: </label>
+                  <div class="dropdown">
+                    <button class="btn btn-default dropdown-toogle dropdown-city-element" type="button" data-toggle="dropdown">{if ($userCurrLocation.city)}{$userCurrLocation.city}{else}Select a city{/if}<span class="caret"</span></button>
+                      <input type="hidden" name="city-id" value="{$userCurrLocation.city_id}">
+                      <ul class="dropdown-menu">
+                          {for $i=0 to count($countries)}
+                            <li class="dropdown-header">{$countries[$i].name}</li>
+                            {for $j=0 to count($cities)}
+                              {if ($cities[$j].country_id == $countries[$i].id)}
+                                <li class="city-item">{$cities[$j].name}</li>
+                              {/if}
+                            {/for}
+                          {/for}
+                      </ul>
                   </div>
                 </div>
                 <div class="form-group">

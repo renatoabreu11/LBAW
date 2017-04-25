@@ -44,7 +44,7 @@
 
     function getCityAndCountry($userId) {
         global $conn;
-        $stmt = $conn->prepare('SELECT city.name as city, country.name as country
+        $stmt = $conn->prepare('SELECT city.name as city_name, city.id as city_id, country.name as country_name, country.id as country_id
                                 FROM "user"
                                 JOIN location ON "user".location_id = location.id
                                 JOIN city ON location.city_id = city.id
@@ -339,6 +339,44 @@
         return $result['hashed_pass'];
     }
 
+    /**
+    * Returns all countries in the database.
+    */
+    function getAllCountries() {
+        global $conn;
+        $stmt = $conn->prepare('SELECT name, id
+                                FROM country
+                                ORDER BY name ASC');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
+    * Returns all cities in the database.
+    */
+    function getAllCities() {
+        global $conn;
+        $stmt = $conn->prepare('SELECT name, country_id
+                                FROM city
+                                ORDER BY name ASC');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
+    * Returns all cities in the database.
+    */
+   /*function getLocations() {
+        global $conn;
+        $stmt = $conn->prepare('SELECT country.name as country_name, city.name as city_name
+                                FROM country
+                                JOIN city ON country.id = city.country_id
+                                GROUP BY country.name, city.name
+                                ORDER BY country.name');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }*/
+
 /************************************* INSERTS ************************************
 
      * @param $name
@@ -451,47 +489,14 @@
      * @param $city
      * @param $country
      */
-    function updateUserLocation($userId, $city, $country) {
+    function updateUserLocation($userId, $cityId) {
         global $conn;
 
-        // Get location id.
-        $stmt = $conn->prepare('SELECT location_id
-                                FROM "user"
+        $stmt = $conn->prepare('UPDATE "user"
+                                SET city_id = :city_id
                                 WHERE id = :user_id');
+        $stmt->bindParam('city_id', $cityId);
         $stmt->bindParam('user_id', $userId);
-        $stmt->execute();
-        $locationId = $stmt->fetch();
-
-        // Get city id.
-        $stmt = $conn->prepare('SELECT city_id
-                                FROM location
-                                WHERE id = :location_id');
-        $stmt->bindParam('location_id', $locationId['location_id']);
-        $stmt->execute();
-        $cityId = $stmt->fetch();
-
-        // Update city name.
-        $stmt = $conn->prepare('UPDATE city
-                                SET name = :city
-                                WHERE id = :city_id');
-        $stmt->bindParam('city', $city);
-        $stmt->bindParam('city_id', $cityId['city_id']);
-        $stmt->execute();
-
-        // Get country id.
-        $stmt = $conn->prepare('SELECT country_id
-                                FROM city
-                                WHERE id = :city_id');
-        $stmt->bindParam('city_id', $cityId['city_id']);
-        $stmt->execute();
-        $countryId = $stmt->fetch();
-
-        // Update country name.
-        $stmt = $conn->prepare('UPDATE country
-                                SET name = :country
-                                WHERE id = :country_id');
-        $stmt->bindParam('country', $country);
-        $stmt->bindParam('country_id', $countryId['country_id']);
         $stmt->execute();
     }
 

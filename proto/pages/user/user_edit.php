@@ -30,10 +30,14 @@
     }
 
     $user = getUser($loggedUserId);
-    $location = getCityAndCountry($loggedUserId);
+    $userCurrLocation = getCityAndCountry($userId);
+    $countries = getAllCountries();
+    $cities = getAllCities();
 
     $smarty->assign('user', $user);
-    $smarty->assign('location', $location);
+    $smarty->assign('userCurrLocation', $userCurrLocation);
+    $smarty->assign('countries', $countries);
+    $smarty->assign('cities', $cities);
 
     $smarty->display('user/user_edit.tpl');
 

@@ -18,7 +18,7 @@
     }
 
     $user = getUser($userId);
-    $location = getCityAndCountry($userId);
+    $userCurrLocation = getCityAndCountry($userId);
     $isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user not logged in.
     $totalAuctions = getNumTotalAuctions($userId);
     $activeAuctions = getActiveAuctions($userId);
@@ -44,7 +44,7 @@
 
     $smarty->assign('loggedUserId', $loggedUserId);
     $smarty->assign('user', $user);
-    $smarty->assign('location', $location);
+    $smarty->assign('userCurrLocation', $userCurrLocation);
     $smarty->assign('isFollowing', $isFollowing);
     $smarty->assign('totalAuctions', $totalAuctions);
     $smarty->assign('activeAuctionsa', $activeAuctions);

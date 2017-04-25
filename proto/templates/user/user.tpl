@@ -26,7 +26,7 @@
         </div>
         <hr>
         <div class="info-zone">
-         <p><span class="glyphicon glyphicon-map-marker"></span>{$location.city}, {$location.country}</p>
+         <p><span class="glyphicon glyphicon-map-marker"></span>{$userCurrLocation.city_name}, {$userCurrLocation.country_name}</p>
           <p><span class="glyphicon glyphicon-envelope"></span><a href="mailto:{$user.email}"> {$user.email}</a></p>
           <p><span class="glyphicon glyphicon-phone"></span> {$user.phone}</p>
         </div>
@@ -52,18 +52,24 @@
               </div>
               <p class="user-rating-numeric text-center"><strong>{$user.rating}</strong>/10</p>
             {/if}
+            <hr>
           {/if}
         </div>
-        <hr>
-        {if ($loggedUserId)}
-          {if ($loggedUserId != $user.id)}
-            {if ($isFollowing.count == 0)}
-              <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
-            {else}
-              <button type="button" id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
+        <div class="buttons-zone">
+          {if ($loggedUserId)}
+            {if ($loggedUserId != $user.id)}
+              {if ($isFollowing.count == 0)}
+                <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
+              {else}
+                <button type="button" id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
+              {/if}
             {/if}
           {/if}
-        {/if}
+
+          {if ($loggedUserId == $user.id)}
+            <a href="{$BASE_URL}pages/user/user_edit.php?id={$user.id}" class="btn btn-info btn-block" role="button">Edit profile</a>
+          {/if}
+        </div>
       </div>
 
       <div class="col-sm-9">
@@ -80,6 +86,9 @@
 
           <!-- ****************** Recent Activity ****************** -->
           <div id="recent-activity" class="tab-pane fade in active">
+            {if !($lastReviews || $lastBids || $lastFollowing || $lastWins || $lastQuestions || $lastWatchlistAuctions)}
+              <p>No recent activities available.</p>
+            {/if}
             {for $var=0 to 2 step 1}
               <div class="col-md-6">
                 {if ($lastReviews[$var] != null)}

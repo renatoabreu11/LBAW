@@ -3,14 +3,14 @@
     include_once('../../config/init.php');
     include_once($BASE_DIR . 'database/users.php');
 
-    if(!$_POST['user-id'] || !$_POST['real-name'] || !$_POST['small-bio'] || !$_POST['city'] || !$_POST['country'] || !$_POST['email'] || !$_POST['phone'] || !$_POST['full-bio']) {
+    if(!$_POST['user-id'] || !$_POST['real-name'] || !$_POST['small-bio'] || !$_POST['city-id'] || !$_POST['email'] || !$_POST['phone'] || !$_POST['full-bio']) {
         $_SESSION['error_messages'][] = "All fields are required!";
         $_SESSION['form_values'] = $_POST;
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;
     }
 
-    $loggedUserId = 1;//$_SESSION['user_id'];
+    $loggedUserId = $_SESSION['user_id'];
     $userId = trim(strip_tags($_POST['user-id']));
 
     if($loggedUserId != $userId) {
@@ -22,8 +22,7 @@
 
     $realName = trim(strip_tags($_POST['real-name']));
     $smallBio = trim(strip_tags($_POST['small-bio']));
-    $city = trim(strip_tags($_POST['city']));
-    $country = trim(strip_tags($_POST['country']));
+    $cityId = trim(strip_tags($_POST['city-id']));
     $email = trim(strip_tags($_POST['email']));
     $phone = trim(strip_tags($_POST['phone']));
     $fullBio = trim(strip_tags($_POST['full-bio']));
@@ -35,13 +34,8 @@
         $invalidChars = true;
     }
 
-    if(!preg_match("/^[a-zA-Z\s]+$/", $city)) {
-        $_SESSION['field_errors']['city'] = 'Invalid city characters';
-        $invalidChars = true;
-    }
-
-    if(!preg_match("/^[a-zA-Z\s]+$/", $country)) {
-        $_SESSION['field_errors']['country'] = 'Invalid country characters';
+    if(!preg_match("/[0-9]+/", $cityId)) {
+        $_SESSION['field_errors']['city-id'] = 'Invalid city id';
         $invalidChars = true;
     }
 
@@ -66,7 +60,7 @@
     }
 
     try {
-        updateUserLocation($userId, $city, $country);
+        updateUserLocation($userId, $cityId);
     } catch(PDOException $e) {
         $_SESSION['error_messages'][] = "error: can't update user location.";
         $_SESSION['form_values'] = $_POST;
