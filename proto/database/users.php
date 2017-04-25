@@ -555,4 +555,28 @@
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    function getPageNotifications($user_id, $items, $offset){
+        global $conn;
+        $stmt = $conn->prepare('SELECT *
+                                FROM notification
+                                WHERE user_id = ?
+                                  GROUP BY id, is_new
+                                  ORDER BY DATE DESC
+                                LIMIT ?
+                                OFFSET ?');
+        $stmt->execute(array($user_id, $items, $offset));
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function countTotalNotifications($user_id){
+        global $conn;
+        $stmt = $conn->prepare('SELECT COUNT(*)
+                                FROM notification
+                                WHERE user_id = ?');
+        $stmt->execute(array($user_id));
+        $result = $stmt->fetch();
+        return $result['count'];
+    }
 ?>

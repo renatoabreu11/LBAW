@@ -17,7 +17,6 @@ if(!validUser($username, $id)) {
 }
 
 $page = $_GET['page'];
-echo $page;
 
 if (empty($page) || is_numeric($page) == FALSE) {
     $page = 1;
@@ -25,4 +24,16 @@ if (empty($page) || is_numeric($page) == FALSE) {
     $page = $_GET['page'];
 }
 
-echo $page;
+$items = 5;
+$offset = ($page * $items) - $items;
+
+$page_notifications = getPageNotifications($id, $items, $offset);
+$notifications = getActiveNotifications($id);
+
+$nr_pages = round(countTotalNotifications($id) / $items);
+
+$smarty->assign('curr_page', $page);
+$smarty->assign('nr_pages', $nr_pages);
+$smarty->assign('notifications', $notifications);
+$smarty->assign('page_notifications', $page_notifications);
+$smarty->display('user/notifications.tpl');
