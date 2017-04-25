@@ -60,7 +60,7 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label">Country and city: </label>
                   <div class="dropdown">
-                    <button class="btn btn-default dropdown-toogle dropdown-city-element" type="button" data-toggle="dropdown">{if ($userCurrLocation.city)}{$userCurrLocation.city}{else}Select a city{/if}<span class="caret"</span></button>
+                    <button class="btn btn-default dropdown-toogle dropdown-city-element" type="button" data-toggle="dropdown">{if ($userCurrLocation.city_name)}{$userCurrLocation.city_name}{else}Select a city{/if}<span class="caret"</span></button>
                       <input type="hidden" name="city-id" value="{if ($userCurrLocation.city_id)}{$userCurrLocation.city_id}{else}null{/if}">
                       <ul class="dropdown-menu">
                         {for $i=0 to count($countries)}
