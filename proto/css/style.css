@@ -963,8 +963,14 @@ a.navlink {
     padding-bottom: 0.5em;
 }
 
-.well .controls {
-    padding-bottom: 1em;
+.well .apiProduct {
+    margin-left: 1em;
+}
+
+@media(max-width:768px) {
+    .well .apiProduct {
+        display: block; margin: 1em auto;
+    }
 }
 
 /******************* Admin sign in ***************************/

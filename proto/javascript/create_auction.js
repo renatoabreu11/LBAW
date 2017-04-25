@@ -29,4 +29,9 @@ $(document).ready(function() {
         $('ul.setup-panel li a[href="#step-3"]').trigger('click');
         $(this).remove();
     })
+
+    $('input[type=radio][name=optradio]').change(function() {
+        var parent = $(this).parents(".input-group");
+        $(parent).find("button.apiProduct").toggleClass("hidden");
+    });
 });

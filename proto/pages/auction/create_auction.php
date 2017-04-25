@@ -2,6 +2,7 @@
 
 include_once ('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
+include_once($BASE_DIR .'database/admins.php');
 
 $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
@@ -16,4 +17,12 @@ if(!validUser($username, $id)){
     return;
 }
 
+if($username && $id){
+    $notifications = getActiveNotifications($_SESSION['user_id']);
+    $smarty->assign('notifications', $notifications);
+}
+
+$categories = getCategories();
+
+$smarty->assign("categories", $categories);
 $smarty->display('auction/create_auction.tpl');
