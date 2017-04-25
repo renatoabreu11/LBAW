@@ -30,7 +30,7 @@ $offset = ($page * $items) - $items;
 $page_notifications = getPageNotifications($id, $items, $offset);
 $notifications = getActiveNotifications($id);
 
-$nr_pages = round(countTotalNotifications($id) / $items);
+$nr_pages = round(countNotifications($id) / $items);
 
 $smarty->assign('curr_page', $page);
 $smarty->assign('nr_pages', $nr_pages);

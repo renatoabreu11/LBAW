@@ -42,7 +42,7 @@
         {if $USERNAME}
             <li><a href="{$BASE_URL}pages/user/user.php?id={$USER_ID}">Profile</a></li>
             <li><a href="">My Auctions</a></li>
-            <li><a href="">Watch List</a></li>
+            <li><a href="{$BASE_URL}pages/auctions/watchlist.php?page=1">Watch List</a></li>
         {elseif $ADMIN_USERNAME}
             <li><a href="{$BASE_URL}pages/admin/users.php">Admin Page</a></li>
         {/if}

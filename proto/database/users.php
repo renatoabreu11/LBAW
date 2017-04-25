@@ -570,7 +570,7 @@
         return $result;
     }
 
-    function countTotalNotifications($user_id){
+    function countNotifications($user_id){
         global $conn;
         $stmt = $conn->prepare('SELECT COUNT(*)
                                 FROM notification

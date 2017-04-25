@@ -165,3 +165,26 @@ function deleteAuction($auction_id){
                             WHERE id = ?');
     $stmt->execute(array($auction_id));
 }
+
+function getPageWatchlistAuctions($user_id, $items, $offset){
+    global $conn;
+    $stmt = $conn->prepare('SELECT watchlist.notifications, auction.* as auction
+                                FROM watchlist
+                                INNER JOIN auction ON auction.id = watchlist.auction_id
+                                WHERE watchlist.user_id = ?             
+                                LIMIT ?
+                                OFFSET ?');
+    $stmt->execute(array($user_id, $items, $offset));
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function countWatchlistAuctions($user_id){
+    global $conn;
+    $stmt = $conn->prepare('SELECT COUNT(*)
+                                FROM watchlist
+                                WHERE user_id = ?');
+    $stmt->execute(array($user_id));
+    $result = $stmt->fetch();
+    return $result['count'];
+}
