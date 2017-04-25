@@ -77,7 +77,6 @@
 
     // Updates profile picture.
     $picture = $_FILES['picture'];
-    var_dump($_FILES);
     if($picture['size'] > 0) {
         $extension = end(explode(".", $picture['name']));
         try {
