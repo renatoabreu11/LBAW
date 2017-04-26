@@ -140,3 +140,52 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
         return 'Success: answer was posted, but question user has disabled notifications.';
     }
 }
+
+function getRecentBidders($auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT "user".username, "user".id, bid.amount, bid.date
+                            FROM "user"
+                            JOIN bid ON "user".id = bid.user_id
+                            JOIN auction ON bid.auction_id = auction.id
+                            WHERE auction.id = :auction_id
+                            ORDER BY bid.amount DESC
+                            LIMIT 5');
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getTotalNumBids($auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT count(*) as total
+                            FROM bid
+                            JOIN auction ON bid.auction_id = auction.id
+                            WHERE auction.id = :auction_id');
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+    return $stmt->fetch()['total'];
+}
+
+function getBidders($auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT DISTINCT ON ("user".username) "user".username
+                            FROM "user"
+                            JOIN bid ON "user".id = bid.user_id
+                            JOIN auction ON bid.auction_id = auction.id
+                            WHERE auction.id = :auction_id');
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getWinningUser($auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT "user".username as user_username, "user".id as user_id
+                            FROM "user"
+                            JOIN bid ON bid.user_id = "user".id
+                            JOIN auction ON auction.id = bid.auction_id
+                            WHERE auction.id = :auction_id');
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+    return $stmt->fetch();
+}

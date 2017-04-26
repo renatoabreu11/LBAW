@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">Home</a> <span class="divider"></span>
+                    <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
                 </li>
                 <li>
                     <a href="#">Auctions</a> <span class="divider"></span>
@@ -61,7 +61,6 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
-                    <h5 class="text-center" style="color: darkgray">Click on the image to expand it</h5>
                     <div class="share text-center">
                         <a href="https://www.facebook.com/bootsnipp"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
                         <a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
@@ -74,7 +73,7 @@
                 <div class="col-md-8 col-xs-12 info">
                     <h3 class="hidden-xs">{$product.name}</h3>
                     <div class="sellerInfo">
-                        <small>Auctioned by <a href="#">CYBERPOWERPC</a></small>
+                        <small>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></small>
                         <div class="user-rating-stars">
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
@@ -82,10 +81,10 @@
                             <span class="glyphicon glyphicon-star-empty"></span>
                             <span class="glyphicon glyphicon-star-empty"></span>
                         </div>
-                        <a class="hidden-xs">12 Reviews</a>
+                        <a class="hidden-xs">{$numReviews} Reviews</a>
                     </div>
                     <div class="col-md-6 text-center auctionDetails">
-                        <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: $799</h3>
+                        <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
                         <div class="section">
                             <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
                             <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
@@ -122,7 +121,7 @@
 
                         <div class="visitors">
                             <span class="pull-left"><i class="fa fa-lg fa-eye" aria-hidden="true"></i> 49 visitors</span>
-                            <span class="pull-right"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> 87 bidders</span>
+                            <span class="pull-right"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
                         </div>
                     </div>
                     <div class="col-md-6 bidders">
@@ -134,21 +133,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="col-xs-5"><a href="#">Mike Adams</a></td><td class="col-xs-2">57</td><td class="col-xs-5">12:10 17/10/17</td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-5"><a href="#">Mike Adams</a></td><td class="col-xs-2">57</td><td class="col-xs-5">12:10 17/10/17</td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-5"><a href="#">Mike Adams</a></td><td class="col-xs-2">57</td><td class="col-xs-5">12:10 17/10/17</td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-5"><a href="#">Mike Adams</a></td><td class="col-xs-2">57</td><td class="col-xs-5">12:10 17/10/17</td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-5"><a href="#">Mike Adams</a></td><td class="col-xs-2">57</td><td class="col-xs-5">12:10 17/10/17</td>
-                            </tr>
+                                {for $i=0 to count($recentBidders)}
+                                    <tr>
+                                        <td class="col-xs-5"><a href="{$BASE_URL}pages/user/user.php?id={$recentBidders[$i].id}">{$recentBidders[$i].username}</a></td><td class="col-xs-2">57</td><td class="col-xs-5">{$recentBidders[$i].date}</td>
+                                    </tr>
+                                {/for}
                             </tbody>
                         </table>
                     </div>
@@ -167,53 +156,40 @@
 
                     <div class="tab-content">
                         <div id="product" class="tab-pane fade in active">
-                            <p>The CyberPowerPC Gamer Xtreme VR is optimized for gaming, and is also VR ready. The Intel CPU and High Performance GPU gives the computer the raw power it needs to function at a high level. Added on, the high speed memory and large hard drive gives the CyberPowerPC Gamer Xtreme VR all the space needed to only focus on gaming.</p>
-                            <h4>Specifications</h4>
-                            <ul>
-                                <li>
-                                    System: Intel i5-6402P 2.8GHz Quad-Core | Intel B150 Chipset | 8GB DDR4 | 1TB HDD | WI-FI USB Adapter | Genuine Windows 10 Home 64-bit
-                                </li>
-                                <li>
-                                    Graphics: AMD Radeon RX 480 4GB Video Card | VR Ready | 1x HDMI | 1x Display Port
-                                </li>
-                                <li>
-                                    Connectivity: 6 x USB 3.0 | 4 x USB 2.0 | 1x RJ-45 Network Ethernet 10/100/1000 | Audio: 7.1 Channel Keyboard and Mouse
-                                </li>
-                                <li>
-                                    Warranty: 1 Year Parts & Labor Warranty Free Lifetime Tech Support"
-                                </li>
-                            </ul>
-                            <h4>Condition</h4>
-                            <p>
-                                An item that has been used previously. The item may have some signs of cosmetic wear, but is fully operational and functions as intended. This item may be a floor model or store return that has been used.</p>
+                            <p>{$product.description}</p>
                         </div>
                         <div id="auctionInformation" class="tab-pane fade">
                             <div class="row">
-                                <strong class="col-md-2 col-xs-5">Type of Auction:</strong><p class="col-md-4"> Sealed Bid</p>
-                                <strong class="col-md-2 col-xs-5">Fixed Price:</strong><p class="col-md-4"> No</p>
+                                <strong class="col-md-2 col-xs-5">Type of Auction:</strong><p class="col-md-4"> {$auction.type}</p>
+                                <strong class="col-md-2 col-xs-5">Fixed Price:</strong><p class="col-md-4"> {if ($auction.type == 'Dutch')}Yes{else}No{/if}</p>
                             </div>
                             <div class="row">
-                                <strong class="col-md-2 col-xs-5">Initial Price:</strong><p class="col-md-4"> 157€</p>
-                                <strong class="col-md-2 col-xs-5">Current Price:</strong><p class="col-md-4"> 267€</p>
+                                <strong class="col-md-2 col-xs-5">Initial Price:</strong><p class="col-md-4"> {$auction.start_bid}€</p>
+                                <strong class="col-md-2 col-xs-5">Current Price:</strong><p class="col-md-4"> {$auction.curr_bid}€</p>
                             </div>
                             <div class="row">
-                                <strong class="col-md-2 col-xs-5">Starting Date:</strong><p class="col-md-4"> Tuesday, Mar 14, 2017 7:29:54</p>
-                                <strong class="col-md-2 col-xs-5">Ending Date:</strong><p class="col-md-4"> Tuesday, Mar 17, 2017 7:29:54</p>
+                                <strong class="col-md-2 col-xs-5">Starting Date:</strong><p class="col-md-4"> {$auction.start_date}</p>
+                                <strong class="col-md-2 col-xs-5">Ending Date:</strong><p class="col-md-4"> {$auction.end_date}</p>
                             </div>
                             <div class="row">
-                                <strong class="col-md-2 col-xs-5">Winning Bid:</strong><p class="col-md-4"> N/A</p>
-                                <strong class="col-md-2 col-xs-5">Winner:</strong><p class="col-md-4"> N/A</p>
+                                <strong class="col-md-2 col-xs-5">Bids:</strong><p class="col-md-4"> {$numBids}</p>
+                                <strong class="col-md-2 col-xs-5">Winner:</strong><p class="col-md-4"> {if ($winningUser)}<a href="{$BASE_URL}pages/user/user.php?id={$winningUser.user_id}">{$winningUser.user_username}</a>{else}N/A{/if}</p>
                             </div>
                             <div class="row">
-                                <strong class="col-md-2 col-xs-5">Bidders:</strong><p class="col-md-4"> 69</p>
-                                <strong class="col-md-2 col-xs-5">Watchers:</strong><p class="col-md-4"> 128</p>
+                                <strong class="col-md-2 col-xs-5">Bidders:</strong><p class="col-md-4"> {$numBidders}</p>
+                                <strong class="col-md-2 col-xs-5">Watchers:</strong><p class="col-md-4"> </p>
                             </div>
                         </div>
                         <div id="seller" class="tab-pane fade">
-                            <a><h3>CyberPowerPC</h3></a>
-                            <p>CyberPowerPC is one of the nation-wide leading computer system manufacturers. As published in the Los Angeles Business Journal in 2003, we were the fastest growing private company in Los Angeles. With vision, commitment, and steadfast determination, we manufacture and distribute various customized high-end gaming machines, notebook systems and high performance workstations to meet the unique needs for gamers, businesses, government agencies, educational institutions and other end-users.</p>
+                            <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><h3 style="color: 	#5F9EA0">{$seller.username}</h3></a>
+                            <h4>Who am I</h4>
+                            {if ($seller.full_bio)}
+                                <p>{$seller.full_bio}</p>
+                            {else}
+                                <p>{$seller.short_bio}</p>
+                            {/if}
                             <h4>Reliability</h4>
-                            <p>CyberPowerPc was reviewed by 18 users, and has a average of 4.7/5 points.</p>
+                            <p>{$seller.username} has {$numReviews} reviews, and an average of <strong>{$seller.rating}</strong>/10 points.</p>
                         </div>
                     </div>
                 </div>
