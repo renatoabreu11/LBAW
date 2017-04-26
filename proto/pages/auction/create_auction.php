@@ -24,5 +24,6 @@ if($username && $id){
 
 $categories = getCategories();
 
+$smarty->assign("token", $_SESSION['token']);
 $smarty->assign("categories", $categories);
 $smarty->display('auction/create_auction.tpl');

@@ -189,3 +189,17 @@ function getWinningUser($auctionId) {
     $stmt->execute();
     return $stmt->fetch();
 }
+
+function validCategory($category){
+    global $conn;
+    $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::category_type))::text)');
+    $stmt->execute(array($category));
+    return $stmt->fetch()['?column?'];
+}
+
+function validAuctionType($auction_type){
+    global $conn;
+    $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::auction_type))::text)');
+    $stmt->execute(array($auction_type));
+    return $stmt->fetch()['?column?'];
+}
