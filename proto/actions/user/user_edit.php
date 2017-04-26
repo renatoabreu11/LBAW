@@ -3,8 +3,8 @@
     include_once('../../config/init.php');
     include_once($BASE_DIR . 'database/users.php');
 
-    if(!$_POST['user-id'] || !$_POST['real-name'] || !$_POST['small-bio'] || !$_POST['city-id'] || !$_POST['email'] || !$_POST['phone'] || !$_POST['full-bio']) {
-        $_SESSION['error_messages'][] = "All fields are required!";
+    if(!$_POST['user-id'] || !$_POST['real-name'] || !$_POST['small-bio'] || !$_POST['email']) {
+        $_SESSION['error_messages'][] = "Your real name, small biography and email are required!";
         $_SESSION['form_values'] = $_POST;
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;
@@ -34,9 +34,14 @@
         $invalidChars = true;
     }
 
-    if(!preg_match("/[0-9]+/", $cityId)) {
-        $_SESSION['field_errors']['city-id'] = 'Invalid city id';
-        $invalidChars = true;
+    $isCityNull = false;
+    if($cityId) {
+        if($cityId == "null")
+            $isCityNull = true;
+        if(!(is_numeric($cityId))) {
+            $_SESSION['field_errors']['city-id'] = 'Invalid city id';
+            $invalidChars = true;
+        }
     }
 
     if(!preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
@@ -59,13 +64,15 @@
         exit;
     }
 
-    try {
-        updateUserLocation($userId, $cityId);
-    } catch(PDOException $e) {
-        $_SESSION['error_messages'][] = "error: can't update user location.";
-        $_SESSION['form_values'] = $_POST;
-        header("Location:"  . $_SERVER['HTTP_REFERER']);
-        exit;
+    if(!($isCityNull)) {
+        try {
+            updateUserLocation($userId, $cityId);
+        } catch(PDOException $e) {
+            $_SESSION['error_messages'][] = "error: can't update user location.";
+            $_SESSION['form_values'] = $_POST;
+            header("Location:"  . $_SERVER['HTTP_REFERER']);
+            exit;
+        }
     }
 
     // Updates profile picture.
@@ -89,6 +96,11 @@
             header("Location:"  . $_SERVER['HTTP_REFERER']);
             exit;
         }
+    } else if($picture['name']) {
+        $_SESSION['error_messages'][] = "error: image is bigger than the allowed.";
+        $_SESSION['form_values'] = $_POST;
+        header("Location:"  . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
     $_SESSION['success_messages'][] = 'Update successful';

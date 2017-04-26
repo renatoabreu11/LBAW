@@ -46,8 +46,7 @@
         global $conn;
         $stmt = $conn->prepare('SELECT city.name as city_name, city.id as city_id, country.name as country_name, country.id as country_id
                                 FROM "user"
-                                JOIN location ON "user".location_id = location.id
-                                JOIN city ON location.city_id = city.id
+                                JOIN city ON "user".city_id = city.id
                                 JOIN country ON city.country_id = country.id
                                 WHERE "user".id = :user_id');
         $stmt->bindParam('user_id', $userId);
@@ -356,26 +355,12 @@
     */
     function getAllCities() {
         global $conn;
-        $stmt = $conn->prepare('SELECT name, country_id
+        $stmt = $conn->prepare('SELECT name, country_id, id
                                 FROM city
                                 ORDER BY name ASC');
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
-    /**
-    * Returns all cities in the database.
-    */
-   /*function getLocations() {
-        global $conn;
-        $stmt = $conn->prepare('SELECT country.name as country_name, city.name as city_name
-                                FROM country
-                                JOIN city ON country.id = city.country_id
-                                GROUP BY country.name, city.name
-                                ORDER BY country.name');
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }*/
 
 /************************************* INSERTS ************************************
 
