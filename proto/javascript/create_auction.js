@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 
     $("#input-24").fileinput({
-        uploadUrl: "http://localhost/file-upload-single/1", // server upload action
+        uploadUrl: "/", // server upload action
         uploadAsync: true,
         overwriteInitial: false,
         maxFileSize: 10000,
