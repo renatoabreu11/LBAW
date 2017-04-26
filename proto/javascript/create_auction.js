@@ -4,6 +4,10 @@ $(document).ready(function() {
         return (value.length > 0 && value.length < 3);
     }, "At least one category must be selected.");
 
+    $.validator.addMethod("auctionTypeSelected", function(value, element, arg){
+        return (value !== "" && (value === "Sealed-bid Auction" || value === "Default" || value === "Dutch Auction"));
+    }, "The auction type must be selected");
+
     $.validator.addMethod("numberOfImages", function(value, element, arg){
         var images = $("#input-24").val();
         return (images !== "");
@@ -33,6 +37,19 @@ $(document).ready(function() {
                 },
                 "input24[]":{
                     numberOfImages: true
+                },
+                base_price: {
+                    required: true,
+                    digits: true
+                },
+                start_date: {
+                    required: true
+                },
+                end_date: {
+                    required: true
+                },
+                auction_type:{
+                    auctionTypeSelected: true
                 }
             },
         messages:
@@ -45,6 +62,10 @@ $(document).ready(function() {
                     required: "Please, enter the number of products that are up to sell.",
                     digits: "Only digits are allowed."
                 },
+                base_price: {
+                    required: "Please, enter the auction initial price.",
+                    digits: "Only digits are allowed."
+                },
                 condition:{
                     required: "Please, enter the product condition.",
                     maxlength: "The product condition must be no more than 255 characters."
@@ -55,6 +76,9 @@ $(document).ready(function() {
                 },
                 category:{
                     productCategoriesSelected: "Please, select a category."
+                },
+                auction_type:{
+                    auctionTypeSelected: "Please, select the auction type."
                 }
             },
         errorPlacement: function(error, element) {
@@ -64,8 +88,13 @@ $(document).ready(function() {
                 var parentDiv = $(element).parents(".input-group");
                 error.insertAfter(parentDiv);
             }
-        }
+        },
+        submitHandler: createAuction
     });
+
+    function createAuction(){
+        
+    }
 
     var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
     allWells.hide();
@@ -86,16 +115,19 @@ $(document).ready(function() {
     $('ul.setup-panel li.active a').trigger('click');
 
     $('#activate-step-2').on('click', function (e) {
-        validator.element("#step-1");
-        $('ul.setup-panel li:eq(1)').removeClass('disabled');
-        $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-        $(this).remove();
+        if($("#productName").valid() && $("#category").valid() && $("#description").valid() && $("#condition").valid() && $("#input-24").valid()){
+            $('ul.setup-panel li:eq(1)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+            $(this).remove();
+        }
     })
 
     $('#activate-step-3').on('click', function (e) {
-        $('ul.setup-panel li:eq(2)').removeClass('disabled');
-        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-        $(this).remove();
+        if($("#end_date").valid() && $("#start_date").valid() && $("#auction_type").valid() && $("#base_price").valid()){
+            $('ul.setup-panel li:eq(2)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+            $(this).remove();
+        }
     })
 
     $('input[type=radio][name=optradio]').change(function() {
