@@ -39,14 +39,14 @@
             <div class="form-group">
                 <label class="control-label col-md-4"> Description<span>*</span> </label>
                 <div class="col-md-8 input-group col-xs-12">
-                    <textarea maxlength="512" class="form-control" name="description" placeholder="Tell us about your product" ></textarea>
+                    <textarea maxlength="512" class="form-control" id="description" name="description" placeholder="Tell us about your product" ></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-4"> Condition<span>*</span> </label>
                 <div class="col-md-8 input-group col-xs-12">
-                    <textarea maxlength="512" class="form-control" name="condition" placeholder="Tell us about the product condition" ></textarea>
+                    <textarea maxlength="512" class="form-control" id="condition" name="condition" placeholder="Tell us about the product condition" ></textarea>
                 </div>
             </div>
 
