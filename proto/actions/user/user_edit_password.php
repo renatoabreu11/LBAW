@@ -10,7 +10,7 @@
         exit;
     }
 
-    $loggedUserId = 1;//$_SESSION['user_id'];
+    $loggedUserId = $_SESSION['user_id'];
     $userId = trim(strip_tags($_POST['user-id']));
 
     if($loggedUserId != $userId) {
@@ -41,12 +41,12 @@
         exit;
     }
 
-    if(!preg_match("/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%+*?@€&])([a-zA-Z\d!#$%+*?@€& ]){8,25}/", $newPass)) {
+    /*if(!preg_match("/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%+*?@€&])([a-zA-Z\d!#$%+*?@€& ]){8,25}/", $newPass)) {
         $_SESSION['field_errors']['new_password'] = 'Invalid new password! Minimum 8 and maximum 25 characters, must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.';
         $_SESSION['form_values'] = $_POST;
         header("Location: $BASE_URL" . "pages/user/user_edit.php?id=" . $userId);
         exit;
-    }
+    }*/
 
     // Checks if the new introduced password is equal to the current one.
     if(password_verify($newPass, $storedHashPass)) {
@@ -59,6 +59,7 @@
     try {
         updatePassword($userId, $newPass);
     } catch(PDOException $e) {
+        echo $e->getMessage();
         $_SESSION['error_messages'][] = "error: can't update user password.";
         $_SESSION['form_values'] = $_POST;
         header("Location:"  . $_SERVER['HTTP_REFERER']);

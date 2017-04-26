@@ -41,9 +41,9 @@
 
     <div class="item active">
         <span class="thumbnail text-center">
-          <h4>Product Title</h4>
-          <img src="http://placehold.it/256x256" class="animated bounce infinite" alt="...">
-          <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
+          <h4>{$mostRecentAuction.product_name}</h4>
+          <img src="{$BASE_URL}images/products/{$mostRecentAuction.image_filename}" class="animated bounce infinite" alt="...">
+          <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;">Watch Auction</a></button>
         </span>
     </div>
 

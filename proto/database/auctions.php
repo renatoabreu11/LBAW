@@ -188,3 +188,17 @@ function countWatchlistAuctions($user_id){
     $result = $stmt->fetch();
     return $result['count'];
 }
+
+function getMostRecentAuction() {
+    global $conn;
+    $stmt = $conn->prepare('SELECT auction.id as auction_id, product.name as product_name, (SELECT image.filename 
+                                                                                            FROM image
+                                                                                            JOIN product ON image.product_id = product.id
+                                                                                            LIMIT 1) as image_filename
+                            FROM auction
+                            JOIN product ON auction.product_id = product.id
+                            ORDER BY auction.id DESC
+                            LIMIT 1');
+    $stmt->execute();
+    return $stmt->fetch();
+}
