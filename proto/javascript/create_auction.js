@@ -1,5 +1,72 @@
 $(document).ready(function() {
 
+    $.validator.addMethod("productCategoriesSelected", function(value, element, arg){
+        return (value.length > 0 && value.length < 3);
+    }, "At least one category must be selected.");
+
+    $.validator.addMethod("numberOfImages", function(value, element, arg){
+        var images = $("#input-24").val();
+        return (images !== "");
+    }, "At least one image must be selected.");
+
+    var validator = $("#createAuctionForm").validate({
+        rules:
+            {
+                name: {
+                    required: true,
+                    maxlength: 64
+                },
+                quantity: {
+                    required: true,
+                    digits: true
+                },
+                description: {
+                    required: true,
+                    maxlength: 512
+                },
+                condition:{
+                    required: true,
+                    maxlength: 512
+                },
+                category:{
+                    productCategoriesSelected: true
+                },
+                "input24[]":{
+                    numberOfImages: true
+                }
+            },
+        messages:
+            {
+                name:{
+                    required: "Please, enter the product name.",
+                    maxlength: "The product name must be no more than 64 characters."
+                },
+                quantity:{
+                    required: "Please, enter the number of products that are up to sell.",
+                    digits: "Only digits are allowed."
+                },
+                condition:{
+                    required: "Please, enter the product condition.",
+                    maxlength: "The product condition must be no more than 255 characters."
+                },
+                description:{
+                    required: "Please, enter the product description.",
+                    maxlength: "The product condition must be no more than 255 characters."
+                },
+                category:{
+                    productCategoriesSelected: "Please, select a category."
+                }
+            },
+        errorPlacement: function(error, element) {
+            if($(element).attr("name") === "description" || $(element).attr("name") === "condition")
+                error.insertAfter(element);
+            else{
+                var parentDiv = $(element).parents(".input-group");
+                error.insertAfter(parentDiv);
+            }
+        }
+    });
+
     var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
     allWells.hide();
 
@@ -19,6 +86,7 @@ $(document).ready(function() {
     $('ul.setup-panel li.active a').trigger('click');
 
     $('#activate-step-2').on('click', function (e) {
+        validator.element("#step-1");
         $('ul.setup-panel li:eq(1)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-2"]').trigger('click');
         $(this).remove();
@@ -77,4 +145,5 @@ $(document).ready(function() {
             '{TAG_CSS_INIT}': 'hide'  // hide the initial input
         }
     });
+
 });

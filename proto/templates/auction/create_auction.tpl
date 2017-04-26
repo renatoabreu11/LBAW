@@ -41,9 +41,14 @@
             </ul>
         </div>
     </div>
-    {include file='auction/product_info.tpl'}
-    {include file='auction/auction_info.tpl'}
-    {include file='auction/extra_info.tpl'}
+    <form id="createAuctionForm" action="{$BASE_URL}actions/auction/create_auction.php" method="post" enctype="multipart/form-data">
+        {include file='auction/product_info.tpl'}
+        {include file='auction/auction_info.tpl'}
+        {include file='auction/extra_info.tpl'}
+        <div class="form-group text-center" id="createAuction-btn">
+            <button class="btn btn-primary pull-right" style="margin-right: 2em;" type="submit">Create Auction</button>
+        </div>
+    </form>
 </div>
 
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>

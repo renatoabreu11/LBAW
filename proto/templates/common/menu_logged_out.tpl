@@ -1,6 +1,6 @@
 <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
 <div class="modal fade modalLogin" id="loginModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog1 modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <img src="{$BASE_URL}images/assets/favicon.jpg" class="img-rounded" alt="Cinque Terre" width="64" height="64">

@@ -20,7 +20,5 @@
                     </select>
                 </div>
             </div>
-            <button class="btn btn-primary pull-right" type="submit">Create Auction</button>
-        </div>
     </div>
 </div>
