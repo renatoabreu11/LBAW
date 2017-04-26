@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label class="control-label col-md-4"> Category<span>*</span> </label>
                 <div class="col-md-8 input-group col-xs-12">
-                    <select class="input-md form-control selectpicker" multiple data-max-options="2" data-live-search="true" title="Define the product category...">
+                    <select class="input-md form-control selectpicker" id="category" name="category" multiple data-max-options="2" data-live-search="true" title="Define the product category...">
                         {foreach $categories as $key => $category}
                            <option>{$category.unnest}</option>
                         {/foreach}
@@ -37,21 +37,23 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-4"> Details<span>*</span> </label>
+                <label class="control-label col-md-4"> Description<span>*</span> </label>
                 <div class="col-md-8 input-group col-xs-12">
-                    <textarea maxlength="1000" required="required" class="form-control" placeholder="Tell us about your product" ></textarea>
+                    <textarea maxlength="512" class="form-control" name="description" placeholder="Tell us about your product" ></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-4"> Condition<span>*</span> </label>
                 <div class="col-md-8 input-group col-xs-12">
-                    <textarea maxlength="1000" required="required" class="form-control" placeholder="Tell us about the product condition" ></textarea>
+                    <textarea maxlength="512" class="form-control" name="condition" placeholder="Tell us about the product condition" ></textarea>
                 </div>
             </div>
 
-            <label> Gallery<span>*</span> </label>
-            <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
+            <div class="form-group">
+                <label> Gallery<span>*</span> </label>
+                <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
+            </div>
 
             <button id="activate-step-2" class="btn btn-primary pull-right">Next Step</button>
         </div>

@@ -88,8 +88,8 @@
                         <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: $799</h3>
                         <div class="section">
                             <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
-                            <div class="modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog modal-sm">
+                            <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
+                                <div class="modal-dialog1 modal-sm">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4>Select the value of your bid!</h4>
