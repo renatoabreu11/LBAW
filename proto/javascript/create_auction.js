@@ -5,7 +5,7 @@ $(document).ready(function() {
     }, "At least one category must be selected.");
 
     $.validator.addMethod("auctionTypeSelected", function(value, element, arg){
-        return (value !== "" && (value === "Sealed-bid Auction" || value === "Default" || value === "Dutch Auction"));
+        return (value !== "" && (value === "Sealed Bid" || value === "Default" || value === "Dutch"));
     }, "The auction type must be selected");
 
     $.validator.addMethod("numberOfImages", function(value, element, arg){
@@ -13,10 +13,10 @@ $(document).ready(function() {
         return (images !== "");
     }, "At least one image must be selected.");
 
-    var validator = $("#createAuctionForm").validate({
+    $("#createAuctionForm").validate({
         rules:
             {
-                name: {
+                product_name: {
                     required: true,
                     maxlength: 64
                 },
@@ -32,7 +32,7 @@ $(document).ready(function() {
                     required: true,
                     maxlength: 512
                 },
-                category:{
+                "category[]":{
                     productCategoriesSelected: true
                 },
                 "input24[]":{
@@ -54,7 +54,7 @@ $(document).ready(function() {
             },
         messages:
             {
-                name:{
+                product_name:{
                     required: "Please, enter the product name.",
                     maxlength: "The product name must be no more than 64 characters."
                 },
@@ -93,7 +93,7 @@ $(document).ready(function() {
     });
 
     function createAuction(){
-        
+        $('#input-24').fileinput('upload');
     }
 
     var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
@@ -115,7 +115,7 @@ $(document).ready(function() {
     $('ul.setup-panel li.active a').trigger('click');
 
     $('#activate-step-2').on('click', function (e) {
-        if($("#productName").valid() && $("#category").valid() && $("#description").valid() && $("#condition").valid() && $("#input-24").valid()){
+        if($("#product_name").valid() && $("#category").valid() && $("#description").valid() && $("#condition").valid() && $("#input-24").valid()){
             $('ul.setup-panel li:eq(1)').removeClass('disabled');
             $('ul.setup-panel li a[href="#step-2"]').trigger('click');
             $(this).remove();
@@ -162,7 +162,7 @@ $(document).ready(function() {
 
 
     $("#input-24").fileinput({
-        uploadUrl: "/", // server upload action
+        uploadUrl: BASE_URL + "api/auction/upload_images", // server upload action
         uploadAsync: true,
         overwriteInitial: false,
         maxFileSize: 10000,
@@ -175,6 +175,16 @@ $(document).ready(function() {
             '{TAG_VALUE}': '',        // no value
             '{TAG_CSS_NEW}': '',      // new thumbnail input
             '{TAG_CSS_INIT}': 'hide'  // hide the initial input
+        },
+        uploadExtraData: function() {  // callback example
+            var out = {}, key, i = 0;
+            $('.kv-input:visible').each(function() {
+                $el = $(this);
+                key = $el.hasClass('kv-new') ? 'new_' + i : 'init_' + i;
+                out[key] = $el.val();
+                i++;
+            });
+            return out;
         }
     });
 

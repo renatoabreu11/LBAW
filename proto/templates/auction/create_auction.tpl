@@ -42,6 +42,7 @@
         </div>
     </div>
     <form id="createAuctionForm" action="{$BASE_URL}actions/auction/create_auction.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="token" value="{$TOKEN}">
         {include file='auction/product_info.tpl'}
         {include file='auction/auction_info.tpl'}
         {include file='auction/extra_info.tpl'}

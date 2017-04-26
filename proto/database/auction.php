@@ -199,7 +199,7 @@ function getWinningUser($auctionId) {
     return $stmt->fetch();
 }
 
-function getSimilarAuctions($auctionId) {
+function validCategory($category){
     global $conn;
     $stmt = $conn->prepare('SELECT similarAuction.id, similarProduct.name, (SELECT image.filename
                                                                             FROM image
@@ -237,4 +237,11 @@ function createAnswer($message, $userId, $questionId) {
     $stmt->bindParam('question_id', $questionId);
     $stmt->bindParam('user_id', $userId);
     $stmt->execute();
+}
+
+function validAuctionType($auction_type){
+    global $conn;
+    $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::auction_type))::text)');
+    $stmt->execute(array($auction_type));
+    return $stmt->fetch()['?column?'];
 }
