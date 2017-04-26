@@ -74,16 +74,25 @@ function getQuestionsAnswers($auction_id){
     $conn->beginTransaction();
     $conn->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
 
-    $stmt = $conn->prepare('SELECT * FROM question WHERE auction_id = ?;');
-    $stmt->execute(array($auction_id));
+    $stmt = $conn->prepare('SELECT "user".username as user_username, "user".id as user_id, "user".profile_pic, question.message, question.date, question.id
+                            FROM question
+                            JOIN "user" ON question.user_id = "user".id
+                            JOIN auction ON question.auction_id = auction.id
+                            WHERE auction_id = :auction_id');
+    $stmt->bindParam('auction_id', $auction_id);
+    $stmt->execute();
     $questions = $stmt->fetchAll();
 
-    for ($i = 0; $i < count($questions); $i++){
+    for ($i = 0; $i < count($questions); $i++) {
         $question_id = $questions[$i]['id'];
-        $stmt = $conn->prepare('SELECT * FROM answer WHERE question_id = ?;');
-        $stmt->execute(array($question_id));
+        $stmt = $conn->prepare('SELECT answer.message, answer.date
+                                FROM answer
+                                WHERE question_id = :question_id');
+        $stmt->bindParam('question_id', $question_id);
+        $stmt->execute();
         $answer = $stmt->fetch();
-        $questions[$i]["answer"] = $answer;
+        $questions[$i]["answer_message"] = $answer['message'];
+        $questions[$i]["answer_date"] = $answer['date'];
     }
     $conn->commit();
     return $questions;

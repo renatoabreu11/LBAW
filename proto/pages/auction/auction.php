@@ -14,6 +14,9 @@ $recentBidders = getRecentBidders($auction_id);
 $numBids = getTotalNumBids($auction_id);
 $numBidders = count(getBidders($auction_id));
 
+$questions = getQuestionsAnswers($auction_id);
+$similarAuctions = getSimilarAuctions($auction_id);
+
 if(date('Y-m-d H:i:s') > $auction.end_date) {
     $winningUser = getWinningUser($auction_id);
     $smarty->assign("winningUser", $winningUser);
@@ -26,5 +29,7 @@ $smarty->assign("numReviews", $numReviews);
 $smarty->assign("recentBidders", $recentBidders);
 $smarty->assign("numBids", $numBids);
 $smarty->assign("numBidders", $numBidders);
+$smarty->assign("questions", $questions);
+$smarty->assign("similarAuctions", $similarAuctions);
 
 $smarty->display('auction/auction.tpl');
