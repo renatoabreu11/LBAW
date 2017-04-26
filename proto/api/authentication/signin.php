@@ -23,7 +23,7 @@ if (userExists($username, $password)) {
     $_SESSION['username'] = $username;
     $_SESSION['user_id'] = getUserID($username);
     if (empty($_SESSION['token'])) {
-        $_SESSION['token'] = bin2hex(random_bytes(32));
+        $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
     }
     echo 'Login Successful!';
     return;

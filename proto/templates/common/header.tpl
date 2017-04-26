@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{$BASE_URL}lib/magnific-popup/magnific-popup.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="{$BASE_URL}lib/select/bootstrap-select.css">
+    <link rel="stylesheet" href="{$BASE_URL}lib/fileinput/fileinput.css">
     <link rel="stylesheet" href="{$BASE_URL}css/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -46,6 +46,7 @@
     {include file='auction/extra_info.tpl'}
 </div>
 
+<script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
 <script src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
 <script src="{$BASE_URL}javascript/create_auction.js"></script>
 
