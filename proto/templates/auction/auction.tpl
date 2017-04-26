@@ -209,126 +209,94 @@
                     </form>
 
                     <section class="comment-list">
-                        <article class="row">
-                            <div class="col-md-1 col-sm-1 hidden-xs">
-                                <figure class="thumbnail">
-                                    <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                                </figure>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xs-12">
-                                <div class="panel panel-default arrow left">
-                                    <div class="panel-body">
-                                        <div class="media-heading">
-                                            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
-                                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                                            </button>
-                                            <a href=""><strong>hant</strong></a> Feb 20th, 2017 at 9:37:41
-                                        </div>
-                                        <div class="panel-collapse collapse in" id="collapseComment">
-                                            <div class="media-body">
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                </p>
-                                                <div class="comment-meta">
-                                                    <span><a href="#">delete</a></span>
-                                                    <span><a href="#">report</a></span>
-                                                    <span><a href="#">hide</a></span>
-                                                    <span><a href="#">reply</a></span>
+                        {foreach $questions as $question}
+                            <article class="row">
+                                <div class="col-md-1 col-sm-1 hidden-xs">
+                                    <figure class="thumbnail">
+                                        <img class="img-responsive" src="{$BASE_URL}images/users/{$question.profile_pic}" />
+                                    </figure>
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-xs-12">
+                                    <div class="panel panel-default arrow left">
+                                        <div class="panel-body">
+                                            <div class="media-heading">
+                                                <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
+                                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                                </button>
+                                                <a href="{$BASE_URL}pages/user/user.php?id={$question.user_id}"><strong>{$question.user_username}</strong></a> {$question.date}
+                                            </div>
+                                            <div class="panel-collapse collapse in" id="collapseComment">
+                                                <div class="media-body">
+                                                    <p>{$question.message}</p>
+                                                    <div class="comment-meta">
+                                                        <span><a href="#">delete</a></span>
+                                                        <span><a href="#">report</a></span>
+                                                        <span><a href="#">hide</a></span>
+                                                        <span><a href="#">reply</a></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
-
-                        <article class="row">
-                            <div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs">
-                                <figure class="thumbnail">
-                                    <img class="img-responsive" src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg" />
-                                </figure>
-                            </div>
-                            <div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11">
-                                <div class="panel panel-default arrow left">
-                                    <div class="panel-body">
-                                        <div class="media-heading">
-                                            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply">
-                                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                                            </button>
-                                            <a href=""><strong>hant</strong></a> Feb 20th, 2017 at 9:37:41
-                                        </div>
-                                        <div class="panel-collapse collapse in" id="collapseReply">
-                                            <div class="media-body">
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                </p>
-                                                <div class="comment-meta">
-                                                    <span><a href="#">delete</a></span>
-                                                    <span><a href="#">report</a></span>
-                                                    <span><a href="#">hide</a></span>
-                                                    <span><a href="#">reply</a></span>
+                            </article>
+                            {if ($question.answer_message)}
+                                <article class="row">
+                                    <div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs">
+                                        <figure class="thumbnail">
+                                            <img class="img-responsive" src="{$BASE_URL}images/users/{$seller.profile_pic}"/>
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11">
+                                        <div class="panel panel-default arrow left">
+                                            <div class="panel-body">
+                                                <div class="media-heading">
+                                                    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply">
+                                                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                                    </button>
+                                                    <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><strong>{$seller.username}</strong></a>{$question.answer_date}
+                                                </div>
+                                                <div class="panel-collapse collapse in" id="collapseReply">
+                                                    <div class="media-body">
+                                                        <p>{$question.answer_message}</p>
+                                                        <div class="comment-meta">
+                                                            <span><a href="#">delete</a></span>
+                                                            <span><a href="#">report</a></span>
+                                                            <span><a href="#">hide</a></span>
+                                                            <span><a href="#">reply</a></span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </article>
+                                </article>
+                            {/if}
+                        {/foreach}
                     </section>
                 </div>
             </div>
 
             <hr>
 
+            {if (count($similarAuctions)) > 0}
             <div class="row suggestions">
                 <div class='col-md-12 col-centered'>
                     <h2>Similar Auctions</h2>
                     <div class="slider1">
+                    {foreach $similarAuctions as $similarAuction}
                         <div class="slide text-center">
-              <span>
-                <h4>Product Tittle</h4>
-                <img src="http://placehold.it/256x256" alt="...">
-                <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
-              </span>
+                        <span>
+                            <h4>{$similarAuction.name}</h4>
+                            <img src="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" alt="...">
+                            <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" style="color: white">Watch Auction</a></button>
+                        </span>
                         </div>
-                        <div class="slide text-center">
-              <span>
-                <h4>Product Tittle</h4>
-                <img src="http://placehold.it/256x256" alt="...">
-                <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
-              </span>
-                        </div>
-                        <div class="slide text-center">
-              <span>
-                <h4>Product Tittle</h4>
-                <img src="http://placehold.it/256x256" alt="...">
-                <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
-              </span>
-                        </div>
-                        <div class="slide text-center">
-              <span>
-                <h4>Product Tittle</h4>
-                <img src="http://placehold.it/256x256" alt="...">
-                <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
-              </span>
-                        </div>
-                        <div class="slide text-center">
-              <span>
-                <h4>Product Tittle</h4>
-                <img src="http://placehold.it/256x256" alt="...">
-                <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
-              </span>
-                        </div>
-                        <div class="slide text-center">
-              <span>
-                <h4>Product Tittle</h4>
-                <img src="http://placehold.it/256x256" alt="...">
-                <button class="btn btn-info" style="margin: 0.5em;"> Watch Auction</button>
-              </span>
-                        </div>
+                    {/foreach}
                     </div>
                 </div>
             </div>
+            {/if}
         </div>
     </div>
 </div>
