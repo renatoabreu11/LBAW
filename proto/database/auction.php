@@ -218,3 +218,23 @@ function getSimilarAuctions($auctionId) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
+
+function createQuestion($message, $userId, $auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO question(date, message, user_id, auction_id)
+                            VALUES(now(), :message, :user_id, :auction_id)');
+    $stmt->bindParam('message', $message);
+    $stmt->bindParam('user_id', $userId);
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+}
+
+function createAnswer($message, $userId, $questionId) {
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO question(date, message, question_id, user_id)
+                            VALUES(now(), :message, :question_id, :user_id)');
+    $stmt->bindParam('message', $message);
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->bindParam('user_id', $userId);
+    $stmt->execute();
+}

@@ -133,11 +133,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                                {for $i=0 to count($recentBidders)}
+                                {foreach $recentBidders as $recentBidder}
                                     <tr>
-                                        <td class="col-xs-5"><a href="{$BASE_URL}pages/user/user.php?id={$recentBidders[$i].id}">{$recentBidders[$i].username}</a></td><td class="col-xs-2">57</td><td class="col-xs-5">{$recentBidders[$i].date}</td>
+                                        <td class="col-xs-5"><a href="{$BASE_URL}pages/user/user.php?id={$recentBidder.id}">{$recentBidder.username}</a></td><td class="col-xs-2">57</td><td class="col-xs-5">{$recentBidder.date}</td>
                                     </tr>
-                                {/for}
+                                {/foreach}
                             </tbody>
                         </table>
                     </div>
@@ -200,12 +200,13 @@
             <div class="row product-questions">
                 <div class="col-md-12">
                     <h2>Product Q&A</h2>
-                    <form class="newQuestion">
+                    <form class="newQuestion" action="javascript:void(0);">
                         <div class="form-group">
                             <label>Your Question</label>
-                            <textarea name="comment" class="form-control" rows="3"></textarea>
+                            <input type="hidden" name="auction-id" value="{$auction.id}">
+                            <textarea name="comment" class="form-control question-area" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">Send</button>
+                        <button type="submit" class="btn btn-default btn-send-question">Send</button>
                     </form>
 
                     <section class="comment-list">
