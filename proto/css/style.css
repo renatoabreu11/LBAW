@@ -352,6 +352,10 @@ ul {
     }
 }
 
+.underline-text-hover:hover {
+    text-decoration: underline;
+}
+
 /*************************** Footer ***************************/
 
 #footer {

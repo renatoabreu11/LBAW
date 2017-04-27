@@ -265,3 +265,13 @@ function getSimilarAuctions($auctionId) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
+
+/************************************* DELETES *************************************/
+
+function deleteQuestion($questionId) {
+    global $conn;
+    $stmt = $conn->prepare('DELETE FROM question
+                            WHERE id = :id');
+    $stmt->bindParam('id', $questionId);
+    $stmt->execute();
+}

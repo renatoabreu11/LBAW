@@ -213,37 +213,43 @@
 
                     <section class="comment-list">
                         {foreach $questions as $question}
-                            <article class="row">
-                                <div class="col-md-1 col-sm-1 hidden-xs">
-                                    <figure class="thumbnail">
-                                        <img class="img-responsive" src="{$BASE_URL}images/users/{$question.profile_pic}" />
-                                    </figure>
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-12">
-                                    <div class="panel panel-default arrow left">
-                                        <div class="panel-body">
-                                            <div class="media-heading">
-                                                <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
-                                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                                                </button>
-                                                <a href="{$BASE_URL}pages/user/user.php?id={$question.user_id}"><strong>{$question.user_username}</strong></a> {$question.date}
-                                            </div>
-                                            <div class="panel-collapse collapse in" id="collapseComment">
-                                                <div class="media-body">
-                                                    <p>{$question.message}</p>
-                                                    <div class="comment-meta">
-                                                        <span><a href="#">delete</a></span>
-                                                        <span><a href="#">report</a></span>
-                                                        <span><a href="#">hide</a></span>
-                                                        <span><a href="#">reply</a></span>
+                            <div class="question-answer">
+                                <article class="row">
+                                    <input type="hidden" name="question-id" value="{$question.id}">
+                                    <div class="col-md-1 col-sm-1 hidden-xs">
+                                        <figure class="thumbnail">
+                                            <img class="img-responsive" src="{$BASE_URL}images/users/{$question.profile_pic}" />
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-10 col-sm-10 col-xs-12">
+                                        <div class="panel panel-default arrow left">
+                                            <div class="panel-body">
+                                                <div class="media-heading">
+                                                    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
+                                                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                                    </button>
+                                                    <a href="{$BASE_URL}pages/user/user.php?id={$question.user_id}"><strong>{$question.user_username}</strong></a> {$question.date}
+                                                </div>
+                                                <div class="panel-collapse collapse in" id="collapseComment">
+                                                    <div class="media-body">
+                                                        <p>{$question.message}</p>
+                                                        <div class="comment-meta">
+                                                            {if ($question.user_id == $userId)}
+                                                                <span class="delete-question underline-text-hover">delete</span>
+                                                            {/if}
+                                                            <span><a href="#">report</a></span>
+                                                            <span class="hide-question underline-text-hover">hide</span>
+                                                            {if ($seller.id == $userId)}
+                                                                <span><a href="#">reply</a></span>
+                                                            {/if}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </article>
-                            {if ($question.answer_message)}
+                                </article>
+                                {if ($question.answer_message)}
                                 <article class="row">
                                     <div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs">
                                         <figure class="thumbnail">
@@ -263,10 +269,11 @@
                                                     <div class="media-body">
                                                         <p>{$question.answer_message}</p>
                                                         <div class="comment-meta">
-                                                            <span><a href="#">delete</a></span>
+                                                            {if ($seller.id == $userId)}
+                                                                <span><a href="#">delete</a></span>
+                                                            {/if}
                                                             <span><a href="#">report</a></span>
                                                             <span><a href="#">hide</a></span>
-                                                            <span><a href="#">reply</a></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,7 +281,8 @@
                                         </div>
                                     </div>
                                 </article>
-                            {/if}
+                                {/if}
+                            </div>
                         {/foreach}
                     </section>
                 </div>

@@ -6,13 +6,12 @@ $(document).ready(function(){
         slideMargin: 15
     });
 
+    // Send question.
     $(".btn-send-question").click(function() {
         var comment = $(".question-area").val();
         var auctionId = $("input[name=auction-id]").val();
         var token = $("input[name=token]").val();
         var userId = $("input[name=user-id]").val();
-
-        console.info(comment + ", " + auctionId + ", " + token + ", " + userId);
 
         var request = $.ajax({
             type: 'POST',
@@ -25,7 +24,6 @@ $(document).ready(function(){
                 "user-id": userId
             },
             success: function(data) {
-                console.log(data);
                 if(data['error']) {
                     $.magnificPopup.open({
                         items: {
@@ -33,10 +31,47 @@ $(document).ready(function(){
                             type: 'inline'
                         }
                     });
-                } else {
+                } else
                     $(".comment-list").prepend('<article class="row"> <div class="col-md-1 col-sm-1 hidden-xs"> <figure class="thumbnail"> <img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '" /> </figure> </div> <div class="col-md-10 col-sm-10 col-xs-12"> <div class="panel panel-default arrow left"> <div class="panel-body"> <div class="media-heading"> <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button> <a href="' + BASE_URL + ' pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a> ' + data['date'] + ' </div> <div class="panel-collapse collapse in" id="collapseComment"> <div class="media-body"> <p>' + data['comment'] + '</p> <div class="comment-meta"> <span><a href="#">delete</a></span> <span><a href="#">report</a></span> <span><a href="#">hide</a></span> <span><a href="#">reply</a></span> </div> </div> </div> </div> </div> </div> </article>');
-                }
             }
         });
-    })
+    });
+
+    // Delete question.
+    $(".delete-question").click(function() {
+        var questionId = $(this).parent().parent().parent().parent().parent().parent().parent().children().eq(0).val();
+        var userId = $("input[name=user-id]").val();
+        var questionAnswerDiv = $(this).parent().parent().parent().parent().parent().parent().parent().parent();
+
+        var request = $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'api/auction/question_delete.php',
+            data: {
+                "question-id": questionId,
+                "user-id": userId
+            }
+        });
+
+        request.done(function (response, textStatus, jqXHR) {
+            if(response.indexOf("success") >= 0) {
+                questionAnswerDiv.fadeOut(500, function() { questionAnswerDiv.remove(); });
+            } else {
+                $.magnificPopup.open({
+                    items: {
+                        src: '<div class="white-popup">' + response + '</div>',
+                        type: 'inline'
+                    }
+                });
+            }
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("The following error occured: " + textStatus + ": " + errorThrown);
+        });
+    });
+
+    // Hide question.
+    $(".hide-question").click(function() {
+        console.log("hiding");
+    });
 });
