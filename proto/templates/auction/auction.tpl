@@ -205,6 +205,7 @@
             <div class="row product-questions">
                 <div class="col-md-12">
                     <h2>Product Q&A</h2>
+                    {if ($seller.id != $userId)}
                         <form class="newQuestion" action="javascript:void(0);">
                             <div class="form-group">
                                 <label>Your question</label>
@@ -212,6 +213,7 @@
                             </div>
                             <button type="submit" class="btn btn-default btn-send-question">Send</button>
                         </form>
+                    {/if}
 
                     <section class="comment-list">
                         {foreach $questions as $question}

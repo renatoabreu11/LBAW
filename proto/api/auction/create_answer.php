@@ -36,7 +36,7 @@
     try {
         createAnswer($comment, $userId, $questionId);
     } catch(PDOException $e) {
-        $reply = array('error' => 'Error: couldn\'t insert answer.', 'PDOException' => $e->getMessage());
+        $reply = array('error' => 'Error: couldn\'t insert answer.');
         echo json_encode($reply);
         return;
     }

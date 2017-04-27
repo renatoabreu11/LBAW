@@ -79,7 +79,7 @@ function getQuestionsAnswers($auction_id){
                             JOIN "user" ON question.user_id = "user".id
                             JOIN auction ON question.auction_id = auction.id
                             WHERE auction_id = :auction_id
-                            ORDER BY question.id DESC');
+                            ORDER BY question.date DESC');
     $stmt->bindParam('auction_id', $auction_id);
     $stmt->execute();
     $questions = $stmt->fetchAll();
