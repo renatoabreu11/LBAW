@@ -23,5 +23,21 @@ $(document).ready(function(){
 	$('.auction_row').each(function() {
 		$(this).show();
 	});
+
+	setRankings();
     
 });
+
+function setRankings() {
+
+  $('.rateYo').each(function() {
+    var rating_ = parseFloat($(this).attr('data-rating'));
+    rating_ = (rating_ / 10.0) * 5; // 5 stars rating
+    $(this).rateYo({
+        rating: rating_,
+        starWidth: "17px",
+        readOnly: true
+      });
+  });
+
+}

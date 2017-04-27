@@ -4,7 +4,8 @@ $(document).ready(function(){
   setCountdown();
   setSearchRequest();
   setPagination();
-
+  setRankings();
+  
 });
 
 function setChangeListType() {
@@ -82,6 +83,7 @@ function setSearchRequest() {
             $('#pagination').attr('data-nr_pages', nr_pages);
             $('#pagination').twbsPagination('destroy');
             setPagination();
+            setRankings();
 
           },
           error: function(data){
@@ -110,6 +112,20 @@ function setPagination() {
 
           window.scrollTo(0, 0);
       }
+  });
+
+}
+
+function setRankings() {
+
+  $('.rateYo').each(function() {
+    var rating_ = parseFloat($(this).attr('data-rating'));
+    rating_ = (rating_ / 10.0) * 5; // 5 stars rating
+    $(this).rateYo({
+        rating: rating_,
+        starWidth: "17px",
+        readOnly: true
+      });
   });
 
 }

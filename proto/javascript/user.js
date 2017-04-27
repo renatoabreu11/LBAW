@@ -130,4 +130,16 @@ $(document).ready(function() {
             console.error("The following error occured: " + textStatus + ": " + errorThrown);
         });
     });
+
+    // set star ratings of user
+    $('.rateYo').each(function() {
+        var rating_ = parseFloat($(this).attr('data-rating'));
+        rating_ = (rating_ / 10.0) * 5; // 5 stars rating
+        $(this).rateYo({
+            rating: rating_,
+            starWidth: "17px",
+            readOnly: true
+          });
+    });
+
 });
