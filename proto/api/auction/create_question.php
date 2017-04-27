@@ -33,16 +33,16 @@
 
     $comment = strip_tags($_POST['comment']);
 
-  /*  try {
+    try {
         createQuestion($comment, $loggedUserId, $auctionId);
     } catch(PDOException $e) {
         $reply = array('error' => 'error: Couldn\'t insert question.');
         echo json_encode($reply);
         return;
-    }*/
+    }
 
     $user = getUser($userId);
-    $reply = array('comment' => $comment, 'user-id' => $loggedUserId, 'username' => $user['username'], 'picture' => $user['profile_pic'], 'date' => date('Y-m-d H:i:s'));
+    $reply = array('comment' => $comment, 'user-id' => $loggedUserId, 'username' => $user['username'], 'profile_pic' => $user['profile_pic'], 'date' => date('Y-m-d H:i:s'));
     echo json_encode($reply);
 
 ?>

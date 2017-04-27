@@ -81,7 +81,7 @@
 						</span>
 						<input type="text" class="form-control" placeholder="Search for auction..." id="inputSearch">
 				    </div>
-	              <h6 style="color: darkgray;">Showing all results matching "{$search}"</h6>
+	              <h6 style="color: darkgray;">Showing all results matching "{$textSearch}"</h6>
 
 	              <div class="row">
 	                <div class="col-sm-8 col-xs-12">
