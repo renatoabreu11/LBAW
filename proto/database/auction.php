@@ -208,41 +208,6 @@ function validCategory($category){
     return $stmt->fetch()['?column?'];
 }
 
-function createQuestion($message, $userId, $auctionId) {
-    global $conn;
-    $stmt = $conn->prepare('INSERT INTO question(date, message, user_id, auction_id)
-                            VALUES(now(), :message, :user_id, :auction_id)');
-    $stmt->bindParam('message', $message);
-    $stmt->bindParam('user_id', $userId);
-    $stmt->bindParam('auction_id', $auctionId);
-    $stmt->execute();
-}
-
-function createAnswer($message, $userId, $questionId) {
-    global $conn;
-
-    // First it verifies if the question already has an anwser (security reasons).
-    $stmt = $conn->prepare('SELECT count(*)
-                            FROM answer
-                            JOIN question ON answer.question_id = question.id
-                            WHERE question.id = :question_id');
-    $stmt->bindParam('question_id', $questionId);
-    $stmt->execute();
-    $isValid = $stmt->fetch()['count'];
-
-    if(!$isValid == 0)
-        return false;
-
-    $stmt = $conn->prepare('INSERT INTO answer(date, message, question_id, user_id)
-                            VALUES(now(), :message, :question_id, :user_id)');
-    $stmt->bindParam('message', $message);
-    $stmt->bindParam('question_id', $questionId);
-    $stmt->bindParam('user_id', $userId);
-    $stmt->execute();
-
-    return true;
-}
-
 function createProduct($category, $product_name, $description, $condition){
     global $conn;
     $stmt = $conn->prepare('INSERT INTO product(type, name, description, condition)
@@ -262,20 +227,6 @@ function getLastAuctionID(){
     $stmt = $conn->prepare('SELECT MAX(id) FROM auction');
     $stmt->execute();
     return $stmt->fetch()['max'];
-}
-
-function createAuction($product_id, $user_id, $start_bid, $start_date, $end_date, $type, $quantity, $questions_section){
-    global $conn;
-    $stmt = $conn->prepare('INSERT INTO auction(product_id, user_id, start_bid, curr_bid, start_date, end_date, date, type, quantity, questions_section)
-                            VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?)');
-    $stmt->execute(array($product_id, $user_id, $start_bid, $start_bid, $start_date, $end_date, $type, $quantity, $questions_section));
-}
-
-function createWatchlist($auction_id, $user_id, $notifications){
-    global $conn;
-    $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
-                            VALUES(?, ?, now(), ?)');
-    $stmt->execute(array($auction_id, $user_id, $notifications));
 }
 
 function validAuctionType($auction_type){
@@ -312,6 +263,66 @@ function isOwner($user_id, $auction_id){
     $stmt->execute(array($auction_id, $user_id));
     $result = $stmt->fetch();
     return $result !== false;
+}
+
+/************************************* INSERTS *************************************/
+
+function createAuction($product_id, $user_id, $start_bid, $start_date, $end_date, $type, $quantity, $questions_section){
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO auction(product_id, user_id, start_bid, curr_bid, start_date, end_date, date, type, quantity, questions_section)
+                            VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?)');
+    $stmt->execute(array($product_id, $user_id, $start_bid, $start_bid, $start_date, $end_date, $type, $quantity, $questions_section));
+}
+
+function createWatchlist($auction_id, $user_id, $notifications){
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
+                            VALUES(?, ?, now(), ?)');
+    $stmt->execute(array($auction_id, $user_id, $notifications));
+}
+
+function createQuestion($message, $userId, $auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO question(date, message, user_id, auction_id)
+                            VALUES(now(), :message, :user_id, :auction_id)');
+    $stmt->bindParam('message', $message);
+    $stmt->bindParam('user_id', $userId);
+    $stmt->bindParam('auction_id', $auctionId);
+    $stmt->execute();
+}
+
+function createAnswer($message, $userId, $questionId) {
+    global $conn;
+
+    // First it verifies if the question already has an anwser (security reasons).
+    $stmt = $conn->prepare('SELECT count(*)
+                            FROM answer
+                            JOIN question ON answer.question_id = question.id
+                            WHERE question.id = :question_id');
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->execute();
+    $isValid = $stmt->fetch()['count'];
+
+    if(!$isValid == 0)
+        return false;
+
+    $stmt = $conn->prepare('INSERT INTO answer(date, message, question_id, user_id)
+                            VALUES(now(), :message, :question_id, :user_id)');
+    $stmt->bindParam('message', $message);
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->bindParam('user_id', $userId);
+    $stmt->execute();
+
+    return true;
+}
+
+function createQuestionReport($questionId, $message) {
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO question_report(date, message, question_id)
+                            VALUES(now(), :message, :question_id)');
+    $stmt->bindParam('message', $message);
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->execute();
 }
 
 /************************************* DELETES *************************************/

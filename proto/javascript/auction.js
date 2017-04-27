@@ -121,6 +121,7 @@ $(document).ready(function(){
         });
     });
 
+    // Edit answer.
     $(".edit-answer").click(function() {
         var answerMessageHTML = $(this).parent().prev().children();
         var comment = answerMessageHTML.eq(0).text();
@@ -225,6 +226,50 @@ $(document).ready(function(){
                     }
                 });
             }
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("The following error occured: " + textStatus + ": " + errorThrown);
+        });
+    });
+
+    //Report question.
+    $(".report-question").click(function() {
+        var questionId = $(this).closest("article").children().eq(0).val();
+
+        $(".btn-send-question-report").click(function() {
+            var comment = $(".report-question-comment").val();
+            var closeBtn = $(this).closest(".modal-body").next().children().eq(0);
+
+            var request = $.ajax({
+                type: 'POST',
+                url: BASE_URL + 'api/auction/report_question.php',
+                data: {
+                    "question-id": questionId,
+                    "comment": comment,
+                    "user-id": userId,
+                    "token": token
+                }
+            });
+
+            request.done(function (response, textStatus, jqXHR) {
+                console.info("Response: " + response);
+                //closeBtn.click();
+                if(response.indexOf("success") >= 0) {
+
+                } else {
+                    $.magnificPopup.open({
+                        items: {
+                            src: '<div class="white-popup">' + response + '</div>',
+                            type: 'inline'
+                        }
+                    });
+                }
+            });
+
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("The following error occured: " + textStatus + ": " + errorThrown);
+            });
         });
     });
 
