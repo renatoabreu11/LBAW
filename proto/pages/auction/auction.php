@@ -33,7 +33,7 @@
     $smarty->assign("questions", $questions);
     $smarty->assign("similarAuctions", $similarAuctions);
     $smarty->assign("token", $_SESSION['token']);    
-    $smarty->assign("userId", $_SESSION['user_id']);    
+    $smarty->assign("userId", $_SESSION['user_id']);
 
     $smarty->display('auction/auction.tpl');
 

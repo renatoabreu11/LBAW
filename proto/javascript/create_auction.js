@@ -162,7 +162,7 @@ $(document).ready(function() {
 
 
     $("#input-24").fileinput({
-        uploadUrl: BASE_URL + "api/auction/upload_images", // server upload action
+        uploadUrl: BASE_URL + "api/auction/upload_images.php", // server upload action
         uploadAsync: true,
         overwriteInitial: false,
         maxFileSize: 10000,
@@ -179,11 +179,13 @@ $(document).ready(function() {
         uploadExtraData: function() {  // callback example
             var out = {}, key, i = 0;
             $('.kv-input:visible').each(function() {
+                console.log(this);
                 $el = $(this);
                 key = $el.hasClass('kv-new') ? 'new_' + i : 'init_' + i;
                 out[key] = $el.val();
                 i++;
             });
+            console.log(out)
             return out;
         }
     });
