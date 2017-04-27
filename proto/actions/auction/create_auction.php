@@ -147,7 +147,7 @@ if (!empty($_POST['token'])) {
             }
 
             $_SESSION['success_messages'][] = 'Auction created with success!';
-            header("Location: $BASE_URL" . 'pages/auction/auction.php?id=' . $auction_id);
+            header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auction_id);
         }
 
     } else {

@@ -130,24 +130,6 @@ $(document).ready(function() {
         '   {size} {actions}\n' +
         '</div>';
 
-    var main = "<div class=\'input-group {class}\'>\n" +
-        "   <div class=\'input-group-btn\'>\n" +
-        "       {browse}\n" +
-        "       {remove}\n" +
-        "   </div>\n" +
-        "   {caption}\n" +
-        "</div>" + "{preview}\n";
-
-    var actions=  '<div class="file-actions">\n' +
-    '    <div class="file-footer-buttons">\n' +
-    '        {delete} {zoom}' +
-    '    </div>\n' +
-    '    {drag}\n' +
-    '    <div class="file-upload-indicator" title="{indicatorTitle}">{indicator}</div>\n' +
-    '    <div class="clearfix"></div>\n' +
-    '</div>';
-
-
     $("#input-24").fileinput({
         uploadUrl: BASE_URL + "api/auction/upload_images.php", // server upload action
         uploadAsync: false,
@@ -155,7 +137,7 @@ $(document).ready(function() {
         maxFileSize: 10000,
         allowedFileExtensions: ["png", "jpg", "bmp", "jpeg"],
         previewClass: "bg-warning",
-        layoutTemplates: {actions: actions, main1: main, footer: footerTemplate, size: '<samp><small>({sizeText})</small></samp>',},
+        layoutTemplates: {footer: footerTemplate, size: '<samp><small>({sizeText})</small></samp>'},
         minFileCount: 1,
         maxFileCount: 10,
         previewThumbTags: {
@@ -171,6 +153,8 @@ $(document).ready(function() {
                 out[key] = $el.val();
                 i++;
             });
+            out['product_id'] = $("#product_id").val();
+            out['token'] = $("#token").val();
             return out;
         }
     });

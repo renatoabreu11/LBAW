@@ -290,6 +290,15 @@ function getSimilarAuctions($auctionId) {
     return $stmt->fetchAll();
 }
 
+function isOwner($user_id, $auction_id){
+    global $conn;
+    $stmt = $conn->prepare('SELECT * from auction
+                            WHERE auction.id = ? AND auction.user_id = ?');
+    $stmt->execute(array($auction_id, $user_id));
+    $result = $stmt->fetch();
+    return $result !== false;
+}
+
 /************************************* DELETES *************************************/
 
 function deleteQuestion($questionId) {

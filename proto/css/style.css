@@ -977,6 +977,10 @@ a.navlink {
     }
 }
 
+.image_upload {
+    padding-bottom: 2em;
+}
+
 /******************* Admin sign in ***************************/
 
 #adminLogin {
