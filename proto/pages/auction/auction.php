@@ -35,7 +35,7 @@
     $smarty->assign("questions", $questions);
     $smarty->assign("similarAuctions", $similarAuctions);
     $smarty->assign("token", $_SESSION['token']);    
-    $smarty->assign("userId", $_SESSION['user-id']);    
+    $smarty->assign("userId", $_SESSION['user_id']);
     echo "cenas: ";
     var_dump($id);
 
