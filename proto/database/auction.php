@@ -78,7 +78,8 @@ function getQuestionsAnswers($auction_id){
                             FROM question
                             JOIN "user" ON question.user_id = "user".id
                             JOIN auction ON question.auction_id = auction.id
-                            WHERE auction_id = :auction_id');
+                            WHERE auction_id = :auction_id
+                            ORDER BY question.id DESC');
     $stmt->bindParam('auction_id', $auction_id);
     $stmt->execute();
     $questions = $stmt->fetchAll();
@@ -231,7 +232,7 @@ function createQuestion($message, $userId, $auctionId) {
 
 function createAnswer($message, $userId, $questionId) {
     global $conn;
-    $stmt = $conn->prepare('INSERT INTO question(date, message, question_id, user_id)
+    $stmt = $conn->prepare('INSERT INTO answer(date, message, question_id, user_id)
                             VALUES(now(), :message, :question_id, :user_id)');
     $stmt->bindParam('message', $message);
     $stmt->bindParam('question_id', $questionId);

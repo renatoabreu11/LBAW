@@ -2,35 +2,54 @@
 
     include_once("../../config/init.php");
     include_once($BASE_DIR . "database/auction.php");
+    include_once($BASE_DIR . "database/users.php");
 
-    if(!$_POST['user-id'] || !$_POST['question_id'] || !$_POST['comment']) {
-        echo "error: some fields are not set.";
+    if(!$_POST['token'] || !$_POST['user-id'] || !$_POST['comment'] || !$_POST['question-id']) {
+        $reply = array('error' => 'Error: some fields are not set.');
+        echo json_encode($reply);
         return;
     }
 
-    $userId = trim(strip_tags($_POST['id']));
-    $loggedUserId = $_SESSION['user-id'];
+    if (!hash_equals($_SESSION['token'], $_POST['token'])) {
+        $reply = array('error' => 'Error: tokens are not the same.');
+        echo json_encode($reply);
+        return;
+    }
 
-    if($userId != $loggedUserId) {
-        echo "error: logged in user and sender user are not the same.";
+    $loggedUserId = $_SESSION['user_id'];
+    $userId = trim(strip_tags($_POST['user-id']));
+    if($loggedUserId != $userId) {
+        $reply = array('error' => 'Error: user id is not the same.');
+        echo json_encode($reply);
         return;
     }
 
     $questionId = trim(strip_tags($_POST['question-id']));
-    $comment = strip_tags($_POST['comment']);
-
-    if(!is_numeric($auctionId)) {
-        echo "error: question id is not numeric.";
+    if(!is_numeric($questionId)) {
+        $reply = array('error' => 'Error: question id is not numeric.');
+        echo json_encode($reply);
         return;
     }
+
+    $comment = strip_tags($_POST['comment']);
 
     try {
         createAnswer($comment, $userId, $questionId);
     } catch(PDOException $e) {
-        echo "error: couldn\'t insert new question.";
+        $reply = array('error' => 'Error: couldn\'t insert answer.', 'PDOException' => $e->getMessage());
+        echo json_encode($reply);
         return;
     }
 
-    echo "success: question successfully posted.";
+    try {
+        $user = getUser($userId);
+    } catch(PDOException $e) {
+        $reply = array('error' => 'Error: couldn\'t get user.');
+        echo json_encode($reply);
+        return;
+    }
+
+    $reply = array('username' => $user['username'], 'profile_pic' => $user['profile_pic'], 'date' => date('Y-m-d H:i:s'));
+    echo json_encode($reply);
 
 ?>

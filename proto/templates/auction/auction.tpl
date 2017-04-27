@@ -197,15 +197,17 @@
 
             <hr>
 
+            <!-- Accessible information -->
+            <input type="hidden" name="auction-id" value="{$auction.id}">
+            <input type="hidden" name="token" value="{$token}">
+            <input type="hidden" name="user-id" value="{$userId}">
+            
             <div class="row product-questions">
                 <div class="col-md-12">
                     <h2>Product Q&A</h2>
                         <form class="newQuestion" action="javascript:void(0);">
                             <div class="form-group">
-                                <label>Your Question</label>
-                                <input type="hidden" name="auction-id" value="{$auction.id}">
-                                <input type="hidden" name="token" value="{$token}">
-                                <input type="hidden" name="user-id" value="{$userId}">
+                                <label>Your question</label>
                                 <textarea name="comment" class="form-control question-area" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn btn-default btn-send-question">Send</button>
@@ -239,10 +241,18 @@
                                                             {/if}
                                                             <span><a href="#">report</a></span>
                                                             <span class="hide-question underline-text-hover">hide</span>
-                                                            {if ($seller.id == $userId)}
-                                                                <span><a href="#">reply</a></span>
+                                                            {if ($seller.id == $userId && !$question.answer_message)}
+                                                                <span class="reply-question underline-text-hover">reply</span>
                                                             {/if}
                                                         </div>
+                                                        {if ($seller.id == $userId && !$question.answer_message)}
+                                                            <form class="new-answer" action="javascript:void(0);">    
+                                                                <div class="form-group">        
+                                                                    <textarea name="comment" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>   
+                                                                </div>    
+                                                                <button type="submit" class="btn btn-default btn-answer-question">Send</button>
+                                                            </form>
+                                                        {/if}
                                                     </div>
                                                 </div>
                                             </div>
