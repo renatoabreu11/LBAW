@@ -14,7 +14,7 @@
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 0) }
-                 <a href="#">{$category.unnest}</a><br>
+                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>

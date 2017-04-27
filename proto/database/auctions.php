@@ -13,7 +13,7 @@ function getMostPopularAuctions() {
                             WHERE now() < auction.end_date
                             GROUP BY auction.id, product.name, "user".username, "user".rating, auction.curr_bid, auction.end_date, "user".id
                             ORDER BY COUNT(*) DESC
-                            LIMIT 15;');
+                            LIMIT 10;');
     $stmt->execute();
     return $stmt->fetchAll();
 }
@@ -54,11 +54,46 @@ function searchAuctions($textSearch) {
                             FROM auction, product, "user",
                                   plainto_tsquery(\'english\', :textSearch) AS query,
                                   to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
-                            WHERE auction.product_id = product.id AND query @@ textsearch AND now() < auction.end_date
+                            WHERE auction.product_id = product.id 
+                            AND query @@ textsearch 
+                            AND now() < auction.end_date
                             AND auction.user_id = "user".id
-                            ORDER BY rank DESC
-                            LIMIT 10;');
+                            ORDER BY rank DESC');
     $stmt->bindParam('textSearch', $textSearch);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function searchAuctionsByCategory($category) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating,
+                            auction.curr_bid, auction.end_date, "user".id as user_id
+                            FROM auction, product, "user"
+                            WHERE auction.product_id = product.id
+                            AND auction.user_id = "user".id
+                            AND now() < auction.end_date
+                            AND :category = ANY(product.type)');
+    $stmt->bindParam('category', $category);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result;
+}
+
+function searchAuctionsByCategoryAndName($textSearch, $category) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank
+                            FROM auction, product, "user",
+                                  plainto_tsquery(\'english\', :textSearch) AS query,
+                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
+                            WHERE auction.product_id = product.id 
+                            AND query @@ textsearch 
+                            AND now() < auction.end_date
+                            AND auction.user_id = "user".id
+                            AND :category = ANY(product.type)
+                            ORDER BY rank DESC;');
+    $stmt->bindParam('textSearch', $textSearch);
+    $stmt->bindParam('category', $category);
     $stmt->execute();
     $result = $stmt->fetchAll();
     return $result;
