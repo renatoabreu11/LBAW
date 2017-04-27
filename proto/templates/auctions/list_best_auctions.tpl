@@ -14,21 +14,21 @@
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 0) }
-                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}">{$category.unnest}</a><br>
+                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 1) }
-                 <a href="#">{$category.unnest}</a><br>
+                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 2) }
-                 <a href="#">{$category.unnest}</a><br>
+                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
@@ -43,7 +43,7 @@
         <span class="thumbnail text-center">
           <h4>{$mostRecentAuction.product_name}</h4>
           <img src="{$BASE_URL}images/products/{$mostRecentAuction.image_filename}" class="animated bounce infinite" alt="...">
-          <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;">Watch Auction</a></button>
+          <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}&page=1" style="color: white;">Watch Auction</a></button>
         </span>
     </div>
 

@@ -110,17 +110,29 @@
 		          	{include file='auctions/list_thumbnail.tpl'} 
 		          </div>
 		           
-		           <div class="text-center">
-	                <ul class="pagination">
-	                  <li class="disabled"><a href="#">«</a></li>
-	                  <li class="active"><a href="#">1</a></li>
-	                  <li><a href="#">2</a></li>
-	                  <li><a href="#">3</a></li>
-	                  <li><a href="#">4</a></li>
-	                  <li><a href="#">5</a></li>
-	                  <li><a href="#">»</a></li>
-	                </ul>
-	              </div>
+		         {if $nr_pages > 1}
+		            <div class="row text-center">
+		                <ul class="pagination">
+		                    {if $curr_page == 1}
+		                        <li class="disabled"><a>«</a></li>
+		                    {else}
+		                        <li ><a href="{$curr_url_without_page}&page={$curr_page - 1}">«</a></li>
+		                    {/if}
+		                    {for $i=1; $i <= $nr_pages; $i++}
+		                        {if $curr_page == $i}
+		                            <li class="active"><a>{$i} <span class="sr-only">(current)</span></a></li>
+		                        {else}
+		                            <li ><a href="{$curr_url_without_page}&page={$i}">{$i} </a></li>
+		                        {/if}
+		                    {/for}
+		                    {if $curr_page == $nr_pages}
+		                        <li class="disabled"><a>»</a></li>
+		                    {else}
+		                        <li ><a href="{$curr_url_without_page}&page={$curr_page + 1}">»</a></li>
+		                    {/if}
+		                </ul>
+		            </div>
+		        {/if}
 	       		</div>
 	            </div>
 	        </div>

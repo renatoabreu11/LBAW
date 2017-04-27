@@ -41,6 +41,7 @@
                 <form class="navbar-form navbar-left" action="{$BASE_URL}pages/auctions/auctions.php" method="get">
                     <div class="form-group inner-addon left-addon">
                         <i class="glyphicon glyphicon-search"></i>
+                        <input type="text" name="page" value="1" hidden>
                         <input type="text" class="form-control" placeholder="Search" name="search">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
