@@ -202,22 +202,9 @@ function getWinningUser($auctionId) {
 
 function validCategory($category){
     global $conn;
-    $stmt = $conn->prepare('SELECT similarAuction.id, similarProduct.name, (SELECT image.filename
-                                                                            FROM image
-                                                                            WHERE similarProduct.id = image.product_id
-                                                                            LIMIT 1
-                                                                            ) AS image
-                            FROM auction originalAuction
-                            JOIN auction similarAuction ON originalAuction.id != similarAuction.id
-                            JOIN product originalProduct ON originalAuction.product_id = originalProduct.id
-                            JOIN product similarProduct ON similarAuction.product_id = similarProduct.id
-                            WHERE similarAuction.type = originalAuction.type
-                            AND similarProduct.type && originalProduct.type
-                            AND originalAuction.id = :original_auction_id
-                            LIMIT 8');
-    $stmt->bindParam('original_auction_id', $auctionId);
-    $stmt->execute();
-    return $stmt->fetchAll();
+    $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::category_type))::text)');
+    $stmt->execute(array($category));
+    return $stmt->fetch()['?column?'];
 }
 
 function createQuestion($message, $userId, $auctionId) {
@@ -238,6 +225,41 @@ function createAnswer($message, $userId, $questionId) {
     $stmt->bindParam('question_id', $questionId);
     $stmt->bindParam('user_id', $userId);
     $stmt->execute();
+}
+
+function createProduct($category, $product_name, $description, $condition){
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO product(type, name, description, condition)
+                            VALUES(?, ?, ?, ?)');
+    $stmt->execute(array( $category, $product_name, $description, $condition));
+}
+
+function getLastProductID(){
+    global $conn;
+    $stmt = $conn->prepare('SELECT MAX(id) FROM product');
+    $stmt->execute();
+    return $stmt->fetch()['max'];
+}
+
+function getLastAuctionID(){
+    global $conn;
+    $stmt = $conn->prepare('SELECT MAX(id) FROM auction');
+    $stmt->execute();
+    return $stmt->fetch()['max'];
+}
+
+function createAuction($product_id, $user_id, $start_bid, $start_date, $end_date, $type, $quantity, $questions_section){
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO auction(product_id, user_id, start_bid, curr_bid, start_date, end_date, date, type, quantity, questions_section)
+                            VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?)');
+    $stmt->execute(array($product_id, $user_id, $start_bid, $start_bid, $start_date, $end_date, $type, $quantity, $questions_section));
+}
+
+function createWatchlist($auction_id, $user_id, $notifications){
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
+                            VALUES(?, ?, now(), ?)');
+    $stmt->execute(array($auction_id, $user_id, $notifications));
 }
 
 function validAuctionType($auction_type){

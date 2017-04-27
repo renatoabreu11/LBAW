@@ -55,11 +55,6 @@
                 <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
             </div>
 
-            <div class="form-group">
-                <label> Gallery<span>*</span> </label>
-                <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
-            </div>
-
             <button id="activate-step-2" class="btn btn-primary pull-right">Next Step</button>
         </div>
     </div>

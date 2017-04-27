@@ -8,11 +8,6 @@ $(document).ready(function() {
         return (value !== "" && (value === "Sealed Bid" || value === "Default" || value === "Dutch"));
     }, "The auction type must be selected");
 
-    $.validator.addMethod("numberOfImages", function(value, element, arg){
-        var images = $("#input-24").val();
-        return (images !== "");
-    }, "At least one image must be selected.");
-
     $("#createAuctionForm").validate({
         rules:
             {
@@ -34,9 +29,6 @@ $(document).ready(function() {
                 },
                 "category[]":{
                     productCategoriesSelected: true
-                },
-                "input24[]":{
-                    numberOfImages: true
                 },
                 base_price: {
                     required: true,
@@ -89,12 +81,7 @@ $(document).ready(function() {
                 error.insertAfter(parentDiv);
             }
         },
-        submitHandler: createAuction
     });
-
-    function createAuction(){
-        $('#input-24').fileinput('upload');
-    }
 
     var navListItems = $('ul.setup-panel li a'), allWells = $('.setup-content');
     allWells.hide();
@@ -114,8 +101,8 @@ $(document).ready(function() {
 
     $('ul.setup-panel li.active a').trigger('click');
 
-    $('#activate-step-2').on('click', function (e) {
-        if($("#product_name").valid() && $("#category").valid() && $("#description").valid() && $("#condition").valid() && $("#input-24").valid()){
+    $('#activate-step-2').on('click', function () {
+        if($("#product_name").valid() && $("#category").valid() && $("#description").valid() && $("#condition").valid()){
             $('ul.setup-panel li:eq(1)').removeClass('disabled');
             $('ul.setup-panel li a[href="#step-2"]').trigger('click');
             $(this).remove();
@@ -163,7 +150,7 @@ $(document).ready(function() {
 
     $("#input-24").fileinput({
         uploadUrl: BASE_URL + "api/auction/upload_images.php", // server upload action
-        uploadAsync: true,
+        uploadAsync: false,
         overwriteInitial: false,
         maxFileSize: 10000,
         allowedFileExtensions: ["png", "jpg", "bmp", "jpeg"],
@@ -179,13 +166,11 @@ $(document).ready(function() {
         uploadExtraData: function() {  // callback example
             var out = {}, key, i = 0;
             $('.kv-input:visible').each(function() {
-                console.log(this);
                 $el = $(this);
-                key = $el.hasClass('kv-new') ? 'new_' + i : 'init_' + i;
+                key = $el.hasClass('kv-new') ? 'image_' + i : 'init_' + i;
                 out[key] = $el.val();
                 i++;
             });
-            console.log(out)
             return out;
         }
     });
