@@ -205,6 +205,7 @@
             <div class="row product-questions">
                 <div class="col-md-12">
                     <h2>Product Q&A</h2>
+                    {if ($seller.id != $userId)}
                         <form class="newQuestion" action="javascript:void(0);">
                             <div class="form-group">
                                 <label>Your question</label>
@@ -212,6 +213,7 @@
                             </div>
                             <button type="submit" class="btn btn-default btn-send-question">Send</button>
                         </form>
+                    {/if}
 
                     <section class="comment-list">
                         {foreach $questions as $question}
@@ -240,7 +242,6 @@
                                                                 <span class="delete-question underline-text-hover">delete</span>
                                                             {/if}
                                                             <span><a href="#">report</a></span>
-                                                            <span class="hide-question underline-text-hover">hide</span>
                                                             {if ($seller.id == $userId && !$question.answer_message)}
                                                                 <span class="reply-question underline-text-hover">reply</span>
                                                             {/if}
@@ -261,6 +262,7 @@
                                 </article>
                                 {if ($question.answer_message)}
                                 <article class="row">
+                                    <input type="hidden" name="answer-id" value="{$question.answer_id}">
                                     <div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs">
                                         <figure class="thumbnail">
                                             <img class="img-responsive" src="{$BASE_URL}images/users/{$seller.profile_pic}"/>
@@ -280,10 +282,9 @@
                                                         <p>{$question.answer_message}</p>
                                                         <div class="comment-meta">
                                                             {if ($seller.id == $userId)}
-                                                                <span><a href="#">delete</a></span>
+                                                                <span class="delete-answer underline-text-hover">delete</span>
                                                             {/if}
                                                             <span><a href="#">report</a></span>
-                                                            <span><a href="#">hide</a></span>
                                                         </div>
                                                     </div>
                                                 </div>

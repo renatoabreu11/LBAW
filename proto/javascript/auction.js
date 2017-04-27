@@ -1,4 +1,10 @@
+var token;
+var userId;
+
 $(document).ready(function(){
+    token = $('input[name=token]').val();
+    userId = $('input[name=user-id]').val();
+
     $('.slider1').bxSlider({
         slideWidth: 200,
         minSlides: 2,
@@ -10,8 +16,6 @@ $(document).ready(function(){
     $(".btn-send-question").click(function() {
         var comment = $(".question-area").val();
         var auctionId = $("input[name=auction-id]").val();
-        var token = $("input[name=token]").val();
-        var userId = $("input[name=user-id]").val();
 
         var request = $.ajax({
             type: 'POST',
@@ -32,61 +36,14 @@ $(document).ready(function(){
                         }
                     });
                 } else
-                    $(".comment-list").prepend('<article class="row"> <div class="col-md-1 col-sm-1 hidden-xs"> <figure class="thumbnail"> <img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '" /> </figure> </div> <div class="col-md-10 col-sm-10 col-xs-12"> <div class="panel panel-default arrow left"> <div class="panel-body"> <div class="media-heading"> <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button> <a href="' + BASE_URL + ' pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a> ' + data['date'] + ' </div> <div class="panel-collapse collapse in" id="collapseComment"> <div class="media-body"> <p>' + data['comment'] + '</p> <div class="comment-meta"> <span><a href="#">delete</a></span> <span><a href="#">report</a></span> <span><a href="#">hide</a></span> <span><a href="#">reply</a></span> </div> </div> </div> </div> </div> </div> </article>');
+                    var content = '<article class="row"> <div class="col-md-1 col-sm-1 hidden-xs"> <figure class="thumbnail"> <img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '" /> </figure> </div> <div class="col-md-10 col-sm-10 col-xs-12"> <div class="panel panel-default arrow left"> <div class="panel-body"> <div class="media-heading"> <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button> <a href="' + BASE_URL + ' pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a> ' + data['date'] + ' </div> <div class="panel-collapse collapse in" id="collapseComment"> <div class="media-body"> <p>' + data['comment'] + '</p> <div class="comment-meta"> <span><a href="#">delete</a></span> <span><a href="#">report</a></span> <span><a href="#">hide</a></span> <span><a href="#">reply</a></span> </div> </div> </div> </div> </div> </div> </article>';
+                    $(content).hide().appendTo(".comment-list").fadeIn(500);
             }
         });
     });
 
-    // Delete question.
-    $(".delete-question").click(function() {
-        var questionId = $(this).parent().parent().parent().parent().parent().parent().parent().children().eq(0).val();
-        var userId = $("input[name=user-id]").val();
-        var questionAnswerDiv = $(this).parent().parent().parent().parent().parent().parent().parent().parent();
-
-        var request = $.ajax({
-            type: 'POST',
-            url: BASE_URL + 'api/auction/question_delete.php',
-            data: {
-                "question-id": questionId,
-                "user-id": userId
-            }
-        });
-
-        request.done(function (response, textStatus, jqXHR) {
-            if(response.indexOf("success") >= 0) {
-                questionAnswerDiv.fadeOut(500, function() { questionAnswerDiv.remove(); });
-            } else {
-                $.magnificPopup.open({
-                    items: {
-                        src: '<div class="white-popup">' + response + '</div>',
-                        type: 'inline'
-                    }
-                });
-            }
-        });
-
-        request.fail(function (jqXHR, textStatus, errorThrown) {
-            console.error("The following error occured: " + textStatus + ": " + errorThrown);
-        });
-    });
-
-    // Hide question.
-    $(".hide-question").click(function() {
-        console.log("hiding");
-    });
-
-    // Hides the reply box.
-    $(".new-answer").toggle();
-
-    // Reply (toggles reply form).
-    $(".reply-question").click(function() {
-        $(this).parent().next().toggle();
-    });
-
-    // Send answer (here because we're referencing something just created above, the send button).
+    // Send answer.
     $(".btn-answer-question").click(function() {
-            var token = $('input[name=token]').val();
-            var userId = $('input[name=user-id]').val();
             var comment = $(this).prev().children().eq(0).val();
             var questionArticle = $(this).closest("article");
             var questionId = questionArticle.children().eq(0).val();
@@ -118,4 +75,76 @@ $(document).ready(function(){
                 }
             });
         });    
+    });
+
+    // Delete question.
+    $(".delete-question").click(function() {
+        var questionArticle = $(this).closest("article");
+        var questionId = questionArticle.children().eq(0).val();
+        var questionAnswerDiv = questionArticle.parent();
+
+        var request = $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'api/auction/question_delete.php',
+            data: {
+                "question-id": questionId,
+                "user-id": userId,
+                "token": token
+            }
+        });
+
+        request.done(function (response, textStatus, jqXHR) {
+            if(response.indexOf("success") >= 0) {
+                questionAnswerDiv.fadeOut(500, function() { questionAnswerDiv.remove(); });
+            } else {
+                $.magnificPopup.open({
+                    items: {
+                        src: '<div class="white-popup">' + response + '</div>',
+                        type: 'inline'
+                    }
+                });
+            }
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("The following error occured: " + textStatus + ": " + errorThrown);
+        });
+    });
+
+    // Delete answer.
+    $(".delete-answer").click(function() {
+        var article = $(this).closest("article");
+        var answerId = article.children().eq(0).val();
+
+        var request = $.ajax({
+            type: 'POST',
+            url: BASE_URL + 'api/auction/answer_delete.php',
+            data: {
+                "answer-id": answerId,
+                "user-id": userId,
+                "token": token
+            }
+        });
+
+        request.done(function (response, textStatus, jqXHR) {
+            console.info(response);
+            if(response.indexOf("success") >= 0) {
+                article.fadeOut(500, function() { article.remove() });
+            } else {
+                $.magnificPopup.open({
+                    items: {
+                        src: '<div class="white-popup">' + response + '</div>',
+                        type: 'inline'
+                    }
+                });
+            }
+        });
+    });
+
+    // Hides the reply box.
+    $(".new-answer").toggle();
+
+    // Reply (toggles reply form).
+    $(".reply-question").click(function() {
+        $(this).parent().next().toggle();
     });

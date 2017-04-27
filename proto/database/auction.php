@@ -79,14 +79,14 @@ function getQuestionsAnswers($auction_id){
                             JOIN "user" ON question.user_id = "user".id
                             JOIN auction ON question.auction_id = auction.id
                             WHERE auction_id = :auction_id
-                            ORDER BY question.id DESC');
+                            ORDER BY question.date DESC');
     $stmt->bindParam('auction_id', $auction_id);
     $stmt->execute();
     $questions = $stmt->fetchAll();
 
     for ($i = 0; $i < count($questions); $i++) {
         $question_id = $questions[$i]['id'];
-        $stmt = $conn->prepare('SELECT answer.message, answer.date
+        $stmt = $conn->prepare('SELECT answer.message, answer.date, answer.id
                                 FROM answer
                                 WHERE question_id = :question_id');
         $stmt->bindParam('question_id', $question_id);
@@ -94,6 +94,7 @@ function getQuestionsAnswers($auction_id){
         $answer = $stmt->fetch();
         $questions[$i]["answer_message"] = $answer['message'];
         $questions[$i]["answer_date"] = $answer['date'];
+        $questions[$i]["answer_id"] = $answer['id'];
     }
     $conn->commit();
     return $questions;
@@ -296,5 +297,13 @@ function deleteQuestion($questionId) {
     $stmt = $conn->prepare('DELETE FROM question
                             WHERE id = :id');
     $stmt->bindParam('id', $questionId);
+    $stmt->execute();
+}
+
+function deleteAnswer($answerId) {
+    global $conn;
+    $stmt = $conn->prepare('DELETE FROM answer
+                            WHERE id = :id');
+    $stmt->bindParam('id', $answerId);
     $stmt->execute();
 }
