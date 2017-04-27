@@ -50,7 +50,9 @@ $(document).ready(function() {
 
         // Callback handler that will be called on success
         request.done(function (response, textStatus, jqXHR){
-            if(response === "Login Successful!"){
+            console.log(response);
+            if(response == "Login Successful!"){
+                'Login Successful!'
                 window.location.href=window.location.href;
             }else {
                 $("#loginModal").find(".field_error").text(response);
@@ -159,4 +161,5 @@ $(document).ready(function() {
     //Collapses 'Categories' panel if in mobile.
     if($(window).width() <= 425)
         $("#categories-wrapper").removeClass('in');
+
 });

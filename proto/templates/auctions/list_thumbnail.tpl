@@ -1,5 +1,5 @@
 {foreach $auctions as $auction}
-	<div class="col-md-3 col-sm-6 col-xs-6">
+	<div class="col-md-3 col-sm-6 col-xs-6 auction_row" data-page="{floor($auction@index/8+1)}" hidden>
   <span class="thumbnail text-center">
     <h4 style="height: 50px;">{$auction.product_name}</h4>
     <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">

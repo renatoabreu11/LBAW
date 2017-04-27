@@ -19,40 +19,23 @@
 	$auctions = null;
 	$textSearch = null;
 
-	$curr_url_without_page = null;
-
 	if ($_GET['search'] && !$_GET['category']) {
 		$textSearch = trim(strip_tags($_GET['search']));
 		$auctions = searchAuctions($textSearch);
-		$curr_url_without_page = $BASE_URL . "pages/auctions/auctions.php?search=" . $textSearch;
 	}
 	else if (!$_GET['search'] && $_GET['category']) {
 		$category = trim(strip_tags($_GET['category']));
 		$auctions = searchAuctionsByCategory($category);
-		$curr_url_without_page = $BASE_URL . "pages/auctions/auctions.php?category=" . $category;
 	}
 	else if ($_GET['search'] && !$_GET['category']) {
 		$textSearch = trim(strip_tags($_GET['search']));
 		$category = trim(strip_tags($_GET['category']));
 		$auctions = searchAuctionsByCategoryAndName($textSearch, $category);
-		$curr_url_without_page = $BASE_URL . "pages/auctions/auctions.php?category=" . $category . "&search=" . $textSearch;
 	}
 	
-	
-	$page = $_GET['page'];
-	if (empty($page) || is_numeric($page) == FALSE) {
-	    $page = 1;
-	}else {
-	    $page = $_GET['page'];
-	}
-	
-	$items = 5;
-	$offset = ($page * $items) - $items;
+	$items = 8;
 	$nr_pages = ceil(count($auctions) / $items);
-	$auctions = array_slice($auctions, $offset, $items);
 
-	$smarty->assign('curr_url_without_page', $curr_url_without_page);
-	$smarty->assign('curr_page', $page);
 	$smarty->assign('nr_pages', $nr_pages);
 	$smarty->assign('search', $textSearch);
 	$smarty->assign('auctions', $auctions);

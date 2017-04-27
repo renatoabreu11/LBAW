@@ -3,6 +3,7 @@ $(document).ready(function(){
   setChangeListType();
   setCountdown();
   setSearchRequest();
+  setPagination();
 
 });
 
@@ -75,11 +76,34 @@ function setSearchRequest() {
             $('#auctionsThumbnails').append(data['listThumbnail']);
 
             setCountdown();
+            setPagination();
           },
           error: function(data){
               alert(data);
           }
       });
+  });
+}
+
+function setPagination() {
+
+  var nr_pages = parseInt($('#pagination').attr('data-nr_pages'));
+
+  $('#pagination').twbsPagination({
+      totalPages: nr_pages,
+      visiblePages: 7,
+      onPageClick: function (event, page) {
+                    
+          $('.auction_row').each(function() {
+            var nrPage = parseInt($(this).attr('data-page'));
+            if (nrPage == page)
+              $(this).show();
+            else
+              $(this).hide();
+          });
+
+          window.scrollTo(0, 0);
+      }
   });
 
 }

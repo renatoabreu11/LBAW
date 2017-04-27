@@ -110,29 +110,7 @@
 		          	{include file='auctions/list_thumbnail.tpl'} 
 		          </div>
 		           
-		         {if $nr_pages > 1}
-		            <div class="row text-center">
-		                <ul class="pagination">
-		                    {if $curr_page == 1}
-		                        <li class="disabled"><a>«</a></li>
-		                    {else}
-		                        <li ><a href="{$curr_url_without_page}&page={$curr_page - 1}">«</a></li>
-		                    {/if}
-		                    {for $i=1; $i <= $nr_pages; $i++}
-		                        {if $curr_page == $i}
-		                            <li class="active"><a>{$i} <span class="sr-only">(current)</span></a></li>
-		                        {else}
-		                            <li ><a href="{$curr_url_without_page}&page={$i}">{$i} </a></li>
-		                        {/if}
-		                    {/for}
-		                    {if $curr_page == $nr_pages}
-		                        <li class="disabled"><a>»</a></li>
-		                    {else}
-		                        <li ><a href="{$curr_url_without_page}&page={$curr_page + 1}">»</a></li>
-		                    {/if}
-		                </ul>
-		            </div>
-		        {/if}
+		          <ul id="pagination" class="pagination-sm" data-nr_pages="{$nr_pages}"></ul>
 	       		</div>
 	            </div>
 	        </div>
@@ -141,7 +119,7 @@
 </div>
 </div>
 
-
+<script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script src="{$BASE_URL}javascript/auctions.js"></script>
 
