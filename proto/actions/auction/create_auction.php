@@ -7,7 +7,17 @@ include_once($BASE_DIR .'database/users.php');
 
 if (!empty($_POST['token'])) {
     if (hash_equals($_SESSION['token'], $_POST['token'])) {
-
+        if (!$_POST['product_name'] || !$_POST['category']
+            | !$_POST['quantity'] || !$_POST['description']
+            || !$_POST['condition'] || !$_FILES['input24']
+            || !$_POST['auction_type'] || !$_POST['base_price']
+            || !$_POST['start_date'] || !$_POST['end_date']
+            || !$_POST['notifications_enabled'] || !$_POST['qa_section']){
+                $_SESSION['error_messages'][] = "All fields are mandatory!";
+                $_SESSION['form_values'] = $_POST;
+                header("Location:"  . $_SERVER['HTTP_REFERER']);
+                exit;
+         }
 
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'];
