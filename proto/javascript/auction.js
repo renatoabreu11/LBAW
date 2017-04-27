@@ -77,6 +77,51 @@ $(document).ready(function(){
         });    
     });
 
+    // Edit question.
+    $(".edit-question").click(function() {
+        var questionMessageHTML = $(this).parent().prev().children();
+        var comment = questionMessageHTML.eq(0).text();
+        var content = '<textarea name="updated-question" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-question">Send</button>';
+        var questionId = $(this).closest("article").children().eq(0).val();
+
+        questionMessageHTML.html(content);
+
+        $(".btn-edit-question").click(function() {
+            var editComment = $(this).prev().val();
+            var questionMessageEditHTML = $(this).parent();
+
+            var request = $.ajax({
+                type: 'POST',
+                url: BASE_URL + 'api/auction/question_edit.php',
+                data: {
+                    "question-id": questionId,
+                    "comment": editComment,
+                    "user-id": userId,
+                    "token": token
+                }
+            });
+
+            request.done(function (response, textStatus, jqXHR) {
+                if(response.indexOf("success") >= 0) {
+                    var editContent = '<p>' + editComment + '</p>';
+                    console.log(questionMessageEditHTML);
+                    questionMessageEditHTML.html(editContent);
+                } else {
+                    $.magnificPopup.open({
+                        items: {
+                            src: 'div class="white-popup">' + data['error'] + '</div>',
+                            type: 'inline'
+                        }
+                    });
+                }
+            });
+
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("The following error occured: " + textStatus + ": " + errorThrown);
+            });
+        });
+    });
+
     // Delete question.
     $(".delete-question").click(function() {
         var questionArticle = $(this).closest("article");

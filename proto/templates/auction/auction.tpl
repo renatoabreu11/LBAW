@@ -236,12 +236,17 @@
                                                 </div>
                                                 <div class="panel-collapse collapse in" id="collapseComment">
                                                     <div class="media-body">
-                                                        <p>{$question.message}</p>
+                                                        <div class="question-display">
+                                                            <p>{$question.message}</p>
+                                                        </div>
                                                         <div class="comment-meta">
                                                             {if ($question.user_id == $userId)}
+                                                                <span class="edit-question underline-text-hover">edit</span>
                                                                 <span class="delete-question underline-text-hover">delete</span>
                                                             {/if}
-                                                            <span><a href="#">report</a></span>
+                                                            {if ($question.user_id != $userId)}
+                                                                <span><a href="#">report</a></span>
+                                                            {/if}
                                                             {if ($seller.id == $userId && !$question.answer_message)}
                                                                 <span class="reply-question underline-text-hover">reply</span>
                                                             {/if}
@@ -282,9 +287,12 @@
                                                         <p>{$question.answer_message}</p>
                                                         <div class="comment-meta">
                                                             {if ($seller.id == $userId)}
+                                                                <span class="edit-answer underline-text-hover">edit</span>
                                                                 <span class="delete-answer underline-text-hover">delete</span>
                                                             {/if}
-                                                            <span><a href="#">report</a></span>
+                                                            {if ($seller.id != $userId)}
+                                                                <span><a href="#">report</a></span>
+                                                            {/if}
                                                         </div>
                                                     </div>
                                                 </div>

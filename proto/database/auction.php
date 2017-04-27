@@ -220,12 +220,27 @@ function createQuestion($message, $userId, $auctionId) {
 
 function createAnswer($message, $userId, $questionId) {
     global $conn;
+
+    // First it verifies if the question already has an anwser (security reasons).
+    $stmt = $conn->prepare('SELECT count(*)
+                            FROM answer
+                            JOIN question ON answer.question_id = question.id
+                            WHERE question.id = :question_id');
+    $stmt->bindParam('question_id', $questionId);
+    $stmt->execute();
+    $isValid = $stmt->fetch()['count'];
+
+    if(!$isValid == 0)
+        return false;
+
     $stmt = $conn->prepare('INSERT INTO answer(date, message, question_id, user_id)
                             VALUES(now(), :message, :question_id, :user_id)');
     $stmt->bindParam('message', $message);
     $stmt->bindParam('question_id', $questionId);
     $stmt->bindParam('user_id', $userId);
     $stmt->execute();
+
+    return true;
 }
 
 function createProduct($category, $product_name, $description, $condition){
@@ -313,6 +328,28 @@ function deleteAnswer($answerId) {
     global $conn;
     $stmt = $conn->prepare('DELETE FROM answer
                             WHERE id = :id');
+    $stmt->bindParam('id', $answerId);
+    $stmt->execute();
+}
+
+/************************************* EDITS *************************************/
+
+function editQuestion($questionId, $updatedMessage) {
+    global $conn;
+    $stmt = $conn->prepare('UPDATE question
+                            SET message = :updated_message
+                            WHERE id = :id');
+    $stmt->bindParam('updated_message', $updatedMessage);
+    $stmt->bindParam('id', $questionId);
+    $stmt->execute();
+}
+
+function editAnswer($answerId, $updatedMessage) {
+    global $conn;
+    $stmt = $conn->prepare('UPDATE answer
+                            SET message = :updated_message
+                            WHERE id = :id');
+    $stmt->bindParam('updated_message', $updatedMessage);
     $stmt->bindParam('id', $answerId);
     $stmt->execute();
 }
