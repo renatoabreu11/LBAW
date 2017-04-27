@@ -3,7 +3,7 @@
     include_once("../../config/init.php");
     include_once($BASE_DIR . "database/auction.php");
 
-    if(!$_POST['question-id'] || !$_POST['user-id'] || !$_POST['token']) {
+    if(!$_POST['answer-id'] || !$_POST['user-id'] || !$_POST['token']) {
         echo "Error: some fields are not set.";
         return;
     }
@@ -20,19 +20,19 @@
         return;
     }
 
-    $questionId = trim(strip_tags($_POST['question-id']));
-    if(!is_numeric($questionId)) {
+    $answerId = trim(strip_tags($_POST['answer-id']));
+    if(!is_numeric($answerId)) {
         echo "Error: invalid question id.";
         return;
     }
 
     try {
-        deleteQuestion($questionId);
+        deleteAnswer($answerId);
     } catch(PDOException $e) {
-        echo "Error: couldn't delete question.";
+        echo "Error: couldn't delete answer.";
         return;
     }
 
-    echo "success: question deleted successfully.";
+    echo "success: answer deleted successfully.";
 
 ?>
