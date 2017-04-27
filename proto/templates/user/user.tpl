@@ -36,20 +36,8 @@
             {if ($user.rating == null)}
               <p>No rating.</p>
             {else}
-              <div class="user-rating-stars text-center">
-                {for $var=2 to $user.rating step 2}
-                  <span class="glyphicon glyphicon-star"></span>
-                {/for}
-                {if ($user.rating % 2 == 1)}
-                  {for $var=$user.rating+1 to 10 step 2}
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                  {/for}
-                {else}
-                  {for $var=$user.rating to 10 step 2}
-                    <span class="glyphicon glyphicon-star-empty"></span>
-                  {/for}
-                {/if}
-              </div>
+              <!--<br>-->
+              <div class="rateYo" data-rating="{$user.rating}" style="margin: auto;""></div>
               <p class="user-rating-numeric text-center"><strong>{$user.rating}</strong>/10</p>
             {/if}
             <hr>
@@ -357,6 +345,7 @@
     </div>
   </div>
 
+  <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
   <script type="text/javascript" src="{$BASE_URL}javascript/user.js"></script>
 
 {include file='common/footer.tpl'}

@@ -11,19 +11,7 @@
         <span>
         {if ($auction.user_rating != null) }
           <br>
-          {for $var=2 to $auction.user_rating step 2}
-            <i class="fa fa-star"></i>
-          {/for} 
-          {if ($auction.user_rating % 2 == 1)}
-            <i class="fa fa-star-half-o"></i>
-            {for $var=$auction.user_rating+3 to 10 step 2}
-              <i class="fa fa-star-o"></i>
-            {/for} 
-          {else}
-            {for $var=$auction.user_rating+2 to 10 step 2}
-              <i class="fa fa-star-o"></i>
-            {/for}
-          {/if}
+          <div class="rateYo text-center" data-rating="{$auction.user_rating}" style="margin: auto;""></div>
         {/if}
         </span>
       </td>

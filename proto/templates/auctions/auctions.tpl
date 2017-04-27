@@ -123,6 +123,7 @@
 
 <script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
+<script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}javascript/auctions.js"></script>
 
 {include file='common/footer.tpl'}
