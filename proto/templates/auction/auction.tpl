@@ -284,7 +284,9 @@
                                                 </div>
                                                 <div class="panel-collapse collapse in" id="collapseReply">
                                                     <div class="media-body">
-                                                        <p>{$question.answer_message}</p>
+                                                        <div class="answer-display">
+                                                            <p>{$question.answer_message}</p>
+                                                        </div>
                                                         <div class="comment-meta">
                                                             {if ($seller.id == $userId)}
                                                                 <span class="edit-answer underline-text-hover">edit</span>

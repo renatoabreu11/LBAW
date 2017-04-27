@@ -104,12 +104,54 @@ $(document).ready(function(){
             request.done(function (response, textStatus, jqXHR) {
                 if(response.indexOf("success") >= 0) {
                     var editContent = '<p>' + editComment + '</p>';
-                    console.log(questionMessageEditHTML);
                     questionMessageEditHTML.html(editContent);
                 } else {
                     $.magnificPopup.open({
                         items: {
-                            src: 'div class="white-popup">' + data['error'] + '</div>',
+                            src: '<div class="white-popup">' + response + '</div>',
+                            type: 'inline'
+                        }
+                    });
+                }
+            });
+
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("The following error occured: " + textStatus + ": " + errorThrown);
+            });
+        });
+    });
+
+    $(".edit-answer").click(function() {
+        var answerMessageHTML = $(this).parent().prev().children();
+        var comment = answerMessageHTML.eq(0).text();
+        var content = '<textarea name="updated-answer" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-answer">Send</button>';
+        var answerId = $(this).closest("article").children().eq(0).val();
+
+        answerMessageHTML.html(content);
+
+        $(".btn-edit-answer").click(function() {
+            var editComment = $(this).prev().val();
+            var answerMessageEditHTML = $(this).parent();
+
+            var request = $.ajax({
+                type: 'POST',
+                url: BASE_URL + 'api/auction/answer_edit.php',
+                data: {
+                    "answer-id": answerId,
+                    "comment": editComment,
+                    "user-id": userId,
+                    "token": token
+                }
+            });
+
+            request.done(function (response, textStatus, jqXHR) {
+                if(response.indexOf("success") >= 0) {
+                    var editContent = '<p>' + editComment + '</p>';
+                    answerMessageEditHTML.html(editContent);
+                } else {
+                    $.magnificPopup.open({
+                        items: {
+                            src: '<div class="white-popup">' + response + '</div>',
                             type: 'inline'
                         }
                     });
