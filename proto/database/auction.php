@@ -245,3 +245,23 @@ function validAuctionType($auction_type){
     $stmt->execute(array($auction_type));
     return $stmt->fetch()['?column?'];
 }
+
+function getSimilarAuctions($auctionId) {
+    global $conn;
+    $stmt = $conn->prepare('SELECT similarAuction.id, similarProduct.name, (SELECT image.filename
+                                                                            FROM image
+                                                                            WHERE similarProduct.id = image.product_id
+                                                                            LIMIT 1
+                                                                            ) AS image
+                            FROM auction originalAuction
+                            JOIN auction similarAuction ON originalAuction.id != similarAuction.id
+                            JOIN product originalProduct ON originalAuction.product_id = originalProduct.id
+                            JOIN product similarProduct ON similarAuction.product_id = similarProduct.id
+                            WHERE similarAuction.type = originalAuction.type
+                            AND similarProduct.type && originalProduct.type
+                            AND originalAuction.id = :original_auction_id
+                            LIMIT 8');
+    $stmt->bindParam('original_auction_id', $auctionId);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}

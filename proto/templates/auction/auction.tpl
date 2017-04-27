@@ -200,14 +200,16 @@
             <div class="row product-questions">
                 <div class="col-md-12">
                     <h2>Product Q&A</h2>
-                    <form class="newQuestion" action="javascript:void(0);">
-                        <div class="form-group">
-                            <label>Your Question</label>
-                            <input type="hidden" name="auction-id" value="{$auction.id}">
-                            <textarea name="comment" class="form-control question-area" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-default btn-send-question">Send</button>
-                    </form>
+                        <form class="newQuestion" action="javascript:void(0);">
+                            <div class="form-group">
+                                <label>Your Question</label>
+                                <input type="hidden" name="auction-id" value="{$auction.id}">
+                                <input type="hidden" name="token" value="{$token}">
+                                <input type="hidden" name="user-id" value="{$userId}">
+                                <textarea name="comment" class="form-control question-area" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-default btn-send-question">Send</button>
+                        </form>
 
                     <section class="comment-list">
                         {foreach $questions as $question}

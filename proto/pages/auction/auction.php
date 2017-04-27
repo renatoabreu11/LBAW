@@ -23,6 +23,8 @@
         $smarty->assign("winningUser", $winningUser);
     }
 
+    $id = $_SESSION['user-id'];
+
     $smarty->assign("product", $product);
     $smarty->assign("auction", $auction);
     $smarty->assign("seller", $seller);
@@ -32,7 +34,11 @@
     $smarty->assign("numBidders", $numBidders);
     $smarty->assign("questions", $questions);
     $smarty->assign("similarAuctions", $similarAuctions);
+    $smarty->assign("token", $_SESSION['token']);    
+    $smarty->assign("userId", $_SESSION['user-id']);    
+    echo "cenas: ";
+    var_dump($id);
 
-    $smarty->display('auction/auction.tpl');
+    //$smarty->display('auction/auction.tpl');
 
 ?>
