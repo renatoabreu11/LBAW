@@ -102,15 +102,17 @@
 	                </div>
 	              </div>
 
-	              <div class="table-responsive" id="auctions">
+	              <div class="row table-responsive" id="auctions">
 	              	{include file='auctions/list.tpl'} 
 	              </div>
 
-		          <div class="collapse" id="auctionsThumbnails">
+		          <div class="row collapse" id="auctionsThumbnails">
 		          	{include file='auctions/list_thumbnail.tpl'} 
 		          </div>
 		           
-		          <ul id="pagination" class="pagination-sm" data-nr_pages="{$nr_pages}"></ul>
+		          <div class="row text-center">
+		          	<ul id="pagination" class="pagination-sm" data-nr_pages="{$nr_pages}"></ul>
+		          </div> 
 	       		</div>
 	            </div>
 	        </div>

@@ -70,13 +70,19 @@ function setSearchRequest() {
           },
           dataType: 'json',
           success: function(data){
+
             $('#auctions').empty();
             $('#auctionsThumbnails').empty();
             $('#auctions').append(data['list']);
             $('#auctionsThumbnails').append(data['listThumbnail']);
 
             setCountdown();
+
+            var nr_pages = data['nr_pages'];
+            $('#pagination').attr('data-nr_pages', nr_pages);
+            $('#pagination').twbsPagination('destroy');
             setPagination();
+
           },
           error: function(data){
               alert(data);
@@ -86,7 +92,7 @@ function setSearchRequest() {
 }
 
 function setPagination() {
-
+  
   var nr_pages = parseInt($('#pagination').attr('data-nr_pages'));
 
   $('#pagination').twbsPagination({

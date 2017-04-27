@@ -19,5 +19,9 @@ $(document).ready(function(){
 
 		});
 	});
+
+	$('.auction_row').each(function() {
+		$(this).show();
+	});
     
 });

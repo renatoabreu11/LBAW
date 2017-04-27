@@ -68,9 +68,12 @@ else {
 	}
 }
 
+$items = 8;
+$nr_pages = ceil(count($auctions) / $items);
+
 $smarty->assign('auctions', $auctions);
 $list = $smarty->fetch('auctions/list.tpl');
 $listThumbnail = $smarty->fetch('auctions/list_thumbnail.tpl');
-$dataToRetrieve = array('list' => $list, 'listThumbnail' => $listThumbnail);
+$dataToRetrieve = array('list' => $list, 'listThumbnail' => $listThumbnail, 'nr_pages' => $nr_pages);
 echo json_encode($dataToRetrieve);
 
