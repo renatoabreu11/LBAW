@@ -34,7 +34,11 @@
     $comment = strip_tags($_POST['comment']);
 
     try {
-        createAnswer($comment, $userId, $questionId);
+        if(!createAnswer($comment, $userId, $questionId)) {
+            $reply = array('error' => 'Error: question already has an answer.');
+            echo json_encode($reply);
+            return;
+        }
     } catch(PDOException $e) {
         $reply = array('error' => 'Error: couldn\'t insert answer.');
         echo json_encode($reply);
