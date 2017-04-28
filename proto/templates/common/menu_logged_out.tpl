@@ -9,7 +9,7 @@
 
       <div class="modal-body">
         <h4 class="field_error"></h4>
-        <form role="form" action="{$BASE_URL}api/authentication/signin.php" method="post" id="signinForm">
+        <form role="form" action="{$BASE_URL}api/authentication/signin.php" method="post" id="signInForm">
           <div class="form-group">
             <label for="usrname">Username</label>
             <input type="text" name="username" class="form-control" id="usrname">

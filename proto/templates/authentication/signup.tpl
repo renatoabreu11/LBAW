@@ -10,7 +10,7 @@
         </div>
 
         <div class="main-login main-center">
-            <form class="form-horizontal" id="signupForm" action="{$BASE_URL}actions/authentication/signup.php" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" id="signUpForm" action="{$BASE_URL}actions/authentication/signup.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Name</label>
                     <div class="cols-sm-10">

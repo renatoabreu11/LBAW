@@ -6,7 +6,7 @@
             <div class="form-wrap">
                 <h1>Admin Sign In</h1>
                 <strong class="field_error">{$FIELD_ERRORS.login}</strong>
-                <form role="form" action="{$BASE_URL}actions/authentication/signin_admin.php" method="post" id="adminSigninForm">
+                <form role="form" action="{$BASE_URL}actions/authentication/signin_admin.php" method="post" id="adminSignInForm">
                     <div class="form-group">
                         <label for="username" class="sr-only">Username</label>
                         <input type="text" name="username" id="username" class="form-control" placeholder="Your username" value="{$FORM_VALUES.username}">
