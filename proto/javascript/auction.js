@@ -77,206 +77,215 @@ $(document).ready(function() {
   });
 });
 
-    // Edit question.
-    $(".edit-question").click(function() {
-        var questionMessageHTML = $(this).parent().prev().children();
-        var comment = questionMessageHTML.eq(0).text();
-        var content = '<textarea name="updated-question" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-question">Send</button>';
-        var questionId = $(this).closest("article").children().eq(0).val();
+// Edit question.
+$('.edit-question').click(function() {
+  let questionMessageHTML = $(this).parent().prev().children();
+  let comment = questionMessageHTML.eq(0).text();
+  let content = '<textarea name="updated-question" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-question">Send</button>';
+  let questionId = $(this).closest('article').children().eq(0).val();
 
-        questionMessageHTML.html(content);
+  questionMessageHTML.html(content);
 
-        $(".btn-edit-question").click(function() {
-            var editComment = $(this).prev().val();
-            var questionMessageEditHTML = $(this).parent();
+  $('.btn-edit-question').click(function() {
+    let editComment = $(this).prev().val();
+    let questionMessageEditHTML = $(this).parent();
 
-            var request = $.ajax({
-                type: 'POST',
-                url: BASE_URL + 'api/auction/question_edit.php',
-                data: {
-                    "question-id": questionId,
-                    "comment": editComment,
-                    "user-id": userId,
-                    "token": token
-                }
-            });
-
-            request.done(function (response, textStatus, jqXHR) {
-                if(response.indexOf("success") >= 0) {
-                    var editContent = '<p>' + editComment + '</p>';
-                    questionMessageEditHTML.html(editContent);
-                } else {
-                    $.magnificPopup.open({
-                        items: {
-                            src: '<div class="white-popup">' + response + '</div>',
-                            type: 'inline'
-                        }
-                    });
-                }
-            });
-
-            request.fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("The following error occured: " + textStatus + ": " + errorThrown);
-            });
-        });
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/question_edit.php',
+      data: {
+        'question-id': questionId,
+        'comment': editComment,
+        'user-id': userId,
+        'token': token,
+      },
     });
 
-    // Edit answer.
-    $(".edit-answer").click(function() {
-        var answerMessageHTML = $(this).parent().prev().children();
-        var comment = answerMessageHTML.eq(0).text();
-        var content = '<textarea name="updated-answer" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-answer">Send</button>';
-        var answerId = $(this).closest("article").children().eq(0).val();
-
-        answerMessageHTML.html(content);
-
-        $(".btn-edit-answer").click(function() {
-            var editComment = $(this).prev().val();
-            var answerMessageEditHTML = $(this).parent();
-
-            var request = $.ajax({
-                type: 'POST',
-                url: BASE_URL + 'api/auction/answer_edit.php',
-                data: {
-                    "answer-id": answerId,
-                    "comment": editComment,
-                    "user-id": userId,
-                    "token": token
-                }
-            });
-
-            request.done(function (response, textStatus, jqXHR) {
-                if(response.indexOf("success") >= 0) {
-                    var editContent = '<p>' + editComment + '</p>';
-                    answerMessageEditHTML.html(editContent);
-                } else {
-                    $.magnificPopup.open({
-                        items: {
-                            src: '<div class="white-popup">' + response + '</div>',
-                            type: 'inline'
-                        }
-                    });
-                }
-            });
-
-            request.fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("The following error occured: " + textStatus + ": " + errorThrown);
-            });
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.indexOf('success') >= 0) {
+        let editContent = '<p>' + editComment + '</p>';
+        questionMessageEditHTML.html(editContent);
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
         });
+      }
     });
 
-    // Delete question.
-    $(".delete-question").click(function() {
-        var questionArticle = $(this).closest("article");
-        var questionId = questionArticle.children().eq(0).val();
-        var questionAnswerDiv = questionArticle.parent();
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: '
+        + textStatus + ': ' + errorThrown);
+    });
+  });
+});
 
-        var request = $.ajax({
-            type: 'POST',
-            url: BASE_URL + 'api/auction/question_delete.php',
-            data: {
-                "question-id": questionId,
-                "user-id": userId,
-                "token": token
-            }
-        });
+// Edit answer.
+$('.edit-answer').click(function() {
+  let answerMessageHTML = $(this).parent().prev().children();
+  let comment = answerMessageHTML.eq(0).text();
+  let content = '<textarea name="updated-answer" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-answer">Send</button>';
+  let answerId = $(this).closest('article').children().eq(0).val();
 
-        request.done(function (response, textStatus, jqXHR) {
-            if(response.indexOf("success") >= 0) {
-                questionAnswerDiv.fadeOut(500, function() { questionAnswerDiv.remove(); });
-            } else {
-                $.magnificPopup.open({
-                    items: {
-                        src: '<div class="white-popup">' + response + '</div>',
-                        type: 'inline'
-                    }
-                });
-            }
-        });
+  answerMessageHTML.html(content);
 
-        request.fail(function (jqXHR, textStatus, errorThrown) {
-            console.error("The following error occured: " + textStatus + ": " + errorThrown);
-        });
+  $('.btn-edit-answer').click(function() {
+    let editComment = $(this).prev().val();
+    let answerMessageEditHTML = $(this).parent();
+
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/answer_edit.php',
+      data: {
+        'answer-id': answerId,
+        'comment': editComment,
+        'user-id': userId,
+        'token': token,
+      },
     });
 
-    // Delete answer.
-    $(".delete-answer").click(function() {
-        var article = $(this).closest("article");
-        var answerId = article.children().eq(0).val();
-
-        var request = $.ajax({
-            type: 'POST',
-            url: BASE_URL + 'api/auction/answer_delete.php',
-            data: {
-                "answer-id": answerId,
-                "user-id": userId,
-                "token": token
-            }
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.indexOf('success') >= 0) {
+        let editContent = '<p>' + editComment + '</p>';
+        answerMessageEditHTML.html(editContent);
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
         });
-
-        request.done(function (response, textStatus, jqXHR) {
-            console.info(response);
-            if(response.indexOf("success") >= 0) {
-                article.fadeOut(500, function() { article.remove() });
-            } else {
-                $.magnificPopup.open({
-                    items: {
-                        src: '<div class="white-popup">' + response + '</div>',
-                        type: 'inline'
-                    }
-                });
-            }
-        });
-
-        request.fail(function (jqXHR, textStatus, errorThrown) {
-            console.error("The following error occured: " + textStatus + ": " + errorThrown);
-        });
+      }
     });
 
-    //Report question.
-    $(".report-question").click(function() {
-        var questionId = $(this).closest("article").children().eq(0).val();
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: '
+        + textStatus + ': ' + errorThrown);
+    });
+  });
+});
 
-        $(".btn-send-question-report").click(function() {
-            var comment = $(".report-question-comment").val();
-            var closeBtn = $(this).closest(".modal-body").next().children().eq(0);
+// Delete question.
+$('.delete-question').click(function() {
+  let questionArticle = $(this).closest('article');
+  let questionId = questionArticle.children().eq(0).val();
+  let questionAnswerDiv = questionArticle.parent();
 
-            var request = $.ajax({
-                type: 'POST',
-                url: BASE_URL + 'api/auction/report_question.php',
-                data: {
-                    "question-id": questionId,
-                    "comment": comment,
-                    "user-id": userId,
-                    "token": token
-                }
-            });
+  let request = $.ajax({
+    type: 'POST',
+    url: BASE_URL + 'api/auction/question_delete.php',
+    data: {
+      'question-id': questionId,
+      'user-id': userId,
+      'token': token,
+    },
+  });
 
-            request.done(function (response, textStatus, jqXHR) {
-                console.info("Response: " + response);
-                //closeBtn.click();
-                if(response.indexOf("success") >= 0) {
+  request.done(function(response, textStatus, jqXHR) {
+    if(response.indexOf('success') >= 0) {
+      questionAnswerDiv.fadeOut(500, function() {
+        questionAnswerDiv.remove();
+      });
+    } else {
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    }
+  });
 
-                } else {
-                    $.magnificPopup.open({
-                        items: {
-                            src: '<div class="white-popup">' + response + '</div>',
-                            type: 'inline'
-                        }
-                    });
-                }
-            });
+  request.fail(function(jqXHR, textStatus, errorThrown) {
+    console.error('The following error occured: '
+      + textStatus + ': ' + errorThrown);
+  });
+});
 
-            request.fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("The following error occured: " + textStatus + ": " + errorThrown);
-            });
+// Delete answer.
+$('.delete-answer').click(function() {
+  let article = $(this).closest('article');
+  let answerId = article.children().eq(0).val();
+
+  let request = $.ajax({
+    type: 'POST',
+    url: BASE_URL + 'api/auction/answer_delete.php',
+    data: {
+      'answer-id': answerId,
+      'user-id': userId,
+      'token': token,
+    },
+  });
+
+  request.done(function(response, textStatus, jqXHR) {
+    console.info(response);
+    if(response.indexOf('success') >= 0) {
+      article.fadeOut(500, function() {
+        article.remove();
+      });
+    } else {
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    }
+  });
+
+  request.fail(function(jqXHR, textStatus, errorThrown) {
+    console.error('The following error occured: '
+      + textStatus + ': ' + errorThrown);
+  });
+});
+
+// Report question.
+$('.report-question').click(function() {
+  let questionId = $(this).closest('article').children().eq(0).val();
+
+  $('.btn-send-question-report').click(function() {
+    let comment = $('.report-question-comment').val();
+    let closeBtn = $(this).closest('.modal-body').next().children().eq(0);
+
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/report_question.php',
+      data: {
+        'question-id': questionId,
+        'comment': comment,
+        'user-id': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      console.info('Response: ' + response);
+      // closeBtn.click();
+      if(response.indexOf('success') >= 0) {
+
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
         });
+      }
     });
 
-    // Hides the reply box.
-    $(".new-answer").toggle();
-
-    // Reply (toggles reply form).
-    $(".reply-question").click(function() {
-        $(this).parent().next().toggle();
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
     });
+  });
+});
+
+// Hides the reply box.
+$('.new-answer').toggle();
+
+// Reply (toggles reply form).
+$('.reply-question').click(function() {
+  $(this).parent().next().toggle();
+});
