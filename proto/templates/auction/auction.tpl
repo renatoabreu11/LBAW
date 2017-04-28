@@ -229,19 +229,21 @@
                                         <div class="panel panel-default arrow left">
                                             <div class="panel-body">
                                                 <div class="media-heading">
-                                                    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment">
+                                                    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment{$question.id}">
                                                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                                     </button>
                                                     <a href="{$BASE_URL}pages/user/user.php?id={$question.user_id}"><strong>{$question.user_username}</strong></a> {$question.date}
                                                 </div>
-                                                <div class="panel-collapse collapse in" id="collapseComment">
+                                                <div class="panel-collapse collapse in" id="collapseComment{$question.id}">
                                                     <div class="media-body">
                                                         <div class="question-display">
                                                             <p>{$question.message}</p>
                                                         </div>
                                                         <div class="comment-meta">
                                                             {if ($question.user_id == $userId)}
-                                                                <span class="edit-question underline-text-hover">edit</span>
+                                                                {if ($question.can_edit)}
+                                                                    <span class="edit-question underline-text-hover">edit</span>
+                                                                {/if}
                                                                 <span class="delete-question underline-text-hover">delete</span>
                                                             {/if}
                                                             {if ($question.user_id != $userId)}
@@ -277,19 +279,21 @@
                                         <div class="panel panel-default arrow left">
                                             <div class="panel-body">
                                                 <div class="media-heading">
-                                                    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply">
+                                                    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply{$question.answer_id}">
                                                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                                     </button>
                                                     <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><strong>{$seller.username}</strong></a>{$question.answer_date}
                                                 </div>
-                                                <div class="panel-collapse collapse in" id="collapseReply">
+                                                <div class="panel-collapse collapse in" id="collapseReply{$question.answer_id}">
                                                     <div class="media-body">
                                                         <div class="answer-display">
                                                             <p>{$question.answer_message}</p>
                                                         </div>
                                                         <div class="comment-meta">
                                                             {if ($seller.id == $userId)}
-                                                                <span class="edit-answer underline-text-hover">edit</span>
+                                                                {if ($question.answer_can_edit)}</p>
+                                                                    <span class="edit-answer underline-text-hover">edit</span>
+                                                                {/if}
                                                                 <span class="delete-answer underline-text-hover">delete</span>
                                                             {/if}
                                                             {if ($seller.id != $userId)}

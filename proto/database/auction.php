@@ -85,6 +85,13 @@ function getQuestionsAnswers($auction_id){
     $questions = $stmt->fetchAll();
 
     for ($i = 0; $i < count($questions); $i++) {
+        // Determines if a question can be edited.
+        $elapsedQuestionSeconds = time() - strtotime($questions[$i]['date']) - 3600;        // Minus 3600  because of time zone errors.
+        $editTimeAllowed = 900;     //900 = 15 minutes * 60 seconds.
+        if($elapsedQuestionSeconds <= $editTimeAllowed)
+            $questions[$i]['ca_edit'] = true;
+        else $questions[$i]['can_edit'] = false;
+
         $question_id = $questions[$i]['id'];
         $stmt = $conn->prepare('SELECT answer.message, answer.date, answer.id
                                 FROM answer
@@ -92,10 +99,18 @@ function getQuestionsAnswers($auction_id){
         $stmt->bindParam('question_id', $question_id);
         $stmt->execute();
         $answer = $stmt->fetch();
+
         $questions[$i]["answer_message"] = $answer['message'];
         $questions[$i]["answer_date"] = $answer['date'];
         $questions[$i]["answer_id"] = $answer['id'];
+
+        // Determines if an answer can be edited.
+        $elapsedAnswerSeconds = time() - strtotime($answer['date']) - 3600;
+        if($elapsedAnswerSeconds <= $editTimeAllowed)
+            $questions[$i]['answer_can_edit'] = true;
+        else $questions[$i]['answer_can_edit'] = false;
     }
+
     $conn->commit();
     return $questions;
 }
