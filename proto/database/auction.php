@@ -89,7 +89,7 @@ function getQuestionsAnswers($auction_id){
         $elapsedQuestionSeconds = time() - strtotime($questions[$i]['date']) - 3600;        // Minus 3600  because of time zone errors.
         $editTimeAllowed = 900;     //900 = 15 minutes * 60 seconds.
         if($elapsedQuestionSeconds <= $editTimeAllowed)
-            $questions[$i]['ca_edit'] = true;
+            $questions[$i]['can_edit'] = true;
         else $questions[$i]['can_edit'] = false;
 
         $question_id = $questions[$i]['id'];
