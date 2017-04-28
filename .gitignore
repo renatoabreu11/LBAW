@@ -7,3 +7,4 @@ proto/.htaccess
 .eslintrc.js
 package.json
 node_modules
+.stylelintrc
