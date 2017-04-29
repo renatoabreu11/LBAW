@@ -11,7 +11,7 @@
         <span>
         {if ($auction.user_rating != null) }
           <br>
-          <div class="rateYo text-center" data-rating="{$auction.user_rating}" style="margin: auto;""></div>
+          <div class="rateYo text-center" data-rating="{$auction.user_rating}" style="margin: auto;"></div>
         {/if}
         </span>
       </td>

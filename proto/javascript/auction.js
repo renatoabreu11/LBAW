@@ -53,7 +53,6 @@ $(document).ready(function() {
     } else btn.closest('.number-spinner').find('input').val(newVal);
   });
 
-
   $('.closePopup').on('click', function() {
     $.magnificPopup.close();
   });
