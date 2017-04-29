@@ -81,7 +81,8 @@
               <span class="glyphicon glyphicon-star-empty"></span>
               <span class="glyphicon glyphicon-star-empty"></span>
             </div>
-            <a class="hidden-xs">{$numReviews} Reviews</a>
+            <a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Reviews</a>
+            <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews" class="hidden-xs">{$numReviews} Reviews</a>
           </div>
           <div class="col-md-6 text-center auctionDetails">
             <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
@@ -92,13 +93,13 @@
                   <div class="row" style="margin: 10px;">
                     <h4 class="bid-title">Bid on auction</h4>
                     <div class="input-group number-spinner">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                            </span>
-                      <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
-                      <span class="input-group-btn">
-                                                <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                            </span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                        <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                        </span>
                     </div>
                   </div>
                   <div class="text-center">

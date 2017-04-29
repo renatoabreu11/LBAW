@@ -9,7 +9,7 @@ $auction = getAuction($auction_id);
 $product = getAuctionProduct($auction_id);
 
 $seller = getUser($auction['user_id']);
-$numReviews = count(getReviews($auction['user-id']));
+$numReviews = count(getReviews($auction['user_id']));
 
 $recentBidders = getRecentBidders($auction_id);
 $numBids = getTotalNumBids($auction_id);
