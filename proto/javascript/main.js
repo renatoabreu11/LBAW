@@ -201,4 +201,18 @@ $(document).ready(function() {
   // Collapses 'Categories' panel if in mobile.
   if($(window).width() <= 425)
     $('#categories-wrapper').removeClass('in');
+
+  $('.rateYo').each(function() {
+    let rating_ = parseFloat($(this).attr('data-rating'));
+    rating_ = (rating_ / 10.0) * 5; // 5 stars rating
+    $(this).rateYo({
+      rating: rating_,
+      starWidth: '17px',
+      readOnly: true,
+      multiColor: {
+        "startColor": "#FF0000", // Red.
+        "endColor"  : "#f1c40f"  //Yellow.
+      }
+    });
+  });
 });
