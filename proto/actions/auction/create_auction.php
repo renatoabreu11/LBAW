@@ -138,7 +138,7 @@ if (!empty($_POST['token'])) {
 
       $auction_id = getLastAuctionID();
       try {
-        createWatchlist($auction_id, $user_id, $notifications_enabled);
+        addAuctionToWatchlist($auction_id, $user_id, $notifications_enabled);
       } catch (PDOException $e) {
         $_SESSION['error_messages'][] = "Error adding auction to your watchlist.";
         $_SESSION['form_values'] = $_POST;

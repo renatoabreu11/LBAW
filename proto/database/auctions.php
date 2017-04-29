@@ -1,5 +1,7 @@
 <?php
 
+/* ========================== SELECTS  ========================== */
+
 /**
  * Select the most popular auctions (popular = more bids).
  */
@@ -84,6 +86,11 @@ function searchAuctions($textSearch) {
   return $result;
 }
 
+/**
+ * Search auctions by category
+ * @param $category
+ * @return array
+ */
 function searchAuctionsByCategory($category) {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
@@ -103,6 +110,12 @@ function searchAuctionsByCategory($category) {
   return $result;
 }
 
+/**
+ * Search auctions by category and name
+ * @param $textSearch
+ * @param $category
+ * @return array
+ */
 function searchAuctionsByCategoryAndName($textSearch, $category) {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, bids.numBids, auction.start_date
@@ -127,6 +140,14 @@ function searchAuctionsByCategoryAndName($textSearch, $category) {
   return $result;
 }
 
+/**
+ * Search auctions by date and price
+ * @param $fromDate
+ * @param $toDate
+ * @param $fromPrice
+ * @param $toPrice
+ * @return array
+ */
 function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
@@ -151,7 +172,16 @@ function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
   return $result;
 }
 
-function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice, $textsearch) {
+/**
+ * Search auctions by date, name and price
+ * @param $fromDate
+ * @param $toDate
+ * @param $fromPrice
+ * @param $toPrice
+ * @param $textSearch
+ * @return array
+ */
+function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice, $textSearch) {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
                             FROM auction, product, "user",
@@ -174,12 +204,21 @@ function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice,
   $stmt->bindParam('toDate', $toDate);
   $stmt->bindParam('fromPrice', $fromPrice);
   $stmt->bindParam('toPrice', $toPrice);
-  $stmt->bindParam('textsearch', $textsearch);
+  $stmt->bindParam('textsearch', $textSearch);
   $stmt->execute();
   $result = $stmt->fetchAll();
   return $result;
 }
 
+/**
+ * Search auctions by date, price and a category
+ * @param $fromDate
+ * @param $toDate
+ * @param $fromPrice
+ * @param $toPrice
+ * @param $category
+ * @return array
+ */
 function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPrice, $category) {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
@@ -206,7 +245,17 @@ function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPr
   return $result;
 }
 
-function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $toPrice, $textsearch, $category) {
+/**
+ * Search auctions by date, price, text and category
+ * @param $fromDate
+ * @param $toDate
+ * @param $fromPrice
+ * @param $toPrice
+ * @param $textSearch
+ * @param $category
+ * @return array
+ */
+function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $toPrice, $textSearch, $category) {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
                             FROM auction, product, "user",
@@ -230,7 +279,7 @@ function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $
   $stmt->bindParam('toDate', $toDate);
   $stmt->bindParam('fromPrice', $fromPrice);
   $stmt->bindParam('toPrice', $toPrice);
-  $stmt->bindParam('textsearch', $textsearch);
+  $stmt->bindParam('textsearch', $textSearch);
   $stmt->bindParam('category', $category);
   $stmt->execute();
   $result = $stmt->fetchAll();
@@ -238,20 +287,14 @@ function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $
 }
 
 /**
- * Delete auction.
+ * Get auctions of a page from the user's watchlist.
+ * @param $userId
+ * @param $items
+ * @param $offset
+ * @return array
+ * @internal param $user_id
  */
-function deleteAuction($auction_id){
-  global $conn;
-  $stmt = $conn->prepare('DELETE 
-                            FROM auction
-                            WHERE id = ?');
-  $stmt->execute(array($auction_id));
-}
-
-/**
- * Get auctions of a page of watchlist.
- */
-function getPageWatchlistAuctions($user_id, $items, $offset){
+function getPageWatchlistAuctions($userId, $items, $offset){
   global $conn;
   $stmt = $conn->prepare('SELECT watchlist.notifications, auction.* as auction
                                 FROM watchlist
@@ -259,26 +302,28 @@ function getPageWatchlistAuctions($user_id, $items, $offset){
                                 WHERE watchlist.user_id = ?             
                                 LIMIT ?
                                 OFFSET ?');
-  $stmt->execute(array($user_id, $items, $offset));
+  $stmt->execute(array($userId, $items, $offset));
   $result = $stmt->fetchAll();
   return $result;
 }
 
 /**
- * Count number of auctions in watchlist of an user.
+ * Count the number of auctions in the watchlist of an user.
+ * @param $userId
+ * @return
  */
-function countWatchlistAuctions($user_id){
+function countWatchlistAuctions($userId){
   global $conn;
   $stmt = $conn->prepare('SELECT COUNT(*)
                                 FROM watchlist
                                 WHERE user_id = ?');
-  $stmt->execute(array($user_id));
+  $stmt->execute(array($userId));
   $result = $stmt->fetch();
   return $result['count'];
 }
 
 /**
- * Get most resent auction.
+ * Get most recent auction.
  */
 function getMostRecentAuction() {
   global $conn;
@@ -293,3 +338,22 @@ function getMostRecentAuction() {
   $stmt->execute();
   return $stmt->fetch();
 }
+
+/* ========================== INSERTS  ========================== */
+
+/**
+ * Adds an auction the user's watchlist
+ * @param $auctionId
+ * @param $userId
+ * @param $notifications
+ */
+function addAuctionToWatchlist($auctionId, $userId, $notifications){
+  global $conn;
+  $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
+                            VALUES(?, ?, now(), ?)');
+  $stmt->execute(array($auctionId, $userId, $notifications));
+}
+
+/* ========================== UPDATES  ========================== */
+
+/* ========================== DELETES  ========================== */
