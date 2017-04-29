@@ -3,24 +3,19 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/users.php');
 
+$userId = null;
 if(!$_GET['id']) {
-  $_SESSION['error_messages'][] = "Undefined id";
-  header("Location: $BASE_URL");
-  exit;
+  $userId = 1;
+}else{
+  $userId = $_GET['id'];
 }
 
-$userId = trim(strip_tags($_GET['id']));
 $loggedUserId = $_SESSION['user_id'];
 
 if(!is_numeric($userId)) {
   $_SESSION['error_messages'][] = "id has invalid characters";
   header("Location: $BASE_URL");
   exit;
-}
-
-if($_SESSION['username'] && $_SESSION['user_id']){
-  $notifications = getActiveNotifications($_SESSION['user_id']);
-  $smarty->assign('notifications', $notifications);
 }
 
 $user = getUser($userId);
@@ -43,19 +38,19 @@ $lastWatchlistAuctions = getLastWatchlistAuctions($userId);
 if($userId == $loggedUserId)
   $reviewsPosted = getWonReviews($userId);
 
-if($_SESSION['username'] && $_SESSION['user_id']){
-  $notifications = getActiveNotifications($loggedUserId);
-  $smarty->assign('notifications', $notifications);
-}
-
-if(!$_SESSION['user_id']){
-  $id = $_SESSION['user_id'];
+if(!$loggedUserId){
   $token = $_SESSION['token'];
-  $smarty->assign("userId", $id);
+  $notifications = getActiveNotifications($loggedUserId);
+  $smarty->assign("userId", $loggedUserId);
+  $smarty->assign("token", $token);
+  $smarty->assign('notifications', $notifications);
+}else if(!$_SESSION['admin_id']){
+  $id = $_SESSION['admin_id'];
+  $token = $_SESSION['token'];
+  $smarty->assign("adminId", $id);
   $smarty->assign("token", $token);
 }
 
-$smarty->assign('loggedUserId', $loggedUserId);
 $smarty->assign('user', $user);
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('isFollowing', $isFollowing);

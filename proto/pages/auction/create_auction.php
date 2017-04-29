@@ -8,23 +8,25 @@ $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
 $token = $_SESSION['token'];
 
-if(!$username || !$id){
-    $smarty->display('common/404.tpl');
-    return;
+if(!$username || !$id || !$token){
+  $smarty->display('common/404.tpl');
+  return;
 }
 
 if(!validUser($username, $id)){
-    $smarty->display('common/404.tpl');
-    return;
+  header("Location: $BASE_URL");
+  return;
 }
 
-if($username && $id){
-    $notifications = getActiveNotifications($_SESSION['user_id']);
-    $smarty->assign('notifications', $notifications);
+if(!isset($_GET['id'])){
+  header("Location:"  . $_SERVER['HTTP_REFERER']);
+  return;
 }
 
+$notifications = getActiveNotifications($_SESSION['user_id']);
 $categories = getCategories();
 
+$smarty->assign('notifications', $notifications);
 $smarty->assign("userId", $id);
 $smarty->assign("token", $token);
 $smarty->assign("categories", $categories);

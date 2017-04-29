@@ -8,13 +8,13 @@ $id = $_SESSION['user_id'];
 $token = $_SESSION['token'];
 
 if(!$username || !$id || !$token){
-    $smarty->display('common/404.tpl');
-    return;
+  $smarty->display('common/404.tpl');
+  return;
 }
 
-if(!validUser($username, $id)) {
-    $smarty->display('common/404.tpl');
-    return;
+if(!validUser($username, $id)){
+  header("Location: $BASE_URL");
+  return;
 }
 
 $page = $_GET['page'];
@@ -27,12 +27,12 @@ if (empty($page) || is_numeric($page) == FALSE) {
 
 $items = 5;
 $offset = ($page * $items) - $items;
-
 $page_notifications = getPageNotifications($id, $items, $offset);
 $notifications = getActiveNotifications($id);
-
 $nr_pages = ceil(countNotifications($id) / $items);
 
+$smarty->assign("userId", $id);
+$smarty->assign("token", $token);
 $smarty->assign('currPage', $page);
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);

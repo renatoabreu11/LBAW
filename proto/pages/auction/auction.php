@@ -29,6 +29,11 @@ if(!$_SESSION['user_id']){
   $token = $_SESSION['token'];
   $smarty->assign("userId", $id);
   $smarty->assign("token", $token);
+}else if(!$_SESSION['admin_id']){
+  $id = $_SESSION['admin_id'];
+  $token = $_SESSION['token'];
+  $smarty->assign("adminId", $id);
+  $smarty->assign("token", $token);
 }
 
 $smarty->assign("product", $product);
@@ -40,7 +45,5 @@ $smarty->assign("numBids", $numBids);
 $smarty->assign("numBidders", $numBidders);
 $smarty->assign("questions", $questions);
 $smarty->assign("similarAuctions", $similarAuctions);
-$smarty->assign("token", $_SESSION['token']);
-$smarty->assign("userId", $_SESSION['user_id']);
 
 $smarty->display('auction/auction.tpl');

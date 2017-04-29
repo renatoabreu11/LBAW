@@ -5,36 +5,34 @@ include_once($BASE_DIR . "database/users.php");
 
 if(!$_GET['id']) {
   $_SESSION['error_messages'][] = "Undefined id";
-  header("Location: $BASE_URL");
+  header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
 }
 
-$userId = trim(strip_tags($_GET['id']));
-$loggedUserId = $_SESSION['user_id'];
+$id = $_SESSION['user_id'];
+$token = $_SESSION['token'];
+$username = $_SESSION['username'];
+$userId = $_GET['id'];
 
-if(!is_numeric($userId) || !is_numeric($loggedUserId)) {
+if(!is_numeric($userId) || !is_numeric($id)) {
   $_SESSION['error_messages'][] = "id has invalid characters";
+  header("Location:"  . $_SERVER['HTTP_REFERER']);
+  exit;
+}
+
+if($userId != $id || !$token || $username) {
+  $_SESSION['error_messages'][] = "Invalid request. You don't have permissions!";
   header("Location: $BASE_URL");
   exit;
 }
 
-if($userId != $loggedUserId) {
-  $_SESSION['error_messages'][] = "id doesn't match.";
-  header("Location: $BASE_URL");
-  exit;
-}
-
-if($_SESSION['username'] && $_SESSION['user_id']){
-  $notifications = getActiveNotifications($_SESSION['user_id']);
-  $smarty->assign('notifications', $notifications);
-}
-
-$user = getUser($loggedUserId);
+$notifications = getActiveNotifications($id);
+$user = getUser($id);
 $userCurrLocation = getCityAndCountry($userId);
 $countries = getAllCountries();
 $cities = getAllCities();
-$token = $_SESSION['token'];
 
+$smarty->assign('notifications', $notifications);
 $smarty->assign("userId", $userId);
 $smarty->assign("token", $token);
 $smarty->assign('user', $user);

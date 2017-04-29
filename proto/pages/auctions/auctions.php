@@ -11,12 +11,7 @@ if (!$_GET['search'] && !$_GET['category']) {
   exit;
 }
 
-if ($_SESSION['username'] && $_SESSION['user_id']) {
-  $notifications = getActiveNotifications($_SESSION['user_id']);
-  $smarty->assign('notifications', $notifications);
-}
 $categories = getCategories();
-
 $auctions = null;
 $textSearch = null;
 
@@ -34,10 +29,20 @@ else if ($_GET['search'] && !$_GET['category']) {
   $auctions = searchAuctionsByCategoryAndName($textSearch, $category);
 }
 
-$items = 8;
-$nr_pages = ceil(count($auctions) / $items);
+if(!$_SESSION['user_id']){
+  $id = $_SESSION['user_id'];
+  $token = $_SESSION['token'];
+  $notifications = getActiveNotifications($id);
+  $smarty->assign("userId", $id);
+  $smarty->assign("token", $token);
+  $smarty->assign('notifications', $notifications);
+}else if(!$_SESSION['admin_id']){
+  $id = $_SESSION['admin_id'];
+  $token = $_SESSION['token'];
+  $smarty->assign("adminId", $id);
+  $smarty->assign("token", $token);
+}
 
-$smarty->assign('nrPages', $nr_pages);
 $smarty->assign('textSearch', $textSearch);
 $smarty->assign('auctions', $auctions);
 $smarty->assign('categories', $categories);
