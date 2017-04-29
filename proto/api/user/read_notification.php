@@ -4,6 +4,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR .'database/auctions.php');
 include_once($BASE_DIR .'database/users.php');
 
+print_r($_POST);
 if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
@@ -20,3 +21,6 @@ if (!$_POST['notifications']){
   echo 'Error 400 Bad Request: Invalid notifications!';
   return;
 }
+
+$notifications = $_POST['notifications'];
+print_r($notifications);

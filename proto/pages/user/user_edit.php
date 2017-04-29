@@ -12,7 +12,7 @@ if(!$_GET['id']) {
 $userId = trim(strip_tags($_GET['id']));
 $loggedUserId = $_SESSION['user_id'];
 
-if(!preg_match("/[0-9]/", $userId) || !preg_match("/[0-9]/", $loggedUserId)) {
+if(!is_numeric($userId) || !is_numeric($loggedUserId)) {
   $_SESSION['error_messages'][] = "id has invalid characters";
   header("Location: $BASE_URL");
   exit;
@@ -29,16 +29,14 @@ if($_SESSION['username'] && $_SESSION['user_id']){
   $smarty->assign('notifications', $notifications);
 }
 
-if($_SESSION['username'] && $_SESSION['user_id']){
-  $notifications = getActiveNotifications($loggedUserId);
-  $smarty->assign('notifications', $notifications);
-}
-
 $user = getUser($loggedUserId);
 $userCurrLocation = getCityAndCountry($userId);
 $countries = getAllCountries();
 $cities = getAllCities();
+$token = $_SESSION['token'];
 
+$smarty->assign("userId", $userId);
+$smarty->assign("token", $token);
 $smarty->assign('user', $user);
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('countries', $countries);

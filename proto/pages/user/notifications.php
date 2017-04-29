@@ -5,8 +5,9 @@ include_once($BASE_DIR . 'database/users.php');
 
 $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
+$token = $_SESSION['token'];
 
-if(!$username || !$id){
+if(!$username || !$id || !$token){
     $smarty->display('common/404.tpl');
     return;
 }

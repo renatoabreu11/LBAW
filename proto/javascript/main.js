@@ -7,6 +7,8 @@ $(document).ready(function() {
   token = $('input[name=token]').val();
   userId = $('input[name=user_id]').val();
   adminId = $('input[name=admin_id]').val();
+  console.log(token);
+  console.log(userId);
 
   $('#signInForm').validate({
     rules:
@@ -182,7 +184,7 @@ $(document).ready(function() {
       });
 
       if(nrNotifications > 0) {
-        $.ajax({
+        let request = $.ajax({
           type: 'POST',
           url: BASE_URL + 'api/user/read_notification.php',
           data: {
@@ -191,6 +193,17 @@ $(document).ready(function() {
             'userId': userId,
           },
           datatype: 'text',
+
+        });
+
+        // Callback handler that will be called on success
+        request.done(function(response, textStatus, jqXHR) {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + response + '</div>',
+              type: 'inline',
+            },
+          });
         });
 
         $('<p class="notifications-empty">' +

@@ -6,6 +6,7 @@ include_once($BASE_DIR .'database/auction.php');
 
 $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
+$token = $_SESSION['token'];
 
 if(!$username || !$id){
     $smarty->display('common/404.tpl');
@@ -36,6 +37,9 @@ if($username && $id){
     $smarty->assign('notifications', $notifications);
 }
 
+
+$smarty->assign("userId", $id);
+$smarty->assign("token", $token);
 $smarty->assign("auction", $auction);
 $smarty->assign("token", $_SESSION['token']);
 $smarty->display('auction/auction_edit.tpl');
