@@ -247,7 +247,7 @@
                                                                 <span class="delete-question underline-text-hover">delete</span>
                                                             {/if}
                                                             {if ($question.user_id != $userId)}
-                                                                <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal">report</span>
+                                                                <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-{$question.id}">report</span>
                                                             {/if}
                                                             {if ($seller.id == $userId && !$question.answer_message)}
                                                                 <span class="reply-question underline-text-hover">reply</span>
@@ -262,6 +262,29 @@
                                                             </form>
                                                         {/if}
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="report-modal-{$question.id}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">
+                                                        Question report
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form horizontal" role="form" action="javascript:void(0);">
+                                                        <div class="form-group">
+                                                            <label>Message</label>
+                                                            <textarea rows="5" class="report-question-comment" placeholder="Your message..."></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-default btn-send-question-report">Send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -309,29 +332,6 @@
                                 {/if}
                             </div>
                         {/foreach}
-                        <div id="report-modal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">
-                                            Question report
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form horizontal" role="form" action="javascript:void(0);">
-                                            <div class="form-group">
-                                                <label>Message</label>
-                                                <textarea rows="5" class="report-question-comment" placeholder="Your message..."></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-default btn-send-question-report">Send</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                 </div>
             </div>

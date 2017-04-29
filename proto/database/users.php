@@ -373,7 +373,7 @@
     function createUser($name, $username, $password, $email, $description) {
         global $conn;
         global $PASSWORD_HASH_COST;
-        $options = ['cost' => $PASSWORD_HASH_COST];
+        $options = ['cost' => 12];//$PASSWORD_HASH_COST];
         $stmt = $conn->prepare('INSERT INTO "user" (name, username, hashed_pass, email, short_bio, register_date) VALUES (?, ?, ?, ?, ?, now())');
         $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
         $stmt->execute(array($name, $username, $encryptedPass, $email, $description));
