@@ -6,6 +6,7 @@ include_once ($BASE_DIR . 'database/users.php');
 
 $auction_id = $_GET["id"];
 $auction = getAuction($auction_id);
+$auction['end_data_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
 $product = getAuctionProduct($auction_id);
 
 $seller = getUser($auction['user_id']);
