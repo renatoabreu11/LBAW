@@ -18,12 +18,7 @@ if(!validUser($username, $id)){
   return;
 }
 
-if(!isset($_GET['id'])){
-  header("Location:"  . $_SERVER['HTTP_REFERER']);
-  return;
-}
-
-$notifications = getActiveNotifications($_SESSION['user_id']);
+$notifications = getActiveNotifications($id);
 $categories = getCategories();
 
 $smarty->assign('notifications', $notifications);

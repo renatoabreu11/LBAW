@@ -12,6 +12,9 @@
         <h4 class="menu-title">Notifications</h4>
       </div>
       <hr class="divider">
+      {if count($notifications) == 0}
+        <p class="notifications-empty">You have no new notifications</p>
+      {/if}
       {foreach $notifications as $notification}
         <div class="notifications-wrapper">
           <div class="media notification-media id-{$notification.id}">

@@ -696,3 +696,15 @@ function updatePassword($userId, $newPass) {
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();
 }
+
+/**
+ * Sets the boolean is new in the respective notification
+ * @param $notificationId
+ */
+function updateNotification($notificationId){
+  global $conn;
+  $stmt = $conn->prepare('UPDATE notification
+                                SET is_new = ?
+                                WHERE id = ?');
+  $stmt->execute(array('FALSE', $notificationId));
+}
