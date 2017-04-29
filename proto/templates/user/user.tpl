@@ -26,9 +26,13 @@
       </div>
       <hr>
       <div class="info-zone">
-        <p><span class="glyphicon glyphicon-map-marker"></span>{$userCurrLocation.city_name}, {$userCurrLocation.country_name}</p>
+        {if ($userCurrLocation)}
+          <p><span class="glyphicon glyphicon-map-marker"></span>{$userCurrLocation.city_name}, {$userCurrLocation.country_name}</p>
+        {/if}
         <p><span class="glyphicon glyphicon-envelope"></span><a href="mailto:{$user.email}"> {$user.email}</a></p>
-        <p><span class="glyphicon glyphicon-phone"></span> {$user.phone}</p>
+        {if ($user.phone)}
+          <p><span class="glyphicon glyphicon-phone"></span> {$user.phone}</p>
+        {/if}
       </div>
       <hr>
       <div class="user-rating">
@@ -189,19 +193,9 @@
                     {foreach $activeAuctions as $auction}
                       <tr>
                         <td class="image col-md-2"><img src="{$BASE_URL}images/products/{$auction.image}" alt="Product image"></td>
-                        <td class="product col-md-4">
+                        <td class="product col-md-6">
                           <strong>{$auction.name}</strong><br>
                           {$auction.description}
-                        </td>
-                        <td class="seller col-md-2">
-                          <a href="#">{$user.username}</a><br>
-                          <span>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                              </span>
                         </td>
                         <td class="price col-md-2">
                           <small>Current bid: ${$auction.curr_bid}</small>
