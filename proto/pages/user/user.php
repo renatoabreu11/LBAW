@@ -55,7 +55,7 @@ $smarty->assign('user', $user);
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('isFollowing', $isFollowing);
 $smarty->assign('totalAuctions', $totalAuctions);
-$smarty->assign('activeAuctionsa', $activeAuctions);
+$smarty->assign('activeAuctions', $activeAuctions);
 $smarty->assign('reviews', $reviews);
 $smarty->assign('wins', $wins);
 $smarty->assign('followingUsers', $followingUsers);

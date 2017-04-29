@@ -25,17 +25,4 @@ $(document).ready(function() {
   setRankings();
 });
 
-/**
- * For each user, defines the star rating
- */
-function setRankings() {
-  $('.rateYo').each(function() {
-    let rating_ = parseFloat($(this).attr('data-rating'));
-    rating_ = (rating_ / 10.0) * 5; // 5 stars rating
-    $(this).rateYo({
-      rating: rating_,
-      starWidth: '17px',
-      readOnly: true,
-    });
-  });
-}
+

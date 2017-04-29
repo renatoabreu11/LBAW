@@ -218,6 +218,14 @@ $(document).ready(function() {
   if($(window).width() <= 425)
     $('#categories-wrapper').removeClass('in');
 
+  setRankings();
+
+});
+
+/**
+ * For each user, defines the star rating
+ */
+function setRankings() {
   $('.rateYo').each(function() {
     let rating_ = parseFloat($(this).attr('data-rating'));
     rating_ = (rating_ / 10.0) * 5; // 5 stars rating
@@ -226,9 +234,9 @@ $(document).ready(function() {
       starWidth: '17px',
       readOnly: true,
       multiColor: {
-        'startColor': '#FF0000', // Red.
-        'endColor': '#f1c40f',  // Yellow.
-      },
+         "startColor": "#FF0000", // Red.
+         "endColor"  : "#f1c40f"  //Yellow.
+      }
     });
   });
-});
+}
