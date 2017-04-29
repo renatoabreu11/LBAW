@@ -14,21 +14,21 @@
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 0) }
-                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
+                <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 1) }
-                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
+                <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4">
             {foreach $categories as $key => $category}
               {if ($key % 3 == 2) }
-                 <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
+                <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
               {/if}
             {/foreach}
           </div>
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-   <div class="col-lg-4 col-md-4 col-sm-4">
+  <div class="col-lg-4 col-md-4 col-sm-4">
 
     <div class="item active">
         <span class="thumbnail text-center">
@@ -72,17 +72,17 @@
       </tr>
 
       {foreach $topTenRankingUsers as $key => $user}
-      <tr>
-        <td class="col-md-3">
-          <p>{$key+1}</p>
-        </td>
-        <td class="col-md-6">
-          <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
-        </td>
-        <td class="col-md-3">
-          <p>{$user.rating}/10</p>
-        </td>
-      </tr>
+        <tr>
+          <td class="col-md-3">
+            <p>{$key+1}</p>
+          </td>
+          <td class="col-md-6">
+            <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
+          </td>
+          <td class="col-md-3">
+            <p>{$user.rating}/10</p>
+          </td>
+        </tr>
       {/foreach}
 
       </tbody>
@@ -110,7 +110,7 @@
             </div>
 
             <div class="table-responsive" id="auctions">
-              {include file='auctions/list.tpl'} 
+              {include file='auctions/list.tpl'}
             </div>
 
           </div>

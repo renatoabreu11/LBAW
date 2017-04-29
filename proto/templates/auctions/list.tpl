@@ -1,6 +1,6 @@
 <table class="table table-hover collapse in" id="auctionsList">
   <tbody>
-   {foreach $auctions as $auction}
+  {foreach $auctions as $auction}
     <tr class="auction_row" data-page="{floor($auction@index/8+1)}" hidden>
       <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
       <td class="product col-md-4">{$auction.product_name}<br></td>
@@ -26,6 +26,6 @@
         <button class="btn btn-info"><a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a></button>
       </td>
     </tr>
-	{/foreach}
-	</tbody>
+  {/foreach}
+  </tbody>
 </table>

@@ -1,5 +1,13 @@
 <?php
 
+/* ========================== SELECTS  ========================== */
+
+/**
+ * Verifies if an admin exists
+ * @param $username
+ * @param $password
+ * @return bool
+ */
 function adminExists($username, $password){
   global $conn;
   $stmt = $conn->prepare('SELECT * FROM admin where username = ?');
@@ -8,6 +16,11 @@ function adminExists($username, $password){
   return ($result !== false && password_verify($password, $result["hashed_pass"]));
 }
 
+/**
+ * Returns the admin id to the respective admin's id
+ * @param $username
+ * @return mixed
+ */
 function getAdminID($username) {
   global $conn;
   $stmt = $conn->prepare('SELECT admin.id
@@ -18,6 +31,12 @@ function getAdminID($username) {
   return $result['id'];
 }
 
+/**
+ * Checks if the records exist in the database
+ * @param $username
+ * @param $id
+ * @return bool
+ */
 function validAdmin($username, $id){
   global $conn;
   $stmt = $conn->prepare('SELECT *
@@ -28,14 +47,10 @@ function validAdmin($username, $id){
   return $result !== false;
 }
 
-function createAdmin($username, $password, $email){
-  global $conn;
-  $options = ['cost' => 12];
-  $stmt = $conn->prepare('INSERT INTO admin (username, hashed_pass, email) VALUES (?, ?, ?)');
-  $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
-  $stmt->execute(array($username, $encryptedPass, $email));
-}
-
+/**
+ * Return all feedback given by users
+ * * @return array
+ */
 function getFeedback(){
   global $conn;
   $stmt = $conn->prepare('SELECT feedback.*, "user".username, "user".profile_pic
@@ -47,14 +62,10 @@ function getFeedback(){
   return $result;
 }
 
-function deleteFeedback($id){
-  global $conn;
-  $stmt = $conn->prepare('DELETE 
-                            FROM feedback
-                            WHERE id = ?');
-  $stmt->execute(array($id));
-}
-
+/**
+ * Return all categories
+ * @return array
+ */
 function getCategories(){
   global $conn;
   $stmt = $conn->prepare('SELECT unnest(enum_range(NULL::category_type))::text');
@@ -63,6 +74,10 @@ function getCategories(){
   return $result;
 }
 
+/**
+ * Return all answer reports
+ * @return array
+ */
 function getAnswerReports(){
   global $conn;
   $stmt = $conn->prepare(
@@ -76,6 +91,10 @@ function getAnswerReports(){
   return $result;
 }
 
+/**
+ * Return all question reports
+ * @return array
+ */
 function getQuestionReports(){
   global $conn;
   $stmt = $conn->prepare(
@@ -89,6 +108,10 @@ function getQuestionReports(){
   return $result;
 }
 
+/**
+ * Return all review reports
+ * @return array
+ */
 function getReviewReports(){
   global $conn;
   $stmt = $conn->prepare(
@@ -103,6 +126,10 @@ function getReviewReports(){
   return $result;
 }
 
+/**
+ * Return all auction reports
+ * @return array
+ */
 function getAuctionReports(){
   global $conn;
   $stmt = $conn->prepare(
@@ -114,6 +141,10 @@ function getAuctionReports(){
   return $result;
 }
 
+/**
+ * Return all user reports
+ * @return array
+ */
 function getUserReports(){
   global $conn;
   $stmt = $conn->prepare(
@@ -126,6 +157,26 @@ function getUserReports(){
   return $result;
 }
 
+/* ========================== INSERTS  ========================== */
+
+/**
+ * Creates a new admin
+ * @param $username
+ * @param $password
+ * @param $email
+ */
+function createAdmin($username, $password, $email){
+  global $conn;
+  $options = ['cost' => 12];
+  $stmt = $conn->prepare('INSERT INTO admin (username, hashed_pass, email) VALUES (?, ?, ?)');
+  $encryptedPass = password_hash($password, PASSWORD_DEFAULT, $options);
+  $stmt->execute(array($username, $encryptedPass, $email));
+}
+
+/**
+ * Creates a new category
+ * @param $title
+ */
 function createCategory($title){
   global $conn;
   $stmt = $conn->prepare(
@@ -134,37 +185,73 @@ function createCategory($title){
   $stmt->execute();
 }
 
-function deleteUserReport($report_id){
+/* ========================== UPDATES  ========================== */
+
+/* ========================== DELETES  ========================== */
+
+/**
+ * Delete a record from the feedback table
+ * @param $id
+ */
+function deleteFeedback($id){
+  global $conn;
+  $stmt = $conn->prepare('DELETE 
+                            FROM feedback
+                            WHERE id = ?');
+  $stmt->execute(array($id));
+}
+
+/**
+ * Delete a record from the user reports table
+ * @param $id
+ */
+function deleteUserReport($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM user_report WHERE id=?');
-  $stmt->execute(array($report_id));
+  $stmt->execute(array($id));
 }
 
-function deleteAuctionReport($report_id){
+/**
+ * Delete a record from the auction reports table
+ * @param $id
+ */
+function deleteAuctionReport($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM auction_report WHERE id=?');
-  $stmt->execute(array($report_id));
+  $stmt->execute(array($id));
 }
 
-function deleteAnswerReport($report_id){
+/**
+ * Delete a record from the answer reports table
+ * @param $id
+ */
+function deleteAnswerReport($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM answer_report WHERE id=?');
-  $stmt->execute(array($report_id));
+  $stmt->execute(array($id));
 }
 
-function deleteQuestionReport($report_id){
+/**
+ * Delete a record from the question reports table
+ * @param $id
+ */
+function deleteQuestionReport($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM question_report WHERE id=?');
-  $stmt->execute(array($report_id));
+  $stmt->execute(array($id));
 }
 
-function deleteReviewReport($report_id){
+/**
+ * Delete a record from the review reports table
+ * @param $id
+ */
+function deleteReviewReport($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM review_report WHERE id=?');
-  $stmt->execute(array($report_id));
+  $stmt->execute(array($id));
 }

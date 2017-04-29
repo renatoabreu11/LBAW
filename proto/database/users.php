@@ -431,46 +431,46 @@ function validUser($username, $id){
 
 /**
  * Returns all user's notifications
- * @param $user_id
+ * @param $userId
  * @return array
  */
-function getAllNotifications($user_id){
+function getAllNotifications($userId){
   global $conn;
   $stmt = $conn->prepare('SELECT *
                                 FROM notification
                                 WHERE user_id = ?
                                   GROUP BY id, is_new
                                   ORDER BY DATE DESC;');
-  $stmt->execute(array($user_id));
+  $stmt->execute(array($userId));
   $result = $stmt->fetchAll();
   return $result;
 }
 
 /**
  * Returns the active notifications (not read), with a limit of 5 elements.
- * @param $user_id
+ * @param $userId
  * @return array
  */
-function getActiveNotifications($user_id){
+function getActiveNotifications($userId){
   global $conn;
   $stmt = $conn->prepare('SELECT notification.*
                                 FROM notification
                                 INNER JOIN "user" ON notification.user_id = "user".id
                                 WHERE is_new = TRUE AND "user".id = ?
                                 LIMIT 5;');
-  $stmt->execute(array($user_id));
+  $stmt->execute(array($userId));
   $result = $stmt->fetchAll();
   return $result;
 }
 
 /**
  * Function useful to achieve pagination. Returns the notifications within the range necessary to each page
- * @param $user_id
+ * @param $userId
  * @param $items
  * @param $offset
  * @return array
  */
-function getPageNotifications($user_id, $items, $offset){
+function getPageNotifications($userId, $items, $offset){
   global $conn;
   $stmt = $conn->prepare('SELECT *
                                 FROM notification
@@ -479,22 +479,22 @@ function getPageNotifications($user_id, $items, $offset){
                                   ORDER BY DATE DESC
                                 LIMIT ?
                                 OFFSET ?');
-  $stmt->execute(array($user_id, $items, $offset));
+  $stmt->execute(array($userId, $items, $offset));
   $result = $stmt->fetchAll();
   return $result;
 }
 
 /**
  * Counts the number of notification that an user has
- * @param $user_id
+ * @param $userId
  * @return mixed
  */
-function countNotifications($user_id){
+function countNotifications($userId){
   global $conn;
   $stmt = $conn->prepare('SELECT COUNT(*)
                                 FROM notification
                                 WHERE user_id = ?');
-  $stmt->execute(array($user_id));
+  $stmt->execute(array($userId));
   $result = $stmt->fetch();
   return $result['count'];
 }
@@ -535,27 +535,27 @@ function insertReview($rating, $message, $bidId) {
 
 /**
  * Add a new notification to the user given in the parameters
- * @param $user_id
+ * @param $userId
  * @param $message
  * @param $type
  */
-function notifyUser($user_id, $message, $type){
+function notifyUser($userId, $message, $type){
   global $conn;
   $stmt = $conn->prepare('INSERT INTO notification
                                 (message, type, is_new, user_id, date)
                                 VALUES (?, ?, ?, ?, now())');
-  $stmt->execute(array($message, $type, 'true', $user_id));
+  $stmt->execute(array($message, $type, 'true', $userId));
 }
 
 /**
  * Add a new feedback record to the database
- * @param $user_id
+ * @param $userId
  * @param $message
  */
-function createFeedback($user_id, $message){
+function createFeedback($userId, $message){
   global $conn;
   $stmt = $conn->prepare('INSERT INTO feedback (user_id, message, date) VALUES(?, ?, now())');
-  $stmt->execute(array($user_id, $message));
+  $stmt->execute(array($userId, $message));
 }
 
 /* ========================== Deletes  ========================== */
@@ -578,14 +578,14 @@ function unfollowUser($followingUserId, $followedUserId) {
 
 /**
  * Delete an user
- * @param $user_id
+ * @param $userId
  */
-function deleteUser($user_id){
+function deleteUser($userId){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM "user"
                                 WHERE id=?');
-  $stmt->execute(array($user_id));
+  $stmt->execute(array($userId));
 }
 
 /* ========================== Updates  ========================== */
