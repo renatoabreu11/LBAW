@@ -75,7 +75,7 @@
           <div class="sellerInfo">
             <p>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></p>
             <div class="rateYo" data-rating="{$seller.rating}"></div>
-            <a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews" style="display: inline">{$numReviews} Reviews</a>
+            <p><a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews" style="display: inline">{$numReviews} Reviews</a>
           </div>
           <div class="col-md-6 text-center auctionDetails">
             <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
