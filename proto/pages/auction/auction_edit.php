@@ -1,8 +1,13 @@
 <?php
 
+function clean($string) {
+  return preg_replace('/[^A-Za-z0-9\,\s]/', '', $string); // Removes special chars.
+}
+
 include_once ('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/auction.php');
+include_once($BASE_DIR .'database/admins.php');
 
 $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
@@ -30,9 +35,22 @@ if(!isOwner($id, $auctionId)){
   return;
 }
 
-$auction = getAuctionProduct($auctionId);
+$categories = getCategories();
+$product = getAuctionProduct($auctionId);
+$auction = getAuction($auctionId);
 $notifications = getActiveNotifications($id);
+$auctionTypes = getAuctionTypes();
+$watchlist = getWatchlistInfo($id, $auctionId);
 
+$types = $product['type'];
+$cleanTypes = clean($types);
+$productType = explode(',', $cleanTypes);
+
+$smarty->assign('productType', $productType);
+$smarty->assign('watchlist', $watchlist);
+$smarty->assign('categories', $categories);
+$smarty->assign('auctionTypes', $auctionTypes);
 $smarty->assign('notifications', $notifications);
 $smarty->assign("auction", $auction);
+$smarty->assign("product", $product);
 $smarty->display('auction/auction_edit.tpl');

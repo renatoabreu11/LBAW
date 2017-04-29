@@ -16,6 +16,81 @@ function getAuction($auctionId){
   return $stmt->fetch();
 }
 
+/**
+ * Returns the info about the auction in the user's watchlist
+ * @param $userId
+ * @param $auctionId
+ * @return mixed
+ */
+function getWatchlistInfo($userId, $auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * 
+    						FROM watchlist
+    						WHERE watchlist.user_id = ? AND watchlist.auction_id = ?');
+  $stmt->execute(array($userId, $auctionId));
+  return $stmt->fetch();
+}
+
+/**
+ * Returns the product related to the given auction id
+ * @param $auctionId
+ * @return mixed
+ */
+function getAuctionProduct($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('
+                          SELECT product.*
+                            FROM product
+                            JOIN auction ON auction.product_id = product.id
+                            WHERE auction.id = ?;');
+  $stmt->execute(array($auctionId));
+  return $stmt->fetch();
+}
+
+/**
+ * Returns the product name
+ * @param $productId
+ * @return mixed
+ */
+function getProductName($productId){
+  global $conn;
+  $stmt = $conn->prepare('
+                          SELECT product.name
+                            FROM product
+                            WHERE product.id = ?;');
+  $stmt->execute(array($productId));
+  $result = $stmt->fetch();
+  return $result['name'];
+}
+
+/**
+ * Returns all auction types
+ * @param $auctionType
+ * @return mixed
+ */
+function validAuctionType($auctionType){
+  global $conn;
+  $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::auction_type))::text)');
+  $stmt->execute(array($auctionType));
+  return $stmt->fetch()['?column?'];
+}
+
+/**
+ * Verifies if an user is the owner of the given auction
+ * @param $userId
+ * @param $auctionId
+ * @return bool
+ */
+function isOwner($userId, $auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * from auction
+                            WHERE auction.id = ? AND auction.user_id = ?');
+  $stmt->execute(array($auctionId, $userId));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+
 /* ========================== INSERTS  ========================== */
 
 /**
@@ -204,27 +279,6 @@ function deleteAnswer($answerId) {
 
 
 
-function getAuctionProduct($auction_id){
-  global $conn;
-  $stmt = $conn->prepare('
-                          SELECT *
-                            FROM product
-                            JOIN auction ON auction.product_id = product.id
-                            WHERE auction.id = ?;');
-  $stmt->execute(array($auction_id));
-  return $stmt->fetch();
-}
-
-function getProductName($product_id){
-  global $conn;
-  $stmt = $conn->prepare('
-                          SELECT product.name
-                            FROM product
-                            WHERE product.id = ?;');
-  $stmt->execute(array($product_id));
-  $result = $stmt->fetch();
-  return $result['name'];
-}
 
 function bid($amountId, $bidderId, $auctionId) {
   global $conn;
@@ -431,13 +485,6 @@ function getLastAuctionID(){
   return $stmt->fetch()['max'];
 }
 
-function validAuctionType($auction_type){
-  global $conn;
-  $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::auction_type))::text)');
-  $stmt->execute(array($auction_type));
-  return $stmt->fetch()['?column?'];
-}
-
 function getSimilarAuctions($auctionId) {
   global $conn;
   $stmt = $conn->prepare('SELECT similarAuction.id, similarProduct.name, (SELECT image.filename
@@ -456,13 +503,4 @@ function getSimilarAuctions($auctionId) {
   $stmt->bindParam('original_auction_id', $auctionId);
   $stmt->execute();
   return $stmt->fetchAll();
-}
-
-function isOwner($user_id, $auction_id){
-  global $conn;
-  $stmt = $conn->prepare('SELECT * from auction
-                            WHERE auction.id = ? AND auction.user_id = ?');
-  $stmt->execute(array($auction_id, $user_id));
-  $result = $stmt->fetch();
-  return $result !== false;
 }

@@ -108,7 +108,7 @@ $(document).ready(function() {
   $('ul.setup-panel li.active a').trigger('click');
 
   $('#activate-step-2').on('click', function() {
-    if($('#product_name').valid()&& $('#category').valid()
+    if($('#product_name').valid() && $('#category').valid()
         && $('#description').valid() && $('#condition').valid()) {
       $('ul.setup-panel li:eq(1)').removeClass('disabled');
       $('ul.setup-panel li a[href="#step-2"]').trigger('click');

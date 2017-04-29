@@ -46,7 +46,7 @@
     <input type="hidden" name="user_id" value="{$USER_ID}">
     {include file='auction/product_info.tpl'}
     {include file='auction/auction_info.tpl'}
-    {include file='auction/extra_info.tpl'}
+    {include file='auction/settings.tpl'}
     <div class="form-group text-center hidden" id="createAuction-btn">
       <button class="btn btn-primary pull-right" style="margin-right: 2em;" type="submit">Create Auction</button>
     </div>

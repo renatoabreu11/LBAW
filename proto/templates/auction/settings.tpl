@@ -23,7 +23,7 @@
       <div class="form-group">
         <label class="control-label col-md-4"> Notifications<span>*</span> </label>
         <div class="input-group col-md-8 col-xs-12">
-          <select class="selectpicker input-md form-control" name="notifications_enabled" id="notifications_enabled" title="Choose if you want to receive notifications relative to this auction">
+          <select class="selectpicker input-md form-control" name="notifications_enabled" id="notifications_enabled" title="Choose if you want to receive notifications relative of this auction">
             {if $FORM_VALUES.notifications_enabled == "Yes"}
             <option selected>Yes</option>
             {else}

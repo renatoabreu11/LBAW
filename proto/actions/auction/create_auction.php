@@ -111,12 +111,20 @@ if (!empty($_POST['token'])) {
     if($notificationsEnabled != "No" && $notificationsEnabled != "Yes"){
       $_SESSION['field_errors']['notifications_enabled'] = 'Invalid notifications option';
       $invalidInfo = true;
+    }else{
+      if($notificationsEnabled == "No")
+        $notificationsEnabled = FALSE;
+      else $notificationsEnabled = TRUE;
     }
 
     $qaSection = $_POST['qa_section'];
     if($qaSection != "No" && $qaSection != "Yes"){
       $_SESSION['field_errors']['qa_section'] = 'Invalid Q&A option';
       $invalidInfo = true;
+    }else{
+      if($qaSection == "No")
+        $qaSection = FALSE;
+      else $qaSection = TRUE;
     }
 
     if($invalidInfo){

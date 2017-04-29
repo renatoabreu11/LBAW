@@ -36,14 +36,6 @@
       </div>
 
       <div class="form-group">
-        <label for="quantity" class="control-label col-md-4"> Quantity<span>*</span> </label>
-        <div class="col-md-8 input-group col-xs-12">
-          <input class="input-md form-control" id="quantity" type="number" value="{$FORM_VALUES.quantity}" min="1" max="25" step="1" name="quantity">
-        </div>
-        <strong class="field_error">{$FIELD_ERRORS.quantity}</strong>
-      </div>
-
-      <div class="form-group">
         <label class="control-label col-md-4"> Description<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
           <textarea maxlength="512" class="form-control" id="description" name="description" placeholder="Tell us about your product" >{$FORM_VALUES.description}</textarea>
