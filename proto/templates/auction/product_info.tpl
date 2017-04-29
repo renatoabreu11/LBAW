@@ -24,7 +24,11 @@
         <div class="col-md-8 input-group col-xs-12">
           <select class="input-md form-control selectpicker" id="category" name="category[]" multiple data-max-options="2" data-live-search="true" title="Define the product category...">
             {foreach $categories as $key => $category}
-              <option>{$category.unnest}</option>
+              {if $category.unnest == $FORM_VALUES.category[0] || $category.unnest == $FORM_VALUES.category[1]}
+                <option selected>{$category.unnest}</option>
+                {else}
+                <option>{$category.unnest}</option>
+              {/if}
             {/foreach}
           </select>
         </div>

@@ -43,10 +43,11 @@
   </div>
   <form id="createAuctionForm" action="{$BASE_URL}actions/auction/create_auction.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="token" value="{$TOKEN}">
+    <input type="hidden" name="user_id" value="{$USER_ID}">
     {include file='auction/product_info.tpl'}
     {include file='auction/auction_info.tpl'}
     {include file='auction/extra_info.tpl'}
-    <div class="form-group text-center" id="createAuction-btn">
+    <div class="form-group text-center hidden" id="createAuction-btn">
       <button class="btn btn-primary pull-right" style="margin-right: 2em;" type="submit">Create Auction</button>
     </div>
   </form>

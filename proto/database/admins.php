@@ -75,6 +75,18 @@ function getCategories(){
 }
 
 /**
+ * Return all auction types
+ * @return array
+ */
+function getAuctionTypes(){
+  global $conn;
+  $stmt = $conn->prepare('SELECT unnest(enum_range(NULL::auction_type))::text');
+  $stmt->execute();
+  $result = $stmt->fetchAll();
+  return $result;
+}
+
+/**
  * Return all answer reports
  * @return array
  */

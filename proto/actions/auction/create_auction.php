@@ -5,11 +5,12 @@ include_once($BASE_DIR .'database/auctions.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/users.php');
 
+print_r($_POST);
 if (!empty($_POST['token'])) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
     if (!$_POST['product_name'] || !$_POST['category']
       | !$_POST['quantity'] || !$_POST['description']
-      || !$_POST['condition'] || !$_FILES['input24']
+      || !$_POST['condition'] || !$_POST['user_id']
       || !$_POST['auction_type'] || !$_POST['base_price']
       || !$_POST['start_date'] || !$_POST['end_date']
       || !$_POST['notifications_enabled'] || !$_POST['qa_section']){
@@ -19,37 +20,44 @@ if (!empty($_POST['token'])) {
       exit;
     }
 
-    $user_id = $_SESSION['user_id'];
+    $loggedUserId = $_SESSION['user_id'];
+    $userId = $_POST['user_id'];
     $username = $_SESSION['username'];
 
-    if(!validUser($username, $user_id)) {
-      $_SESSION['error_messages'][] = "Invalid user";
-      header("Location: $BASE_URL" . 'pages/auctions/best_auctions.php');
+    if($loggedUserId != $userId){
+      $_SESSION['error_messages'][] = "Invalid user. You don't have the necessary permissions to create an auction.";
+      header("Location:" . $BASE_URL);
       exit;
     }
 
-    $product_name = trim(strip_tags($_POST["product_name"]));
+    if(!validUser($username, $userId)) {
+      $_SESSION['error_messages'][] = "Invalid user. You don't have the necessary permissions to create an auction.";
+      header("Location:" . $BASE_URL);
+      exit;
+    }
+
+    $productName = trim(strip_tags($_POST["product_name"]));
     $invalidInfo = false;
-    if ( strlen($product_name) > 64) {
+    if ( strlen($productName) > 64) {
       $_SESSION['field_errors']['product_name'] = 'Invalid product name length.';
       $invalidInfo = true;
     }
 
     $category = $_POST["category"];
-    $category_arr;
+    $categoryArr;
     if(count($category) == 2){
       if ( !validCategory($category[0]) || !validCategory($category[1])) {
         $invalidInfo = true;
         $_SESSION['field_errors']['category'] = 'Invalid category.';
       }else{
-        $category_arr = '{' . $category[0] . ',' . $category[1] . '}';
+        $categoryArr = '{' . $category[0] . ',' . $category[1] . '}';
       }
     }else if (count($category) == 1){
       if ( !validCategory($category[0])) {
         $invalidInfo = true;
         $_SESSION['field_errors']['category'] = 'Invalid category.';
       }else{
-        $category_arr = '{' . $category[0] . '}';
+        $categoryArr = '{' . $category[0] . '}';
       }
     }else{
       $invalidInfo = true;
@@ -74,39 +82,39 @@ if (!empty($_POST['token'])) {
       $invalidInfo = true;
     }
 
-    $auction_type = $_POST["auction_type"];
-    if ( !validAuctionType($auction_type)) {
+    $auctionType = $_POST["auction_type"];
+    if ( !validAuctionType($auctionType)) {
       $invalidInfo = true;
       $_SESSION['field_errors']['auction_type'] = 'Invalid auction type.';
     }
 
-    $base_price = $_POST['base_price'];
-    if(!is_numeric($base_price)){
+    $basePrice = $_POST['base_price'];
+    if(!is_numeric($basePrice)){
       $_SESSION['field_errors']['base_price'] = 'Invalid base price.';
       $invalidInfo = true;
     }
 
-    $start_date = date("Y-m-d H:i:s", strtotime($_POST['start_date']));
-    $end_date = date("Y-m-d H:i:s", strtotime($_POST['end_date']));
+    $startDate = date("Y-m-d H:i:s", strtotime($_POST['start_date']));
+    $endDate = date("Y-m-d H:i:s", strtotime($_POST['end_date']));
 
-    if(!$start_date){
+    if(!$startDate){
       $_SESSION['field_errors']['start_date'] = 'Invalid starting date.';
       $invalidInfo = true;
     }
 
-    if(!$end_date){
+    if(!$endDate){
       $_SESSION['field_errors']['end_date'] = 'Invalid ending date.';
       $invalidInfo = true;
     }
 
-    $notifications_enabled = $_POST['notifications_enabled'];
-    if($notifications_enabled != "No" && $notifications_enabled != "Yes"){
+    $notificationsEnabled = $_POST['notifications_enabled'];
+    if($notificationsEnabled != "No" && $notificationsEnabled != "Yes"){
       $_SESSION['field_errors']['notifications_enabled'] = 'Invalid notifications option';
       $invalidInfo = true;
     }
 
-    $qa_section = $_POST['qa_section'];
-    if($qa_section != "No" && $qa_section != "Yes"){
+    $qaSection = $_POST['qa_section'];
+    if($qaSection != "No" && $qaSection != "Yes"){
       $_SESSION['field_errors']['qa_section'] = 'Invalid Q&A option';
       $invalidInfo = true;
     }
@@ -117,7 +125,7 @@ if (!empty($_POST['token'])) {
       exit;
     }else{
       try {
-        createProduct($category_arr, $product_name, $description, $condition);
+        createProduct($categoryArr, $productName, $description, $condition);
       } catch (PDOException $e) {
         $_SESSION['error_messages'][] = "Error creating the auction product.";
         $_SESSION['form_values'] = $_POST;
@@ -125,10 +133,9 @@ if (!empty($_POST['token'])) {
         exit;
       }
 
-      $product_id = getLastProductID();
-
+      $productId = getLastProductID();
       try {
-        createAuction($product_id, $user_id, $base_price, $start_date, $end_date, $type, $quantity, $qa_section);
+        createAuction($productId, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection);
       } catch (PDOException $e) {
         $_SESSION['error_messages'][] = "Error creating auction.";
         $_SESSION['form_values'] = $_POST;
@@ -136,9 +143,9 @@ if (!empty($_POST['token'])) {
         exit;
       }
 
-      $auction_id = getLastAuctionID();
+      $auctionId = getLastAuctionID();
       try {
-        addAuctionToWatchlist($auction_id, $user_id, $notifications_enabled);
+        addAuctionToWatchlist($auctionId, $userId, $notificationsEnabled);
       } catch (PDOException $e) {
         $_SESSION['error_messages'][] = "Error adding auction to your watchlist.";
         $_SESSION['form_values'] = $_POST;
@@ -147,7 +154,7 @@ if (!empty($_POST['token'])) {
       }
 
       $_SESSION['success_messages'][] = 'Auction created with success!';
-      header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auction_id);
+      header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auctionId);
     }
 
   } else {
@@ -156,4 +163,4 @@ if (!empty($_POST['token'])) {
     header("Location:"  . $_SERVER['HTTP_REFERER']);
     exit;
   }
-}
+}else header("Location:"  . $BASE_URL);

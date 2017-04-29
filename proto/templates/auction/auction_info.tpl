@@ -6,9 +6,13 @@
         <label class="control-label col-md-4"> Type<span>*</span> </label>
         <div class="col-md-8 col-xs-12 input-group">
           <select class="selectpicker input-md form-control" name="auction_type" id="auction_type" title="Define the auction type...">
-            <option>Dutch</option>
-            <option>Sealed Bid</option>
-            <option>Default</option>
+            {foreach $auctionTypes as $key => $type}
+              {if $type.unnest == $FORM_VALUES.auction_type}
+                <option selected>{$type.unnest}</option>
+              {else}
+                <option>{$type.unnest}</option>
+              {/if}
+            {/foreach}
           </select>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.auction_type}</strong>

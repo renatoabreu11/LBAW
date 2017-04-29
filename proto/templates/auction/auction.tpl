@@ -188,8 +188,6 @@
 
       <!-- Accessible information -->
       <input type="hidden" name="auction-id" value="{$auction.id}">
-      <input type="hidden" name="token" value="{$token}">
-      <input type="hidden" name="user-id" value="{$userId}">
 
       <div class="row product-questions">
         <div class="col-md-12">

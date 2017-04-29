@@ -119,6 +119,7 @@ $(document).ready(function() {
   $('#activate-step-3').on('click', function(e) {
     if($('#end_date').valid() && $('#start_date').valid() &&
         $('#auction_type').valid() && $('#base_price').valid()) {
+      $('#createAuction-btn').removeClass('hidden');
       $('ul.setup-panel li:eq(2)').removeClass('disabled');
       $('ul.setup-panel li a[href="#step-3"]').trigger('click');
       $(this).remove();

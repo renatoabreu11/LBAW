@@ -20,7 +20,9 @@ if(!validUser($username, $id)){
 
 $notifications = getActiveNotifications($id);
 $categories = getCategories();
+$auctionTypes = getAuctionTypes();
 
+$smarty->assign('auctionTypes', $auctionTypes);
 $smarty->assign('notifications', $notifications);
 $smarty->assign("categories", $categories);
 $smarty->display('auction/create_auction.tpl');

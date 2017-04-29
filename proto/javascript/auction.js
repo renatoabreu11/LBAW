@@ -1,10 +1,6 @@
-let token;
-let userId;
 let auctionId;
 
 $(document).ready(function() {
-  token = $('input[name=token]').val();
-  userId = $('input[name=user-id]').val();
   auctionId = $('input[name=auction-id]').val();
 
   $('.slider1').bxSlider({
