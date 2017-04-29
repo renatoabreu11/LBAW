@@ -1,15 +1,54 @@
 let token;
 let userId;
+let auctionId;
 
 $(document).ready(function() {
   token = $('input[name=token]').val();
   userId = $('input[name=user-id]').val();
+  auctionId = $('input[name=auction-id]').val();
 
   $('.slider1').bxSlider({
     slideWidth: 200,
     minSlides: 2,
     maxSlides: 4,
     slideMargin: 15,
+  });
+
+  // Bid on the auction.
+  $(".btn-bid").click(function() {    
+    var amount = $(".bid-amount").val();
+
+    console.log(amount + ", " + auctionId + ", " + userId + ", " + token);
+
+    var request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/bid.php',
+      data: {
+        "amount": amount,
+        "auction-id": auctionId,
+        "user-id": userId,
+        "token": token
+      }
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      console.info(response);
+      if(response.indexOf("success") >= 0) {
+
+      } else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + response + '</div>',
+              type: 'inline',
+            },
+          });
+      }
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: '
+        + textStatus + ': ' + errorThrown);
+    });
   });
 
   // Send question.

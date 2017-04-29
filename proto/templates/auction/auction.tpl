@@ -97,19 +97,19 @@
 
                                             <div class="row" style="margin: 10px; padding-top: 2em;">
                                                 <div class="input-group number-spinner">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                </span>
-                                                    <input type="text" class="form-control text-center" value="800$">
                                                     <span class="input-group-btn">
-                                            <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                            </span>
+                                                        <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                                    </span>
+                                                    <input type="text" class="form-control text-center bid-amount" value="{$auction.curr_bid+1}">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </span>
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer" style="padding-bottom: 0">
                                                 <button type="submit" class="btn btn-info btn-default pull-right" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal">Bid</button>
+                                                <button type="submit" class="btn btn-info btn-default pull-left btn-bid" data-dismiss="modal">Bid</button>
                                             </div>
                                         </div>
                                     </div>

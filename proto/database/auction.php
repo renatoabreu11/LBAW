@@ -60,7 +60,7 @@ function bid($amount_bid, $bidder_id, $auction_id) {
         $stmt->execute();
 
         $conn->commit();
-        return "Bet was correctly recorded.";
+        return "success: bet was correctly recorded.";
     }
     else {
         $conn->commit();
