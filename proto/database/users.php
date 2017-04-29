@@ -619,6 +619,14 @@ function deleteUser($userId){
   $stmt->execute(array($userId));
 }
 
+function deleteNotification($notificationId){
+  global $conn;
+  $stmt = $conn->prepare('DELETE 
+                                FROM notification
+                                WHERE id=?');
+  $stmt->execute(array($notificationId));
+}
+
 /* ========================== Updates  ========================== */
 
 /**

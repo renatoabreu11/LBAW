@@ -27,7 +27,6 @@ $email = trim(strip_tags($_POST['email']));
 $phone = trim(strip_tags($_POST['phone']));
 $fullBio = trim(strip_tags($_POST['full-bio']));
 
-var_dump($_POST);
 $invalidChars = false;
 
 if(!preg_match("/^[a-zA-Z\s]+$/", $realName)) {
@@ -48,7 +47,6 @@ if($cityId) {
 if(!preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
   $_SESSION['field_errors']['email'] = 'Invalid email format';
   $invalidChars = true;
-  echo 'mail';
 }
 
 if($invalidChars) {

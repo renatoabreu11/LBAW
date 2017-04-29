@@ -13,11 +13,11 @@ $(document).ready(function() {
 
   // Used when an user clicks the reviews on an auction page. This way it will be redirected to the
   // review tab.
-  var hash = document.location.hash;
+  let hash = document.location.hash;
   if (hash)
       $('.nav-tabs a[href="'+hash+'"]').tab('show');
   // Change hash for page-reload
-  $('.nav-tabs a').on('shown.bs.tab', function (e) {
+  $('.nav-tabs a').on('shown.bs.tab', function(e) {
       window.location.hash = e.target.hash;
   });
 
@@ -170,4 +170,68 @@ $(document).ready(function() {
       readOnly: true,
     });
   });
+
+  $('.closePopup').on('click', function() {
+    $.magnificPopup.close();
+  });
+
+  $('.removeNotificationPopup').on('click', function() {
+    let notificationClass = $(this).attr('class').split('id-');
+    if (notificationClass.length === 2) {
+      let object = $(this).parents('.notifications-wrapper');
+      let notificationId = notificationClass[1];
+      $('.removeNotificationPopup').magnificPopup({
+        type: 'inline',
+        midClick: true,
+      }).magnificPopup('open');
+
+      $('.removeNotification').one('click', function() {
+        $.magnificPopup.close();
+        deleteNotification(notificationId, object);
+      });
+    }
+  });
+
+  /**
+   * Handles the call to delete a notification
+   * @param {number} notificationId
+   * @param {object} object
+   */
+  function deleteNotification(notificationId, object) {
+    $.magnificPopup.close();
+    let request;
+    request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/user/delete_notification.php',
+      data: {
+        'id': notificationId,
+        'token': token,
+        'userId': userId,
+      },
+      datatype: 'text',
+    });
+
+    // Callback handler that will be called on success
+    request.done(function(response, textStatus, jqXHR) {
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+      if(response.includes('Success')) {
+        object.hide('slow', function() {
+          object.remove();
+        });
+      }
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error(
+        'The following error occurred: '+
+        textStatus, errorThrown
+      );
+    });
+  }
 });

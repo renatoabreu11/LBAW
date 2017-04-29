@@ -219,7 +219,6 @@ $(document).ready(function() {
     $('#categories-wrapper').removeClass('in');
 
   setRankings();
-
 });
 
 /**
@@ -234,9 +233,9 @@ function setRankings() {
       starWidth: '17px',
       readOnly: true,
       multiColor: {
-         "startColor": "#FF0000", // Red.
-         "endColor"  : "#f1c40f"  //Yellow.
-      }
+         'startColor': '#FF0000', // Red.
+         'endColor': '#f1c40f',  // Yellow.
+      },
     });
   });
 }
