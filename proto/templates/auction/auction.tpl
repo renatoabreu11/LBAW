@@ -86,7 +86,7 @@
           </div>
           <div class="col-md-6 text-center auctionDetails">
             <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
-            {if ($seller.id != $userId) && $userId}
+            {if ($seller.id != $userId && $userId && !$winningUser)}
               <div class="section">
                 <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
                 <div id="bidOnAuction" class="white-popup mfp-hide">
@@ -113,8 +113,7 @@
             <div class="countdown">
               <span class="clock"><p>{$auction.end_date}</p></span>
             </div>
-            <h4>Ending date: Monday, Mar 6, 2017
-              4:12:50 AM WET</h4>
+            <h4>Ending date: {$auction.end_data_readable}</h4>
 
             <div class="visitors">
               <span class="pull-left"><i class="fa fa-lg fa-eye" aria-hidden="true"></i> 49 visitors</span>
