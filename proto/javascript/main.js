@@ -1,9 +1,12 @@
 BASE_URL = '/';
+let userId = null;
+let token = null;
+let adminId = null;
 
 $(document).ready(function() {
-  let token = $('input[name=token]').val();
-  let userId = $('input[name=user_id]').val();
-  let adminId = $('input[name=admin_id]').val();
+  token = $('input[name=token]').val();
+  userId = $('input[name=user_id]').val();
+  adminId = $('input[name=admin_id]').val();
 
   $('#signInForm').validate({
     rules:
@@ -210,9 +213,9 @@ $(document).ready(function() {
       starWidth: '17px',
       readOnly: true,
       multiColor: {
-        "startColor": "#FF0000", // Red.
-        "endColor"  : "#f1c40f"  //Yellow.
-      }
+        'startColor': '#FF0000', // Red.
+        'endColor': '#f1c40f',  // Yellow.
+      },
     });
   });
 });

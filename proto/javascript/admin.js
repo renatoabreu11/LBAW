@@ -1,7 +1,4 @@
 $(document).ready(function() {
-  let adminId = $('input[name=admin_id]').val();
-  let token = $('input[name=token]').val();
-
   $('#menu-toggle').click(function(e) {
     e.preventDefault();
     $('#wrapper').toggleClass('toggled');
