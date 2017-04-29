@@ -16,7 +16,5 @@ if(!validAdmin($username, $id)){
   return;
 }
 
-$smarty->assign("adminId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("adminSection", "addAdmin");
 $smarty->display('admin/admin_page.tpl');

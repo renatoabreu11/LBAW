@@ -37,8 +37,6 @@ switch ($reportType){
     $reports = getUserReports();
 }
 
-$smarty->assign("adminId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("reportType", $reportType);
 $smarty->assign("reports", $reports);
 $smarty->assign("adminSection", "reports");

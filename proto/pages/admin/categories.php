@@ -18,8 +18,6 @@ if(!validAdmin($username, $id)){
 
 $categories = getCategories();
 
-$smarty->assign("adminId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("categories", $categories);
 $smarty->assign("adminSection", "categories");
 $smarty->display('admin/admin_page.tpl');

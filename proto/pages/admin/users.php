@@ -25,8 +25,6 @@ foreach ($users as $user){
     array_push($nrOfAuctionsByUser, $nrAuctions);
 }
 
-$smarty->assign("adminId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("auctionsUser", $nrOfAuctionsByUser);
 $smarty->assign("users", $users);
 $smarty->assign("adminSection", "users");

@@ -24,16 +24,10 @@ if(date('Y-m-d H:i:s') > $auction['end_date']) {
   $smarty->assign("winningUser", $winningUser);
 }
 
-if(!$_SESSION['user_id']){
+if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
-  $token = $_SESSION['token'];
-  $smarty->assign("userId", $id);
-  $smarty->assign("token", $token);
-}else if(!$_SESSION['admin_id']){
-  $id = $_SESSION['admin_id'];
-  $token = $_SESSION['token'];
-  $smarty->assign("adminId", $id);
-  $smarty->assign("token", $token);
+  $notifications = getActiveNotifications($id);
+  $smarty->assign('notifications', $notifications);
 }
 
 $smarty->assign("product", $product);

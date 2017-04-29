@@ -18,8 +18,6 @@ if(!validAdmin($username, $id)){
 
 $feedback = getFeedback();
 
-$smarty->assign("adminId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("feedback", $feedback);
 $smarty->assign("adminSection", "feedback");
 $smarty->display('admin/admin_page.tpl');

@@ -12,18 +12,10 @@ $topTenRankingUsers = getTopTenRankingUsers();
 $mostPopularAuctions = getMostPopularAuctions();
 $mostRecentAuction = getMostRecentAuction();
 
-if(!$_SESSION['user_id']){
+if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
-  $token = $_SESSION['token'];
   $notifications = getActiveNotifications($id);
-  $smarty->assign("userId", $id);
-  $smarty->assign("token", $token);
   $smarty->assign('notifications', $notifications);
-}else if(!$_SESSION['admin_id']){
-  $id = $_SESSION['admin_id'];
-  $token = $_SESSION['token'];
-  $smarty->assign("adminId", $id);
-  $smarty->assign("token", $token);
 }
 
 $smarty->assign('categories', $categories);

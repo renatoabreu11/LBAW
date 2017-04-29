@@ -67,12 +67,12 @@
 </nav>
 
 {if $ADMIN_USERNAME}
-  <input type="hidden" name="admin_id" value="{$adminId}">
+  <input type="hidden" name="admin_id" value="{$ADMIN_ID}">
 {elseif $USERNAME}
-  <input type="hidden" name="user_id" value="{$userId}">
+  <input type="hidden" name="user_id" value="{$USER_ID}">
 {/if}
 {if $USERNAME || $ADMIN_USERNAME}
-  <input type="hidden" name="token" value="{$token}">
+  <input type="hidden" name="token" value="{$TOKEN}">
 {/if}
 
 <div id="error_messages">

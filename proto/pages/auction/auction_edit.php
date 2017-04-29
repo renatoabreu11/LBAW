@@ -34,7 +34,5 @@ $auction = getAuctionProduct($auctionId);
 $notifications = getActiveNotifications($id);
 
 $smarty->assign('notifications', $notifications);
-$smarty->assign("userId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("auction", $auction);
 $smarty->display('auction/auction_edit.tpl');

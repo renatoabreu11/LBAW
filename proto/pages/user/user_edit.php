@@ -20,7 +20,7 @@ if(!is_numeric($userId) || !is_numeric($id)) {
   exit;
 }
 
-if($userId != $id || !$token || $username) {
+if($userId != $id || !$token || !$username) {
   $_SESSION['error_messages'][] = "Invalid request. You don't have permissions!";
   header("Location: $BASE_URL");
   exit;
@@ -33,8 +33,6 @@ $countries = getAllCountries();
 $cities = getAllCities();
 
 $smarty->assign('notifications', $notifications);
-$smarty->assign("userId", $userId);
-$smarty->assign("token", $token);
 $smarty->assign('user', $user);
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('countries', $countries);

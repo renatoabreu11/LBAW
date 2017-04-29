@@ -7,8 +7,6 @@ $(document).ready(function() {
   token = $('input[name=token]').val();
   userId = $('input[name=user_id]').val();
   adminId = $('input[name=admin_id]').val();
-  console.log(token);
-  console.log(userId);
 
   $('#signInForm').validate({
     rules:

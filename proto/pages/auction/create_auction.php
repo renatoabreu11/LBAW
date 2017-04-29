@@ -27,7 +27,5 @@ $notifications = getActiveNotifications($_SESSION['user_id']);
 $categories = getCategories();
 
 $smarty->assign('notifications', $notifications);
-$smarty->assign("userId", $id);
-$smarty->assign("token", $token);
 $smarty->assign("categories", $categories);
 $smarty->display('auction/create_auction.tpl');

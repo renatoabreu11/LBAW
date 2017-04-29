@@ -34,8 +34,6 @@ $page_auctions = getPageWatchlistAuctions($id, $items, $offset);
 $notifications = getActiveNotifications($id);
 $nr_pages = round(countWatchlistAuctions($id) / $items);
 
-$smarty->assign("userId", $id);
-$smarty->assign("token", $token);
 $smarty->assign('currPage', $page);
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);

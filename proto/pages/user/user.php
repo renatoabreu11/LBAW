@@ -38,17 +38,9 @@ $lastWatchlistAuctions = getLastWatchlistAuctions($userId);
 if($userId == $loggedUserId)
   $reviewsPosted = getWonReviews($userId);
 
-if(!$loggedUserId){
-  $token = $_SESSION['token'];
+if($loggedUserId){
   $notifications = getActiveNotifications($loggedUserId);
-  $smarty->assign("userId", $loggedUserId);
-  $smarty->assign("token", $token);
   $smarty->assign('notifications', $notifications);
-}else if(!$_SESSION['admin_id']){
-  $id = $_SESSION['admin_id'];
-  $token = $_SESSION['token'];
-  $smarty->assign("adminId", $id);
-  $smarty->assign("token", $token);
 }
 
 $smarty->assign('user', $user);
