@@ -18,5 +18,5 @@ if(!validAdmin($username, $id)){
 $categories = getCategories();
 
 $smarty->assign("categories", $categories);
-$smarty->assign("admin_section", "categories");
+$smarty->assign("adminSection", "categories");
 $smarty->display('admin/admin_page.tpl');

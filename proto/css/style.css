@@ -385,6 +385,10 @@ th {
   text-decoration: underline;
 }
 
+.bid-title {
+  padding-bottom: 0.5em;
+}
+
 /* =============== Footer =============== */
 
 #footer {

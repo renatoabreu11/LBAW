@@ -20,7 +20,7 @@
             <p>You’ll see here updates of your auctions, bids, questions, answers and warnings.</p>
         </div>
 
-        {foreach $page_notifications as $notif}
+        {foreach $pageNotifications as $notif}
             <div class="notifications-wrapper">
                 <div class="media notification-media">
                     <div class="media-left" style="padding: 1em;">
@@ -54,25 +54,25 @@
             <hr class="divider">
         {/foreach}
 
-        {if $nr_pages > 1}
+        {if $nrPages > 1}
             <div class="row text-center">
                 <ul class="pagination">
-                    {if $curr_page == 1}
+                    {if $currPage == 1}
                         <li class="disabled"><a>«</a></li>
                     {else}
-                        <li ><a href="{$BASE_URL}pages/user/notifications.php?page={$curr_page - 1}">«</a></li>
+                        <li ><a href="{$BASE_URL}pages/user/notifications.php?page={$currPage - 1}">«</a></li>
                     {/if}
-                    {for $i=1; $i <= $nr_pages; $i++}
-                        {if $curr_page == $i}
+                    {for $i=1; $i <= $nrPages; $i++}
+                        {if $currPage == $i}
                             <li class="active"><a>{$i} <span class="sr-only">(current)</span></a></li>
                         {else}
                             <li ><a href="{$BASE_URL}pages/user/notifications.php?page={$i}">{$i} </a></li>
                         {/if}
                     {/for}
-                    {if $curr_page == $nr_pages}
+                    {if $currPage == $nrPages}
                         <li class="disabled"><a>»</a></li>
                     {else}
-                        <li ><a href="{$BASE_URL}pages/user/notifications.php?page={$curr_page + 1}">»</a></li>
+                        <li ><a href="{$BASE_URL}pages/user/notifications.php?page={$currPage + 1}">»</a></li>
                     {/if}
                 </ul>
             </div>

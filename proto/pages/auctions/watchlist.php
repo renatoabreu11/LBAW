@@ -34,8 +34,8 @@ $notifications = getActiveNotifications($id);
 
 $nr_pages = round(countWatchlistAuctions($id) / $items);
 
-$smarty->assign('curr_page', $page);
-$smarty->assign('nr_pages', $nr_pages);
+$smarty->assign('currPage', $page);
+$smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);
-$smarty->assign('page_auctions', $page_auctions);
+$smarty->assign('pageAuctions', $page_auctions);
 $smarty->display('auctions/watchlist.tpl');

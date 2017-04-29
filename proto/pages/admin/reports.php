@@ -36,7 +36,7 @@ switch ($report_type){
         $reports = getUserReports();
 }
 
-$smarty->assign("report_type", $report_type);
+$smarty->assign("reportType", $report_type);
 $smarty->assign("reports", $reports);
-$smarty->assign("admin_section", "reports");
+$smarty->assign("adminSection", "reports");
 $smarty->display('admin/admin_page.tpl');

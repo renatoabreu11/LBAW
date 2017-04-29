@@ -24,7 +24,7 @@ foreach ($users as $user){
     array_push($nrOfAuctionsByUser, $nrAuctions);
 }
 
-$smarty->assign("auctions_user", $nrOfAuctionsByUser);
+$smarty->assign("auctionsUser", $nrOfAuctionsByUser);
 $smarty->assign("users", $users);
-$smarty->assign("admin_section", "users");
+$smarty->assign("adminSection", "users");
 $smarty->display('admin/admin_page.tpl');

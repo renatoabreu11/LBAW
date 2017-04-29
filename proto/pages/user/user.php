@@ -1,71 +1,71 @@
 <?php
-    include_once('../../config/init.php');
-    include_once($BASE_DIR . 'database/users.php');
 
-    if(!$_GET['id']) {
-        $_SESSION['error_messages'][] = "Undefined id";
-        header("Location: $BASE_URL");
-        exit;
-    }
+include_once('../../config/init.php');
+include_once($BASE_DIR . 'database/users.php');
 
-    $userId = trim(strip_tags($_GET['id']));
-    $loggedUserId = $_SESSION['user_id'];
-    
-    if(!preg_match("/[0-9]/", $userId)) {
-        $_SESSION['error_messages'][] = "id has invalid characters";
-        header("Location: $BASE_URL");
-        exit;
-    }
+if(!$_GET['id']) {
+  $_SESSION['error_messages'][] = "Undefined id";
+  header("Location: $BASE_URL");
+  exit;
+}
 
-    if($_SESSION['username'] && $_SESSION['user_id']){
-        $notifications = getActiveNotifications($_SESSION['user_id']);
-        $smarty->assign('notifications', $notifications);
-    }
+$userId = trim(strip_tags($_GET['id']));
+$loggedUserId = $_SESSION['user_id'];
 
-    $user = getUser($userId);
-    $userCurrLocation = getCityAndCountry($userId);
-    $isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user not logged in.
-    $totalAuctions = getNumTotalAuctions($userId);
-    $activeAuctions = getActiveAuctions($userId);
-    $reviews = getReviews($userId);
-    $wins = getWins($userId);
-    $followingUsers = getFollowingUsers($userId);
+if(!preg_match("/[0-9]/", $userId)) {
+  $_SESSION['error_messages'][] = "id has invalid characters";
+  header("Location: $BASE_URL");
+  exit;
+}
 
-    // Recent Activity.
-    $lastReviews = getLastReviews($userId);
-    $lastBids = getLastBids($userId);
-    $lastFollowing = getLastFollows($userId);
-    $lastWins = getLastWins($userId);
-    $lastQuestion = getLastQuestions($userId);
-    $lastWatchlistAuctions = getLastWatchlistAuctions($userId);
+if($_SESSION['username'] && $_SESSION['user_id']){
+  $notifications = getActiveNotifications($_SESSION['user_id']);
+  $smarty->assign('notifications', $notifications);
+}
 
-    if($userId == $loggedUserId)
-        $reviewsPosted = getWonReviews($userId);
+$user = getUser($userId);
+$userCurrLocation = getCityAndCountry($userId);
+$isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user not logged in.
+$totalAuctions = getNumTotalAuctions($userId);
+$activeAuctions = getActiveAuctions($userId);
+$reviews = getReviews($userId);
+$wins = getWins($userId);
+$followingUsers = getFollowingUsers($userId);
 
-    if($_SESSION['username'] && $_SESSION['user_id']){
-        $notifications = getActiveNotifications($loggedUserId);
-        $smarty->assign('notifications', $notifications);
-    }
+// Recent Activity.
+$lastReviews = getLastReviews($userId);
+$lastBids = getLastBids($userId);
+$lastFollowing = getLastFollows($userId);
+$lastWins = getLastWins($userId);
+$lastQuestion = getLastQuestions($userId);
+$lastWatchlistAuctions = getLastWatchlistAuctions($userId);
 
-    $smarty->assign('loggedUserId', $loggedUserId);
-    $smarty->assign('user', $user);
-    $smarty->assign('userCurrLocation', $userCurrLocation);
-    $smarty->assign('isFollowing', $isFollowing);
-    $smarty->assign('totalAuctions', $totalAuctions);
-    $smarty->assign('activeAuctionsa', $activeAuctions);
-    $smarty->assign('reviews', $reviews);
-    $smarty->assign('wins', $wins);
-    $smarty->assign('followingUsers', $followingUsers);
+if($userId == $loggedUserId)
+  $reviewsPosted = getWonReviews($userId);
 
-    $smarty->assign('lastReviews', $lastReviews);
-    $smarty->assign('lastBids', $lastBids);
-    $smarty->assign('lastFollowing', $lastFollowing);
-    $smarty->assign('lastWins', $lastWins);
-    $smarty->assign('lastQuestion', $lastQuestion);
-    $smarty->assign('lastWatchlistAuctions', $lastWatchlistAuctions);
+if($_SESSION['username'] && $_SESSION['user_id']){
+  $notifications = getActiveNotifications($loggedUserId);
+  $smarty->assign('notifications', $notifications);
+}
 
-    if($userId == $loggedUserId)
-        $smarty->assign('reviewsPosted', $reviewsPosted);
+$smarty->assign('loggedUserId', $loggedUserId);
+$smarty->assign('user', $user);
+$smarty->assign('userCurrLocation', $userCurrLocation);
+$smarty->assign('isFollowing', $isFollowing);
+$smarty->assign('totalAuctions', $totalAuctions);
+$smarty->assign('activeAuctionsa', $activeAuctions);
+$smarty->assign('reviews', $reviews);
+$smarty->assign('wins', $wins);
+$smarty->assign('followingUsers', $followingUsers);
 
-    $smarty->display('user/user.tpl');
-?>
+$smarty->assign('lastReviews', $lastReviews);
+$smarty->assign('lastBids', $lastBids);
+$smarty->assign('lastFollowing', $lastFollowing);
+$smarty->assign('lastWins', $lastWins);
+$smarty->assign('lastQuestion', $lastQuestion);
+$smarty->assign('lastWatchlistAuctions', $lastWatchlistAuctions);
+
+if($userId == $loggedUserId)
+  $smarty->assign('reviewsPosted', $reviewsPosted);
+
+$smarty->display('user/user.tpl');

@@ -51,7 +51,7 @@
     </div>
 
     <div class="row auctions">
-        {foreach $page_auctions as $auction}
+        {foreach $pageAuctions as $auction}
             <div class="col-md-3 col-sm-6 col-xs-6">
               <span class="thumbnail text-center">
 
@@ -93,25 +93,25 @@
             </div>
         {/foreach}
     </div>
-    {if $nr_pages > 1}
+    {if $nrPages > 1}
         <div class="row text-center">
             <ul class="pagination">
-                {if $curr_page == 1}
+                {if $currPage == 1}
                     <li class="disabled"><a>«</a></li>
                 {else}
-                    <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$curr_page - 1}">«</a></li>
+                    <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$currPage - 1}">«</a></li>
                 {/if}
-                {for $i=1; $i <= $nr_pages; $i++}
-                    {if $curr_page == $i}
+                {for $i=1; $i <= $nrPages; $i++}
+                    {if $currPage == $i}
                         <li class="active"><a>{$i} <span class="sr-only">(current)</span></a></li>
                     {else}
                         <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$i}">{$i} </a></li>
                     {/if}
                 {/for}
-                {if $curr_page == $nr_pages}
+                {if $currPage == $nrPages}
                     <li class="disabled"><a>»</a></li>
                 {else}
-                    <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$curr_page + 1}">»</a></li>
+                    <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$currPage + 1}">»</a></li>
                 {/if}
             </ul>
         </div>

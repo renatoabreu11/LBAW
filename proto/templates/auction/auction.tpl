@@ -87,31 +87,23 @@
                         <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
                         {if ($seller.id != $userId)}
                             <div class="section">
-                                <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
-                                <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog1 modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4>Select the value of your bid!</h4>
-                                            </div>
-
-                                            <div class="row" style="margin: 10px; padding-top: 2em;">
-                                                <div class="input-group number-spinner">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                                                    </span>
-                                                    <input type="text" class="form-control text-center bid-amount" value="{$auction.curr_bid+1}">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="modal-footer" style="padding-bottom: 0">
-                                                <button type="submit" class="btn btn-info btn-default pull-right" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-info btn-default pull-left btn-bid" data-dismiss="modal">Bid</button>
-                                            </div>
+                                <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
+                                <div id="bidOnAuction" class="white-popup mfp-hide">
+                                    <div class="row" style="margin: 10px;">
+                                        <h4 class="bid-title">Bid on auction</h4>
+                                        <div class="input-group number-spinner">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                            </span>
+                                            <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                            </span>
                                         </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-info bidOnAuction" style="width: 35%">Place bid</button>
+                                        <button class="btn btn-info closePopup" style="width: 35%">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -207,10 +199,10 @@
             <div class="row product-questions">
                 <div class="col-md-12">
                     <h2>Product Q&A</h2>
-                    {if ($seller.id != $userId)}
+                    {if ($seller.id != $userId) && $userId}
                         <form class="newQuestion" action="javascript:void(0);">
                             <div class="form-group">
-                                <label>Your question</label>
+                                <label for="comment">Your question</label>
                                 <textarea name="comment" class="form-control question-area" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn btn-default btn-send-question">Send</button>

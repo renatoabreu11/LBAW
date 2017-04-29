@@ -35,17 +35,17 @@
 
             <h2>Website Administration</h2>
 
-            {if $admin_section === "users"}
+            {if $adminSection === "users"}
                 {include file='admin/users.tpl'}
-            {elseif $admin_section === "auctions"}
+            {elseif $adminSection === "auctions"}
                 {include file='admin/auctions.tpl'}
-            {elseif $admin_section === "categories"}
+            {elseif $adminSection === "categories"}
                 {include file='admin/categories.tpl'}
-            {elseif $admin_section === "add_admin"}
+            {elseif $adminSection === "addAdmin"}
                 {include file='admin/add_admin.tpl'}
-            {elseif $admin_section === "reports"}
+            {elseif $adminSection === "reports"}
                 {include file='admin/reports.tpl'}
-            {elseif $admin_section === "feedback"}
+            {elseif $adminSection === "feedback"}
                 {include file='admin/feedback.tpl'}
             {/if}
 

@@ -1,12 +1,12 @@
 <div class="adminOption">
-    <h4><i class="fa fa-users" aria-hidden="true"></i> {$report_type} reports</h4>
+    <h4><i class="fa fa-users" aria-hidden="true"></i> {$reportType} reports</h4>
 
     <div class="table-responsive">
         <table id="reportsTable" class="table row-border" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th>Report ID</th>
-                <th class="reportType">{$report_type}</th>
+                <th class="reportType">{$reportType}</th>
                 <th>Message</th>
                 <th>Date</th>
             </tr>
@@ -15,11 +15,11 @@
             {foreach $reports as $report}
                 <tr>
                     <td>{$report.id}</td>
-                    {if $report_type === "User"}
+                    {if $reportType === "User"}
                         <td><a href="{$BASE_URL}pages/user/user.php?id={$report.user_id}">{$report.username}</a></td>
-                    {elseif $report_type === "Auction"}
+                    {elseif $reportType === "Auction"}
                         <td><a href="{$BASE_URL}pages/auction/auction.php?id={$report.auction_id}">{$report.auction_id}</a></td>
-                    {elseif $report_type === "Review" || $report_type === "Question" || $report_type == "Answer"}
+                    {elseif $reportType === "Review" || $reportType === "Question" || $reportType == "Answer"}
                         <td>Written by <a href="{$BASE_URL}pages/auction/auction.php?id={$report.user_id}">{$report.username}</a></td>
                     {/if}
                     <td>{$report.message}</td>

@@ -14,12 +14,55 @@ $(document).ready(function() {
     slideMargin: 15,
   });
 
-  // Bid on the auction.
-  $('.btn-bid').click(function() {
-    let amount = $('.bid-amount').val();
+  $('.number-spinner').on('click', 'button', function() {
+    let btn = $(this);
+    let oldValue = btn.closest('.number-spinner').find('input').val().trim();
+    let newVal = 0;
 
-    console.log(amount + ', ' + auctionId + ', ' + userId + ', ' + token);
+    if (btn.attr('data-dir') === 'up') {
+      newVal = parseInt(oldValue) + 1;
+    } else {
+      if (oldValue > 1) {
+        newVal = parseInt(oldValue) - 1;
+      } else {
+        newVal = 1;
+      }
+    }
+    let minValue = btn.closest('.number-spinner').find('input').attr('min');
+    if(minValue > newVal) {
+      btn.closest('.number-spinner').find('input').val(minValue);
+    } else btn.closest('.number-spinner').find('input').val(newVal);
+  });
 
+
+  $('.closePopup').on('click', function() {
+    $.magnificPopup.close();
+  });
+
+  $('.binOnAuctionPopup').on('click', function() {
+    $('.binOnAuctionPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
+
+    $('.bidOnAuction').one('click', function() {
+      $.magnificPopup.close();
+      let amount = $('#bidOnAuction').find('.bid-amount').val().trim();
+      let auctionId = $('input[name=auction-id]').val();
+      let userId = $('input[name=user-id]').val();
+      let token = $('input[name=token]').val();
+      bidOnAuction(amount, auctionId, userId, token);
+    });
+  });
+
+  /**
+   * Handles the bid ajax call and updates the current bid value accordingly to the response;
+   * @param {number} amount
+   * @param {number} auctionId
+   * @param {number} userId
+   * @param {string} token
+   */
+  function bidOnAuction(amount, auctionId, userId, token) {
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/bid.php',
@@ -36,12 +79,12 @@ $(document).ready(function() {
       if(response.indexOf('success') >= 0) {
 
       } else {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + response + '</div>',
-              type: 'inline',
-            },
-          });
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
+        });
       }
     });
 
@@ -49,7 +92,7 @@ $(document).ready(function() {
       console.error('The following error occured: '
         + textStatus + ': ' + errorThrown);
     });
-  });
+  }
 
   // Send question.
   $('.btn-send-question').click(function() {

@@ -3,4 +3,3 @@
   include_once($BASE_DIR .'database/users.php');
 
   $smarty->display('authentication/signup.tpl');
-
