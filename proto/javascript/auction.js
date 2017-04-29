@@ -48,6 +48,7 @@ $(document).ready(function() {
     let questionArticle = $(this).closest('article');
     let questionId = questionArticle.children().eq(0).val();
     let replyBtn = $(this).parent().prev().children('.reply-question'); ;
+    let form = $(this).parent();
 
     $.ajax({
       type: 'POST',
@@ -70,7 +71,8 @@ $(document).ready(function() {
         } else {
           let content = '<article class="row"><div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs"><figure class="thumbnail"><img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '"/></figure></div><div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11"><div class="panel panel-default arrow left"><div class="panel-body"><div class="media-heading"><button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a>' + data['date'] + '</div><div class="panel-collapse collapse in" id="collapseReply"><div class="media-body"><p>' + comment + '</p><div class="comment-meta"><span><a href="#">delete</a></span><span><a href="#">report</a></span><span><a href="#">hide</a></span>                        </div>                    </div>                </div>            </div>        </div>    </div></article>';
           $(content).hide().appendTo(questionArticle).fadeIn(500);
-          replyBtn.remove();
+          replyBtn.fadeOut(500, function() { replyBtn.remove() });
+          form.remove();
         }
       },
     });
@@ -242,10 +244,11 @@ $(document).ready(function() {
 
   // Report question.
   $('.report-question').click(function() {
+    let reportBtn = $(this);
     let questionId = $(this).closest('article').children().eq(0).val();
 
-    $('.btn-send-question-report').click(function() {
-      let comment = $('.report-question-comment').val();
+    $('.btn-send-question-' + questionId + '-report').click(function() {
+      let comment = $('.report-question-' + questionId + '-comment').val();
       let closeBtn = $(this).closest('.modal-body').next().children().eq(0);
 
       let request = $.ajax({
@@ -255,15 +258,72 @@ $(document).ready(function() {
           'question-id': questionId,
           'comment': comment,
           'user-id': userId,
-          'token': token,
+          'token': token
         },
       });
 
       request.done(function(response, textStatus, jqXHR) {
-        console.info('Response: ' + response);
-        // closeBtn.click();
-        if(response.indexOf('success') >= 0) {
+        closeBtn.click();
+        reportBtn.remove();
 
+        if(response.indexOf('success') >= 0) {
+            $.magnificPopup.open({
+              items: {
+                src: '<div class="white-popup">' + 'The report was delivered with success and the administrators will look into it. Thank you.' + '</div>',
+                type: 'inline',
+              },
+            });
+        } else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + response + '</div>',
+              type: 'inline',
+            },
+          });
+        }
+      });
+
+      request.fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('The following error occured: ' +
+          textStatus + ': ' + errorThrown);
+      });
+    });
+  });
+
+  // Report anwser.
+  $('.report-answer').click(function() {
+    let reportBtn = $(this);
+    let answerId = $(this).closest('article').children().eq(0).val();
+
+    $('.btn-send-answer-' + answerId + '-report').click(function() {
+      let comment = $('.report-answer-' + answerId + '-comment').val();
+      let closeBtn = $(this).closest('.modal-body').next().children().eq(0);
+
+      console.warn(answerId + ", " + comment + "; " + userId + ", " + token);
+
+      let request = $.ajax({
+        type: 'POST',
+        url: BASE_URL + 'api/auction/report_answer.php',
+        data: {
+          'answer-id': answerId,
+          'comment': comment,
+          'user-id': userId,
+          'token': token
+        },
+      });
+
+      request.done(function(response, textStatus, jqXHR) {
+        closeBtn.click();
+        reportBtn.remove();
+        console.info(response);
+
+        if(response.indexOf('success') >= 0) {
+            $.magnificPopup.open({
+              items: {
+                src: '<div class="white-popup">' + 'The report was delivered with success and the administrators will look into it. Thank you.' + '</div>',
+                type: 'inline',
+              },
+            });
         } else {
           $.magnificPopup.open({
             items: {

@@ -340,6 +340,15 @@ function createQuestionReport($questionId, $message) {
     $stmt->execute();
 }
 
+function createAnswerReport($answerId, $message) {
+    global $conn;
+    $stmt = $conn->prepare('INSERT INTO answer_report(date, message, answer_id)
+                            VALUES(now(), :message, :answer_id)');
+    $stmt->bindParam('message', $message);
+    $stmt->bindParam('answer_id', $answerId);
+    $stmt->execute();
+}
+
 /************************************* DELETES *************************************/
 
 function deleteQuestion($questionId) {
