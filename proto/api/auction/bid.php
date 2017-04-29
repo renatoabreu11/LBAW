@@ -3,8 +3,8 @@ include_once('../../config/init.php');
 include_once($BASE_DIR .'database/auction.php');
 
 if (!$_GET['amount'] || !$_GET['bidder_id'] || !$_GET['auction_id']) {
-    echo 'All fields are mandatory!';
-    exit;
+  echo 'All fields are mandatory!';
+  exit;
 }
 
 $amount = $_GET['amount'];
