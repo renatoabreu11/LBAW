@@ -85,35 +85,37 @@
                     </div>
                     <div class="col-md-6 text-center auctionDetails">
                         <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
-                        <div class="section">
-                            <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
-                            <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog1 modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4>Select the value of your bid!</h4>
-                                        </div>
-
-                                        <div class="row" style="margin: 10px; padding-top: 2em;">
-                                            <div class="input-group number-spinner">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                            </span>
-                                                <input type="text" class="form-control text-center" value="800$">
-                                                <span class="input-group-btn">
-					                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                        </span>
+                        {if ($seller.id != $userId)}
+                            <div class="section">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
+                                <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog1 modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4>Select the value of your bid!</h4>
                                             </div>
-                                        </div>
 
-                                        <div class="modal-footer" style="padding-bottom: 0">
-                                            <button type="submit" class="btn btn-info btn-default pull-right" data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal">Bid</button>
+                                            <div class="row" style="margin: 10px; padding-top: 2em;">
+                                                <div class="input-group number-spinner">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                                    <input type="text" class="form-control text-center" value="800$">
+                                                    <span class="input-group-btn">
+                                            <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                            </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer" style="padding-bottom: 0">
+                                                <button type="submit" class="btn btn-info btn-default pull-right" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal">Bid</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {/if}
 
                         <h3 class="time">02h:54m:10s</h3>
                         <h4>Ending date: Monday, Mar 6, 2017
