@@ -15,25 +15,25 @@ $(document).ready(function() {
   });
 
   // Bid on the auction.
-  $(".btn-bid").click(function() {    
-    var amount = $(".bid-amount").val();
+  $('.btn-bid').click(function() {
+    let amount = $('.bid-amount').val();
 
-    console.log(amount + ", " + auctionId + ", " + userId + ", " + token);
+    console.log(amount + ', ' + auctionId + ', ' + userId + ', ' + token);
 
-    var request = $.ajax({
+    let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/bid.php',
       data: {
-        "amount": amount,
-        "auction-id": auctionId,
-        "user-id": userId,
-        "token": token
-      }
+        'amount': amount,
+        'auction-id': auctionId,
+        'user-id': userId,
+        'token': token,
+      },
     });
 
     request.done(function(response, textStatus, jqXHR) {
       console.info(response);
-      if(response.indexOf("success") >= 0) {
+      if(response.indexOf('success') >= 0) {
 
       } else {
           $.magnificPopup.open({
@@ -110,7 +110,9 @@ $(document).ready(function() {
         } else {
           let content = '<article class="row"><div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs"><figure class="thumbnail"><img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '"/></figure></div><div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11"><div class="panel panel-default arrow left"><div class="panel-body"><div class="media-heading"><button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a>' + data['date'] + '</div><div class="panel-collapse collapse in" id="collapseReply"><div class="media-body"><p>' + comment + '</p><div class="comment-meta"><span><a href="#">delete</a></span><span><a href="#">report</a></span><span><a href="#">hide</a></span>                        </div>                    </div>                </div>            </div>        </div>    </div></article>';
           $(content).hide().appendTo(questionArticle).fadeIn(500);
-          replyBtn.fadeOut(500, function() { replyBtn.remove() });
+          replyBtn.fadeOut(500, function() {
+            replyBtn.remove();
+          });
           form.remove();
         }
       },
@@ -121,7 +123,11 @@ $(document).ready(function() {
   $('.edit-question').click(function() {
     let questionMessageHTML = $(this).parent().prev().children();
     let comment = questionMessageHTML.eq(0).text();
-    let content = '<textarea name="updated-question" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-question">Send</button>';
+    let content =
+      '<textarea name="updated-question" class="form-control answer-area" rows="3">'
+      + comment
+      + '</textarea>' +
+      '<button type="submit" class="btn btn-default btn-edit-question">Send</button>';
     let questionId = $(this).closest('article').children().eq(0).val();
 
     questionMessageHTML.html(content);
@@ -166,7 +172,11 @@ $(document).ready(function() {
   $('.edit-answer').click(function() {
     let answerMessageHTML = $(this).parent().prev().children();
     let comment = answerMessageHTML.eq(0).text();
-    let content = '<textarea name="updated-answer" class="form-control answer-area" rows="3">' + comment + '</textarea><button type="submit" class="btn btn-default btn-edit-answer">Send</button>';
+    let content =
+      '<textarea name="updated-answer" class="form-control answer-area" rows="3">'
+      + comment
+      + '</textarea>' +
+      '<button type="submit" class="btn btn-default btn-edit-answer">Send</button>';
     let answerId = $(this).closest('article').children().eq(0).val();
 
     answerMessageHTML.html(content);
@@ -297,7 +307,7 @@ $(document).ready(function() {
           'question-id': questionId,
           'comment': comment,
           'user-id': userId,
-          'token': token
+          'token': token,
         },
       });
 
@@ -308,7 +318,9 @@ $(document).ready(function() {
         if(response.indexOf('success') >= 0) {
             $.magnificPopup.open({
               items: {
-                src: '<div class="white-popup">' + 'The report was delivered with success and the administrators will look into it. Thank you.' + '</div>',
+                src: '<div class="white-popup">'
+                + 'The report was delivered with success and the administrators will look into it. Thank you.'
+                + '</div>',
                 type: 'inline',
               },
             });
@@ -345,7 +357,7 @@ $(document).ready(function() {
           'answer-id': answerId,
           'comment': comment,
           'user-id': userId,
-          'token': token
+          'token': token,
         },
       });
 
@@ -356,7 +368,9 @@ $(document).ready(function() {
         if(response.indexOf('success') >= 0) {
             $.magnificPopup.open({
               items: {
-                src: '<div class="white-popup">' + 'The report was delivered with success and the administrators will look into it. Thank you.' + '</div>',
+                src: '<div class="white-popup">'
+                + 'The report was delivered with success and the administrators will look into it. Thank you.'
+                + '</div>',
                 type: 'inline',
               },
             });
