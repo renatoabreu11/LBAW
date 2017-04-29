@@ -36,39 +36,39 @@ function getProductName($product_id){
 }
 
 
-function bid($amount_bid, $bidder_id, $auction_id) {
+function bid($amountId, $bidderId, $auctionId) {
   global $conn;
 
   $conn->beginTransaction();
   $conn->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
 
   $stmt = $conn->prepare('SELECT amount as balance FROM "user" WHERE "user".id = ?;');
-  $stmt->execute(array($bidder_id));
+  $stmt->execute(array($bidderId));
   $result = $stmt->fetch();
   $balance = $result['balance'];
 
-  if ($balance >= $amount_bid) {
+  if ($balance >= $amountId) {
 
     $stmt = $conn->prepare('INSERT INTO bid (amount, date, user_id, auction_id) 
                                 VALUES (:amount, now(), :user_id, :auction_id)');
-    $stmt->bindParam('amount', $amount_bid);
-    $stmt->bindParam('user_id', $bidder_id);
-    $stmt->bindParam('auction_id', $auction_id);
+    $stmt->bindParam('amount', $amountId);
+    $stmt->bindParam('user_id', $bidderId);
+    $stmt->bindParam('auction_id', $auctionId);
     $stmt->execute();
 
     $stmt = $conn->prepare('UPDATE "user"
                                 SET amount = amount - :amount_bid
                                 WHERE "user".id = :user_id;');
-    $stmt->bindParam('amount_bid', $amount_bid);
-    $stmt->bindParam('user_id', $bidder_id);
+    $stmt->bindParam('amount_bid', $auctionId);
+    $stmt->bindParam('user_id', $bidderId);
     $stmt->execute();
 
     $conn->commit();
-    return "success: bet was correctly recorded.";
+    return "Success 201 Created: Bet was correctly recorded.";
   }
   else {
     $conn->commit();
-    return "Error: insufficient funds.";
+    return "Success 203: Insufficient funds.";
   }
 }
 

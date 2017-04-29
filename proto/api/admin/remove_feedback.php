@@ -16,7 +16,7 @@ if($loggedAdminId != $adminId) {
 }
 
 if (!$_POST['id']){
-  echo 'Invalid feedback id!';
+  echo 'Error 400 Bad Request: All fields are mandatory!';
   return;
 }
 
@@ -34,4 +34,4 @@ try {
   return;
 }
 
-echo "Success 201: Feedback successfully removed!";
+echo "Success 200 OK: Feedback successfully removed!";

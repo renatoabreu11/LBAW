@@ -35,4 +35,4 @@ try {
   return;
 }
 
-echo "Success 201: User successfully removed!";
+echo "Success 200 OK: User successfully removed!";

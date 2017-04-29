@@ -33,7 +33,7 @@ try {
   createAdmin($username, $password, $email);
 } catch (PDOException $e) {
   if (strpos($e->getMessage(), 'admin_username_uindex') !== false){
-    echo "Error 500 Internal Server Error: Username already exists.";
+    echo "Error 500 Internal Server: Username already exists.";
     return;
   }
   else if (strpos($e->getMessage(), 'admin_email_uindex') !== false){

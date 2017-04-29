@@ -92,8 +92,8 @@ $(document).ready(function() {
 
     request.done(function(response, textStatus, jqXHR) {
       console.info(response);
-      if(response.indexOf('success') >= 0) {
-
+      if(response.includes('Success 201')) {
+        // update current bid
       } else {
         $.magnificPopup.open({
           items: {
