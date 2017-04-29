@@ -3,18 +3,36 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
-if (!$_POST['id']){
-  echo 'Invalid user id!';
+if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-$user_id = $_POST['id'];
+$loggedAdminId = $_SESSION['admin_id'];
+$adminId = $_POST['adminId'];
+if($loggedAdminId != $adminId) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  return;
+}
+
+if (!$_POST['id']){
+  echo 'Error 400 Bad Request: All fields are mandatory!';
+  return;
+}
+
+$userId = $_POST['id'];
+
+if(!is_numeric($userId)){
+  echo 'Error 400 Bad Request: Invalid user id.';
+  return;
+}
 
 try {
-  deleteUser($user_id);
+  deleteUser($userId);
 } catch (PDOException $e) {
+  echo "Error 500 Internal Server: Error deleting user.";
   echo $e->getMessage();
   return;
 }
 
-echo "User deleted!";
+echo "Success 201: User successfully removed!";

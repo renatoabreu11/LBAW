@@ -3,42 +3,59 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/admins.php');
 
-if (!$_POST['id'] || !$_POST['type']){
-  echo 'All fields are mandatory!';
+if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-$report_id = $_POST['id'];
+$loggedAdminId = $_SESSION['admin_id'];
+$adminId = $_POST['adminId'];
+if($loggedAdminId != $adminId) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  return;
+}
+
+if (!$_POST['id'] || !$_POST['type']){
+  echo 'Error 400 Bad Request: All fields are mandatory!';
+  return;
+}
+
+$reportId = $_POST['id'];
 $type = $_POST['type'];
 
 $types = array("User", "Auction", "Review", "Question", "Answer");
 
 if (!in_array($type, $types)) {
-  echo "Invalid report type!";
+  echo 'Error 400 Bad Request: Invalid report type!';
+  return;
+}
+
+if(!is_numeric($reportId)){
+  echo 'Error 400 Bad Request: Invalid report id.';
   return;
 }
 
 try {
   switch($type){
     case "User":
-      deleteUserReport($report_id);
+      deleteUserReport($reportId);
       break;
     case "Auction":
-      deleteAuctionReport($report_id);
+      deleteAuctionReport($reportId);
       break;
     case "Question":
-      deleteQuestionReport($report_id);
+      deleteQuestionReport($reportId);
       break;
     case "Answer":
-      deleteAnswerReport($report_id);
+      deleteAnswerReport($reportId);
       break;
     case "Review":
-      deleteReviewReport($report_id);
+      deleteReviewReport($reportId);
       break;
   }
 } catch (PDOException $e) {
-  echo $e->getMessage();
+  echo "Error 500 Internal Server: Error deleting report.";
   return;
 }
 
-echo "Report deleted!";
+echo "Success 201: Report successfully removed!";

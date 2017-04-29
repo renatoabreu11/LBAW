@@ -34,6 +34,8 @@
     <div class="container-fluid">
 
       <h2>Website Administration</h2>
+      <input type="hidden" name="admin_id" value="{$adminId}">
+      <input type="hidden" name="token" value="{$token}">
 
       {if $adminSection === "users"}
         {include file='admin/users.tpl'}

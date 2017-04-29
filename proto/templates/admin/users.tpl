@@ -21,7 +21,7 @@
           <td>{$user.email}</td>
           <td>{$user.short_bio}</td>
           <td>{$user.register_date}</td>
-          <td>{$auctions_user[$i++]}</td>
+          <td>{$auctionsUser[$i++]}</td>
         </tr>
       {/foreach}
       </tbody>
