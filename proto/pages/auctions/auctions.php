@@ -38,7 +38,7 @@ $items = 8;
 $nr_pages = ceil(count($auctions) / $items);
 
 $smarty->assign('nrPages', $nr_pages);
-$smarty->assign('search', $textSearch);
+$smarty->assign('textSearch', $textSearch);
 $smarty->assign('auctions', $auctions);
 $smarty->assign('categories', $categories);
 $smarty->display('auctions/auctions.tpl');

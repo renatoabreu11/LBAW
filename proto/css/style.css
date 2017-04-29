@@ -497,7 +497,7 @@ th {
   display: block;
   padding-top: 20px;
   padding-bottom: 10px;
-  padding-left: 10px;
+  margin-left: 10px;
   border-bottom: 2px solid transparent;
   color: #757575;
   -webkit-transition: all 0.05s linear;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Popular = more bids
+ * Select the most popular auctions (popular = more bids).
  */
 function getMostPopularAuctions() {
   global $conn;
@@ -18,6 +18,9 @@ function getMostPopularAuctions() {
   return $stmt->fetchAll();
 }
 
+/**
+ * Get number of active auctions.
+ */
 function getNumActiveAuctions() {
   global $conn;
   $stmt = $conn->prepare('SELECT COUNT(*) 
@@ -28,6 +31,9 @@ function getNumActiveAuctions() {
   return $result['count'];
 }
 
+/**
+ * Get total value of active auctions.
+ */
 function getTotalValueOfActiveAuctions() {
   global $conn;
   $stmt = $conn->prepare('SELECT SUM(curr_bid) 
@@ -38,6 +44,9 @@ function getTotalValueOfActiveAuctions() {
   return $result['sum'];
 }
 
+/**
+ * Get all auctions.
+ */
 function getAllAuctions(){
   global $conn;
   $stmt = $conn->prepare('SELECT * 
@@ -48,13 +57,23 @@ function getAllAuctions(){
   return $result;
 }
 
+/**
+ * Search auctions by name.
+ * @param $textSearch
+ * @return array
+ */
 function searchAuctions($textSearch) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, bids.numBids, auction.start_date 
                             FROM auction, product, "user",
                                   plainto_tsquery(\'english\', :textSearch) AS query,
-                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
+                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
+                                  (SELECT auction.id as auction_id,  count(*) as numBids
+                                  FROM bid
+                                  JOIN auction ON bid.auction_id = auction.id
+                                  GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id 
+                            AND bids.auction_id = auction.id
                             AND query @@ textsearch 
                             AND now() < auction.end_date
                             AND auction.user_id = "user".id
@@ -67,10 +86,14 @@ function searchAuctions($textSearch) {
 
 function searchAuctionsByCategory($category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating,
-                            auction.curr_bid, auction.end_date, "user".id as user_id
-                            FROM auction, product, "user"
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
+                            FROM auction, product, "user",
+                                  (SELECT auction.id as auction_id,  count(*) as numBids
+                                  FROM bid
+                                  JOIN auction ON bid.auction_id = auction.id
+                                  GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id
+                            AND bids.auction_id = auction.id
                             AND auction.user_id = "user".id
                             AND now() < auction.end_date
                             AND :category = ANY(product.type)');
@@ -82,11 +105,16 @@ function searchAuctionsByCategory($category) {
 
 function searchAuctionsByCategoryAndName($textSearch, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, bids.numBids, auction.start_date
                             FROM auction, product, "user",
                                   plainto_tsquery(\'english\', :textSearch) AS query,
-                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
+                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
+                                  (SELECT auction.id as auction_id,  count(*) as numBids
+                                  FROM bid
+                                  JOIN auction ON bid.auction_id = auction.id
+                                  GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id 
+                            AND bids.auction_id = auction.id
                             AND query @@ textsearch 
                             AND now() < auction.end_date
                             AND auction.user_id = "user".id
@@ -101,10 +129,14 @@ function searchAuctionsByCategoryAndName($textSearch, $category) {
 
 function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating,
-                            auction.curr_bid, auction.end_date, "user".id as user_id
-                            FROM auction, product, "user"
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
+                            FROM auction, product, "user",
+                                  (SELECT auction.id as auction_id,  count(*) as numBids
+                                  FROM bid
+                                  JOIN auction ON bid.auction_id = auction.id
+                                  GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id
+                            AND bids.auction_id = auction.id
                             AND auction.user_id = "user".id
                             AND :fromDate < auction.end_date
                             AND auction.end_date < :toDate
@@ -121,12 +153,16 @@ function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
 
 function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice, $textsearch) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating,
-                            auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
                             FROM auction, product, "user",
                               plainto_tsquery(\'english\', :textsearch) AS query,
-                              to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
+                              to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
+                              (SELECT auction.id as auction_id,  count(*) as numBids
+                                  FROM bid
+                                  JOIN auction ON bid.auction_id = auction.id
+                                  GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id
+                            AND bids.auction_id = auction.id
                             AND query @@ textsearch
                             AND auction.user_id = "user".id
                             AND :fromDate <= auction.end_date
@@ -146,10 +182,14 @@ function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice,
 
 function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPrice, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating,
-                            auction.curr_bid, auction.end_date, "user".id as user_id
-                            FROM auction, product, "user"
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
+                            FROM auction, product, "user",
+                                  (SELECT auction.id as auction_id,  count(*) as numBids
+                                  FROM bid
+                                  JOIN auction ON bid.auction_id = auction.id
+                                  GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id
+                            AND bids.auction_id = auction.id
                             AND auction.user_id = "user".id
                             AND :fromDate < auction.end_date
                             AND auction.end_date < :toDate
@@ -168,12 +208,16 @@ function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPr
 
 function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $toPrice, $textsearch, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating,
-                            auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
                             FROM auction, product, "user",
                               plainto_tsquery(\'english\', :textsearch) AS query,
-                              to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
+                              to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
+                              (SELECT auction.id as auction_id,  count(*) as numBids
+                                FROM bid
+                                JOIN auction ON bid.auction_id = auction.id
+                                GROUP BY auction.id) as bids
                             WHERE auction.product_id = product.id
+                            AND bids.auction_id = auction.id
                             AND query @@ textsearch
                             AND auction.user_id = "user".id
                             AND :fromDate <= auction.end_date
@@ -193,6 +237,9 @@ function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $
   return $result;
 }
 
+/**
+ * Delete auction.
+ */
 function deleteAuction($auction_id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
@@ -201,6 +248,9 @@ function deleteAuction($auction_id){
   $stmt->execute(array($auction_id));
 }
 
+/**
+ * Get auctions of a page of watchlist.
+ */
 function getPageWatchlistAuctions($user_id, $items, $offset){
   global $conn;
   $stmt = $conn->prepare('SELECT watchlist.notifications, auction.* as auction
@@ -214,6 +264,9 @@ function getPageWatchlistAuctions($user_id, $items, $offset){
   return $result;
 }
 
+/**
+ * Count number of auctions in watchlist of an user.
+ */
 function countWatchlistAuctions($user_id){
   global $conn;
   $stmt = $conn->prepare('SELECT COUNT(*)
@@ -224,6 +277,9 @@ function countWatchlistAuctions($user_id){
   return $result['count'];
 }
 
+/**
+ * Get most resent auction.
+ */
 function getMostRecentAuction() {
   global $conn;
   $stmt = $conn->prepare('SELECT auction.id as auction_id, product.name as product_name, (SELECT image.filename 

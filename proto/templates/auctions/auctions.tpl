@@ -16,9 +16,9 @@
 							<div class="collapse" id="categories">
 								<select class="form-control" id="category">
 									<option value="All" selected="selected">All</option>
-                  {foreach $categories as $category}
+                  						{foreach $categories as $category}
 										<option value="{$category.unnest}">{$category.unnest}</option>
-                  {/foreach}
+                  						{/foreach}
 								</select>
 								<br>
 							</div>
@@ -86,32 +86,32 @@
 							<div class="row">
 								<div class="col-sm-8 col-xs-12">
 									<ul class="auctionSort">
-										<li class="active"><a href="#">Popular</a></li>
-										<li><a href="#">Newest</a></li>
-										<li><a href="#">Ending</a></li>
-										<li><a href="#">Price (low)</a></li>
-										<li><a href="#">Price (high)</a></li>
+										<li id="popular" class="active"><a href="#">Popular</a></li>
+										<li id="newest"><a href="#">Newest</a></li>
+										<li id="ending"><a href="#">Ending</a></li>
+										<li id="priceLow"><a href="#">Price (low)</a></li>
+										<li id="priceHigh"><a href="#">Price (high)</a></li>
 									</ul>
 								</div>
 
 								<div class="col-md-4 text-center pull-right col-xs-8" id="listType">
 									<div class="btn-group">
-										<button type="button" class="btn btn-default btn-responsive active" data-target="#auctionsList"><i class="fa fa-list"></i></button>
-										<button type="button" class="btn btn-default btn-responsive" data-target="#auctionsThumbnails"><i class="fa fa-th"></i></button>
+										<button id="list_btn" type="button" class="btn btn-default btn-responsive active" data-target="#auctionsList"><i class="fa fa-list"></i></button>
+										<button id="list_thumbnail_btn" type="button" class="btn btn-default btn-responsive" data-target="#auctionsThumbnails"><i class="fa fa-th"></i></button>
 									</div>
 								</div>
 							</div>
 
 							<div class="row table-responsive" id="auctions">
-                {include file='auctions/list.tpl'}
+                				{include file='auctions/list.tpl'}
 							</div>
 
 							<div class="row collapse" id="auctionsThumbnails">
-                {include file='auctions/list_thumbnail.tpl'}
+                				{include file='auctions/list_thumbnail.tpl'}
 							</div>
 
 							<div class="row text-center">
-								<ul id="pagination" class="pagination-sm" data-nr_pages="{$nr_pages}"></ul>
+								<ul id="pagination" class="pagination-sm" data-nr_pages="{$nrPages}"></ul>
 							</div>
 						</div>
 					</div>
@@ -124,6 +124,7 @@
 <script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
+<script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
 <script src="{$BASE_URL}javascript/auctions.js"></script>
 
 {include file='common/footer.tpl'}

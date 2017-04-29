@@ -4,6 +4,7 @@ $(document).ready(function() {
   setSearchRequest();
   setPagination();
   setRankings();
+  setSorting();
 });
 
 /**
@@ -86,6 +87,9 @@ function setSearchRequest() {
         $('#pagination').twbsPagination('destroy');
         setPagination();
         setRankings();
+        setSorting();
+        $('#popular').trigger('click'); // update sort ordering
+        $('#list_btn').trigger('click'); // update list type
       },
       error: function(data) {
         alert(data);
@@ -129,5 +133,39 @@ function setRankings() {
       starWidth: '17px',
       readOnly: true,
     });
+  });
+}
+
+/**
+ * Set sorting filters.
+ */
+function setSorting() {
+  $('.auctionSort li').click(function() {
+    $('.auctionSort li').removeClass('active');
+    $(this).addClass('active');
+    let id = this.id;
+
+    // normal list
+    if (id == 'priceLow') 
+      tinysort('#bodyToSort>tr', {attr:'data-priceLow'});
+    if (id == 'priceHigh') 
+      tinysort('#bodyToSort>tr', {attr:'data-priceHigh'});
+    if (id == 'popular')
+      tinysort('#bodyToSort>tr', {attr:'data-popular'});
+    if (id == 'newest') 
+      tinysort('#bodyToSort>tr', {attr:'data-newest'});
+    if (id == 'ending')
+      tinysort('#bodyToSort>tr', {attr:'data-ending'});
+    // thumbnail list
+    if (id == 'priceLow') 
+      tinysort('#auctionsThumbnails>div', {attr:'data-priceLow'});
+    if (id == 'priceHigh') 
+      tinysort('#auctionsThumbnails>div', {attr:'data-priceHigh'});
+    if (id == 'popular')
+      tinysort('#auctionsThumbnails>div', {attr:'data-popular'});
+    if (id == 'newest') 
+      tinysort('#auctionsThumbnails>div', {attr:'data-newest'});
+    if (id == 'ending')
+      tinysort('#auctionsThumbnails>div', {attr:'data-ending'});
   });
 }
