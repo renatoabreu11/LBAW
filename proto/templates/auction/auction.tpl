@@ -240,17 +240,19 @@
                                                             <p>{$question.message}</p>
                                                         </div>
                                                         <div class="comment-meta">
-                                                            {if ($question.user_id == $userId)}
-                                                                {if ($question.can_edit)}
-                                                                    <span class="edit-question underline-text-hover">edit</span>
+                                                            {if ($userId)}
+                                                                {if ($question.user_id == $userId)}
+                                                                    {if ($question.can_edit)}
+                                                                        <span class="edit-question underline-text-hover">edit</span>
+                                                                    {/if}
+                                                                    <span class="delete-question underline-text-hover">delete</span>
                                                                 {/if}
-                                                                <span class="delete-question underline-text-hover">delete</span>
-                                                            {/if}
-                                                            {if ($question.user_id != $userId)}
-                                                                <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</span>
-                                                            {/if}
-                                                            {if ($seller.id == $userId && !$question.answer_message)}
-                                                                <span class="reply-question underline-text-hover">reply</span>
+                                                                {if ($question.user_id != $userId)}
+                                                                    <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</span>
+                                                                {/if}
+                                                                {if ($seller.id == $userId && !$question.answer_message)}
+                                                                    <span class="reply-question underline-text-hover">reply</span>
+                                                                {/if}
                                                             {/if}
                                                         </div>
                                                         {if ($seller.id == $userId && !$question.answer_message)}
@@ -313,14 +315,16 @@
                                                             <p>{$question.answer_message}</p>
                                                         </div>
                                                         <div class="comment-meta">
-                                                            {if ($seller.id == $userId)}
-                                                                {if ($question.answer_can_edit)}</p>
-                                                                    <span class="edit-answer underline-text-hover">edit</span>
+                                                            {if ($userId)}
+                                                                {if ($seller.id == $userId)}
+                                                                    {if ($question.answer_can_edit)}</p>
+                                                                        <span class="edit-answer underline-text-hover">edit</span>
+                                                                    {/if}
+                                                                    <span class="delete-answer underline-text-hover">delete</span>
                                                                 {/if}
-                                                                <span class="delete-answer underline-text-hover">delete</span>
-                                                            {/if}
-                                                            {if ($seller.id != $userId)}
-                                                                <span class="report-answer underline-text-hover" data-toggle="modal" data-target="#report-modal-answer-{$question.answer_id}">report</span>
+                                                                {if ($seller.id != $userId)}
+                                                                    <span class="report-answer underline-text-hover" data-toggle="modal" data-target="#report-modal-answer-{$question.answer_id}">report</span>
+                                                                {/if}
                                                             {/if}
                                                         </div>
                                                     </div>

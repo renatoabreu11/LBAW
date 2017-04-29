@@ -299,8 +299,6 @@ $(document).ready(function() {
       let comment = $('.report-answer-' + answerId + '-comment').val();
       let closeBtn = $(this).closest('.modal-body').next().children().eq(0);
 
-      console.warn(answerId + ", " + comment + "; " + userId + ", " + token);
-
       let request = $.ajax({
         type: 'POST',
         url: BASE_URL + 'api/auction/report_answer.php',
@@ -315,7 +313,6 @@ $(document).ready(function() {
       request.done(function(response, textStatus, jqXHR) {
         closeBtn.click();
         reportBtn.remove();
-        console.info(response);
 
         if(response.indexOf('success') >= 0) {
             $.magnificPopup.open({
