@@ -61,16 +61,14 @@
               <div class="form-group">
                 <label class="col-md-3 control-label">Country and city: </label>
                 <div class="col-md-6 col-xs-12">
-                  <input type="hidden" name="city-id" value="{if ($userCurrLocation.city_id)}{$userCurrLocation.city_id}{else}null{/if}">
-                  <input type="hidden" name="city-item-id" value="{$cities[$j].id}">
-                  <select class="input-md form-control selectpicker show-tick" id="country-city" name="country-city[]" data-max-options="1" data-live-search="true" title="Define your location">
+                  <select class="input-md form-control selectpicker show-tick" id="country-city" name="city-id" data-max-options="1" data-live-search="true" title="Define your location">
                     {foreach $countries as $country}
                       <optgroup label="{$country.name}">
                         {foreach $cities as $city}
                           {if ($city.country_id == $country.id)}
                             {if $city.id == $userCurrLocation.city_id}
-                              <option selected>{$city.name}</option>
-                            {else} <option>{$city.name}</option>
+                              <option selected value="{$city.id}">{$city.name}</option>
+                            {else} <option value="{$city.id}">{$city.name}</option>
                             {/if}
                           {/if}
                         {/foreach}

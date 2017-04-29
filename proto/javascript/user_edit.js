@@ -3,7 +3,15 @@ $(document).ready(function() {
     window.location.href=window.location.href;
   });
 
-  $('.city-item').click(function() {
+  $(".city-item").change(function() {
+    console.log("Clicked");
+    /*let cityIndex = $(this).closest(".selectpicker").prev();
+    let selectedCityIndex = $(this).next().val();
+    cityIndex.val(selectedCityIndex);
+    console.info("Index: " + cityIndex.val());*/
+  });
+
+  /*$('.city-item').click(function() {
     let cityIndex = $(this).next('input[name=city-item-id]').val();
     let cityName = $(this).text();
     let cityDropDown = $(this).parent().parent();
@@ -11,7 +19,8 @@ $(document).ready(function() {
       .html(cityName + '<span class="caret"></span>');
     // Updates the hidden input.
     $('input[name=city-id]').val(cityIndex);
-  });
+    console.info(cityIndex);
+  });*/
 
   let profileUrl = $('input[name=picture]').val();
   console.log(profileUrl);
