@@ -59,20 +59,23 @@
               <div class="panel-body">
                 <div class="form-group">
                   <label class="col-md-3 control-label">Country and city: </label>
-                  <div class="dropdown">
-                    <button class="btn btn-default dropdown-toogle dropdown-city-element" type="button" data-toggle="dropdown">{if ($userCurrLocation.city_name)}{$userCurrLocation.city_name}{else}Select a city{/if}<span class="caret"</span></button>
-                      <input type="hidden" name="city-id" value="{if ($userCurrLocation.city_id)}{$userCurrLocation.city_id}{else}null{/if}">
-                      <ul class="dropdown-menu">
-                        {for $i=0 to count($countries)}
-                          <li class="dropdown-header">{$countries[$i].name}</li>
-                          {for $j=0 to count($cities)}
-                            {if ($cities[$j].country_id == $countries[$i].id)}
-                              <li class="city-item">{$cities[$j].name}</li>
-                              <input type="hidden" name="city-item-id" value="{$cities[$j].id}">
-                            {/if}
-                          {/for}
-                        {/for}
-                      </ul>
+                  <div class="col-md-6 col-xs-12">
+                    <input type="hidden" name="city-id" value="{if ($userCurrLocation.city_id)}{$userCurrLocation.city_id}{else}null{/if}">
+                    <input type="hidden" name="city-item-id" value="{$cities[$j].id}">
+                    <select class="input-md form-control selectpicker show-tick" id="country-city" name="country-city[]" data-max-options="1" data-live-search="true" title="Define your location">
+                        {foreach $countries as $country}
+                            <optgroup label="{$country.name}">
+                                {foreach $cities as $city}
+                                    {if ($city.country_id == $country.id)}
+                                        {if $city.id == $userCurrLocation.city_id}
+                                            <option selected>{$city.name}</option>
+                                        {else} <option>{$city.name}</option>
+                                        {/if}
+                                    {/if}
+                                {/foreach}
+                            </optgroup>
+                        {/foreach}
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -240,6 +243,7 @@
     </div>
   </div>
 
+  <script type="text/javascript" src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
   <script type="text/javascript" src="{$BASE_URL}javascript/user_edit.js"></script>
 
 {include file = 'common/footer.tpl'}

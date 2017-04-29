@@ -14,6 +14,25 @@ $(document).ready(function() {
     slideMargin: 15,
   });
 
+  $('.clock').each(function() {
+    let date = $(this).find('p').text();
+    $(this).countdown(date)
+      .on('update.countdown', function(event) {
+        let format = '%Hh:%Mm:%Ss';
+        if(event.offset.totalDays > 0) {
+          format = '%-d day%!d ' + format;
+        }
+        if(event.offset.weeks > 0) {
+          format = '%-w week%!w ' + format;
+        }
+        $(this).html(event.strftime(format));
+      })
+      .on('finish.countdown', function(event) {
+        $(this).html('This offer has expired!')
+          .parent().addClass('disabled');
+      });
+  });
+
   $('.number-spinner').on('click', 'button', function() {
     let btn = $(this);
     let oldValue = btn.closest('.number-spinner').find('input').val().trim();
