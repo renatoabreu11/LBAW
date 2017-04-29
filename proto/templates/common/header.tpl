@@ -67,6 +67,15 @@
   </div>
 </nav>
 
+{if $ADMIN_USERNAME}
+  <input type="hidden" name="admin_id" value="{$adminId}">
+{elseif $USERNAME}
+  <input type="hidden" name="user_id" value="{$userId}">
+{/if}
+{if $USERNAME || $ADMIN_USERNAME}
+  <input type="hidden" name="token" value="{$token}">
+{/if}
+
 <div id="error_messages">
   {foreach $ERROR_MESSAGES as $error}
     <div class="error">{$error}<a class="close" href="#">X</a></div>

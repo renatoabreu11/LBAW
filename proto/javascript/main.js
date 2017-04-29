@@ -1,6 +1,10 @@
 BASE_URL = '/';
 
 $(document).ready(function() {
+  let token = $('input[name=token]').val();
+  let userId = $('input[name=user_id]').val();
+  let adminId = $('input[name=admin_id]').val();
+
   $('#signInForm').validate({
     rules:
       {
@@ -131,7 +135,7 @@ $(document).ready(function() {
    * @param {number} numNotifications
    */
   function updateNotificationBadge(numNotifications) {
-    $('.dropdown .notification-badge').html(numNotifications);
+    $('.dropdown .badge').html(numNotifications);
   }
 
   $('.notifications-wrapper .hideNotification').click(function(e) {
@@ -162,13 +166,34 @@ $(document).ready(function() {
   $('.notification-footer h4.markRecentNotificationsAsRead')
     .click(function() {
       let notifications = $('.notifications');
+      let nrNotifications = notifications.children('.notifications-wrapper').length;
+
+      let notificationsIds = [];
       notifications.children('.notifications-wrapper').each( function() {
+        let notificationClass = $(this).find('.notification-media').attr('class').split('id-');
+        if (notificationClass.length === 2) {
+          let idVar = notificationClass[1];
+          notificationsIds.push(idVar);
+        }
         this.remove();
       });
 
-      $('<p class="notifications-empty">' +
-        'You have no new notifications</p>')
-        .insertAfter('.notifications hr.divider:first');
+      if(nrNotifications > 0) {
+        $.ajax({
+          type: 'POST',
+          url: BASE_URL + 'api/user/read_notification.php',
+          data: {
+            'notifications': notificationsIds,
+            'token': token,
+            'userId': userId,
+          },
+          datatype: 'text',
+        });
+
+        $('<p class="notifications-empty">' +
+          'You have no new notifications</p>')
+          .insertAfter('.notifications hr.divider:first');
+      }
 
       updateNotificationBadge(0);
     });

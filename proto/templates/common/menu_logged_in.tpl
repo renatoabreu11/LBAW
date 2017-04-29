@@ -14,7 +14,7 @@
       <hr class="divider">
       {foreach $notifications as $notification}
         <div class="notifications-wrapper">
-          <div class="media notification-media">
+          <div class="media notification-media id-{$notification.id}">
             <div class="media-left" style="padding-top: 0.25em; padding-left: 0.5em;">
               <img src="{$BASE_URL}images/assets/{$notification.type}.png" width="64">
             </div>
