@@ -18,6 +18,37 @@ function getTopTenRankingUsers() {
 }
 
 /**
+ * Returns the user that has the given email
+ * @param $userEmail
+ * @return mixed
+ */
+function getUserByEmail($userEmail){
+    global $conn;
+    $stmt = $conn->prepare('SELECT *
+                                FROM "user"
+                                WHERE email=:user_email');
+    $stmt->bindParam('user_email', $userEmail);
+    $stmt->execute();
+    return $stmt->fetch();
+}
+
+/**
+ * Returns the username of the user that has the given email
+ * @param $userEmail
+ * @return mixed
+ */
+function getUserUsername($userEmail){
+    global $conn;
+    $stmt = $conn->prepare('SELECT "user".username
+                                FROM "user"
+                                WHERE email=:user_email');
+    $stmt->bindParam('user_email', $userEmail);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result['username'];
+}
+
+/**
  * Returns the column from the table "user" that has the given primary key
  * @param $userId
  * @return mixed

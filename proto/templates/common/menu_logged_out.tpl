@@ -19,6 +19,9 @@
             <input type="password" name="password" class="form-control" id="psw">
           </div>
           <button type="submit" class="btn btn-default btn-success btn-block">Sign in</button>
+          <a class="btn btn-default btn-primary btn-block" href="{$FB_LOGIN_URL}">
+            <span><i class="fa fa-facebook"> </i></span> Sign in with Facebook
+          </a>
         </form>
       </div>
 
