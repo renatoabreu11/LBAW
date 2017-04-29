@@ -37,7 +37,7 @@
               <p>No rating.</p>
             {else}
               <!--<br>-->
-              <div class="rateYo" data-rating="{$user.rating}" style="margin: auto;""></div>
+              <div class="rateYo" data-rating="{$user.rating}" style="margin: auto;"></div>
               <p class="user-rating-numeric text-center"><strong>{$user.rating}</strong>/10</p>
             {/if}
             <hr>
@@ -86,7 +86,7 @@
                       <span class="recent-activity-date">{$lastReviews[$var].date}</span>
                     </div>
                     <div class="panel-body">
-                      <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].username}</a>.</p>
+                      <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].seller_username}</a>.</p>
                     </div>
                   </div>
                 {/if}

@@ -85,35 +85,37 @@
                     </div>
                     <div class="col-md-6 text-center auctionDetails">
                         <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
-                        <div class="section">
-                            <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
-                            <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog1 modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4>Select the value of your bid!</h4>
-                                        </div>
-
-                                        <div class="row" style="margin: 10px; padding-top: 2em;">
-                                            <div class="input-group number-spinner">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
-                            </span>
-                                                <input type="text" class="form-control text-center" value="800$">
-                                                <span class="input-group-btn">
-					                    <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
-                        </span>
+                        {if ($seller.id != $userId)}
+                            <div class="section">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#bidModal"> Bid</button>
+                                <div class="modal modalLogin fade" id="bidModal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog1 modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4>Select the value of your bid!</h4>
                                             </div>
-                                        </div>
 
-                                        <div class="modal-footer" style="padding-bottom: 0">
-                                            <button type="submit" class="btn btn-info btn-default pull-right" data-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal">Bid</button>
+                                            <div class="row" style="margin: 10px; padding-top: 2em;">
+                                                <div class="input-group number-spinner">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                                    </span>
+                                                    <input type="text" class="form-control text-center bid-amount" value="{$auction.curr_bid+1}">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer" style="padding-bottom: 0">
+                                                <button type="submit" class="btn btn-info btn-default pull-right" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-info btn-default pull-left btn-bid" data-dismiss="modal">Bid</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {/if}
 
                         <h3 class="time">02h:54m:10s</h3>
                         <h4>Ending date: Monday, Mar 6, 2017
@@ -240,17 +242,19 @@
                                                             <p>{$question.message}</p>
                                                         </div>
                                                         <div class="comment-meta">
-                                                            {if ($question.user_id == $userId)}
-                                                                {if ($question.can_edit)}
-                                                                    <span class="edit-question underline-text-hover">edit</span>
+                                                            {if ($userId)}
+                                                                {if ($question.user_id == $userId)}
+                                                                    {if ($question.can_edit)}
+                                                                        <span class="edit-question underline-text-hover">edit</span>
+                                                                    {/if}
+                                                                    <span class="delete-question underline-text-hover">delete</span>
                                                                 {/if}
-                                                                <span class="delete-question underline-text-hover">delete</span>
-                                                            {/if}
-                                                            {if ($question.user_id != $userId)}
-                                                                <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal">report</span>
-                                                            {/if}
-                                                            {if ($seller.id == $userId && !$question.answer_message)}
-                                                                <span class="reply-question underline-text-hover">reply</span>
+                                                                {if ($question.user_id != $userId)}
+                                                                    <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</span>
+                                                                {/if}
+                                                                {if ($seller.id == $userId && !$question.answer_message)}
+                                                                    <span class="reply-question underline-text-hover">reply</span>
+                                                                {/if}
                                                             {/if}
                                                         </div>
                                                         {if ($seller.id == $userId && !$question.answer_message)}
@@ -262,6 +266,29 @@
                                                             </form>
                                                         {/if}
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="report-modal-question-{$question.id}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">
+                                                        Question report
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form horizontal" role="form" action="javascript:void(0);">
+                                                        <div class="form-group">
+                                                            <label>Message</label>
+                                                            <textarea rows="5" class="report-question-{$question.id}-comment" placeholder="Your message..."></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-default btn-send-question-{$question.id}-report">Send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -290,17 +317,42 @@
                                                             <p>{$question.answer_message}</p>
                                                         </div>
                                                         <div class="comment-meta">
-                                                            {if ($seller.id == $userId)}
-                                                                {if ($question.answer_can_edit)}</p>
-                                                                    <span class="edit-answer underline-text-hover">edit</span>
+                                                            {if ($userId)}
+                                                                {if ($seller.id == $userId)}
+                                                                    {if ($question.answer_can_edit)}</p>
+                                                                        <span class="edit-answer underline-text-hover">edit</span>
+                                                                    {/if}
+                                                                    <span class="delete-answer underline-text-hover">delete</span>
                                                                 {/if}
-                                                                <span class="delete-answer underline-text-hover">delete</span>
-                                                            {/if}
-                                                            {if ($seller.id != $userId)}
-                                                                <span class="report-answer underline-text-hover">report</span>
+                                                                {if ($seller.id != $userId)}
+                                                                    <span class="report-answer underline-text-hover" data-toggle="modal" data-target="#report-modal-answer-{$question.answer_id}">report</span>
+                                                                {/if}
                                                             {/if}
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="report-modal-answer-{$question.answer_id}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">
+                                                        Answer report
+                                                    </h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form horizontal" role="form" action="javascript:void(0);">
+                                                        <div class="form-group">
+                                                            <label>Message</label>
+                                                            <textarea rows="5" class="report-answer-{$question.answer_id}-comment" placeholder="Your message..."></textarea>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-default btn-send-answer-{$question.answer_id}-report">Send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -309,29 +361,6 @@
                                 {/if}
                             </div>
                         {/foreach}
-                        <div id="report-modal" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">
-                                            Question report
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form class="form horizontal" role="form" action="javascript:void(0);">
-                                            <div class="form-group">
-                                                <label>Message</label>
-                                                <textarea rows="5" class="report-question-comment" placeholder="Your message..."></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-default btn-send-question-report">Send</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                 </div>
             </div>
