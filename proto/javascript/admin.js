@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  let adminId = $('input[name=admin_id]').val();
+  let token = $('input[name=token]').val();
+
   $('#menu-toggle').click(function(e) {
     e.preventDefault();
     $('#wrapper').toggleClass('toggled');
@@ -68,33 +71,36 @@ $(document).ready(function() {
     let confirm = form.find('#confirm').val();
     $.ajax({
       type: 'POST',
-      url: BASE_URL + '/api/admin/add_admin.php',
+      url: BASE_URL + 'api/admin/add_admin.php',
       data: {
         'username': username,
         'password': password,
         'email': email,
         'confirm': confirm,
+        'token': token,
+        'adminId': adminId,
       },
       success: function(data) {
         form.find('.field_error.username').text('');
         form.find('.field_error.email').text('');
-        if(data === 'Invalid username characters'
-            || data === 'Username already exists') {
+        if(data.includes('Invalid username characters.')
+            || data.includes('Username already exists.')) {
           form.find('.field_error.username').text(data);
-        } else if(data === 'Email already exists')
+        } else if(data.includes('Email already exists.'))
           form.find('.field_error.email').text(data);
-        else if(data === 'Admin successfully added!') {
+        else {
           $.magnificPopup.open({
             items: {
               src: '<div class="white-popup">' + data + '</div>',
               type: 'inline',
             },
           });
-          form.trigger('reset');
+          if(data.includes('Success'))
+            form.trigger('reset');
         }
       },
       error: function(data) {
-        alert(data);
+        console.log(data);
       },
     });
     return false;
@@ -118,15 +124,17 @@ $(document).ready(function() {
       url: BASE_URL + 'api/admin/add_category.php',
       data: {
         'title': title,
+        'token': token,
+        'adminId': adminId,
       },
       datatype: 'text',
     });
 
     // Callback handler that will be called on success
     request.done(function(response, textStatus, jqXHR) {
-      if(response === 'Category already exists') {
+      if(response.includes('Category already exists')) {
         form.find('.field_error').text(response);
-      } else if(response === 'Category successfully added!') {
+      } else if(response.includes('Success')) {
         $.magnificPopup.open({
           items: {
             src: '<div class="white-popup">' + response + '</div>',
@@ -136,6 +144,13 @@ $(document).ready(function() {
         form.trigger('reset');
         let div = '<li class="list-group-item col-md-3">'+title+'</li>';
         $('.categories ul').append(div);
+      }else{
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
+        });
       }
     });
 
@@ -167,6 +182,8 @@ $(document).ready(function() {
       url: BASE_URL + 'api/admin/remove_auction.php',
       data: {
         'id': id,
+        'token': token,
+        'adminId': adminId,
       },
       datatype: 'text',
     });
@@ -179,7 +196,7 @@ $(document).ready(function() {
           type: 'inline',
         },
       });
-      if(response === 'Auction deleted!') {
+      if(response.includes('Success')) {
         auctionTable.DataTable().row('.selected').remove().draw(false);
       }
     });
@@ -204,6 +221,8 @@ $(document).ready(function() {
       url: BASE_URL + 'api/admin/remove_user.php',
       data: {
         'id': id,
+        'token': token,
+        'adminId': adminId,
       },
       datatype: 'text',
     });
@@ -216,7 +235,7 @@ $(document).ready(function() {
           type: 'inline',
         },
       });
-      if(response === 'User deleted!') {
+      if(response.includes('Success')) {
         userTable.DataTable().row('.selected').remove().draw(false);
       }
     });
@@ -243,6 +262,8 @@ $(document).ready(function() {
       data: {
         'id': id,
         'type': type,
+        'token': token,
+        'adminId': adminId,
       },
       datatype: 'text',
     });
@@ -256,7 +277,7 @@ $(document).ready(function() {
         },
       });
       console.log(response);
-      if(response === 'Report deleted!') {
+      if(response.includes('Success')) {
         reportTable.DataTable().row('.selected').remove().draw(false);
       }
     });
@@ -363,6 +384,8 @@ $(document).ready(function() {
       data: {
         'id': id,
         'message': message,
+        'token': token,
+        'adminId': adminId,
       },
       datatype: 'text',
     });
@@ -457,6 +480,8 @@ $(document).ready(function() {
       url: BASE_URL + 'api/admin/remove_feedback.php',
       data: {
         'id': feedId,
+        'token': token,
+        'adminId': adminId,
       },
       datatype: 'text',
     });
@@ -469,7 +494,7 @@ $(document).ready(function() {
           type: 'inline',
         },
       });
-      if(response === 'Feedback deleted!') {
+      if(response.includes('Success')) {
         object.hide('slow', function() {
           object.remove();
         });

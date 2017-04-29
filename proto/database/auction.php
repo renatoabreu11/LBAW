@@ -1,5 +1,9 @@
 <?php
 
+/**
+* Returns an auction with the specified id.
+* @param $auction_id
+*/
 function getAuction($auction_id){
   global $conn;
   $stmt = $conn->prepare('SELECT * 

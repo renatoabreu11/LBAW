@@ -67,10 +67,7 @@ $(document).ready(function() {
     $('.bidOnAuction').one('click', function() {
       $.magnificPopup.close();
       let amount = $('#bidOnAuction').find('.bid-amount').val().trim();
-      let auctionId = $('input[name=auction-id]').val();
-      let userId = $('input[name=user-id]').val();
-      let token = $('input[name=token]').val();
-      bidOnAuction(amount, auctionId, userId, token);
+      bidOnAuction(amount);
     });
   });
 
@@ -81,7 +78,7 @@ $(document).ready(function() {
    * @param {number} userId
    * @param {string} token
    */
-  function bidOnAuction(amount, auctionId, userId, token) {
+  function bidOnAuction(amount) {
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/bid.php',

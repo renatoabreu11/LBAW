@@ -4,39 +4,42 @@ include_once($BASE_DIR .'database/admins.php');
 
 $username = $_SESSION['admin_username'];
 $id = $_SESSION['admin_id'];
+$token = $_SESSION['token'];
 
-if(!$username || !$id){
-    $smarty->display('common/404.tpl');
-    return;
+if(!$username || !$id || !$token){
+  $smarty->display('common/404.tpl');
+  return;
 }
 
 if(!validAdmin($username, $id)){
-    $smarty->display('common/404.tpl');
-    return;
+  $smarty->display('common/404.tpl');
+  return;
 }
 
-$report_type = $_GET['type'];
+$reportType = $_GET['type'];
 $reports;
 
-switch ($report_type){
-    case "Answer":
-        $reports = getAnswerReports();
-        break;
-    case "Auction":
-        $reports = getAuctionReports();
-        break;
-    case "Question":
-        $reports = getQuestionReports();
-        break;
-    case "Review":
-        $reports = getReviewReports();
-        break;
-    default:
-        $report_type = "User";
-        $reports = getUserReports();
+switch ($reportType){
+  case "Answer":
+    $reports = getAnswerReports();
+    break;
+  case "Auction":
+    $reports = getAuctionReports();
+    break;
+  case "Question":
+    $reports = getQuestionReports();
+    break;
+  case "Review":
+    $reports = getReviewReports();
+    break;
+  default:
+    $reportType = "User";
+    $reports = getUserReports();
 }
 
-$smarty->assign("reportType", $report_type);
+$smarty->assign("adminId", $id);
+$smarty->assign("token", $token);
+$smarty->assign("reportType", $reportType);
 $smarty->assign("reports", $reports);
 $smarty->assign("adminSection", "reports");
 $smarty->display('admin/admin_page.tpl');

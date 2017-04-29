@@ -11,6 +11,16 @@ $(document).ready(function() {
     wins.find('.win-image').width(156);
   }
 
+  // Used when an user clicks the reviews on an auction page. This way it will be redirected to the
+  // review tab.
+  var hash = document.location.hash;
+  if (hash)
+      $('.nav-tabs a[href="'+hash+'"]').tab('show');
+  // Change hash for page-reload
+  $('.nav-tabs a').on('shown.bs.tab', function (e) {
+      window.location.hash = e.target.hash;
+  });
+
   /**
    * Follow/Unfollow button (below the basic details).
    */
