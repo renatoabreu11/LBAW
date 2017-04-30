@@ -9,7 +9,7 @@ SELECT setval('bid_id_seq', (SELECT MAX(id) FROM bid)+1);
 SELECT setval('city_id_seq', (SELECT MAX(id) FROM city)+1);
 SELECT setval('country_id_seq', (SELECT MAX(id) FROM country)+1);
 SELECT setval('image_id_seq', (SELECT MAX(id) FROM image)+1);
-SELECT setval('location_id_seq', (SELECT MAX(id) FROM location)+1);
+SELECT setval('category_id_seq', (SELECT MAX(id) FROM category)+1);
 SELECT setval('notification_id_seq', (SELECT MAX(id) FROM notification)+1);
 SELECT setval('product_id_seq', (SELECT MAX(id) FROM product)+1);
 SELECT setval('question_id_seq', (SELECT MAX(id) FROM question)+1);
