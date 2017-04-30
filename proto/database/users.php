@@ -109,6 +109,62 @@ function getCityAndCountry($userId) {
 }
 
 /**
+ * Returns the credit of an user.
+ * @param $userId
+ * @return credit of user
+ */
+function getCreditOfUser($userId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT amount
+                          FROM "user"
+                          WHERE "user".id = :user_id');
+  $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+  $result = $stmt->fetch();
+  return $result['amount'];
+}
+
+/**
+ * Returns the number of bets in game of an user.
+ * @param $userId
+ * @return number of bets in game of user
+ */
+function getBetsOnGame($userId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT COUNT(*)
+                          FROM bid, "user", auction
+                          WHERE bid.user_id = "user".id
+                          AND bid.auction_id = auction.id
+                          AND bid.amount = auction.curr_bid
+                          AND now() < auction.end_date
+                          AND "user".id = :user_id');
+  $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+  $result = $stmt->fetch();
+  return $result['count'];
+}
+
+/**
+ * Returns the value of bets in game of an user.
+ * @param $userId
+ * @return value of bets in game of user
+ */
+function getValBetsOnGame($userId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT SUM(bid.amount)
+                          FROM bid, "user", auction
+                          WHERE bid.user_id = "user".id
+                          AND bid.auction_id = auction.id
+                          AND bid.amount = auction.curr_bid
+                          AND now() < auction.end_date
+                          AND "user".id = :user_id');
+  $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+  $result = $stmt->fetch();
+  return $result['sum'];
+}
+
+/**
  * Returns the number of auctions created by an user
  * @param $userId
  * @return mixed
@@ -678,7 +734,6 @@ function updateUserPicture($userId, $pictureId) {
  */
 function updateUserLocation($userId, $cityId) {
   global $conn;
-
   $stmt = $conn->prepare('UPDATE "user"
                                 SET city_id = :city_id
                                 WHERE id = :user_id');
@@ -715,4 +770,19 @@ function updateNotification($notificationId){
                                 SET is_new = ?
                                 WHERE id = ?');
   $stmt->execute(array('FALSE', $notificationId));
+}
+
+/**
+ * Update user credit of an user.
+ * @param $newCredit
+ * @param $userId
+ */
+function updateUserCredit($newCredit, $userId) {
+  global $conn;
+  $stmt = $conn->prepare('UPDATE "user"
+                          SET amount = :newCredit
+                          WHERE "user".id = :userId');
+  $stmt->bindParam('newCredit', $newCredit);
+  $stmt->bindParam('userId', $userId);
+  $stmt->execute();
 }
