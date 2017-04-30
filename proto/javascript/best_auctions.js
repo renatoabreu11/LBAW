@@ -1,4 +1,16 @@
 $(document).ready(function() {
+  setCountdown();
+  $('.auction_row').each(function() {
+    $(this).show();
+  });
+  setRankings();
+  setSorting();
+});
+
+/**
+ * For each date, initializes the respective countdown
+ */
+function setCountdown() {
   $('.clock').each(function() {
     let date = $(this).find('p').text();
     $(this).countdown(date)
@@ -17,12 +29,28 @@ $(document).ready(function() {
           .parent().addClass('disabled');
       });
   });
+}
 
-  $('.auction_row').each(function() {
-    $(this).show();
+/**
+ * Set sorting filters.
+ */
+function setSorting() {
+  $('.auctionSort li').click(function() {
+    $('.auctionSort li').removeClass('active');
+    $(this).addClass('active');
+    let id = this.id;
+
+    // normal list
+    if (id === 'priceLow')
+      tinysort('#bodyToSort>tr', {attr: 'data-priceLow'});
+    if (id === 'priceHigh')
+      tinysort('#bodyToSort>tr', {attr: 'data-priceHigh'});
+    if (id === 'popular')
+      tinysort('#bodyToSort>tr', {attr: 'data-popular'});
+    if (id === 'newest')
+      tinysort('#bodyToSort>tr', {attr: 'data-newest'});
+    if (id === 'ending')
+      tinysort('#bodyToSort>tr', {attr: 'data-ending'});
   });
-
-  setRankings();
-});
-
+}
 

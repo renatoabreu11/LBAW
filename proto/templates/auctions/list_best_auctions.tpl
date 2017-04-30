@@ -84,11 +84,11 @@
             <div class="row">
               <div class="col-sm-10 col-xs-12">
                 <ul class="auctionSort">
-                  <li class="active"><a href="#">Popular</a></li>
-                  <li><a href="#">Newest</a></li>
-                  <li><a href="#">Ending</a></li>
-                  <li><a href="#">Price (low)</a></li>
-                  <li><a href="#">Price (high)</a></li>
+                  <li id="popular" class="active"><a href="#">Popular</a></li>
+                  <li id="newest"><a href="#">Newest</a></li>
+                  <li id="ending"><a href="#">Ending</a></li>
+                  <li id="priceLow"><a href="#">Price (low)</a></li>
+                  <li id="priceHigh"><a href="#">Price (high)</a></li>
                 </ul>
               </div>
             </div>
@@ -106,6 +106,7 @@
 
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
+<script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
 <script src="{$BASE_URL}javascript/best_auctions.js"></script>
 
 {include file='common/footer.tpl'}

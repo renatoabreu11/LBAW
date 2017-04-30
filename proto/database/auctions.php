@@ -7,7 +7,7 @@
  */
 function getMostPopularAuctions() {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, auction.num_bids as numBids
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, auction.num_bids as numBids, auction.start_date 
                             FROM bid
                             INNER JOIN auction ON bid.auction_id = auction.id
                             INNER JOIN product ON auction.product_id = product.id
