@@ -17,7 +17,7 @@
 								<select class="form-control" id="category">
 									<option value="All" selected="selected">All</option>
                   						{foreach $categories as $category}
-										<option value="{$category.unnest}">{$category.unnest}</option>
+										<option value="{$category.name}">{$category.name}</option>
                   						{/foreach}
 								</select>
 								<br>

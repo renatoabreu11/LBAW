@@ -7,14 +7,14 @@
  */
 function getMostPopularAuctions() {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, auction.num_bids as numBids
                             FROM bid
                             INNER JOIN auction ON bid.auction_id = auction.id
                             INNER JOIN product ON auction.product_id = product.id
                             INNER JOIN "user" ON auction.user_id = "user".id
                             WHERE now() < auction.end_date
-                            GROUP BY auction.id, product.name, "user".username, "user".rating, auction.curr_bid, auction.end_date, "user".id
-                            ORDER BY COUNT(*) DESC
+                            GROUP BY auction.id, product.name, "user".username, "user".rating, auction.curr_bid, auction.end_date, "user".id, auction.num_bids
+                            ORDER BY auction.num_bids DESC
                             LIMIT 10;');
   $stmt->execute();
   return $stmt->fetchAll();
@@ -66,14 +66,10 @@ function getAllAuctions(){
  */
 function searchAuctions($textSearch) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, bids.numBids, auction.start_date 
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.num_bids as numBids, auction.start_date 
                             FROM auction, product, "user",
                                   plainto_tsquery(\'english\', :textSearch) AS query,
-                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
-                                  (SELECT auction.id as auction_id,  count(*) as numBids
-                                  FROM bid
-                                  JOIN auction ON bid.auction_id = auction.id
-                                  GROUP BY auction.id) as bids
+                                  to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
                             WHERE auction.product_id = product.id 
                             AND bids.auction_id = auction.id
                             AND query @@ textsearch 
@@ -93,17 +89,14 @@ function searchAuctions($textSearch) {
  */
 function searchAuctionsByCategory($category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
-                            FROM auction, product, "user",
-                                  (SELECT auction.id as auction_id,  count(*) as numBids
-                                  FROM bid
-                                  JOIN auction ON bid.auction_id = auction.id
-                                  GROUP BY auction.id) as bids
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
+                            FROM auction, product, "user", category, product_category
                             WHERE auction.product_id = product.id
-                            AND bids.auction_id = auction.id
+                            AND product.id = product_category.product_id
+                            AND product_category.category_id = category.id
                             AND auction.user_id = "user".id
                             AND now() < auction.end_date
-                            AND :category = ANY(product.type)');
+                            AND :category = category.name');
   $stmt->bindParam('category', $category);
   $stmt->execute();
   $result = $stmt->fetchAll();
@@ -118,20 +111,18 @@ function searchAuctionsByCategory($category) {
  */
 function searchAuctionsByCategoryAndName($textSearch, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, bids.numBids, auction.start_date
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.num_bids as numBids, auction.start_date
                             FROM auction, product, "user",
                                   plainto_tsquery(\'english\', :textSearch) AS query,
                                   to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
-                                  (SELECT auction.id as auction_id,  count(*) as numBids
-                                  FROM bid
-                                  JOIN auction ON bid.auction_id = auction.id
-                                  GROUP BY auction.id) as bids
+                                  category, product_category
                             WHERE auction.product_id = product.id 
-                            AND bids.auction_id = auction.id
+                            AND product.id = product_category.product_id
+                            AND product_category.category_id = category.id
                             AND query @@ textsearch 
                             AND now() < auction.end_date
                             AND auction.user_id = "user".id
-                            AND :category = ANY(product.type)
+                            AND :category = category.name
                             ORDER BY rank DESC;');
   $stmt->bindParam('textSearch', $textSearch);
   $stmt->bindParam('category', $category);
@@ -150,14 +141,9 @@ function searchAuctionsByCategoryAndName($textSearch, $category) {
  */
 function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
-                            FROM auction, product, "user",
-                                  (SELECT auction.id as auction_id,  count(*) as numBids
-                                  FROM bid
-                                  JOIN auction ON bid.auction_id = auction.id
-                                  GROUP BY auction.id) as bids
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
+                            FROM auction, product, "user"
                             WHERE auction.product_id = product.id
-                            AND bids.auction_id = auction.id
                             AND auction.user_id = "user".id
                             AND :fromDate < auction.end_date
                             AND auction.end_date < :toDate
@@ -183,16 +169,11 @@ function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
  */
 function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice, $textSearch) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
                             FROM auction, product, "user",
                               plainto_tsquery(\'english\', :textsearch) AS query,
-                              to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
-                              (SELECT auction.id as auction_id,  count(*) as numBids
-                                  FROM bid
-                                  JOIN auction ON bid.auction_id = auction.id
-                                  GROUP BY auction.id) as bids
+                              to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
                             WHERE auction.product_id = product.id
-                            AND bids.auction_id = auction.id
                             AND query @@ textsearch
                             AND auction.user_id = "user".id
                             AND :fromDate <= auction.end_date
@@ -221,20 +202,17 @@ function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice,
  */
 function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPrice, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
-                            FROM auction, product, "user",
-                                  (SELECT auction.id as auction_id,  count(*) as numBids
-                                  FROM bid
-                                  JOIN auction ON bid.auction_id = auction.id
-                                  GROUP BY auction.id) as bids
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
+                            FROM auction, product, "user", category, product_category
                             WHERE auction.product_id = product.id
-                            AND bids.auction_id = auction.id
+                            AND product.id = product_category.product_id
+                            AND product_category.category_id = category.id
                             AND auction.user_id = "user".id
                             AND :fromDate < auction.end_date
                             AND auction.end_date < :toDate
                             AND auction.curr_bid >= :fromPrice
                             AND auction.curr_bid <= :toPrice
-                            AND :category = ANY(product.type)');
+                            AND :category = category.name');
   $stmt->bindParam('fromDate', $fromDate);
   $stmt->bindParam('toDate', $toDate);
   $stmt->bindParam('fromPrice', $fromPrice);
@@ -257,23 +235,21 @@ function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPr
  */
 function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $toPrice, $textSearch, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, bids.numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
+  $stmt = $conn->prepare('SELECT auction.id, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
                             FROM auction, product, "user",
                               plainto_tsquery(\'english\', :textsearch) AS query,
                               to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch,
-                              (SELECT auction.id as auction_id,  count(*) as numBids
-                                FROM bid
-                                JOIN auction ON bid.auction_id = auction.id
-                                GROUP BY auction.id) as bids
+                              category, product_category
                             WHERE auction.product_id = product.id
-                            AND bids.auction_id = auction.id
+                            AND product.id = product_category.product_id
+                            AND product_category.category_id = category.id
                             AND query @@ textsearch
                             AND auction.user_id = "user".id
                             AND :fromDate <= auction.end_date
                             AND auction.end_date <= :toDate
                             AND auction.curr_bid >= :fromPrice
                             AND auction.curr_bid <= :toPrice
-                            AND :category = ANY(product.type)
+                            AND :category = category.name
                             ORDER BY rank DESC');
   $stmt->bindParam('fromDate', $fromDate);
   $stmt->bindParam('toDate', $toDate);

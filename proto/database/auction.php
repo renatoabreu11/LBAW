@@ -214,18 +214,20 @@ function getWinningUser($auctionId) {
 function getSimilarAuctions($auctionId) {
   global $conn;
   $stmt = $conn->prepare('SELECT similarAuction.id, similarProduct.name, (SELECT image.filename
-                                                                            FROM image
-                                                                            WHERE similarProduct.id = image.product_id
-                                                                            LIMIT 1
-                                                                            ) AS image
-                            FROM auction originalAuction
-                            JOIN auction similarAuction ON originalAuction.id != similarAuction.id
-                            JOIN product originalProduct ON originalAuction.product_id = originalProduct.id
-                            JOIN product similarProduct ON similarAuction.product_id = similarProduct.id
-                            WHERE similarAuction.type = originalAuction.type
-                            AND similarProduct.type && originalProduct.type
-                            AND originalAuction.id = :original_auction_id
-                            LIMIT 8');
+                                                FROM image
+                                                WHERE similarProduct.id = image.product_id
+                                                LIMIT 1
+                                                ) AS image
+                          FROM auction as originalAuction, auction as similarAuction, product as originalProduct, product as similarProduct,
+                          product_category as pc1, product_category as pc2
+                          WHERE originalAuction.id = :original_auction_id
+                          AND originalAuction.product_id = originalProduct.id
+                          AND similarAuction.product_id = similarProduct.id
+                          AND originalProduct.id = pc1.product_id
+                          AND similarProduct.id = pc2.product_id
+                          AND pc2.category_id = pc1.category_id
+                          AND originalProduct.id != similarProduct.id
+                          LIMIT 8');
   $stmt->bindParam('original_auction_id', $auctionId);
   $stmt->execute();
   return $stmt->fetchAll();

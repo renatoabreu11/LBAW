@@ -13,7 +13,7 @@
         <div class="panel-body">
           {foreach $categories as $category}
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.name}&page=1">{$category.name}</a><br>
+              <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.name}">{$category.name}</a><br>
             </div>
           {/foreach}
         </div>
