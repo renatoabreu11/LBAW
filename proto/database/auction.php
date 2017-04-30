@@ -63,6 +63,16 @@ function getProductName($productId){
   return $result['name'];
 }
 
+function getProductCategories($productId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT category.name
+                            FROM category
+                            INNER JOIN product_category ON category.id = product_category.category_id AND product_category.product_id = ?');
+  $stmt->execute(array($productId));
+  $result = $stmt->fetchAll();
+  return $result;
+}
+
 /**
  * Checks if the auction type given exists in the auction_type enum
  * @param $auctionType
@@ -91,15 +101,18 @@ function isOwner($userId, $auctionId){
 }
 
 /**
- * Checks if the category given exists in the category_type enum
+ * Checks if the category given exists in the respective table
  * @param $category
  * @return mixed
  */
 function validCategory($category){
-    global $conn;
-    $stmt = $conn->prepare('SELECT ? = ANY (SELECT unnest(enum_range(NULL::category_type))::text)');
-    $stmt->execute(array($category));
-    return $stmt->fetch()['?column?'];
+  global $conn;
+  $stmt = $conn->prepare('SELECT * 
+                          FROM category
+                          WHERE name = ?');
+  $stmt->execute(array($category));
+  $result = $stmt->fetch();
+  return $result !== false;
 }
 
 /**
@@ -395,16 +408,15 @@ function createAuction($productId, $userId, $startBid, $startDate, $endDate, $ty
 
 /**
  * Adds a new product to the database
- * @param $category
  * @param $productName
  * @param $description
  * @param $condition
  */
-function createProduct($category, $productName, $description, $condition){
+function createProduct($productName, $description, $condition){
   global $conn;
-  $stmt = $conn->prepare('INSERT INTO product(type, name, description, condition)
-                            VALUES(?, ?, ?, ?)');
-  $stmt->execute(array($category, $productName, $description, $condition));
+  $stmt = $conn->prepare('INSERT INTO product(name, description, condition)
+                            VALUES(?, ?, ?)');
+  $stmt->execute(array($productName, $description, $condition));
 }
 
 /**
