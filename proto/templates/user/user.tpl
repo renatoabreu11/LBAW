@@ -48,8 +48,8 @@
         {/if}
       </div>
       <div class="buttons-zone">
-        {if ($userId)}
-          {if ($userId != $user.id)}
+        {if ($USER_ID)}
+          {if ($USER_ID != $user.id)}
             {if ($isFollowing.count == 0)}
               <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
             {else}
@@ -58,7 +58,7 @@
           {/if}
         {/if}
 
-        {if ($userId == $user.id)}
+        {if ($USER_ID == $user.id)}
           <a href="{$BASE_URL}pages/user/user_edit.php?id={$user.id}" class="btn btn-info btn-block" role="button">Edit profile</a>
         {/if}
       </div>
@@ -272,7 +272,7 @@
                     <hr class="title-comment-divider">
                     <p class="win-comment text-justify">{$win.description}</p>
                     <hr>
-                    {if ($userId == $user.id)}
+                    {if ($USER_ID == $user.id)}
                       {$isReviewed = false}
                       {foreach from=$reviewsPosted key=k item=a}
                         {if ($a.bid_id == $win.bid_id)}
@@ -323,7 +323,7 @@
                   <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
                   <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><p>{$followingUser.username}</p></a>
                 </div>
-                {if ($userId == $user.id)}
+                {if ($USER_ID == $user.id)}
                   <div class="media-right">
                     <button type="button" class="btn btn-danger">Unfollow</button>
                   </div>

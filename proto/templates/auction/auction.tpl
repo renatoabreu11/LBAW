@@ -79,7 +79,7 @@
           </div>
           <div class="col-md-6 text-center auctionDetails">
             <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
-            {if ($seller.id != $userId && $userId && !$winningUser)}
+            {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
               <div class="section">
                 <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
                 <div id="bidOnAuction" class="white-popup mfp-hide">
@@ -192,7 +192,7 @@
       <div class="row product-questions">
         <div class="col-md-12">
           <h2>Product Q&A</h2>
-          {if ($seller.id != $userId) && $userId}
+          {if ($seller.id != $USER_ID) && $USER_ID}
             <form class="newQuestion" action="javascript:void(0);">
               <div class="form-group">
                 <label for="comment">Your question</label>
@@ -205,144 +205,9 @@
           <section class="comment-list">
             {foreach $questions as $question}
               <div class="question-answer">
-                <article class="row">
-                  <input type="hidden" name="question-id" value="{$question.id}">
-                  <div class="col-md-1 col-sm-1 hidden-xs">
-                    <figure class="thumbnail">
-                      <img class="img-responsive" src="{$BASE_URL}images/users/{$question.profile_pic}" />
-                    </figure>
-                  </div>
-                  <div class="col-md-10 col-sm-10 col-xs-12">
-                    <div class="panel panel-default arrow left">
-                      <div class="panel-body">
-                        <div class="media-heading">
-                          <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment{$question.id}">
-                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                          </button>
-                          <a href="{$BASE_URL}pages/user/user.php?id={$question.user_id}"><strong>{$question.user_username}</strong></a> {$question.date}
-                        </div>
-                        <div class="panel-collapse collapse in" id="collapseComment{$question.id}">
-                          <div class="media-body">
-                            <div class="question-display">
-                              <p>{$question.message}</p>
-                            </div>
-                            <div class="comment-meta">
-                              {if ($userId)}
-                                {if ($question.user_id == $userId)}
-                                  {if ($question.can_edit)}
-                                    <span class="edit-question underline-text-hover">edit</span>
-                                  {/if}
-                                  <span class="delete-question underline-text-hover">delete</span>
-                                {/if}
-                                {if ($question.user_id != $userId)}
-                                  <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</span>
-                                {/if}
-                                {if ($seller.id == $userId && !$question.answer_message)}
-                                  <span class="reply-question underline-text-hover">reply</span>
-                                {/if}
-                              {/if}
-                            </div>
-                            {if ($seller.id == $userId && !$question.answer_message)}
-                              <form class="new-answer" action="javascript:void(0);">
-                                <div class="form-group">
-                                  <textarea name="comment" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-default btn-answer-question">Send</button>
-                              </form>
-                            {/if}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="report-modal-question-{$question.id}" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">
-                            Question report
-                          </h4>
-                        </div>
-                        <div class="modal-body">
-                          <form class="form horizontal" role="form" action="javascript:void(0);">
-                            <div class="form-group">
-                              <label>Message</label>
-                              <textarea rows="5" class="report-question-{$question.id}-comment" placeholder="Your message..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-default btn-send-question-{$question.id}-report">Send</button>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </article>
+                {include file='auction/question.tpl'}
                 {if ($question.answer_message)}
-                  <article class="row">
-                    <input type="hidden" name="answer-id" value="{$question.answer_id}">
-                    <div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs">
-                      <figure class="thumbnail">
-                        <img class="img-responsive" src="{$BASE_URL}images/users/{$seller.profile_pic}"/>
-                      </figure>
-                    </div>
-                    <div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11">
-                      <div class="panel panel-default arrow left">
-                        <div class="panel-body">
-                          <div class="media-heading">
-                            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply{$question.answer_id}">
-                              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                            </button>
-                            <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><strong>{$seller.username}</strong></a>{$question.answer_date}
-                          </div>
-                          <div class="panel-collapse collapse in" id="collapseReply{$question.answer_id}">
-                            <div class="media-body">
-                              <div class="answer-display">
-                                <p>{$question.answer_message}</p>
-                              </div>
-                              <div class="comment-meta">
-                                {if ($userId)}
-                                  {if ($seller.id == $userId)}
-                                    {if ($question.answer_can_edit)}</p>
-                                      <span class="edit-answer underline-text-hover">edit</span>
-                                    {/if}
-                                    <span class="delete-answer underline-text-hover">delete</span>
-                                  {/if}
-                                  {if ($seller.id != $userId)}
-                                    <span class="report-answer underline-text-hover" data-toggle="modal" data-target="#report-modal-answer-{$question.answer_id}">report</span>
-                                  {/if}
-                                {/if}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="report-modal-answer-{$question.answer_id}" class="modal fade" role="dialog">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h4 class="modal-title">
-                              Answer report
-                            </h4>
-                          </div>
-                          <div class="modal-body">
-                            <form class="form horizontal" role="form" action="javascript:void(0);">
-                              <div class="form-group">
-                                <label>Message</label>
-                                <textarea rows="5" class="report-answer-{$question.answer_id}-comment" placeholder="Your message..."></textarea>
-                              </div>
-                              <button type="submit" class="btn btn-default btn-send-answer-{$question.answer_id}-report">Send</button>
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
+                  {include file='auction/answer.tpl'}
                 {/if}
               </div>
             {/foreach}
