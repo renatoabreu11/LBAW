@@ -11,27 +11,11 @@
       </div>
       <div id="categories-wrapper" class="panel-collapse collapse">
         <div class="panel-body">
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            {foreach $categories as $key => $category}
-              {if ($key % 3 == 0) }
-                <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
-              {/if}
-            {/foreach}
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            {foreach $categories as $key => $category}
-              {if ($key % 3 == 1) }
-                <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
-              {/if}
-            {/foreach}
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            {foreach $categories as $key => $category}
-              {if ($key % 3 == 2) }
-                <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.unnest}&page=1">{$category.unnest}</a><br>
-              {/if}
-            {/foreach}
-          </div>
+          {foreach $categories as $category}
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.name}&page=1">{$category.name}</a><br>
+            </div>
+          {/foreach}
         </div>
       </div>
     </div>

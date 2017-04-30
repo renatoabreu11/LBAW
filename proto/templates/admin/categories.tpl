@@ -3,8 +3,8 @@
     <h4><i class="fa fa-list-ul" aria-hidden="true"></i> Categories</h4>
 
     <ul class="list-group col-md-12" style="padding-top: 0.5em;">
-      {foreach $categories as $key => $category}
-        <li class="list-group-item col-md-3">{$category.unnest}</li>
+      {foreach $categories as $category}
+        <li class="list-group-item col-md-3">{$category.name}</li>
       {/foreach}
     </ul>
   </div>

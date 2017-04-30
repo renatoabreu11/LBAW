@@ -68,7 +68,7 @@ function getFeedback(){
  */
 function getCategories(){
   global $conn;
-  $stmt = $conn->prepare('SELECT unnest(enum_range(NULL::category_type))::text');
+  $stmt = $conn->prepare('Select name from category');
   $stmt->execute();
   $result = $stmt->fetchAll();
   return $result;
@@ -192,9 +192,8 @@ function createAdmin($username, $password, $email){
 function createCategory($title){
   global $conn;
   $stmt = $conn->prepare(
-    'ALTER TYPE category_type ADD VALUE :title');
-  $stmt->bindParam('title', $title);
-  $stmt->execute();
+    'INSERT INTO category (name) VALUES(?)');
+  $stmt->execute($title);
 }
 
 /* ========================== UPDATES  ========================== */

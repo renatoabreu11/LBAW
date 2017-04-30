@@ -25,8 +25,8 @@ $title= trim(strip_tags($_POST["title"]));
 try {
   createCategory($title);
 } catch (PDOException $e) {
-  if (strpos($e->getMessage(), 'Duplicate object') !== false){
-    echo "Category already exists";
+  if (strpos($e->getMessage(), 'category_name_key') !== false){
+    echo "Error 500 Internal Server: Category already exists";
   } else echo $e->getMessage() . "Error 500 Internal Server: Error creating category.";
   return;
 }

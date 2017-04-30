@@ -1,4 +1,4 @@
-BASE_URL = '/~lbaw1662/proto/';
+BASE_URL = '';
 let userId = null;
 let token = null;
 let adminId = null;

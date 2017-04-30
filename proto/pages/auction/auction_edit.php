@@ -41,12 +41,9 @@ $auction = getAuction($auctionId);
 $notifications = getActiveNotifications($id);
 $auctionTypes = getAuctionTypes();
 $watchlist = getWatchlistInfo($id, $auctionId);
+$productTypes = getProductCategories($product['id']);
 
-$types = $product['type'];
-$cleanTypes = clean($types);
-$productType = explode(',', $cleanTypes);
-
-$smarty->assign('productType', $productType);
+$smarty->assign('productTypes', $productTypes);
 $smarty->assign('watchlist', $watchlist);
 $smarty->assign('categories', $categories);
 $smarty->assign('auctionTypes', $auctionTypes);
