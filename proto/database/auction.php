@@ -121,6 +121,21 @@ function validCategory($category){
 }
 
 /**
+ * Returns the id of the table with category name equal to the given on
+ * @param $category
+ * @return mixed
+ */
+function getCategoryId($category){
+  global $conn;
+  $stmt = $conn->prepare('SELECT id 
+                          FROM category
+                          WHERE name = ?');
+  $stmt->execute(array($category));
+  $result = $stmt->fetch();
+  return $result['id'];
+}
+
+/**
  * Returns the last product id inserted
  * @return mixed
  */
@@ -240,10 +255,11 @@ function getSimilarAuctions($auctionId) {
 
 /**
  * Places a bid on the respective auction, if the user's amount is larger than the auction's current bid
- * @param $amountId
+ * @param $amount
  * @param $bidderId
  * @param $auctionId
  * @return string
+ * @internal param $amountId
  */
 function bid($amount, $bidderId, $auctionId) {
   global $conn;
@@ -412,7 +428,11 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
 
 /**
  * Adds a new auction to the database
- * @param $productId
+ * @param $productName
+ * @param $description
+ * @param $condition
+ * @param $category1
+ * @param $category2
  * @param $userId
  * @param $startBid
  * @param $startDate
@@ -420,12 +440,46 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
  * @param $type
  * @param $quantity
  * @param $questionsSection
+ * @param $notificationsEnabled
+ * @internal param $productId
  */
-function createAuction($productId, $userId, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection){
+function createAuction($productName, $description, $condition, $category1, $category2, $userId, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection, $notificationsEnabled){
   global $conn;
+
+  $conn->beginTransaction();
+  $conn->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
+
+  $stmt = $conn->prepare('INSERT INTO product(name, description, condition)
+                            VALUES(?, ?, ?)');
+  $stmt->execute(array($productName, $description, $condition));
+
+  $stmt = $conn->prepare('SELECT currval(\'product_id_seq\')');
+  $productId = $stmt->execute();
+
+  if($category1 != NULL){
+    $stmt = $conn->prepare('INSERT INTO product_category(product_id, category_id)
+                            VALUES(?, ?)');
+    $stmt->execute(array($productId, $category1));
+  }
+
+  if($category2 != NULL){
+    $stmt = $conn->prepare('INSERT INTO product_category(product_id, category_id)
+                            VALUES(?, ?)');
+    $stmt->execute(array($productId, $category2));
+  }
+
   $stmt = $conn->prepare('INSERT INTO auction(product_id, user_id, start_bid, curr_bid, start_date, end_date, date, type, quantity, questions_section)
                             VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?)');
   $stmt->execute(array($productId, $userId, $startBid, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection));
+
+  $stmt = $conn->prepare('SELECT currval(\'product_id_seq\')');
+  $auctionId = $stmt->execute();
+
+  $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
+                            VALUES(?, ?, now(), ?)');
+  $stmt->execute(array($auctionId, $userId, $notificationsEnabled));
+
+  $conn->commit();
 }
 
 /**
@@ -515,6 +569,18 @@ function createAnswerReport($answerId, $message) {
   $stmt->bindParam('message', $message);
   $stmt->bindParam('answer_id', $answerId);
   $stmt->execute();
+}
+
+/**
+ * Creates a new product-category association
+ * @param $productId
+ * @param $categoryId
+ */
+function createProductCategory($productId, $categoryId){
+  global $conn;
+  $stmt = $conn->prepare('INSERT INTO product_category(product_id, category_id)
+                            VALUES(?, ?)');
+  $stmt->execute(array($productId, $categoryId));
 }
 
 /* ========================== UPDATES  ========================== */

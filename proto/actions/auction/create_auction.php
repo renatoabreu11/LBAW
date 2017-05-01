@@ -5,7 +5,6 @@ include_once($BASE_DIR .'database/auctions.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/users.php');
 
-print_r($_POST);
 if (!empty($_POST['token'])) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
     if (!$_POST['product_name'] || !$_POST['category']
@@ -44,20 +43,26 @@ if (!empty($_POST['token'])) {
     }
 
     $category = $_POST["category"];
-    $categoryArr;
+    $categoryId1 = NULL;
+    $categoryId2 = NULL;
     if(count($category) == 2){
       if ( !validCategory($category[0]) || !validCategory($category[1])) {
         $invalidInfo = true;
         $_SESSION['field_errors']['category'] = 'Invalid category.';
-      }else{
-        $categoryArr = '{' . $category[0] . ',' . $category[1] . '}';
+      }else {
+        $categoryId1 = getCategoryId($category[0]);
+        $categoryId2 = getCategoryId($category[1]);
+        if($categoryId1 == $categoryId2){
+          $invalidInfo = true;
+          $_SESSION['field_errors']['category'] = 'Invalid categories.';
+        }
       }
     }else if (count($category) == 1){
       if ( !validCategory($category[0])) {
         $invalidInfo = true;
         $_SESSION['field_errors']['category'] = 'Invalid category.';
       }else{
-        $categoryArr = '{' . $category[0] . '}';
+        $categoryId1 = getCategoryId($category[0]);
       }
     }else{
       $invalidInfo = true;
@@ -97,6 +102,22 @@ if (!empty($_POST['token'])) {
     $startDate = date("Y-m-d H:i:s", strtotime($_POST['start_date']));
     $endDate = date("Y-m-d H:i:s", strtotime($_POST['end_date']));
 
+    if($startDate > $endDate){
+      $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be smaller than the ending date.";
+      $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be smaller than the starting date.";
+      $invalidInfo = true;
+    }
+
+    if($startDate < date("Y-m-d H:i:s")){
+      $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be after the current date.";
+      $invalidInfo = true;
+    }
+
+    if($endDate < date("Y-m-d H:i:s")){
+      $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be after the current date.";
+      $invalidInfo = true;
+    }
+
     if(!$startDate){
       $_SESSION['field_errors']['start_date'] = 'Invalid starting date.';
       $invalidInfo = true;
@@ -113,8 +134,8 @@ if (!empty($_POST['token'])) {
       $invalidInfo = true;
     }else{
       if($notificationsEnabled == "No")
-        $notificationsEnabled = FALSE;
-      else $notificationsEnabled = TRUE;
+        $notificationsEnabled = 'FALSE';
+      else $notificationsEnabled = 'TRUE';
     }
 
     $qaSection = $_POST['qa_section'];
@@ -123,8 +144,8 @@ if (!empty($_POST['token'])) {
       $invalidInfo = true;
     }else{
       if($qaSection == "No")
-        $qaSection = FALSE;
-      else $qaSection = TRUE;
+        $qaSection = 'FALSE';
+      else $qaSection = 'TRUE';
     }
 
     if($invalidInfo){
@@ -133,33 +154,22 @@ if (!empty($_POST['token'])) {
       exit;
     }else{
       try {
-        createProduct($categoryArr, $productName, $description, $condition);
+        createAuction($productName, $description, $condition, $categoryId1, $categoryId2, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection, $notificationsEnabled);
       } catch (PDOException $e) {
-        $_SESSION['error_messages'][] = "Error creating the auction product.";
-        $_SESSION['form_values'] = $_POST;
-        echo $e->getMessage();
-        exit;
-      }
+        if (strpos($e->getMessage(), 'product_category_pkey') !== false) {
+          $_SESSION['field_errors']['category'] = "Product-category association already exists.";
+        } else if (strpos($e->getMessage(), 'auction_date_ck') !== false) {
+          $_SESSION['field_errors']['end_date'] = "The auction's starting date has to be smaller than the ending date.";
+        } else {
+          $_SESSION['error_messages'][] = "Error creating the auction.";
+        }
 
-      $productId = getLastProductID();
-      try {
-        createAuction($productId, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection);
-      } catch (PDOException $e) {
-        $_SESSION['error_messages'][] = "Error creating auction.";
         $_SESSION['form_values'] = $_POST;
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;
       }
 
       $auctionId = getLastAuctionID();
-      try {
-        addAuctionToWatchlist($auctionId, $userId, $notificationsEnabled);
-      } catch (PDOException $e) {
-        $_SESSION['error_messages'][] = "Error adding auction to your watchlist.";
-        $_SESSION['form_values'] = $_POST;
-        header("Location:"  . $_SERVER['HTTP_REFERER']);
-        exit;
-      }
 
       $_SESSION['success_messages'][] = 'Auction created with success!';
       header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auctionId);
