@@ -256,8 +256,23 @@ function bid($amount, $bidderId, $auctionId) {
   $result = $stmt->fetch();
   $balance = $result['balance'];
 
-  if ($balance >= $amount) {
+  // Calculates the difference between the last bid and the current one.
+  $stmt = $conn->prepare('SELECT amount
+                          FROM bid
+                          WHERE user_id = :user_id
+                            AND auction_id = :auction_id
+                          ORDER BY id DESC
+                          LIMIT 1');
+  $stmt->bindParam('user_id', $bidderId);
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  $alreadyBiddedAmount = $stmt->fetch()['amount'];
 
+  $amountDiff = $amount;
+  if($alreadyBiddedAmount > 0)
+    $amountDiff = $amount - $alreadyBiddedAmount;
+
+  if ($balance >= $amountDiff) {
     $stmt = $conn->prepare('INSERT INTO bid (amount, date, user_id, auction_id) 
                                 VALUES (:amount, now(), :user_id, :auction_id)');
     $stmt->bindParam('amount', $amount);
@@ -268,7 +283,7 @@ function bid($amount, $bidderId, $auctionId) {
     $stmt = $conn->prepare('UPDATE "user"
                                 SET amount = amount - :amount_bid
                                 WHERE "user".id = :user_id;');
-    $stmt->bindParam('amount_bid', $a = 0);//$amount);
+    $stmt->bindParam('amount_bid', $amountDiff);
     $stmt->bindParam('user_id', $bidderId);
     $stmt->execute();
 

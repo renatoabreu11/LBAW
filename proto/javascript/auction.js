@@ -80,6 +80,7 @@ $(document).ready(function() {
 
     let request = $.ajax({
       type: 'POST',
+      dataType: 'json',
       url: BASE_URL + 'api/auction/bid.php',
       data: {
         'amount': amount,
@@ -100,6 +101,13 @@ $(document).ready(function() {
           if(bidderTableBody.children().length == 5)
             bidderTableBody.children().last().remove();
           bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
+
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + data['success'] + '</div>',
+              type: 'inline',
+            },
+          });
         }
       },
     });
