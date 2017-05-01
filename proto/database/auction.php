@@ -63,6 +63,11 @@ function getProductName($productId){
   return $result['name'];
 }
 
+/**
+ * Returns the product categories
+ * @param $productId
+ * @return array
+ */
 function getProductCategories($productId){
   global $conn;
   $stmt = $conn->prepare('SELECT category.name

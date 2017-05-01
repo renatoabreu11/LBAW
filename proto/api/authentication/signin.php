@@ -4,7 +4,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
 if (!$_POST['username'] || !$_POST['password']) {
-  echo "All fields are mandatory!";
+  echo 'Error 400 Bad Request: All fields are mandatory!';
   return;
 }
 
@@ -25,9 +25,9 @@ if (userExists($username, $password)) {
   if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
   }
-  echo 'Login Successful!';
+  echo 'Success: Login Successful!';
   return;
 } else {
-  echo 'Invalid username or password!';
+  echo 'Error 400 Bad Request: Invalid username or password!';
   return;
 }

@@ -28,7 +28,7 @@
     </table>
   </div>
 
-  <div class="text-center">
+  <div class="text-center userOptions">
     <a class="btn btn-info removeUserPopup" href="#removeUserConfirmation">Remove selected user</a>
     <a class="btn btn-info notifyUserPopup" href="#notifyUserConfirmation">Notify selected user</a>
   </div>

@@ -47,11 +47,13 @@
     <br>
     <div class="col-sm-3">
       <select class="form-control" id="report_type" name="report_type">
-        <option value="User">User Reports</option>
-        <option value="Auction">Auction Reports</option>
-        <option value="Review">Review Reports</option>
-        <option value="Answer">Answer Reports</option>
-        <option value="Question">Question Reports</option>
+        {foreach $reportTypes as $type}
+          {if $reportType == $type}
+            <option value="{$type}" selected>{$type} Reports</option>
+            {else}
+            <option value="{$type}">{$type} Reports</option>
+          {/if}
+        {/foreach}
       </select>
     </div>
     <a class="btn btn-info showReports">Show reports</a>

@@ -68,10 +68,21 @@ function getFeedback(){
  */
 function getCategories(){
   global $conn;
-  $stmt = $conn->prepare('Select name from category');
+  $stmt = $conn->prepare('Select * from category');
   $stmt->execute();
   $result = $stmt->fetchAll();
   return $result;
+}
+
+/**
+ * Returns the last category id inserted
+ * @return mixed
+ */
+function getLastCategoryId(){
+  global $conn;
+  $stmt = $conn->prepare('SELECT MAX(id) FROM category');
+  $stmt->execute();
+  return $stmt->fetch()['max'];
 }
 
 /**
@@ -193,7 +204,7 @@ function createCategory($title){
   global $conn;
   $stmt = $conn->prepare(
     'INSERT INTO category (name) VALUES(?)');
-  $stmt->execute($title);
+  $stmt->execute(array($title));
 }
 
 /* ========================== UPDATES  ========================== */
@@ -208,6 +219,18 @@ function deleteFeedback($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                             FROM feedback
+                            WHERE id = ?');
+  $stmt->execute(array($id));
+}
+
+/**
+ * Delete a record from the category table
+ * @param $id
+ */
+function deleteCategory($id){
+  global $conn;
+  $stmt = $conn->prepare('DELETE 
+                            FROM category
                             WHERE id = ?');
   $stmt->execute(array($id));
 }

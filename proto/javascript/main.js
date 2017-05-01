@@ -1,4 +1,4 @@
-BASE_URL = '';
+BASE_URL = '/';
 let userId = null;
 let token = null;
 let adminId = null;
@@ -87,7 +87,7 @@ $(document).ready(function() {
 
   $('#feedbackForm').validate({
     rules: {
-      notification: {
+      feedback: {
         required: true,
         maxlength: 256,
       },
@@ -101,14 +101,14 @@ $(document).ready(function() {
   function leaveFeedback() {
     $.magnificPopup.close();
     let feedbackForm = $('#feedbackForm');
-    let username = feedbackForm.find('input[name=username]').val();
     let feedback = feedbackForm.find('textarea#feedback').val();
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/user/feedback.php',
       data: {
-        'username': username,
         'feedback': feedback,
+        'userId': userId,
+        'token': token,
       },
       datatype: 'text',
     });

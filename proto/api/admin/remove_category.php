@@ -1,7 +1,7 @@
 <?php
 
 include_once('../../config/init.php');
-include_once($BASE_DIR .'database/users.php');
+include_once($BASE_DIR .'database/admins.php');
 
 if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
@@ -20,19 +20,18 @@ if (!$_POST['id']){
   return;
 }
 
-$userId = $_POST['id'];
+$categoryId = $_POST['id'];
 
-if(!is_numeric($userId)){
-  echo 'Error 400 Bad Request: Invalid user id.';
+if(!is_numeric($categoryId)){
+  echo 'Error 400 Bad Request: Invalid category id.';
   return;
 }
 
 try {
-  deleteUser($userId);
+  deleteCategory($categoryId);
 } catch (PDOException $e) {
-  echo "Error 500 Internal Server: Error deleting user.";
-  echo $e->getMessage();
+  echo "Error 500 Internal Server: Error deleting category.";
   return;
 }
 
-echo "Success: User successfully removed!";
+echo "Success: Category successfully removed!";

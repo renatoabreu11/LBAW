@@ -103,20 +103,26 @@ $(document).ready(function() {
     return false;
   }
 
-  let request;
-  $('#newCategory').submit(function(event) {
-    // Prevent default posting of form - put here to work in case of errors
-    event.preventDefault();
+  $('#newCategory').validate({
+    rules: {
+      title: {
+        required: true,
+        maxlength: 64,
+      },
+    },
+    submitHandler: addCategory,
+  });
 
-    // Abort any pending request
-    if (request) {
-      request.abort();
-    }
+  /**
+   * Ajax call that adds a new category
+   */
+  function addCategory() {
+    event.preventDefault();
 
     let form = $('#newCategory');
     let title = form.find('input[name=\'title\']').val();
 
-    request = $.ajax({
+    let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/admin/add_category.php',
       data: {
@@ -124,27 +130,33 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      datatype: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Category already exists')) {
-        form.find('.field_error').text(response);
-      } else if(response.includes('Success')) {
+    request.done(function(responseJson, textStatus, jqXHR) {
+      let response = JSON.parse(responseJson);
+      let message = response['message'];
+      if(message.includes('Category already exists')) {
+        form.find('.field_error').text(message);
+      } else if(message.includes('Success')) {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
           },
         });
         form.trigger('reset');
-        let div = '<li class="list-group-item col-md-3">'+title+'</li>';
+        let div = '<li class="list-group-item col-md-3">'
+          +title+
+          '<a class="removeCategoryPopup id-' + response['id'] + '" href="#removeCategoryConfirmation">'+
+          '<i class="fa fa-times pull-right" aria-hidden="true"></i>'+
+          '</a></li>';
         $('.categories ul').append(div);
       }else{
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
           },
         });
@@ -159,7 +171,69 @@ $(document).ready(function() {
         textStatus, errorThrown
       );
     });
+  }
+
+  $('ul.list-group').on('click', 'a.removeCategoryPopup', function() {
+    let categoryObject = $(this).parents('.list-group-item');
+    let classArray = $(this).attr('class').split('id-');
+    if(classArray.length > 2)
+      return;
+
+    let categoryId = classArray[1];
+
+    $('.removeCategoryPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
+
+    $('.removeCategory').one('click', function() {
+      $.magnificPopup.close();
+      deleteCategory(categoryId, categoryObject);
+    });
   });
+
+  /**
+   * Ajax call that deletes a category
+   * @param {id} categoryId
+   * @param {object} object
+   */
+  function deleteCategory(categoryId, object) {
+    $.magnificPopup.close();
+    let request;
+    request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/admin/remove_category.php',
+      data: {
+        'id': categoryId,
+        'token': token,
+        'adminId': adminId,
+      },
+      datatype: 'text',
+    });
+
+    // Callback handler that will be called on success
+    request.done(function(response, textStatus, jqXHR) {
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+      if(response.includes('Success')) {
+        object.hide('slow', function() {
+          object.remove();
+        });
+      }
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error(
+        'The following error occurred: '+
+        textStatus, errorThrown
+      );
+    });
+  }
 
   let auctionTable = $('#auctionsTable');
   auctionTable.DataTable();
@@ -506,4 +580,35 @@ $(document).ready(function() {
       );
     });
   }
+
+  $('.exportAuctions').on('click', function() {
+    let request;
+    request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/admin/export_auctions.php',
+      data: {
+        'token': token,
+        'adminId': adminId,
+      },
+      datatype: 'text',
+    });
+
+    // Callback handler that will be called on success
+    request.done(function(response, textStatus, jqXHR) {
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error(
+        'The following error occurred: '+
+        textStatus, errorThrown
+      );
+    });
+  });
 });

@@ -58,4 +58,4 @@ try {
   return;
 }
 
-echo "Success 200 OK: Report successfully removed!";
+echo "Success: Report successfully removed!";

@@ -786,6 +786,10 @@ input::-webkit-input-placeholder {
 
 /* =============== admin =============== */
 
+.userOptions a.btn {
+  margin-right: 0.5em;
+}
+
 .navlink {
   float: left;
   height: 50px;

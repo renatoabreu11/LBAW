@@ -34,4 +34,4 @@ try {
   return;
 }
 
-echo "Success 200 OK: Auction successfully removed!";
+echo "Success: Auction successfully removed!";

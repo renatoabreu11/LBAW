@@ -20,14 +20,19 @@ if (!$_POST['id'] || !$_POST["message"]){
   return;
 }
 
-$user_id = $_POST["id"];
+$userId = $_POST["id"];
 $message = trim(strip_tags($_POST["message"]));
 
-try {
-  notifyUser($user_id, $message, "Warning");
-} catch (PDOException $e) {
-  echo "Error 500 Internal Server: Error notifying user.";
+if(strlen($message) > 256){
+  echo 'Error 400 Bad Request: Invalid notification length!';
   return;
 }
 
-echo "Success 201 Created: User notified.";
+try {
+  notifyUser($userId, $message, "Warning");
+} catch (PDOException $e) {
+  echo "Error 500 Internal Server: Error sending notification to the user.";
+  return;
+}
+
+echo "Success: User notified.";

@@ -60,6 +60,19 @@ function getAllAuctions(){
 }
 
 /**
+ * Get closed auctions.
+ */
+function getClosedAuctions(){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * 
+    						FROM auction
+    						WHERE end_date < now()');
+  $stmt->execute();
+  $result = $stmt->fetchAll();
+  return $result;
+}
+
+/**
  * Search auctions by name.
  * @param $textSearch
  * @return array

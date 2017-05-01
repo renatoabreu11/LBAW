@@ -33,7 +33,7 @@ if(!is_numeric($auctionId)) {
 }
 
 try {
-    $ret = bid($amount, $userId, $auctionId);
+  $ret = bid($amount, $userId, $auctionId);
 } catch(PDOException $e) {
   echo "Error 500 Internal Server: Error creating the bid.";
   return;

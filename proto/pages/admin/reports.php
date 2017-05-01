@@ -15,7 +15,7 @@ if(!validAdmin($username, $id)){
   $smarty->display('common/404.tpl');
   return;
 }
-
+$reportTypes = ['Answer', 'Auction', 'Question', 'Review', 'User'];
 $reportType = $_GET['type'];
 $reports;
 
@@ -37,6 +37,7 @@ switch ($reportType){
     $reports = getUserReports();
 }
 
+$smarty->assign("reportTypes", $reportTypes);
 $smarty->assign("reportType", $reportType);
 $smarty->assign("reports", $reports);
 $smarty->assign("adminSection", "reports");

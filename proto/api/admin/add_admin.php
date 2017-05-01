@@ -26,6 +26,11 @@ if ( !preg_match ("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/", $username)){
   return;
 }
 
+if(strlen($username) > 64){
+  echo 'Error 400 Bad Request: Invalid username length.';
+  return;
+}
+
 $password = $_POST['password'];
 $email = $_POST['email'];
 
@@ -46,4 +51,4 @@ try {
   }
 }
 
-echo "Success 201 Created: Admin successfully added!";
+echo "Success: Admin successfully added!";

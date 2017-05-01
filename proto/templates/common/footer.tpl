@@ -6,10 +6,9 @@
       <a class="pull-right leaveFeedbackPopup" href="#leaveFeedback">Leave a Feedback</a>
       <div id="leaveFeedback" class="white-popup mfp-hide">
         <form role="form" action="{$BASE_URL}api/user/feedback.php" method="post" id="feedbackForm">
-          <input type="hidden" name="username" value={$USERNAME}>
           <div class="form-group">
             <label for="feedback">Feedback:</label>
-            <textarea class="form-control" rows="5" id="feedback"></textarea>
+            <textarea class="form-control" rows="5" name="feedback" id="feedback"></textarea>
           </div>
           <div class="text-center">
             <input type="submit" id="submitFeedback" class="btn btn-info" value="Submit feedback">

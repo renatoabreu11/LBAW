@@ -16,10 +16,26 @@ if ( !preg_match ("/^[a-zA-Z\s]+$/", $name)) {
   $invalidCharacters = true;
 }
 
+if(strlen($name) > 64){
+  $_SESSION['field_errors']['name'] = 'Invalid name length.';
+  $invalidCharacters = true;
+}
+
 $username = trim(strip_tags($_POST["username"]));
-if ( !preg_match ("/^[a-zA-Z0-9\s]+$/", $username)) {
+if ( !preg_match ("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/", $username)) {
   $invalidCharacters = true;
   $_SESSION['field_errors']['username'] = 'Invalid username characters';
+}
+
+if(strlen($username) > 64){
+  $_SESSION['field_errors']['username'] = 'Invalid username length.';
+  $invalidCharacters = true;
+}
+
+$description = trim(strip_tags($_POST["description"]));
+if(strlen($description) > 255){
+  $_SESSION['field_errors']['description'] = 'Invalid description length.';
+  $invalidCharacters = true;
 }
 
 if($invalidCharacters){
@@ -28,7 +44,6 @@ if($invalidCharacters){
   exit;
 }
 
-$description = trim(strip_tags($_POST["description"]));
 $password = $_POST['password'];
 $email = $_POST['email'];
 
@@ -36,18 +51,16 @@ try {
   createUser($name, $username, $password, $email, $description);
 } catch (PDOException $e) {
   if (strpos($e->getMessage(), 'user_username_uindex') !== false) {
-    $_SESSION['error_messages'][] = 'Duplicate username';
     $_SESSION['field_errors']['username'] = 'Username already exists';
   }
   else if (strpos($e->getMessage(), 'user_email_uindex') !== false){
-    $_SESSION['error_messages'][] = 'Duplicate email';
     $_SESSION['field_errors']['email'] = 'Email already exists';
-  } else $_SESSION['error_messages'][] = 'Error creating user' . $e->getMessage();
+  } else $_SESSION['error_messages'][] = 'Error creating user';
 
   $_SESSION['form_values'] = $_POST;
   header("Location: $BASE_URL" . 'pages/authentication/signup.php');
   exit;
 }
 
-$_SESSION['success_messages'][] = 'User registered successfully';
+$_SESSION['success_messages'][] = 'User successfully registered';
 header("Location: $BASE_URL" . 'pages/auctions/best_auctions.php');

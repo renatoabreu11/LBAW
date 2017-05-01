@@ -4,31 +4,43 @@ include_once('../../config/init.php');
 include_once($BASE_DIR .'database/admins.php');
 
 if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply = array('message' => "Error 403 Forbidden: You don't have permissions to make this request.");
+  echo json_encode($reply);
   return;
 }
 
 $loggedAdminId = $_SESSION['admin_id'];
 $adminId = $_POST['adminId'];
 if($loggedAdminId != $adminId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply = array('message' => "Error 403 Forbidden: You don't have permissions to make this request.");
+  echo json_encode($reply);
   return;
 }
 
 if (!$_POST['title']){
-  echo 'Error 400 Bad Request: All fields are mandatory!';
+  $reply = array('message' => 'Error 400 Bad Request: All fields are mandatory!');
+  echo json_encode($reply);
   return;
 }
 
-$title= trim(strip_tags($_POST["title"]));
+$title = trim(strip_tags($_POST["title"]));
+if(strlen($title) > 64){
+  $reply = array('message' => 'Error 400 Bad Request: Invalid category name length!');
+  echo json_encode($reply);
+  return;
+}
 
+$categoryId;
 try {
   createCategory($title);
+  $categoryId = getLastCategoryId();
 } catch (PDOException $e) {
   if (strpos($e->getMessage(), 'category_name_key') !== false){
-    echo "Error 500 Internal Server: Category already exists";
-  } else echo $e->getMessage() . "Error 500 Internal Server: Error creating category.";
+    $reply = array('message' => "Error 500 Internal Server: Category already exists.");
+  } else $reply = array('message' => "Error 500 Internal Server: Error creating category.");
+  echo json_encode($reply);
   return;
 }
 
-echo "Success 201 Created: Category successfully added!";
+$reply = array('id' => $categoryId, 'category' => $title, 'message' => "Success: Category successfully added!");
+echo json_encode($reply);
