@@ -216,7 +216,7 @@ $(document).ready(function() {
       });
 
       request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occured: '
+        console.error('The following error occurred: '
           + textStatus + ': ' + errorThrown);
       });
     });
@@ -271,26 +271,48 @@ $(document).ready(function() {
     });
   });
 
-  // Delete question.
-  $('.delete-question').click(function() {
+  $('.removeQuestionPopup').on('click', function() {
     let questionArticle = $(this).closest('article');
-    let questionId = questionArticle.children().eq(0).val();
+    let questionClass = $(this).attr('class').split('id-');
     let questionAnswerDiv = questionArticle.parent();
 
+    if(questionClass.length !== 2)
+      return;
+
+    let questionId = questionClass[1];
+
+    $('.removeQuestionPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
+
+    $('.removeQuestion').one('click', function() {
+      $.magnificPopup.close();
+      deleteQuestion(questionId, questionAnswerDiv);
+    });
+  });
+
+  /**
+   * Makes an ajax call to delete a question
+   * @param {number} questionId
+   * @param {object} questionDiv
+   */
+  function deleteQuestion(questionId, questionDiv) {
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/question_delete.php',
       data: {
-        'question-id': questionId,
-        'user-id': userId,
+        'questionId': questionId,
+        'userId': userId,
+        'adminId': adminId,
         'token': token,
       },
     });
 
     request.done(function(response, textStatus, jqXHR) {
-      if(response.indexOf('success') >= 0) {
-        questionAnswerDiv.fadeOut(500, function() {
-          questionAnswerDiv.remove();
+      if(response.includes('Success')) {
+        questionDiv.fadeOut(500, function() {
+          questionDiv.remove();
         });
       } else {
         $.magnificPopup.open({
@@ -306,26 +328,47 @@ $(document).ready(function() {
       console.error('The following error occured: '
         + textStatus + ': ' + errorThrown);
     });
+  }
+
+  $('.removeAnswerPopup').on('click', function() {
+    let answerArticle = $(this).closest('article');
+    let answerClass = $(this).attr('class').split('id-');
+    if(answerClass.length !== 2)
+      return;
+
+    let answerId = answerClass[1];
+
+    $('.removeAnswerPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
+
+    $('.removeAnswer').one('click', function() {
+      $.magnificPopup.close();
+      deleteAnswer(answerId, answerArticle);
+    });
   });
 
-  // Delete answer.
-  $('.delete-answer').click(function() {
-    let article = $(this).closest('article');
-    let answerId = article.children().eq(0).val();
-
+  /**
+   * Handles the ajax call to delete an answer
+   * @param {number} answerId
+   * @param {object} article
+   */
+  function deleteAnswer(answerId, article) {
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/answer_delete.php',
       data: {
-        'answer-id': answerId,
-        'user-id': userId,
+        'answerId': answerId,
+        'userId': userId,
+        'adminId': adminId,
         'token': token,
       },
     });
 
     request.done(function(response, textStatus, jqXHR) {
       console.info(response);
-      if(response.indexOf('success') >= 0) {
+      if(response.includes('Success')) {
         article.fadeOut(500, function() {
           article.remove();
         });
@@ -343,7 +386,7 @@ $(document).ready(function() {
       console.error('The following error occured: '
         + textStatus + ': ' + errorThrown);
     });
-  });
+  }
 
   // Report question.
   $('.report-question').click(function() {

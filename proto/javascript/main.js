@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     // Callback handler that will be called on success
     request.done(function(response, textStatus, jqXHR) {
-      if(response === 'Login Successful!') {
+      if(response.includes('Success')) {
         window.location.href=window.location.href;
       }else {
         $('#loginModal').find('.field_error').text(response);

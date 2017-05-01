@@ -212,6 +212,28 @@
               </div>
             {/foreach}
           </section>
+
+          <div>
+            <div id="removeQuestion" class="white-popup mfp-hide">
+              <h4>Are you sure that you want to delete this answer?</h4>
+              <p>You will not be able to undo this action!</p>
+              <div class="text-center">
+                <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
+                <button class="btn btn-info closePopup">No, go back</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div id="removeAnswer" class="white-popup mfp-hide">
+              <h4>Are you sure that you want to delete this answer?</h4>
+              <p>You will not be able to undo this action!</p>
+              <div class="text-center">
+                <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
+                <button class="btn btn-info closePopup">No, go back</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

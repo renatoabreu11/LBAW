@@ -20,18 +20,21 @@
               <p>{$question.message}</p>
             </div>
             <div class="comment-meta">
+              {if $ADMIN_ID}
+                <span><a class="removeQuestionPopup id-{$question.id}" href="#removeQuestion">delete</a></span>
+              {/if}
               {if ($USER_ID)}
                 {if ($question.user_id == $USER_ID)}
                   {if ($question.can_edit)}
-                    <span class="edit-question underline-text-hover">edit</span>
+                    <a class="edit-question underline-text-hover">edit</a>
                   {/if}
-                  <span class="delete-question underline-text-hover">delete</span>
+                  <span><a class="removeQuestionPopup id-{$question.id}" href="#removeQuestion">delete</a></span>
                 {/if}
                 {if ($question.user_id != $USER_ID)}
-                  <span class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</span>
+                  <a class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</a>
                 {/if}
                 {if ($seller.id == $USER_ID && !$question.answer_message)}
-                  <span class="reply-question underline-text-hover">reply</span>
+                  <a class="reply-question underline-text-hover">reply</a>
                 {/if}
               {/if}
             </div>

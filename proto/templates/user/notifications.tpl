@@ -55,14 +55,12 @@
       </div>
     {/foreach}
 
-    <div>
-      <div id="removeNotification" class="white-popup mfp-hide">
-        <h4>Are you sure that you want to delete this notification?</h4>
-        <p>You will not be able to undo this action!</p>
-        <div class="text-center">
-          <button class="btn btn-info removeNotification">Yes, I'm sure</button>
-          <button class="btn btn-info closePopup">No, go back</button>
-        </div>
+    <div id="removeNotification" class="white-popup mfp-hide">
+      <h4>Are you sure that you want to delete this notification?</h4>
+      <p>You will not be able to undo this action!</p>
+      <div class="text-center">
+        <button class="btn btn-info removeNotification">Yes, I'm sure</button>
+        <button class="btn btn-info closePopup">No, go back</button>
       </div>
     </div>
 
