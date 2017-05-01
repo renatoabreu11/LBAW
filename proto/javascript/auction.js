@@ -74,6 +74,10 @@ $(document).ready(function() {
    * @param {string} token
    */
   function bidOnAuction(amount) {
+    let currBid = $('.current-bid');
+    let bidderTableBody = $('.bidders-table-body');
+    let username = $('input[name=user-username]').val();
+
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/bid.php',
@@ -88,7 +92,11 @@ $(document).ready(function() {
     request.done(function(response, textStatus, jqXHR) {
       console.info(response);
       if(response.includes('Success 201')) {
-        // update current bid
+        currBid.text("Current Bid: " + amount + "€");
+
+        if(bidderTableBody.children() == 5)
+          bidderTableBody.children().last().remove();
+        bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">Just now</td></tr>');
       } else {
         $.magnificPopup.open({
           items: {

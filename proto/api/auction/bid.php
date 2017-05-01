@@ -9,13 +9,13 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $loggedUserId = $_SESSION['user_id'];
-$userId = $_POST['userId'];
+$userId = $_POST['user-id'];
 if($loggedUserId != $userId) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-if(!$_POST['amount'] || !$_POST['auctionId']) {
+if(!$_POST['amount'] || !$_POST['auction-id']) {
   echo 'Error 400 Bad Request: All fields are mandatory!';
   return;
 }

@@ -245,7 +245,7 @@ function getSimilarAuctions($auctionId) {
  * @param $auctionId
  * @return string
  */
-function bid($amountId, $bidderId, $auctionId) {
+function bid($amount, $bidderId, $auctionId) {
   global $conn;
 
   $conn->beginTransaction();
@@ -256,11 +256,11 @@ function bid($amountId, $bidderId, $auctionId) {
   $result = $stmt->fetch();
   $balance = $result['balance'];
 
-  if ($balance >= $amountId) {
+  if ($balance >= $amount) {
 
     $stmt = $conn->prepare('INSERT INTO bid (amount, date, user_id, auction_id) 
                                 VALUES (:amount, now(), :user_id, :auction_id)');
-    $stmt->bindParam('amount', $amountId);
+    $stmt->bindParam('amount', $amount);
     $stmt->bindParam('user_id', $bidderId);
     $stmt->bindParam('auction_id', $auctionId);
     $stmt->execute();
@@ -268,7 +268,7 @@ function bid($amountId, $bidderId, $auctionId) {
     $stmt = $conn->prepare('UPDATE "user"
                                 SET amount = amount - :amount_bid
                                 WHERE "user".id = :user_id;');
-    $stmt->bindParam('amount_bid', $auctionId);
+    $stmt->bindParam('amount_bid', $a = 0);//$amount);
     $stmt->bindParam('user_id', $bidderId);
     $stmt->execute();
 

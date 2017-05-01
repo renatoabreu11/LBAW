@@ -26,7 +26,9 @@ if(date('Y-m-d H:i:s') > $auction['end_date']) {
 
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
+  $username = $_SESSION['username'];
   $notifications = getActiveNotifications($id);
+  $smarty->assign('username', $username);
   $smarty->assign('notifications', $notifications);
 }
 

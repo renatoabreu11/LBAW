@@ -74,11 +74,11 @@
           <h3 class="hidden-xs">{$product.name}</h3>
           <div class="sellerInfo">
             <p>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></p>
-            <div class="rateYo" data-rating="{$seller.rating}"></div>
+            {if ($numReviews != 0)}<div class="rateYo" data-rating="{$seller.rating}"></div> {/if}
             <p><a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews" style="display: inline">{$numReviews} Reviews</a>
           </div>
           <div class="col-md-6 text-center auctionDetails">
-            <h3 style="padding-top: 1em; padding-bottom: 0.5em;">Current Bid: {$auction.curr_bid}€</h3>
+            <h3 style="padding-top: 1em; padding-bottom: 0.5em;" class="current-bid">Current Bid: {$auction.curr_bid}€</h3>
             {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
               <div class="section">
                 <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
@@ -121,10 +121,10 @@
                 <th class="col-xs-5">User</th><th class="col-xs-2">Bid</th><th class="col-xs-5">Date</th>
               </tr>
               </thead>
-              <tbody>
+              <tbody class="bidders-table-body">
               {foreach $recentBidders as $recentBidder}
                 <tr>
-                  <td class="col-xs-5"><a href="{$BASE_URL}pages/user/user.php?id={$recentBidder.id}">{$recentBidder.username}</a></td><td class="col-xs-2">57</td><td class="col-xs-5">{$recentBidder.date}</td>
+                  <td class="col-xs-5"><a href="{$BASE_URL}pages/user/user.php?id={$recentBidder.id}">{$recentBidder.username}</a></td><td class="col-xs-2">{$recentBidder.amount}</td><td class="col-xs-5">{$recentBidder.date}</td>
                 </tr>
               {/foreach}
               </tbody>
@@ -188,6 +188,7 @@
 
       <!-- Accessible information -->
       <input type="hidden" name="auction-id" value="{$auction.id}">
+      <input type="hidden" name="user-username" value="{$username}">
 
       <div class="row product-questions">
         <div class="col-md-12">
