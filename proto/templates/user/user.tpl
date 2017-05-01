@@ -202,7 +202,7 @@
                           <h5 class="time">{$auction.remaining_time}</h5>
                         </td>
                         <td class="watch col-md-2">
-                          <button class="btn btn-info">Watch Auction</button>
+                          <button class="btn btn-info"><a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a></button>
                         </td>
                       </tr>
                     {/foreach}

@@ -193,7 +193,7 @@ function getActiveAuctions($userId) {
                                 FROM image
                                 WHERE image.product_id = product.id
                                 LIMIT 1
-                                ) AS image, product.description, auction.curr_bid, auction.end_date - now() AS remaining_time
+                                ) AS image, product.description, auction.curr_bid, auction.id, auction.end_date - now() AS remaining_time
                                 FROM auction
                                 JOIN product ON auction.product_id = product.id
                                 JOIN "user" ON auction.user_id = "user".id
