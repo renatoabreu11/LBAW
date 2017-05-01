@@ -87,29 +87,21 @@ $(document).ready(function() {
         'user-id': userId,
         'token': token,
       },
-    });
-
-    request.done(function(response, textStatus, jqXHR) {
-      console.info(response);
-      if(response.includes('Success 201')) {
-        currBid.text("Current Bid: " + amount + "€");
-
-        if(bidderTableBody.children() == 5)
-          bidderTableBody.children().last().remove();
-        bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">Just now</td></tr>');
-      } else {
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + response + '</div>',
-            type: 'inline',
-          },
-        });
-      }
-    });
-
-    request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: '
-        + textStatus + ': ' + errorThrown);
+      success: function(data) {
+        if(data['error']) {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + data['error'] + '</div>',
+              type: 'inline',
+            },
+          });
+        } else {
+          currBid.text("Current Bid: " + amount + "€");
+          if(bidderTableBody.children().length == 5)
+            bidderTableBody.children().last().remove();
+          bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
+        }
+      },
     });
   }
 
