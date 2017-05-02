@@ -5,7 +5,7 @@
     <div class="col-md-12 index">
       <ul class="breadcrumb">
         <li>
-          <a href="#">Home</a> <span class="divider"></span>
+          <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
         </li>
         <li>
           <a href="#">Auctions</a> <span class="divider"></span>
@@ -16,7 +16,6 @@
       </ul>
     </div>
     <h3>Watchlist</h3>
-    <p>You’ll see here the auctions in your watchlist as well as your own auctions</p>
   </div>
 
   <div class="col-sm-12" style="padding-top: 1.5em;">

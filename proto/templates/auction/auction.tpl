@@ -7,8 +7,11 @@
         <li>
           <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
         </li>
+        <li>
+          <a href="#">Auctions</a> <span class="divider"></span>
+        </li>
         <li class="active">
-          Auction
+          Product
         </li>
       </ul>
     </div>
@@ -64,7 +67,27 @@
             <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
             <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
           </div>
-          <h4 class="text-center"><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Add to watch list</a></h4>
+          {if ($USERNAME)}
+            <div class="watchlist-button">
+            {if ($isOnWatchlist)}
+              <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default btn-remove-auction-watchlist"> Remove from watch list</button></h4>
+            {else}
+              <h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>
+            {/if}
+            </div>
+            <div id="watchlist-notification-modal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <p>Do you want to receive notifications regarding this auction?</p>
+                      <button class="btn btn-primary btn-add-watchlist">No</button>
+                      <button class="btn btn-primary btn-add-watchlist pull-right">Yes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {/if}
         </div>
 
         <div class="col-md-8 col-xs-12 info">
@@ -106,8 +129,7 @@
             <h4>Ending date: {$auction.end_data_readable}</h4>
 
             <div class="visitors">
-              <span class="pull-left"><i class="fa fa-lg fa-eye" aria-hidden="true"></i> 49 visitors</span>
-              <span class="pull-right"><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
+              <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
             </div>
           </div>
           <div class="col-md-6 bidders">
@@ -163,7 +185,7 @@
               </div>
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Bidders:</strong><p class="col-md-4"> {$numBidders}</p>
-                <strong class="col-md-2 col-xs-5">Watchers:</strong><p class="col-md-4"> </p>
+                <strong class="col-md-2 col-xs-5">Category:</strong><p class="col-md-4"> </p>
               </div>
             </div>
             <div id="seller" class="tab-pane fade">

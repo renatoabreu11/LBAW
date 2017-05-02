@@ -327,21 +327,51 @@ function getMostRecentAuction() {
   return $stmt->fetch();
 }
 
+function isOnWatchlist($userId, $auctionId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT count(*)
+                          FROM watchlist
+                          WHERE user_id = :user_id
+                            AND auction_id = :auction_id');
+  $stmt->bindParam('user_id', $userId);
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  return $stmt->fetch()['count'];
+}
+
 /* ========================== INSERTS  ========================== */
 
 /**
- * Adds an auction the user's watchlist
- * @param $auctionId
+ * Adds a new auction to the watchlist.
  * @param $userId
- * @param $notifications
+ * @param $auctionId
+ * @param notifications
  */
-function addAuctionToWatchlist($auctionId, $userId, $notifications){
+function addAuctionToWatchlist($userId, $auctionId, $notifications) {
   global $conn;
-  $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
-                            VALUES(?, ?, now(), ?)');
-  $stmt->execute(array($auctionId, $userId, $notifications));
+  $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, notifications, date)
+                          VALUES(:auction_id, :user_id, :notifications, now())');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->bindParam('user_id', $userId);
+  $stmt->bindParam('notifications', $notifications);
+  $stmt->execute();
 }
 
 /* ========================== UPDATES  ========================== */
 
 /* ========================== DELETES  ========================== */
+
+/**
+ * Removes an auction from the watchlist.
+ * @param $userId
+ * @param $auctionId
+ */
+function removeAuctionFromWatchlist($userId, $auctionId) {
+  global $conn;
+  $stmt = $conn->prepare('DELETE FROM watchlist
+                          WHERE user_id = :user_id
+                            AND auction_id = :auction_id');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+}

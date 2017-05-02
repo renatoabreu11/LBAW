@@ -637,7 +637,6 @@ function addProductPicture($productId, $filename, $caption){
   $stmt->execute(array($productId, $filename, $caption));
 }
 
-
 /* ========================== UPDATES  ========================== */
 
 /**

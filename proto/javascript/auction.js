@@ -24,9 +24,8 @@ $(document).ready(function() {
         $(this).html(event.strftime(format));
       })
       .on('finish.countdown', function(event) {
-        $(this).html('This offer has expired!')
-          .parent().addClass('disabled');
-      });
+          $(this).html('This offer has expired!').parent().addClass('disabled');
+        });
   });
 
   $('.number-spinner').on('click', 'button', function() {
@@ -109,6 +108,76 @@ $(document).ready(function() {
       },
     });
   }
+
+  // Add auctions to watchlist.
+  $('.btn-add-watchlist').click(function() {
+    let notificationsVal = $(this).text();
+    let glyphiconSpan = $('.auction-watchlist-glyphicon');
+    let notificationsModal = $(this).closest('#watchlist-notification-modal');
+    let watchlistBtnDiv = $('.watchlist-button');
+
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auctions/add_auction_watchlist.php',
+      data: {
+        'auctionId': auctionId,
+        'notifications': notificationsVal,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      notificationsModal.modal('hide');
+
+      if(response.indexOf('Success') >= 0)
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default btn-remove-auction-watchlist"> Remove from watch list</button></h4>');
+
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  });
+
+  // Remove auction from watchlist.
+  $('.watchlist-button').on('click', '.btn-remove-auction-watchlist', function() {
+    let watchlistBtnDiv = $('.watchlist-button');
+
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auctions/delete_auction_watchlist.php',
+      data: {
+        'auctionId': auctionId,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.indexOf('Success') >= 0)
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
+
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  });
 
   let qaSection = $('#qaSection');
   $('#newQuestionForm').validate({
@@ -529,3 +598,34 @@ $(document).ready(function() {
     $(this).parent().next().toggle();
   });
 });
+
+function removeAuctionFromWatchlistHandler() {
+    let watchlistBtnDiv = $('.watchlist-button');
+
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auctions/delete_auction_watchlist.php',
+      data: {
+        'auctionId': auctionId,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.indexOf('Success') >= 0)
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
+
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+};
