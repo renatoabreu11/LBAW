@@ -30,7 +30,7 @@ if (empty($page) || is_numeric($page) == FALSE) {
 $items = 2;
 $offset = ($page * $items) - $items;
 
-$page_auctions = getPageWatchlistAuctions($id, $items, $offset);
+$z = getPageWatchlistAuctions($id, $items, $offset);
 $notifications = getActiveNotifications($id);
 $nr_pages = round(countWatchlistAuctions($id) / $items);
 
