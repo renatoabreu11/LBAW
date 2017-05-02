@@ -40,16 +40,22 @@
 
         <div class="form-group">
           <label for="start_date" class="control-label col-md-4"> Starting Date<span>*</span> </label>
-          <div class="col-md-8 col-xs-12 input-group">
-            <input type="datetime-local" class="form-control" value={$auction.start_date} name="start_date" id="start_date"/>
+          <div class='col-md-8 col-xs-12 input-group date' id='startDatePicker'>
+            <input type='text' class="form-control" name="start_date" id="start_date" value="{$auction.start_date}"/>
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
           </div>
           <strong class="field_error">{$FIELD_ERRORS.start_date}</strong>
         </div>
 
         <div class="form-group">
           <label for="end_date" class="control-label col-md-4"> Ending Date<span>*</span> </label>
-          <div class="input-group col-md-8 col-xs-12">
-            <input type="datetime-local" class="form-control" value={$auction.start_date} name="end_date" id="end_date"/>
+          <div class='col-md-8 col-xs-12 input-group date' id='endDatePicker'>
+            <input type='text' class="form-control" name="end_date" id="end_date" value="{$auction.end_date}"/>
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
           </div>
           <strong class="field_error">{$FIELD_ERRORS.end_date}</strong>
         </div>

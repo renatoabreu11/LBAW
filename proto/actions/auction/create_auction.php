@@ -161,7 +161,7 @@ if (!empty($_POST['token'])) {
         } else if (strpos($e->getMessage(), 'auction_date_ck') !== false) {
           $_SESSION['field_errors']['end_date'] = "The auction's starting date has to be smaller than the ending date.";
         } else {
-          $_SESSION['error_messages'][] = "Error creating the auction.";
+          $_SESSION['error_messages'][] = "Error creating the auction " . $e->getMessage();
         }
 
         $_SESSION['form_values'] = $_POST;

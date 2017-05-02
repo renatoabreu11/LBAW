@@ -1,4 +1,14 @@
 $(document).ready(function() {
+  $(function() {
+    $('#startDatePicker').datetimepicker({
+      minDate: moment(),
+    });
+
+    $('#endDatePicker').datetimepicker({
+      minDate: moment(),
+    });
+  });
+
   $.validator.addMethod('productCategoriesSelected',
     function(value, element, arg) {
       return (value.length > 0 && value.length < 3);

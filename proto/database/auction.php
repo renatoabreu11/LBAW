@@ -141,7 +141,7 @@ function getCategoryId($category){
  */
 function getLastProductID(){
     global $conn;
-    $stmt = $conn->prepare('SELECT MAX(id) FROM product');
+    $stmt = $conn->prepare('SELECT max(id) from product');
     $stmt->execute();
     return $stmt->fetch()['max'];
 }
@@ -152,7 +152,7 @@ function getLastProductID(){
  */
 function getLastAuctionID(){
     global $conn;
-    $stmt = $conn->prepare('SELECT MAX(id) FROM auction');
+    $stmt = $conn->prepare('SELECT max(id) from auction;');
     $stmt->execute();
     return $stmt->fetch()['max'];
 }
@@ -453,8 +453,9 @@ function createAuction($productName, $description, $condition, $category1, $cate
                             VALUES(?, ?, ?)');
   $stmt->execute(array($productName, $description, $condition));
 
-  $stmt = $conn->prepare('SELECT currval(\'product_id_seq\')');
-  $productId = $stmt->execute();
+  $stmt = $conn->prepare('SELECT max(id) from product;');
+  $stmt->execute();
+  $productId = $stmt->fetch()['max'];
 
   if($category1 != NULL){
     $stmt = $conn->prepare('INSERT INTO product_category(product_id, category_id)
@@ -472,8 +473,9 @@ function createAuction($productName, $description, $condition, $category1, $cate
                             VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?)');
   $stmt->execute(array($productId, $userId, $startBid, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection));
 
-  $stmt = $conn->prepare('SELECT currval(\'product_id_seq\')');
-  $auctionId = $stmt->execute();
+  $stmt = $conn->prepare('SELECT max(id) from auction;');
+  $stmt->execute();
+  $auctionId = $stmt->fetch()['max'];
 
   $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
                             VALUES(?, ?, now(), ?)');

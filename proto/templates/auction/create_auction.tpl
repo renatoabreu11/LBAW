@@ -53,7 +53,8 @@
   </form>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+<script src="{$BASE_URL}lib/datetimepicker/moment.js"></script>
+<script src="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
 <script src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
 <script src="{$BASE_URL}javascript/create_auction.js"></script>
