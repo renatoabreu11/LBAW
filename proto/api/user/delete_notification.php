@@ -34,4 +34,4 @@ try {
   return;
 }
 
-echo "Success 200 OK: Notification successfully removed!";
+echo "Success: Notification successfully removed!";

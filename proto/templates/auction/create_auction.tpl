@@ -53,7 +53,6 @@
 <script src="{$BASE_URL}lib/datetimepicker/moment.js"></script>
 <script src="{$BASE_URL}lib/datetimepicker/pt.js"></script>
 <script src="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
-<script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
 <script src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
 <script src="{$BASE_URL}javascript/create_auction.js"></script>
 

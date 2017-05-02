@@ -32,6 +32,20 @@ function getWatchlistInfo($userId, $auctionId){
 }
 
 /**
+ * Returns the auction of a certain product
+ * @param $productId
+ * @return mixed
+ */
+function getAuctionIdFromProduct($productId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT auction.id 
+    						FROM auction
+    						WHERE auction.product_id = ?');
+  $stmt->execute(array($productId));
+  return $stmt->fetch()['id'];
+}
+
+/**
  * Returns the product related to the given auction id
  * @param $auctionId
  * @return mixed
@@ -144,6 +158,17 @@ function getLastProductID(){
     $stmt = $conn->prepare('SELECT max(id) from product');
     $stmt->execute();
     return $stmt->fetch()['max'];
+}
+
+/**
+ * Returns the next image id
+ * @return mixed
+ */
+function getNextImageId(){
+  global $conn;
+  $stmt = $conn->prepare('SELECT nextval(\'image_id_seq\')');
+  $stmt->execute();
+  return $stmt->fetch()['nextval'];
 }
 
 /**
@@ -585,6 +610,20 @@ function createProductCategory($productId, $categoryId){
   $stmt->execute(array($productId, $categoryId));
 }
 
+/**
+ * Adds a picture associated to a product
+ * @param $productId
+ * @param $filename
+ * @param $caption
+ */
+function addProductPicture($productId, $filename, $caption){
+  global $conn;
+  $stmt = $conn->prepare('INSERT INTO image(product_id, filename, description)
+                            VALUES(?, ?, ?)');
+  $stmt->execute(array($productId, $filename, $caption));
+}
+
+
 /* ========================== UPDATES  ========================== */
 
 /**
@@ -716,5 +755,17 @@ function deleteProductCategories($productId){
   $stmt = $conn->prepare('DELETE FROM product_category
                             WHERE product_id = :id');
   $stmt->bindParam('id', $productId);
+  $stmt->execute();
+}
+
+/**
+ * Deletes the product image
+ * @param $imageId
+ */
+function deleteProductPicture($imageId){
+  global $conn;
+  $stmt = $conn->prepare('DELETE FROM image
+                            WHERE id = :id');
+  $stmt->bindParam('id', $imageId);
   $stmt->execute();
 }

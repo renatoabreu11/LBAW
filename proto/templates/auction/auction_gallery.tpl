@@ -1,8 +1,7 @@
 {include file='common/header.tpl'}
 
 <div class="container newAuctionH">
-
-  <div class="row heading">
+  <div class="row">
     <div class="col-md-12 index">
       <ul class="breadcrumb">
         <li>
@@ -23,8 +22,8 @@
 
     <hr class="divider">
 
-    <input type="hidden" name="token" id="token" value="{$token}">
-    <input type="hidden" name="product_id" id="product_id" value="{$product.product_id}">
+    <input type="hidden" name="product_id" id="product_id" value="{$product.id}">
+
     <div class="image_upload">
       <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
     </div>
@@ -33,6 +32,6 @@
 
 
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
-<script src="{$BASE_URL}javascript/create_auction.js"></script>
+<script src="{$BASE_URL}javascript/auction_gallery.js"></script>
 
 {include file='common/footer.tpl'}

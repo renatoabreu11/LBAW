@@ -23,16 +23,18 @@ if(!isset($_GET['id'])){
   return;
 }
 
-$auction_id = $_GET['id'];
+$auctionId = $_GET['id'];
 
-if(!isOwner($id, $auction_id)){
+if(!isOwner($id, $auctionId)){
   header("Location: $BASE_URL");
   return;
 }
 
-$product = getAuctionProduct($auction_id);
+$product = getAuctionProduct($auctionId);
+$auction = getAuction($auctionId);
 $notifications = getActiveNotifications($id);
 
 $smarty->assign('notifications', $notifications);
 $smarty->assign("product", $product);
+$smarty->assign("auction", $auction);
 $smarty->display('auction/auction_gallery.tpl');

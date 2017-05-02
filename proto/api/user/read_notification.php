@@ -35,4 +35,4 @@ foreach ($notifications as $notification){
   }
 }
 
-echo "Success 200 OK: All notifications are marked as read!";
+echo "Success: All notifications are marked as read!";
