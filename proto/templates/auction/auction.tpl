@@ -67,7 +67,7 @@
             <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
             <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
           </div>
-          {if ($USERNAME)}
+ {*         {if ($USERNAME)}
             <div class="watchlist-button">
             {if ($isOnWatchlist)}
               <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default btn-remove-auction-watchlist"> Remove from watch list</button></h4>
@@ -87,7 +87,7 @@
                 </div>
               </div>
             </div>
-          {/if}
+          {/if}*}
         </div>
 
         <div class="col-md-8 col-xs-12 info">

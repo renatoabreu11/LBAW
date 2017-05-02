@@ -237,13 +237,35 @@ $(document).ready(function() {
     });
   }
 
-  // Send answer.
-  $('.btn-answer-question').click(function() {
-    let comment = $(this).prev().children().eq(0).val();
-    let questionArticle = $(this).closest('article');
-    let questionId = questionArticle.children().eq(0).val();
-    let replyBtn = $(this).parent().prev().children('.reply-question'); ;
-    let form = $(this).parent();
+  $('.newAnswerForm').validate({
+    rules:
+      {
+        comment: {
+          required: true,
+          maxlength: 512,
+        },
+      },
+    messages:
+      {
+        comment: {
+          required: 'Please, enter your question.',
+          maxlength: 'The length of this answer exceeds the maximum value of 512 characters.',
+        },
+      },
+    errorPlacement: function(error, element) {
+      error.insertAfter(element);
+    },
+    submitHandler: createAnswer,
+  });
+
+  /**
+   * Function that makes an ajax call to create a new answer
+   */
+  function createAnswer(form) {
+    let comment = $(form).find('textarea[name=comment]').val();
+    let questionArticle = $(form).closest('article');
+    let questionId = questionArticle.find('input[name=question-id]').val();
+    let auctionId = $('input[name=auction-id]').val();
 
     $.ajax({
       type: 'POST',
@@ -251,125 +273,116 @@ $(document).ready(function() {
       dataType: 'json',
       data: {
         'token': token,
-        'user-id': userId,
+        'userId': userId,
         'comment': comment,
-        'question-id': questionId,
+        'questionId': questionId,
+        'auctionId': auctionId,
       },
       success: function(data) {
-        if(data['error']) {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + data['error'] + '</div>',
-              type: 'inline',
-            },
-          });
-        } else {
-          let content = '<article class="row"><div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs"><figure class="thumbnail"><img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '"/></figure></div><div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11"><div class="panel panel-default arrow left"><div class="panel-body"><div class="media-heading"><button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a>' + data['date'] + '</div><div class="panel-collapse collapse in" id="collapseReply"><div class="media-body"><p>' + comment + '</p><div class="comment-meta"><span><a href="#">delete</a></span><span><a href="#">report</a></span><span><a href="#">hide</a></span>                        </div>                    </div>                </div>            </div>        </div>    </div></article>';
-          $(content).hide().appendTo(questionArticle).fadeIn(500);
-          replyBtn.fadeOut(500, function() {
-            replyBtn.remove();
-          });
-          form.remove();
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + data['message'] + '</div>',
+            type: 'inline',
+          },
+        });
+        if (data['message'].includes('Success')) {
+          $('.newAnswerForm').remove();
+          qaSection.empty();
+          qaSection.append(data['questionsDiv']);
         }
       },
+      error: function(data) {
+        console.log(data);
+      },
     });
+  }
+
+  qaSection.on('click', '.edit-question', function() {
+    let parent = $(this).parents('.comment-meta');
+    parent.siblings('.question-edit-display').toggle();
+    parent.siblings('.question-display').toggle();
   });
 
-  // Edit question.
-  $('.edit-question').click(function() {
-    let questionMessageHTML = $(this).parent().prev().children();
-    let comment = questionMessageHTML.eq(0).text();
-    let content =
-      '<textarea name="updated-question" class="form-control answer-area" rows="3">'
-      + comment
-      + '</textarea>' +
-      '<button type="submit" class="btn btn-default btn-edit-question">Send</button>';
-    let questionId = $(this).closest('article').children().eq(0).val();
+  qaSection.on('click', '.btn-edit-question', function() {
+    let editComment = $(this).prev().val();
+    let parent = $(this).parents('.media-body');
+    let questionId = $(this).closest('article').find('input[name=question-id]').val();
 
-    questionMessageHTML.html(content);
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/question_edit.php',
+      data: {
+        'questionId': questionId,
+        'comment': editComment,
+        'userId': userId,
+        'token': token,
+      },
+    });
 
-    $('.btn-edit-question').click(function() {
-      let editComment = $(this).prev().val();
-      let questionMessageEditHTML = $(this).parent();
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        let questionDisplay = parent.children('.question-display');
+        parent.children('.question-edit-display').toggle();
+        questionDisplay.toggle();
+        questionDisplay.find('p').html(editComment);
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
+        });
+      }
+    });
 
-      let request = $.ajax({
-        type: 'POST',
-        url: BASE_URL + 'api/auction/question_edit.php',
-        data: {
-          'question-id': questionId,
-          'comment': editComment,
-          'user-id': userId,
-          'token': token,
-        },
-      });
-
-      request.done(function(response, textStatus, jqXHR) {
-        if(response.indexOf('success') >= 0) {
-          let editContent = '<p>' + editComment + '</p>';
-          questionMessageEditHTML.html(editContent);
-        } else {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + response + '</div>',
-              type: 'inline',
-            },
-          });
-        }
-      });
-
-      request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occurred: '
-          + textStatus + ': ' + errorThrown);
-      });
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occurred: '
+        + textStatus + ': ' + errorThrown);
     });
   });
 
   // Edit answer.
-  $('.edit-answer').click(function() {
-    let answerMessageHTML = $(this).parent().prev().children();
-    let comment = answerMessageHTML.eq(0).text();
-    let content =
-      '<textarea name="updated-answer" class="form-control answer-area" rows="3">'
-      + comment
-      + '</textarea>' +
-      '<button type="submit" class="btn btn-default btn-edit-answer">Send</button>';
-    let answerId = $(this).closest('article').children().eq(0).val();
+  qaSection.on('click', '.edit-answer', function() {
+    let parent = $(this).parents('.comment-meta');
+    parent.siblings('.answer-edit-display').toggle();
+    parent.siblings('.answer-display').toggle();
+  });
 
-    answerMessageHTML.html(content);
+  qaSection.on('click', '.btn-edit-answer', function() {
+    let editComment = $(this).prev().val();
+    let parent = $(this).parents('.media-body');
+    let answerId = $(this).closest('article').find('input[name=answer-id]').val();
 
-    $('.btn-edit-answer').click(function() {
-      let editComment = $(this).prev().val();
-      let answerMessageEditHTML = $(this).parent();
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/answer_edit.php',
+      data: {
+        'answerId': answerId,
+        'comment': editComment,
+        'userId': userId,
+        'token': token,
+      },
+    });
 
-      let request = $.ajax({
-        type: 'POST',
-        url: BASE_URL + 'api/auction/answer_edit.php',
-        data: {
-          'answer-id': answerId,
-          'comment': editComment,
-          'user-id': userId,
-          'token': token,
-        },
-      });
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        let answerDisplay = parent.children('.answer-display');
+        parent.children('.answer-edit-display').toggle();
+        answerDisplay.toggle();
+        answerDisplay.find('p').html(editComment);
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
+        });
+      }
+    });
 
-      request.done(function(response, textStatus, jqXHR) {
-        if(response.indexOf('success') >= 0) {
-          let editContent = '<p>' + editComment + '</p>';
-          answerMessageEditHTML.html(editContent);
-        } else {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + response + '</div>',
-              type: 'inline',
-            },
-          });
-        }
-      });
-
-      request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occured: '
-          + textStatus + ': ' + errorThrown);
-      });
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: '
+        + textStatus + ': ' + errorThrown);
     });
   });
 
@@ -469,7 +482,6 @@ $(document).ready(function() {
     });
 
     request.done(function(response, textStatus, jqXHR) {
-      console.info(response);
       if(response.includes('Success')) {
         article.fadeOut(500, function() {
           article.remove();
@@ -590,12 +602,9 @@ $(document).ready(function() {
     });
   });
 
-  // Hides the reply box.
-  $('.new-answer').toggle();
-
   // Reply (toggles reply form).
   $('.reply-question').click(function() {
-    $(this).parent().next().toggle();
+    $('.newAnswerForm').fadeToggle();
   });
 });
 

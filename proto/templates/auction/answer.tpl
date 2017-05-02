@@ -19,6 +19,10 @@
             <div class="answer-display">
               <p>{$question.answer_message}</p>
             </div>
+            <div class="answer-edit-display" hidden>
+              <textarea name="updated-answer" class="form-control answer-area" rows="3">{$question.answer_message}</textarea>
+              <button style="margin-top: 1em;" class="btn btn-default btn-edit-answer">Send</button>
+            </div>
             <div class="comment-meta">
               {if $ADMIN_ID}
                 <span><a class="underline-text-hover removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
@@ -26,7 +30,7 @@
               {if ($USER_ID)}
                 {if ($seller.id == $USER_ID)}
                   {if ($question.answer_can_edit)}
-                    <span class="edit-answer underline-text-hover">edit</span>
+                    <span><a class="edit-answer underline-text-hover">edit</a></span>
                   {/if}
                   <span><a class="underline-text-hover removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
                 {/if}

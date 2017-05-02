@@ -161,6 +161,32 @@ function getLastProductID(){
 }
 
 /**
+ * Retrieves a question
+ * @param $id
+ *
+ * @return mixed
+ */
+function getQuestion($id){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * from question WHERE id = ?');
+  $stmt->execute(array($id));
+  return $stmt->fetch();
+}
+
+/**
+ * Retrieves an answer
+ * @param $id
+ *
+ * @return mixed
+ */
+function getAnswer($id){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * from answer WHERE id = ?');
+  $stmt->execute(array($id));
+  return $stmt->fetch();
+}
+
+/**
  * Returns the next image id
  * @return mixed
  */
@@ -360,7 +386,7 @@ function getQuestionsAnswers($auctionId){
 
   for ($i = 0; $i < count($questions); $i++) {
     // Determines if a question can be edited.
-    $elapsedQuestionSeconds = time() - strtotime($questions[$i]['date']) - 3600;        // Minus 3600  because of time zone errors.
+    $elapsedQuestionSeconds = strtotime(date('Y-m-d H:m')) - strtotime($questions[$i]['date']);      // Minus 3600  because of time zone errors.
     $editTimeAllowed = 900;     //900 = 15 minutes * 60 seconds.
     if($elapsedQuestionSeconds <= $editTimeAllowed)
       $questions[$i]['can_edit'] = true;
@@ -379,7 +405,7 @@ function getQuestionsAnswers($auctionId){
     $questions[$i]["answer_id"] = $answer['id'];
 
     // Determines if an answer can be edited.
-    $elapsedAnswerSeconds = time() - strtotime($answer['date']) - 3600;
+    $elapsedAnswerSeconds = strtotime(date('Y-m-d H:m')) - strtotime($questions[$i]["answer_date"]);
     if($elapsedAnswerSeconds <= $editTimeAllowed)
       $questions[$i]['answer_can_edit'] = true;
     else $questions[$i]['answer_can_edit'] = false;

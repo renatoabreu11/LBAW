@@ -21,6 +21,10 @@
                 <div class="question-display">
                   <p>{$question.message}</p>
                 </div>
+                <div class="question-edit-display" hidden>
+                  <textarea name="updated-question" class="form-control question-area" rows="3">{$question.message}</textarea>
+                  <button style="margin-top: 1em;" class="btn btn-default btn-edit-question">Send</button>
+                </div>
                 <div class="comment-meta">
                   {if $ADMIN_ID}
                     <span><a class="underline-text-hover removeQuestionPopup id-{$question.id}" href="#removeQuestion">delete</a></span>
@@ -28,24 +32,25 @@
                   {if ($USER_ID)}
                     {if ($question.user_id == $USER_ID)}
                       {if ($question.can_edit)}
-                        <a class="edit-question underline-text-hover">edit</a>
+                        <span><a class="edit-question underline-text-hover">edit</a></span>
                       {/if}
                       <span><a class="underline-text-hover removeQuestionPopup id-{$question.id}" href="#removeQuestion">delete</a></span>
                     {/if}
                     {if ($question.user_id != $USER_ID)}
-                      <a class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</a>
+                      <span><a class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</a></span>
                     {/if}
                     {if ($seller.id == $USER_ID && !$question.answer_message)}
-                      <a class="reply-question underline-text-hover">reply</a>
+                      <span><a class="reply-question underline-text-hover">reply</a></span>
                     {/if}
                   {/if}
                 </div>
                 {if ($seller.id == $USER_ID && !$question.answer_message)}
-                  <form class="new-answer" action="javascript:void(0);">
+                  <form class="newAnswerForm" action="{$BASE_URL}api/auction/create_answer.php" method="post" hidden>
                     <div class="form-group">
+                      <label></label>
                       <textarea name="comment" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-default btn-answer-question">Send</button>
+                    <button type="submit" class="btn btn-default">Send</button>
                   </form>
                 {/if}
               </div>

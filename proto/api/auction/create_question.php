@@ -48,15 +48,6 @@ try {
   return;
 }
 
-$user = NULL;
-try {
-  $user = getUser($userId);
-} catch(PDOException $e) {
-  $reply['message'] = "Error 500 Internal Server: Couldn't retrieve the user, but the question was created!";
-  echo json_encode($reply);
-  return;
-}
-
 $questions = getQuestionsAnswers($auctionId);
 $smarty->assign("questions", $questions);
 $questionsDiv = $smarty->fetch('auction/question.tpl');

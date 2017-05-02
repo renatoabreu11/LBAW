@@ -19,12 +19,13 @@ if($loggedUserId != $userId) {
   return;
 }
 
-if(!$_POST['comment']) {
+if(!$_POST['comment'] || !$_POST['auctionId']) {
   $reply['message'] = "Error 400 Bad Request: All fields are mandatory!";
   echo json_encode($reply);
   return;
 }
 
+$auctionId = $_POST['auctionId'];
 $comment = strip_tags($_POST['comment']);
 if(strlen($comment) > 512){
   $reply['message'] = "Error 400 Bad Request: The field length exceeds the maximum!";
@@ -32,25 +33,31 @@ if(strlen($comment) > 512){
   return;
 }
 
+$questionId = $_POST['questionId'];
+if(!$questionId || !is_numeric($questionId)){
+  $reply['message'] = "Error 400 Bad Request: Invalid question id!";
+  echo json_encode($reply);
+  return;
+}
+
 try {
   if(!createAnswer($comment, $userId, $questionId)) {
-    $reply = array('error' => 'Error: question already has an answer.');
+    $reply['message'] = "Error 500 Internal Server: Question already has an answer!";
     echo json_encode($reply);
     return;
   }
 } catch(PDOException $e) {
-  $reply = array('error' => 'Error: couldn\'t insert answer.');
+  $reply['message'] = "Error 500 Internal Server: Couldn't create answer!";
   echo json_encode($reply);
   return;
 }
 
-try {
-  $user = getUser($userId);
-} catch(PDOException $e) {
-  $reply = array('error' => 'Error: couldn\'t get user.');
-  echo json_encode($reply);
-  return;
-}
-
-$reply = array('username' => $user['username'], 'profile_pic' => $user['profile_pic'], 'date' => date('Y-m-d H:i:s'));
-echo json_encode($reply);
+$seller = getUser($userId);
+$questions = getQuestionsAnswers($auctionId);
+$smarty->assign("questions", $questions);
+$smarty->assign("seller", $seller);
+$questionsDiv = $smarty->fetch('auction/question.tpl');
+$dataToRetrieve = array(
+  'questionsDiv' => $questionsDiv,
+  'message' => "Success: Question successfully added!");
+echo json_encode($dataToRetrieve);
