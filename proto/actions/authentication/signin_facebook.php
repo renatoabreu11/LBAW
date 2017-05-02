@@ -22,7 +22,7 @@ if(isset($accessToken)) {
 
     // Getting user facebook profile info
     try {
-        $profileRequest = $fb->get('/me?fields=name,first_name,last_name,email,link,picture');
+        $profileRequest = $fb->get('/me?fields=name,first_name,last_name,email,link,picture.width(400).height(400)');
         $fbUserProfile = $profileRequest->getGraphNode()->asArray();
     } catch(FacebookResponseException $e) {
         echo 'Graph returned an error: ' . $e->getMessage();
@@ -64,8 +64,11 @@ if(isset($accessToken)) {
         header("Location: $BASE_URL" . "pages/authentication/signup.php");
     }else{
         // Add link to facebook to user if not already linked
-        $_SESSION['username'] = getUserUsername($_SESSION['facebook_user_data'][email]);
+        $_SESSION['username'] = getUserUsername($_SESSION['facebook_user_data']['email']);
         $_SESSION['user_id'] = getUserID($_SESSION['username']);
+        if(!getUserByEmail($_SESSION['facebook_user_data']['email'])['oauth_id']) {
+            updateUserFacebook($_SESSION['user_id'], $_SESSION['facebook_user_data']['oauth_uid'], $_SESSION['facebook_user_data']['picture']);
+        }
         if (empty($_SESSION['token'])) {
             $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
         }

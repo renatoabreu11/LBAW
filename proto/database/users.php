@@ -728,6 +728,24 @@ function updateUserPicture($userId, $pictureId) {
 }
 
 /**
+ * Update user with facebook information
+ * @param $userId
+ * @param $facebook_oauth_id
+ * @param $facebook_picture
+ */
+function updateUserFacebook($userId, $facebook_oauth_id, $facebook_picture){
+    global $conn;
+    $stmt = $conn->prepare('UPDATE "user"
+                                SET oauth_id = :facebook_oauth_id,
+                                    profile_pic = :facebook_picture
+                                WHERE id = :user_id');
+    $stmt->bindParam('facebook_oauth_id', $facebook_oauth_id);
+    $stmt->bindParam('facebook_picture', $facebook_picture);
+    $stmt->bindParam('user_id', $userId);
+    $stmt->execute();
+}
+
+/**
  * Updates user location.
  * @param $userId
  * @param $cityId

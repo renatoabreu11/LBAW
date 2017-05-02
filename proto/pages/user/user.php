@@ -44,6 +44,11 @@ if($loggedUserId){
 }
 
 $smarty->assign('user', $user);
+if($user['oauth_id']!=null){
+    $smarty->assign('profile_pic', $user['profile_pic']);
+}else {
+    $smarty->assign('profile_pic', $BASE_URL . "images/users" . $user['profile_pic']);
+}
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('isFollowing', $isFollowing);
 $smarty->assign('totalAuctions', $totalAuctions);

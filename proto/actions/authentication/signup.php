@@ -61,6 +61,26 @@ try {
   header("Location: $BASE_URL" . 'pages/authentication/signup.php');
   exit;
 }
+// facebook info
+if(isset($_SESSION['facebook_user_data']))
+    updateUserFacebook(getUserID($username), $_SESSION['facebook_user_data']['oauth_uid'], $_SESSION['facebook_user_data']['picture']);
+
+// Session
+
+// Unser Admin Session
+if($_SESSION['admin_username'] != null)
+    unset($_SESSION['admin_username']);
+if($_SESSION['admin_id'] != null)
+    unset($_SESSION['admin_id']);
+if (!empty($_SESSION['token'])) {
+    unset($_SESSION['token']);
+}
+
+$_SESSION['username'] = $username;
+$_SESSION['user_id'] = getUserID($username);
+if (empty($_SESSION['token'])) {
+    $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+}
 
 $_SESSION['success_messages'][] = 'User successfully registered';
 header("Location: $BASE_URL" . 'pages/auctions/best_auctions.php');
