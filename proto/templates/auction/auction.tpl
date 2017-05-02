@@ -191,24 +191,17 @@
         <div class="col-md-12">
           <h2>Product Q&A</h2>
           {if ($seller.id != $USER_ID) && $USER_ID}
-            <form class="newQuestion" action="javascript:void(0);">
+            <form id="newQuestionForm" action="{$BASE_URL}api/auction/create_question.php" method="post">
               <div class="form-group">
-                <label for="comment">Your question</label>
-                <textarea name="comment" class="form-control question-area" rows="3"></textarea>
+                <label for="commentQuestion">Your question</label>
+                <textarea id="commentQuestion" name="comment" class="form-control question-area" rows="3"></textarea>
               </div>
-              <button type="submit" class="btn btn-default btn-send-question">Send</button>
+              <button type="submit" class="btn btn-default">Send</button>
             </form>
           {/if}
 
-          <section class="comment-list">
-            {foreach $questions as $question}
-              <div class="question-answer">
-                {include file='auction/question.tpl'}
-                {if ($question.answer_message)}
-                  {include file='auction/answer.tpl'}
-                {/if}
-              </div>
-            {/foreach}
+          <section id="qaSection" class="comment-list">
+            {include file='auction/question.tpl'}
           </section>
 
           <div>

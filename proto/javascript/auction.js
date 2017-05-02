@@ -69,16 +69,13 @@ $(document).ready(function() {
   /**
    * Handles the bid ajax call and updates the current bid value accordingly to the response;
    * @param {number} amount
-   * @param {number} auctionId
-   * @param {number} userId
-   * @param {string} token
    */
   function bidOnAuction(amount) {
     let currBid = $('.current-bid');
     let bidderTableBody = $('.bidders-table-body');
     let username = $('input[name=user-username]').val();
 
-    let request = $.ajax({
+    $.ajax({
       type: 'POST',
       dataType: 'json',
       url: BASE_URL + 'api/auction/bid.php',
@@ -97,8 +94,8 @@ $(document).ready(function() {
             },
           });
         } else {
-          currBid.text("Current Bid: " + amount + "€");
-          if(bidderTableBody.children().length == 5)
+          currBid.text('Current Bid: ' + amount + '€');
+          if(bidderTableBody.children().length === 5)
             bidderTableBody.children().last().remove();
           bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
 
@@ -113,8 +110,32 @@ $(document).ready(function() {
     });
   }
 
-  // Send question.
-  $('.btn-send-question').click(function() {
+  let qaSection = $('#qaSection');
+  $('#newQuestionForm').validate({
+    rules:
+      {
+        comment: {
+          required: true,
+          maxlength: 512,
+        },
+      },
+    messages:
+      {
+        comment: {
+          required: 'Please, enter your question.',
+          maxlength: 'The length of this question exceeds the maximum value of 512 characters.',
+        },
+      },
+    errorPlacement: function(error, element) {
+      error.insertAfter(element);
+    },
+    submitHandler: createQuestion,
+  });
+
+  /**
+   * Function that makes an ajax call to create a new question
+   */
+  function createQuestion() {
     let comment = $('.question-area').val();
     let auctionId = $('input[name=auction-id]').val();
 
@@ -124,24 +145,28 @@ $(document).ready(function() {
       url: BASE_URL + 'api/auction/create_question.php',
       data: {
         'comment': comment,
-        'auction-id': auctionId,
+        'auctionId': auctionId,
         'token': token,
-        'user-id': userId,
+        'userId': userId,
       },
       success: function(data) {
-        if(data['error']) {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + data['error'] + '</div>',
-              type: 'inline',
-            },
-          });
-        } else
-          var content = '<article class="row"> <div class="col-md-1 col-sm-1 hidden-xs"> <figure class="thumbnail"> <img class="img-responsive" src="' + BASE_URL + 'images/users/' + data['profile_pic'] + '" /> </figure> </div> <div class="col-md-10 col-sm-10 col-xs-12"> <div class="panel panel-default arrow left"> <div class="panel-body"> <div class="media-heading"> <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> </button> <a href="' + BASE_URL + ' pages/user/user.php?id=' + userId + '"><strong>' + data['username'] + '</strong></a> ' + data['date'] + ' </div> <div class="panel-collapse collapse in" id="collapseComment"> <div class="media-body"> <p>' + data['comment'] + '</p> <div class="comment-meta"> <span><a href="#">delete</a></span> <span><a href="#">report</a></span> <span><a href="#">hide</a></span> <span><a href="#">reply</a></span> </div> </div> </div> </div> </div> </div> </article>';
-        $(content).hide().appendTo('.comment-list').fadeIn(500);
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + data['message'] + '</div>',
+            type: 'inline',
+          },
+        });
+        if (data['message'].includes('Success')) {
+          $('#newQuestionForm').trigger('reset');
+          qaSection.empty();
+          qaSection.append(data['questionsDiv']);
+        }
+      },
+      error: function(data) {
+        console.log(data);
       },
     });
-  });
+  }
 
   // Send answer.
   $('.btn-answer-question').click(function() {
@@ -279,7 +304,7 @@ $(document).ready(function() {
     });
   });
 
-  $('.removeQuestionPopup').on('click', function() {
+  qaSection.on('click', '.removeQuestionPopup', function() {
     let questionArticle = $(this).closest('article');
     let questionClass = $(this).attr('class').split('id-');
     let questionAnswerDiv = questionArticle.parent();
@@ -338,7 +363,7 @@ $(document).ready(function() {
     });
   }
 
-  $('.removeAnswerPopup').on('click', function() {
+  qaSection.on('click', '.removeAnswerPopup', function() {
     let answerArticle = $(this).closest('article');
     let answerClass = $(this).attr('class').split('id-');
     if(answerClass.length !== 2)

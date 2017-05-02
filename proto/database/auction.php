@@ -449,6 +449,20 @@ function answerQuestion($answerMessage, $questionId, $userId, $auctionId) {
   }
 }
 
+/**
+ * Returns the number of questions asked by an user in a given auction
+ * @param $auctionId
+ * @param $userId
+ */
+function getNumberQuestions($auctionId, $userId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT count(*)
+                            FROM question
+                            WHERE auction_id = ? AND user_id = ?');
+  $stmt->execute(array($auctionId, $userId));
+  return $stmt->fetch()['count'];
+}
+
 /* ========================== INSERTS  ========================== */
 
 /**

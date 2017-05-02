@@ -21,14 +21,14 @@
             </div>
             <div class="comment-meta">
               {if $ADMIN_ID}
-                <span><a class="removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
+                <span><a class="underline-text-hover removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
               {/if}
               {if ($USER_ID)}
                 {if ($seller.id == $USER_ID)}
                   {if ($question.answer_can_edit)}
                     <span class="edit-answer underline-text-hover">edit</span>
                   {/if}
-                  <span><a class="removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
+                  <span><a class="underline-text-hover removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
                 {/if}
                 {if ($seller.id != $USER_ID)}
                   <span class="report-answer underline-text-hover" data-toggle="modal" data-target="#report-modal-answer-{$question.answer_id}">report</span>
@@ -36,29 +36,6 @@
               {/if}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="report-modal-answer-{$question.answer_id}" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">
-            Answer report
-          </h4>
-        </div>
-        <div class="modal-body">
-          <form class="form horizontal" role="form" action="javascript:void(0);">
-            <div class="form-group">
-              <label>Message</label>
-              <textarea rows="5" class="report-answer-{$question.answer_id}-comment" placeholder="Your message..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-default btn-send-answer-{$question.answer_id}-report">Send</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
