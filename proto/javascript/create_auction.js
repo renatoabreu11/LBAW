@@ -2,10 +2,12 @@ $(document).ready(function() {
   $(function() {
     $('#startDatePicker').datetimepicker({
       minDate: moment(),
+      locale: 'pt',
     });
 
     $('#endDatePicker').datetimepicker({
       minDate: moment(),
+      locale: 'pt',
     });
   });
 

@@ -9,7 +9,7 @@
           <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
         </li>
         <li>
-          <a href="{$BASE_URL}pages/auctions/best_auctions.php">Auctions</a> <span class="divider"></span>
+          <a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}">Auction</a> <span class="divider"></span>
         </li>
         <li class="active">
           Auction Gallery
@@ -20,6 +20,8 @@
       Auction images
     </h3>
     <p>Choose here the images to show to potential bidders.</p>
+
+    <hr class="divider">
 
     <input type="hidden" name="token" id="token" value="{$token}">
     <input type="hidden" name="product_id" id="product_id" value="{$product.product_id}">

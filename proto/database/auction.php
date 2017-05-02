@@ -617,6 +617,58 @@ function editAnswer($answerId, $updatedMessage) {
   $stmt->execute();
 }
 
+/**
+ * Updates the question section option
+ * @param $auctionId
+ * @param $qaSection
+ */
+function updateAuctionQA($auctionId, $qaSection){
+  global $conn;
+  $stmt = $conn->prepare('UPDATE auction
+                            SET questions_section = ?
+                            WHERE id = ?');
+  $stmt->execute(array($qaSection, $auctionId));
+}
+
+/**
+ * Updates the notifications option
+ * @param $auctionId
+ * @param $userId
+ * @param $notificationsEnabled
+ */
+function updateWatchlistNotifications($auctionId, $userId, $notificationsEnabled){
+  global $conn;
+  $stmt = $conn->prepare('UPDATE watchlist
+                            SET notifications = ?
+                            WHERE auction_id = ? AND user_id = ?');
+  $stmt->execute(array($notificationsEnabled, $auctionId, $userId));
+}
+
+/**
+ * Updates an auction
+ * @param $auctionId
+ * @param $basePrice
+ * @param $quantity
+ * @param $startDate
+ * @param $endDate
+ * @param $auctionType
+ */
+function updateAuction($auctionId, $basePrice, $quantity, $startDate, $endDate, $auctionType){
+  global $conn;
+  $stmt = $conn->prepare('UPDATE auction
+                            SET start_bid = ?, curr_bid = ?, quantity = ?, start_date = ?, end_date = ?, type = ? 
+                            WHERE id = ?');
+  $stmt->execute(array($basePrice, $basePrice, $quantity, $startDate, $endDate, $auctionType, $auctionId));
+}
+
+function updateProduct($productId, $productName, $description, $condition){
+  global $conn;
+  $stmt = $conn->prepare('UPDATE product
+                            SET name = ?, description = ?, condition = ? 
+                            WHERE id = ?');
+  $stmt->execute(array($productName, $description, $condition, $productId));
+}
+
 /* ========================== DELETES  ========================== */
 
 /**
@@ -652,5 +704,17 @@ function deleteAnswer($answerId) {
   $stmt = $conn->prepare('DELETE FROM answer
                             WHERE id = :id');
   $stmt->bindParam('id', $answerId);
+  $stmt->execute();
+}
+
+/**
+ * Delete the product categories
+ * @param $productId
+ */
+function deleteProductCategories($productId){
+  global $conn;
+  $stmt = $conn->prepare('DELETE FROM product_category
+                            WHERE product_id = :id');
+  $stmt->bindParam('id', $productId);
   $stmt->execute();
 }

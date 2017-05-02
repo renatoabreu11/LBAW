@@ -70,7 +70,7 @@ if (!empty($_POST['token'])) {
     }
 
     $quantity = $_POST['quantity'];
-    if(!is_numeric($quantity)){
+    if(!is_numeric($quantity) || $quantity > 25){
       $_SESSION['field_errors']['quantity'] = 'Invalid quantity.';
       $invalidInfo = true;
     }
@@ -99,8 +99,10 @@ if (!empty($_POST['token'])) {
       $invalidInfo = true;
     }
 
-    $startDate = date("Y-m-d H:i:s", strtotime($_POST['start_date']));
-    $endDate = date("Y-m-d H:i:s", strtotime($_POST['end_date']));
+    $postStartDate = strtr($_POST['start_date'], '/', '-');
+    $postEndDate = strtr($_POST['end_date'], '/', '-');
+    $startDate = date("Y-m-d H:i:s", strtotime($postStartDate));
+    $endDate = date("Y-m-d H:i:s", strtotime($postEndDate));
 
     if($startDate > $endDate){
       $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be smaller than the ending date.";
@@ -161,7 +163,7 @@ if (!empty($_POST['token'])) {
         } else if (strpos($e->getMessage(), 'auction_date_ck') !== false) {
           $_SESSION['field_errors']['end_date'] = "The auction's starting date has to be smaller than the ending date.";
         } else {
-          $_SESSION['error_messages'][] = "Error creating the auction " . $e->getMessage();
+          $_SESSION['error_messages'][] = "Error creating the auction.";
         }
 
         $_SESSION['form_values'] = $_POST;

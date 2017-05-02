@@ -9,7 +9,7 @@
           <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
         </li>
         <li>
-          <a href="{$BASE_URL}pages/auctions/best_auctions.php">Auctions</a> <span class="divider"></span>
+          <a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}">Auction</a> <span class="divider"></span>
         </li>
         <li class="active">
           Edit Auction
@@ -52,6 +52,9 @@
   {include file='auction/edit_settings.tpl'}
 </div>
 
+<script src="{$BASE_URL}lib/datetimepicker/moment.js"></script>
+<script src="{$BASE_URL}lib/datetimepicker/pt.js"></script>
+<script src="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
 <script src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
 <script src="{$BASE_URL}javascript/edit_auction.js"></script>

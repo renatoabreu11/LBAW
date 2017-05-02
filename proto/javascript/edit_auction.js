@@ -1,4 +1,16 @@
 $(document).ready(function() {
+  $(function() {
+    $('#startDatePicker').datetimepicker({
+      minDate: moment(),
+      locale: 'pt',
+    });
+
+    $('#endDatePicker').datetimepicker({
+      minDate: moment(),
+      locale: 'pt',
+    });
+  });
+
   let navListItems = $('ul.setup-panel li a');
   let allWells = $('.setup-content');
   allWells.hide();
