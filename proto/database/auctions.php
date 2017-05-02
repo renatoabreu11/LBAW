@@ -84,7 +84,6 @@ function searchAuctions($textSearch) {
                                   plainto_tsquery(\'english\', :textSearch) AS query,
                                   to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
                             WHERE auction.product_id = product.id 
-                            AND bids.auction_id = auction.id
                             AND query @@ textsearch 
                             AND now() < auction.end_date
                             AND auction.user_id = "user".id

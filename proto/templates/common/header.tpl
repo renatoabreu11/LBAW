@@ -44,7 +44,6 @@
         <div class="searchHeader">
           <form class="navbar-form navbar-left" action="{$BASE_URL}pages/auctions/auctions.php" method="get" role="search">
             <div class="input-group">
-              <input type="hidden" name="page" value="1">
               <input type="text" class="form-control" placeholder="Search" name="search">
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
