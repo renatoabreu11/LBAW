@@ -60,7 +60,7 @@ $(document).ready(function() {
 
     $('.bidOnAuction').one('click', function() {
       $.magnificPopup.close();
-      let amount = $('#bidOnAuction').find('.bid-amount').val().trim();
+      let amount = roundTo($('#bidOnAuction').find('.bid-amount').val().trim(), 2);
       bidOnAuction(amount);
     });
   });
@@ -80,8 +80,8 @@ $(document).ready(function() {
       url: BASE_URL + 'api/auction/bid.php',
       data: {
         'amount': amount,
-        'auction-id': auctionId,
-        'user-id': userId,
+        'auctionId': auctionId,
+        'userId': userId,
         'token': token,
       },
       success: function(data) {
@@ -94,6 +94,10 @@ $(document).ready(function() {
             },
           });
         } else if(response.includes('Success 201')) {
+          $('input.bid-amount').val(amount + 1);
+          $('input.bid-amount').attr({
+            'min': amount + 1,
+          });
           currBid.text('Current Bid: ' + amount + '€');
           if(bidderTableBody.children().length === 5)
             bidderTableBody.children().last().remove();

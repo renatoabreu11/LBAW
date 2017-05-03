@@ -30,7 +30,7 @@ function setCreditInput() {
 function setAddCredit() {
   $('#addCreditBtn').click(function() {
     let userId = $('#userId').val();
-    let creditToAdd = $('#creditToAdd').val().trim();
+    let creditToAdd = roundTo($('#creditToAdd').val().trim(), 2);
     if (isNaN(creditToAdd))
       return;
 

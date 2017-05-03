@@ -10,27 +10,27 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $loggedUserId = $_SESSION['user_id'];
-$userId = $_POST['user-id'];
+$userId = $_POST['userId'];
 if($loggedUserId != $userId) {
   $reply = array('message' => "Error 403 Forbidden: You don't have permissions to make this request.");
   echo json_encode($reply);
   return;
 }
 
-if(!$_POST['amount'] || !$_POST['auction-id']) {
+if(!$_POST['amount'] || !$_POST['auctionId']) {
   $reply = array('message' => "Error 400 Bad Request: All fields are mandatory!");
   echo json_encode($reply);
   return;
 }
 
-$amount = $_POST['amount'];
+$amount = round($_POST['amount'], 2);
 if(!is_numeric($amount)) {
   $reply = array('message' => "Error 400 Bad Request: Invalid amount!");
   echo json_encode($reply);
   return;
 }
 
-$auctionId = $_POST['auction-id'];
+$auctionId = $_POST['auctionId'];
 if(!is_numeric($auctionId)) {
   $reply = array('message' => "Error 400 Bad Request: Invalid auction id!");
   echo json_encode($reply);
