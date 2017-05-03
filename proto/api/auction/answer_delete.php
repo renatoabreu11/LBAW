@@ -38,6 +38,11 @@ if(!is_numeric($answerId)) {
   return;
 }
 
+if($userId && !isAnswerCreator($answerId, $userId)){
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  return;
+}
+
 try {
   deleteAnswer($answerId);
 } catch(PDOException $e) {

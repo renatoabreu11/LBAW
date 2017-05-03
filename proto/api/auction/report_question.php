@@ -15,9 +15,14 @@ if($loggedUserId != $userId) {
   return;
 }
 
-$questionId = trim(strip_tags($_POST['questionId']));
+$questionId = $_POST['questionId'];
 if(!is_numeric($questionId)) {
   echo "Error 400 Bad Request: Invalid question id!";
+  return;
+}
+
+if(isQuestionCreator($questionId, $userId)){
+  echo "Error 403 Forbidden: You can't report your own question.";
   return;
 }
 

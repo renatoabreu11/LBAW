@@ -21,6 +21,11 @@ if(!is_numeric($questionId)) {
   return;
 }
 
+if(!isQuestionCreator($questionId, $userId)){
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  return;
+}
+
 if(!$_POST['comment']) {
   echo "Error 400 Bad Request: All fields are mandatory!";
   return;
@@ -33,7 +38,7 @@ if(strlen($comment) > 512){
 }
 
 $question = getQuestion($questionId);
-$elapsedQuestionSeconds = strtotime(date('Y-m-d H:m')) - strtotime($question['date']);
+$elapsedQuestionSeconds = strtotime(date('Y-m-d H:i')) - strtotime($question['date']);
 $editTimeAllowed = 900;     //900 = 15 minutes * 60 seconds.
 if($elapsedQuestionSeconds > $editTimeAllowed){
   echo "Error 403 Forbidden: The time to edit the question has expired.";

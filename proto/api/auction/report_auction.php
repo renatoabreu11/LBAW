@@ -15,9 +15,14 @@ if($loggedUserId != $userId) {
   return;
 }
 
-$auctionId = trim(strip_tags($_POST['auctionId']));
+$auctionId = $_POST['auctionId'];
 if(!is_numeric($auctionId)) {
   echo "Error 400 Bad Request: Invalid auction id!";
+  return;
+}
+
+if(isOwner($userId, $auctionId)){
+  echo "Error 403 Forbidden: You can't report your own auction.";
   return;
 }
 

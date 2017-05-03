@@ -4,18 +4,18 @@ include_once($BASE_DIR .'database/auctions.php');
 
 if (!is_numeric($_GET['fromPrice']) || !is_numeric($_GET['toPrice'])
   || !is_numeric($_GET['fromTimeRem']) || !is_numeric($_GET['toTimeRem'])) {
-  echo "Error: some(s) value(s) is not a number when it should be.";
+  echo "Error 400 Bad Request: Invalid values. All of the values must be numbers.";
   return;
 }
 
 if (!isset($_GET['name']) || !$_GET['category']){
-  echo 'All fields are mandatory!';
+  echo '"Error 400 Bad Request: All fields are mandatory!';
   return;
 }
 
 $nameAuction = trim(strip_tags($_GET["name"]));
 if ( !preg_match ("/^[a-zA-Z0-9\s]*$/", $nameAuction)){
-  echo 'Invalid username characters';
+  echo 'Error 400 Bad Request: Invalid auction name characters';
   return;
 }
 

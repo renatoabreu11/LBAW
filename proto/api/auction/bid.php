@@ -37,6 +37,12 @@ if(!is_numeric($auctionId)) {
   return;
 }
 
+if(isOwner($userId, $auctionId)){
+  $reply = array('message' => "Error 403 Forbidden: The auction's seller cannot bid on his own auction!");
+  echo json_encode($reply);
+  return;
+}
+
 try {
   $ret = bid($amount, $userId, $auctionId);
 } catch(PDOException $e) {

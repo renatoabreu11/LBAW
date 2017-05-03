@@ -21,7 +21,6 @@ if (!$_POST['id']){
 }
 
 $auctionId = $_POST['id'];
-
 if(!is_numeric($auctionId)){
   echo 'Error 400 Bad Request: Invalid auction id.';
   return;

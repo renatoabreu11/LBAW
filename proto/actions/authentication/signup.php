@@ -67,7 +67,7 @@ if(isset($_SESSION['facebook_user_data']))
 
 // Session
 
-// Unser Admin Session
+// Unset Admin Session
 if($_SESSION['admin_username'] != null)
     unset($_SESSION['admin_username']);
 if($_SESSION['admin_id'] != null)

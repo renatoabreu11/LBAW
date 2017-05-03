@@ -161,6 +161,36 @@ function getLastProductID(){
 }
 
 /**
+ * Verifies if the data exists in the answer table
+ * @param $answerId
+ * @param $userId
+ * @return bool
+ */
+function isAnswerCreator($answerId, $userId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * from answer
+                            WHERE id = ? AND answer.user_id = ?');
+  $stmt->execute(array($answerId, $userId));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+/**
+ * Verifies if the question data exists in the question table
+ * @param $questionId
+ * @param $userId
+ * @return bool
+ */
+function isQuestionCreator($questionId, $userId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * from question
+                            WHERE id = ? AND question.user_id = ?');
+  $stmt->execute(array($questionId, $userId));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+/**
  * Retrieves a question
  * @param $id
  *
@@ -753,6 +783,13 @@ function updateAuction($auctionId, $basePrice, $quantity, $startDate, $endDate, 
   $stmt->execute(array($basePrice, $basePrice, $quantity, $startDate, $endDate, $auctionType, $auctionId));
 }
 
+/**
+ * Updates a product
+ * @param $productId
+ * @param $productName
+ * @param $description
+ * @param $condition
+ */
 function updateProduct($productId, $productName, $description, $condition){
   global $conn;
   $stmt = $conn->prepare('UPDATE product

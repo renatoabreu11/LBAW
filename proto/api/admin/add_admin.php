@@ -32,6 +32,11 @@ if(strlen($username) > 64){
 }
 
 $password = $_POST['password'];
+if(strlen($password) > 64){
+  echo 'Error 400 Bad Request: Invalid password length.';
+  return;
+}
+
 $email = $_POST['email'];
 
 try {

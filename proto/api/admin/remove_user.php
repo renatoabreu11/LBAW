@@ -21,7 +21,6 @@ if (!$_POST['id']){
 }
 
 $userId = $_POST['id'];
-
 if(!is_numeric($userId)){
   echo 'Error 400 Bad Request: Invalid user id.';
   return;
@@ -31,7 +30,6 @@ try {
   deleteUser($userId);
 } catch (PDOException $e) {
   echo "Error 500 Internal Server: Error deleting user.";
-  echo $e->getMessage();
   return;
 }
 

@@ -14,15 +14,15 @@ if (!hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $loggedUserId = $_SESSION['user_id'];
-$userId = trim(strip_tags($_POST['userId']));
+$userId = $_POST['userId'];
 if($loggedUserId != $userId) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-$auctionId = trim(strip_tags($_POST['auctionId']));
+$auctionId = $_POST['auctionId'];
 if(!is_numeric($auctionId)) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  echo "Error 400 Bad Request: Invalid auction id.";
   return;
 }
 
@@ -32,14 +32,14 @@ if($notifications == "Yes")
 else if($notifications == "No")
   $notifications = false;
 else {
-  echo "Error 403 Forbidden: You don't have permissions to make this request. Notifications value is not the espected.";
+  echo "Error 400 Bad Request: Notifications value is not the expected.";
   return;
 }
 
 try {
   addAuctionToWatchlist($userId, $auctionId, $notifications);
 } catch(PDOException $e) {
-  echo "Error 500 Internal Server: Error adding auction.";
+  echo "Error 500 Internal Server: Error adding auction to watchlist.";
   return;
 }
 

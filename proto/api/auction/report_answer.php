@@ -21,6 +21,11 @@ if(!is_numeric($answerId)) {
   return;
 }
 
+if(isAnswerCreator($answerId, $userId)){
+  echo "Error 403 Forbidden: You can't report your own answer.";
+  return;
+}
+
 $comment = strip_tags($_POST['comment']);
 if(!$comment){
   echo "Error 400 Bad Request: All fields are required!";
