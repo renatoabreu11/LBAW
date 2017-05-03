@@ -17,16 +17,16 @@ if($loggedUserId != $userId) {
   exit;
 }
 
-if(!$_POST['curr-pass'] || !$_POST['new-pass'] || !$_POST['new-pass-repeat']) {
+if(!$_POST['currPass'] || !$_POST['newPass'] || !$_POST['newPassRepeat']) {
   $_SESSION['error_messages'][] = "All fields are required!";
   $_SESSION['form_values'] = $_POST;
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
 }
 
-$currPass = $_POST['curr-pass'];
-$newPass = $_POST['new-pass'];
-$newPassRepeat = $_POST['new-pass-repeat'];
+$currPass = $_POST['currPass'];
+$newPass = $_POST['newPass'];
+$newPassRepeat = $_POST['newPassRepeat'];
 
 // Checks if the password repeat is the same as the password.
 if($newPass != $newPassRepeat) {
@@ -44,7 +44,6 @@ if(strlen($newPass) > 64){
 }
 
 $storedHashPass = getPassword($userId);
-
 // Checks if the stored password is the same.
 if(!password_verify($currPass, $storedHashPass)) {
   $_SESSION['error_messages'][] = "Invalid current password.";
@@ -52,13 +51,6 @@ if(!password_verify($currPass, $storedHashPass)) {
   header("Location:" . $_SERVER['HTTP_REFERER']);
   exit;
 }
-
-/*if(!preg_match("/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#$%+*?@€&])([a-zA-Z\d!#$%+*?@€& ]){8,25}/", $newPass)) {
-    $_SESSION['field_errors']['new_password'] = 'Invalid new password! Minimum 8 and maximum 25 characters, must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.';
-    $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . "pages/user/user_edit.php?id=" . $userId);
-    exit;
-}*/
 
 // Checks if the new introduced password is equal to the current one.
 if(password_verify($newPass, $storedHashPass)) {

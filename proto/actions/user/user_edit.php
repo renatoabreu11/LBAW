@@ -38,6 +38,13 @@ if(!preg_match("/^[a-zA-Z\s]+$/", $realName)) {
   $invalidChars = true;
 }
 
+if($phone) {
+  if(!preg_match("/[0-9]+/", $phone)) {
+    $_SESSION['field_errors']['phone'] = 'Invalid numeric characters';
+    $invalidChars = true;
+  }
+}
+
 $isCityNull = false;
 if($cityId) {
   if($cityId == "null")
