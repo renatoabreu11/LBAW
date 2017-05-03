@@ -37,7 +37,7 @@
                       <span><a class="underline-text-hover removeQuestionPopup id-{$question.id}" href="#removeQuestion">delete</a></span>
                     {/if}
                     {if ($question.user_id != $USER_ID)}
-                      <span><a class="report-question underline-text-hover" data-toggle="modal" data-target="#report-modal-question-{$question.id}">report</a></span>
+                      <span><a class="reportQuestionPopup underline-text-hover" href="#reportQuestionConfirmation">report</a></span>
                     {/if}
                     {if ($seller.id == $USER_ID && !$question.answer_message)}
                       <span><a class="reply-question underline-text-hover">reply</a></span>

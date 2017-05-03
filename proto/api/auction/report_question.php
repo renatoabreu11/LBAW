@@ -44,4 +44,4 @@ try {
   return;
 }
 
-echo "Success: Question report successfully created.";
+echo "Success: The report was delivered with success and the administrators will look into it. Thank you.";

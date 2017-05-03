@@ -247,6 +247,34 @@
               </div>
             </div>
           </div>
+
+          <div>
+            <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
+              <form role="form" action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
+                <div class="form-group">
+                  <label for="reportQuestionMessage">Report:</label>
+                  <textarea class="form-control" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                </div>
+                <div class="text-center">
+                  <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div>
+            <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
+              <form role="form" action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
+                <div class="form-group">
+                  <label for="reportAnswerMessage">Report:</label>
+                  <textarea class="form-control" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
+                </div>
+                <div class="text-center">
+                  <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -231,4 +231,57 @@ $(document).ready(function() {
       );
     });
   }
+
+  $('.reportUserPopup').magnificPopup({
+    type: 'inline',
+    midClick: true,
+  });
+
+  $('#reportUserForm').validate({
+    rules: {
+      reportUserMessage: {
+        required: true,
+        maxlength: 512,
+      },
+    },
+    submitHandler: reportUser,
+  });
+
+  /**
+   * Ajax call that reports an user
+   */
+  function reportUser(form) {
+    $.magnificPopup.close();
+    let comment = $('#reportUserMessage').val();
+    let reportedUserId = $(form).find('input[name=reportedUserId]').val();
+    console.log(comment);
+    console.log(reportedUserId);
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/user/report_user.php',
+      data: {
+        'reportedUserId': reportedUserId,
+        'comment': comment,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        $(form).trigger('reset');
+      }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
 });

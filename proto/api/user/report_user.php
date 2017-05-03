@@ -1,7 +1,7 @@
 <?php
 
 include_once("../../config/init.php");
-include_once($BASE_DIR . "database/user.php");
+include_once($BASE_DIR . "database/users.php");
 
 if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
@@ -15,7 +15,7 @@ if($loggedUserId != $userId) {
   return;
 }
 
-$reportedUserId = $_POST['userId'];
+$reportedUserId = $_POST['reportedUserId'];
 if(!is_numeric($userId)) {
   echo "Error 400 Bad Request: Invalid user id!";
   return;
@@ -38,10 +38,10 @@ if(strlen($comment) > 512){
 }
 
 try {
-  createUserReport($userId, $comment);
+  createUserReport($reportedUserId, $comment);
 } catch(PDOException $e) {
   echo "Error 500 Internal Server: Error creating the user report.";
   return;
 }
 
-echo "Success: User report successfully created.";
+echo "Success: The report was delivered with success and the administrators will look into it. Thank you.";

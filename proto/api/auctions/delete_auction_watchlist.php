@@ -33,4 +33,4 @@ try {
   return;
 }
 
-echo "Success: Auction removed successfully to watchlist.";
+echo "Success: Auction removed successfully from watchlist.";

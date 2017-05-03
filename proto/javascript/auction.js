@@ -500,139 +500,124 @@ $(document).ready(function() {
     });
   }
 
-  // Report question.
-  $('.report-question').click(function() {
-    let reportBtn = $(this);
-    let questionId = $(this).closest('article').children().eq(0).val();
+  let reportQuestionId;
+  $('.product-questions').on('click', '.reportQuestionPopup', function() {
+    $('.reportQuestionPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
 
-    $('.btn-send-question-' + questionId + '-report').click(function() {
-      let comment = $('.report-question-' + questionId + '-comment').val();
-      let closeBtn = $(this).closest('.modal-body').next().children().eq(0);
-
-      let request = $.ajax({
-        type: 'POST',
-        url: BASE_URL + 'api/auction/report_question.php',
-        data: {
-          'question-id': questionId,
-          'comment': comment,
-          'user-id': userId,
-          'token': token,
-        },
-      });
-
-      request.done(function(response, textStatus, jqXHR) {
-        closeBtn.click();
-        reportBtn.remove();
-
-        if(response.indexOf('success') >= 0) {
-            $.magnificPopup.open({
-              items: {
-                src: '<div class="white-popup">'
-                + 'The report was delivered with success and the administrators will look into it. Thank you.'
-                + '</div>',
-                type: 'inline',
-              },
-            });
-        } else {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + response + '</div>',
-              type: 'inline',
-            },
-          });
-        }
-      });
-
-      request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occured: ' +
-          textStatus + ': ' + errorThrown);
-      });
-    });
+    reportQuestionId = $(this).closest('article').find('input[name=question-id]').val();
   });
 
-  // Report answer.
-  $('.report-answer').click(function() {
-    let reportBtn = $(this);
-    let answerId = $(this).closest('article').children().eq(0).val();
+  $('#reportQuestionForm').validate({
+    rules: {
+      reportQuestionMessage: {
+        required: true,
+        maxlength: 512,
+      },
+    },
+    submitHandler: reportQuestion,
+  });
 
-    $('.btn-send-answer-' + answerId + '-report').click(function() {
-      let comment = $('.report-answer-' + answerId + '-comment').val();
-      let closeBtn = $(this).closest('.modal-body').next().children().eq(0);
+  /**
+   * Ajax call that reports a question
+   */
+  function reportQuestion() {
+    if(reportQuestionId === -1)
+      return;
+    $.magnificPopup.close();
+    let comment = $('#reportQuestionMessage').val();
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/report_question.php',
+      data: {
+        'questionId': reportQuestionId,
+        'comment': comment,
+        'userId': userId,
+        'token': token,
+      },
+    });
 
-      let request = $.ajax({
-        type: 'POST',
-        url: BASE_URL + 'api/auction/report_answer.php',
-        data: {
-          'answer-id': answerId,
-          'comment': comment,
-          'user-id': userId,
-          'token': token,
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        $('#reportQuestionForm').trigger('reset');
+        reportQuestionId = -1;
+      }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
         },
       });
+    });
 
-      request.done(function(response, textStatus, jqXHR) {
-        closeBtn.click();
-        reportBtn.remove();
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
 
-        if(response.indexOf('success') >= 0) {
-            $.magnificPopup.open({
-              items: {
-                src: '<div class="white-popup">'
-                + 'The report was delivered with success and the administrators will look into it. Thank you.'
-                + '</div>',
-                type: 'inline',
-              },
-            });
-        } else {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + response + '</div>',
-              type: 'inline',
-            },
-          });
-        }
-      });
+  let reportAnswerId;
+  $('.product-questions').on('click', '.reportAnswerPopup', function() {
+    $('.reportAnswerPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
 
-      request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occured: ' +
-          textStatus + ': ' + errorThrown);
+    reportAnswerId = $(this).closest('article').find('input[name=answer-id]').val();
+  });
+
+  $('#reportAnswerForm').validate({
+    rules: {
+      reportAnswerMessage: {
+        required: true,
+        maxlength: 512,
+      },
+    },
+    submitHandler: reportAnswer,
+  });
+
+  /**
+   * Ajax call that reports an answer
+   */
+  function reportAnswer() {
+    if(reportAnswerId === -1)
+      return;
+    $.magnificPopup.close();
+    let comment = $('#reportAnswerMessage').val();
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/report_answer.php',
+      data: {
+        'answerId': reportAnswerId,
+        'comment': comment,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        $('#reportAnswerForm').trigger('reset');
+        reportAnswerId = -1;
+      }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
       });
     });
-  });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
 
   // Reply (toggles reply form).
   $('.reply-question').click(function() {
     $('.newAnswerForm').fadeToggle();
   });
 });
-
-function removeAuctionFromWatchlistHandler() {
-  let watchlistBtnDiv = $('.watchlist-button');
-
-  let request = $.ajax({
-    type: 'POST',
-    url: BASE_URL + 'api/auctions/delete_auction_watchlist.php',
-    data: {
-      'auctionId': auctionId,
-      'userId': userId,
-      'token': token,
-    },
-  });
-
-  request.done(function(response, textStatus, jqXHR) {
-    if(response.indexOf('Success') >= 0)
-      watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
-
-    $.magnificPopup.open({
-      items: {
-        src: '<div class="white-popup">' + response + '</div>',
-        type: 'inline',
-      },
-    });
-  });
-
-  request.fail(function(jqXHR, textStatus, errorThrown) {
-    console.error('The following error occured: ' +
-      textStatus + ': ' + errorThrown);
-  });
-}

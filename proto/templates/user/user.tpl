@@ -61,6 +61,24 @@
         {if ($USER_ID == $user.id)}
           <a href="{$BASE_URL}pages/user/user_edit.php?id={$user.id}" class="btn btn-info btn-block" role="button">Edit profile</a>
         {/if}
+        {if !$ADMIN_ID && $USER_ID && $USER_ID != $user.id}
+          <span><a class="reportUserPopup btn btn-primary btn-block" href="#reportUserConfirmation">Report</a></span>
+        {/if}
+      </div>
+    </div>
+
+    <div>
+      <div id="reportUserConfirmation" class="white-popup mfp-hide">
+        <form role="form" action="{$BASE_URL}api/admin/report_user.php" method="post" id="reportUserForm">
+          <input type="hidden" name="reportedUserId" value="{$user.id}">
+          <div class="form-group">
+            <label for="reportUserMessage">Report:</label>
+            <textarea class="form-control" rows="5" id="reportUserMessage" name="reportUserMessage"></textarea>
+          </div>
+          <div class="text-center">
+            <input type="submit" id="reportUser" class="btn btn-info" value="Report user">
+          </div>
+        </form>
       </div>
     </div>
 
