@@ -49,6 +49,10 @@
     </div>
   </div>
 
+  <div class="table-responsive" id="auctions">
+    {include file='auctions/list.tpl'}
+  </div>
+
   {if $nrPages > 1}
     <div class="row text-center">
       <ul class="pagination">
@@ -75,6 +79,7 @@
 </div>
 
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
+<script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}javascript/auctions.js"></script>
 
 {include file = 'common/footer.tpl'}
