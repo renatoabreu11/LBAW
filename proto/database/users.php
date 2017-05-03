@@ -645,6 +645,20 @@ function createFeedback($userId, $message){
   $stmt->execute(array($userId, $message));
 }
 
+/**
+ * Creates an user report
+ * @param $userId
+ * @param $message
+ */
+function createUserReport($userId, $message) {
+  global $conn;
+  $stmt = $conn->prepare('INSERT INTO user_report(date, message, user_id)
+                            VALUES(now(), :message, :user_id)');
+  $stmt->bindParam('message', $message);
+  $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+}
+
 /* ========================== Deletes  ========================== */
 
 /**

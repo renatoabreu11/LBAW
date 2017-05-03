@@ -26,8 +26,7 @@ try {
   updateUserCredit($newCredit, $userId);
 } catch(PDOException $e) {
   echo "Error 500 Internal Server: Error updating user credit.";
-  echo $e->getMessage();
   return;
 }
 
-echo "Credit added successfully.";
+echo "Success: Credit added successfully.";

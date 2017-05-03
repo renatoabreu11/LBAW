@@ -12,7 +12,7 @@ function setCreditInput() {
     let	oldValue = $('#creditToAdd').val().trim();
     let	newVal = 0;
 
-    if (btn.attr('data-dir') == 'up')
+    if (btn.attr('data-dir') === 'up')
       newVal = parseInt(oldValue) + 1;
     else {
       if (oldValue > 1)

@@ -3,37 +3,40 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
 
-if(!$_POST['answer-id'] || !$_POST['token'] || !$_POST['user-id'] || !$_POST['comment']) {
-  echo "Error: some fields are not set.";
+if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-if (!hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error: tokens are not the same.";
-  return;
-}
-
+$userId = $_POST['userId'];
 $loggedUserId = $_SESSION['user_id'];
-$userId = trim(strip_tags($_POST['user-id']));
 if($loggedUserId != $userId) {
-  echo "Error: user id is not the same.";
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-$answerId = trim(strip_tags($_POST['answer-id']));
+$answerId = trim(strip_tags($_POST['answerId']));
 if(!is_numeric($answerId)) {
-  echo "Error: answer id is not numeric.";
+  echo "Error 400 Bad Request: Invalid answer id!";
   return;
 }
 
 $comment = strip_tags($_POST['comment']);
+if(!$comment){
+  echo "Error 400 Bad Request: All fields are required!";
+  return;
+}
+
+if(strlen($comment) > 512){
+  echo "Error 400 Bad Request: The field length exceeds the maximum!";
+  return;
+}
 
 try {
   createAnswerReport($answerId, $comment);
 } catch(PDOException $e) {
-  echo $e->getMessage();
-  echo "Error: couldn't create a new answer report.";
+  echo "Error 500 Internal Server: Error creating the answer report.";
   return;
 }
 
-echo "success: answer report successfully created.";
+echo "Success: Answer report successfully created.";

@@ -639,6 +639,20 @@ function createAnswerReport($answerId, $message) {
 }
 
 /**
+ * Creates an auction report
+ * @param $auctionId
+ * @param $message
+ */
+function createAuctionReport($auctionId, $message) {
+  global $conn;
+  $stmt = $conn->prepare('INSERT INTO auction_report(date, message, auction_id)
+                            VALUES(now(), :message, :auction_id)');
+  $stmt->bindParam('message', $message);
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+}
+
+/**
  * Creates a new product-category association
  * @param $productId
  * @param $categoryId

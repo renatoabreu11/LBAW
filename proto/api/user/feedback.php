@@ -21,7 +21,6 @@ if(!$_POST['feedback']) {
 }
 
 $feedback = trim(strip_tags($_POST["feedback"]));
-
 if ( strlen($feedback) > 256){
   echo '"Error 400 Bad Request: Invalid feedback length.';
   return;

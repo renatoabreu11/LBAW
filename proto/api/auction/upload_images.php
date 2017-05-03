@@ -8,14 +8,14 @@ if (!empty($_POST['token'])) {
     $userId = $_POST['userId'];
     $loggedUserId = $_SESSION['user_id'];
     if($loggedUserId != $userId) {
-      $reply = array('message' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
+      $reply = array('error' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
       echo json_encode($reply);
       return;
     }
 
     $productId = $_POST['productId'];
     if(!$productId){
-      $reply = array('message' =>  "Error 400 Bad Request: Invalid product id!");
+      $reply = array('error' =>  "Error 400 Bad Request: Invalid product id!");
       echo json_encode($reply);
       return;
     }
@@ -24,7 +24,7 @@ if (!empty($_POST['token'])) {
     $nrImages = count($images['name']);
     $captions = $_POST['captions'];
     if($nrImages > 10 || $nrImages < 1){
-      $reply = array('message' =>  "Error 400 Bad Request: Invalid number of images!");
+      $reply = array('error' =>  "Error 400 Bad Request: Invalid number of images!");
       echo json_encode($reply);
       return;
     }
@@ -64,12 +64,12 @@ if (!empty($_POST['token'])) {
     return;
 
   } else {
-    $reply = array('message' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
+    $reply = array('error' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
     echo json_encode($reply);
     return;
   }
 }else {
-  $reply = array('message' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
+  $reply = array('error' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
   echo json_encode($reply);
   return;
 }

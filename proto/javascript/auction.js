@@ -552,7 +552,7 @@ $(document).ready(function() {
     });
   });
 
-  // Report anwser.
+  // Report answer.
   $('.report-answer').click(function() {
     let reportBtn = $(this);
     let answerId = $(this).closest('article').children().eq(0).val();
@@ -609,32 +609,32 @@ $(document).ready(function() {
 });
 
 function removeAuctionFromWatchlistHandler() {
-    let watchlistBtnDiv = $('.watchlist-button');
+  let watchlistBtnDiv = $('.watchlist-button');
 
-    let request = $.ajax({
-      type: 'POST',
-      url: BASE_URL + 'api/auctions/delete_auction_watchlist.php',
-      data: {
-        'auctionId': auctionId,
-        'userId': userId,
-        'token': token,
+  let request = $.ajax({
+    type: 'POST',
+    url: BASE_URL + 'api/auctions/delete_auction_watchlist.php',
+    data: {
+      'auctionId': auctionId,
+      'userId': userId,
+      'token': token,
+    },
+  });
+
+  request.done(function(response, textStatus, jqXHR) {
+    if(response.indexOf('Success') >= 0)
+      watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
+
+    $.magnificPopup.open({
+      items: {
+        src: '<div class="white-popup">' + response + '</div>',
+        type: 'inline',
       },
     });
+  });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.indexOf('Success') >= 0)
-        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
-
-      $.magnificPopup.open({
-        items: {
-          src: '<div class="white-popup">' + response + '</div>',
-          type: 'inline',
-        },
-      });
-    });
-
-    request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
-        textStatus + ': ' + errorThrown);
-    });
-};
+  request.fail(function(jqXHR, textStatus, errorThrown) {
+    console.error('The following error occured: ' +
+      textStatus + ': ' + errorThrown);
+  });
+}
