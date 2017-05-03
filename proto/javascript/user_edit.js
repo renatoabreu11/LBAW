@@ -24,7 +24,7 @@ $(document).ready(function() {
     allowedFileExtensions: ['jpg', 'png', 'gif'],
   });
 
-  $("#form-general").validate({
+  $('#form-general').validate({
     rules:
       {
         realName: {
@@ -51,14 +51,14 @@ $(document).ready(function() {
         },
         email: {
             required: 'Please, enter your email.',
-        }
+        },
       },
     errorPlacement: function(error, element) {
       $(element).parent().append(error);
-    }
+    },
   });
 
-  $("#form-password").validate({
+  $('#form-password').validate({
     rules:
       {
         currPass: {
@@ -73,8 +73,8 @@ $(document).ready(function() {
         },
         newPassRepeat: {
           required: true,
-          equalTo: $(this).find("#new-pass-1"),
-        }
+          equalTo: $(this).find('#new-pass-1'),
+        },
       },
     messages:
       {
@@ -90,11 +90,11 @@ $(document).ready(function() {
         },
         newPassRepeat: {
           required: 'Please, enter your new password.',
-          equalTo: 'The password doesn\'t match.'
-        }
+          equalTo: 'The password doesn\'t match.',
+        },
       },
     errorPlacement: function(error, element) {
       $(element).parent().append(error);
-    }
+    },
   });
 });

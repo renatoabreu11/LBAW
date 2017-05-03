@@ -3,24 +3,34 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/users.php");
 
-if(!$_POST['followedUserId']) {
-  echo "error: id isn't set.";
+if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-$followingUserId = $_SESSION['user_id'];
-$followedUserId = trim(strip_tags($_POST['followedUserId']));
+$loggedUserId = $_SESSION['user_id'];
+$userId = $_POST['userId'];
+if($loggedUserId != $userId) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  return;
+}
 
-if(!preg_match("/[0-9]+/", $followedUserId)) {
-  echo "error: invalid id characters.";
+$followedUserId = $_POST['followedUserId'];
+if(!$followedUserId || !is_numeric($followedUserId)) {
+  echo 'Error 400 Bad Request: Invalid followed user id!';
+  return;
+}
+
+if($followedUserId == $userId){
+  echo 'Error 400 Bad Request: You can\'t follow yourself!';
   return;
 }
 
 try {
-  followUser($followingUserId, $followedUserId);
+  followUser($userId, $followedUserId);
 } catch(PDOException $e) {
-  echo "error.";       // Change.
+  echo "Error 500 Internal Server: Error following user.";
   return;
 }
 
-echo "success: user started following.";
+echo "Success: You have started to follow the user.";

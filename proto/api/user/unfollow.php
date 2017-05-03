@@ -3,24 +3,34 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/users.php");
 
-if(!$_POST['followedUserId']) {
-  echo "error: id isn't set.";
+if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-$followingUserId = $_SESSION['user_id'];
-$followedUserId = trim(strip_tags($_POST['followedUserId']));
+$loggedUserId = $_SESSION['user_id'];
+$userId = $_POST['userId'];
+if($loggedUserId != $userId) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  return;
+}
 
-if(!preg_match("/[0-9]+/", $followingUserId) || !preg_match("/[0-9]+/", $followedUserId)) {
-  echo "error: invalid id characters.";
+$unfollowedUserId = $_POST['unfollowedUserId'];
+if(!$unfollowedUserId || !is_numeric($unfollowedUserId)) {
+  echo 'Error 400 Bad Request: Invalid unfollowed user id!';
+  return;
+}
+
+if($unfollowedUserId == $userId){
+  echo 'Error 400 Bad Request: You can\'t unfollow yourself!';
   return;
 }
 
 try {
-  unfollowUser($followingUserId, $followedUserId);
+  unfollowUser($userId, $unfollowedUserId);
 } catch(PDOException $e) {
-  echo $e->getMessage(); //"error: Problem.";
+  echo "Error 500 Internal Server: Error unfollowing user.";
   return;
 }
 
-echo "success: user is no longer following user.";
+echo "Success: Your are no longer following the user.";

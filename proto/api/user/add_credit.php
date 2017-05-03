@@ -8,14 +8,15 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $userId = $_POST['userId'];
-
-if (!is_numeric($_POST['creditToAdd']) || !is_numeric($userId)) {
-  echo 'Error 400 Bad Request: Invalid parameters.';
+$userId = $_POST['userId'];
+$loggedUserId = $_SESSION['user_id'];
+if($loggedUserId != $userId) {
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
-if ($_SESSION['user_id'] != $userId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+if (!is_numeric($_POST['creditToAdd']) || !is_numeric($userId)) {
+  echo 'Error 400 Bad Request: Invalid parameters.';
   return;
 }
 

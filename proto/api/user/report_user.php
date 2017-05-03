@@ -15,9 +15,14 @@ if($loggedUserId != $userId) {
   return;
 }
 
-$userId = trim(strip_tags($_POST['userId']));
+$reportedUserId = $_POST['userId'];
 if(!is_numeric($userId)) {
   echo "Error 400 Bad Request: Invalid user id!";
+  return;
+}
+
+if($reportedUserId == $userId){
+  echo "Error 400 Bad Request: You can't report yourself!";
   return;
 }
 

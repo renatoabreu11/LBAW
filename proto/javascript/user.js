@@ -25,7 +25,7 @@ $(document).ready(function() {
    * Follow/Unfollow button (below the basic details).
    */
   $('#follow-btn').click(function() {
-    let userId = $('#details').find('.details-short-info-member-number').text();
+    let followedUserId = $('#details').find('.details-short-info-member-number').text();
     let btnText = $(this).text();
 
     let request;
@@ -34,13 +34,14 @@ $(document).ready(function() {
         type: 'POST',
         url: BASE_URL + 'api/user/follow.php',
         data: {
-          'followedUserId': userId,
+          'followedUserId': followedUserId,
+          'userId': userId,
+          'token': token,
         },
       });
 
       request.done(function(response, textStatus, jqXHR) {
-        console.info('Response: ' + response);
-        if(response.indexOf('success') >= 0)
+        if(response.includes('Success'))
           $('#follow-btn').html('Unfollow');
       });
 
@@ -53,13 +54,15 @@ $(document).ready(function() {
         type: 'POST',
         url: BASE_URL + 'api/user/unfollow.php',
         data: {
-          'followedUserId': userId,
+          'unfollowedUserId': followedUserId,
+          'userId': userId,
+          'token': token,
         },
       });
 
       request.done(function(response, textStatus, jqXHR) {
         console.info('Response: ' + response);
-        if(response.indexOf('success') >= 0)
+        if(response.includes('Success'))
           $('#follow-btn').html('Follow');
       });
 
@@ -140,13 +143,15 @@ $(document).ready(function() {
       data: {
         'rating': rating,
         'message': message,
-        'bid_id': bidId,
+        'bidId': bidId,
+        'userId': userId,
+        'token': token,
       },
     });
 
     request.done(function(response, textStatus, jqXHR) {
       console.info('Insert review response: ' + response);
-      if(response.indexOf('success') >= 0) {
+      if(response.includes('Success')) {
         // Removes the form wrapper.
         formWrapper.fadeOut(500, function() {
           formWrapper.remove();

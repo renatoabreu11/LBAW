@@ -21,9 +21,8 @@ if (!$_POST['id']){
 }
 
 $notificationId = $_POST['id'];
-
 if(!is_numeric($notificationId)){
-  echo 'Error 400 Bad Request: Invalid feedback id.';
+  echo 'Error 400 Bad Request: Invalid notification id.';
   return;
 }
 
