@@ -94,7 +94,7 @@ $(document).ready(function() {
           || $(element).attr('name') === 'condition')
         error.insertAfter(element);
       else{
-        let parentDiv = $(element).parents('.input-group');
+        let parentDiv = $(element).closest('.input-group');
         error.insertAfter(parentDiv);
       }
     },

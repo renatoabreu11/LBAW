@@ -101,21 +101,22 @@ if (!empty($_POST['token'])) {
 
     $postStartDate = strtr($_POST['start_date'], '/', '-');
     $postEndDate = strtr($_POST['end_date'], '/', '-');
-    $startDate = date("Y-m-d H:i:s", strtotime($postStartDate));
-    $endDate = date("Y-m-d H:i:s", strtotime($postEndDate));
-
+    $startDate = date("Y-m-d H:i", strtotime($postStartDate));
+    $endDate = date("Y-m-d H:i", strtotime($postEndDate));
     if($startDate > $endDate){
       $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be smaller than the ending date.";
-      $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be smaller than the starting date.";
+      $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be after the starting date.";
       $invalidInfo = true;
     }
 
-    if($startDate < date("Y-m-d H:i:s")){
+    if($startDate < date("Y-m-d H:i")){
+      $_POST['start_date'] = date("d/m/Y H:i", strtotime('+1 hour'));
       $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be after the current date.";
       $invalidInfo = true;
     }
 
-    if($endDate < date("Y-m-d H:i:s")){
+    if($endDate < date("Y-m-d H:i")){
+      $_POST['end_date'] = date("d/m/Y H:i", strtotime('+2 hour'));
       $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be after the current date.";
       $invalidInfo = true;
     }
@@ -161,7 +162,10 @@ if (!empty($_POST['token'])) {
         if (strpos($e->getMessage(), 'product_category_pkey') !== false) {
           $_SESSION['field_errors']['category'] = "Product-category association already exists.";
         } else if (strpos($e->getMessage(), 'auction_date_ck') !== false) {
-          $_SESSION['field_errors']['end_date'] = "The auction's starting date has to be smaller than the ending date.";
+          $_POST['start_date'] = date("d/m/Y H:i", strtotime('+1 hour'));
+          $_POST['end_date'] = date("d/m/Y H:i", strtotime('+2 hour'));
+          $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be after the current date.";
+          $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be after the starting date.";
         } else {
           $_SESSION['error_messages'][] = "Error creating the auction.";
         }

@@ -165,10 +165,10 @@ $(document).ready(function() {
     $.magnificPopup.close();
   });
 
-  $('.removeNotificationPopup').on('click', function() {
+  $('.notifications-wrapper').on('click', '.removeNotificationPopup', function() {
     let notificationClass = $(this).attr('class').split('id-');
     if (notificationClass.length === 2) {
-      let object = $(this).parents('.notifications-wrapper');
+      let object = $(this).closest('.notifications-wrapper');
       let notificationId = notificationClass[1];
       $('.removeNotificationPopup').magnificPopup({
         type: 'inline',

@@ -174,7 +174,7 @@ $(document).ready(function() {
   }
 
   $('ul.list-group').on('click', 'a.removeCategoryPopup', function() {
-    let categoryObject = $(this).parents('.list-group-item');
+    let categoryObject = $(this).closest('.list-group-item');
     let classArray = $(this).attr('class').split('id-');
     if(classArray.length > 2)
       return;
@@ -523,7 +523,7 @@ $(document).ready(function() {
   } );
 
   $('.removeFeedbackPopup').on('click', function() {
-    let notificationObject = $(this).parents('div.notifications-wrapper');
+    let notificationObject = $(this).closest('div.notifications-wrapper');
     let parent = $(this).parent('.media-body');
     let feedId = parent.find('h5 span.feed_id').html();
 

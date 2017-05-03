@@ -144,7 +144,7 @@ $(document).ready(function() {
   $('.notifications-wrapper .hideNotification').click(function(e) {
     let notificationsWrapper = $('.notifications-wrapper');
     let numNotifications = notificationsWrapper.children().length;
-    let notification = $(this).parents('.notifications-wrapper');
+    let notification = $(this).closest('.notifications-wrapper');
 
     notification.fadeOut(500, function() {
       notification.remove();

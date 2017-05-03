@@ -296,14 +296,14 @@ $(document).ready(function() {
   }
 
   qaSection.on('click', '.edit-question', function() {
-    let parent = $(this).parents('.comment-meta');
+    let parent = $(this).closest('.comment-meta');
     parent.siblings('.question-edit-display').toggle();
     parent.siblings('.question-display').toggle();
   });
 
   qaSection.on('click', '.btn-edit-question', function() {
     let editComment = $(this).prev().val();
-    let parent = $(this).parents('.media-body');
+    let parent = $(this).closest('.media-body');
     let questionId = $(this).closest('article').find('input[name=question-id]').val();
 
     let request = $.ajax({
@@ -341,14 +341,14 @@ $(document).ready(function() {
 
   // Edit answer.
   qaSection.on('click', '.edit-answer', function() {
-    let parent = $(this).parents('.comment-meta');
+    let parent = $(this).closest('.comment-meta');
     parent.siblings('.answer-edit-display').toggle();
     parent.siblings('.answer-display').toggle();
   });
 
   qaSection.on('click', '.btn-edit-answer', function() {
     let editComment = $(this).prev().val();
-    let parent = $(this).parents('.media-body');
+    let parent = $(this).closest('.media-body');
     let answerId = $(this).closest('article').find('input[name=answer-id]').val();
 
     let request = $.ajax({
