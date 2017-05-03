@@ -2,7 +2,7 @@
   <tbody id="bodyToSort">
   {foreach $auctions as $auction}
     <tr class="auction_row" data-page="{floor($auction@index/8+1)}" data-priceLow="{$auction.curr_bid}" data-priceHigh="-{$auction.curr_bid}" data-popular="-{$auction.numbids}" data-newest="-{strtotime($auction.start_date)}" data-ending="{strtotime($auction.end_date)}" hidden>
-      <td class="image col-md-2"><img src="http://lorempixel.com/400/300/city/5" alt=""></td>
+      <td class="image col-md-2"><img src="{$BASE_URL}images/products/{$auction.image}" alt=""></td>
       <td id="product_name" class="product col-md-4">{$auction.product_name}<br></td>
 
       <!-- user rating -->

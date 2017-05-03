@@ -30,12 +30,12 @@ if (empty($page) || is_numeric($page) == FALSE) {
 $items = 2;
 $offset = ($page * $items) - $items;
 
-$z = getPageWatchlistAuctions($id, $items, $offset);
+$auctions = getPageWatchlistAuctions($id, $items, $offset);
 $notifications = getActiveNotifications($id);
 $nr_pages = round(countWatchlistAuctions($id) / $items);
 
 $smarty->assign('currPage', $page);
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);
-$smarty->assign('pageAuctions', $page_auctions);
+$smarty->assign('auctions', $auctions);
 $smarty->display('auctions/watchlist.tpl');

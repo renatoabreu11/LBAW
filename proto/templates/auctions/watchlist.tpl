@@ -49,48 +49,6 @@
     </div>
   </div>
 
-  <div class="row auctions">
-    {foreach $pageAuctions as $auction}
-      <div class="col-md-3 col-sm-6 col-xs-6">
-        <div class="thumbnail text-center">
-          <div class="dropdown">
-            <h4 style="display: inline;">Surface Book</h4>
-            <a href="#" class="pull-right dropdown-toggle" data-toggle="dropdown">
-              <i class="glyphicon glyphicon-chevron-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-header">Auction</li>
-              <li><a href="#">Remove auction</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Notifications</li>
-              <li class="disabled"><a href="#">Disable notifications</a></li>
-              <li><a href="#">Enable notifications</a></li>
-            </ul>
-          </div>
-
-          <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
-          <p>Incredibly powerful and meticulously crafted, Surface Book with Performance Base is a revolution in laptop design.</p>
-          <p>Current bid: {$auction.curr_bid} €</p>
-          <div class="countdown">
-            <span class="clock"><p hidden>{$auction.end_date}</p></span>
-          </div>
-          <div class="row text-center" style="padding-top: 4px; padding-bottom: 10px;">
-            <button class="btn btn-primary btn-sm"> Watch</button>
-          </div>
-          <div class="seller">
-            <p>Product auctioned by <a href="#">Microsoft</a></p>
-            <span>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    {/foreach}
-  </div>
   {if $nrPages > 1}
     <div class="row text-center">
       <ul class="pagination">
