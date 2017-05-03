@@ -24,7 +24,7 @@ if(!validUser($username, $id)){
 }
 
 if(!isset($_GET['id'])){
-  header("Location:"  . $_SERVER['HTTP_REFERER']);
+  header("Location: $BASE_URL");
   return;
 }
 
@@ -35,9 +35,15 @@ if(!isOwner($id, $auctionId)){
   return;
 }
 
+$auction = getAuction($auctionId);
+
+if(strtotime($auction['start_date']) - strtotime(date('Y-m-d H:i:s')) < 0){
+  header("Location:"  . $BASE_URL . 'pages/auction/auction.php?id=' . $auctionId);
+  return;
+}
+
 $categories = getCategories();
 $product = getAuctionProduct($auctionId);
-$auction = getAuction($auctionId);
 $notifications = getActiveNotifications($id);
 $auctionTypes = getAuctionTypes();
 $watchlist = getWatchlistInfo($id, $auctionId);

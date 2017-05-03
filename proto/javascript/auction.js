@@ -85,25 +85,19 @@ $(document).ready(function() {
         'token': token,
       },
       success: function(data) {
-        if(data['error']) {
+        let response = data['message'];
+        if(response.includes('Error') || response.includes('Success 203')) {
           $.magnificPopup.open({
             items: {
-              src: '<div class="white-popup">' + data['error'] + '</div>',
+              src: '<div class="white-popup">' + response + '</div>',
               type: 'inline',
             },
           });
-        } else {
+        } else if(response.includes('Success 201')) {
           currBid.text('Current Bid: ' + amount + '€');
           if(bidderTableBody.children().length === 5)
             bidderTableBody.children().last().remove();
           bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
-
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + data['success'] + '</div>',
-              type: 'inline',
-            },
-          });
         }
       },
     });

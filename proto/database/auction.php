@@ -359,7 +359,7 @@ function bid($amount, $bidderId, $auctionId) {
   }
   else {
     $conn->commit();
-    return "Success 203: Insufficient funds.";
+    return "Success 203: Insufficient funds. You don't have the necessary amount to place a new bid.";
   }
 }
 

@@ -7,10 +7,15 @@ $username = $_SESSION['username'];
 $id = $_SESSION['user_id'];
 $token = $_SESSION['token'];
 
+if(!$username || !$id || !$token){
+  $smarty->display('common/404.tpl');
+  return;
+}
+
 $userId = null;
 if (!$_GET['userId']) {
   $_SESSION['error_messages'][] = "User id field not specified!";
-  header("Location:"  . $_SERVER['HTTP_REFERER']);
+  header("Location:"  . $BASE_URL);
   return;
 } else {
   $userId = $_GET['userId'];
@@ -18,7 +23,7 @@ if (!$_GET['userId']) {
 
 if ($userId != $_SESSION['user_id']) {
   $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
-  header("Location:"  . $_SERVER['HTTP_REFERER']);
+  header("Location:"  . $BASE_URL);
   return;
 }
 
