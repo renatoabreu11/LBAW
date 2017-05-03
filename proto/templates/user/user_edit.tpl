@@ -27,7 +27,7 @@
     </div>
     <div id="profile-edit" class="panel-collapse collapse in">
       <div class="panel-body">
-        <form class="form-horizontal" method="post" action="{$BASE_URL}actions/user/user_edit.php" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-general" method="post" action="{$BASE_URL}actions/user/user_edit.php" enctype="multipart/form-data">
           <input type="hidden" name="user-id" value="{$user.id}">
           <input type="hidden" name="picture" value="{$BASE_URL}images/users/{$user.profile_pic}">
           <div class="panel panel-info">
@@ -43,13 +43,13 @@
               <div class="form-group">
                 <label class="col-md-3 control-label">Real name: </label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" id="real-name" name="real-name" value="{$user.name}">
+                  <input type="text" class="form-control" id="real-name" name="realName" value="{$user.name}">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-md-3 control-label">Small biography: </label>
                 <div class="col-md-6">
-                  <textarea class="form-control" name="small-bio" rows="2" id="small-bio">{$user.short_bio}</textarea>
+                  <textarea class="form-control" name="smallBio" rows="2" id="small-bio">{$user.short_bio}</textarea>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@
               <div class="form-group">
                 <label class="col-md-3 control-label">Phone number: </label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="phone" id="cellphone-number" value="{$user.phone}">
+                  <input type="number" class="form-control" name="phone" id="cellphone-number" value="{$user.phone}">
                 </div>
               </div>
             </div>
@@ -133,24 +133,24 @@
       <div id="password-edit" class="panel-collapse collapse">
         <div class="panel-body">
 
-          <form class="form-horizontal" method="post" action="{$BASE_URL}actions/user/user_edit_password.php">
+          <form class="form-horizontal" id="form-password" method="post" action="{$BASE_URL}actions/user/user_edit_password.php">
             <input type="hidden" name="user-id" value="{$user.id}">
             <div class="form-group">
               <label class="col-md-3 control-label">Current password: </label>
               <div class="col-md-6">
-                <input type="password" class="form-control" name="curr-pass" id="curr-pass">
+                <input type="password" class="form-control" name="currPass" id="curr-pass">
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label">New password: </label>
               <div class="col-md-6">
-                <input type="password" class="form-control" name="new-pass" id="new-pass-1">
+                <input type="password" class="form-control" name="newPass" id="new-pass-1">
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label">Repeat password: </label>
               <div class="col-md-6">
-                <input type="password" class="form-control" name="new-pass-repeat" id="new-pass-2">
+                <input type="password" class="form-control" name="newPassRepeat" id="new-pass-2">
               </div>
             </div>
 
