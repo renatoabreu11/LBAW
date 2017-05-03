@@ -87,13 +87,15 @@ $(document).ready(function() {
       type: 'POST',
       url: BASE_URL + 'api/user/unfollow.php',
       data: {
-        'followedUserId': id,
+        'unfollowedUserId': id,
+        'userId': userId,
+        'token': token,
       },
     });
 
     request.done(function(response, textStatus, jqXHR) {
       console.info('Response: ' + response);
-      if(response.indexOf('success') >= 0) {
+      if(response.includes('Success')) {
         mediaObj.fadeOut(500, function() {
           mediaObj.remove();
 
