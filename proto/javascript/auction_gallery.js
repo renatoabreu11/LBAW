@@ -14,13 +14,15 @@ $(document).ready(function() {
     uploadUrl: BASE_URL + 'api/auction/upload_images.php',
     uploadAsync: false,
     overwriteInitial: false,
-    maxFileSize: 10000,
+    initialPreviewAsData: true,
+    maxFileSize: 5000,
     allowedFileExtensions: ['png', 'jpg', 'bmp', 'jpeg'],
     previewClass: 'bg-warning',
     layoutTemplates: {footer: footerTemplate,
       size: '<samp><small>({sizeText})</small></samp>'},
     minFileCount: 1,
     maxFileCount: 10,
+    validateInitialCount: true,
     previewThumbTags: {
       '{TAG_VALUE}': '',        // no value
       '{TAG_CSS_NEW}': '',      // new thumbnail input

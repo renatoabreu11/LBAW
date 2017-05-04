@@ -222,9 +222,9 @@ function getAnswer($id){
  */
 function getNextImageId(){
   global $conn;
-  $stmt = $conn->prepare('SELECT nextval(\'image_id_seq\')');
+  $stmt = $conn->prepare('SELECT max(id) FROM image;');
   $stmt->execute();
-  return $stmt->fetch()['nextval'];
+  return $stmt->fetch()['max'];
 }
 
 /**
@@ -236,6 +236,19 @@ function getLastAuctionID(){
     $stmt = $conn->prepare('SELECT max(id) from auction;');
     $stmt->execute();
     return $stmt->fetch()['max'];
+}
+
+/**
+ * Returns the product images
+ * @param $productId
+ *
+ * @return array
+ */
+function getProductImages($productId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * from image WHERE product_id = ?;');
+  $stmt->execute(array($productId));
+  return $stmt->fetchAll();
 }
 
 /**
@@ -332,6 +345,20 @@ function getSimilarAuctions($auctionId) {
   $stmt->bindParam('original_auction_id', $auctionId);
   $stmt->execute();
   return $stmt->fetchAll();
+}
+
+/**
+ * Returns an array with the original names of the current images
+ * @param $productId
+ * @return array
+ */
+function getProductImagesOriginalNames($productId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT image.original_name
+                            FROM image
+                            WHERE product_id = ?');
+  $stmt->execute(array($productId));
+  return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
 }
 
 /**
@@ -700,11 +727,11 @@ function createProductCategory($productId, $categoryId){
  * @param $filename
  * @param $caption
  */
-function addProductPicture($productId, $filename, $caption){
+function addProductPicture($productId, $filename, $caption, $name){
   global $conn;
-  $stmt = $conn->prepare('INSERT INTO image(product_id, filename, description)
-                            VALUES(?, ?, ?)');
-  $stmt->execute(array($productId, $filename, $caption));
+  $stmt = $conn->prepare('INSERT INTO image(product_id, filename, description, original_name)
+                            VALUES(?, ?, ?, ?)');
+  $stmt->execute(array($productId, $filename, $caption, $name));
 }
 
 /* ========================== UPDATES  ========================== */
