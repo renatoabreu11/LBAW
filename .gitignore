@@ -10,3 +10,4 @@ node_modules
 .stylelintrc
 proto/vendor/
 final/vendor/
+proto/config/lbaw1662.log
