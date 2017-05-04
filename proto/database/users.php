@@ -325,7 +325,7 @@ function getLastBids($userId) {
                                 JOIN auction ON bid.auction_id = auction.id
                                 JOIN "user" seller ON auction.user_id = seller.id
                                 WHERE own.id = :user_id
-                                ORDER BY bid.date
+                                ORDER BY bid.date DESC
                                 LIMIT 2');
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();

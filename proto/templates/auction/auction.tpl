@@ -253,74 +253,76 @@
 
     <hr>
 
-    <div class="row product-questions">
-      <div class="col-md-12">
-        <h2>Product Q&A</h2>
-        {if ($seller.id != $USER_ID) && $USER_ID}
-          <form id="newQuestionForm" action="{$BASE_URL}api/auction/create_question.php" method="post">
-            <div class="form-group">
-              <label for="commentQuestion">Your question</label>
-              <textarea id="commentQuestion" name="comment" class="form-control question-area" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-default">Send</button>
-          </form>
-        {/if}
-
-        <section id="qaSection" class="comment-list">
-          {include file='auction/question.tpl'}
-        </section>
-
-        <div>
-          <div id="removeQuestion" class="white-popup mfp-hide">
-            <h4>Are you sure that you want to delete this answer?</h4>
-            <p>You will not be able to undo this action!</p>
-            <div class="text-center">
-              <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
-              <button class="btn btn-info closePopup">No, go back</button>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div id="removeAnswer" class="white-popup mfp-hide">
-            <h4>Are you sure that you want to delete this answer?</h4>
-            <p>You will not be able to undo this action!</p>
-            <div class="text-center">
-              <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
-              <button class="btn btn-info closePopup">No, go back</button>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
-            <form role="form" action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
+    {if (($seller.id == $USER_ID && count($questions) != 0) || ($seller.id != $USER_ID))}
+      <div class="row product-questions">
+        <div class="col-md-12">
+          <h2>Product Q&A</h2>
+          {if ($seller.id != $USER_ID) && $USER_ID}
+            <form id="newQuestionForm" action="{$BASE_URL}api/auction/create_question.php" method="post">
               <div class="form-group">
-                <label for="reportQuestionMessage">Report:</label>
-                <textarea class="form-control" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                <label for="commentQuestion">Your question</label>
+                <textarea id="commentQuestion" name="comment" class="form-control question-area" rows="3"></textarea>
               </div>
-              <div class="text-center">
-                <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
-              </div>
+              <button type="submit" class="btn btn-default">Send</button>
             </form>
-          </div>
-        </div>
+          {/if}
 
-        <div>
-          <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
-            <form role="form" action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
-              <div class="form-group">
-                <label for="reportAnswerMessage">Report:</label>
-                <textarea class="form-control" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
-              </div>
+          <section id="qaSection" class="comment-list">
+            {include file='auction/question.tpl'}
+          </section>
+
+          <div>
+            <div id="removeQuestion" class="white-popup mfp-hide">
+              <h4>Are you sure that you want to delete this answer?</h4>
+              <p>You will not be able to undo this action!</p>
               <div class="text-center">
-                <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
+                <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
+                <button class="btn btn-info closePopup">No, go back</button>
               </div>
-            </form>
+            </div>
+          </div>
+
+          <div>
+            <div id="removeAnswer" class="white-popup mfp-hide">
+              <h4>Are you sure that you want to delete this answer?</h4>
+              <p>You will not be able to undo this action!</p>
+              <div class="text-center">
+                <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
+                <button class="btn btn-info closePopup">No, go back</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
+              <form role="form" action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
+                <div class="form-group">
+                  <label for="reportQuestionMessage">Report:</label>
+                  <textarea class="form-control" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                </div>
+                <div class="text-center">
+                  <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div>
+            <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
+              <form role="form" action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
+                <div class="form-group">
+                  <label for="reportAnswerMessage">Report:</label>
+                  <textarea class="form-control" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
+                </div>
+                <div class="text-center">
+                  <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {/if}
 
     <hr>
 
@@ -331,11 +333,11 @@
           <div class="slider1">
             {foreach $similarAuctions as $similarAuction}
               <div class="slide text-center">
-                        <span>
-                            <h4>{$similarAuction.name}</h4>
-                            <img src="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" alt="...">
-                            <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" style="color: white">Watch Auction</a></button>
-                        </span>
+                <span>
+                    <h4>{$similarAuction.name}</h4>
+                    <img src="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" alt="...">
+                    <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" style="color: white">Watch Auction</a></button>
+                </span>
               </div>
             {/foreach}
           </div>
