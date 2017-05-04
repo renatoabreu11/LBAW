@@ -10,22 +10,22 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $loggedUserId = $_SESSION['user_id'];
-$userId = $_POST['user-id'];
-if($loggedUserId != $userId) {
+$userId = $_POST['userId'];
+if($loggedUserId != 1) {
   $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
   header("Location:"  . $BASE_URL);
   exit;
 }
 
-if(!$_POST['real-name'] || !$_POST['small-bio'] || !$_POST['email']) {
+if(!$_POST['realName'] || !$_POST['smallBio'] || !$_POST['email']) {
   $_SESSION['error_messages'][] = "Your real name, small biography and email are required!";
   $_SESSION['form_values'] = $_POST;
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
 }
 
-$realName = trim(strip_tags($_POST['real-name']));
-$smallBio = trim(strip_tags($_POST['small-bio']));
+$realName = trim(strip_tags($_POST['realName']));
+$smallBio = trim(strip_tags($_POST['smallBio']));
 $cityId = trim(strip_tags($_POST['city-id']));
 $email = trim(strip_tags($_POST['email']));
 $phone = trim(strip_tags($_POST['phone']));
@@ -45,20 +45,14 @@ if($phone) {
   }
 }
 
-$isCityNull = false;
+$isCityNull = true;
 if($cityId) {
-  if($cityId == "null")
-    $isCityNull = true;
+  $isCityNull = false;
   if(!(is_numeric($cityId))) {
     $_SESSION['field_errors']['city-id'] = 'Invalid city id.';
     $invalidChars = true;
   }
 }
-
-/*if(!preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
-  $_SESSION['field_errors']['email'] = 'Invalid email format';
-  $invalidChars = true;
-}*/
 
 if($invalidChars) {
   $_SESSION['form_values'] = $_POST;
@@ -79,7 +73,7 @@ if(!($isCityNull)) {
   try {
     updateUserLocation($userId, $cityId);
   } catch(PDOException $e) {
-    $_SESSION['error_messages'][] = "Error updating your location.";
+    $_SESSION['error_messages'][] = "Error updating your location." . var_dump($_POST);
     $_SESSION['form_values'] = $_POST;
     header("Location:"  . $_SERVER['HTTP_REFERER']);
     exit;
@@ -91,6 +85,15 @@ $picture = $_FILES['picture'];
 if($picture['size'] > 0) {
   $extension = end(explode(".", $picture['name']));
   $picturePath = $BASE_DIR . "images/users/" . $userId . "." . $extension;
+
+  $oldPicture = getProfilePic($userId);
+  $oldExtension = end(explode(".", $oldPicture));
+  if($oldPicture != 'default.png' && $oldExtension != $extension) {
+    $path = realpath($BASE_DIR . 'images/users/' . $oldPicture);
+    if(is_writable($path))
+      unlink($path);
+  }
+
   if(!move_uploaded_file($picture['tmp_name'], $picturePath)) {
     $_SESSION['error_messages'][] = "Error updating your profile avatar. Please select another photo.";
     $_SESSION['form_values'] = $_POST;
@@ -98,15 +101,9 @@ if($picture['size'] > 0) {
     exit;
   }
 
-  // carissimo evenilink, verifica se é preciso eliminar a foto antiga ou o move_uploaded_file faz o overwrite
-
   try {
     updateUserPicture($userId, $userId . "." . $extension);
   } catch(PDOException $e) {
-    $path = realpath($BASE_URL . 'images/users/' . $userId . "." . $extension);
-    if(is_writable($path)){
-      unlink($path);
-    }
     $_SESSION['error_messages'][] = "Error updating your profile avatar. Please select another photo.";
     $_SESSION['form_values'] = $_POST;
     header("Location:"  . $_SERVER['HTTP_REFERER']);

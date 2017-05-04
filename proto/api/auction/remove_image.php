@@ -13,18 +13,37 @@ if (!empty($_POST['token'])) {
       return;
     }
 
+    $originalName = $_POST['originalName'];
+    $imageId = $_POST['key'];
     $productId = $_POST['productId'];
-    $auctionId = getAuctionIdFromProduct($productId);
-    if(!$productId){
-      $reply = array('error' =>  "Error 400 Bad Request: Invalid product id!");
+    $image = getImage($imageId);
+    if(!$productId || !$imageId || !$originalName){
+      $reply = array('error' =>  "Error 400 Bad Request: Invalid request attributes!");
       echo json_encode($reply);
       return;
     }
 
-    $images = $_FILES['input24'];
-    $nrImages = count($images['name']);
-    $captions = $_POST['captions'];
-    print_r($_FILES);
+    if(!validProductImage($imageId, $productId, $originalName)){
+      $reply = array('error' =>  "Error 400 Bad Request: Invalid image specification!");
+      echo json_encode($reply);
+      return;
+    }
+
+    try {
+      deleteProductPicture($imageId);
+    } catch(PDOException $e) {
+      $reply = array('error' =>  "Error 500 Internal server: Error deleting the picture!");
+      echo json_encode($reply);
+      return;
+    }
+
+    $path = realpath($BASE_URL . 'images/auctions/' . $image['filename']);
+    if(is_writable($path)){
+      unlink($path);
+    }
+
+    echo json_encode([]);
+
   } else {
     $reply = array('error' =>  "Error 403 Forbidden: You don't have permissions to make this request.");
     echo json_encode($reply);

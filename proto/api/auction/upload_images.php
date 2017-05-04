@@ -5,6 +5,7 @@ include_once($BASE_DIR . "database/auction.php");
 
 if (!empty($_POST['token'])) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
+    $token = $_SESSION['token'];
     $userId = $_POST['userId'];
     $loggedUserId = $_SESSION['user_id'];
     if($loggedUserId != $userId) {
@@ -90,12 +91,14 @@ if (!empty($_POST['token'])) {
     }
 
     $reply;
+    $p1 = $p2 = [];
     for($i = 0; $i < $nrImages; $i++) {
       if ($errors[$i]) {
         $reply['error'] .= "Picture " . $names[$i] . ": Invalid file!<br/>";
       }else {
         $imageId = getNextImageId() + 1;
         $extension = end(explode("/", $types[$i]));
+        $caption;
         try {
           $caption = trim(strip_tags($captionsArr[$i]));
           addProductPicture($productId, $imageId . "." . $extension, $caption, $names[$i]);
@@ -107,11 +110,24 @@ if (!empty($_POST['token'])) {
         if (!move_uploaded_file($tmp_names[$i], $picturePath)) {
           $reply['error'] .=  "Error storing the picture " . $names[$i] . "!";
           deleteProductPicture($imageId);
+        }else {
+          $key = $imageId;
+          $extra = array();
+          $extra['userId'] = $userId;
+          $extra['productId'] = $productId;
+          $extra['token'] = $token;
+          $extra['originalName'] = $names[$i];
+          $url = $BASE_URL . 'api/auction/remove_image.php';
+          $p1[$i] = $BASE_URL . "images/auctions/" . $imageId . "." . $extension;
+          $p2[$i] = ['caption' => $caption, 'url' => $url, 'key' => $key, 'extra' => $extra];
         }
       }
     }
-    echo json_encode($reply);
-    return;
+    echo json_encode([
+      'initialPreview' => $p1,
+      'initialPreviewConfig' => $p2,
+      'append' => true
+    ]);
 
   } else {
     $reply = array('error' =>  "Error 403 Forbidden: You don't have permissions to make this request.");

@@ -93,7 +93,7 @@
           <div class="sellerInfo">
             <span>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></span>
             {if ($numReviews != 0)}
-            <span class="rateYo user-rating-stars" data-rating="{$seller.rating}"></span>
+              <span class="rateYo user-rating-stars" data-rating="{$seller.rating}"></span>
             {/if}
             <span class="hidden-xs">
               <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Review(s)</a>
@@ -178,8 +178,6 @@
       </div>
     </div>
 
-    <hr>
-
     <div class="row">
       <div class="col-md-12">
         <ul class="nav nav-tabs">
@@ -231,7 +229,7 @@
 
     <hr>
 
-    {if (($seller.id == $USER_ID && count($questions) != 0) || ($seller.id != $USER_ID))}
+    {if (($seller.id == $USER_ID && count($questions) > 0) || ($seller.id != $USER_ID && $USER_ID) || (!$USER_ID && count($questions) > 0))}
       <div class="row product-questions">
         <div class="col-md-12">
           <h2>Product Q&A</h2>
@@ -300,11 +298,10 @@
           </div>
         </div>
       </div>
+      <hr>
     {/if}
 
-    <hr>
-
-    {if (count($similarAuctions)) > 0}
+    {if (count($similarAuctions) > 0)}
       <div class="row suggestions">
         <div class='col-md-12 col-centered'>
           <h2>Similar Auctions</h2>
