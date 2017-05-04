@@ -152,6 +152,10 @@
       </div>
     </div>
 
+    <!-- Accessible information -->
+    <input type="hidden" name="auction-id" value="{$auction.id}">
+    <input type="hidden" name="user-username" value="{$username}">
+
     <div>
       <div id="reportAuctionConfirmation" class="white-popup mfp-hide">
         <form role="form" action="{$BASE_URL}api/admin/report_auction.php" method="post" id="reportAuctionForm">
@@ -218,10 +222,6 @@
     </div>
 
     <hr>
-
-    <!-- Accessible information -->
-    <input type="hidden" name="auction-id" value="{$auction.id}">
-    <input type="hidden" name="user-username" value="{$username}">
 
     <div class="row product-questions">
       <div class="col-md-12">
