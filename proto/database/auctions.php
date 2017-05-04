@@ -283,37 +283,32 @@ function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $
 /**
  * Get auctions of a page from the user's watchlist.
  * @param $userId
- * @param $items
- * @param $offset
  * @return array
- * @internal param $user_id
  */
-function getPageWatchlistAuctions($userId, $items, $offset){
+function getWatchlistAuctionsOfUser($userId){
   global $conn;
-  $stmt = $conn->prepare('SELECT watchlist.notifications, auction.* as auction
+  $stmt = $conn->prepare('SELECT watchlist.notifications, auction.id, 
+                          (SELECT filename
+                          FROM image
+                          WHERE product_id = product.id
+                          LIMIT 1) as image, 
+                          product.id, 
+                          product.name as product_name, 
+                          "user".username, 
+                          "user".rating as user_rating, 
+                          auction.curr_bid, 
+                          auction.end_date, 
+                          "user".id as user_id, 
+                          auction.num_bids as numBids, 
+                          auction.start_date
                           FROM watchlist
                           JOIN auction ON auction.id = watchlist.auction_id
-                          WHERE watchlist.user_id = ?             
-                          LIMIT ?
-                          OFFSET ?');
-  $stmt->execute(array($userId, $items, $offset));
+                          JOIN product ON auction.product_id = product.id
+                          JOIN "user" ON "user".id = auction.user_id
+                          WHERE watchlist.user_id = ?');
+  $stmt->execute(array($userId));
   $result = $stmt->fetchAll();
   return $result;
-}
-
-/**
- * Count the number of auctions in the watchlist of an user.
- * @param $userId
- * @return
- */
-function countWatchlistAuctions($userId){
-  global $conn;
-  $stmt = $conn->prepare('SELECT COUNT(*)
-                                FROM watchlist
-                                WHERE user_id = ?');
-  $stmt->execute(array($userId));
-  $result = $stmt->fetch();
-  return $result['count'];
 }
 
 /**
