@@ -15,7 +15,6 @@ ALTER TABLE ONLY proto.watchlist DROP CONSTRAINT watchlist_user_fk;
 ALTER TABLE ONLY proto.watchlist DROP CONSTRAINT watchlist_auction_fk;
 ALTER TABLE ONLY proto.user_report DROP CONSTRAINT user_report_fk;
 ALTER TABLE ONLY proto."user" DROP CONSTRAINT user_fk;
-ALTER TABLE ONLY proto.review_report DROP CONSTRAINT review_report_fk;
 ALTER TABLE ONLY proto.review DROP CONSTRAINT review_fk;
 ALTER TABLE ONLY proto.question DROP CONSTRAINT question_user_fk;
 ALTER TABLE ONLY proto.question_report DROP CONSTRAINT question_report_fk;
@@ -63,7 +62,6 @@ DROP INDEX proto.admin_email_uindex;
 ALTER TABLE ONLY proto.watchlist DROP CONSTRAINT watchlist_pk;
 ALTER TABLE ONLY proto.user_report DROP CONSTRAINT user_report_pkey;
 ALTER TABLE ONLY proto."user" DROP CONSTRAINT user_pkey;
-ALTER TABLE ONLY proto.review_report DROP CONSTRAINT review_report_pkey;
 ALTER TABLE ONLY proto.review DROP CONSTRAINT review_pkey;
 ALTER TABLE ONLY proto.question_report DROP CONSTRAINT question_report_pkey;
 ALTER TABLE ONLY proto.question DROP CONSTRAINT question_pkey;
@@ -85,7 +83,6 @@ ALTER TABLE ONLY proto.answer DROP CONSTRAINT answer_pkey;
 ALTER TABLE ONLY proto.admin DROP CONSTRAINT admin_pkey;
 ALTER TABLE proto.user_report ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto."user" ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE proto.review_report ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.review ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.question_report ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.question ALTER COLUMN id DROP DEFAULT;
@@ -107,8 +104,6 @@ DROP SEQUENCE proto.user_report_id_seq;
 DROP TABLE proto.user_report;
 DROP SEQUENCE proto.user_id_seq;
 DROP TABLE proto."user";
-DROP SEQUENCE proto.review_report_id_seq;
-DROP TABLE proto.review_report;
 DROP SEQUENCE proto.review_id_seq;
 DROP TABLE proto.review;
 DROP SEQUENCE proto.question_report_id_seq;
@@ -1066,41 +1061,6 @@ ALTER SEQUENCE review_id_seq OWNED BY review.id;
 
 
 --
--- Name: review_report; Type: TABLE; Schema: proto; Owner: lbaw1662; Tablespace: 
---
-
-CREATE TABLE review_report (
-    id integer NOT NULL,
-    date timestamp without time zone NOT NULL,
-    message text NOT NULL,
-    review_id integer NOT NULL
-);
-
-
-ALTER TABLE review_report OWNER TO lbaw1662;
-
---
--- Name: review_report_id_seq; Type: SEQUENCE; Schema: proto; Owner: lbaw1662
---
-
-CREATE SEQUENCE review_report_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE review_report_id_seq OWNER TO lbaw1662;
-
---
--- Name: review_report_id_seq; Type: SEQUENCE OWNED BY; Schema: proto; Owner: lbaw1662
---
-
-ALTER SEQUENCE review_report_id_seq OWNED BY review_report.id;
-
-
---
 -- Name: user; Type: TABLE; Schema: proto; Owner: lbaw1662; Tablespace: 
 --
 
@@ -1118,6 +1078,7 @@ CREATE TABLE "user" (
     rating integer,
     amount double precision DEFAULT 0 NOT NULL,
     city_id integer,
+    oauth_id character varying(64),
     CONSTRAINT user_rating_ck CHECK (((rating >= 0) AND (rating <= 10)))
 );
 
@@ -1304,13 +1265,6 @@ ALTER TABLE ONLY question_report ALTER COLUMN id SET DEFAULT nextval('question_r
 --
 
 ALTER TABLE ONLY review ALTER COLUMN id SET DEFAULT nextval('review_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: proto; Owner: lbaw1662
---
-
-ALTER TABLE ONLY review_report ALTER COLUMN id SET DEFAULT nextval('review_report_id_seq'::regclass);
 
 
 --
@@ -1866,49 +1820,35 @@ SELECT pg_catalog.setval('review_id_seq', 6, true);
 
 
 --
--- Data for Name: review_report; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
---
-
-INSERT INTO review_report VALUES (1, '2017-03-29 08:25:01', 'pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis', 3);
-
-
---
--- Name: review_report_id_seq; Type: SEQUENCE SET; Schema: proto; Owner: lbaw1662
---
-
-SELECT pg_catalog.setval('review_report_id_seq', 2, true);
-
-
---
 -- Data for Name: user; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
 --
 
-INSERT INTO "user" VALUES (8, 'Kinney', 'Mauris@etrutrumeu.net', 'Austin', 'mollis vitae, posuere at, velit. Cras lorem lorem, luctus ut, pellentesque eget, dictum placerat, augue.', NULL, 'DBV77CYZ5KU', '120 624 980', '2017-05-31 10:25:24', 'Kinney.jpg', NULL, 0, 1);
-INSERT INTO "user" VALUES (19, 'Hobbs', 'a.magna.Lorem@loremtristiquealiquet.net', 'Francis', 'Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean massa. Integer', NULL, 'WMK09CMM7AC', '(01) 935 777 211', '2017-05-25 17:25:40', 'Hobbs.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (23, 'Fox', 'litora.torquent.per@nislNullaeu.net', 'Dale', 'aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam', NULL, 'WVT56BDS6TL', '(01) 171 574 614', '2017-03-15 23:22:40', 'Fox.jpg', NULL, 0, 1);
-INSERT INTO "user" VALUES (2, 'hant', 'helder_antunes-@hotmail.com', 'Helder Antunes', 'dsd', NULL, '$2y$12$GBHf7g9UDIWmGC.sjCtdBOJ9ZX/Y64t0pKBwLgQpqgdbIcP3B3zPW', NULL, '2017-04-19 15:01:41', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (1, 'renatoabreu', 'renatoabreu1196@gmail.com', 'Renato Abreu', 'asfasfasfas', NULL, '$2y$12$XQI7OxCgRV.iOOi/EmFnWOFWtS6fdYRmaTY1N4B9rAqk7CR5JNz7m', NULL, '2017-04-19 12:57:54', 'default.png', 1, 0, 1);
-INSERT INTO "user" VALUES (4, 'Romero', 'malesuada.ut@enimnonnisi.org', 'Brent', 'adipiscing elit. Aliquam auctor, velit eget laoreet posuere, enim nisl elementum purus, accumsan interdum libero', NULL, 'HZZ83KYX0VR', '(09) 929 462 326', '2017-04-03 11:49:24', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (5, 'Becker', 'nulla@enimdiamvel.co.uk', 'Teagan', 'lectus rutrum urna, nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem,', NULL, 'KFD08MQZ8YE', '(06) 301 746 284', '2017-05-21 04:29:35', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (11, 'Townsend', 'at.libero@est.org', 'Brenda', 'Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna', NULL, 'NRM81OWS2OV', '(08) 147 274 376', '2017-04-04 17:28:39', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (12, 'Tyler', 'Cras@ametrisus.net', 'Adrian', 'purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in,', NULL, 'DJI32DGL7PN', '(08) 066 946 130', '2017-05-15 18:48:25', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (13, 'Willis', 'enim.condimentum@Nullamutnisi.net', 'Daniel', 'vitae semper egestas, urna justo faucibus lectus, a sollicitudin orci sem eget massa. Suspendisse eleifend.', NULL, 'UDL44PJX3YG', '(03) 365 593 569', '2017-07-23 04:30:34', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (15, 'Meyer', 'egestas@primisinfaucibus.net', 'Adena', 'at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin', NULL, 'TGJ32CBB3WW', '(01) 606 570 428', '2017-03-05 15:14:38', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (16, 'Christian', 'mauris.a.nunc@sitametmetus.net', 'Angela', 'felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices', NULL, 'GLW57ESV1SO', '(02) 875 964 716', '2017-04-05 22:21:47', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (20, 'Hardy', 'molestie.pharetra@inaliquet.edu', 'Brian', 'ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec', NULL, 'IMG27BBA1IR', '(07) 121 967 929', '2017-06-07 20:47:04', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (22, 'Gilliam', 'aliquam.iaculis@sitamet.net', 'Danielle', 'libero. Proin mi. Aliquam gravida mauris ut mi. Duis risus odio, auctor vitae, aliquet nec,', NULL, 'BKR31SCG6QZ', '(08) 653 083 528', '2017-02-11 01:11:30', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (25, 'Wise', 'ipsum.porta@utnullaCras.co.uk', 'Eleanor', 'odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et,', NULL, 'EGV61HMX2RW', '(01) 075 231 883', '2017-05-29 07:23:03', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (3, 'Jennings', 'vestibulum.nec.euismod@idenimCurabitur.co.uk', 'Joy', 'diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos', NULL, 'IDS86KLR5ZH', '298 864 407', '2017-07-27 20:08:29', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (6, 'Ramos', 'Phasellus.nulla.Integer@loremac.org', 'Valentine', 'amet metus. Aliquam erat volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate,', NULL, 'YTU61DVX1GM', '(04) 930 300 923', '2017-04-12 20:44:14', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (7, 'Davis', 'Duis.dignissim.tempor@nislelementum.ca', 'Ruby', 'massa. Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec,', NULL, 'WAF42UBV8ZO', '260 636 980', '2017-04-26 02:54:49', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (9, 'Booker', 'id.mollis.nec@ligulaeu.net', 'Emma', 'magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam', NULL, 'TVI84PMT0ER', '190 636 950', '2017-05-24 06:20:03', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (18, 'Cleveland', 'lorem.fringilla@sollicitudin.co.uk', 'September', 'lobortis risus. In mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris', NULL, 'SMA91SZQ5XG', '291 046 712', '2017-03-19 03:16:00', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (21, 'Elliott', 'sem.ut@libero.org', 'Craig', 'rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit', NULL, 'MLC88ATX6OB', '494 073 167', '2017-02-23 04:44:33', 'default.png', 3, 0, 1);
-INSERT INTO "user" VALUES (14, 'Palmer', 'consectetuer.adipiscing.elit@utsem.com', 'Lenore', 'mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris eu elit. Nulla', NULL, 'QBC46HME1QM', '(07) 041 222 487', '2017-02-15 14:58:55', 'default.png', 7, 0, 1);
-INSERT INTO "user" VALUES (10, 'Bowers', 'auctor.velit.eget@risus.ca', 'Laith', 'ultrices posuere cubilia Curae; Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque', NULL, 'JTU77JSO0XU', '(03) 874 515 612', '2017-04-02 20:09:50', 'default.png', 8, 0, 1);
-INSERT INTO "user" VALUES (17, 'Walter', 'eu.tellus@dui.net', 'Troy', 'massa. Mauris vestibulum, neque sed dictum eleifend, nunc risus varius orci, in consequat enim diam', NULL, 'KER37IWE0EZ', '357 734 185', '2017-06-07 03:15:15', 'default.png', 6, 0, 1);
-INSERT INTO "user" VALUES (24, 'Gardner', 'risus@mus.edu', 'Rogan', 'felis. Donec tempor, est ac mattis semper, dui lectus rutrum urna, nec luctus felis purus', NULL, 'NIG86PVG9XF', '430 826 295', '2017-04-30 00:31:32', 'default.png', NULL, 0, 1);
-INSERT INTO "user" VALUES (28, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'I am a user passing by in a night fly.', NULL, '$2y$12$yJVXYVc7tObXLv4Ba3FdvemTHd33cCbTGTu62k3X5EJxx.FI74W4W', NULL, '2017-04-19 15:44:36', 'default.png', NULL, 0, 1);
+INSERT INTO "user" VALUES (8, 'Kinney', 'Mauris@etrutrumeu.net', 'Austin', 'mollis vitae, posuere at, velit. Cras lorem lorem, luctus ut, pellentesque eget, dictum placerat, augue.', NULL, 'DBV77CYZ5KU', '120 624 980', '2017-05-31 10:25:24', 'Kinney.jpg', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (19, 'Hobbs', 'a.magna.Lorem@loremtristiquealiquet.net', 'Francis', 'Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean massa. Integer', NULL, 'WMK09CMM7AC', '(01) 935 777 211', '2017-05-25 17:25:40', 'Hobbs.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (23, 'Fox', 'litora.torquent.per@nislNullaeu.net', 'Dale', 'aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam', NULL, 'WVT56BDS6TL', '(01) 171 574 614', '2017-03-15 23:22:40', 'Fox.jpg', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (2, 'hant', 'helder_antunes-@hotmail.com', 'Helder Antunes', 'dsd', NULL, '$2y$12$GBHf7g9UDIWmGC.sjCtdBOJ9ZX/Y64t0pKBwLgQpqgdbIcP3B3zPW', NULL, '2017-04-19 15:01:41', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (1, 'renatoabreu', 'renatoabreu1196@gmail.com', 'Renato Abreu', 'asfasfasfas', NULL, '$2y$12$XQI7OxCgRV.iOOi/EmFnWOFWtS6fdYRmaTY1N4B9rAqk7CR5JNz7m', NULL, '2017-04-19 12:57:54', 'default.png', 1, 0, 1, NULL);
+INSERT INTO "user" VALUES (4, 'Romero', 'malesuada.ut@enimnonnisi.org', 'Brent', 'adipiscing elit. Aliquam auctor, velit eget laoreet posuere, enim nisl elementum purus, accumsan interdum libero', NULL, 'HZZ83KYX0VR', '(09) 929 462 326', '2017-04-03 11:49:24', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (5, 'Becker', 'nulla@enimdiamvel.co.uk', 'Teagan', 'lectus rutrum urna, nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem,', NULL, 'KFD08MQZ8YE', '(06) 301 746 284', '2017-05-21 04:29:35', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (11, 'Townsend', 'at.libero@est.org', 'Brenda', 'Donec tempus, lorem fringilla ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem magna', NULL, 'NRM81OWS2OV', '(08) 147 274 376', '2017-04-04 17:28:39', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (12, 'Tyler', 'Cras@ametrisus.net', 'Adrian', 'purus. Nullam scelerisque neque sed sem egestas blandit. Nam nulla magna, malesuada vel, convallis in,', NULL, 'DJI32DGL7PN', '(08) 066 946 130', '2017-05-15 18:48:25', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (13, 'Willis', 'enim.condimentum@Nullamutnisi.net', 'Daniel', 'vitae semper egestas, urna justo faucibus lectus, a sollicitudin orci sem eget massa. Suspendisse eleifend.', NULL, 'UDL44PJX3YG', '(03) 365 593 569', '2017-07-23 04:30:34', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (15, 'Meyer', 'egestas@primisinfaucibus.net', 'Adena', 'at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin', NULL, 'TGJ32CBB3WW', '(01) 606 570 428', '2017-03-05 15:14:38', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (16, 'Christian', 'mauris.a.nunc@sitametmetus.net', 'Angela', 'felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices', NULL, 'GLW57ESV1SO', '(02) 875 964 716', '2017-04-05 22:21:47', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (20, 'Hardy', 'molestie.pharetra@inaliquet.edu', 'Brian', 'ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec', NULL, 'IMG27BBA1IR', '(07) 121 967 929', '2017-06-07 20:47:04', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (22, 'Gilliam', 'aliquam.iaculis@sitamet.net', 'Danielle', 'libero. Proin mi. Aliquam gravida mauris ut mi. Duis risus odio, auctor vitae, aliquet nec,', NULL, 'BKR31SCG6QZ', '(08) 653 083 528', '2017-02-11 01:11:30', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (25, 'Wise', 'ipsum.porta@utnullaCras.co.uk', 'Eleanor', 'odio tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus. Nullam velit dui, semper et,', NULL, 'EGV61HMX2RW', '(01) 075 231 883', '2017-05-29 07:23:03', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (3, 'Jennings', 'vestibulum.nec.euismod@idenimCurabitur.co.uk', 'Joy', 'diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos', NULL, 'IDS86KLR5ZH', '298 864 407', '2017-07-27 20:08:29', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (6, 'Ramos', 'Phasellus.nulla.Integer@loremac.org', 'Valentine', 'amet metus. Aliquam erat volutpat. Nulla facilisis. Suspendisse commodo tincidunt nibh. Phasellus nulla. Integer vulputate,', NULL, 'YTU61DVX1GM', '(04) 930 300 923', '2017-04-12 20:44:14', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (7, 'Davis', 'Duis.dignissim.tempor@nislelementum.ca', 'Ruby', 'massa. Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec,', NULL, 'WAF42UBV8ZO', '260 636 980', '2017-04-26 02:54:49', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (9, 'Booker', 'id.mollis.nec@ligulaeu.net', 'Emma', 'magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam', NULL, 'TVI84PMT0ER', '190 636 950', '2017-05-24 06:20:03', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (18, 'Cleveland', 'lorem.fringilla@sollicitudin.co.uk', 'September', 'lobortis risus. In mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris', NULL, 'SMA91SZQ5XG', '291 046 712', '2017-03-19 03:16:00', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (21, 'Elliott', 'sem.ut@libero.org', 'Craig', 'rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit', NULL, 'MLC88ATX6OB', '494 073 167', '2017-02-23 04:44:33', 'default.png', 3, 0, 1, NULL);
+INSERT INTO "user" VALUES (14, 'Palmer', 'consectetuer.adipiscing.elit@utsem.com', 'Lenore', 'mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris eu elit. Nulla', NULL, 'QBC46HME1QM', '(07) 041 222 487', '2017-02-15 14:58:55', 'default.png', 7, 0, 1, NULL);
+INSERT INTO "user" VALUES (10, 'Bowers', 'auctor.velit.eget@risus.ca', 'Laith', 'ultrices posuere cubilia Curae; Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque', NULL, 'JTU77JSO0XU', '(03) 874 515 612', '2017-04-02 20:09:50', 'default.png', 8, 0, 1, NULL);
+INSERT INTO "user" VALUES (17, 'Walter', 'eu.tellus@dui.net', 'Troy', 'massa. Mauris vestibulum, neque sed dictum eleifend, nunc risus varius orci, in consequat enim diam', NULL, 'KER37IWE0EZ', '357 734 185', '2017-06-07 03:15:15', 'default.png', 6, 0, 1, NULL);
+INSERT INTO "user" VALUES (24, 'Gardner', 'risus@mus.edu', 'Rogan', 'felis. Donec tempor, est ac mattis semper, dui lectus rutrum urna, nec luctus felis purus', NULL, 'NIG86PVG9XF', '430 826 295', '2017-04-30 00:31:32', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (28, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'I am a user passing by in a night fly.', NULL, '$2y$12$yJVXYVc7tObXLv4Ba3FdvemTHd33cCbTGTu62k3X5EJxx.FI74W4W', NULL, '2017-04-19 15:44:36', 'default.png', NULL, 0, 1, NULL);
 
 
 --
@@ -2108,14 +2048,6 @@ ALTER TABLE ONLY question_report
 
 ALTER TABLE ONLY review
     ADD CONSTRAINT review_pkey PRIMARY KEY (id);
-
-
---
--- Name: review_report_pkey; Type: CONSTRAINT; Schema: proto; Owner: lbaw1662; Tablespace: 
---
-
-ALTER TABLE ONLY review_report
-    ADD CONSTRAINT review_report_pkey PRIMARY KEY (id);
 
 
 --
@@ -2470,14 +2402,6 @@ ALTER TABLE ONLY question
 
 ALTER TABLE ONLY review
     ADD CONSTRAINT review_fk FOREIGN KEY (bid_id) REFERENCES bid(id);
-
-
---
--- Name: review_report_fk; Type: FK CONSTRAINT; Schema: proto; Owner: lbaw1662
---
-
-ALTER TABLE ONLY review_report
-    ADD CONSTRAINT review_report_fk FOREIGN KEY (review_id) REFERENCES review(id) ON DELETE CASCADE;
 
 
 --
