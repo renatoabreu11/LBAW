@@ -14,6 +14,7 @@ if (!empty($_POST['token'])) {
     }
 
     $productId = $_POST['productId'];
+    $auctionId = getAuctionIdFromProduct($productId);
     if(!$productId){
       $reply = array('error' =>  "Error 400 Bad Request: Invalid product id!");
       echo json_encode($reply);
@@ -29,33 +30,82 @@ if (!empty($_POST['token'])) {
       return;
     }
 
+    $productImages = getProductImages($productId);
+    if(count($productImages) >= 10){
+      $reply = array('error' =>  "Error 400 Bad Request: You can't upload more images. The maximum number of images was achieved!");
+      echo json_encode($reply);
+      return;
+    }
+
+    if(count($productImages) + $nrImages >= 10){
+      $reply = array('error' =>  "Error 400 Bad Request: You can't upload so many images. The maximum number of images per product is 10!");
+      echo json_encode($reply);
+      return;
+    }
+
     $captionsStr = $_POST['captions'];
     $captionsArr = explode(',', $captionsStr);
-    $auctionId = getAuctionIdFromProduct($productId);
+    if(count($captionsArr) != $nrImages){
+      $reply = array('error' =>  "Error 400 Bad Request: Every picture must have a caption.");
+      echo json_encode($reply);
+      return;
+    }
+
+    foreach ($captionsArr as $caption){
+      if($caption == ""){
+        $reply = array('error' =>  "Error 400 Bad Request: Every picture must have a caption.");
+        echo json_encode($reply);
+        return;
+      }else if(strlen($caption) > 128){
+        $reply = array('error' =>  "Error 400 Bad Request: Every picture must have a caption with a maximum length of 128.");
+        echo json_encode($reply);
+        return;
+      }
+    }
+
     $names = $images['name'];
     $types = $images['type'];
     $tmp_names = $images['tmp_name'];
     $errors = $images['error'];
     $sizes = $images['size'];
+
+    $i = 0;
+    foreach($sizes as $size){
+      if($size > 5000000){
+        $reply = array('error' =>  "Error file " . $sizes[$i] . ": The maximum size of each image is 5MB.");
+        echo json_encode($reply);
+        return;
+      }
+      $i++;
+    }
+
+    $currentImagesNames = getProductImagesOriginalNames($productId);
+    $i = 0;
+    foreach ($names as $name){
+      if(in_array($name, $currentImagesNames)){
+        $reply = array('error' =>  "Error file " . $names[$i] . ": This image is already stored.");
+        echo json_encode($reply);
+        return;
+      }
+    }
+
     $reply;
     for($i = 0; $i < $nrImages; $i++) {
       if ($errors[$i]) {
-        $reply['Picture ' . $names[$i]] = "Error 400 Bad Request: Invalid file!";
+        $reply['error'] .= "Picture " . $names[$i] . ": Invalid file!<br/>";
       }else {
-        $imageId = getNextImageId();
+        $imageId = getNextImageId() + 1;
         $extension = end(explode("/", $types[$i]));
         try {
           $caption = trim(strip_tags($captionsArr[$i]));
-          if(strlen($caption) > 128)
-            $caption = "Product picture";
-          addProductPicture($productId, $imageId . "." . $extension, $caption);
+          addProductPicture($productId, $imageId . "." . $extension, $caption, $names[$i]);
         } catch(PDOException $e) {
-          $reply['Picture ' . $names[$i]] = "Error 500 Internal Server: Error storing image-product association.";
+          $reply['error'] .= "Error 500 Internal Server: Error storing the association between the product and " . $names[$i] . ".<br/>";
         }
 
         $picturePath = $BASE_DIR . "images/auctions/" . $imageId . "." . $extension;
         if (!move_uploaded_file($tmp_names[$i], $picturePath)) {
-          $reply['Picture ' . $names[$i]] =  "Error 400 Bad Request: Error while storing the image!";
+          $reply['error'] .=  "Error storing the picture " . $names[$i] . "!";
           deleteProductPicture($imageId);
         }
       }
