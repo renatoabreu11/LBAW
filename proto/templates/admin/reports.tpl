@@ -19,7 +19,7 @@
             <td><a href="{$BASE_URL}pages/user/user.php?id={$report.user_id}">{$report.username}</a></td>
           {elseif $reportType === "Auction"}
             <td><a href="{$BASE_URL}pages/auction/auction.php?id={$report.auction_id}">{$report.auction_id}</a></td>
-          {elseif $reportType === "Review" || $reportType === "Question" || $reportType == "Answer"}
+          {elseif $reportType === "Question" || $reportType == "Answer"}
             <td>Written by <a href="{$BASE_URL}pages/auction/auction.php?id={$report.user_id}">{$report.username}</a></td>
           {/if}
           <td>{$report.message}</td>

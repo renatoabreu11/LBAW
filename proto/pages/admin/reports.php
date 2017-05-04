@@ -15,7 +15,7 @@ if(!validAdmin($username, $id)){
   $smarty->display('common/404.tpl');
   return;
 }
-$reportTypes = ['Answer', 'Auction', 'Question', 'Review', 'User'];
+$reportTypes = ['Answer', 'Auction', 'Question', 'User'];
 $reportType = $_GET['type'];
 $reports;
 
@@ -28,9 +28,6 @@ switch ($reportType){
     break;
   case "Question":
     $reports = getQuestionReports();
-    break;
-  case "Review":
-    $reports = getReviewReports();
     break;
   default:
     $reportType = "User";

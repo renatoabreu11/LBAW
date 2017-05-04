@@ -415,7 +415,7 @@ $(document).ready(function() {
       return;
 
     let reportType = reportTable.find('th.reportType').html();
-    let types = ['Answer', 'Auction', 'User', 'Question', 'Review'];
+    let types = ['Answer', 'Auction', 'User', 'Question'];
     if(types.indexOf(reportType) === -1)
       return;
 

@@ -23,7 +23,7 @@ if (!$_POST['id'] || !$_POST['type']){
 $reportId = $_POST['id'];
 $type = $_POST['type'];
 
-$types = array("User", "Auction", "Review", "Question", "Answer");
+$types = array("User", "Auction", "Question", "Answer");
 
 if (!in_array($type, $types)) {
   echo 'Error 400 Bad Request: Invalid report type!';
@@ -48,9 +48,6 @@ try {
       break;
     case "Answer":
       deleteAnswerReport($reportId);
-      break;
-    case "Review":
-      deleteReviewReport($reportId);
       break;
   }
 } catch (PDOException $e) {

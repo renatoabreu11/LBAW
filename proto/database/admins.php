@@ -132,24 +132,6 @@ function getQuestionReports(){
 }
 
 /**
- * Return all review reports
- * @return array
- */
-function getReviewReports(){
-  global $conn;
-  $stmt = $conn->prepare(
-    'SELECT review_report.*, "user".username, "user".id as user_id
-                    FROM review_report
-                    JOIN review ON review_report.review_id = review.id
-                    JOIN bid ON review.bid_id = bid.id
-                    JOIN "user" ON bid.user_id = "user".id
-                    ORDER BY review_report.date DESC;');
-  $stmt->execute();
-  $result = $stmt->fetchAll();
-  return $result;
-}
-
-/**
  * Return all auction reports
  * @return array
  */
@@ -276,16 +258,5 @@ function deleteQuestionReport($id){
   global $conn;
   $stmt = $conn->prepare('DELETE 
                                 FROM question_report WHERE id=?');
-  $stmt->execute(array($id));
-}
-
-/**
- * Delete a record from the review reports table
- * @param $id
- */
-function deleteReviewReport($id){
-  global $conn;
-  $stmt = $conn->prepare('DELETE 
-                                FROM review_report WHERE id=?');
   $stmt->execute(array($id));
 }
