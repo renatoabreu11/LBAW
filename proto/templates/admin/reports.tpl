@@ -2,7 +2,7 @@
   <h4><i class="fa fa-users" aria-hidden="true"></i> {$reportType} reports</h4>
 
   <div class="table-responsive">
-    <table id="reportsTable" class="table row-border" cellspacing="0" width="100%">
+    <table id="reportsTable" class="table row-border">
       <thead>
       <tr>
         <th>Report ID</th>
@@ -19,7 +19,7 @@
             <td><a href="{$BASE_URL}pages/user/user.php?id={$report.user_id}">{$report.username}</a></td>
           {elseif $reportType === "Auction"}
             <td><a href="{$BASE_URL}pages/auction/auction.php?id={$report.auction_id}">{$report.auction_id}</a></td>
-          {elseif $reportType === "Review" || $reportType === "Question" || $reportType == "Answer"}
+          {elseif $reportType === "Question" || $reportType == "Answer"}
             <td>Written by <a href="{$BASE_URL}pages/auction/auction.php?id={$report.user_id}">{$report.username}</a></td>
           {/if}
           <td>{$report.message}</td>
@@ -43,7 +43,7 @@
   </div>
 
   <div class="form-group reportSelection">
-    <label for="service">Select the type of report that you want to analyse</label>
+    <label for="report_type">Select the type of report that you want to analyse</label>
     <br>
     <div class="col-sm-3">
       <select class="form-control" id="report_type" name="report_type">

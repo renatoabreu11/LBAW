@@ -5,7 +5,7 @@
     {if $USERNAME}
       <a class="pull-right leaveFeedbackPopup" href="#leaveFeedback">Leave a Feedback</a>
       <div id="leaveFeedback" class="white-popup mfp-hide">
-        <form role="form" action="{$BASE_URL}api/user/feedback.php" method="post" id="feedbackForm">
+        <form action="{$BASE_URL}api/user/feedback.php" method="post" id="feedbackForm">
           <div class="form-group">
             <label for="feedback">Feedback:</label>
             <textarea class="form-control" rows="5" name="feedback" id="feedback"></textarea>

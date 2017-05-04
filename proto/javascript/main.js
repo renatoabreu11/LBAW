@@ -254,3 +254,27 @@ function roundTo(n, digits) {
   let test =(Math.round(n) / multiplicator);
   return +(test.toFixed(2));
 }
+
+/**
+ * Facebook javascript sdk init
+ */
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '278916729224728',
+        xfbml: true,
+        version: 'v2.9',
+    });
+    FB.AppEvents.logPageView();
+};
+
+(function(d, s, id) {
+    let js;
+    let fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+return;
+}
+    js = d.createElement(s); js.id = id;
+    js.src = '//connect.facebook.net/en_US/sdk.js';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));

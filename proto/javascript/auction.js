@@ -129,7 +129,7 @@ $(document).ready(function() {
       notificationsModal.modal('hide');
 
       if(response.indexOf('Success') >= 0)
-        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default btn-remove-auction-watchlist"> Remove from watch list</button></h4>');
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>');
 
       $.magnificPopup.open({
         items: {
@@ -161,7 +161,7 @@ $(document).ready(function() {
 
     request.done(function(response, textStatus, jqXHR) {
       if(response.indexOf('Success') >= 0)
-        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>');
 
       $.magnificPopup.open({
         items: {
@@ -616,8 +616,68 @@ $(document).ready(function() {
     });
   }
 
+  $('.reportAuctionPopup').magnificPopup({
+    type: 'inline',
+    midClick: true,
+  });
+
+  $('#reportAuctionForm').validate({
+    rules: {
+      reportAuctionMessage: {
+        required: true,
+        maxlength: 512,
+      },
+    },
+    submitHandler: reportAuction,
+  });
+
+  /**
+   * Ajax call that reports an auction
+   */
+  function reportAuction(form) {
+    $.magnificPopup.close();
+    let comment = $('#reportAuctionMessage').val();
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/report_auction.php',
+      data: {
+        'auctionId': auctionId,
+        'comment': comment,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        $(form).trigger('reset');
+      }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
+
   // Reply (toggles reply form).
   $('.reply-question').click(function() {
     $('.newAnswerForm').fadeToggle();
   });
+
+  // Facebook Share
+  document.getElementById('social-fb').onclick = function(){
+      FB.ui({
+          method: 'share',
+          hashtag: '#SeekBid',
+          href: window.location
+      }, function(response){});
+      console.log("CLICKED SHARE");
+  }
 });
