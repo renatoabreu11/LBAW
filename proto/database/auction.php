@@ -92,6 +92,16 @@ function getProductCategories($productId){
   return $result;
 }
 
+function getImage($imageId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT *
+                            FROM image
+                            WHERE id = ?');
+  $stmt->execute(array($imageId));
+  $result = $stmt->fetch();
+  return $result;
+}
+
 /**
  * Checks if the auction type given exists in the auction_type enum
  * @param $auctionType
@@ -130,6 +140,24 @@ function validCategory($category){
                           FROM category
                           WHERE name = ?');
   $stmt->execute(array($category));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+/**
+ * Verifies if the image record exists in the database
+ * @param $imageId
+ * @param $productId
+ * @param $originalName
+ *
+ * @return bool
+ */
+function validProductImage($imageId, $productId, $originalName){
+  global $conn;
+  $stmt = $conn->prepare('SELECT * 
+                          FROM image
+                          WHERE id = ? AND product_id = ? AND original_name = ?');
+  $stmt->execute(array($imageId, $productId, $originalName));
   $result = $stmt->fetch();
   return $result !== false;
 }

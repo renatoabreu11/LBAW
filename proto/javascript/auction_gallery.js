@@ -1,11 +1,31 @@
+$(document).one('ready', function() {
+  let productId = $('#product_id').val();
+  let request = $.ajax({
+    type: 'POST',
+    url: BASE_URL + 'api/auction/get_product_images.php',
+    data: {
+      'productId': productId,
+      'userId': userId,
+      'token': token,
+    },
+  });
+
+  request.done(function(response, textStatus, jqXHR) {
+
+  });
+
+  request.fail(function(jqXHR, textStatus, errorThrown) {
+    console.error('The following error occured: ' +
+      textStatus + ': ' + errorThrown);
+  });
+});
+
 $(document).ready(function() {
   let footerTemplate =
     '<div class="file-thumbnail-footer" style ="height:94px">\n' +
     '   <div style="margin:5px 0">\n' +
     '       <input class="kv-input kv-new form-control input-sm text-center ' +
     '{TAG_CSS_NEW}" value="{caption}" placeholder="Enter caption...">\n' +
-    '       <input class="kv-input kv-init form-control input-sm text-center ' +
-    '{TAG_CSS_INIT}" value="{TAG_VALUE}" placeholder="Enter caption...">\n' +
     '   </div>\n' +
     '   {size} {actions}\n' +
     '</div>';
@@ -24,7 +44,6 @@ $(document).ready(function() {
     maxFileCount: 10,
     validateInitialCount: true,
     previewThumbTags: {
-      '{TAG_VALUE}': '',        // no value
       '{TAG_CSS_NEW}': '',      // new thumbnail input
       '{TAG_CSS_INIT}': 'hide',  // hide the initial input
     },
