@@ -3,31 +3,23 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/users.php");
 
-if(!$_GET['id']) {
-  $_SESSION['error_messages'][] = "Undefined id";
-  header("Location:"  . $_SERVER['HTTP_REFERER']);
-  exit;
-}
-
-$id = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
 $token = $_SESSION['token'];
 $username = $_SESSION['username'];
-$userId = $_GET['id'];
 
-if(!is_numeric($userId) || !is_numeric($id)) {
-  $_SESSION['error_messages'][] = "id has invalid characters";
+if(!$username || !$userId || !$token){
+  $smarty->display('common/404.tpl');
+  return;
+}
+
+if(!is_numeric($userId)) {
+  $_SESSION['error_messages'][] = "Invalid user id.";
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
 }
 
-if($userId != $id || !$token || !$username) {
-  $_SESSION['error_messages'][] = "Invalid request. You don't have permissions!";
-  header("Location: $BASE_URL");
-  exit;
-}
-
-$notifications = getActiveNotifications($id);
-$user = getUser($id);
+$notifications = getActiveNotifications($userId);
+$user = getUser($userId);
 $userCurrLocation = getCityAndCountry($userId);
 $countries = getAllCountries();
 $cities = getAllCities();

@@ -4,26 +4,16 @@ include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/users.php');
 
 $username = $_SESSION['username'];
-$id = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
 $token = $_SESSION['token'];
 
-if(!$username || !$id || !$token){
+if(!$username || !$userId || !$token){
   $smarty->display('common/404.tpl');
   return;
 }
 
-$userId = null;
-if (!$_GET['userId']) {
-  $_SESSION['error_messages'][] = "User id field not specified!";
-  header("Location:"  . $BASE_URL);
-  return;
-} else {
-  $userId = $_GET['userId'];
-}
-
-if ($userId != $_SESSION['user_id']) {
-  $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
-  header("Location:"  . $BASE_URL);
+if(!validUser($username, $userId)){
+  $smarty->display('common/404.tpl');
   return;
 }
 

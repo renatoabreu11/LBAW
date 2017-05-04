@@ -13,7 +13,7 @@ if(!$_GET['id']) {
 $loggedUserId = $_SESSION['user_id'];
 
 if(!is_numeric($userId)) {
-  $_SESSION['error_messages'][] = "id has invalid characters";
+  $_SESSION['error_messages'][] = "Invalid user id.";
   header("Location: $BASE_URL");
   exit;
 }

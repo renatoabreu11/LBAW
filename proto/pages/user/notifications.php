@@ -13,7 +13,7 @@ if(!$username || !$id || !$token){
 }
 
 if(!validUser($username, $id)){
-  header("Location: $BASE_URL");
+  $smarty->display('common/404.tpl');
   return;
 }
 
