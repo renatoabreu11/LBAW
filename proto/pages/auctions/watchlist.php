@@ -19,22 +19,12 @@ if(!validUser($username, $id)){
   return;
 }
 
-$page = $_GET['page'];
-
-if (empty($page) || is_numeric($page) == FALSE) {
-    $page = 1;
-}else {
-    $page = $_GET['page'];
-}
-
-$items = 2;
-$offset = ($page * $items) - $items;
-
-$auctions = getPageWatchlistAuctions($id, $items, $offset);
+$auctions = getWatchlistAuctionsOfUser($id);
 $notifications = getActiveNotifications($id);
-$nr_pages = round(countWatchlistAuctions($id) / $items);
 
-$smarty->assign('currPage', $page);
+$items = 4;
+$nr_pages = ceil(count($auctions) / $items);
+
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);
 $smarty->assign('auctions', $auctions);

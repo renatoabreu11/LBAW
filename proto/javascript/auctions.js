@@ -108,14 +108,8 @@ function setPagination() {
     totalPages: nrPages,
     visiblePages: 7,
     onPageClick: function(event, page) {
-      $('.auction_row').each(function() {
-        let nrPage = parseInt($(this).attr('data-page'));
-        if (nrPage == page)
-          $(this).show();
-        else
-          $(this).hide();
-      });
-
+      $('#pagination').attr('data-curr_page', page);
+      showAuctionsOfAPage(page);
       window.scrollTo(0, 0);
     },
   });
@@ -129,6 +123,8 @@ function setSorting() {
     $('.auctionSort li').removeClass('active');
     $(this).addClass('active');
     let id = this.id;
+
+    showAllAuctions(); // tinysort dont sort hidden elements
 
     // normal list
     if (id === 'priceLow')
@@ -152,5 +148,42 @@ function setSorting() {
       tinysort('#auctionsThumbnails>div', {attr: 'data-newest'});
     if (id === 'ending')
       tinysort('#auctionsThumbnails>div', {attr: 'data-ending'});
+
+    let page = $('#pagination').attr('data-curr_page');
+    console.log(page);
+    setAuctionsCurrPage();
+    showAuctionsOfAPage(page);
   });
 }
+
+function showAllAuctions() {
+  $('.auction_row').each(function() {
+    $(this).show();
+  });
+}
+
+function setAuctionsCurrPage() {
+  let counter = 0;
+  $('#auctions .auction_row').each(function() {
+    let hisPage = Math.floor(counter/8)+1;
+    $(this).attr('data-page', hisPage);
+    counter++;
+  });
+  counter = 0;
+  $('#auctionsThumbnails .auction_row').each(function() {
+    let hisPage = Math.floor(counter/8)+1;
+    $(this).attr('data-page', hisPage);
+    counter++;
+  });
+}
+
+function showAuctionsOfAPage(page) {
+  $('.auction_row').each(function() {
+    let nrPage = parseInt($(this).attr('data-page'));
+    if (nrPage == page)
+      $(this).show();
+    else
+      $(this).hide();
+  });
+}
+

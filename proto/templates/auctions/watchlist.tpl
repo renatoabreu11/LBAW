@@ -38,7 +38,6 @@
         </div>
       </form>
     </div>
-
     <div class="controls col-sm-6 col-xs-6">
       <select class="selectpicker input-md textinput textInput form-control" title="Type of auctions">
         <option>All auctions</option>
@@ -49,37 +48,20 @@
     </div>
   </div>
 
-  <div class="table-responsive" id="auctions">
-    {include file='auctions/list.tpl'}
+  <div class="row auctions">
+    {include file='auctions/list_watchlist.tpl'}
   </div>
 
-  {if $nrPages > 1}
-    <div class="row text-center">
-      <ul class="pagination">
-        {if $currPage == 1}
-          <li class="disabled"><a>«</a></li>
-        {else}
-          <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$currPage - 1}">«</a></li>
-        {/if}
-        {for $i=1; $i <= $nrPages; $i++}
-          {if $currPage == $i}
-            <li class="active"><a>{$i} <span class="sr-only">(current)</span></a></li>
-          {else}
-            <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$i}">{$i} </a></li>
-          {/if}
-        {/for}
-        {if $currPage == $nrPages}
-          <li class="disabled"><a>»</a></li>
-        {else}
-          <li ><a href="{$BASE_URL}pages/auctions/watchlist.php?page={$currPage + 1}">»</a></li>
-        {/if}
-      </ul>
-    </div>
-  {/if}
+  <div class="row text-center">
+    <ul id="pagination" class="pagination-sm" data-nr_pages="{$nrPages}"></ul>
+  </div>
+
 </div>
 
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
-<script src="{$BASE_URL}javascript/auctions.js"></script>
+<script src="{$BASE_URL}lib/select/bootstrap-select.min.js"></script>
+<script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
+<script src="{$BASE_URL}javascript/watchlist.js"></script>
 
 {include file = 'common/footer.tpl'}
