@@ -586,6 +586,16 @@ function countNotifications($userId){
   return $result['count'];
 }
 
+function getProfilePic($userId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT profile_pic
+                          FROM "user"
+                          WHERE id = :id');
+  $stmt->bindParam('id', $userId);
+  $stmt->execute();
+  return $stmt->fetch()['profile_pic'];
+}
+
 /* ========================== Inserts  ========================== */
 
 /**
@@ -756,8 +766,8 @@ function updateUserFacebook($userId, $facebook_oauth_id, $facebook_picture) {
 function updateUserPicture($userId, $pictureId) {
   global $conn;
   $stmt = $conn->prepare('UPDATE "user"
-                                SET profile_pic = :picture_id
-                                WHERE id = :user_id');
+                          SET profile_pic = :picture_id
+                          WHERE id = :user_id');
   $stmt->bindParam('picture_id', $pictureId);
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();

@@ -29,6 +29,7 @@
       <div class="panel-body">
         <form class="form-horizontal" id="form-general" method="post" action="{$BASE_URL}actions/user/user_edit.php" enctype="multipart/form-data">
           <input type="hidden" name="userId" value="{$user.id}">
+          <input type="hidden" name="token" value="{$TOKEN}">
           <input type="hidden" name="picture" value="{$BASE_URL}images/users/{$user.profile_pic}">
           <div class="panel panel-info">
             <div class="panel-heading">General Info</div>
