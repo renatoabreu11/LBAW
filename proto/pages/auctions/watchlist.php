@@ -20,10 +20,23 @@ if(!validUser($username, $id)){
 }
 
 $auctions = getWatchlistAuctionsOfUser($id);
-/*
+$now = strtotime(date('Y/m/d h:i:s a', time()));
+
+// add 'active' and 'myAuction' attributes to each auction
 foreach ($auctions as &$auction) {
-	echo $seller_id = $auction['user_id'] . "\n";
-}*/
+	$seller_id = $auction['user_id'];
+	$end_date = strtotime($auction['end_date']);
+
+	if ($seller_id == $id)
+		$auction['myAuction'] = 1;
+	else
+		$auction['myAuction'] = 0;
+
+	if ($end_date > $now)
+		$auction['active'] = 1;
+	else
+		$auction['active'] = 0;
+}
 
 $notifications = getActiveNotifications($id);
 

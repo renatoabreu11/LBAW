@@ -103,6 +103,8 @@ function setSearchRequest() {
  */
 function setPagination() {
   let nrPages = parseInt($('#pagination').attr('data-nr_pages'));
+  if (nrPages == 0)
+    return;
 
   $('#pagination').twbsPagination({
     totalPages: nrPages,

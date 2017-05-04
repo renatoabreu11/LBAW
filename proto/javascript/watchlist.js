@@ -3,6 +3,7 @@ $(document).ready(function() {
   setPagination();
   setRankings();
   setSorting();
+  setFilter();
 });
 
 /**
@@ -34,6 +35,9 @@ function setCountdown() {
  */
 function setPagination() {
   let nrPages = parseInt($('#pagination').attr('data-nr_pages'));
+  if (nrPages == 0) {
+    return;
+  }
 
   $('#pagination').twbsPagination({
     totalPages: nrPages,
@@ -41,7 +45,6 @@ function setPagination() {
     onPageClick: function(event, page) {
       $('#pagination').attr('data-curr_page', page);
       showAuctionsOfAPage(page);
-      window.scrollTo(0, 0);
     },
   });
 }
@@ -69,6 +72,15 @@ function showAllAuctions() {
 }
 
 /**
+ * Hide all auctions of all pages.
+ */
+function hideAllAuctions() {
+  $('.auction_row').each(function() {
+    $(this).hide();
+  });
+}
+
+/**
  * Set sorting filters.
  */
 function setSorting() {
@@ -90,31 +102,107 @@ function setSorting() {
       tinysort('#auctionsThumbnails>div', {attr: 'data-newest'});
     if (id === 'ending')
       tinysort('#auctionsThumbnails>div', {attr: 'data-ending'});
-    if (id === 'recentlyAdded') {
-      console.log('oi');
+    if (id === 'recentlyAdded')
       tinysort('#auctionsThumbnails>div', {attr: 'data-recentlyAdded'});
-    }
 
-    let page = $('#pagination').attr('data-curr_page');
-    setAuctionsCurrPage();
-    showAuctionsOfAPage(page);
+    let currPage = 1;
+    $('#pagination').attr('data-curr_page', currPage);
+    setPagesOfAuctions();
+    $('#pagination').twbsPagination('destroy');
+    setPagination();
+    showAuctionsOfAPage(currPage);
   });
 }
 
 /**
  * Set attribute data-page of each auction element.
  */
-function setAuctionsCurrPage() {
+function setPagesOfAuctions() {
   let counter = 0;
-  $('#auctions .auction_row').each(function() {
-    let hisPage = Math.floor(counter/4)+1;
-    $(this).attr('data-page', hisPage);
-    counter++;
-  });
-  counter = 0;
   $('#auctionsThumbnails .auction_row').each(function() {
     let hisPage = Math.floor(counter/4)+1;
     $(this).attr('data-page', hisPage);
     counter++;
+  });
+}
+
+/**
+ * Set filte of auctions in watchlist
+ */ 
+function setFilter() {
+  $('.selectpicker').on('change', function(){
+    let selected = $(this).find("option:selected").val();
+    
+    $('#pagination').attr('data-nr_pages', 0);
+    hideAllAuctions();
+    showAuctionsSpecifiedInFilter(selected);
+   
+    let numPages = getNumPagesNecessaryToVisibleAuctions();
+    $('#pagination').attr('data-nr_pages', numPages);
+    setPagesOfVisibleAuctions();
+
+    let currPage = 1
+    $('#pagination').attr('data-curr_page', currPage);
+    $('#pagination').twbsPagination('destroy');
+    setPagination();
+  });
+}
+
+/**
+ * Show auctions based on the selected option of filter.
+ */
+function showAuctionsSpecifiedInFilter(selected) {
+  if (selected == "All auctions") {
+    showAllAuctions();
+  }
+  else if (selected == "My auctions") {
+    $('#auctionsThumbnails .auction_row').each(function() {
+      let myAuction = $(this).attr('data-myAuction');
+      if (myAuction == 1)
+        $(this).show();
+    });
+  }
+  else if (selected == "Closed auctions") {
+    $('#auctionsThumbnails .auction_row').each(function() {
+      let myAuction = $(this).attr('data-active');
+      if (myAuction == 0) 
+        $(this).show();
+    });
+  }
+  else if (selected == "Open auctions") {
+    $('#auctionsThumbnails .auction_row').each(function() {
+      let myAuction = $(this).attr('data-active');
+      if (myAuction == 1) 
+        $(this).show();
+    });
+  }
+}
+
+/**
+ * Get number of pages necessary to all showing auctions.
+ */
+function getNumPagesNecessaryToVisibleAuctions() {
+  let numAuctions = 0;
+  $('#auctionsThumbnails .auction_row').each(function() {
+    if ($(this).is(":visible")) 
+      numAuctions++;
+  });
+  return Math.ceil(numAuctions/4.0);
+}
+
+/**
+ * Set attribute data-page of each auction element.
+ */
+function setPagesOfVisibleAuctions() {
+  let counter = 0;
+  $('#auctionsThumbnails .auction_row').each(function() {
+    if ($(this).is(":visible")) {
+      let hisPage = Math.floor(counter/4)+1;
+      $(this).attr('data-page', hisPage);
+      counter++;
+    }
+    else {
+      $(this).attr('data-page', -1);
+    }
   });
 }

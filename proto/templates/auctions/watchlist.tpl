@@ -21,17 +21,17 @@
   <div class="row" style="padding-left: 1.5em; padding-right: 1.5em;">
     <div class="col-xs-6" style="padding-top: 1.5em;">
       <ul class="auctionSort">
-        <li id="popular" class="active"><a href="#">Popular</a></li>
-        <li id="newest"><a href="#">Newest</a></li>
-        <li id="ending"><a href="#">Ending</a></li>
-        <li id="priceLow"><a href="#">Price (low)</a></li>
-        <li id="priceHigh"><a href="#">Price (high)</a></li>
-        <li id="recentlyAdded"><a href="#">Recently added</a></li>
+        <li id="popular" class="active"><a href="javascript:;">Popular</a></li>
+        <li id="newest"><a href="javascript:;">Newest</a></li>
+        <li id="ending"><a href="javascript:;">Ending</a></li>
+        <li id="priceLow"><a href="javascript:;">Price (low)</a></li>
+        <li id="priceHigh"><a href="javascript:;">Price (high)</a></li>
+        <li id="recentlyAdded"><a href="javascript:;">Recently added</a></li>
       </ul>
     </div>
     <div class="controls col-xs-6" style="padding-top: 1.5em;">
       <select class="selectpicker input-md textinput textInput form-control">
-        <option>All auctions</option>
+        <option selected="selected">All auctions</option>
         <option>My auctions</option>
         <option>Closed auctions</option>
         <option>Open auctions</option>
@@ -39,11 +39,14 @@
     </div>
   </div>
 
-  <div id="auctionsThumbnails" class="row auctions">
-    {include file='auctions/list_watchlist.tpl'}
+  <div id="auctionsThumbnails" class="row auctions" style="margin: auto;">
+    {if (count($auctions) >= 1) }
+      {include file='auctions/list_watchlist.tpl'}
+    {else}
+      <p>You have no auctions on watchlist.</p>
+    {/if}
   </div>
-
-  <div class="row text-center">
+  <div class="row text-center result">
     <ul id="pagination" class="pagination-sm" data-nr_pages="{$nrPages}"></ul>
   </div>
 
