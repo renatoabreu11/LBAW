@@ -7,7 +7,7 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
       <i class="glyphicon glyphicon-bell"></i> <span class="badge">{count($notifications)}</span>
     </a>
-    <ul class="dropdown-menu notifications" role="menu">
+    <div class="dropdown-menu notifications" role="menu">
       <div class="notification-heading text-center">
         <h4 class="menu-title">Notifications</h4>
       </div>
@@ -19,7 +19,7 @@
         <div class="notifications-wrapper">
           <div class="media notification-media id-{$notification.id}">
             <div class="media-left" style="padding-top: 0.25em; padding-left: 0.5em;">
-              <img src="{$BASE_URL}images/assets/{$notification.type}.png" width="64">
+              <img src="{$BASE_URL}images/assets/{$notification.type}.png" Alt="{$notification.type}" width="64">
             </div>
             <div class="media-body">
               <a class="notifications-item-title hideNotification">
@@ -39,7 +39,7 @@
         <h4 class="menu-title"><a href="{$BASE_URL}pages/user/notifications.php?page=1">View all notifications</a></h4>
         <h4 class="menu-title pull-right markRecentNotificationsAsRead"><a>Mark all as read</a></h4>
       </div>
-    </ul>
+    </div>
   </li>
 {/if}
 
@@ -48,8 +48,7 @@
   <ul class="dropdown-menu">
     {if $USERNAME}
       <li><a href="{$BASE_URL}pages/user/user.php?id={$USER_ID}">Profile</a></li>
-      <li><a href="{$BASE_URL}pages/user/credit.php?userId={$USER_ID}">Credit info</a></li>
-      <li><a href="">My Auctions</a></li>
+      <li><a href="{$BASE_URL}pages/user/credit.php">Credit info</a></li>
       <li><a href="{$BASE_URL}pages/auctions/watchlist.php?page=1">Watch List</a></li>
     {elseif $ADMIN_USERNAME}
       <li><a href="{$BASE_URL}pages/admin/users.php">Admin Page</a></li>

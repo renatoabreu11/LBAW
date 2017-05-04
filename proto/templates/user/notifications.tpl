@@ -25,7 +25,7 @@
       <div class="notifications-wrapper">
         <div class="media notification-media">
           <div class="media-left" style="padding: 1em;">
-            <img src="{$BASE_URL}images/assets/{$notif.type}.png" width="64">
+            <img src="{$BASE_URL}images/assets/{$notif.type}.png" Alt="{$notif.type}" width="64">
           </div>
           <div class="media-body">
             <a class="notifications-item-title">
