@@ -18,28 +18,19 @@
     <h3>Watchlist</h3>
   </div>
 
-  <div class="col-sm-12" style="padding-top: 1.5em;">
-    <ul class="auctionSort">
-      <li class="active"><a href="#">Popular</a></li>
-      <li><a href="#">Newest</a></li>
-      <li><a href="#">Ending</a></li>
-      <li><a href="#">Price (low)</a></li>
-      <li><a href="#">Price (high)</a></li>
-      <li><a href="#">Recently added</a></li>
-    </ul>
-  </div>
-
   <div class="row" style="padding-left: 1.5em; padding-right: 1.5em;">
-    <div class="col-sm-6 col-xs-6">
-      <form>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-          <input type="text" class="form-control" name="userWatchList" placeholder="Filter auctions by seller...">
-        </div>
-      </form>
+    <div class="col-xs-6" style="padding-top: 1.5em;">
+      <ul class="auctionSort">
+        <li id="popular" class="active"><a href="#">Popular</a></li>
+        <li id="newest"><a href="#">Newest</a></li>
+        <li id="ending"><a href="#">Ending</a></li>
+        <li id="priceLow"><a href="#">Price (low)</a></li>
+        <li id="priceHigh"><a href="#">Price (high)</a></li>
+        <li id="recentlyAdded"><a href="#">Recently added</a></li>
+      </ul>
     </div>
-    <div class="controls col-sm-6 col-xs-6">
-      <select class="selectpicker input-md textinput textInput form-control" title="Type of auctions">
+    <div class="controls col-xs-6" style="padding-top: 1.5em;">
+      <select class="selectpicker input-md textinput textInput form-control">
         <option>All auctions</option>
         <option>My auctions</option>
         <option>Closed auctions</option>
@@ -48,7 +39,7 @@
     </div>
   </div>
 
-  <div class="row auctions">
+  <div id="auctionsThumbnails" class="row auctions">
     {include file='auctions/list_watchlist.tpl'}
   </div>
 
@@ -62,6 +53,7 @@
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}lib/select/bootstrap-select.min.js"></script>
 <script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
+<script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
 <script src="{$BASE_URL}javascript/watchlist.js"></script>
 
 {include file = 'common/footer.tpl'}
