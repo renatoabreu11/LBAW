@@ -795,8 +795,7 @@ function updateUserLocation($userId, $cityId) {
  */
 function updatePassword($userId, $newPass) {
   global $conn;
-  global $PASSWORD_HASH_COST;
-  $options = ['cost' => $PASSWORD_HASH_COST];
+  $options = ['cost' => 12];
   $encryptedNewPass = password_hash($newPass, PASSWORD_DEFAULT, $options);
   $stmt = $conn->prepare('UPDATE "user"
                                 SET hashed_pass = :new_hashed_pass

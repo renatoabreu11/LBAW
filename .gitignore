@@ -8,3 +8,5 @@ proto/.htaccess
 package.json
 node_modules
 .stylelintrc
+proto/vendor/
+final/vendor/
