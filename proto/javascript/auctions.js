@@ -150,18 +150,23 @@ function setSorting() {
       tinysort('#auctionsThumbnails>div', {attr: 'data-ending'});
 
     let page = $('#pagination').attr('data-curr_page');
-    console.log(page);
     setAuctionsCurrPage();
     showAuctionsOfAPage(page);
   });
 }
 
+/**
+ * Show all auctions of all pages.
+ */
 function showAllAuctions() {
   $('.auction_row').each(function() {
     $(this).show();
   });
 }
 
+/**
+ * Set attribute data-page of each auction element.
+ */
 function setAuctionsCurrPage() {
   let counter = 0;
   $('#auctions .auction_row').each(function() {
@@ -177,6 +182,9 @@ function setAuctionsCurrPage() {
   });
 }
 
+/**
+ * Show all auctions of a page.
+ */
 function showAuctionsOfAPage(page) {
   $('.auction_row').each(function() {
     let nrPage = parseInt($(this).attr('data-page'));

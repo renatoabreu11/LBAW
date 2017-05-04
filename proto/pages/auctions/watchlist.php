@@ -20,6 +20,11 @@ if(!validUser($username, $id)){
 }
 
 $auctions = getWatchlistAuctionsOfUser($id);
+/*
+foreach ($auctions as &$auction) {
+	echo $seller_id = $auction['user_id'] . "\n";
+}*/
+
 $notifications = getActiveNotifications($id);
 
 $items = 4;
