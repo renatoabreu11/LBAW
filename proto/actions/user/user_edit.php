@@ -85,6 +85,15 @@ $picture = $_FILES['picture'];
 if($picture['size'] > 0) {
   $extension = end(explode(".", $picture['name']));
   $picturePath = $BASE_DIR . "images/users/" . $userId . "." . $extension;
+
+  $oldPicture = getProfilePic($userId);
+  $oldExtension = end(explode(".", $oldPicture));
+  if($oldPicture != 'default.png' && $oldExtension != $extension) {
+    $path = realpath($BASE_DIR . 'images/users/' . $oldPicture);
+    if(is_writable($path))
+      unlink($path);
+  }
+
   if(!move_uploaded_file($picture['tmp_name'], $picturePath)) {
     $_SESSION['error_messages'][] = "Error updating your profile avatar. Please select another photo.";
     $_SESSION['form_values'] = $_POST;
@@ -93,15 +102,6 @@ if($picture['size'] > 0) {
   }
 
   try {
-    $oldPicture = getProfilePic($userId);
-    $oldExtension = end(explode(".", $oldPicture));
-
-    if($oldExtension != $extension) {
-      $path = realpath($BASE_URL . 'images/users/' . $oldPicture);
-      if(is_writable($path))
-        unlink($path);
-    }
-
     updateUserPicture($userId, $userId . "." . $extension);
   } catch(PDOException $e) {
     $_SESSION['error_messages'][] = "Error updating your profile avatar. Please select another photo.";
