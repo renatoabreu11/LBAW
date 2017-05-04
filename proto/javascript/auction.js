@@ -670,4 +670,14 @@ $(document).ready(function() {
   $('.reply-question').click(function() {
     $('.newAnswerForm').fadeToggle();
   });
+
+  // Facebook Share
+  document.getElementById('social-fb').onclick = function(){
+      FB.ui({
+          method: 'share',
+          hashtag: '#SeekBid',
+          href: window.location
+      }, function(response){});
+      console.log("CLICKED SHARE");
+  }
 });
