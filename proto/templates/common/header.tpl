@@ -71,6 +71,13 @@
         {include file='authentication/signin.tpl'}
       {/if}
     </div>
+    {if (count($ERROR_MESSAGES) > 0)}
+      <div id="error-messages">
+        {foreach $ERROR_MESSAGES as $error}
+          <p class="text-center" style="color: brown;"><strong>{$error}</strong></p>
+        {/foreach}
+      </div>
+    {/if}
   </div>
 </nav>
 
@@ -82,14 +89,3 @@
 {if $USERNAME || $ADMIN_USERNAME}
   <input type="hidden" name="token" value="{$TOKEN}">
 {/if}
-
-<div id="error_messages">
-  {foreach $ERROR_MESSAGES as $error}
-    <div class="error">{$error}<a class="close" href="#">X</a></div>
-  {/foreach}
-</div>
-<div id="success_messages">
-  {foreach $SUCCESS_MESSAGES as $success}
-    <div class="success">{$success}<a class="close" href="#">X</a></div>
-  {/foreach}
-</div>

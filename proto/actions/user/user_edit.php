@@ -11,7 +11,7 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 
 $loggedUserId = $_SESSION['user_id'];
 $userId = $_POST['userId'];
-if($loggedUserId != $userId) {
+if($loggedUserId != 1) {
   $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
   header("Location:"  . $BASE_URL);
   exit;
