@@ -86,11 +86,11 @@
 							<div class="row">
 								<div class="col-sm-8 col-xs-12">
 									<ul class="auctionSort">
-										<li id="popular" class="active"><a href="#">Popular</a></li>
-										<li id="newest"><a href="#">Newest</a></li>
-										<li id="ending"><a href="#">Ending</a></li>
-										<li id="priceLow"><a href="#">Price (low)</a></li>
-										<li id="priceHigh"><a href="#">Price (high)</a></li>
+										<li id="popular" class="active"><a href="javascript:;">Popular</a></li>
+										<li id="newest"><a href="javascript:;">Newest</a></li>
+										<li id="ending"><a href="javascript:;">Ending</a></li>
+										<li id="priceLow"><a href="javascript:;">Price (low)</a></li>
+										<li id="priceHigh"><a href="javascript:;">Price (high)</a></li>
 									</ul>
 								</div>
 
