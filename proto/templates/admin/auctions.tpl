@@ -1,7 +1,7 @@
 <div class="adminOption">
   <h4><i class="fa fa-users" aria-hidden="true"></i> Auctions list</h4>
   <div class="table-responsive">
-    <table id="auctionsTable" class="table row-border" cellspacing="0" width="100%">
+    <table id="auctionsTable" class="table row-border">
       <thead>
       <tr>
         <th>#</th>

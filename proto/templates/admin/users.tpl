@@ -1,7 +1,7 @@
 <div class="adminOption">
   <h4><i class="fa fa-users" aria-hidden="true"></i> Users list</h4>
   <div class="table-responsive">
-    <table id="usersTable" class="table row-border" cellspacing="0" width="100%">
+    <table id="usersTable" class="table row-border">
       <thead>
       <tr>
         <th>#</th>
@@ -43,7 +43,7 @@
   </div>
 
   <div id="notifyUserConfirmation" class="white-popup mfp-hide">
-    <form role="form" action="{$BASE_URL}api/admin/notify_user.php" method="post" id="notificationForm">
+    <form action="{$BASE_URL}api/admin/notify_user.php" method="post" id="notificationForm">
       <div class="form-group">
         <label for="notification">Notification:</label>
         <textarea class="form-control" rows="5" id="notification" name="notification"></textarea>

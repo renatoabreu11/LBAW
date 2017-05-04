@@ -4,7 +4,7 @@
   <div class="row main">
     <div class="panel-heading">
       <div class="panel-title text-center">
-        <img src="{$BASE_URL}images/assets/favicon.jpg" class="img-rounded" width="32" height="32" style="position: relative; bottom: 5px;">
+        <img src="{$BASE_URL}images/assets/favicon.jpg" class="img-rounded" width="32" height="32" Alt="Seek Bid logo" style="position: relative; bottom: 5px;">
         <h2 class="title" id="title-signup" style="display: inline;">Join Seek Bid for free!</h2>
       </div>
     </div>

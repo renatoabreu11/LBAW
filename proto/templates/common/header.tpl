@@ -54,7 +54,8 @@
       {/if}
       <ul class="nav navbar-nav navbar-right">
         {if !$USERNAME && !$ADMIN_USERNAME}
-          {include file='common/menu_logged_out.tpl'}
+          <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
+          <li><a href="{$BASE_URL}pages/authentication/signup.php">Sign up</a></li>
         {elseif $ADMIN_USERNAME}
           <li>
             <a href="#menu-toggle" id="menu-toggle" class="navlink">Admin Panel</a>
@@ -65,6 +66,10 @@
           {include file='common/menu_logged_in.tpl'}
         {/if}
       </ul>
+
+      {if !$USERNAME && !$ADMIN_USERNAME}
+        {include file='authentication/signin.tpl'}
+      {/if}
     </div>
   </div>
 </nav>
