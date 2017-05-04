@@ -129,7 +129,7 @@ $(document).ready(function() {
       notificationsModal.modal('hide');
 
       if(response.indexOf('Success') >= 0)
-        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default btn-remove-auction-watchlist"> Remove from watch list</button></h4>');
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>');
 
       $.magnificPopup.open({
         items: {
@@ -161,7 +161,7 @@ $(document).ready(function() {
 
     request.done(function(response, textStatus, jqXHR) {
       if(response.indexOf('Success') >= 0)
-        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>');
+        watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>');
 
       $.magnificPopup.open({
         items: {

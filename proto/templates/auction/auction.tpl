@@ -1,3 +1,32 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {include file='common/header.tpl'}
 
 <div class="container">
@@ -67,12 +96,17 @@
             <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
             <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
           </div>
+          <div class="sellerInfo text-center">
+            <p style="margin-bottom: 2px;">Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></p>
+            <p><a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Review(s)</a></p>
+            {if ($numReviews != 0)}<div class="rateYo text-center" data-rating="{$seller.rating}" style="margin: auto; margin-bottom: 5px;"></div>{/if}
+          </div>
           {if ($USERNAME)}
           <div class="watchlist-button">
             {if ($isOnWatchlist)}
-              <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default btn-remove-auction-watchlist"> Remove from watch list</button></h4>
+              <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>
             {else}
-              <h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span><button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal"> Add to watch list</button></h4>
+              <h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>
             {/if}
           </div>
           <div id="watchlist-notification-modal" class="modal fade" role="dialog">
@@ -88,15 +122,10 @@
           </div>
         </div>
         {/if}
-      </div>
 
       <div class="col-md-8 col-xs-12 info">
         <h3 class="hidden-xs">{$product.name}</h3>
-        <div class="sellerInfo">
-          <p>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></p>
-          {if ($numReviews != 0)}<div class="rateYo" data-rating="{$seller.rating}"></div> {/if}
-          <p><a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews" style="display: inline">{$numReviews} Reviews</a>
-        </div>
+        <hr style="margin-bottom: 0px;">
         <div class="col-md-6 text-center auctionDetails">
           <h3 style="padding-top: 1em; padding-bottom: 0.5em;" class="current-bid">Current Bid: {$auction.curr_bid}€</h3>
           {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
@@ -148,6 +177,7 @@
             {/foreach}
             </tbody>
           </table>
+          <span><a class="reportAuctionPopup btn btn-default pull-right" href="#reportAuctionConfirmation">Report</a></span>
         </div>
       </div>
     </div>

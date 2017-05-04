@@ -24,6 +24,19 @@ $(document).ready(function() {
     allowedFileExtensions: ['jpg', 'png', 'gif'],
   });
 
+  /*$("#e-mail").keyup(function() {
+    let formGroup = $(this).closest(".form-group");
+    let emailVal = $(this).val();
+    let emailReg = new RegExp('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/');
+  
+    let regSuccess = emailReg.test(emailVal);
+
+    if(!regSuccess && $('.email-error').length == 0)
+      formGroup.append('<p class="email-error">Please enter a valid email.</p>');
+    else if(regSuccess && $('.email-error').length > 0)
+      formGroup.children().last().remove();
+  });*/
+
   $('#form-general').validate({
     rules:
       {
