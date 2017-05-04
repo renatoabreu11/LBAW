@@ -639,7 +639,7 @@ $(document).ready(function() {
     let comment = $('#reportAuctionMessage').val();
     let request = $.ajax({
       type: 'POST',
-      url: BASE_URL + 'api/user/report_auction.php',
+      url: BASE_URL + 'api/auction/report_auction.php',
       data: {
         'auctionId': auctionId,
         'comment': comment,
