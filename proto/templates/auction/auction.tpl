@@ -90,25 +90,20 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+          <h5 class="text-center" style="color: darkgray">Click on the image to expand it</h5>
           <div class="share text-center">
             <a href=""><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-            <!--<a href="https://twitter.com/bootsnipp"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-            <a href="https://plus.google.com/+Bootsnipp-page"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-            <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>-->
           </div>
-          <div class="sellerInfo text-center">
-            <p style="margin-bottom: 2px;">Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></p>
-            <p><a target="_blank" href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Review(s)</a></p>
-            {if ($numReviews != 0)}<div class="rateYo text-center" data-rating="{$seller.rating}" style="margin: auto; margin-bottom: 5px;"></div>{/if}
-          </div>
-          {if ($USERNAME)}
-          <div class="watchlist-button">
-            {if ($isOnWatchlist)}
-              <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>
-            {else}
-              <h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>
-            {/if}
-          </div>
+          {if ($USER_ID)}
+            <div class="watchlist-button">
+              {if ($isOnWatchlist)}
+                <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>
+              {else}
+                <h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>
+              {/if}
+            </div>
+          {/if}
+          <span><a class="reportAuctionPopup btn btn-default" href="#reportAuctionConfirmation">Report</a></span>
           <div id="watchlist-notification-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -121,66 +116,78 @@
             </div>
           </div>
         </div>
-        {/if}
 
-      <div class="col-md-8 col-xs-12 info">
-        <h3 class="hidden-xs">{$product.name}</h3>
-        <hr style="margin-bottom: 0px;">
-        <div class="col-md-6 text-center auctionDetails">
-          <h3 style="padding-top: 1em; padding-bottom: 0.5em;" class="current-bid">Current Bid: {$auction.curr_bid}€</h3>
-          {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
-            <div class="section">
-              <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
-              <div id="bidOnAuction" class="white-popup mfp-hide">
-                <div class="row" style="margin: 10px;">
-                  <h4 class="bid-title">Bid on auction</h4>
-                  <div class="input-group number-spinner">
+        <div class="col-md-8 col-xs-12 info">
+          <h3 class="hidden-xs">{$product.name}</h3>
+          <div class="sellerInfo">
+            <span>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></span>
+            {if ($numReviews != 0)}
+            <span class="rateYo user-rating-stars" data-rating="{$seller.rating}"></span>
+            {/if}
+            <span class="hidden-xs">
+              <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Review(s)</a>
+            </span>
+          </div>
+          <div class="col-md-6 text-center auctionDetails">
+            <h3 style="padding-top: 1em; padding-bottom: 0.5em;" class="current-bid">Current Bid: {$auction.curr_bid}€</h3>
+            {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
+              <div class="section">
+                <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
+                <div id="bidOnAuction" class="white-popup mfp-hide">
+                  <div class="row" style="margin: 10px;">
+                    <h4 class="bid-title">Bid on auction</h4>
+                    <div class="input-group number-spinner">
                         <span class="input-group-btn">
                             <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                         </span>
-                    <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
-                    <span class="input-group-btn">
+                      <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
+                      <span class="input-group-btn">
                             <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                         </span>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn btn-info bidOnAuction" style="width: 35%">Place bid</button>
+                    <button class="btn btn-info closePopup" style="width: 35%">Close</button>
                   </div>
                 </div>
-                <div class="text-center">
-                  <button class="btn btn-info bidOnAuction" style="width: 35%">Place bid</button>
-                  <button class="btn btn-info closePopup" style="width: 35%">Close</button>
-                </div>
               </div>
+            {/if}
+
+            <div class="countdown">
+              <span class="clock"><p>{$auction.end_date}</p></span>
             </div>
-          {/if}
+            <h4>Ending date: {$auction.end_data_readable}</h4>
 
-          <div class="countdown">
-            <span class="clock"><p>{$auction.end_date}</p></span>
+            <div class="visitors">
+              <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
+            </div>
           </div>
-          <h4>Ending date: {$auction.end_data_readable}</h4>
-
-          <div class="visitors">
-            <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
-          </div>
-        </div>
-        <div class="col-md-6 bidders">
-          <h4 style="padding-top: 1em;">Recent Bidders</h4>
-          <table class="table table-fixed">
-            <thead>
-            <tr>
-              <th class="col-xs-5">User</th><th class="col-xs-2">Bid</th><th class="col-xs-5">Date</th>
-            </tr>
-            </thead>
-            <tbody class="bidders-table-body">
-            {foreach $recentBidders as $recentBidder}
+          <div class="col-md-6 bidders">
+            <h4 style="padding-top: 1em;">Recent Bidders</h4>
+            <table class="table table-fixed">
+              <thead>
               <tr>
-                <td class="col-xs-5"><a href="{$BASE_URL}pages/user/user.php?id={$recentBidder.id}">{$recentBidder.username}</a></td><td class="col-xs-2">{$recentBidder.amount}</td><td class="col-xs-5">{$recentBidder.date}</td>
+                <th class="col-xs-5">User</th><th class="col-xs-1">Bid</th><th class="col-xs-6">Date</th>
               </tr>
-            {/foreach}
-            </tbody>
-          </table>
-          <span><a class="reportAuctionPopup btn btn-default pull-right" href="#reportAuctionConfirmation">Report</a></span>
+              </thead>
+              <tbody class="bidders-table-body">
+              {foreach $recentBidders as $recentBidder}
+                <tr>
+                  <td class="col-xs-5">
+                    <a href="{$BASE_URL}pages/user/user.php?id={$recentBidder.id}">{$recentBidder.username}</a>
+                  </td>
+                  <td class="col-xs-1">{$recentBidder.amount}</td>
+                  <td class="col-xs-6">{$recentBidder.date}</td>
+                </tr>
+              {/foreach}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Accessible information -->
     <input type="hidden" name="auction-id" value="{$auction.id}">

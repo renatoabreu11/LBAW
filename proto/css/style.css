@@ -176,18 +176,23 @@ ul {
   padding-top: 0.5em;
 }
 
-.user-rating-stars {
-  display: inline;
-  padding-left: 1em;
-  padding-right: 1em;
-  color: #ffc82c;
-}
-
 .sellerInfo {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   border-bottom: 1px solid lightgrey;
 }
+
+.sellerInfo > span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.user-rating-stars {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
 
 .auction .info {
   color: black;
