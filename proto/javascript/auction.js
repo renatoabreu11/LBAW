@@ -616,6 +616,56 @@ $(document).ready(function() {
     });
   }
 
+  $('.reportAuctionPopup').magnificPopup({
+    type: 'inline',
+    midClick: true,
+  });
+
+  $('#reportAuctionForm').validate({
+    rules: {
+      reportAuctionMessage: {
+        required: true,
+        maxlength: 512,
+      },
+    },
+    submitHandler: reportAuction,
+  });
+
+  /**
+   * Ajax call that reports an auction
+   */
+  function reportAuction(form) {
+    $.magnificPopup.close();
+    let comment = $('#reportAuctionMessage').val();
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/user/report_auction.php',
+      data: {
+        'auctionId': auctionId,
+        'comment': comment,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        $(form).trigger('reset');
+      }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occured: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
+
   // Reply (toggles reply form).
   $('.reply-question').click(function() {
     $('.newAnswerForm').fadeToggle();
