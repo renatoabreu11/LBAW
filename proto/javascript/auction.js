@@ -261,7 +261,7 @@ $(document).ready(function() {
    */
   function createAnswer(form) {
     let comment = $(form).find('textarea[name=comment]').val();
-    let questionArticle = $(form).closest('article');
+    let questionArticle = $(form).closest('.questionArticle');
     let questionId = questionArticle.find('input[name=question-id]').val();
     let auctionId = $('input[name=auction-id]').val();
 
@@ -304,7 +304,7 @@ $(document).ready(function() {
   qaSection.on('click', '.btn-edit-question', function() {
     let editComment = $(this).prev().val();
     let parent = $(this).closest('.media-body');
-    let questionId = $(this).closest('article').find('input[name=question-id]').val();
+    let questionId = $(this).closest('.questionArticle').find('input[name=question-id]').val();
 
     let request = $.ajax({
       type: 'POST',
@@ -349,7 +349,7 @@ $(document).ready(function() {
   qaSection.on('click', '.btn-edit-answer', function() {
     let editComment = $(this).prev().val();
     let parent = $(this).closest('.media-body');
-    let answerId = $(this).closest('article').find('input[name=answer-id]').val();
+    let answerId = $(this).closest('.answerArticle').find('input[name=answer-id]').val();
 
     let request = $.ajax({
       type: 'POST',
@@ -385,7 +385,7 @@ $(document).ready(function() {
   });
 
   qaSection.on('click', '.removeQuestionPopup', function() {
-    let questionArticle = $(this).closest('article');
+    let questionArticle = $(this).closest('.questionArticle');
     let questionClass = $(this).attr('class').split('id-');
     let questionAnswerDiv = questionArticle.parent();
 
@@ -444,7 +444,7 @@ $(document).ready(function() {
   }
 
   qaSection.on('click', '.removeAnswerPopup', function() {
-    let answerArticle = $(this).closest('article');
+    let answerArticle = $(this).closest('.answerArticle');
     let answerClass = $(this).attr('class').split('id-');
     if(answerClass.length !== 2)
       return;
@@ -507,7 +507,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
-    reportQuestionId = $(this).closest('article').find('input[name=question-id]').val();
+    reportQuestionId = $(this).closest('.questionArticle').find('input[name=question-id]').val();
   });
 
   $('#reportQuestionForm').validate({
@@ -565,7 +565,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
-    reportAnswerId = $(this).closest('article').find('input[name=answer-id]').val();
+    reportAnswerId = $(this).closest('.answerArticle').find('input[name=answer-id]').val();
   });
 
   $('#reportAnswerForm').validate({

@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-          <label for="basePrice" class="control-label col-md-4"> Base Price<span>*</span> </label>
+          <label for="base_price" class="control-label col-md-4"> Base Price<span>*</span> </label>
           <div class="col-md-8 col-xs-12 input-group">
             <input type="number" step="1" name="base_price" id="base_price" class="form-control" value="{$auction.start_bid}" min="1"  />
           </div>

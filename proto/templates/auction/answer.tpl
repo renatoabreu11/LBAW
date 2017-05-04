@@ -1,8 +1,8 @@
-<article class="row">
+<div class="row answerArticle">
   <input type="hidden" name="answer-id" value="{$question.answer_id}">
   <div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-0 hidden-xs">
     <figure class="thumbnail">
-      <img class="img-responsive" src="{$BASE_URL}images/users/{$seller.profile_pic}"/>
+      <img class="img-responsive" src="{$BASE_URL}images/users/{$seller.profile_pic}" Alt="Profile picture"/>
     </figure>
   </div>
   <div class="col-md-9 col-sm-9 col-sm-offset-0 col-md-offset-0 col-xs-offset-1 col-xs-11">
@@ -20,7 +20,8 @@
               <p>{$question.answer_message}</p>
             </div>
             <div class="answer-edit-display" hidden>
-              <textarea name="updated-answer" class="form-control answer-area" rows="3">{$question.answer_message}</textarea>
+              <label class="sr-only" for="updated-answer-{$question.answer_id}">Updated answer</label>
+              <textarea id="updated-answer-{$question.answer_id}" name="updated-answer" class="form-control answer-area" rows="3">{$question.answer_message}</textarea>
               <button style="margin-top: 1em;" class="btn btn-default btn-edit-answer">Send</button>
             </div>
             <div class="comment-meta">
@@ -35,7 +36,7 @@
                   <span><a class="underline-text-hover removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
                 {/if}
                 {if ($seller.id != $USER_ID)}
-                  <span class="report-answer underline-text-hover" data-toggle="modal" data-target="#report-modal-answer-{$question.answer_id}">report</span>
+                  <span><a class="reportAnswerPopup underline-text-hover" href="#reportAnswerConfirmation">report</a></span>
                 {/if}
               {/if}
             </div>
@@ -44,4 +45,4 @@
       </div>
     </div>
   </div>
-</article>
+</div>

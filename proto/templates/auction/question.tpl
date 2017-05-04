@@ -1,10 +1,10 @@
 {foreach $questions as $question}
   <div class="question-answer">
-    <article class="row">
+    <div class="row questionArticle">
       <input type="hidden" name="question-id" value="{$question.id}">
       <div class="col-md-1 col-sm-1 hidden-xs">
         <figure class="thumbnail">
-          <img class="img-responsive" src="{$BASE_URL}images/users/{$question.profile_pic}" />
+          <img class="img-responsive" src="{$BASE_URL}images/users/{$question.profile_pic}" Alt="Profile picture" />
         </figure>
       </div>
       <div class="col-md-10 col-sm-10 col-xs-12">
@@ -22,7 +22,8 @@
                   <p>{$question.message}</p>
                 </div>
                 <div class="question-edit-display" hidden>
-                  <textarea name="updated-question" class="form-control question-area" rows="3">{$question.message}</textarea>
+                  <label class="sr-only" for="updated-question-{$question.id}">Updated question</label>
+                  <textarea id="updated-question-{$question.id}" name="updated-question" class="form-control question-area" rows="3">{$question.message}</textarea>
                   <button style="margin-top: 1em;" class="btn btn-default btn-edit-question">Send</button>
                 </div>
                 <div class="comment-meta">
@@ -58,7 +59,7 @@
           </div>
         </div>
       </div>
-    </article>
+    </div>
     {if ($question.answer_message)}
       {include file='auction/answer.tpl'}
     {/if}

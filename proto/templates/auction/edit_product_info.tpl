@@ -7,7 +7,7 @@
       <div class="col-md-12 well">
         <h3> Product Specification</h3>
         <div class="form-group">
-          <label for="productName" class="control-label col-md-4"> Name<span>*</span> </label>
+          <label for="product_name" class="control-label col-md-4"> Name<span>*</span> </label>
           <div class="col-md-8 input-group col-xs-12">
             <input class="input-md form-control" id="product_name" name="product_name" placeholder="Define the product name" type="text" value="{$product.name}"/>
           </div>
