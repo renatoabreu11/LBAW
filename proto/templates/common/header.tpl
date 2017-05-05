@@ -70,15 +70,20 @@
         {include file='authentication/signin.tpl'}
       {/if}
     </div>
-    {if (count($ERROR_MESSAGES) > 0)}
-      <div id="error-messages">
-        {foreach $ERROR_MESSAGES as $error}
-          <p class="text-center" style="color: brown;"><strong>{$error}</strong></p>
-        {/foreach}
-      </div>
-    {/if}
   </div>
 </nav>
+
+{if (count($ERROR_MESSAGES) > 0)}
+  <div class="col-xs-12">
+    <div class="alert alert-danger fade in col-xs-6 col-xs-offset-3">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Warning!</strong>
+      {foreach $ERROR_MESSAGES as $error}
+        <p>{$error}</p>
+      {/foreach}
+    </div>
+  </div>
+{/if}
 
 {if $ADMIN_USERNAME}
   <input type="hidden" name="admin_id" value="{$ADMIN_ID}">

@@ -40,6 +40,7 @@ if(strlen($description) > 255){
 
 if($invalidCharacters){
   $_SESSION['form_values'] = $_POST;
+  $_SESSION['error_messages'][] = "Sign Up failed!";
   header("Location: $BASE_URL" . 'pages/authentication/signup.php');
   exit;
 }
