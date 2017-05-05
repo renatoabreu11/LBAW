@@ -166,51 +166,52 @@ $(document).ready(function() {
   });
 
   // Remove all notifications.
-  $('.notification-footer h4.markRecentNotificationsAsRead')
-    .click(function() {
-      let notifications = $('.notifications');
-      let nrNotifications = notifications.children('.notifications-wrapper').length;
+  $('#navbar-collapse-1').on('click', '.notification-footer h4.markRecentNotificationsAsRead', function() {
+    let notifications = $('.notifications');
+    let nrNotifications = notifications.children('.notifications-wrapper').length;
 
-      let notificationsIds = [];
-      notifications.children('.notifications-wrapper').each( function() {
-        let notificationClass = $(this).find('.notification-media').attr('class').split('id-');
-        if (notificationClass.length === 2) {
-          let idVar = notificationClass[1];
-          notificationsIds.push(idVar);
-        }
-        this.remove();
+    let notificationsIds = [];
+    notifications.children('.notifications-wrapper').each( function() {
+      let notificationClass = $(this).find('.notification-media').attr('class').split('id-');
+      if (notificationClass.length === 2) {
+        let idVar = notificationClass[1];
+        notificationsIds.push(idVar);
+      }
+      this.remove();
+    });
+
+    if(nrNotifications > 0) {
+      let request = $.ajax({
+        type: 'POST',
+        url: BASE_URL + 'api/user/read_notifications.php',
+        data: {
+          'notifications': notificationsIds,
+          'token': token,
+          'userId': userId,
+        },
+        dataType: 'json',
+
       });
 
-      if(nrNotifications > 0) {
-        let request = $.ajax({
-          type: 'POST',
-          url: BASE_URL + 'api/user/read_notification.php',
-          data: {
-            'notifications': notificationsIds,
-            'token': token,
-            'userId': userId,
+      // Callback handler that will be called on success
+      request.done(function(response, textStatus, jqXHR) {
+        let message = response['message'];
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + message + '</div>',
+            type: 'inline',
           },
-          datatype: 'text',
-
         });
 
-        // Callback handler that will be called on success
-        request.done(function(response, textStatus, jqXHR) {
-          $.magnificPopup.open({
-            items: {
-              src: '<div class="white-popup">' + response + '</div>',
-              type: 'inline',
-            },
-          });
-        });
-
-        $('<p class="notifications-empty">' +
-          'You have no new notifications</p>')
-          .insertAfter('.notifications hr.divider:first');
-      }
-
-      updateNotificationBadge(0);
-    });
+        if (message.includes('Success')) {
+          let nrNotifications = response['nrNotifications'];
+          $('.dropdown-menu.notifications').empty();
+          $('.dropdown-menu.notifications').append(response['notificationsDiv']);
+          updateNotificationBadge(nrNotifications);
+        }
+      });
+    }else updateNotificationBadge(0);
+  });
 
   // Collapses 'Categories' panel if in mobile.
   if($(window).width() <= 425)
