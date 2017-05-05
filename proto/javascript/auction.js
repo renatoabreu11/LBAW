@@ -74,6 +74,9 @@ $(document).ready(function() {
     let currBid = $('.current-bid');
     let bidderTableBody = $('.bidders-table-body');
     let username = $('input[name=user-username]').val();
+    let biddersDiv = $('.bidders');
+    let auctionDetailsDiv = $('.auctionDetails');
+    let hasBidders = $('html').has('.bidders-table-body').length;
 
     $.ajax({
       type: 'POST',
@@ -100,9 +103,21 @@ $(document).ready(function() {
             'min': amount + 1,
           });
           currBid.text('Current Bid: ' + amount + '€');
-          if(bidderTableBody.children().length === 5)
-            bidderTableBody.children().last().remove();
-          bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
+          if (hasBidders) {
+            if (bidderTableBody.children().length === 5)
+              bidderTableBody.children().last().remove();
+            bidderTableBody.prepend('' +
+              '<tr>' +
+              '<td class="col-xs-5">' +
+              '<a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a>' +
+              '</td>' +
+              '<td class="col-xs-2">' + amount + '</td>' +
+              '<td class="col-xs-5">' + data['date'] + '</td>' +
+              '</tr>');
+          } else {
+            auctionDetailsDiv.removeClass('col-md-12').addClass('col-md-6');
+            biddersDiv.append(data['biddersDiv']);
+          }
         }
       },
     });
@@ -111,7 +126,6 @@ $(document).ready(function() {
   // Add auctions to watchlist.
   $('.btn-add-watchlist').click(function() {
     let notificationsVal = $(this).text();
-    let glyphiconSpan = $('.auction-watchlist-glyphicon');
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
     let watchlistBtnDiv = $('.watchlist-button');
 
@@ -483,7 +497,6 @@ $(document).ready(function() {
     });
 
     request.done(function(response, textStatus, jqXHR) {
-      console.log(response);
       if(response.includes('Success')) {
         article.fadeOut(500, function() {
           article.remove();

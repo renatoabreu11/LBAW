@@ -130,20 +130,20 @@ function setPagesOfAuctions() {
 
 /**
  * Set filter of auctions in watchlist
- */ 
+ */
 function setFilter() {
-  $('.selectpicker').on('change', function(){
-    let selected = $(this).find("option:selected").val();
-    
+  $('.selectpicker').on('change', function() {
+    let selected = $(this).find('option:selected').val();
+
     $('#pagination').attr('data-nr_pages', 0);
     hideAllAuctions();
     showAuctionsSpecifiedInFilter(selected);
-   
+
     let numPages = getNumPagesNecessaryToVisibleAuctions();
     $('#pagination').attr('data-nr_pages', numPages);
     setPagesOfVisibleAuctions();
 
-    let currPage = 1
+    let currPage = 1;
     $('#pagination').attr('data-curr_page', currPage);
     $('#pagination').twbsPagination('destroy');
     setPagination();
@@ -154,27 +154,24 @@ function setFilter() {
  * Show auctions based on the selected option of filter.
  */
 function showAuctionsSpecifiedInFilter(selected) {
-  if (selected == "All auctions") {
+  if (selected == 'All auctions') {
     showAllAuctions();
-  }
-  else if (selected == "My auctions") {
+  } else if (selected == 'My auctions') {
     $('#auctionsThumbnails .auction_row').each(function() {
       let myAuction = $(this).attr('data-myAuction');
       if (myAuction == 1)
         $(this).show();
     });
-  }
-  else if (selected == "Closed auctions") {
+  } else if (selected == 'Closed auctions') {
     $('#auctionsThumbnails .auction_row').each(function() {
       let myAuction = $(this).attr('data-active');
-      if (myAuction == 0) 
+      if (myAuction == 0)
         $(this).show();
     });
-  }
-  else if (selected == "Open auctions") {
+  } else if (selected == 'Open auctions') {
     $('#auctionsThumbnails .auction_row').each(function() {
       let myAuction = $(this).attr('data-active');
-      if (myAuction == 1) 
+      if (myAuction == 1)
         $(this).show();
     });
   }
@@ -186,7 +183,7 @@ function showAuctionsSpecifiedInFilter(selected) {
 function getNumPagesNecessaryToVisibleAuctions() {
   let numAuctions = 0;
   $('#auctionsThumbnails .auction_row').each(function() {
-    if ($(this).is(":visible")) 
+    if ($(this).is(':visible'))
       numAuctions++;
   });
   return Math.ceil(numAuctions/4.0);
@@ -198,12 +195,11 @@ function getNumPagesNecessaryToVisibleAuctions() {
 function setPagesOfVisibleAuctions() {
   let counter = 0;
   $('#auctionsThumbnails .auction_row').each(function() {
-    if ($(this).is(":visible")) {
+    if ($(this).is(':visible')) {
       let hisPage = Math.floor(counter/4)+1;
       $(this).attr('data-page', hisPage);
       counter++;
-    }
-    else {
+    } else {
       $(this).attr('data-page', -1);
     }
   });
@@ -265,7 +261,7 @@ function getNumPagesNecessaryToAllAuctions() {
 }
 
 /**
- * Set api call to toogle notification 
+ * Set api call to toogle notification
  * option of one auction from watchlist.
  */
 function setToogleNotifications() {
@@ -295,8 +291,7 @@ function setToogleNotifications() {
         if (liElem.hasClass('disable-notif')) {
           ulElem.children('.enable-notif').addClass('toogle-notif');
           ulElem.children('.enable-notif').removeClass('disabled');
-        }
-        else {
+        } else {
           ulElem.children('.disable-notif').addClass('toogle-notif');
           ulElem.children('.disable-notif').removeClass('disabled');
         }
