@@ -12,11 +12,11 @@
         <li class="divider"></li>
         <li class="dropdown-header">Notifications</li>
         {if $auction.notifications }
-        <li><a href="javascript:;">Disable notifications</a></li> 
-        <li class="disabled"><a href="javascript:;">Enable notifications</a></li>  
+        <li class="disable-notif"><a class="toogle-notif" href="javascript:;">Disable notifications</a></li> 
+        <li class="enable-notif disabled"><a href="javascript:;">Enable notifications</a></li>  
         {else}
-        <li class="disabled"><a href="javascript:;">Disable notifications</a></li> 
-        <li><a href="javascript:;">Enable notifications</a></li> 
+        <li class="disable-notif disabled"><a href="javascript:;">Disable notifications</a></li> 
+        <li class="enable-notif"><a class="toogle-notif" href="javascript:;">Enable notifications</a></li> 
         {/if}
       </ul>
     </div>
