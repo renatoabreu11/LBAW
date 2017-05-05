@@ -87,6 +87,10 @@ if (!empty($_POST['token'])) {
       $invalidInfo = true;
     }
 
+    $characteristics = $_POST['characteristics'];
+    print_r($_POST);
+    exit;
+
     $auctionType = $_POST["auction_type"];
     if ( !validAuctionType($auctionType)) {
       $invalidInfo = true;

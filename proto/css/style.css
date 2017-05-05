@@ -996,6 +996,12 @@ a.navlink {
   }
 }
 
+.addon-icon{
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
 .newAuctionH .heading {
   border-bottom: 1px lightgrey solid;
 }

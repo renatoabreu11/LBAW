@@ -213,14 +213,13 @@
           </div>
         </div>
         <div id="seller" class="tab-pane fade">
-          <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><h3 style="color: 	#5F9EA0">{$seller.username}</h3></a>
-          <h4>Who am I</h4>
+          <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><h3 >{$seller.username}</h3></a>
           {if ($seller.full_bio)}
             <p>{$seller.full_bio}</p>
           {else}
             <p>{$seller.short_bio}</p>
           {/if}
-          <h4>Reliability</h4>
+          <br>
           <p>{$seller.username} has {$numReviews} reviews, and an average of <strong>{$seller.rating}</strong>/10 points.</p>
         </div>
       </div>

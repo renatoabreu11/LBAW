@@ -51,6 +51,27 @@
         <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
       </div>
 
+      <div class="form-group">
+        <label class="control-label col-md-4"> Characteristics</label>
+        <div class="col-md-8 input-group col-xs-12" style="padding-bottom: 0.5em;">
+          <input class="input-md form-control" name="newCharacteristic" placeholder="Add a new characteristic" type="text"/>
+          <span class="input-group-addon addon-icon addCharacteristic">
+    				<span class="glyphicon glyphicon-plus"></span>
+    			</span>
+        </div>
+        <div class="col-md-8 input-group col-xs-12 col-md-offset-4">
+          <select class="input-md form-control selectpicker" id="characteristics" name="characteristics[]" title="Product characteristics...">
+            {foreach $FORM_VALUES.characteristics as $characteristic}
+              <option>{$characteristic}</option>
+            {/foreach}
+          </select>
+          <span class="input-group-addon addon-icon removeCharacteristic">
+    				<span class="glyphicon glyphicon-remove"></span>
+    			</span>
+        </div>
+        <strong class="field_error">{$FIELD_ERRORS.characteristics}</strong>
+      </div>
+
       <button id="activate-step-2" class="btn btn-primary pull-right">Next Step</button>
     </div>
   </div>

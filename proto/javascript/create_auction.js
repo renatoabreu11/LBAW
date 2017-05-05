@@ -1,4 +1,32 @@
 $(document).ready(function() {
+  $('#step-1').on('click', '.input-group span.addCharacteristic', function() {
+    let input = $(this).closest('.input-group').find('input[name=newCharacteristic]');
+    let value = input.val();
+
+    if(value === '' || value.length > 128)
+      return;
+
+    let select = $('#characteristics');
+    let nrElements = select.children('option').length - 1;
+    if(nrElements >= 10)
+      return;
+
+    let option = '<option>' + value + '</option>';
+    select.append(option);
+    select.selectpicker('refresh');
+    input.val('');
+  });
+
+  $('#step-1').on('click', '.input-group span.removeCharacteristic', function() {
+    let select = $('#characteristics');
+    let selectedText = select.find('option:selected').text();
+
+    if(selectedText === '')
+      return;
+    select.find('option:selected').remove();
+    select.selectpicker('refresh');
+  });
+
   $(function() {
     $('#startDatePicker').datetimepicker({
       minDate: moment(),
