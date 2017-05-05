@@ -5,6 +5,7 @@ $(document).ready(function() {
   setSorting();
   setFilter();
   setRemoveAuctionFromWatchlist();
+  setToogleNotifications();
 });
 
 /**
@@ -263,4 +264,48 @@ function getNumPagesNecessaryToAllAuctions() {
   return Math.ceil(numAuctions/4.0);
 }
 
+/**
+ * Set api call to toogle notification 
+ * option of one auction from watchlist.
+ */
+function setToogleNotifications() {
+  $('.toogle-notif').click(function() {
+    let auctionId = $(this).closest('ul').attr('data-auctionId');
+    let liElem = $(this).closest('li');
+    let ulElem = $(this).closest('ul');
+
+    $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auctions/toogle_notifications.php',
+      data: {
+        'token': token,
+        'userId': userId,
+        'auctionId': auctionId,
+      },
+      success: function(data) {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + data + '</div>',
+            type: 'inline',
+          },
+        });
+
+        liElem.addClass('disabled');
+        liElem.children('a').removeClass('toogle-notif');
+        if (liElem.hasClass('disable-notif')) {
+          ulElem.children('.enable-notif').addClass('toogle-notif');
+          ulElem.children('.enable-notif').removeClass('disabled');
+        }
+        else {
+          ulElem.children('.disable-notif').addClass('toogle-notif');
+          ulElem.children('.disable-notif').removeClass('disabled');
+        }
+        setToogleNotifications();
+      },
+      error: function(data) {
+        alert(data);
+      },
+    });
+  });
+}
 
