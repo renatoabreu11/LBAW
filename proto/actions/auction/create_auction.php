@@ -5,6 +5,22 @@ include_once($BASE_DIR .'database/auctions.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/users.php');
 
+function to_pg_array($set) {
+  settype($set, 'array'); // can be called with a scalar or array
+  $result = array();
+  foreach ($set as $t) {
+    if (is_array($t)) {
+      $result[] = to_pg_array($t);
+    } else {
+      $t = str_replace('"', '\\"', $t); // escape double quote
+      if (! is_numeric($t)) // quote only non-numeric values
+        $t = '"' . $t . '"';
+      $result[] = $t;
+    }
+  }
+  return '{' . implode(",", $result) . '}'; // format
+}
+
 if (!empty($_POST['token'])) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
     if (!$_POST['product_name'] || !$_POST['category']
@@ -87,9 +103,27 @@ if (!empty($_POST['token'])) {
       $invalidInfo = true;
     }
 
-    $characteristics = $_POST['characteristics'];
-    print_r($_POST);
-    exit;
+    $tmpCharacteristics = $_POST['characteristics'];
+    $characteristics;
+    if(count($tmpCharacteristics) > 10){
+      $_SESSION['field_errors']['characteristics'] = 'Invalid number of characteristics.';
+      $invalidInfo = true;
+    }else if(count($tmpCharacteristics) > 0){
+      $aux = array_map(function($v){
+        return trim(strip_tags($v));
+      }, $tmpCharacteristics);
+
+      foreach ($aux as $c){
+        if(strlen($c) > 128){
+          $_SESSION['field_errors']['characteristics'] = 'Invalid characteristics length. The maximum length is 128 characters.';
+          $invalidInfo = true;
+        }
+      }
+
+      if(!$invalidInfo){
+        $characteristics = to_pg_array($aux);
+      }
+    }
 
     $auctionType = $_POST["auction_type"];
     if ( !validAuctionType($auctionType)) {
@@ -161,7 +195,7 @@ if (!empty($_POST['token'])) {
       exit;
     }else{
       try {
-        createAuction($productName, $description, $condition, $categoryId1, $categoryId2, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection, $notificationsEnabled);
+        createAuction($productName, $description, $condition, $categoryId1, $categoryId2, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection, $notificationsEnabled, $characteristics);
       } catch (PDOException $e) {
         if (strpos($e->getMessage(), 'product_category_pkey') !== false) {
           $_SESSION['field_errors']['category'] = "Product-category association already exists.";

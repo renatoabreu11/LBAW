@@ -115,6 +115,20 @@ function validAuctionType($auctionType){
 }
 
 /**
+ * Returns the product characteristics
+ *
+ * @param $productId
+ *
+ * @return mixed
+ */
+function getProductCharacteristics($productId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT unnest(characteristics::text[]) from product where id = ?');
+  $stmt->execute(array($productId));
+  return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+}
+
+/**
  * Verifies if an user is the owner of the given auction
  * @param $userId
  * @param $auctionId
@@ -591,9 +605,9 @@ function getNumberQuestions($auctionId, $userId){
  * @param $quantity
  * @param $questionsSection
  * @param $notificationsEnabled
- * @internal param $productId
+ * @param $characteristics
  */
-function createAuction($productName, $description, $condition, $category1, $category2, $userId, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection, $notificationsEnabled){
+function createAuction($productName, $description, $condition, $category1, $category2, $userId, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection, $notificationsEnabled, $characteristics){
   global $conn;
 
   $conn->beginTransaction();
@@ -606,6 +620,11 @@ function createAuction($productName, $description, $condition, $category1, $cate
   $stmt = $conn->prepare('SELECT max(id) from product;');
   $stmt->execute();
   $productId = $stmt->fetch()['max'];
+
+  if(strlen($characteristics) != 0){
+    $stmt = $conn->prepare('UPDATE product set characteristics = ? where id = ?;');
+    $stmt->execute(array($characteristics, $productId));
+  }
 
   if($category1 != NULL){
     $stmt = $conn->prepare('INSERT INTO product_category(product_id, category_id)
@@ -844,13 +863,21 @@ function updateAuction($auctionId, $basePrice, $quantity, $startDate, $endDate, 
  * @param $productName
  * @param $description
  * @param $condition
+ * @param $characteristics
  */
-function updateProduct($productId, $productName, $description, $condition){
+function updateProduct($productId, $productName, $description, $condition, $characteristics){
   global $conn;
-  $stmt = $conn->prepare('UPDATE product
-                            SET name = ?, description = ?, condition = ? 
+  if(strlen($characteristics) > 0){
+    $stmt = $conn->prepare('UPDATE product
+                            SET name = ?, description = ?, condition = ?, characteristics = ? 
                             WHERE id = ?');
-  $stmt->execute(array($productName, $description, $condition, $productId));
+    $stmt->execute(array($productName, $description, $condition, $characteristics, $productId));
+  }else{
+    $stmt = $conn->prepare('UPDATE product
+                            SET name = ?, description = ?, condition = ?
+                            WHERE id = ?');
+    $stmt->execute(array($productName, $description, $condition, $productId));
+  }
 }
 
 /* ========================== DELETES  ========================== */

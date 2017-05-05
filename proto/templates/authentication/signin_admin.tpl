@@ -20,7 +20,6 @@
             <input type="submit" id="btn-login" class="btn btn-lg btn-info" value="Sign in">
           </div>
         </form>
-        <a class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
         <hr>
       </div>
     </div>

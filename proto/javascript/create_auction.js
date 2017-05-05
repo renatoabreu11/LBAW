@@ -17,16 +17,6 @@ $(document).ready(function() {
     input.val('');
   });
 
-  $('#step-1').on('click', '.input-group span.removeCharacteristic', function() {
-    let select = $('#characteristics');
-    let selectedText = select.find('option:selected').text();
-
-    if(selectedText === '')
-      return;
-    select.find('option:selected').remove();
-    select.selectpicker('refresh');
-  });
-
   $(function() {
     $('#startDatePicker').datetimepicker({
       minDate: moment(),

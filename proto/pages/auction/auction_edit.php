@@ -48,6 +48,7 @@ $notifications = getActiveNotifications($id);
 $auctionTypes = getAuctionTypes();
 $watchlist = getWatchlistInfo($id, $auctionId);
 $productTypes = getProductCategories($product['id']);
+$characteristics = getProductCharacteristics($product['id']);
 
 $auction['start_date'] = date('d/m/y h:m', strtotime($auction['start_date']));
 $auction['end_date'] = date('d/m/y h:m', strtotime($auction['end_date']));
@@ -57,6 +58,7 @@ $smarty->assign('watchlist', $watchlist);
 $smarty->assign('categories', $categories);
 $smarty->assign('auctionTypes', $auctionTypes);
 $smarty->assign('notifications', $notifications);
+$smarty->assign('characteristics', $characteristics);
 $smarty->assign("auction", $auction);
 $smarty->assign("product", $product);
 $smarty->display('auction/auction_edit.tpl');

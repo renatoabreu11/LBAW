@@ -4,6 +4,22 @@ include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/auction.php');
 include_once($BASE_DIR . 'database/users.php');
 
+function to_pg_array($set) {
+  settype($set, 'array'); // can be called with a scalar or array
+  $result = array();
+  foreach ($set as $t) {
+    if (is_array($t)) {
+      $result[] = to_pg_array($t);
+    } else {
+      $t = str_replace('"', '\\"', $t); // escape double quote
+      if (! is_numeric($t)) // quote only non-numeric values
+        $t = '"' . $t . '"';
+      $result[] = $t;
+    }
+  }
+  return '{' . implode(",", $result) . '}'; // format
+}
+
 if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
   header("Location:"  . $BASE_URL);
@@ -85,6 +101,28 @@ if ( strlen($condition) > 512) {
   $invalidInfo = true;
 }
 
+$tmpCharacteristics = $_POST['characteristics'];
+$characteristics;
+if(count($tmpCharacteristics) > 10){
+  $_SESSION['field_errors']['characteristics'] = 'Invalid number of characteristics.';
+  $invalidInfo = true;
+}else if(count($tmpCharacteristics) > 0){
+  $aux = array_map(function($v){
+    return trim(strip_tags($v));
+  }, $tmpCharacteristics);
+
+  foreach ($aux as $c){
+    if(strlen($c) > 128){
+      $_SESSION['field_errors']['characteristics'] = 'Invalid characteristics length. The maximum length is 128 characters.';
+      $invalidInfo = true;
+    }
+  }
+
+  if(!$invalidInfo){
+    $characteristics = to_pg_array($aux);
+  }
+}
+
 if($invalidInfo){
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
@@ -109,7 +147,7 @@ if($invalidInfo){
   }
 
   try {
-    updateProduct($productId, $productName, $description, $condition);
+    updateProduct($productId, $productName, $description, $condition, $characteristics);
   } catch (PDOException $e) {
     $_SESSION['error_messages'][] = 'Error updating the product.';
     header("Location:"  . $_SERVER['HTTP_REFERER']);
