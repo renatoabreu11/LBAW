@@ -182,6 +182,7 @@ $(document).ready(function() {
         midClick: true,
       }).magnificPopup('open');
 
+      $('.removeNotification').off();
       $('.removeNotification').one('click', function() {
         $.magnificPopup.close();
         deleteNotification(notificationId, object);

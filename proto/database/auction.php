@@ -197,7 +197,7 @@ function getLastProductID(){
 function isAnswerCreator($answerId, $userId){
   global $conn;
   $stmt = $conn->prepare('SELECT * from answer
-                            WHERE id = ? AND answer.user_id = ?');
+                            WHERE id = ? AND user_id = ?');
   $stmt->execute(array($answerId, $userId));
   $result = $stmt->fetch();
   return $result !== false;

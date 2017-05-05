@@ -58,6 +58,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
+    $('.bidOnAuction').off();
     $('.bidOnAuction').one('click', function() {
       $.magnificPopup.close();
       let amount = roundTo($('#bidOnAuction').find('.bid-amount').val().trim(), 2);
@@ -73,6 +74,9 @@ $(document).ready(function() {
     let currBid = $('.current-bid');
     let bidderTableBody = $('.bidders-table-body');
     let username = $('input[name=user-username]').val();
+    let biddersDiv = $('.bidders');
+    let auctionDetailsDiv = $('.auctionDetails');
+    let hasBidders = $('html').has('.bidders-table-body').length;
 
     $.ajax({
       type: 'POST',
@@ -99,9 +103,21 @@ $(document).ready(function() {
             'min': amount + 1,
           });
           currBid.text('Current Bid: ' + amount + '€');
-          if(bidderTableBody.children().length === 5)
-            bidderTableBody.children().last().remove();
-          bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
+          if (hasBidders) {
+            if (bidderTableBody.children().length === 5)
+              bidderTableBody.children().last().remove();
+            bidderTableBody.prepend('' +
+              '<tr>' +
+              '<td class="col-xs-5">' +
+              '<a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a>' +
+              '</td>' +
+              '<td class="col-xs-2">' + amount + '</td>' +
+              '<td class="col-xs-5">' + data['date'] + '</td>' +
+              '</tr>');
+          } else {
+            auctionDetailsDiv.removeClass('col-md-12').addClass('col-md-6');
+            biddersDiv.append(data['biddersDiv']);
+          }
         }
       },
     });
@@ -110,7 +126,6 @@ $(document).ready(function() {
   // Add auctions to watchlist.
   $('.btn-add-watchlist').click(function() {
     let notificationsVal = $(this).text();
-    let glyphiconSpan = $('.auction-watchlist-glyphicon');
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
     let watchlistBtnDiv = $('.watchlist-button');
 
@@ -399,6 +414,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
+    $('.removeQuestion').off();
     $('.removeQuestion').one('click', function() {
       $.magnificPopup.close();
       deleteQuestion(questionId, questionAnswerDiv);
@@ -455,6 +471,7 @@ $(document).ready(function() {
       type: 'inline',
       midClick: true,
     }).magnificPopup('open');
+    $('.removeAnswer').off();
 
     $('.removeAnswer').one('click', function() {
       $.magnificPopup.close();
@@ -672,12 +689,12 @@ $(document).ready(function() {
   });
 
   // Facebook Share
-  document.getElementById('social-fb').onclick = function(){
+  document.getElementById('social-fb').onclick = function() {
       FB.ui({
           method: 'share',
           hashtag: '#SeekBid',
-          href: window.location
-      }, function(response){});
-      console.log("CLICKED SHARE");
-  }
+          href: window.location,
+      }, function(response) {});
+      console.log('CLICKED SHARE');
+  };
 });

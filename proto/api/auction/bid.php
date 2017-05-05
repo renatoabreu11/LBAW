@@ -51,5 +51,13 @@ try {
   return;
 }
 
-$reply = array('message' => $ret, 'date' => date('d-m-Y H:m'));
+$getRecentBidders = getRecentBidders($auctionId);
+$smarty->assign("recentBidders", $getRecentBidders);
+$biddersDiv = $smarty->fetch('auction/list_bidders.tpl');
+
+$reply = array(
+  'message' => $ret,
+  'date' => date('d-m-Y H:m'),
+  'biddersDiv' => $biddersDiv);
+
 echo json_encode($reply);

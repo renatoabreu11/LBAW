@@ -299,14 +299,15 @@ function getWatchlistAuctionsOfUser($userId){
                           auction.curr_bid, 
                           auction.end_date, 
                           "user".id as user_id, 
-                          auction.num_bids as numBids, 
+                          auction.num_bids as numbids, 
                           auction.start_date,
                           watchlist.date as date_added
                           FROM watchlist
                           JOIN auction ON auction.id = watchlist.auction_id
                           JOIN product ON auction.product_id = product.id
                           JOIN "user" ON "user".id = auction.user_id
-                          WHERE watchlist.user_id = ?');
+                          WHERE watchlist.user_id = ?
+                          ORDER BY auction.num_bids DESC');
   $stmt->execute(array($userId));
   $result = $stmt->fetchAll();
   return $result;
@@ -329,16 +330,38 @@ function getMostRecentAuction() {
   return $stmt->fetch();
 }
 
+/**
+ * Check if a user added an auction to his watchlist.
+ * @param $userId
+ * @param $auctionId
+ */
 function isOnWatchlist($userId, $auctionId) {
   global $conn;
   $stmt = $conn->prepare('SELECT count(*)
                           FROM watchlist
                           WHERE user_id = :user_id
-                            AND auction_id = :auction_id');
+                          AND auction_id = :auction_id');
   $stmt->bindParam('user_id', $userId);
   $stmt->bindParam('auction_id', $auctionId);
   $stmt->execute();
   return $stmt->fetch()['count'];
+}
+
+/**
+ * Get notification option (True or false).
+ * @param $userId
+ * @param $auctionId
+ */
+function getNotificationOption($userId, $auctionId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT watchlist.notifications
+                          FROM watchlist
+                          WHERE watchlist.auction_id = :auction_id
+                          AND watchlist.user_id = :user_id');
+  $stmt->bindParam('user_id', $userId);
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  return $stmt->fetch()['notifications'];
 }
 
 /* ========================== INSERTS  ========================== */
@@ -360,6 +383,18 @@ function addAuctionToWatchlist($userId, $auctionId, $notifications) {
 }
 
 /* ========================== UPDATES  ========================== */
+
+function updateNotificationOption($userId, $auctionId, $notifications) {
+  global $conn;
+  $stmt = $conn->prepare('UPDATE watchlist
+                          SET notifications = :notifications
+                          WHERE watchlist.auction_id = :auction_id
+                          AND watchlist.user_id = :user_id');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->bindParam('user_id', $userId);
+  $stmt->bindParam('notifications', $notifications);
+  $stmt->execute();
+}
 
 /* ========================== DELETES  ========================== */
 
