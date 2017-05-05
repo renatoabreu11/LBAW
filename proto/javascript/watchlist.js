@@ -4,6 +4,7 @@ $(document).ready(function() {
   setRankings();
   setSorting();
   setFilter();
+  setRemoveAuctionFromWatchlist();
 });
 
 /**
@@ -127,7 +128,7 @@ function setPagesOfAuctions() {
 }
 
 /**
- * Set filte of auctions in watchlist
+ * Set filter of auctions in watchlist
  */ 
 function setFilter() {
   $('.selectpicker').on('change', function(){
@@ -206,3 +207,60 @@ function setPagesOfVisibleAuctions() {
     }
   });
 }
+
+/**
+ * Set api call to remove an auction from watchlist.
+ */
+function setRemoveAuctionFromWatchlist() {
+  $('.rm-auction').click(function() {
+    let auctionId = $(this).closest('ul').attr('data-auctionId');
+    let remLinkElem = $(this);
+
+    $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auctions/delete_auction_watchlist.php',
+      data: {
+        'token': token,
+        'userId': userId,
+        'auctionId': auctionId,
+      },
+      success: function(data) {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + data + '</div>',
+            type: 'inline',
+          },
+        });
+        remLinkElem.closest('.auction_row').remove();
+
+        let numPages = getNumPagesNecessaryToAllAuctions();
+        let currPage = 1;
+        $('#pagination').attr('data-nr_pages', numPages);
+        $('#pagination').attr('data-curr_page', currPage);
+
+        setPagesOfAuctions();
+        $('#pagination').twbsPagination('destroy');
+        setPagination();
+        showAuctionsOfAPage(currPage);
+        setSorting();
+        setFilter();
+      },
+      error: function(data) {
+        alert(data);
+      },
+    });
+  });
+}
+
+/**
+ * Get number of pages necessary to all auctions.
+ */
+function getNumPagesNecessaryToAllAuctions() {
+  let numAuctions = 0;
+  $('#auctionsThumbnails .auction_row').each(function() {
+    numAuctions++;
+  });
+  return Math.ceil(numAuctions/4.0);
+}
+
+

@@ -6,13 +6,18 @@
       <a href="#" class="pull-right dropdown-toggle" data-toggle="dropdown">
         <i class="glyphicon glyphicon-chevron-down"></i>
       </a>
-      <ul class="dropdown-menu dropdown-menu-right" style="margin-top: 15px;">
+      <ul class="dropdown-menu dropdown-menu-right" data-auctionId="{$auction.id}" style="margin-top: 15px;">
         <li class="dropdown-header">Auction</li>
-        <li><a href="#">Remove auction</a></li>
+        <li><a class="rm-auction" href="javascript:;">Remove from watchlist</a></li>
         <li class="divider"></li>
         <li class="dropdown-header">Notifications</li>
-        <li class="disabled"><a href="#">Disable notifications</a></li>
-        <li><a href="#">Enable notifications</a></li>
+        {if $auction.notifications }
+        <li><a href="javascript:;">Disable notifications</a></li> 
+        <li class="disabled"><a href="javascript:;">Enable notifications</a></li>  
+        {else}
+        <li class="disabled"><a href="javascript:;">Disable notifications</a></li> 
+        <li><a href="javascript:;">Enable notifications</a></li> 
+        {/if}
       </ul>
     </div>
     <h4 style="height: 50px;">{$auction.product_name}</h4>

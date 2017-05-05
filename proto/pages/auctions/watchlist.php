@@ -26,7 +26,7 @@ $now = strtotime(date('Y/m/d h:i:s a', time()));
 foreach ($auctions as &$auction) {
 	$seller_id = $auction['user_id'];
 	$end_date = strtotime($auction['end_date']);
-
+	
 	if ($seller_id == $id)
 		$auction['myAuction'] = 1;
 	else

@@ -299,14 +299,15 @@ function getWatchlistAuctionsOfUser($userId){
                           auction.curr_bid, 
                           auction.end_date, 
                           "user".id as user_id, 
-                          auction.num_bids as numBids, 
+                          auction.num_bids as numbids, 
                           auction.start_date,
                           watchlist.date as date_added
                           FROM watchlist
                           JOIN auction ON auction.id = watchlist.auction_id
                           JOIN product ON auction.product_id = product.id
                           JOIN "user" ON "user".id = auction.user_id
-                          WHERE watchlist.user_id = ?');
+                          WHERE watchlist.user_id = ?
+                          ORDER BY auction.num_bids DESC');
   $stmt->execute(array($userId));
   $result = $stmt->fetchAll();
   return $result;
