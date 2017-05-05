@@ -58,6 +58,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
+    $('.bidOnAuction').off();
     $('.bidOnAuction').one('click', function() {
       $.magnificPopup.close();
       let amount = roundTo($('#bidOnAuction').find('.bid-amount').val().trim(), 2);
@@ -399,6 +400,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
+    $('.removeQuestion').off();
     $('.removeQuestion').one('click', function() {
       $.magnificPopup.close();
       deleteQuestion(questionId, questionAnswerDiv);
@@ -455,6 +457,7 @@ $(document).ready(function() {
       type: 'inline',
       midClick: true,
     }).magnificPopup('open');
+    $('.removeAnswer').off();
 
     $('.removeAnswer').one('click', function() {
       $.magnificPopup.close();
@@ -480,6 +483,7 @@ $(document).ready(function() {
     });
 
     request.done(function(response, textStatus, jqXHR) {
+      console.log(response);
       if(response.includes('Success')) {
         article.fadeOut(500, function() {
           article.remove();
@@ -672,12 +676,12 @@ $(document).ready(function() {
   });
 
   // Facebook Share
-  document.getElementById('social-fb').onclick = function(){
+  document.getElementById('social-fb').onclick = function() {
       FB.ui({
           method: 'share',
           hashtag: '#SeekBid',
-          href: window.location
-      }, function(response){});
-      console.log("CLICKED SHARE");
-  }
+          href: window.location,
+      }, function(response) {});
+      console.log('CLICKED SHARE');
+  };
 });
