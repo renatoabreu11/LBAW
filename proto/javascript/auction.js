@@ -1,6 +1,6 @@
 let auctionId;
 
-$(document).ready(function() {
+$(document).ready(function () {
   auctionId = $('input[name=auction-id]').val();
 
   $('.slider1').bxSlider({
@@ -10,25 +10,25 @@ $(document).ready(function() {
     slideMargin: 15,
   });
 
-  $('.clock').each(function() {
+  $('.clock').each(function () {
     let date = $(this).find('p').text();
     $(this).countdown(date)
-      .on('update.countdown', function(event) {
+      .on('update.countdown', function (event) {
         let format = '%Hh:%Mm:%Ss';
-        if(event.offset.totalDays > 0) {
+        if (event.offset.totalDays > 0) {
           format = '%-d day%!d ' + format;
         }
-        if(event.offset.weeks > 0) {
+        if (event.offset.weeks > 0) {
           format = '%-w week%!w ' + format;
         }
         $(this).html(event.strftime(format));
       })
-      .on('finish.countdown', function(event) {
-          $(this).html('This offer has expired!').parent().addClass('disabled');
-        });
+      .on('finish.countdown', function (event) {
+        $(this).html('This offer has expired!').parent().addClass('disabled');
+      });
   });
 
-  $('.number-spinner').on('click', 'button', function() {
+  $('.number-spinner').on('click', 'button', function () {
     let btn = $(this);
     let oldValue = btn.closest('.number-spinner').find('input').val().trim();
     let newVal = 0;
@@ -43,22 +43,22 @@ $(document).ready(function() {
       }
     }
     let minValue = btn.closest('.number-spinner').find('input').attr('min');
-    if(minValue > newVal) {
+    if (minValue > newVal) {
       btn.closest('.number-spinner').find('input').val(minValue);
     } else btn.closest('.number-spinner').find('input').val(newVal);
   });
 
-  $('.closePopup').on('click', function() {
+  $('.closePopup').on('click', function () {
     $.magnificPopup.close();
   });
 
-  $('.binOnAuctionPopup').on('click', function() {
+  $('.binOnAuctionPopup').on('click', function () {
     $('.binOnAuctionPopup').magnificPopup({
       type: 'inline',
       midClick: true,
     }).magnificPopup('open');
 
-    $('.bidOnAuction').one('click', function() {
+    $('.bidOnAuction').one('click', function () {
       $.magnificPopup.close();
       let amount = roundTo($('#bidOnAuction').find('.bid-amount').val().trim(), 2);
       bidOnAuction(amount);
@@ -73,6 +73,9 @@ $(document).ready(function() {
     let currBid = $('.current-bid');
     let bidderTableBody = $('.bidders-table-body');
     let username = $('input[name=user-username]').val();
+    let biddersDiv = $(".bidders");
+    let auctionDetailsDiv = $(".auctionDetails");
+    let hasBidders = $('html').has(".bidders-table-body").length;
 
     $.ajax({
       type: 'POST',
@@ -99,16 +102,21 @@ $(document).ready(function() {
             'min': amount + 1,
           });
           currBid.text('Current Bid: ' + amount + '€');
-          if(bidderTableBody.children().length === 5)
-            bidderTableBody.children().last().remove();
-          bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
+          if (hasBidders) {
+            if (bidderTableBody.children().length === 5)
+              bidderTableBody.children().last().remove();
+            bidderTableBody.prepend('<tr><td class="col-xs-5"><a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a></td><td class="col-xs-2">' + amount + '</td><td class="col-xs-5">' + data['date'] + '</td></tr>');
+          } else {
+            auctionDetailsDiv.removeClass("col-md-12").addClass("col-md-6");
+            biddersDiv.append(data['biddersDiv']);
+          }
         }
       },
     });
   }
 
   // Add auctions to watchlist.
-  $('.btn-add-watchlist').click(function() {
+  $('.btn-add-watchlist').click(function () {
     let notificationsVal = $(this).text();
     let glyphiconSpan = $('.auction-watchlist-glyphicon');
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
@@ -125,10 +133,10 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function (response, textStatus, jqXHR) {
       notificationsModal.modal('hide');
 
-      if(response.indexOf('Success') >= 0)
+      if (response.indexOf('Success') >= 0)
         watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>');
 
       $.magnificPopup.open({
@@ -139,14 +147,14 @@ $(document).ready(function() {
       });
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: ' +
         textStatus + ': ' + errorThrown);
     });
   });
 
   // Remove auction from watchlist.
-  $('.watchlist-button').on('click', '.btn-remove-auction-watchlist', function() {
+  $('.watchlist-button').on('click', '.btn-remove-auction-watchlist', function () {
     let watchlistBtnDiv = $('.watchlist-button');
 
     let request = $.ajax({
@@ -159,8 +167,8 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.indexOf('Success') >= 0)
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.indexOf('Success') >= 0)
         watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>');
 
       $.magnificPopup.open({
@@ -171,7 +179,7 @@ $(document).ready(function() {
       });
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: ' +
         textStatus + ': ' + errorThrown);
     });
@@ -180,20 +188,20 @@ $(document).ready(function() {
   let qaSection = $('#qaSection');
   $('#newQuestionForm').validate({
     rules:
-      {
-        comment: {
-          required: true,
-          maxlength: 512,
-        },
+    {
+      comment: {
+        required: true,
+        maxlength: 512,
       },
+    },
     messages:
-      {
-        comment: {
-          required: 'Please, enter your question.',
-          maxlength: 'The length of this question exceeds the maximum value of 512 characters.',
-        },
+    {
+      comment: {
+        required: 'Please, enter your question.',
+        maxlength: 'The length of this question exceeds the maximum value of 512 characters.',
       },
-    errorPlacement: function(error, element) {
+    },
+    errorPlacement: function (error, element) {
       error.insertAfter(element);
     },
     submitHandler: createQuestion,
@@ -216,7 +224,7 @@ $(document).ready(function() {
         'token': token,
         'userId': userId,
       },
-      success: function(data) {
+      success: function (data) {
         $.magnificPopup.open({
           items: {
             src: '<div class="white-popup">' + data['message'] + '</div>',
@@ -229,7 +237,7 @@ $(document).ready(function() {
           qaSection.append(data['questionsDiv']);
         }
       },
-      error: function(data) {
+      error: function (data) {
         console.log(data);
       },
     });
@@ -237,20 +245,20 @@ $(document).ready(function() {
 
   $('.newAnswerForm').validate({
     rules:
-      {
-        comment: {
-          required: true,
-          maxlength: 512,
-        },
+    {
+      comment: {
+        required: true,
+        maxlength: 512,
       },
+    },
     messages:
-      {
-        comment: {
-          required: 'Please, enter your question.',
-          maxlength: 'The length of this answer exceeds the maximum value of 512 characters.',
-        },
+    {
+      comment: {
+        required: 'Please, enter your question.',
+        maxlength: 'The length of this answer exceeds the maximum value of 512 characters.',
       },
-    errorPlacement: function(error, element) {
+    },
+    errorPlacement: function (error, element) {
       error.insertAfter(element);
     },
     submitHandler: createAnswer,
@@ -276,7 +284,7 @@ $(document).ready(function() {
         'questionId': questionId,
         'auctionId': auctionId,
       },
-      success: function(data) {
+      success: function (data) {
         $.magnificPopup.open({
           items: {
             src: '<div class="white-popup">' + data['message'] + '</div>',
@@ -289,19 +297,19 @@ $(document).ready(function() {
           qaSection.append(data['questionsDiv']);
         }
       },
-      error: function(data) {
+      error: function (data) {
         console.log(data);
       },
     });
   }
 
-  qaSection.on('click', '.edit-question', function() {
+  qaSection.on('click', '.edit-question', function () {
     let parent = $(this).closest('.comment-meta');
     parent.siblings('.question-edit-display').toggle();
     parent.siblings('.question-display').toggle();
   });
 
-  qaSection.on('click', '.btn-edit-question', function() {
+  qaSection.on('click', '.btn-edit-question', function () {
     let editComment = $(this).prev().val();
     let parent = $(this).closest('.media-body');
     let questionId = $(this).closest('.questionArticle').find('input[name=question-id]').val();
@@ -317,8 +325,8 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
         let questionDisplay = parent.children('.question-display');
         parent.children('.question-edit-display').toggle();
         questionDisplay.toggle();
@@ -333,20 +341,20 @@ $(document).ready(function() {
       }
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
   });
 
   // Edit answer.
-  qaSection.on('click', '.edit-answer', function() {
+  qaSection.on('click', '.edit-answer', function () {
     let parent = $(this).closest('.comment-meta');
     parent.siblings('.answer-edit-display').toggle();
     parent.siblings('.answer-display').toggle();
   });
 
-  qaSection.on('click', '.btn-edit-answer', function() {
+  qaSection.on('click', '.btn-edit-answer', function () {
     let editComment = $(this).prev().val();
     let parent = $(this).closest('.media-body');
     let answerId = $(this).closest('.answerArticle').find('input[name=answer-id]').val();
@@ -362,8 +370,8 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
         let answerDisplay = parent.children('.answer-display');
         parent.children('.answer-edit-display').toggle();
         answerDisplay.toggle();
@@ -378,18 +386,18 @@ $(document).ready(function() {
       }
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: '
         + textStatus + ': ' + errorThrown);
     });
   });
 
-  qaSection.on('click', '.removeQuestionPopup', function() {
+  qaSection.on('click', '.removeQuestionPopup', function () {
     let questionArticle = $(this).closest('.questionArticle');
     let questionClass = $(this).attr('class').split('id-');
     let questionAnswerDiv = questionArticle.parent();
 
-    if(questionClass.length !== 2)
+    if (questionClass.length !== 2)
       return;
 
     let questionId = questionClass[1];
@@ -399,7 +407,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
-    $('.removeQuestion').one('click', function() {
+    $('.removeQuestion').one('click', function () {
       $.magnificPopup.close();
       deleteQuestion(questionId, questionAnswerDiv);
     });
@@ -422,9 +430,9 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
-        questionDiv.fadeOut(500, function() {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
+        questionDiv.fadeOut(500, function () {
           questionDiv.remove();
         });
       } else {
@@ -437,16 +445,16 @@ $(document).ready(function() {
       }
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: '
         + textStatus + ': ' + errorThrown);
     });
   }
 
-  qaSection.on('click', '.removeAnswerPopup', function() {
+  qaSection.on('click', '.removeAnswerPopup', function () {
     let answerArticle = $(this).closest('.answerArticle');
     let answerClass = $(this).attr('class').split('id-');
-    if(answerClass.length !== 2)
+    if (answerClass.length !== 2)
       return;
 
     let answerId = answerClass[1];
@@ -456,7 +464,7 @@ $(document).ready(function() {
       midClick: true,
     }).magnificPopup('open');
 
-    $('.removeAnswer').one('click', function() {
+    $('.removeAnswer').one('click', function () {
       $.magnificPopup.close();
       deleteAnswer(answerId, answerArticle);
     });
@@ -479,9 +487,9 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
-        article.fadeOut(500, function() {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
+        article.fadeOut(500, function () {
           article.remove();
         });
       } else {
@@ -494,14 +502,14 @@ $(document).ready(function() {
       }
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: '
         + textStatus + ': ' + errorThrown);
     });
   }
 
   let reportQuestionId;
-  $('.product-questions').on('click', '.reportQuestionPopup', function() {
+  $('.product-questions').on('click', '.reportQuestionPopup', function () {
     $('.reportQuestionPopup').magnificPopup({
       type: 'inline',
       midClick: true,
@@ -524,7 +532,7 @@ $(document).ready(function() {
    * Ajax call that reports a question
    */
   function reportQuestion() {
-    if(reportQuestionId === -1)
+    if (reportQuestionId === -1)
       return;
     $.magnificPopup.close();
     let comment = $('#reportQuestionMessage').val();
@@ -539,8 +547,8 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
         $('#reportQuestionForm').trigger('reset');
         reportQuestionId = -1;
       }
@@ -552,14 +560,14 @@ $(document).ready(function() {
       });
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: ' +
         textStatus + ': ' + errorThrown);
     });
   }
 
   let reportAnswerId;
-  $('.product-questions').on('click', '.reportAnswerPopup', function() {
+  $('.product-questions').on('click', '.reportAnswerPopup', function () {
     $('.reportAnswerPopup').magnificPopup({
       type: 'inline',
       midClick: true,
@@ -582,7 +590,7 @@ $(document).ready(function() {
    * Ajax call that reports an answer
    */
   function reportAnswer() {
-    if(reportAnswerId === -1)
+    if (reportAnswerId === -1)
       return;
     $.magnificPopup.close();
     let comment = $('#reportAnswerMessage').val();
@@ -597,8 +605,8 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
         $('#reportAnswerForm').trigger('reset');
         reportAnswerId = -1;
       }
@@ -610,7 +618,7 @@ $(document).ready(function() {
       });
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: ' +
         textStatus + ': ' + errorThrown);
     });
@@ -648,8 +656,8 @@ $(document).ready(function() {
       },
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
+    request.done(function (response, textStatus, jqXHR) {
+      if (response.includes('Success')) {
         $(form).trigger('reset');
       }
       $.magnificPopup.open({
@@ -660,24 +668,24 @@ $(document).ready(function() {
       });
     });
 
-    request.fail(function(jqXHR, textStatus, errorThrown) {
+    request.fail(function (jqXHR, textStatus, errorThrown) {
       console.error('The following error occured: ' +
         textStatus + ': ' + errorThrown);
     });
   }
 
   // Reply (toggles reply form).
-  $('.reply-question').click(function() {
+  $('.reply-question').click(function () {
     $('.newAnswerForm').fadeToggle();
   });
 
   // Facebook Share
-  document.getElementById('social-fb').onclick = function(){
-      FB.ui({
-          method: 'share',
-          hashtag: '#SeekBid',
-          href: window.location
-      }, function(response){});
-      console.log("CLICKED SHARE");
+  document.getElementById('social-fb').onclick = function () {
+    FB.ui({
+      method: 'share',
+      hashtag: '#SeekBid',
+      href: window.location
+    }, function (response) { });
+    console.log("CLICKED SHARE");
   }
 });
