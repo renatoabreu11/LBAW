@@ -79,7 +79,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-md-3 control-label">e-mail: </label>
+                <label class="col-md-3 control-label">E-mail: </label>
                 <div class="col-md-6">
                   <input type="text" class="form-control" name="email" id="e-mail" value="{$user.email}">
                 </div>
@@ -169,74 +169,6 @@
             </div>
           </form>
 
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ****************** Notifications ****************** -->
-  <div class="panel-group">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <i class="glyphicon glyphicon-bell"></i>
-          <a href="#notifications-edit" data-toggle="collapse">Notifications</a>
-        </h4>
-      </div>
-      <div id="notifications-edit" class="panel-collapse collapse">
-        <div class="panel-body">
-          <form method="post" action="">
-            <div class="panel panel-info">
-              <div class="panel-heading">Active Notifications</div>
-              <div class="panel-body">
-                <div class="form-group">
-                  <div class="row checkbox-row">
-                    <div class="col-md-2 col-md-offset-5">
-                      <label class="checkbox-inline"><input type="checkbox" value="" checked> Auction won.</label>
-                    </div>
-                  </div>
-                  <div class="row checkbox-row">
-                    <div class="col-md-2 col-md-offset-5">
-                      <label class="checkbox-inline"><input type="checkbox" value="" checked> Bid surpassed.</label>
-                    </div>
-                  </div>
-                  <div class="row checkbox-row">
-                    <div class="col-md-2 col-md-offset-5">
-                      <label class="checkbox-inline"><input type="checkbox" value="" checked> Question.</label>
-                    </div>
-                  </div>
-                  <div class="row checkbox-row">
-                    <div class="col-md-2 col-md-offset-5">
-                      <label class="checkbox-inline"><input type="checkbox" value="" checked> Question reply.</label>
-                    </div>
-                  </div>
-                  <div class="row checkbox-row">
-                    <div class="col-md-2 col-md-offset-5">
-                      <label class="checkbox-inline"><input type="checkbox" value="" checked> Review.</label>
-                    </div>
-                  </div>
-                  <div class="row checkbox-row">
-                    <div class="col-md-2 col-md-offset-5">
-                      <label class="checkbox-inline"><input type="checkbox" value="" checked> Auction removed.</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row" style="padding-top: 20px;">
-              <div class="col-xs-6 text-left">
-                <div class="previous">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-              </div>
-              <div class="col-xs-6 text-right">
-                <div class="next">
-                  <button type="button" class="btn btn-primary btn-discard">Discard</button>
-                </div>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
     </div>

@@ -69,7 +69,7 @@
 
     <div>
       <div id="reportUserConfirmation" class="white-popup mfp-hide">
-        <form role="form" action="{$BASE_URL}api/admin/report_user.php" method="post" id="reportUserForm">
+        <form action="{$BASE_URL}api/admin/report_user.php" method="post" id="reportUserForm">
           <input type="hidden" name="reportedUserId" value="{$user.id}">
           <div class="form-group">
             <label for="reportUserMessage">Report:</label>
@@ -108,7 +108,7 @@
                     <span class="recent-activity-date">{$lastReviews[$var].date}</span>
                   </div>
                   <div class="panel-body">
-                    <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].seller_username}</a>.</p>
+                    <p><a href="#">{$user.username}</a> wrote a review regarding an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastReviews[$var].auction_id}">auction</a> hosted by <a href="{$BASE_URL}pages/user/user.php?id={$lastReviews[$var].seller_id}">{$lastReviews[$var].seller_username}</a>.</p>
                   </div>
                 </div>
               {/if}
@@ -119,7 +119,7 @@
                     <span class="recent-activity-date">{$lastBids[$var].date}</span>
                   </div>
                   <div class="panel-body">
-                    <p><a href="#">{$user.username}</a> bid {$lastBids[$var].amount}€ on an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastBids[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastBids[$var].seller_id}">{$lastBids[$var].seller_username}</a>.</p>
+                    <p><a href="#">{$user.username}</a> bid {$lastBids[$var].amount}€ on an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastBids[$var].auction_id}">auction</a> hosted by <a href="{$BASE_URL}pages/user/user.php?id={$lastBids[$var].seller_id}">{$lastBids[$var].seller_username}</a>.</p>
                   </div>
                 </div>
               {/if}
@@ -141,7 +141,7 @@
                     <span class="recent-activity-date">{$lastWins[$var].end_date}</span>
                   </div>
                   <div class="panel-body">
-                    <p><a href="#">{$user.username}</a> won an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="../../pages/user/user.php?id={$lastWins[$var].seller_id}">{$lastWins[$var].seller_username}</a>.</p>
+                    <p><a href="#">{$user.username}</a> won an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastWins[$var].auction_id}">auction</a> hosted by <a href="{$BASE_URL}pages/user/user.php?id={$lastWins[$var].seller_id}">{$lastWins[$var].seller_username}</a>.</p>
                   </div>
                 </div>
               {/if}
@@ -220,7 +220,7 @@
                           <h5 class="time">{$auction.remaining_time}</h5>
                         </td>
                         <td class="watch col-md-2">
-                          <button class="btn btn-info"><a href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a></button>
+                          <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a>
                         </td>
                       </tr>
                     {/foreach}
@@ -242,7 +242,7 @@
                 <div class="thumbnail review-item">
                   <div class="row">
                     <div class="col-lg-3 col-md-3">
-                      <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="../../images/products/{$review.image_filename}"></a>
+                      <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="{$BASE_URL}images/products/{$review.image_filename}" Alt="Product image"></a>
                       <div class="review-rating text-center">
                         <span class="glyphicon glyphicon-star"></span>
                         <span class="glyphicon glyphicon-star"></span>
@@ -274,14 +274,14 @@
                 <div class="row">
                   <div class="col-lg-3 col-md-3 win-wrapper">
                     <div id="win-info-image">
-                      <a href="{$BASE_URL}pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="../../images/products/{$win.image_filename}" alt="Product image"></a>
+                      <a href="{$BASE_URL}pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="{$BASE_URL}images/products/{$win.image_filename}" alt="Product image"></a>
                     </div>
                     <div id="win-info-text">
                       <div class="text-right win-info">
                         <span class="win-info-title">Base price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
                         <span class="win-info-title">Bought price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
                         <span class="win-info-title">Date: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
-                        <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="../../pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a></button><br>
+                        <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a></button><br>
                       </div>
                     </div>
                   </div>
@@ -335,7 +335,7 @@
             {foreach $followingUsers as $followingUser}
               <div class="media">
                 <div class="media-left">
-                  <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$BASE_URL}images/users/{$followingUser.profile_pic}"></a>
+                  <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><img class="media-object" src="{$BASE_URL}images/users/{$followingUser.profile_pic}" Alt="User photo"></a>
                 </div>
                 <div class="media-body">
                   <a href="{$BASE_URL}pages/user/user.php?id={$followingUser.id}" class="media-object"><p class="media-heading lead">{$followingUser.name}</p></a>
