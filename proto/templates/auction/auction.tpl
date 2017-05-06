@@ -23,27 +23,19 @@
         <h3 class="visible-xs" style="color: black;">{$product.name}</h3>
         <div class="col-md-4 col-xs-12">
           <div id="productGallery" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              {for $i = 0; $i < count($images); $i++}
-              {if $i == 0}
-                <li data-target="#productGallery" data-slide-to="{$i}" class="active"></li>
-              {else}
-                <li data-target="#productGallery" data-slide-to="{$i}"></li>
-              {/if}
-              {/for}
-            </ol>
+            {if count($images) != 0}
+              <ol class="carousel-indicators">
+                {for $i = 0; $i < count($images); $i++}
+                {if $i == 0}
+                  <li data-target="#productGallery" data-slide-to="{$i}" class="active"></li>
+                {else}
+                  <li data-target="#productGallery" data-slide-to="{$i}"></li>
+                {/if}
+                {/for}
+              </ol>
+            {/if}
 
             <div class="carousel-inner popup-gallery" role="listbox">
-              {if count($images) == 0}
-                <div class="item active">
-                  <a href="{$BASE_URL}images/auctions/default.jpeg" title="Image not available">
-                    <img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" alt="Image not available">
-                  </a>
-                  <div class="carousel-caption">
-                    <h5>Image not available</h5>
-                  </div>
-                </div>
-              {else}
               {for $i = 0; $i < count($images); $i++}
                 {if $i == 0}
                 <div class="item active">
@@ -58,23 +50,23 @@
                   </div>
                 </div>
               {/for}
-              {/if}
             </div>
-
-            <a class="left carousel-control" href="#productGallery" role="button" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#productGallery" role="button" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
+            {if count($images) != 1}
+              <a class="left carousel-control" href="#productGallery" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#productGallery" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            {/if}
           </div>
           <h5 class="text-center" style="color: darkgray">Click on the image to expand it</h5>
-          <div class="share text-center">
-            <a href=""><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+          <div class="share text-center" style="padding-bottom: 0.5em;">
+            <a href="" class="btn btn-primary"><i id="social-fb" class="fa fa-facebook"> Share on facebook</i></a>
           </div>
-          {if ($USER_ID)}
+          {if ($USER_ID) && $USER_ID != {$seller.id}}
             <div class="watchlist-button">
               {if ($isOnWatchlist)}
                 <h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>
@@ -83,7 +75,18 @@
               {/if}
             </div>
           {/if}
-          <span><a class="reportAuctionPopup btn btn-default" href="#reportAuctionConfirmation">Report</a></span>
+          {if ($USER_ID) && $USER_ID != {$seller.id}}
+            <div class="text-center">
+              <span><a class="reportAuctionPopup btn btn-default" href="#reportAuctionConfirmation">Report</a></span>
+            </div>
+          {/if}
+          {if ($USER_ID) && $USER_ID == {$seller.id} && $canEdit}
+            <div class="text-center">
+              <span><a class="btn btn-default" href="{$BASE_URL}pages/auction/auction_edit.php?id={$auction.id}">Edit auction</a></span>
+              <span><a class="btn btn-default" href="{$BASE_URL}pages/auction/auction_gallery.php?id={$auction.id}">Edit gallery</a></span>
+              <span><a class="deleteAuctionPopup btn btn-default">Delete Auction</a></span>
+            </div>
+          {/if}
           <div id="watchlist-notification-modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -160,8 +163,7 @@
   <input type="hidden" name="user-username" value="{$username}">
   <input type="hidden" name="seller" value="{$seller.username}">
 
-
-      <div>
+  <div>
     <div id="reportAuctionConfirmation" class="white-popup mfp-hide">
       <form action="{$BASE_URL}api/admin/report_auction.php" method="post" id="reportAuctionForm">
         <div class="form-group">

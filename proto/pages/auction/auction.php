@@ -26,6 +26,11 @@ if(date('Y-m-d H:i:s') > $auction['end_date']) {
   $smarty->assign("winningUser", $winningUser);
 }
 
+$canEdit = true;
+if(strtotime($auction['start_date']) - strtotime(date('Y-m-d H:i:s')) < 0){
+  $canEdit = false;
+}
+
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
   $username = $_SESSION['username'];
@@ -36,6 +41,11 @@ if($_SESSION['user_id']){
   $smarty->assign('isOnWatchlist', $isOnWatchlist);
 }
 
+if(count($images) == 0){
+  $images = array(['description' => 'Image not available', 'filename' => 'default.jpeg']);
+}
+
+$smarty->assign("canEdit", $canEdit);
 $smarty->assign("images", $images);
 $smarty->assign("product", $product);
 $smarty->assign("auction", $auction);
