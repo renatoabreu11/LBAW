@@ -82,7 +82,7 @@
             <div class="text-center">
               <span><a class="btn btn-default" href="{$BASE_URL}pages/auction/auction_edit.php?id={$auction.id}">Edit auction</a></span>
               <span><a class="btn btn-default" href="{$BASE_URL}pages/auction/auction_gallery.php?id={$auction.id}">Edit gallery</a></span>
-              <span><a class="deleteAuctionPopup btn btn-default">Delete Auction</a></span>
+              <span><a class="btn btn-default removeAuctionPopup" href="#removeAuctionConfirmation">Delete Auction</a></span>
             </div>
           {/if}
           <div id="watchlist-notification-modal" class="modal fade" role="dialog">
@@ -164,6 +164,15 @@
               <input type="submit" id="reportAuction" class="btn btn-info" value="Report Auction">
             </div>
           </form>
+        </div>
+      </div>
+
+      <div id="removeAuctionConfirmation" class="white-popup mfp-hide">
+        <h4>Are you sure that you want to delete this auction?</h4>
+        <p>You will not be able to undo this action!</p>
+        <div class="text-center">
+          <button class="btn btn-info removeAuction">Yes, I'm sure</button>
+          <button class="btn btn-info closePopup">No, go back</button>
         </div>
       </div>
 

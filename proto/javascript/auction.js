@@ -148,7 +148,7 @@ $(document).ready(function() {
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
     let watchlistBtnDiv = $('.watchlist-button');
 
-    console.log("texto: " + notificationsVal);
+    console.log('texto: ' + notificationsVal);
 
     let request = $.ajax({
       type: 'POST',
@@ -703,6 +703,27 @@ $(document).ready(function() {
         textStatus + ': ' + errorThrown);
     });
   }
+
+  $('.auction').on('click', 'a.removeAuctionPopup', function() {
+    $('.removeAuctionPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
+
+    $('.removeAuction').off();
+    $('.removeAuction').one('click', function() {
+      $.magnificPopup.close();
+      $.ajax({
+        type: 'POST',
+        url: BASE_URL + 'actions/auction/auction_delete.php',
+        data: {
+          'auctionId': auctionId,
+          'userId': userId,
+          'token': token,
+        },
+      });
+    });
+  });
 
   // Reply (toggles reply form).
   $('.reply-question').click(function() {
