@@ -46,6 +46,7 @@ if($userId && !isQuestionCreator($questionId, $userId)){
 try {
   deleteQuestion($questionId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'adminId' => $adminId, 'request' => 'Delete question.'));
   echo "Error 500 Internal Server: Error deleting question.";
   return;
 }

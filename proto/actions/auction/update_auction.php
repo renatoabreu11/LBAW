@@ -97,6 +97,7 @@ if($invalidInfo){
   try {
     updateAuction($auctionId, $basePrice, $quantity, $startDate, $endDate, $auctionType);
   } catch (PDOException $e) {
+    $log->error($e->getMessage(), array('userId' => $userId, 'auctionId' => $auctionId, 'request' => 'Updating auction info.'));
     $_SESSION['error_messages'][] = 'Error updating the auction.';
     header("Location:"  . $_SERVER['HTTP_REFERER']);
     exit;

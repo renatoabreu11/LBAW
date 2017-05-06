@@ -31,6 +31,7 @@ if(!is_numeric($notificationId)){
 try {
   updateNotification($notificationId);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Read notification.'));
   echo "Error 500 Internal Server: Error marking notification as read.";
 }
 

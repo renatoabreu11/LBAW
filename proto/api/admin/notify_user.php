@@ -31,6 +31,7 @@ if(strlen($message) > 256){
 try {
   notifyUser($userId, $message, "Warning");
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Notify user.'));
   echo "Error 500 Internal Server: Error sending notification to the user.";
   return;
 }

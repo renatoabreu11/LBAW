@@ -104,6 +104,7 @@ if($picture['size'] > 0) {
   try {
     updateUserPicture($userId, $userId . "." . $extension);
   } catch(PDOException $e) {
+    $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Update user info.'));
     $_SESSION['error_messages'][] = "Error updating your profile avatar. Please select another photo.";
     $_SESSION['form_values'] = $_POST;
     header("Location:"  . $_SERVER['HTTP_REFERER']);

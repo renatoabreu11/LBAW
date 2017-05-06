@@ -19,6 +19,7 @@ $email = trim($_POST['email']);
 try {
   updatePasswordWithEmail($email, $newPass);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('request' => "Reset password."));
   echo "Error 500 Internal Server: Error updating password.";
   return;
 }

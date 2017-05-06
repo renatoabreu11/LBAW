@@ -79,6 +79,7 @@ if($invalidInfo){
     try {
       updateWatchlistNotifications($auctionId, $userId, $notificationsEnabled);
     } catch (PDOException $e) {
+      $log->error($e->getMessage(), array('userId' => $userId, 'auctionId' => $auctionId, 'request' => 'Updating auction settings info.'));
       $_SESSION['field_errors']['notifications_enabled'] = 'Error updating the notifications option.';
       header("Location:"  . $_SERVER['HTTP_REFERER']);
       exit;

@@ -32,6 +32,7 @@ if (!empty($_POST['token'])) {
     try {
       deleteProductPicture($imageId);
     } catch(PDOException $e) {
+      $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Delete image.'));
       $reply = array('error' =>  "Error 500 Internal server: Error deleting the picture!");
       echo json_encode($reply);
       return;

@@ -47,6 +47,7 @@ try {
     return;
   }
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create answer'));
   $reply['message'] = "Error 500 Internal Server: Couldn't create answer!";
   echo json_encode($reply);
   return;

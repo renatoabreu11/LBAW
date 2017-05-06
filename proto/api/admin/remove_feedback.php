@@ -30,6 +30,7 @@ if(!is_numeric($feedbackId)){
 try {
   deleteFeedback($feedbackId);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Remove feedback.'));
   echo "Error 500 Internal Server: Error deleting feedback.";
   return;
 }

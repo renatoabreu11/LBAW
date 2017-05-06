@@ -63,8 +63,8 @@ if(password_verify($newPass, $storedHashPass)) {
 try {
   updatePassword($userId, $newPass);
 } catch(PDOException $e) {
-  echo $e->getMessage();
-  $_SESSION['error_messages'][] = "Error updating your password password.";
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Update user password.'));
+  $_SESSION['error_messages'][] = "Error updating your password.";
   $_SESSION['form_values'] = $_POST;
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;

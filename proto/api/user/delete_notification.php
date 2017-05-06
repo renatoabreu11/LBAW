@@ -9,8 +9,8 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $loggedUserId = $_SESSION['user_id'];
-$user_id = $_POST['userId'];
-if($loggedUserId != $user_id) {
+$userId = $_POST['userId'];
+if($loggedUserId != $userId) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
@@ -29,6 +29,7 @@ if(!is_numeric($notificationId)){
 try {
   deleteNotification($notificationId);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Remove notification'));
   echo "Error 500 Internal Server: Error deleting notification.";
   return;
 }

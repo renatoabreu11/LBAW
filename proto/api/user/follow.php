@@ -29,6 +29,7 @@ if($followedUserId == $userId){
 try {
   followUser($userId, $followedUserId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Follow user.'));
   echo "Error 500 Internal Server: Error following user.";
   return;
 }

@@ -29,6 +29,7 @@ if(!isOwner($userId, $auctionId)){
 try {
   deleteAuction($auctionId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Delete auction.'));
   echo "Error 500 Internal Server: Error removing auction!";
   return;
 }

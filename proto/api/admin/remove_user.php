@@ -29,6 +29,7 @@ if(!is_numeric($userId)){
 try {
   deleteUser($userId);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Remove user.'));
   echo "Error 500 Internal Server: Error deleting user.";
   return;
 }

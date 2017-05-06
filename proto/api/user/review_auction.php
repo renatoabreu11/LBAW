@@ -37,6 +37,7 @@ if(strlen($message) > 512){
 try {
   insertReview($rating, $message, $bidId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Review auction.'));
   echo "Error 500 Internal Server: Error creating the review.";
   return;
 }

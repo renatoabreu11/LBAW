@@ -49,8 +49,8 @@ try {
   else if (strpos($e->getMessage(), 'admin_email_uindex') !== false){
     echo "Error 500 Internal Server: Email already exists.";
     return;
-  }
-  else {
+  }else {
+    $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Add new admin.'));
     echo "Error 500 Internal Server: Error creating admin.";
     return;
   }

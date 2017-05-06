@@ -43,6 +43,7 @@ if($nrQuestions >= 3){
 try {
   createQuestion($comment, $userId, $auctionId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create question'));
   $reply['message'] = "Error 500 Internal Server: Error creating the question!";
   echo json_encode($reply);
   return;

@@ -38,6 +38,7 @@ foreach ($notifications as $notification){
   try {
     updateNotification($notification);
   } catch (PDOException $e) {
+    $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Read notifications.'));
     $reply['message'] = "Error 500 Internal Server: Error marking notification as read.<br/>";
   }
 }

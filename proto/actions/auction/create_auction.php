@@ -206,6 +206,7 @@ if (!empty($_POST['token'])) {
           $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be after the current date.";
           $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be after the starting date.";
         } else {
+          $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create auction.'));
           $_SESSION['error_messages'][] = "Error creating the auction.";
         }
 

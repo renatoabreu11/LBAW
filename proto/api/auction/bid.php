@@ -46,6 +46,7 @@ if(isOwner($userId, $auctionId)){
 try {
   $ret = bid($amount, $userId, $auctionId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Bid on auction.'));
   $reply = array('message' => "Error 500 Internal Server: Error creating the bid.");
   echo json_encode($reply);
   return;

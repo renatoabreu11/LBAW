@@ -29,6 +29,7 @@ if ( strlen($feedback) > 256){
 try {
   createFeedback($userId, $feedback);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create feedback.'));
   echo "Error 500 Internal Server: Error creating the feedback message.";
   return;
 }

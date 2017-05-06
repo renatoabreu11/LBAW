@@ -35,6 +35,7 @@ try {
 		updateNotificationOption($userId, $auctionId, '1');
 
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => "Toggle notifications."));
   echo "Error 500 Internal Server: Error removing auction from watchlist.";
   return;
 }

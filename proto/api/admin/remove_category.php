@@ -30,6 +30,7 @@ if(!is_numeric($categoryId)){
 try {
   deleteCategory($categoryId);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Remove category.'));
   echo "Error 500 Internal Server: Error deleting category.";
   return;
 }

@@ -13,6 +13,7 @@ $email = trim(strip_tags($_GET['email']));
 try {
   $link = createRequestPasswordReset($email);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('request' => "Recover password."));
   echo "Error 500 Internal Server: Error creating password recovery request.";
   return;
 }

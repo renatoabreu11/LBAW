@@ -46,6 +46,7 @@ if($userId && !isAnswerCreator($answerId, $userId)){
 try {
   deleteAnswer($answerId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'adminId' => $adminId, 'request' => 'Delete answer.'));
   echo "Error 500 Internal Server: Error deleting answer.";
   return;
 }

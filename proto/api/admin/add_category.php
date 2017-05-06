@@ -36,7 +36,10 @@ try {
 } catch (PDOException $e) {
   if (strpos($e->getMessage(), 'category_name_key') !== false){
     $reply = array('message' => "Error 500 Internal Server: Category already exists.");
-  } else $reply = array('message' => "Error 500 Internal Server: Error creating category.");
+  } else{
+    $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Add new category'));
+    $reply = array('message' => "Error 500 Internal Server: Error creating category.");
+  }
   echo json_encode($reply);
   return;
 }

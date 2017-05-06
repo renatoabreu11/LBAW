@@ -48,6 +48,7 @@ if($elapsedQuestionSeconds > $editTimeAllowed){
 try {
   editAnswer($answerId, $comment);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Edit answer.'));
   echo "Error 500 Internal Server: Couldn't edit answer!";
   return;
 }

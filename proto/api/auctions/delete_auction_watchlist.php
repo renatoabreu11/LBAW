@@ -29,6 +29,7 @@ if(!is_numeric($auctionId)) {
 try {
   removeAuctionFromWatchlist($userId, $auctionId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => "Remove auction from watchlist."));
   echo "Error 500 Internal Server: Error removing auction from watchlist.";
   return;
 }

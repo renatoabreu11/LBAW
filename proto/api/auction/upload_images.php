@@ -106,6 +106,7 @@ if (!empty($_POST['token'])) {
           $caption = trim(strip_tags($captionsArr[$i]));
           $imageId = addProductPicture($productId, $extension, $caption, $names[$i]);
         } catch(PDOException $e) {
+          $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Upload auction image.'));
           $reply['error'] .= "Error 500 Internal Server: Error storing the association between the product and " . $names[$i] . ".<br/>";
         }
 

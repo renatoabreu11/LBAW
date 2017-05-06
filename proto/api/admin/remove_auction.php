@@ -29,6 +29,7 @@ if(!is_numeric($auctionId)){
 try {
   deleteAuction($auctionId);
 } catch (PDOException $e) {
+  $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Remove auction.'));
   echo "Error 500 Internal Server: Error deleting auction.";
   return;
 }

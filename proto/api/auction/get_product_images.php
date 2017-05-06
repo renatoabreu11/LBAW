@@ -37,6 +37,7 @@ $images;
 try {
   $images = getProductImages($productId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Get product images.'));
   $reply['message'] = "Error 500 Internal Server: Error retrieving product images!";
   echo json_encode($reply);
   return;

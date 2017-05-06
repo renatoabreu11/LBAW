@@ -40,6 +40,7 @@ if(strlen($comment) > 512){
 try {
   createAuctionReport($auctionId, $comment);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create auction report.'));
   echo "Error 500 Internal Server: Error creating the auction report.";
   return;
 }

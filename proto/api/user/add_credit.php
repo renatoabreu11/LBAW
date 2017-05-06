@@ -8,7 +8,6 @@ if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
 }
 
 $userId = $_POST['userId'];
-$userId = $_POST['userId'];
 $loggedUserId = $_SESSION['user_id'];
 if($loggedUserId != $userId) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
@@ -27,6 +26,7 @@ $newCredit = $creditToAdd + $currCredit;
 try {
   updateUserCredit($newCredit, $userId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Add credit.'));
   echo "Error 500 Internal Server: Error updating user credit.";
   return;
 }

@@ -149,6 +149,7 @@ if($invalidInfo){
   try {
     updateProduct($productId, $productName, $description, $condition, $characteristics);
   } catch (PDOException $e) {
+    $log->error($e->getMessage(), array('userId' => $userId, 'auctionId' => $auctionId, 'request' => 'Updating product info.'));
     $_SESSION['error_messages'][] = 'Error updating the product.';
     header("Location:"  . $_SERVER['HTTP_REFERER']);
     exit;

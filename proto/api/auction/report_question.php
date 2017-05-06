@@ -40,6 +40,7 @@ if(strlen($comment) > 512){
 try {
   createQuestionReport($questionId, $comment);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create question report.'));
   echo "Error 500 Internal Server: Error creating the question report.";
   return;
 }

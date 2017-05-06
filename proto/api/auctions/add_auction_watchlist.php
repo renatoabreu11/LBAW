@@ -39,6 +39,7 @@ else {
 try {
   addAuctionToWatchlist($userId, $auctionId, $notifications);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Add auction to watchlist.'));
   echo "Error 500 Internal Server: Error adding auction to watchlist.";
   return;
 }

@@ -29,6 +29,7 @@ if($unfollowedUserId == $userId){
 try {
   unfollowUser($userId, $unfollowedUserId);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Unfollow user.'));
   echo "Error 500 Internal Server: Error unfollowing user.";
   return;
 }
