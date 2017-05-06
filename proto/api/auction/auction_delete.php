@@ -15,7 +15,7 @@ if($loggedUserId != $userId) {
   return;
 }
 
-$auctionId = trim(strip_tags($_POST['auctionId']));
+$auctionId = $_POST['auctionId'];
 if(!is_numeric($auctionId)) {
   echo "Error 400 Bad Request: Invalid auction id!";
   return;
@@ -25,6 +25,17 @@ if(!isOwner($userId, $auctionId)){
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
+
+$auction = getAuction($auctionId);
+
+// Verificar se já começou, se sim, não eliminar
+if($auction['start_date'] < date("Y-m-d H:i:s")){
+  $_SESSION['error_messages'][] = "The auction has already started. You can't update it anymore.";
+  header("Location:"  . $BASE_URL . "pages/auction/auction.php?id=" . $auction['id']);
+  exit;
+}
+
+// eliminar as fotos do leilão -> usar intervention
 
 try {
   deleteAuction($auctionId);

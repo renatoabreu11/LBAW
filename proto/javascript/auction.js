@@ -713,17 +713,43 @@ $(document).ready(function() {
     $('.removeAuction').off();
     $('.removeAuction').one('click', function() {
       $.magnificPopup.close();
-      $.ajax({
-        type: 'POST',
-        url: BASE_URL + 'actions/auction/auction_delete.php',
-        data: {
-          'auctionId': auctionId,
-          'userId': userId,
-          'token': token,
-        },
-      });
+      deleteAuction(auctionId);
     });
   });
+
+  /**
+   * Ajax call that deletes an auction
+   * @param auctionId
+   */
+  function deleteAuction(auctionId) {
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/report_auction.php',
+      data: {
+        'auctionId': auctionId,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        // redirect to home page
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
+        });
+      }
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occurred: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
 
   // Reply (toggles reply form).
   $('.reply-question').click(function() {

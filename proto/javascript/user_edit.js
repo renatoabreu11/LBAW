@@ -27,7 +27,7 @@ $(document).ready(function() {
   $('#form-general').validate({
     rules:
       {
-        realNrame: {
+        realName: {
             required: true,
             maxlength: 64,
         },
