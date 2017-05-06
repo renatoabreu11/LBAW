@@ -21,6 +21,11 @@ $numBidders = count(getBidders($auctionId));
 $questions = getQuestionsAnswers($auctionId);
 $similarAuctions = getSimilarAuctions($auctionId);
 
+foreach ($similarAuctions as &$auction) {
+  if ($auction['image'] == null)
+    $auction['image'] = 'default.jpeg';
+}
+
 if(date('Y-m-d H:i:s') > $auction['end_date']) {
   $winningUser = getWinningUser($auctionId);
   $smarty->assign("winningUser", $winningUser);

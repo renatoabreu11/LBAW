@@ -300,7 +300,7 @@
                 <div class="slide text-center">
                   <div>
                     <h4>{$similarAuction.name}</h4>
-                    <img src="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" alt="...">
+                    <img src="{$BASE_URL}images/auctions/thumbnails/{$similarAuction.image}" alt="Product image">
                     <span><a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$similarAuction.id}" style="color: white; margin: 0.5em;">Watch Auction</a></span>
                   </div>
                 </div>
