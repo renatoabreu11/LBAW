@@ -210,7 +210,11 @@
                     <tbody>
                     {foreach $activeAuctions as $auction}
                       <tr>
-                        <td class="image col-md-2"><img src="{$BASE_URL}images/products/{$auction.image}" alt="Product image"></td>
+                        {if ($auction.image)}
+                          <td class="image col-md-2"><img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image"></td>
+                        {else}
+                          <td class="image col-md-2"><img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" alt="Product image"></td>
+                        {/if}
                         <td class="product col-md-6">
                           <strong>{$auction.name}</strong><br>
                           {$auction.description}
