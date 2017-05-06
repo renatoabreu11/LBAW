@@ -708,12 +708,11 @@ $(document).ready(function() {
   });
 
   // Facebook Share
-  document.getElementById('social-fb').onclick = function() {
+  $('#social-fb').on('click', function() {
       FB.ui({
           method: 'share',
           hashtag: '#SeekBid',
           href: window.location,
       }, function(response) {});
-      console.log('CLICKED SHARE');
-  };
+  });
 });
