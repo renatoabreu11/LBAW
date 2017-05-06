@@ -4,10 +4,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/users.php');
 
 $userId = null;
-if(!$_GET['id'])
-  $userId = 1;
-else
-  $userId = $_GET['id'];
+$userId = $_GET['id'];
 
 $loggedUserId = $_SESSION['user_id'];
 
