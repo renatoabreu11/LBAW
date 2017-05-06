@@ -18,4 +18,4 @@ try {
   return;
 }
 
-echo "Success: A password recovery request was successfully created." . $link;
+echo "Success 203 Created: A password recovery request was successfully created." . $link;
