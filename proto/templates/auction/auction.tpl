@@ -24,27 +24,41 @@
         <div class="col-md-4 col-xs-12">
           <div id="productGallery" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-              <li data-target="#productGallery" data-slide-to="0" class="active"></li>
-              <li data-target="#productGallery" data-slide-to="1"></li>
-              <li data-target="#productGallery" data-slide-to="2"></li>
+              {for $i = 0; $i < count($images); $i++}
+              {if $i == 0}
+                <li data-target="#productGallery" data-slide-to="{$i}" class="active"></li>
+              {else}
+                <li data-target="#productGallery" data-slide-to="{$i}"></li>
+              {/if}
+              {/for}
             </ol>
 
             <div class="carousel-inner popup-gallery" role="listbox">
+              {if count($images) == 0}
+                <div class="item active">
+                  <a href="{$BASE_URL}images/auctions/default.jpeg" title="Image not available">
+                    <img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" alt="Image not available">
+                  </a>
+                  <div class="carousel-caption">
+                    <h5>Image not available</h5>
+                  </div>
+                </div>
+              {else}
               {for $i = 0; $i < count($images); $i++}
                 {if $i == 0}
-                  <div class="item active">
+                <div class="item active">
                 {else}
-                  <div class="item">
+                <div class="item">
                 {/if}
                   <a href="{$BASE_URL}images/auctions/{$images[$i].filename}" title="{$images[$i].description}">
-                    <img src="{$BASE_URL}images/auctions/{$images[$i].filename}" alt="{$images[$i].description}">
+                    <img src="{$BASE_URL}images/auctions/thumbnails/{$images[$i].filename}" alt="{$images[$i].description}">
                   </a>
                   <div class="carousel-caption">
                     <h5>{$images[$i].description}</h5>
                   </div>
                 </div>
               {/for}
-
+              {/if}
             </div>
 
             <a class="left carousel-control" href="#productGallery" role="button" data-slide="prev">

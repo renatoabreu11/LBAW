@@ -363,11 +363,6 @@ th {
   color: black;
 }
 
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  margin: auto;
-}
-
 @media (max-width: 768px) {
   .sellerInfo {
     text-align: center;

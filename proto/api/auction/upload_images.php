@@ -3,6 +3,8 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
 
+use Intervention\Image\ImageManager;
+
 if (!empty($_POST['token'])) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
     $token = $_SESSION['token'];
@@ -92,6 +94,7 @@ if (!empty($_POST['token'])) {
 
     $reply;
     $p1 = $p2 = $p3 = [];
+    $manager = new ImageManager();
     for($i = 0; $i < $nrImages; $i++) {
       if ($errors[$i]) {
         $reply['error'] .= "Picture " . $names[$i] . ": Invalid file!<br/>";
@@ -107,21 +110,21 @@ if (!empty($_POST['token'])) {
         }
 
         $picturePath = $BASE_DIR . "images/auctions/" . $imageId . "." . $extension;
-        if (!move_uploaded_file($tmp_names[$i], $picturePath)) {
-          $reply['error'] .=  "Error storing the picture " . $names[$i] . "!";
-          deleteProductPicture($imageId);
-        }else {
-          $key = $imageId;
-          $extra = array();
-          $extra['userId'] = $userId;
-          $extra['productId'] = $productId;
-          $extra['token'] = $token;
-          $extra['originalName'] = $names[$i];
-          $url = $BASE_URL . 'api/auction/remove_image.php';
-          $p1[$i] = $BASE_URL . "images/auctions/" . $imageId . "." . $extension;
-          $p2[$i] = ['caption' => $caption, 'url' => $url, 'key' => $key, 'extra' => $extra];
-          $p3[$i] = ['{TAG_VALUE}' => $caption, '{TAG_CSS_NEW}' => 'hide', '{TAG_CSS_INIT}' => ''];
-        }
+        $thumbnailPath = $BASE_DIR . "images/auctions/thumbnails/" . $imageId . "." . $extension;
+        $img = $manager->make($tmp_names[$i]);
+        $img->save($picturePath);
+        $img->fit(460, 300);
+        $img->save($thumbnailPath);
+        $key = $imageId;
+        $extra = array();
+        $extra['userId'] = $userId;
+        $extra['productId'] = $productId;
+        $extra['token'] = $token;
+        $extra['originalName'] = $names[$i];
+        $url = $BASE_URL . 'api/auction/remove_image.php';
+        $p1[$i] = $BASE_URL . "images/auctions/" . $imageId . "." . $extension;
+        $p2[$i] = ['caption' => $caption, 'url' => $url, 'key' => $key, 'extra' => $extra];
+        $p3[$i] = ['{TAG_VALUE}' => $caption, '{TAG_CSS_NEW}' => 'hide', '{TAG_CSS_INIT}' => ''];
       }
     }
     echo json_encode([

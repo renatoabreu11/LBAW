@@ -4,6 +4,7 @@
     "smarty/smarty": "~3.1",
     "facebook/graph-sdk": "^5.5",
     "aws/aws-sdk-php": "^3.26",
-    "cboden/ratchet": "^0.3.6"
+    "cboden/ratchet": "^0.3.6",
+    "intervention/image": "^2.3"
   }
 }
