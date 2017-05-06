@@ -738,8 +738,6 @@ function createRequestPasswordReset($email) {
       return "Message sent!";
   }
 
-
-
 /*
   global $conn;
   $stmt = $conn->prepare('SELECT EXISTS

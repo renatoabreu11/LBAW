@@ -200,7 +200,7 @@
               </div>
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Bidders:</strong><p class="col-md-4"> {$numBidders}</p>
-                <strong class="col-md-2 col-xs-5">Category:</strong><p class="col-md-4"> </p>
+                <strong class="col-md-2 col-xs-5">Category:</strong><p class="col-md-4"> {if (count($productCategories) == 2)}{$productCategories[1].name},{/if} {$productCategories[0].name}</p>
               </div>
             </div>
             <div id="seller" class="tab-pane fade">

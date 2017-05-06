@@ -4,15 +4,15 @@ include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/users.php');
 
 if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
+  $_SESSION['error_messages'][] = "You don't have permissions to make this request. Generated token is different.";
   header("Location:"  . $BASE_URL);
   exit;
 }
 
 $loggedUserId = $_SESSION['user_id'];
 $userId = $_POST['userId'];
-if($loggedUserId != 1) {
-  $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
+if($loggedUserId != $userId) {
+  $_SESSION['error_messages'][] = "You don't have permissions to make this request. User id's are different.";
   header("Location:"  . $BASE_URL);
   exit;
 }
@@ -101,6 +101,11 @@ if($picture['size'] > 0) {
     exit;
   }
 
+  //$img = resize_image($picturePath, 200, 200);
+  
+  // and you are ready to go ...
+  //$image = Image::make($picturePath)->resize(300, 200);
+
   try {
     updateUserPicture($userId, $userId . "." . $extension);
   } catch(PDOException $e) {
@@ -119,3 +124,30 @@ if($picture['size'] > 0) {
 
 $_SESSION['success_messages'][] = 'Personal information updated with success.';
 header("Location: $BASE_URL" . 'pages/user/user.php?id=' . $userId);
+
+function resize_image($file, $w, $h, $crop=FALSE) {
+    list($width, $height) = getimagesize($file);
+    $r = $width / $height;
+    if ($crop) {
+        if ($width > $height) {
+            $width = ceil($width-($width*abs($r-$w/$h)));
+        } else {
+            $height = ceil($height-($height*abs($r-$w/$h)));
+        }
+        $newwidth = $w;
+        $newheight = $h;
+    } else {
+        if ($w/$h > $r) {
+            $newwidth = $h*$r;
+            $newheight = $h;
+        } else {
+            $newheight = $w/$r;
+            $newwidth = $w;
+        }
+    }
+    $src = imagecreatefromjpeg($file);
+    $dst = imagecreatetruecolor($newwidth, $newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+    return $dst;
+}

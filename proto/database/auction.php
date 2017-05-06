@@ -86,7 +86,8 @@ function getProductCategories($productId){
   global $conn;
   $stmt = $conn->prepare('SELECT category.name
                             FROM category
-                            INNER JOIN product_category ON category.id = product_category.category_id AND product_category.product_id = ?');
+                            INNER JOIN product_category ON category.id = product_category.category_id 
+                            WHERE product_category.product_id = ?');
   $stmt->execute(array($productId));
   $result = $stmt->fetchAll();
   return $result;

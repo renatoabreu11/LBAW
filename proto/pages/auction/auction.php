@@ -10,6 +10,7 @@ $auction = getAuction($auctionId);
 
 $auction['end_data_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
 $product = getAuctionProduct($auctionId);
+$productCategories = getProductCategories($product['id']);
 $images = getProductImages($product['id']);
 
 $seller = getUser($auction['user_id']);
@@ -54,6 +55,7 @@ if(count($images) == 0){
 $smarty->assign("canEdit", $canEdit);
 $smarty->assign("images", $images);
 $smarty->assign("product", $product);
+$smarty->assign("productCategories", $productCategories);
 $smarty->assign("auction", $auction);
 $smarty->assign("seller", $seller);
 $smarty->assign("numReviews", $numReviews);
