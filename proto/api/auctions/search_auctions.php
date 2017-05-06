@@ -68,6 +68,11 @@ else {
   }
 }
 
+foreach ($auctions as &$auction) {
+  if ($auction['image'] == null) 
+    $auction['image'] = 'default.jpeg';
+}
+
 $items = 8;
 $nr_pages = ceil(count($auctions) / $items);
 

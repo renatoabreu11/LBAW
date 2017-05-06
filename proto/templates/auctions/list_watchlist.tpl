@@ -21,7 +21,7 @@
       </ul>
     </div>
     <h4 style="height: 50px;">{$auction.product_name}</h4>
-    <img src="https://www.thurrott.com/wp-content/uploads/2015/10/surface-book-hero.jpg" alt="...">
+    <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Image not available">
     <h4>Current bid: {$auction.curr_bid} €</h4>
     <div class="countdown">
         <h3 class="clock"><span hidden>{$auction.end_date}</span></h3>

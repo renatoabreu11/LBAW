@@ -36,6 +36,9 @@ foreach ($auctions as &$auction) {
 		$auction['active'] = 1;
 	else
 		$auction['active'] = 0;
+
+	if ($auction['image'] == null) 
+		$auction['image'] = 'default.jpeg';
 }
 
 $notifications = getActiveNotifications($id);
