@@ -28,9 +28,9 @@ if(!is_numeric($auctionId)) {
 
 $notifications = trim(strip_tags($_POST['notifications']));
 if($notifications == "Yes")
-  $notifications = true;
+  $notifications = 'true';
 else if($notifications == "No")
-  $notifications = false;
+  $notifications = 'false';
 else {
   echo "Error 400 Bad Request: Notifications value is not the expected.";
   return;

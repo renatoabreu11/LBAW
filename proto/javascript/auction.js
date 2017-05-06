@@ -148,6 +148,8 @@ $(document).ready(function() {
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
     let watchlistBtnDiv = $('.watchlist-button');
 
+    console.log("texto: " + notificationsVal);
+
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auctions/add_auction_watchlist.php',
