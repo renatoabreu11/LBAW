@@ -96,13 +96,6 @@ if($picture['size'] > 0) {
       unlink($path);
   }
 
-  if(!move_uploaded_file($picture['tmp_name'], $picturePath)) {
-    $_SESSION['error_messages'][] = "Error updating your profile avatar. Please select another photo.";
-    $_SESSION['form_values'] = $_POST;
-    header("Location:"  . $_SERVER['HTTP_REFERER']);
-    exit;
-  }
-
   // Resize the image.
   $manager = new ImageManager();
   $img = $manager->make($picturePath);
