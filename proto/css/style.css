@@ -82,6 +82,11 @@ ul {
   padding: 0 0.2em;
 }
 
+.readNotification,
+.markRecentNotificationsAsRead {
+  cursor: pointer;
+}
+
 .menu-title {
   color: #000;
   font-size: large;
@@ -368,10 +373,6 @@ th {
     text-align: center;
     font-size: 15px;
   }
-}
-
-.underline-text-hover:hover {
-  text-decoration: underline;
 }
 
 .bid-title {

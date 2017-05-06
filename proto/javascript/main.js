@@ -8,6 +8,10 @@ $(document).ready(function() {
   userId = $('input[name=user_id]').val();
   adminId = $('input[name=admin_id]').val();
 
+  $('body').tooltip({
+    selector: '[data-toggle=tooltip]',
+  });
+
   $('#signInForm').validate({
     rules:
       {
@@ -57,7 +61,7 @@ $(document).ready(function() {
         'username': username,
         'password': password,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -110,7 +114,7 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -142,7 +146,7 @@ $(document).ready(function() {
   }
 
   $('.notifications-wrapper .hideNotification').click(function(e) {
-    let notificationsWrapper = $('.notifications-wrapper');
+    let notificationsWrapper = $('.dropdown-menu.notifications .notifications-wrapper');
     let numNotifications = notificationsWrapper.children().length;
     let notification = $(this).closest('.notifications-wrapper');
 
@@ -155,7 +159,7 @@ $(document).ready(function() {
     });
 
     numNotifications = notificationsWrapper.children().length;
-
+    console.log(numNotifications);
     if(numNotifications === 1) {
       $('<p class="notifications-empty">' +
         'You have no new notifications</p>')

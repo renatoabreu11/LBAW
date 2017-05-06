@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="col-lg-8 col-md-8">
+  <div class="col-lg-8 col-md-8 notificationsPage">
     <div class="row heading">
       <h3 class="notification-page-title">Notifications</h3>
       <p>You’ll see here updates of your auctions, bids, questions, answers and warnings.</p>
@@ -41,12 +41,15 @@
                 You are the winner of an auction. Congratulations!
               {/if}
             </a>
-            <small style="padding-left: 1em;">Feb 20th, 2017 at 9:37:41</small>
+            <small style="padding-left: 1em; padding-right: 1em;">Feb 20th, 2017 at 9:37:41</small>
+            {if !$notif.is_new}
+              <a href="#" data-toggle="tooltip" title="Notification read!"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            {/if}
             <p style="padding-top: 1em;">{$notif.message}</p>
             <div class="notification-options">
-              <span><a class="removeNotificationPopup id-{$notif.id}" href="#removeNotification">Remove notification</a></span>
+              <span><a class="removeNotificationPopup id-{$notif.id}" href="#removeNotification">delete</a></span>
               {if $notif.is_new}
-                <span><a class="readNotification id-{$notif.if}">read</a></span>
+                <span><a class="readNotification id-{$notif.id}">read</a></span>
               {/if}
             </div>
           </div>

@@ -130,12 +130,11 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'json',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(responseJson, textStatus, jqXHR) {
-      let response = JSON.parse(responseJson);
+    request.done(function(response, textStatus, jqXHR) {
       let message = response['message'];
       if(message.includes('Category already exists')) {
         form.find('.field_error').text(message);
@@ -209,7 +208,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -257,7 +256,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -296,7 +295,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -337,7 +336,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -462,7 +461,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -559,7 +558,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -595,7 +594,7 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success

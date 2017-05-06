@@ -172,7 +172,40 @@ $(document).ready(function() {
     $.magnificPopup.close();
   });
 
-  $('.notifications-wrapper').on('click', '.removeNotificationPopup', function() {
+  let notificationsWrapper = $('.notificationsPage .notifications-wrapper');
+  notificationsWrapper.on('click', '.readNotification', function() {
+    let notificationClass = $(this).attr('class').split('id-');
+    if (notificationClass.length === 2) {
+      let object = $(this).closest('.notifications-wrapper');
+      let notificationId = notificationClass[1];
+      let request = $.ajax({
+        type: 'POST',
+        url: BASE_URL + 'api/user/read_notification.php',
+        data: {
+          'notification': notificationId,
+          'token': token,
+          'userId': userId,
+        },
+      });
+
+      // Callback handler that will be called on success
+      request.done(function(response, textStatus, jqXHR) {
+        if (response.includes('Success')) {
+          $('<a href="#" data-toggle="tooltip" title="Notification read!"><i class="fa fa-eye" aria-hidden="true"></i></a>').insertAfter(object.find('.media-body small'));
+          object.find('span a.readNotification').remove();
+        }else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + response + '</div>',
+              type: 'inline',
+            },
+          });
+        }
+      });
+    }
+  });
+
+  notificationsWrapper.on('click', '.removeNotificationPopup', function() {
     let notificationClass = $(this).attr('class').split('id-');
     if (notificationClass.length === 2) {
       let object = $(this).closest('.notifications-wrapper');
@@ -206,7 +239,7 @@ $(document).ready(function() {
         'token': token,
         'userId': userId,
       },
-      datatype: 'text',
+      dataType: 'text',
     });
 
     // Callback handler that will be called on success
@@ -218,9 +251,13 @@ $(document).ready(function() {
         },
       });
       if(response.includes('Success')) {
+        notificationsWrapper = $('.notificationsPage .notifications-wrapper');
         object.hide('slow', function() {
           object.remove();
         });
+        if(notificationsWrapper.length === 1) {
+          window.location.href=window.location.href;
+        }
       }
     });
 

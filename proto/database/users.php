@@ -517,23 +517,6 @@ function validUser($username, $id){
 }
 
 /**
- * Returns all user's notifications
- * @param $userId
- * @return array
- */
-function getAllNotifications($userId){
-  global $conn;
-  $stmt = $conn->prepare('SELECT *
-                                FROM notification
-                                WHERE user_id = ?
-                                  GROUP BY id, is_new
-                                  ORDER BY DATE DESC;');
-  $stmt->execute(array($userId));
-  $result = $stmt->fetchAll();
-  return $result;
-}
-
-/**
  * Returns the active notifications (not read), with a limit of 5 elements.
  * @param $userId
  * @return array
@@ -544,6 +527,7 @@ function getActiveNotifications($userId){
                                 FROM notification
                                 INNER JOIN "user" ON notification.user_id = "user".id
                                 WHERE is_new = TRUE AND "user".id = ?
+                                ORDER BY date DESC
                                 LIMIT 5;');
   $stmt->execute(array($userId));
   $result = $stmt->fetchAll();
@@ -562,8 +546,7 @@ function getPageNotifications($userId, $items, $offset){
   $stmt = $conn->prepare('SELECT *
                                 FROM notification
                                 WHERE user_id = ?
-                                  GROUP BY id, is_new
-                                  ORDER BY DATE DESC
+                                  ORDER BY is_new DESC , date DESC
                                 LIMIT ?
                                 OFFSET ?');
   $stmt->execute(array($userId, $items, $offset));

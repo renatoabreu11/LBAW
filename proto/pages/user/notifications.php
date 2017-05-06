@@ -25,7 +25,7 @@ if (empty($page) || is_numeric($page) == FALSE) {
     $page = $_GET['page'];
 }
 
-$items = 5;
+$items = 10;
 $offset = ($page * $items) - $items;
 $page_notifications = getPageNotifications($id, $items, $offset);
 $notifications = getActiveNotifications($id);
