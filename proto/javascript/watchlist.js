@@ -13,7 +13,7 @@ $(document).ready(function() {
  */
 function setCountdown() {
   $('.clock').each(function() {
-    let date = $(this).find('p').text();
+    let date = $(this).find('span').text();
     $(this).countdown(date)
       .on('update.countdown', function(event) {
         let format = '%Hh:%Mm:%Ss';
