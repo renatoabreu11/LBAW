@@ -569,6 +569,12 @@ function countNotifications($userId){
   return $result['count'];
 }
 
+/**
+ * Returns the user profile pic
+ * @param $userId
+ *
+ * @return mixed
+ */
 function getProfilePic($userId) {
   global $conn;
   $stmt = $conn->prepare('SELECT profile_pic
@@ -579,6 +585,13 @@ function getProfilePic($userId) {
   return $stmt->fetch()['profile_pic'];
 }
 
+/**
+ * Returns the recovery request id
+ * @param $email
+ * @param $token
+ *
+ * @return mixed
+ */
 function getPasswordRecoveryRequestId($email, $token) {
   global $conn;
   $stmt = $conn->prepare('SELECT id
@@ -664,6 +677,12 @@ function createUserReport($userId, $message) {
   $stmt->execute();
 }
 
+/**
+ * Creates a password request
+ * @param $email
+ *
+ * @return string|void
+ */
 function createRequestPasswordReset($email) {
   global $conn;
   $stmt = $conn->prepare('SELECT EXISTS
