@@ -1,5 +1,5 @@
 {if (count($recentBidders) > 0)}
-<div class="col-md-6">
+<div class="col-md-6 bidders">
     <h4 style="padding-top: 1em;">Recent Bidders</h4>
     <table class="table table-fixed">
     <thead>

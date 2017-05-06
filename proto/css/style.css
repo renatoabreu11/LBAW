@@ -408,7 +408,7 @@ th {
 }
 
 .grid .grid-body {
-  padding: 5px 20px 15px 20px;
+  padding: 5px 1em 15px 1em;
   font-size: 0.9em;
   line-height: 1.9em;
 }
