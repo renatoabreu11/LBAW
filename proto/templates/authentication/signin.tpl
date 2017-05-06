@@ -25,9 +25,13 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
-        <p>Not a member? <a href="{$BASE_URL}pages/authentication/signup.php">Sign Up</a></p>
-        <p><a href="{$BASE_URL}pages/authentication/recovery.php">Forgot your password?</a></p>
+        <div class="col-xs-3 pull-left" style="padding-top: 0.5em;">
+          <button type="submit" class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
+        </div>
+        <div class="col-xs-9 pull-right">
+          <p>Not a member? <a href="{$BASE_URL}pages/authentication/signup.php">Sign Up</a></p>
+          <p><a href="{$BASE_URL}pages/authentication/recovery.php">Forgot your password?</a></p>
+        </div>
       </div>
     </div>
   </div>
