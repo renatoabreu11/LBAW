@@ -1,16 +1,24 @@
 {include file='common/header.tpl'}
 
-    <div class="container">
-        <form class="form-horizontal" action="javascript:void(0);">
-            <div class="form-group">
-                <label class="control-label col-md-3" for="email">Email address:</label>
-                <div class="col-md-9">
-                    <input type="email" class="form-control" id="email">
-                </div>
-            </div>
+<section id="adminLogin">
+  <div class="container">
+    <div class="row">
+      <div class="form-wrap">
+        <h1>Password recovery</h1>
+        <form action="{$BASE_URL}'api/authentication/recovery.php" method="get" id="recoveryForm">
+          <div class="form-group">
+            <label class="sr-only" for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+          </div>
+          <div class="text-center">
             <button type="submit" class="btn btn-primary">Send me a recovery email</button>
+          </div>
         </form>
+        <hr>
+      </div>
     </div>
+  </div>
+</section>
 
 <script src="{$BASE_URL}javascript/recovery.js"></script>
 {include file='common/footer.tpl'}

@@ -43,7 +43,14 @@
     {if (count($auctions) >= 1) }
       {include file='auctions/list_watchlist.tpl'}
     {else}
-      <p>You have no auctions on watchlist.</p>
+      <div class="container-fluid" style="padding-bottom: 2em;">
+        <div class="row-fluid">
+          <div class="empty-content text-center">
+            <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
+            <h3>No auctions in the watchlist.</h3>
+          </div>
+        </div>
+      </div>
     {/if}
   </div>
   <div class="row text-center result">

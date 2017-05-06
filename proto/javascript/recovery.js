@@ -1,5 +1,16 @@
 $(document).ready(function() {
-  $('button[type=submit]').click(function() {
+  $('#recoveryForm').validate({
+    rules:
+      {
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+    submitHandler: sendRecoveryRequest,
+  });
+
+  function sendRecoveryRequest(form) {
     let email = $('#email').val();
 
     let request = $.ajax({
@@ -12,8 +23,7 @@ $(document).ready(function() {
 
     request.done(function(response, textStatus, jqXHR) {
       if(response.includes('Success')) {
-        console.info(response);
-        $('form').remove();
+        $(form).trigger('reset');
         $('.container').prepend('<p>We sent an email to <strong>' + email + '</strong></p>');
       } else {
         $.magnificPopup.open({
@@ -29,5 +39,5 @@ $(document).ready(function() {
       console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
-  });
+  }
 });
