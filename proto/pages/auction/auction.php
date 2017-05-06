@@ -7,6 +7,7 @@ include_once ($BASE_DIR . 'database/users.php');
 
 $auctionId = $_GET["id"];
 $auction = getAuction($auctionId);
+
 $auction['end_data_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
 $product = getAuctionProduct($auctionId);
 $images = getProductImages($product['id']);
@@ -21,9 +22,9 @@ $numBidders = count(getBidders($auctionId));
 $questions = getQuestionsAnswers($auctionId);
 $similarAuctions = getSimilarAuctions($auctionId);
 
-foreach ($similarAuctions as &$auction) {
-  if ($auction['image'] == null)
-    $auction['image'] = 'default.jpeg';
+foreach ($similarAuctions as &$auctions) {
+  if ($auctions['image'] == null)
+    $auctions['image'] = 'default.jpeg';
 }
 
 if(date('Y-m-d H:i:s') > $auction['end_date']) {
