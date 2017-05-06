@@ -12,6 +12,14 @@ $topTenRankingUsers = getTopTenRankingUsers();
 $mostPopularAuctions = getMostPopularAuctions();
 $mostRecentAuction = getMostRecentAuction();
 
+if ($mostRecentAuction['image_filename'] == null)
+	$mostRecentAuction['image_filename'] = 'default.jpeg';
+
+foreach ($mostPopularAuctions as &$auction) {
+	if ($auction['image'] == null) 
+		$auction['image'] = 'default.jpeg';
+}
+
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
   $notifications = getActiveNotifications($id);

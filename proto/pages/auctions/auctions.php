@@ -29,6 +29,11 @@ else if ($_GET['search'] && !$_GET['category']) {
   $auctions = searchAuctionsByCategoryAndName($textSearch, $category);
 }
 
+foreach ($auctions as &$auction) {
+  if ($auction['image'] == null) 
+    $auction['image'] = 'default.jpeg';
+}
+
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
   $notifications = getActiveNotifications($id);
