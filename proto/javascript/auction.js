@@ -174,7 +174,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
+      console.error('The following error occurred: ' +
         textStatus + ': ' + errorThrown);
     });
   });
@@ -206,7 +206,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
+      console.error('The following error occurred: ' +
         textStatus + ': ' + errorThrown);
     });
   });
@@ -413,7 +413,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: '
+      console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
   });
@@ -473,7 +473,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: '
+      console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
   }
@@ -531,7 +531,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: '
+      console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
   }
@@ -589,7 +589,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
+      console.error('The following error occurred: ' +
         textStatus + ': ' + errorThrown);
     });
   }
@@ -647,7 +647,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
+      console.error('The following error occurred: ' +
         textStatus + ': ' + errorThrown);
     });
   }
@@ -697,7 +697,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
+      console.error('The following error occurred: ' +
         textStatus + ': ' + errorThrown);
     });
   }

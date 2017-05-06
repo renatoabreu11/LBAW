@@ -204,7 +204,7 @@
             <div class="selling-wrapper">
               <div class="table-responsive" id="auctions">
                 {if ($activeAuctions == null)}
-                  <p>No active auctions curretly available.</p>
+                  <p>No active auctions currently available.</p>
                 {else}
                   <table class="table table-hover collapse in" id="auctionsList">
                     <tbody>

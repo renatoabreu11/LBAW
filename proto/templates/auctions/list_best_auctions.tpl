@@ -26,7 +26,7 @@
     <div class="item active">
         <div class="thumbnail text-center">
           <h4>{$mostRecentAuction.product_name}</h4>
-          <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuction.image_filename}" class="animated bounce infinite" alt="Image not available">
+          <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuction.image_filename}" class="animated bounce infinite" alt="Product image">
           <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;margin: 0.5em;">Watch Auction</a>
         </div>
     </div>

@@ -46,7 +46,7 @@ $(document).ready(function() {
       });
 
       request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occured: '
+        console.error('The following error occurred: '
           + textStatus + ': ' + errorThrown);
       });
     } else {
@@ -61,13 +61,12 @@ $(document).ready(function() {
       });
 
       request.done(function(response, textStatus, jqXHR) {
-        console.info('Response: ' + response);
         if(response.includes('Success'))
           $('#follow-btn').html('Follow');
       });
 
       request.fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('The following error occured: '
+        console.error('The following error occurred: '
           + textStatus + ': ' + errorThrown);
       });
     }
@@ -113,7 +112,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: '
+      console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
   });
@@ -292,8 +291,6 @@ $(document).ready(function() {
     $.magnificPopup.close();
     let comment = $('#reportUserMessage').val();
     let reportedUserId = $(form).find('input[name=reportedUserId]').val();
-    console.log(comment);
-    console.log(reportedUserId);
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/user/report_user.php',
@@ -318,7 +315,7 @@ $(document).ready(function() {
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('The following error occured: ' +
+      console.error('The following error occurred: ' +
         textStatus + ': ' + errorThrown);
     });
   }

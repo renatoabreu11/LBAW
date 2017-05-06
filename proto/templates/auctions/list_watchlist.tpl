@@ -21,7 +21,7 @@
       </ul>
     </div>
     <h4 style="height: 50px;">{$auction.product_name}</h4>
-    <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Image not available">
+    <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
     <h4>Current bid: {$auction.curr_bid} €</h4>
     <div class="countdown">
         <h3 class="clock"><span hidden>{$auction.end_date}</span></h3>
