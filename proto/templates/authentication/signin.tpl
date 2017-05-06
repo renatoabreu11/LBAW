@@ -27,6 +27,7 @@
       <div class="modal-footer">
         <button type="submit" class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
         <p>Not a member? <a href="{$BASE_URL}pages/authentication/signup.php">Sign Up</a></p>
+        <p><a href="{$BASE_URL}pages/authentication/recovery.php">Forgot your password?</a></p>
       </div>
     </div>
   </div>

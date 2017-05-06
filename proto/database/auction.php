@@ -452,7 +452,7 @@ function getQuestionsAnswers($auctionId){
 
   for ($i = 0; $i < count($questions); $i++) {
     // Determines if a question can be edited.
-    $elapsedQuestionSeconds = strtotime(date('Y-m-d H:m')) - strtotime($questions[$i]['date']);      // Minus 3600  because of time zone errors.
+    $elapsedQuestionSeconds = strtotime(date('Y-m-d H:m')) - strtotime($questions[$i]['date']);
     $editTimeAllowed = 900;     //900 = 15 minutes * 60 seconds.
     if($elapsedQuestionSeconds <= $editTimeAllowed)
       $questions[$i]['can_edit'] = true;

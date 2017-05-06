@@ -67,6 +67,7 @@ ALTER TABLE ONLY proto.question_report DROP CONSTRAINT question_report_pkey;
 ALTER TABLE ONLY proto.question DROP CONSTRAINT question_pkey;
 ALTER TABLE ONLY proto.product DROP CONSTRAINT product_pkey;
 ALTER TABLE ONLY proto.product_category DROP CONSTRAINT product_category_pkey;
+ALTER TABLE ONLY proto.password_request DROP CONSTRAINT password_request_pkey;
 ALTER TABLE ONLY proto.notification DROP CONSTRAINT notification_pkey;
 ALTER TABLE ONLY proto.image DROP CONSTRAINT image_pkey;
 ALTER TABLE ONLY proto.follow DROP CONSTRAINT follow_pk;
@@ -87,6 +88,7 @@ ALTER TABLE proto.review ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.question_report ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.question ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.product ALTER COLUMN id DROP DEFAULT;
+ALTER TABLE proto.password_request ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.notification ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.image ALTER COLUMN id DROP DEFAULT;
 ALTER TABLE proto.feedback ALTER COLUMN id DROP DEFAULT;
@@ -113,6 +115,8 @@ DROP TABLE proto.question;
 DROP SEQUENCE proto.product_id_seq;
 DROP TABLE proto.product_category;
 DROP TABLE proto.product;
+DROP SEQUENCE proto.password_request_id_seq;
+DROP TABLE proto.password_request;
 DROP SEQUENCE proto.notification_id_seq;
 DROP TABLE proto.notification;
 DROP SEQUENCE proto.image_id_seq;
@@ -906,6 +910,40 @@ ALTER SEQUENCE notification_id_seq OWNED BY notification.id;
 
 
 --
+-- Name: password_request; Type: TABLE; Schema: proto; Owner: lbaw1662; Tablespace: 
+--
+
+CREATE TABLE password_request (
+    id integer NOT NULL,
+    email character varying(128) NOT NULL,
+    token character varying(128) NOT NULL
+);
+
+
+ALTER TABLE password_request OWNER TO lbaw1662;
+
+--
+-- Name: password_request_id_seq; Type: SEQUENCE; Schema: proto; Owner: lbaw1662
+--
+
+CREATE SEQUENCE password_request_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE password_request_id_seq OWNER TO lbaw1662;
+
+--
+-- Name: password_request_id_seq; Type: SEQUENCE OWNED BY; Schema: proto; Owner: lbaw1662
+--
+
+ALTER SEQUENCE password_request_id_seq OWNED BY password_request.id;
+
+
+--
 -- Name: product; Type: TABLE; Schema: proto; Owner: lbaw1662; Tablespace: 
 --
 
@@ -1238,6 +1276,13 @@ ALTER TABLE ONLY image ALTER COLUMN id SET DEFAULT nextval('image_id_seq'::regcl
 --
 
 ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: proto; Owner: lbaw1662
+--
+
+ALTER TABLE ONLY password_request ALTER COLUMN id SET DEFAULT nextval('password_request_id_seq'::regclass);
 
 
 --
@@ -1686,6 +1731,19 @@ SELECT pg_catalog.setval('notification_id_seq', 296, true);
 
 
 --
+-- Data for Name: password_request; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
+--
+
+
+
+--
+-- Name: password_request_id_seq; Type: SEQUENCE SET; Schema: proto; Owner: lbaw1662
+--
+
+SELECT pg_catalog.setval('password_request_id_seq', 1, false);
+
+
+--
 -- Data for Name: product; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
 --
 
@@ -2009,6 +2067,14 @@ ALTER TABLE ONLY image
 
 ALTER TABLE ONLY notification
     ADD CONSTRAINT notification_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: password_request_pkey; Type: CONSTRAINT; Schema: proto; Owner: lbaw1662; Tablespace: 
+--
+
+ALTER TABLE ONLY password_request
+    ADD CONSTRAINT password_request_pkey PRIMARY KEY (id);
 
 
 --

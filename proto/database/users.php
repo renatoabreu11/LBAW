@@ -579,6 +579,18 @@ function getProfilePic($userId) {
   return $stmt->fetch()['profile_pic'];
 }
 
+function getPasswordRecoveryRequestId($email, $token) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT id
+                          FROM password_request
+                          WHERE email = :email
+                            AND token = :token');
+  $stmt->bindParam('email', $email);
+  $stmt->bindParam('token', $token);
+  $stmt->execute();
+  return $stmt->fetch()['id'];
+}
+
 /* ========================== Inserts  ========================== */
 
 /**
@@ -650,6 +662,37 @@ function createUserReport($userId, $message) {
   $stmt->bindParam('message', $message);
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();
+}
+
+function createRequestPasswordReset($email) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT EXISTS
+                            (SELECT id
+                            FROM "user"
+                            WHERE email = :email) as exists');
+  $stmt->bindParam('email', $email);
+  $stmt->execute();
+  $exists = $stmt->fetch()['exists'];
+
+  if(!($exists))
+    return;
+
+  $token = bin2hex(openssl_random_pseudo_bytes(32));
+
+  $stmt = $conn->prepare('INSERT INTO password_request(email, token)
+                          VALUES(:email, :token)');
+  $stmt->bindParam('email', $email);
+  $stmt->bindParam('token', $token);
+  $stmt->execute();
+
+  // Mails are not sent using the local server.
+  $message = "Someone requested a password reset. Click on the following link to reset your password: http://localhost:8000/pages/authentication/password_reset.php?email=" . $email . "&token=" . $token;
+  $message = wordwrap($message, 70);
+  $subject = "SeekBid password reset request";
+  $headers = "From: seekbid@noreply.com";
+  mail($email, $subject, $message, $headers);
+
+  return "http://localhost:8000/pages/authentication/reset_password.php?email=" . $email . "&token=" . $token;
 }
 
 /* ========================== Deletes  ========================== */
@@ -785,6 +828,31 @@ function updatePassword($userId, $newPass) {
                                 WHERE id = :user_id');
   $stmt->bindParam('new_hashed_pass', $encryptedNewPass);
   $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+}
+
+/**
+ * Updates user password and removes password request.
+ * @param $email
+ * @param $newPass
+ */
+function updatePasswordWithEmail($email, $newPass) {
+  global $conn;
+
+  // Updates password.
+  $options = ['cost' => 12];
+  $encryptedNewPass = password_hash($newPass, PASSWORD_DEFAULT, $options);
+  $stmt = $conn->prepare('UPDATE "user"
+                          SET hashed_pass = :new_hashed_pass
+                          WHERE email = :email');
+  $stmt->bindParam('new_hashed_pass', $encryptedNewPass);
+  $stmt->bindParam('email', $email);
+  $stmt->execute();
+
+  // Removes the password request.
+  $stmt = $conn->prepare('DELETE FROM password_request
+                          WHERE email = :email');
+  $stmt->bindParam('email', $email);
   $stmt->execute();
 }
 
