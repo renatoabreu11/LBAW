@@ -236,7 +236,14 @@
         {if ($totalAuctions > 0)}
           <div id="reviews" class="tab-pane fade">
             {if ($reviews == null)}
-              <p>No reviews were written.</p>
+              <div class="container-fluid" style="padding-bottom: 2em;">
+                <div class="row-fluid">
+                  <div class="empty-content text-center">
+                    <i class="fa fa-comment fa-3x" aria-hidden="true"></i>
+                    <h3>No reviews were written.</h3>
+                  </div>
+                </div>
+              </div>
             {else}
               {foreach $reviews as $review}
                 <div class="thumbnail review-item">
@@ -267,7 +274,14 @@
         <!-- ****************** Wins ****************** -->
         <div id="wins" class="tab-pane fade">
           {if ($wins == null)}
-            <p>No auctions won.</p>
+            <div class="container-fluid" style="padding-bottom: 2em;">
+              <div class="row-fluid">
+                <div class="empty-content text-center">
+                  <i class="fa fa-trophy fa-3x" aria-hidden="true"></i>
+                  <h3>No wins.</h3>
+                </div>
+              </div>
+            </div>
           {else}
             {foreach $wins as $win}
               <div class="thumbnail win-item">
@@ -330,7 +344,14 @@
         <!-- ****************** Following ****************** -->
         <div id="following" class="tab-pane fade">
           {if ($followingUsers == null)}
-            <p>No users being followed.</p>
+            <div class="container-fluid" style="padding-bottom: 2em;">
+              <div class="row-fluid">
+                <div class="empty-content text-center">
+                  <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+                  <h3>No users being followed.</h3>
+                </div>
+              </div>
+            </div>
           {else}
             {foreach $followingUsers as $followingUser}
               <div class="media">

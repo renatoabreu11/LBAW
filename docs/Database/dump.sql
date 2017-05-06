@@ -1734,13 +1734,14 @@ SELECT pg_catalog.setval('notification_id_seq', 296, true);
 -- Data for Name: password_request; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
 --
 
+INSERT INTO password_request VALUES (1, 'renatoabreu1196@gmail.com', '4df4766722278fa28c356c9b05db605d5d40db9c20fc7b5440fe6516419d1aad');
 
 
 --
 -- Name: password_request_id_seq; Type: SEQUENCE SET; Schema: proto; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('password_request_id_seq', 1, false);
+SELECT pg_catalog.setval('password_request_id_seq', 1, true);
 
 
 --
@@ -1908,13 +1909,15 @@ INSERT INTO "user" VALUES (10, 'Bowers', 'auctor.velit.eget@risus.ca', 'Laith', 
 INSERT INTO "user" VALUES (17, 'Walter', 'eu.tellus@dui.net', 'Troy', 'massa. Mauris vestibulum, neque sed dictum eleifend, nunc risus varius orci, in consequat enim diam', NULL, 'KER37IWE0EZ', '357 734 185', '2017-06-07 03:15:15', 'default.png', 6, 0, 1, NULL);
 INSERT INTO "user" VALUES (24, 'Gardner', 'risus@mus.edu', 'Rogan', 'felis. Donec tempor, est ac mattis semper, dui lectus rutrum urna, nec luctus felis purus', NULL, 'NIG86PVG9XF', '430 826 295', '2017-04-30 00:31:32', 'default.png', NULL, 0, 1, NULL);
 INSERT INTO "user" VALUES (28, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'I am a user passing by in a night fly.', NULL, '$2y$12$yJVXYVc7tObXLv4Ba3FdvemTHd33cCbTGTu62k3X5EJxx.FI74W4W', NULL, '2017-04-19 15:44:36', 'default.png', NULL, 0, 1, NULL);
+INSERT INTO "user" VALUES (35, 'asrasrasrasr', 'up201403377@fe.up.pt', 'asfasfasfasf', 'asrasrasrasr', NULL, '$2y$12$alt8a3x5b/5OmIMKC3HL3uMau90IsviNwFZGje2lJEO/n6qmEJjQe', NULL, '2017-05-06 21:14:31.765949', 'default.png', NULL, 0, NULL, NULL);
+INSERT INTO "user" VALUES (36, 'eu', 'ded@dfssd.com', 'eu', 'efwefwef', NULL, '$2y$12$fiwEVErOZZtpeI8g5/QyIubdn5Asm7MqDAu21nTqpJyllE9jcwPCa', NULL, '2017-05-06 22:59:30.7497', 'default.png', NULL, 0, NULL, NULL);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: proto; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('user_id_seq', 34, true);
+SELECT pg_catalog.setval('user_id_seq', 36, true);
 
 
 --

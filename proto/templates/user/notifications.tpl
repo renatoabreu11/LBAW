@@ -20,7 +20,16 @@
       <h3 class="notification-page-title">Notifications</h3>
       <p>You’ll see here updates of your auctions, bids, questions, answers and warnings.</p>
     </div>
-
+    {if count($pageNotifications) == 0}
+      <div class="container-fluid" style="padding-bottom: 2em;">
+        <div class="row-fluid">
+          <div class="empty-content text-center">
+            <i class="fa fa-bell fa-3x" aria-hidden="true"></i>
+            <h3>No new notifications.</h3>
+          </div>
+        </div>
+      </div>
+    {/if}
     {foreach $pageNotifications as $notif}
       <div class="notifications-wrapper">
         <div class="media notification-media">
