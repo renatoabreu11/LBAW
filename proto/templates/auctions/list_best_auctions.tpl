@@ -13,7 +13,7 @@
         <div class="panel-body">
           {foreach $categories as $category}
             <div class="col-lg-4 col-md-4 col-sm-4">
-              <a href="{$BASE_URL}pages/auctions/auctions.php?category={$category.name}">{$category.name}</a><br>
+              <a href="{$BASE_URL}pages/auctions/auctions.php?category={urlencode($category.name)}">{$category.name}</a><br>
             </div>
           {/foreach}
         </div>
@@ -24,11 +24,11 @@
   <div class="col-lg-4 col-md-4 col-sm-4">
 
     <div class="item active">
-        <span class="thumbnail text-center">
+        <div class="thumbnail text-center">
           <h4>{$mostRecentAuction.product_name}</h4>
           <img src="{$BASE_URL}images/products/{$mostRecentAuction.image_filename}" class="animated bounce infinite" alt="...">
-          <button class="btn btn-info" style="margin: 0.5em;"><a href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;">Watch Auction</a></button>
-        </span>
+          <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;margin: 0.5em;">Watch Auction</a>
+        </div>
     </div>
 
     <div class="text-center">
