@@ -192,17 +192,6 @@ function getCategoryId($category){
 }
 
 /**
- * Returns the last product id inserted
- * @return mixed
- */
-function getLastProductID(){
-    global $conn;
-    $stmt = $conn->prepare('SELECT max(id) from product');
-    $stmt->execute();
-    return $stmt->fetch()['max'];
-}
-
-/**
  * Verifies if the data exists in the answer table
  * @param $answerId
  * @param $userId
@@ -256,28 +245,6 @@ function getAnswer($id){
   $stmt = $conn->prepare('SELECT * from answer WHERE id = ?');
   $stmt->execute(array($id));
   return $stmt->fetch();
-}
-
-/**
- * Returns the next image id
- * @return mixed
- */
-function getNextImageId(){
-  global $conn;
-  $stmt = $conn->prepare('SELECT max(id) FROM image;');
-  $stmt->execute();
-  return $stmt->fetch()['max'];
-}
-
-/**
- * Returns the last auction id inserted
- * @return mixed
- */
-function getLastAuctionID(){
-    global $conn;
-    $stmt = $conn->prepare('SELECT max(id) from auction;');
-    $stmt->execute();
-    return $stmt->fetch()['max'];
 }
 
 /**
@@ -614,12 +581,9 @@ function createAuction($productName, $description, $condition, $category1, $cate
   $conn->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
   $stmt = $conn->prepare('INSERT INTO product(name, description, condition)
-                            VALUES(?, ?, ?)');
+                            VALUES(?, ?, ?) RETURNING id');
   $stmt->execute(array($productName, $description, $condition));
-
-  $stmt = $conn->prepare('SELECT max(id) from product;');
-  $stmt->execute();
-  $productId = $stmt->fetch()['max'];
+  $productId = $stmt->fetch()['id'];
 
   if(strlen($characteristics) != 0){
     $stmt = $conn->prepare('UPDATE product set characteristics = ? where id = ?;');
@@ -639,18 +603,16 @@ function createAuction($productName, $description, $condition, $category1, $cate
   }
 
   $stmt = $conn->prepare('INSERT INTO auction(product_id, user_id, start_bid, curr_bid, start_date, end_date, date, type, quantity, questions_section)
-                            VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?)');
+                            VALUES(?, ?, ?, ?, ?, ?, now(), ?, ?, ?) RETURNING id');
   $stmt->execute(array($productId, $userId, $startBid, $startBid, $startDate, $endDate, $type, $quantity, $questionsSection));
-
-  $stmt = $conn->prepare('SELECT max(id) from auction;');
-  $stmt->execute();
-  $auctionId = $stmt->fetch()['max'];
+  $auctionId = $stmt->fetch()['id'];
 
   $stmt = $conn->prepare('INSERT INTO watchlist(auction_id, user_id, date, notifications)
                             VALUES(?, ?, now(), ?)');
   $stmt->execute(array($auctionId, $userId, $notificationsEnabled));
 
   $conn->commit();
+  return $auctionId;
 }
 
 /**
@@ -770,15 +732,23 @@ function createProductCategory($productId, $categoryId){
 
 /**
  * Adds a picture associated to a product
+ *
  * @param $productId
- * @param $filename
+ * @param $extension
  * @param $caption
+ * @param $name
+ * @return mixed
  */
-function addProductPicture($productId, $filename, $caption, $name){
+function addProductPicture($productId, $extension, $caption, $name){
   global $conn;
   $stmt = $conn->prepare('INSERT INTO image(product_id, filename, description, original_name)
-                            VALUES(?, ?, ?, ?)');
-  $stmt->execute(array($productId, $filename, $caption, $name));
+                            VALUES(?, ?, ?, ?) returning id');
+  $stmt->execute(array($productId, '', $caption, $name));
+  $imageId = $stmt->fetch()['id'];
+
+  $stmt = $conn->prepare('update image set filename = ? where id = ?');
+  $stmt->execute(array($imageId . '.' . $extension, $imageId));
+  return $imageId;
 }
 
 /* ========================== UPDATES  ========================== */

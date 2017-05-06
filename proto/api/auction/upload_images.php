@@ -91,17 +91,17 @@ if (!empty($_POST['token'])) {
     }
 
     $reply;
-    $p1 = $p2 = [];
+    $p1 = $p2 = $p3 = [];
     for($i = 0; $i < $nrImages; $i++) {
       if ($errors[$i]) {
         $reply['error'] .= "Picture " . $names[$i] . ": Invalid file!<br/>";
       }else {
-        $imageId = getNextImageId() + 1;
+        $imageId;
         $extension = end(explode("/", $types[$i]));
         $caption;
         try {
           $caption = trim(strip_tags($captionsArr[$i]));
-          addProductPicture($productId, $imageId . "." . $extension, $caption, $names[$i]);
+          $imageId = addProductPicture($productId, $extension, $caption, $names[$i]);
         } catch(PDOException $e) {
           $reply['error'] .= "Error 500 Internal Server: Error storing the association between the product and " . $names[$i] . ".<br/>";
         }
@@ -120,12 +120,14 @@ if (!empty($_POST['token'])) {
           $url = $BASE_URL . 'api/auction/remove_image.php';
           $p1[$i] = $BASE_URL . "images/auctions/" . $imageId . "." . $extension;
           $p2[$i] = ['caption' => $caption, 'url' => $url, 'key' => $key, 'extra' => $extra];
+          $p3[$i] = ['{TAG_VALUE}' => $caption, '{TAG_CSS_NEW}' => 'hide', '{TAG_CSS_INIT}' => ''];
         }
       }
     }
     echo json_encode([
       'initialPreview' => $p1,
       'initialPreviewConfig' => $p2,
+      'initialPreviewThumbTags' => $p3,
       'append' => true
     ]);
 

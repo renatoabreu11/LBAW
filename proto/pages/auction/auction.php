@@ -9,6 +9,7 @@ $auctionId = $_GET["id"];
 $auction = getAuction($auctionId);
 $auction['end_data_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
 $product = getAuctionProduct($auctionId);
+$images = getProductImages($product['id']);
 
 $seller = getUser($auction['user_id']);
 $numReviews = count(getReviews($auction['user_id']));
@@ -35,6 +36,7 @@ if($_SESSION['user_id']){
   $smarty->assign('isOnWatchlist', $isOnWatchlist);
 }
 
+$smarty->assign("images", $images);
 $smarty->assign("product", $product);
 $smarty->assign("auction", $auction);
 $smarty->assign("seller", $seller);

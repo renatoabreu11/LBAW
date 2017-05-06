@@ -37,7 +37,7 @@ if (!empty($_POST['token'])) {
       return;
     }
 
-    $path = realpath($BASE_URL . 'images/auctions/' . $image['filename']);
+    $path = realpath($BASE_DIR . 'images/auctions/' . $image['filename']);
     if(is_writable($path)){
       unlink($path);
     }

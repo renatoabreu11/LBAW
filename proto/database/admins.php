@@ -75,17 +75,6 @@ function getCategories(){
 }
 
 /**
- * Returns the last category id inserted
- * @return mixed
- */
-function getLastCategoryId(){
-  global $conn;
-  $stmt = $conn->prepare('SELECT MAX(id) FROM category');
-  $stmt->execute();
-  return $stmt->fetch()['max'];
-}
-
-/**
  * Return all auction types
  * @return array
  */
@@ -185,8 +174,10 @@ function createAdmin($username, $password, $email){
 function createCategory($title){
   global $conn;
   $stmt = $conn->prepare(
-    'INSERT INTO category (name) VALUES(?)');
+    'INSERT INTO category (name) VALUES(?) RETURNING id');
   $stmt->execute(array($title));
+  $result = $stmt->fetch()['id'];
+  return $result;
 }
 
 /* ========================== UPDATES  ========================== */

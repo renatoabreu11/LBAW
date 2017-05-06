@@ -194,8 +194,9 @@ if (!empty($_POST['token'])) {
       header("Location:"  . $_SERVER['HTTP_REFERER']);
       exit;
     }else{
+      $auctionId = NULL;
       try {
-        createAuction($productName, $description, $condition, $categoryId1, $categoryId2, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection, $notificationsEnabled, $characteristics);
+        $auctionId = createAuction($productName, $description, $condition, $categoryId1, $categoryId2, $userId, $basePrice, $startDate, $endDate, $auctionType, $quantity, $qaSection, $notificationsEnabled, $characteristics);
       } catch (PDOException $e) {
         if (strpos($e->getMessage(), 'product_category_pkey') !== false) {
           $_SESSION['field_errors']['category'] = "Product-category association already exists.";
@@ -212,8 +213,6 @@ if (!empty($_POST['token'])) {
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;
       }
-
-      $auctionId = getLastAuctionID();
 
       $_SESSION['success_messages'][] = 'Auction created with success!';
       header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auctionId);

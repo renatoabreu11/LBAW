@@ -32,8 +32,7 @@ if(strlen($title) > 64){
 
 $categoryId;
 try {
-  createCategory($title);
-  $categoryId = getLastCategoryId();
+  $categoryId = createCategory($title);
 } catch (PDOException $e) {
   if (strpos($e->getMessage(), 'category_name_key') !== false){
     $reply = array('message' => "Error 500 Internal Server: Category already exists.");

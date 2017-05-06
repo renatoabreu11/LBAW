@@ -29,27 +29,22 @@
               <li data-target="#productGallery" data-slide-to="2"></li>
             </ol>
 
-            <div class="carousel-inner" role="listbox">
-              <div class="item active">
-                <img src="https://images-na.ssl-images-amazon.com/images/I/81nmXFn%2BbDL._SL1500_.jpg" alt="Chania" width="460" height="345">
-                <div class="carousel-caption">
-                  <h3>Chania</h3>
+            <div class="carousel-inner popup-gallery" role="listbox">
+              {for $i = 0; $i < count($images); $i++}
+                {if $i == 0}
+                  <div class="item active">
+                {else}
+                  <div class="item">
+                {/if}
+                  <a href="{$BASE_URL}images/auctions/{$images[$i].filename}" title="{$images[$i].description}">
+                    <img src="{$BASE_URL}images/auctions/{$images[$i].filename}" alt="{$images[$i].description}">
+                  </a>
+                  <div class="carousel-caption">
+                    <h5>{$images[$i].description}</h5>
+                  </div>
                 </div>
-              </div>
+              {/for}
 
-              <div class="item">
-                <img src="https://images-na.ssl-images-amazon.com/images/I/815UyQUdfoL._SL1500_.jpg" alt="Chania" width="460" height="345">
-                <div class="carousel-caption">
-                  <h3>Chania</h3>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="https://images-na.ssl-images-amazon.com/images/I/811PGIDq-RL._SL1500_.jpg" alt="Flower" width="460" height="345">
-                <div class="carousel-caption">
-                  <h3>Flowers</h3>
-                </div>
-              </div>
             </div>
 
             <a class="left carousel-control" href="#productGallery" role="button" data-slide="prev">
@@ -149,8 +144,10 @@
   <!-- Accessible information -->
   <input type="hidden" name="auction-id" value="{$auction.id}">
   <input type="hidden" name="user-username" value="{$username}">
+  <input type="hidden" name="seller" value="{$seller.username}">
 
-  <div>
+
+      <div>
     <div id="reportAuctionConfirmation" class="white-popup mfp-hide">
       <form action="{$BASE_URL}api/admin/report_auction.php" method="post" id="reportAuctionForm">
         <div class="form-group">
