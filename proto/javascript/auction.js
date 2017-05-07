@@ -24,8 +24,8 @@ $(document).ready(function() {
 
   $('.slider1').bxSlider({
     slideWidth: 200,
-    minSlides: 3,
-    maxSlides: 3,
+    minSlides: 1,
+    maxSlides: 4,
     slideMargin: 15,
   });
 

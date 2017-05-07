@@ -7,11 +7,8 @@
         <li>
           <a href="{$BASE_URL}pages/auctions/best_auctions.php">Home</a> <span class="divider"></span>
         </li>
-        <li>
-          <a href="#">Auctions</a> <span class="divider"></span>
-        </li>
         <li class="active">
-          Product
+          Auction
         </li>
       </ul>
     </div>
