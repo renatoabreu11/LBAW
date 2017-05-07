@@ -134,6 +134,12 @@ $(document).ready(function() {
               '<td class="col-xs-5">' + data['date'] + '</td>' +
               '</tr>');
           } else {
+            $.magnificPopup.open({
+              items: {
+                src: '<div class="white-popup">' + data + '</div>',
+                type: 'inline',
+              },
+            });
             auctionDetailsDiv.removeClass('col-md-12').addClass('col-md-6');
             biddersDiv.append(data['biddersDiv']);
           }
