@@ -46,12 +46,14 @@
                 <div class="col-md-6">
                   <input type="text" class="form-control" id="real-name" name="realName" value="{$user.name}">
                 </div>
+                <strong class="field_error">{$FIELD_ERRORS.realName}</strong>
               </div>
               <div class="form-group">
                 <label class="col-md-3 control-label">Small biography: </label>
                 <div class="col-md-6">
                   <textarea class="form-control" name="smallBio" rows="2" id="small-bio">{$user.short_bio}</textarea>
                 </div>
+                <strong class="field_error">{$FIELD_ERRORS.smallBio}</strong>
               </div>
             </div>
           </div>
@@ -77,18 +79,21 @@
                     {/foreach}
                   </select>
                 </div>
+                <strong class="field_error">{$FIELD_ERRORS.city-id}</strong>
               </div>
               <div class="form-group">
                 <label class="col-md-3 control-label">E-mail: </label>
                 <div class="col-md-6">
                   <input type="text" class="form-control" name="email" id="e-mail" value="{$user.email}">
                 </div>
+                <strong class="field_error">{$FIELD_ERRORS.email}</strong>
               </div>
               <div class="form-group">
                 <label class="col-md-3 control-label">Phone number: </label>
                 <div class="col-md-6">
                   <input type="number" class="form-control" name="phone" id="cellphone-number" value="{$user.phone}">
                 </div>
+                <strong class="field_error">{$FIELD_ERRORS.phone}</strong>
               </div>
             </div>
           </div>
@@ -101,6 +106,7 @@
                 <div class="col-md-6">
                   <textarea class="form-control" rows="4" name="full-bio" id="who-am-I">{$user.full_bio}</textarea>
                 </div>
+                <strong class="field_error">{$FIELD_ERRORS.full-bio}</strong>
               </div>
             </div>
           </div>
