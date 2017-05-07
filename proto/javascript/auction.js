@@ -148,7 +148,7 @@ $(document).ready(function() {
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
     let watchlistBtnDiv = $('.watchlist-button');
 
-    console.log("texto: " + notificationsVal);
+    console.log('texto: ' + notificationsVal);
 
     let request = $.ajax({
       type: 'POST',
@@ -696,6 +696,53 @@ $(document).ready(function() {
           type: 'inline',
         },
       });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error('The following error occurred: ' +
+        textStatus + ': ' + errorThrown);
+    });
+  }
+
+  $('.auction').on('click', 'a.removeAuctionPopup', function() {
+    $('.removeAuctionPopup').magnificPopup({
+      type: 'inline',
+      midClick: true,
+    }).magnificPopup('open');
+
+    $('.removeAuction').off();
+    $('.removeAuction').one('click', function() {
+      $.magnificPopup.close();
+      deleteAuction(auctionId);
+    });
+  });
+
+  /**
+   * Ajax call that deletes an auction
+   * @param auctionId
+   */
+  function deleteAuction(auctionId) {
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/auction/report_auction.php',
+      data: {
+        'auctionId': auctionId,
+        'userId': userId,
+        'token': token,
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      if(response.includes('Success')) {
+        // redirect to home page
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + response + '</div>',
+            type: 'inline',
+          },
+        });
+      }
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {

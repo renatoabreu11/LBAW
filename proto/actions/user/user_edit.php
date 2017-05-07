@@ -36,12 +36,27 @@ $fullBio = trim(strip_tags($_POST['full-bio']));
 $invalidChars = false;
 
 if(!preg_match("/^[a-zA-Z\s]+$/", $realName)) {
-  $_SESSION['field_errors']['real_name'] = 'Invalid name characters.';
+  $_SESSION['field_errors']['realName'] = 'Invalid name characters.';
+  $invalidChars = true;
+}
+
+if(strlen($realName) > 64){
+  $_SESSION['field_errors']['realName'] = 'Invalid name length. The maximum length is 64.';
+  $invalidChars = true;
+}
+
+if(strlen($smallBio) > 255){
+  $_SESSION['field_errors']['smallBio'] = 'Invalid small bio length.';
+  $invalidChars = true;
+}
+
+if(strlen($fullBio) > 512){
+  $_SESSION['field_errors']['full-bio'] = 'Invalid full bio length.';
   $invalidChars = true;
 }
 
 if($phone) {
-  if(!preg_match("/[0-9]+/", $phone)) {
+  if(!is_numeric($phone)) {
     $_SESSION['field_errors']['phone'] = 'Invalid numeric characters';
     $invalidChars = true;
   }
@@ -65,6 +80,7 @@ if($invalidChars) {
 try {
   updateUserDetails($userId, $realName, $smallBio, $email, $phone, $fullBio);
 } catch(PDOException $e) {
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Update user details.'));
   $_SESSION['error_messages'][] = "Error updating your personal details.";
   $_SESSION['form_values'] = $_POST;
   header("Location:"  . $_SERVER['HTTP_REFERER']);
@@ -75,7 +91,8 @@ if(!($isCityNull)) {
   try {
     updateUserLocation($userId, $cityId);
   } catch(PDOException $e) {
-    $_SESSION['error_messages'][] = "Error updating your location." . var_dump($_POST);
+    $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Update user location.'));
+    $_SESSION['error_messages'][] = "Error updating your location.";
     $_SESSION['form_values'] = $_POST;
     header("Location:"  . $_SERVER['HTTP_REFERER']);
     exit;
