@@ -253,14 +253,12 @@
                 <div class="thumbnail review-item">
                   <div class="row">
                     <div class="col-lg-3 col-md-3">
-                      <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="{$BASE_URL}images/products/{$review.image_filename}" Alt="Product image"></a>
-                      <div class="review-rating text-center">
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                      </div>
+                      {if ($review.image_filename)}
+                        <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="{$BASE_URL}images/auctions/thumbnails/{$review.image_filename}" Alt="Product image"></a>
+                      {else}
+                        <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" Alt="Product image"></a>
+                      {/if}
+                      <div class="rateYo" data-rating="{$review.rating}" style="margin: auto;"></div>
                       <p class="text-center reviewer-info">By <a href="{$BASE_URL}pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> on {$review.date}</p>
                     </div>
                     <div class="col-md-9 col-sm-9">
