@@ -25,6 +25,7 @@ $auctions = array();
 foreach ($auctionsIDs as $auctionArr){
   $product_name = getProductName($auctionArr["product_id"]);
   $seller = getUser($auctionArr["user_id"])["name"];
+  $sellerId = $auctionArr['user_id'];
   $type = $auctionArr["type"];
   $start_date = $auctionArr["start_date"];
   $end_date = $auctionArr["end_date"];
@@ -32,6 +33,7 @@ foreach ($auctionsIDs as $auctionArr){
     "id" => $auctionArr["id"],
     "product" => $product_name,
     "seller" => $seller,
+    "seller_id" => $sellerId,
     "type" => $type,
     "start_date" => $start_date,
     "end_date" => $end_date,

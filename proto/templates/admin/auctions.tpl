@@ -17,7 +17,7 @@
         <tr>
           <td>{$auction.id}</td>
           <td>{$auction.product}</td>
-          <td><a href="#">{$auction.seller}</a></td>
+          <td><a href="{$BASE_URL}pages/user/user.php?id={$auction.seller_id}">{$auction.seller}</a></td>
           <td>{$auction.type}</td>
           <td>{$auction.start_date}</td>
           <td>{$auction.end_date}</td>

@@ -879,34 +879,10 @@ function updateProduct($productId, $productName, $description, $condition, $char
  * Delete auction.
  * @param $auctionId
  */
-function deleteAuctionAdmin($auctionId){
+function deleteAuction($auctionId){
   global $conn;
 
-  // Returns the funds invested by the last bidders.
-  $stmt = $conn->prepare('SELECT bid.amount, bid.user_id
-                          FROM bid
-                          JOIN auction ON bid.auction_id = auction.id
-                          WHERE auction.id = :auction_id
-                          ORDER BY bid.amount DESC
-                          LIMIT 1');
-  $stmt->bindParam('auction_id', $auctionId);
-  $stmt->execute();
-  $lastBidder = $stmt->fetch();
-
-  $stmt->prepare('UPDATE "user"
-                  SET amount = amount + :wasted_amount
-                  WHERE "user".id = :user_id');
-  $stmt->bindParam('wasted_amount', $lastBidder['amount']);
-  $stmt->bindParam('user_id', $lastBidder['user_id']);
-  $stmt->execute();
-
   // Deletes the auction images.
-  if($oldPicture != 'default.png' && $oldExtension != $extension) {
-    $path = realpath($BASE_DIR . 'images/users/' . $oldPicture);
-    if(is_writable($path))
-      unlink($path);
-  }
-
   $stmt = $conn->prepare('SELECT image.filename
                           FROM image
                           JOIN product ON product.id = image.product_id
@@ -914,36 +890,18 @@ function deleteAuctionAdmin($auctionId){
                           WHERE auction.id = :auction_id');
   $stmt->bindParam('auction_id', $auctionId);
   $stmt->execute();
-  $imgFilename = $stmt->fetchAll();
-
-  foreach($imgFilename as $filename) {
-    $path = realpath($BASE_DIR . 'images/auctions/' . $filename);
-    if(is_writable($path))
-      unlink($path);
-
-    $path = realpath($BASE_DIR . 'images/auctions/thumbnails/' . $filename);
-    if(is_writable($path))
-      unlink($path);
-  }
+  $imagesFilename = $stmt->fetchAll();
 
   $stmt = $conn->prepare('DELETE FROM image
-                          JOIN product ON product.id = image.product_id
-                          JOIN auction ON auction.product_id = product.id
-                          WHERE auction.id = :auction_id');
-  $stmt->bindParam('auction_id', $auctionId);
+                          WHERE product_id = :product_id');
+  $stmt->bindParam('product_id', $productId);
   $stmt->execute();
 
-  // Deletes the auction.
   $stmt = $conn->prepare('DELETE FROM auction
                           WHERE id = ?');
   $stmt->execute(array($auctionId));
-}
 
-function deleteAuction($auctionId){
-  global $conn;
-  $stmt = $conn->prepare('DELETE FROM auction
-                          WHERE id = ?');
-  $stmt->execute(array($auctionId));
+  return $imagesFilename;
 }
 
 /**

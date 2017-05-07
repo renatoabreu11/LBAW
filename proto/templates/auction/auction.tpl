@@ -147,6 +147,7 @@
 
       <!-- Accessible information -->
       <input type="hidden" name="auction-id" value="{$auction.id}">
+      <input type="hidden" name="product-id" value="{$product.id}">
       <input type="hidden" name="user-username" value="{$username}">
       <input type="hidden" name="seller" value="{$seller.username}">
 

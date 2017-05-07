@@ -27,7 +27,7 @@
         <div class="thumbnail text-center">
           <h4>{$mostRecentAuction.product_name}</h4>
           {if ($mostRecentAuctionImage)}
-            <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuction.image_filename}" class="animated bounce infinite" alt="Product image">
+            <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuctionImage}" class="animated bounce infinite" alt="Product image">
           {else}
             <img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" class="animated bounce infinite" alt="Product image">
           {/if}

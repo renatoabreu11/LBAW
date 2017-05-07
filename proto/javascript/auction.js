@@ -726,17 +726,22 @@ $(document).ready(function() {
    * @param auctionId
    */
   function deleteAuction(auctionId) {
+    let productId = $("input[name=product-id]").val();
+
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/auction/remove_auction.php',
       data: {
         'auctionId': auctionId,
+        'productId': productId,
         'userId': userId,
         'token': token,
       },
     });
 
     request.done(function(response, textStatus, jqXHR) {
+      console.log(response);
+      return;
       if(response.includes('Success'))
         window.location.replace(BASE_URL);
       else {

@@ -55,8 +55,8 @@ function getTotalValueOfActiveAuctions() {
 function getAllAuctions(){
   global $conn;
   $stmt = $conn->prepare('SELECT * 
-    						FROM auction
-    						ORDER BY id ASC;');
+                          FROM auction
+                          ORDER BY id ASC;');
   $stmt->execute();
   $result = $stmt->fetchAll();
   return $result;
