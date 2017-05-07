@@ -13,8 +13,6 @@ $mostPopularAuctions = getMostPopularAuctions();
 $mostRecentAuction = getMostRecentAuction();
 $mostRecentAuctionImage = getAuctionImage($mostRecentAuction['auction_id']);
 
-var_dump($mostRecentAuctionImage);
-
 if ($mostRecentAuction['image_filename'] == null)
 	$mostRecentAuction['image_filename'] = 'default.jpeg';
 

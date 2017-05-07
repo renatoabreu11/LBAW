@@ -37,6 +37,7 @@ ALTER TABLE ONLY proto.answer_report DROP CONSTRAINT answer_report_fk;
 ALTER TABLE ONLY proto.answer DROP CONSTRAINT answer_question_fk;
 DROP TRIGGER seller_cannot_bid ON proto.bid;
 DROP TRIGGER review_trigger ON proto.review;
+DROP TRIGGER remove_review ON proto.review;
 DROP TRIGGER new_user_report ON proto.user_report;
 DROP TRIGGER new_question_report ON proto.question_report;
 DROP TRIGGER new_bid ON proto.bid;
@@ -147,6 +148,7 @@ DROP FUNCTION proto.user_report_notification();
 DROP FUNCTION proto.update_auction();
 DROP FUNCTION proto.seller_cannot_bid();
 DROP FUNCTION proto.review_trigger();
+DROP FUNCTION proto.remove_review();
 DROP FUNCTION proto.question_report_notification();
 DROP FUNCTION proto.auction_report_notification();
 DROP FUNCTION proto.answer_report_notification();
@@ -276,6 +278,34 @@ $$;
 
 
 ALTER FUNCTION proto.question_report_notification() OWNER TO lbaw1662;
+
+--
+-- Name: remove_review(); Type: FUNCTION; Schema: proto; Owner: lbaw1662
+--
+
+CREATE FUNCTION remove_review() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$DECLARE
+  seller_id INTEGER;
+BEGIN
+  SELECT "user".id
+   FROM "user"
+     INNER JOIN bid ON bid.id = old.bid_id
+     INNER JOIN auction ON bid.auction_id = auction.id
+   WHERE "user".id = auction.user_id
+   INTO seller_id;
+  UPDATE "user"
+  SET rating = (SELECT AVG(review.rating)
+                FROM review, bid, auction
+                WHERE review.bid_id = bid.id
+                      AND bid.auction_id = auction.id
+                      AND auction.user_id = seller_id)
+  WHERE "user".id = seller_id;
+  RETURN NULL;
+END;$$;
+
+
+ALTER FUNCTION proto.remove_review() OWNER TO lbaw1662;
 
 --
 -- Name: review_trigger(); Type: FUNCTION; Schema: proto; Owner: lbaw1662
@@ -430,11 +460,20 @@ ALTER FUNCTION proto.user_report_notification() OWNER TO lbaw1662;
 
 CREATE FUNCTION warn_bidders() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
-DECLARE
+    AS $$DECLARE
   _bidder INTEGER;
   _auction VARCHAR(64);
+  latest_bidder INTEGER;
 BEGIN
+  SELECT bid.user_id
+       FROM bid
+       WHERE bid.auction_id = OLD.id
+       ORDER BY bid.amount DESC LIMIT 1
+  INTO latest_bidder;
+  IF latest_bidder IS NOT NULL
+    THEN 
+    UPDATE "user" set amount = amount + OLD.curr_bid WHERE id = latest_bidder;
+  END IF;
   FOR _bidder IN (
     SELECT DISTINCT "user".id
     FROM "user", bid
@@ -1350,8 +1389,6 @@ SELECT pg_catalog.setval('admin_id_seq', 6, true);
 INSERT INTO answer VALUES (3, '2017-03-18 17:03:59', 'libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus', 10, 1);
 INSERT INTO answer VALUES (6, '2017-03-15 18:07:39', 'urna suscipit nonummy. Fusce fermentum fermentum arcu.', 2, 19);
 INSERT INTO answer VALUES (7, '2017-03-20 01:25:35', 'neque. Morbi quis urna. Nunc quis', 4, 7);
-INSERT INTO answer VALUES (5, '2017-03-12 23:58:34', 'vitae dolor. Donec fringilla. Donec feugiat', 7, 15);
-INSERT INTO answer VALUES (1, '2017-03-21 18:10:01', 'Curabitur vel lectus. Cum sociis natoque penatibus et magnis', 8, 10);
 INSERT INTO answer VALUES (4, '2017-03-11 10:42:58', 'eget lacus. Mauris non dui', 12, 1);
 INSERT INTO answer VALUES (2, '2017-03-21 14:06:37', 'scelerisque sed, sapien. Nunc pulvinar arcu et pede. Nunc sed orci lobortis augue scelerisque', 14, 4);
 INSERT INTO answer VALUES (8, '2017-03-18 18:56:22', 'vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum', 15, 17);
@@ -1369,9 +1406,7 @@ SELECT pg_catalog.setval('answer_id_seq', 9, true);
 --
 
 INSERT INTO answer_report VALUES (1, '2017-03-12 22:14:35', 'malesuada malesuada. Integer id magna et ipsum cursus vestibulum. Mauris', 2);
-INSERT INTO answer_report VALUES (2, '2017-03-11 04:57:40', 'adipiscing elit. Aliquam auctor, velit eget laoreet posuere, enim nisl', 5);
 INSERT INTO answer_report VALUES (6, '2017-03-22 03:21:14', 'odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum', 3);
-INSERT INTO answer_report VALUES (3, '2017-03-23 15:33:08', 'Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing', 5);
 INSERT INTO answer_report VALUES (4, '2017-03-16 16:21:45', 'nec ante blandit viverra. Donec tempus, lorem fringilla ornare placerat, orci lacus', 8);
 
 
@@ -1386,8 +1421,6 @@ SELECT pg_catalog.setval('answer_report_id_seq', 7, true);
 -- Data for Name: auction; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
 --
 
-INSERT INTO auction VALUES (20, 92.2000000000000028, 205, '2017-03-06 07:29:37', '2017-05-11 21:08:10', 'Sealed Bid', 14, 20, '2017-03-02 06:17:09', 1, true, 3);
-INSERT INTO auction VALUES (7, 63.9299999999999997, 70, '2017-03-05 02:22:24', '2017-05-11 21:08:10', 'Dutch', 10, 7, '2017-03-04 20:18:16', 1, true, 1);
 INSERT INTO auction VALUES (3, 64.7600000000000051, 64.7600000000000051, '2017-03-10 05:11:33', '2017-05-11 21:08:10', 'Default', 11, 3, '2017-03-05 19:10:22', 1, true, 1);
 INSERT INTO auction VALUES (5, 66.7900000000000063, 66.7900000000000063, '2017-03-12 00:11:42', '2017-05-11 21:08:10', 'Default', 16, 5, '2017-03-08 15:14:38', 1, true, 1);
 INSERT INTO auction VALUES (8, 41.1700000000000017, 41.1700000000000017, '2017-03-04 10:01:44', '2017-05-11 21:08:10', 'Dutch', 16, 8, '2017-03-03 08:03:13', 1, true, 0);
@@ -1400,11 +1433,9 @@ INSERT INTO auction VALUES (18, 11.4700000000000006, 11.4700000000000006, '2017-
 INSERT INTO auction VALUES (6, 43.240000000000002, 43.240000000000002, '2017-03-05 21:18:09', '2017-05-11 21:08:10', 'Dutch', 19, 6, '2017-03-03 10:17:54', 1, true, 1);
 INSERT INTO auction VALUES (9, 83.2999999999999972, 7, '2017-03-11 13:29:25', '2017-05-11 21:08:10', 'Dutch', 5, 9, '2017-03-02 08:34:12', 1, true, 2);
 INSERT INTO auction VALUES (2, 75.3700000000000045, 9, '2017-03-06 04:57:27', '2017-05-11 21:08:10', 'Dutch', 21, 2, '2017-03-04 10:25:56', 1, true, 2);
-INSERT INTO auction VALUES (4, 29.7199999999999989, 12, '2017-03-05 08:29:15', '2017-05-11 21:08:10', 'Dutch', 10, 4, '2017-03-04 18:37:46', 1, true, 2);
 INSERT INTO auction VALUES (10, 50.0499999999999972, 98, '2017-03-08 21:08:10', '2017-05-11 21:08:10', 'Default', 1, 10, '2017-03-06 00:47:22', 1, true, 3);
 INSERT INTO auction VALUES (11, 16.379999999999999, 121, '2017-03-11 00:58:46', '2017-05-11 21:08:10', 'Sealed Bid', 1, 11, '2017-03-05 06:45:27', 1, true, 3);
 INSERT INTO auction VALUES (19, 62.0799999999999983, 200, '2017-03-12 08:28:26', '2017-05-11 21:08:10', 'Sealed Bid', 17, 19, '2017-03-02 13:23:12', 1, true, 2);
-INSERT INTO auction VALUES (14, 55.6099999999999994, 100, '2017-03-09 02:43:40', '2017-05-11 21:08:10', 'Dutch', 10, 14, '2017-03-06 22:22:49', 1, true, 1);
 
 
 --
@@ -1425,7 +1456,6 @@ INSERT INTO auction_report VALUES (5, '2017-03-07 16:49:21', 'ligula. Aenean gra
 INSERT INTO auction_report VALUES (6, '2017-03-16 21:49:32', 'felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non', 8);
 INSERT INTO auction_report VALUES (8, '2017-03-09 01:29:16', 'Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem, eget mollis lectus', 18);
 INSERT INTO auction_report VALUES (9, '2017-03-04 05:56:49', 'Sed pharetra, felis eget varius ultrices, mauris', 6);
-INSERT INTO auction_report VALUES (10, '2017-03-18 18:30:51', 'vel, faucibus id, libero. Donec consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis,', 7);
 INSERT INTO auction_report VALUES (1, '2017-03-21 09:23:19', 'magna tellus faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo.', 5);
 INSERT INTO auction_report VALUES (7, '2017-03-22 01:00:25', 'ante bibendum ullamcorper. Duis cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus', 6);
 
@@ -1451,23 +1481,15 @@ INSERT INTO bid VALUES (23, 7, '2017-03-26 17:49:50', 13, 9);
 INSERT INTO bid VALUES (13, 8, '2017-03-08 03:35:38', 8, 2);
 INSERT INTO bid VALUES (19, 9, '2017-03-11 17:59:42', 23, 2);
 INSERT INTO bid VALUES (2, 10, '2017-03-13 12:21:20', 9, 3);
-INSERT INTO bid VALUES (25, 11, '2017-03-16 06:01:14', 12, 4);
-INSERT INTO bid VALUES (17, 12, '2017-03-07 23:08:40', 11, 4);
 INSERT INTO bid VALUES (6, 14, '2017-03-14 11:13:00', 7, 6);
 INSERT INTO bid VALUES (9, 98, '2017-03-18 15:57:31', 23, 10);
 INSERT INTO bid VALUES (10, 100, '2017-03-15 21:01:12', 3, 11);
 INSERT INTO bid VALUES (24, 120, '2017-03-16 10:13:29', 8, 11);
-INSERT INTO bid VALUES (16, 121, '2017-03-12 00:39:55', 10, 11);
 INSERT INTO bid VALUES (3, 122, '2017-03-13 07:16:48', 25, 13);
 INSERT INTO bid VALUES (4, 174, '2017-03-13 19:12:40', 19, 15);
 INSERT INTO bid VALUES (11, 180, '2017-03-16 04:37:49', 18, 17);
 INSERT INTO bid VALUES (5, 190, '2017-03-13 10:04:53', 19, 19);
 INSERT INTO bid VALUES (20, 200, '2017-03-16 02:01:01', 22, 19);
-INSERT INTO bid VALUES (7, 201, '2017-03-13 17:07:59', 8, 20);
-INSERT INTO bid VALUES (18, 202, '2017-03-08 15:54:48', 12, 20);
-INSERT INTO bid VALUES (32, 205, '2017-04-23 15:11:30.321156', 8, 20);
-INSERT INTO bid VALUES (34, 70, '2017-04-23 15:25:41.766271', 4, 7);
-INSERT INTO bid VALUES (36, 100, '2017-04-30 18:00:41.733223', 2, 14);
 
 
 --
@@ -1610,7 +1632,6 @@ INSERT INTO follow VALUES (3, 20, '2017-03-05 22:59:39');
 INSERT INTO follow VALUES (9, 13, '2017-03-22 11:29:06');
 INSERT INTO follow VALUES (18, 14, '2017-03-04 23:07:22');
 INSERT INTO follow VALUES (14, 8, '2017-03-29 22:24:44');
-INSERT INTO follow VALUES (10, 1, '2017-03-19 07:58:24');
 INSERT INTO follow VALUES (11, 12, '2017-03-13 23:59:42');
 INSERT INTO follow VALUES (9, 7, '2017-03-06 13:57:16');
 INSERT INTO follow VALUES (18, 11, '2017-03-11 00:48:13');
@@ -1651,7 +1672,6 @@ INSERT INTO notification VALUES (237, 'Your auction Suspendisse ac metus vitae v
 INSERT INTO notification VALUES (238, 'Your auction scelerisque mollis. Phasellus libero mauris, has been reported.', 'Warning', 16, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (239, 'Your auction nisl. Nulla eu neque pellentesque has been reported.', 'Warning', 17, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (240, 'Your auction Donec est mauris, rhoncus id, has been reported.', 'Warning', 19, true, '2017-04-19 16:11:04.078471');
-INSERT INTO notification VALUES (241, 'Your auction ridiculus mus. Proin vel arcu has been reported.', 'Warning', 10, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (242, 'Your auction sed, sapien. Nunc pulvinar arcu has been reported.', 'Warning', 16, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (243, 'Your auction Donec est mauris, rhoncus id, has been reported.', 'Warning', 19, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (1, 'Lorem ipsum dolor sit amet, consectetuer', 'Answer', 8, false, '2017-03-15 04:49:18');
@@ -1670,7 +1690,6 @@ INSERT INTO notification VALUES (13, 'Lorem ipsum dolor sit amet, consectetuer a
 INSERT INTO notification VALUES (14, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Warning', 18, false, '2017-03-21 17:08:04');
 INSERT INTO notification VALUES (15, 'Lorem', 'Win', 16, true, '2017-03-13 20:15:47');
 INSERT INTO notification VALUES (16, 'Lorem', 'Win', 6, true, '2017-03-11 02:26:16');
-INSERT INTO notification VALUES (17, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer aliquam adipiscing lacus.', 'Auction', 10, false, '2017-03-14 20:28:27');
 INSERT INTO notification VALUES (18, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed', 'Auction', 7, true, '2017-03-20 13:54:19');
 INSERT INTO notification VALUES (19, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Curabitur sed tortor. Integer', 'Answer', 20, true, '2017-03-15 00:26:42');
 INSERT INTO notification VALUES (20, 'Lorem ipsum dolor', 'Question', 8, false, '2017-03-18 08:26:55');
@@ -1700,7 +1719,6 @@ INSERT INTO notification VALUES (262, 'The user Willis has bid on the auction Ve
 INSERT INTO notification VALUES (263, 'Your bid on the auction ipsum cursus vestibulum. Mauris magna. was surpassed.', 'Auction', 8, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (264, 'The user Fox has bid on the auction ipsum cursus vestibulum. Mauris magna..', 'Auction', 21, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (265, 'Your bid on the auction condimentum eget, volutpat ornare, facilisis was surpassed.', 'Auction', 12, true, '2017-04-19 16:11:04.078471');
-INSERT INTO notification VALUES (266, 'The user Townsend has bid on the auction condimentum eget, volutpat ornare, facilisis.', 'Auction', 10, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (267, 'Your bid on the auction amet lorem semper auctor. Mauris was surpassed.', 'Auction', 25, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (268, 'The user Fox has bid on the auction amet lorem semper auctor. Mauris.', 'Auction', 1, true, '2017-04-19 16:11:04.078471');
 INSERT INTO notification VALUES (269, 'Your bid on the auction eu, eleifend nec, malesuada ut, was surpassed.', 'Auction', 3, true, '2017-04-19 16:11:04.078471');
@@ -1714,20 +1732,23 @@ INSERT INTO notification VALUES (276, 'The user Tyler has bid on the auction feu
 INSERT INTO notification VALUES (278, 'You have been reported due to the following reasons: He is very ugly..', 'Warning', 2, true, '2017-04-19 19:08:04.080509');
 INSERT INTO notification VALUES (279, 'You have been reported due to the following reasons: He is horrible..', 'Warning', 3, true, '2017-04-19 19:08:04.080509');
 INSERT INTO notification VALUES (280, 'You have been reported due to the following reasons: He is very horrible..', 'Warning', 4, true, '2017-04-19 19:08:04.080509');
-INSERT INTO notification VALUES (281, 'es feio tens de trabalhar mais', 'Warning', 10, true, '2017-04-20 10:41:01.711786');
 INSERT INTO notification VALUES (282, 'es feio tens de trabalhar mais', 'Warning', 28, true, '2017-04-20 10:41:17.505232');
 INSERT INTO notification VALUES (286, 'Foste hackeado', 'Warning', 1, true, '2017-04-20 12:30:34.713425');
 INSERT INTO notification VALUES (292, 'The user Kinney has bid on the auction feugiat nec, diam. Duis mi.', 'Auction', 14, true, '2017-04-23 15:11:30.321156');
 INSERT INTO notification VALUES (291, 'Your bid on the auction feugiat nec, diam. Duis mi was surpassed.', 'Auction', 12, true, '2017-04-23 15:11:30.321156');
-INSERT INTO notification VALUES (294, 'The user Romero has bid on the auction ridiculus mus. Proin vel arcu.', 'Auction', 10, true, '2017-04-23 15:25:41.766271');
-INSERT INTO notification VALUES (296, 'The user hant has bid on the auction dis parturient montes, nascetur ridiculus.', 'Auction', 10, true, '2017-04-30 18:00:41.733223');
+INSERT INTO notification VALUES (299, 'The auction feugiat nec, diam. Duis mi and respectives bids/posts were removed.', 'Auction', 8, true, '2017-05-07 18:00:29.036057');
+INSERT INTO notification VALUES (300, 'The auction feugiat nec, diam. Duis mi and respectives bids/posts were removed.', 'Auction', 12, true, '2017-05-07 18:00:29.036057');
+INSERT INTO notification VALUES (305, 'The auction ridiculus mus. Proin vel arcu and respectives bids/posts were removed.', 'Auction', 4, true, '2017-05-07 18:06:20.240308');
+INSERT INTO notification VALUES (306, 'The auction condimentum eget, volutpat ornare, facilisis and respectives bids/posts were removed.', 'Auction', 11, true, '2017-05-07 18:06:20.240308');
+INSERT INTO notification VALUES (307, 'The auction condimentum eget, volutpat ornare, facilisis and respectives bids/posts were removed.', 'Auction', 12, true, '2017-05-07 18:06:20.240308');
+INSERT INTO notification VALUES (308, 'The auction dis parturient montes, nascetur ridiculus and respectives bids/posts were removed.', 'Auction', 2, true, '2017-05-07 18:06:20.240308');
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: proto; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 296, true);
+SELECT pg_catalog.setval('notification_id_seq', 308, true);
 
 
 --
@@ -1814,7 +1835,6 @@ SELECT pg_catalog.setval('product_id_seq', 21, true);
 -- Data for Name: question; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
 --
 
-INSERT INTO question VALUES (8, '2017-03-20 01:10:50', 'imperdiet non, vestibulum nec, euismod in, dolor. Fusce feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam', 4, 14);
 INSERT INTO question VALUES (13, '2017-03-04 21:43:18', 'at, velit. Cras lorem lorem,', 16, 2);
 INSERT INTO question VALUES (1, '2017-03-15 07:45:48', 'eu neque pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper, velit in aliquet lobortis, nisi nibh lacinia', 12, 19);
 INSERT INTO question VALUES (2, '2017-03-14 08:08:55', 'cubilia Curae; Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque scelerisque dui. Suspendisse', 6, 6);
@@ -1825,10 +1845,7 @@ INSERT INTO question VALUES (14, '2017-03-20 18:57:33', 'egestas. Fusce aliquet 
 INSERT INTO question VALUES (11, '2017-03-12 05:30:37', 'Phasellus at augue id ante dictum', 4, 8);
 INSERT INTO question VALUES (10, '2017-03-15 05:52:16', 'facilisis non, bibendum sed, est. Nunc laoreet lectus quis massa. Mauris vestibulum, neque sed', 17, 11);
 INSERT INTO question VALUES (9, '2017-03-07 04:36:18', 'luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim.', 9, 12);
-INSERT INTO question VALUES (5, '2017-03-21 14:20:21', 'ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec tincidunt.', 12, 14);
-INSERT INTO question VALUES (7, '2017-03-10 15:00:31', 'libero. Proin mi. Aliquam gravida mauris', 10, 15);
 INSERT INTO question VALUES (15, '2017-03-16 12:51:05', 'Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet,', 14, 19);
-INSERT INTO question VALUES (6, '2017-03-19 14:55:34', 'ac libero nec ligula consectetuer rhoncus. Nullam', 11, 20);
 
 
 --
@@ -1843,8 +1860,6 @@ SELECT pg_catalog.setval('question_id_seq', 16, true);
 --
 
 INSERT INTO question_report VALUES (1, '2017-03-11 01:42:50', 'rhoncus. Proin nisl sem, consequat', 3);
-INSERT INTO question_report VALUES (2, '2017-03-08 21:39:54', 'aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit', 6);
-INSERT INTO question_report VALUES (3, '2017-03-07 20:46:40', 'egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at,', 6);
 INSERT INTO question_report VALUES (4, '2017-03-21 00:10:24', 'a, malesuada id, erat. Etiam vestibulum', 1);
 INSERT INTO question_report VALUES (5, '2017-03-14 20:18:04', 'ante, iaculis nec, eleifend non, dapibus', 4);
 INSERT INTO question_report VALUES (6, '2017-03-03 21:38:13', 'risus odio, auctor vitae, aliquet nec, imperdiet nec, leo. Morbi neque tellus, imperdiet', 2);
@@ -1866,8 +1881,6 @@ SELECT pg_catalog.setval('question_report_id_seq', 11, true);
 --
 
 INSERT INTO review VALUES (3, 3, 'parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu. Sed', '2017-03-14 05:41:07', 19);
-INSERT INTO review VALUES (4, 7, 'Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec', '2017-03-24 10:44:42', 7);
-INSERT INTO review VALUES (1, 8, 'Praesent eu nulla at sem molestie sodales. Mauris blandit enim consequat purus.', '2017-03-21 16:46:09', 25);
 INSERT INTO review VALUES (2, 1, 'ac turpis egestas. Aliquam fringilla cursus purus. Nullam scelerisque neque sed sem egestas blandit. Nam', '2017-03-20 13:29:19', 24);
 INSERT INTO review VALUES (5, 6, 'sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames', '2017-03-20 05:21:45', 20);
 
@@ -1905,12 +1918,9 @@ INSERT INTO "user" VALUES (9, 'Booker', 'id.mollis.nec@ligulaeu.net', 'Emma', 'm
 INSERT INTO "user" VALUES (18, 'Cleveland', 'lorem.fringilla@sollicitudin.co.uk', 'September', 'lobortis risus. In mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris', NULL, 'SMA91SZQ5XG', '291 046 712', '2017-03-19 03:16:00', 'default.png', NULL, 0, 1, NULL);
 INSERT INTO "user" VALUES (21, 'Elliott', 'sem.ut@libero.org', 'Craig', 'rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit', NULL, 'MLC88ATX6OB', '494 073 167', '2017-02-23 04:44:33', 'default.png', 3, 0, 1, NULL);
 INSERT INTO "user" VALUES (14, 'Palmer', 'consectetuer.adipiscing.elit@utsem.com', 'Lenore', 'mi pede, nonummy ut, molestie in, tempus eu, ligula. Aenean euismod mauris eu elit. Nulla', NULL, 'QBC46HME1QM', '(07) 041 222 487', '2017-02-15 14:58:55', 'default.png', 7, 0, 1, NULL);
-INSERT INTO "user" VALUES (10, 'Bowers', 'auctor.velit.eget@risus.ca', 'Laith', 'ultrices posuere cubilia Curae; Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque', NULL, 'JTU77JSO0XU', '(03) 874 515 612', '2017-04-02 20:09:50', 'default.png', 8, 0, 1, NULL);
 INSERT INTO "user" VALUES (17, 'Walter', 'eu.tellus@dui.net', 'Troy', 'massa. Mauris vestibulum, neque sed dictum eleifend, nunc risus varius orci, in consequat enim diam', NULL, 'KER37IWE0EZ', '357 734 185', '2017-06-07 03:15:15', 'default.png', 6, 0, 1, NULL);
 INSERT INTO "user" VALUES (24, 'Gardner', 'risus@mus.edu', 'Rogan', 'felis. Donec tempor, est ac mattis semper, dui lectus rutrum urna, nec luctus felis purus', NULL, 'NIG86PVG9XF', '430 826 295', '2017-04-30 00:31:32', 'default.png', NULL, 0, 1, NULL);
 INSERT INTO "user" VALUES (28, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'I am a user passing by in a night fly.', NULL, '$2y$12$yJVXYVc7tObXLv4Ba3FdvemTHd33cCbTGTu62k3X5EJxx.FI74W4W', NULL, '2017-04-19 15:44:36', 'default.png', NULL, 0, 1, NULL);
-INSERT INTO "user" VALUES (35, 'asrasrasrasr', 'up201403377@fe.up.pt', 'asfasfasfasf', 'asrasrasrasr', NULL, '$2y$12$alt8a3x5b/5OmIMKC3HL3uMau90IsviNwFZGje2lJEO/n6qmEJjQe', NULL, '2017-05-06 21:14:31.765949', 'default.png', NULL, 0, NULL, NULL);
-INSERT INTO "user" VALUES (36, 'eu', 'ded@dfssd.com', 'eu', 'efwefwef', NULL, '$2y$12$fiwEVErOZZtpeI8g5/QyIubdn5Asm7MqDAu21nTqpJyllE9jcwPCa', NULL, '2017-05-06 22:59:30.7497', 'default.png', NULL, 0, NULL, NULL);
 
 
 --
@@ -1940,23 +1950,15 @@ SELECT pg_catalog.setval('user_report_id_seq', 5, true);
 -- Data for Name: watchlist; Type: TABLE DATA; Schema: proto; Owner: lbaw1662
 --
 
-INSERT INTO watchlist VALUES (7, 6, false, '2017-03-11 07:14:12');
 INSERT INTO watchlist VALUES (11, 4, false, '2017-03-11 04:35:48');
 INSERT INTO watchlist VALUES (13, 21, true, '2017-03-16 17:09:45');
-INSERT INTO watchlist VALUES (20, 6, true, '2017-03-07 14:19:16');
-INSERT INTO watchlist VALUES (20, 3, false, '2017-03-21 03:08:34');
-INSERT INTO watchlist VALUES (14, 12, false, '2017-03-11 14:46:57');
 INSERT INTO watchlist VALUES (3, 2, true, '2017-03-22 18:31:24');
-INSERT INTO watchlist VALUES (20, 19, true, '2017-03-12 07:29:37');
 INSERT INTO watchlist VALUES (16, 12, false, '2017-03-22 01:42:51');
 INSERT INTO watchlist VALUES (13, 8, false, '2017-03-09 03:26:00');
 INSERT INTO watchlist VALUES (13, 6, false, '2017-03-16 11:13:00');
 INSERT INTO watchlist VALUES (6, 4, true, '2017-03-10 12:52:03');
 INSERT INTO watchlist VALUES (2, 2, true, '2017-03-05 04:54:35');
 INSERT INTO watchlist VALUES (2, 7, false, '2017-03-11 16:47:59');
-INSERT INTO watchlist VALUES (7, 19, true, '2017-03-14 08:27:03');
-INSERT INTO watchlist VALUES (7, 24, false, '2017-03-23 05:59:55');
-INSERT INTO watchlist VALUES (7, 25, false, '2017-03-18 05:57:52');
 INSERT INTO watchlist VALUES (11, 20, false, '2017-03-14 05:46:51');
 
 
@@ -2301,6 +2303,13 @@ CREATE TRIGGER new_user_report AFTER INSERT ON user_report FOR EACH ROW EXECUTE 
 
 
 --
+-- Name: remove_review; Type: TRIGGER; Schema: proto; Owner: lbaw1662
+--
+
+CREATE TRIGGER remove_review AFTER DELETE ON review FOR EACH ROW EXECUTE PROCEDURE remove_review();
+
+
+--
 -- Name: review_trigger; Type: TRIGGER; Schema: proto; Owner: lbaw1662
 --
 
@@ -2335,7 +2344,7 @@ ALTER TABLE ONLY answer_report
 --
 
 ALTER TABLE ONLY answer
-    ADD CONSTRAINT answer_user_fk FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE SET NULL;
+    ADD CONSTRAINT answer_user_fk FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE;
 
 
 --
@@ -2375,7 +2384,7 @@ ALTER TABLE ONLY bid
 --
 
 ALTER TABLE ONLY bid
-    ADD CONSTRAINT bid_user_fk FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE SET NULL;
+    ADD CONSTRAINT bid_user_fk FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE;
 
 
 --
@@ -2463,7 +2472,7 @@ ALTER TABLE ONLY question_report
 --
 
 ALTER TABLE ONLY question
-    ADD CONSTRAINT question_user_fk FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE SET NULL;
+    ADD CONSTRAINT question_user_fk FOREIGN KEY (user_id) REFERENCES "user"(id) ON DELETE CASCADE;
 
 
 --
@@ -2471,7 +2480,7 @@ ALTER TABLE ONLY question
 --
 
 ALTER TABLE ONLY review
-    ADD CONSTRAINT review_fk FOREIGN KEY (bid_id) REFERENCES bid(id);
+    ADD CONSTRAINT review_fk FOREIGN KEY (bid_id) REFERENCES bid(id) ON DELETE CASCADE;
 
 
 --

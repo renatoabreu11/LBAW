@@ -730,7 +730,7 @@ $(document).ready(function() {
 
     let request = $.ajax({
       type: 'POST',
-      url: BASE_URL + 'api/auction/remove_auction.php',
+      url: BASE_URL + 'api/auction/auction_delete.php',
       data: {
         'auctionId': auctionId,
         'productId': productId,

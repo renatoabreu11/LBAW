@@ -879,7 +879,7 @@ function updateProduct($productId, $productName, $description, $condition, $char
  * Delete auction.
  * @param $auctionId
  */
-function deleteAuction($auctionId){
+function deleteAuction($auctionId, $productId){
   global $conn;
 
   // Deletes the auction images.
