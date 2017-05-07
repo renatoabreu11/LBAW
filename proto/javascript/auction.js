@@ -24,8 +24,8 @@ $(document).ready(function() {
 
   $('.slider1').bxSlider({
     slideWidth: 200,
-    minSlides: 2,
-    maxSlides: 4,
+    minSlides: 3,
+    maxSlides: 3,
     slideMargin: 15,
   });
 
@@ -147,8 +147,6 @@ $(document).ready(function() {
     let notificationsVal = $(this).text();
     let notificationsModal = $(this).closest('#watchlist-notification-modal');
     let watchlistBtnDiv = $('.watchlist-button');
-
-    console.log('texto: ' + notificationsVal);
 
     let request = $.ajax({
       type: 'POST',

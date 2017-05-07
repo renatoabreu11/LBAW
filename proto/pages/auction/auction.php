@@ -23,9 +23,9 @@ $numBidders = count(getBidders($auctionId));
 $questions = getQuestionsAnswers($auctionId);
 $similarAuctions = getSimilarAuctions($auctionId);
 
-foreach ($similarAuctions as &$auctions) {
-  if ($auctions['image'] == null)
-    $auctions['image'] = 'default.jpeg';
+foreach ($similarAuctions as &$auction_) {
+  if ($auction_['image'] == null)
+    $auction_['image'] = 'default.jpeg';
 }
 
 if(date('Y-m-d H:i:s') > $auction['end_date']) {
