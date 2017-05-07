@@ -396,6 +396,16 @@ function getNotificationOption($userId, $auctionId) {
   return $stmt->fetch()['notifications'];
 }
 
+function getUserAuctions($userId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT auction.product_id, auction.id
+                          FROM auction
+                          WHERE user_id = ?');
+  $stmt->bindParam('user_id', $userId);
+  $stmt->execute();
+  return $stmt->fetchAll();
+}
+
 /* ========================== INSERTS  ========================== */
 
 /**
