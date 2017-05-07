@@ -385,7 +385,29 @@ function bid($amount, $bidderId, $auctionId) {
   $conn->beginTransaction();
   $conn->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
 
-  $stmt = $conn->prepare('SELECT amount as balance FROM "user" WHERE "user".id = ?;');
+  // IS NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // BEATED USER.
+  // Return the money spent to the current winning user.
+  $stmt = $conn->prepare('SELECT bid.amount, bid.user_id
+                          FROM bid
+                          JOIN auction ON auction.id = bid.auction_id
+                          WHERE auction.id = :auction_id
+                          ORDER BY bid.amount DESC
+                          LIMIT 1');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  $lastBidder = $stmt->fetch();
+
+  $stmt = $conn->prepare('UPDATE "user"
+                          SET amount = amount + :bidded_amount
+                          WHERE "user".id = :user_id');
+  $stmt->bindParam('bidded_amount', $lastBidder['amount']);
+  $stmt->bindParam('user_id', $lastBidder['user_id']);
+
+  // NEW WINNING USER.
+  $stmt = $conn->prepare('SELECT amount as balance
+                          FROM "user"
+                          WHERE "user".id = ?;');
   $stmt->execute(array($bidderId));
   $result = $stmt->fetch();
   $balance = $result['balance'];
@@ -860,22 +882,58 @@ function updateProduct($productId, $productName, $description, $condition, $char
 function deleteAuctionAdmin($auctionId){
   global $conn;
 
-  $stmt = $conn->prepare('SELECT DISTINCT ON ("user".amount) "user".amount as amount
-                          FROM "user"
-                          JOIN bid ON "user".id = bid.user_id
+  // Returns the funds invested by the last bidders.
+  $stmt = $conn->prepare('SELECT bid.amount, bid.user_id
+                          FROM bid
                           JOIN auction ON bid.auction_id = auction.id
                           WHERE auction.id = :auction_id
-                          ORDER BY bid.date DESC
+                          ORDER BY bid.amount DESC
                           LIMIT 1');
   $stmt->bindParam('auction_id', $auctionId);
   $stmt->execute();
-  $wastedAmount = $stmt->fetch()['amount'];
+  $lastBidder = $stmt->fetch();
 
   $stmt->prepare('UPDATE "user"
-                  SET amount = amount + :wasted_amount');
-  $stmt->bindParam('wasted_amount', $wastedAmount);
+                  SET amount = amount + :wasted_amount
+                  WHERE "user".id = :user_id');
+  $stmt->bindParam('wasted_amount', $lastBidder['amount']);
+  $stmt->bindParam('user_id', $lastBidder['user_id']);
   $stmt->execute();
 
+  // Deletes the auction images.
+  if($oldPicture != 'default.png' && $oldExtension != $extension) {
+    $path = realpath($BASE_DIR . 'images/users/' . $oldPicture);
+    if(is_writable($path))
+      unlink($path);
+  }
+
+  $stmt = $conn->prepare('SELECT image.filename
+                          FROM image
+                          JOIN product ON product.id = image.product_id
+                          JOIN auction ON auction.product_id = product.id
+                          WHERE auction.id = :auction_id');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  $imgFilename = $stmt->fetchAll();
+
+  foreach($imgFilename as $filename) {
+    $path = realpath($BASE_DIR . 'images/auctions/' . $filename);
+    if(is_writable($path))
+      unlink($path);
+
+    $path = realpath($BASE_DIR . 'images/auctions/thumbnails/' . $filename);
+    if(is_writable($path))
+      unlink($path);
+  }
+
+  $stmt = $conn->prepare('DELETE FROM image
+                          JOIN product ON product.id = image.product_id
+                          JOIN auction ON auction.product_id = product.id
+                          WHERE auction.id = :auction_id');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+
+  // Deletes the auction.
   $stmt = $conn->prepare('DELETE FROM auction
                           WHERE id = ?');
   $stmt->execute(array($auctionId));

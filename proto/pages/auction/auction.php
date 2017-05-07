@@ -34,9 +34,8 @@ if(date('Y-m-d H:i:s') > $auction['end_date']) {
 }
 
 $canEdit = true;
-if(strtotime($auction['start_date']) - strtotime(date('Y-m-d H:i:s')) < 0){
+if(strtotime($auction['start_date']) - strtotime(date('Y-m-d H:i:s')) < 0)
   $canEdit = false;
-}
 
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
