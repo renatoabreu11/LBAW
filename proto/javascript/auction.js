@@ -740,8 +740,6 @@ $(document).ready(function() {
     });
 
     request.done(function(response, textStatus, jqXHR) {
-      console.log(response);
-      return;
       if(response.includes('Success'))
         window.location.replace(BASE_URL);
       else {
