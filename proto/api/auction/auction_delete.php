@@ -4,7 +4,7 @@ include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
 
 if(!$_POST['auctionId'] || !$_POST['productId'] || !$_POST['userId'] || !$_POST['token']) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  echo "Error 400 Bad Request: All fields are mandatory";
   return;
 }
 
@@ -39,22 +39,20 @@ if(!isOwner($userId, $auctionId)){
 
 $auction = getAuction($auctionId);
 
-// If an auction has already started, it's not possible to delete it.
 if($auction['start_date'] < date("Y-m-d H:i:s")){
-  $_SESSION['error_messages'][] = "The auction has already started. You can't update it anymore.";
-  header("Location:"  . $BASE_URL . "pages/auction/auction.php?id=" . $auction['id']);
-  exit;
+  echo "Error 400 Forbidden: The auction has already started. You can't delete it .";
+  return;
 }
 
 try {
-    $imagesFilename = deleteAuction($auctionId, $productId);
+  $imagesFilename = deleteAuction($auctionId, $productId);
 } catch(PDOException $e) {
-    echo "Error 500 Internal Server: Couldn't delete auction." . $e->getMessage();
-    return;
+  $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Remove auction.'));
+  echo "Error 500 Internal Server: Couldn't delete auction.";
+  return;
 }
 
 foreach($imagesFilename as $filename) {
-  echo ($filename['filename']);
   $path = realpath($BASE_DIR . 'images/auctions/' . $filename['filename']);
   if(is_writable($path))
     unlink($path);

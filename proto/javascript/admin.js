@@ -246,14 +246,13 @@ $(document).ready(function() {
    * Ajax call that deletes an auction with the given id
    * @param {number} id
    */
-  function deleteAuction(id, productId) {
+  function deleteAuction(id) {
     let request;
     request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/admin/remove_auction.php',
       data: {
         'id': id,
-        'productId': productId,
         'token': token,
         'adminId': adminId,
       },
@@ -366,7 +365,6 @@ $(document).ready(function() {
   $('.removePopup').on('click', function() {
     let row = auctionTable.find('tr.selected');
     let auctionId = row.find('td:first').html();
-    let productId = $('input[name=product-id]');
 
     if(auctionId === undefined)
       return;
@@ -379,7 +377,7 @@ $(document).ready(function() {
     $('.removeAuction').off();
     $('.removeAuction').one('click', function() {
       $.magnificPopup.close();
-      deleteAuction(auctionId, productId);
+      deleteAuction(auctionId);
     });
   });
 
