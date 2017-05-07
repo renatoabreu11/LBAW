@@ -23,17 +23,6 @@
         </div>
 
         <div class="form-group">
-          <label for="email" class="cols-sm-2 control-label">Email</label>
-          <div class="cols-sm-10">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" value="{$FORM_VALUES.email}"/>
-            </div>
-            <strong class="field_error">{$FIELD_ERRORS.email}</strong>
-          </div>
-        </div>
-
-        <div class="form-group">
           <label for="username" class="cols-sm-2 control-label">Username</label>
           <div class="cols-sm-10">
             <div class="input-group">
@@ -41,6 +30,17 @@
               <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" value="{$FORM_VALUES.username}"/>
             </div>
             <strong class="field_error">{$FIELD_ERRORS.username}</strong>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="cols-sm-2 control-label">Email</label>
+          <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" value="{$FORM_VALUES.email}"/>
+            </div>
+            <strong class="field_error">{$FIELD_ERRORS.email}</strong>
           </div>
         </div>
 

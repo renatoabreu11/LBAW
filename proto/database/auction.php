@@ -857,10 +857,33 @@ function updateProduct($productId, $productName, $description, $condition, $char
  * Delete auction.
  * @param $auctionId
  */
+function deleteAuctionAdmin($auctionId){
+  global $conn;
+
+  $stmt = $conn->prepare('SELECT DISTINCT ON ("user".amount) "user".amount as amount
+                          FROM "user"
+                          JOIN bid ON "user".id = bid.user_id
+                          JOIN auction ON bid.auction_id = auction.id
+                          WHERE auction.id = :auction_id
+                          ORDER BY bid.date DESC
+                          LIMIT 1');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  $wastedAmount = $stmt->fetch()['amount'];
+
+  $stmt->prepare('UPDATE "user"
+                  SET amount = amount + :wasted_amount');
+  $stmt->bindParam('wasted_amount', $wastedAmount);
+  $stmt->execute();
+
+  $stmt = $conn->prepare('DELETE FROM auction
+                          WHERE id = ?');
+  $stmt->execute(array($auctionId));
+}
+
 function deleteAuction($auctionId){
   global $conn;
-  $stmt = $conn->prepare('DELETE 
-                          FROM auction
+  $stmt = $conn->prepare('DELETE FROM auction
                           WHERE id = ?');
   $stmt->execute(array($auctionId));
 }

@@ -724,7 +724,7 @@ $(document).ready(function() {
   function deleteAuction(auctionId) {
     let request = $.ajax({
       type: 'POST',
-      url: BASE_URL + 'api/auction/report_auction.php',
+      url: BASE_URL + 'api/auction/remove_auction.php',
       data: {
         'auctionId': auctionId,
         'userId': userId,
@@ -733,9 +733,9 @@ $(document).ready(function() {
     });
 
     request.done(function(response, textStatus, jqXHR) {
-      if(response.includes('Success')) {
-        // redirect to home page
-      } else {
+      if(response.includes('Success'))
+        window.location.replace(BASE_URL);
+      else {
         $.magnificPopup.open({
           items: {
             src: '<div class="white-popup">' + response + '</div>',
