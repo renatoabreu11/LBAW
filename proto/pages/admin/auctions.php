@@ -32,6 +32,7 @@ foreach ($auctionsIDs as $auctionArr){
   $auction = array(
     "id" => $auctionArr["id"],
     "product" => $product_name,
+    "product_id" => $auctionArr['product_id'],
     "seller" => $seller,
     "seller_id" => $sellerId,
     "type" => $type,

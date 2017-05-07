@@ -27,6 +27,7 @@
     </table>
   </div>
 
+  <input type="hidden" name="product-id" value="{$product_id}">
 
   <div class="text-center userOptions">
     <a class="btn btn-info removePopup" href="#removeAuctionConfirmation">Remove selected auction</a>
