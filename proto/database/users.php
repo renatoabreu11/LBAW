@@ -792,8 +792,8 @@ function unfollowUser($followingUserId, $followedUserId) {
 function deleteUser($userId){
   global $conn;
   $stmt = $conn->prepare('DELETE 
-                                FROM "user"
-                                WHERE id=?');
+                          FROM "user"
+                          WHERE id=?');
   $stmt->execute(array($userId));
 }
 

@@ -336,16 +336,30 @@ function getWatchlistAuctionsOfUser($userId){
  */
 function getMostRecentAuction() {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id as auction_id, product.name as product_name, (SELECT image.filename 
-                                                                                            FROM image
-                                                                                            JOIN product ON image.product_id = product.id
-                                                                                            LIMIT 1) as image_filename
-                            FROM auction
-                            JOIN product ON auction.product_id = product.id
-                            ORDER BY auction.id DESC
-                            LIMIT 1');
+  $stmt = $conn->prepare('SELECT auction.id as auction_id, product.name as product_name, product.id
+                          FROM product
+                          JOIN auction ON auction.product_id = product.id
+                          ORDER BY auction.id DESC
+                          LIMIT 1');
   $stmt->execute();
   return $stmt->fetch();
+}
+
+/**
+ * Get one auction's image.
+ * @param $auctionId
+ */
+function getAuctionImage($auctionId) {
+  global $conn;
+  $stmt = $conn->prepare('SELECT image.filename
+                          FROM auction
+                          JOIN product ON auction.product_id = product.id
+                          JOIN image ON image.product_id = product.id
+                          WHERE auction.id = :auction_id
+                          LIMIT 1');
+  $stmt->bindParam('auction_id', $auctionId);
+  $stmt->execute();
+  return $stmt->fetch()['filename'];
 }
 
 /**

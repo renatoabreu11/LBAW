@@ -11,6 +11,7 @@ $totalValOfActiveAuctions = getTotalValueOfActiveAuctions();
 $topTenRankingUsers = getTopTenRankingUsers();
 $mostPopularAuctions = getMostPopularAuctions();
 $mostRecentAuction = getMostRecentAuction();
+$mostRecentAuctionImage = getAuctionImage($mostRecentAuction['auction_id']);
 
 if ($mostRecentAuction['image_filename'] == null)
 	$mostRecentAuction['image_filename'] = 'default.jpeg';

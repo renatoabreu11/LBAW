@@ -338,10 +338,10 @@ function getWinningUser($auctionId) {
 function getSimilarAuctions($auctionId) {
   global $conn;
   $stmt = $conn->prepare('SELECT similarAuction.id, similarProduct.name, (SELECT image.filename
-                                                FROM image
-                                                WHERE similarProduct.id = image.product_id
-                                                LIMIT 1
-                                                ) AS image
+                                                                          FROM image
+                                                                          WHERE similarProduct.id = image.product_id
+                                                                          LIMIT 1
+                                                                          ) AS image
                           FROM auction as originalAuction, auction as similarAuction, product as originalProduct, product as similarProduct,
                           product_category as pc1, product_category as pc2
                           WHERE originalAuction.id = :original_auction_id
@@ -860,8 +860,8 @@ function updateProduct($productId, $productName, $description, $condition, $char
 function deleteAuction($auctionId){
   global $conn;
   $stmt = $conn->prepare('DELETE 
-                            FROM auction
-                            WHERE id = ?');
+                          FROM auction
+                          WHERE id = ?');
   $stmt->execute(array($auctionId));
 }
 
