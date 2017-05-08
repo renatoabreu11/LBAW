@@ -215,13 +215,22 @@
                         {else}
                           <td class="image col-md-2"><img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" alt="Product image"></td>
                         {/if}
-                        <td class="product col-md-6">
+                        <td class="product col-md-5">
                           <strong>{$auction.name}</strong><br>
                           {$auction.description}
                         </td>
-                        <td class="price col-md-2">
-                          <small>Current bid: ${$auction.curr_bid}</small>
-                          <h5 class="time">{$auction.remaining_time}</h5>
+                        <td class="price col-md-3">
+                          {if $auction.state == 'Created'}
+                            <small>Price: <strong>{$auction.start_bid}€</strong></small><br>
+                            <small>Starting date:</small><br>
+                            <strong style="font-size: 14px">{$auction.start_date}</strong>
+                          {else}
+                            <small>Price: <strong>{$auction.curr_bid}€</strong></small><br>
+                            <small>Ends in</small>
+                            <div class="countdown">
+                              <div class="clock" style="font-weight: bolder; font-size: 14px;"><p hidden>{$auction.end_date}</p></div>
+                            </div>
+                          {/if}
                         </td>
                         <td class="watch col-md-2">
                           <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a>
@@ -328,7 +337,7 @@
                             </div>
                             <div class="input-group win-review-comment">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                              <textarea class="form-control" rows="3" columns="50" placeholder="Comment..."></textarea>
+                              <textarea class="form-control" rows="3" placeholder="Comment..."></textarea>
                             </div>
                             <button type="submit" class="btn btn-info btn-block btn-review-submit" value="Submit">Submit</button>
                           </form>
@@ -381,6 +390,7 @@
 </div>
 
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
+<script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script type="text/javascript" src="{$BASE_URL}javascript/user.js"></script>
 
 {include file='common/footer.tpl'}
