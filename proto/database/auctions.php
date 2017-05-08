@@ -69,7 +69,7 @@ function getClosedAuctions(){
   global $conn;
   $stmt = $conn->prepare('SELECT * 
     						FROM auction
-    						WHERE end_date < now()');
+    						WHERE state = \'Closed\'');
   $stmt->execute();
   $result = $stmt->fetchAll();
   return $result;

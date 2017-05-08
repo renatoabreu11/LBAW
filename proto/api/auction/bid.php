@@ -43,6 +43,12 @@ if(isOwner($userId, $auctionId)){
   return;
 }
 
+if(getAuctionState($auctionId) != 'Open'){
+  $reply = array('message' => "Error 403 Forbidden: You cannot bid on an auction that is not open!");
+  echo json_encode($reply);
+  return;
+}
+
 try {
   $ret = bid($amount, $userId, $auctionId);
 } catch(PDOException $e) {

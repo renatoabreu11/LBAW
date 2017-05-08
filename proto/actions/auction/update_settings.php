@@ -33,7 +33,7 @@ if(!isOwner($userId, $auctionId)){
 
 $auction = getAuction($auctionId);
 
-if($auction['start_date'] > date("Y-m-d H:i:s")){
+if($auction['state'] != 'Created'){
   $_SESSION['error_messages'][] = "The auction has already started. You can't update it anymore.";
   header("Location:"  . $BASE_URL . "pages/auction/auction.php?id=" . $auction['id']);
   exit;

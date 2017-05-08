@@ -24,6 +24,12 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       return;
     }
 
+    if(getAuctionState($auctionId) != 'Created'){
+      $reply = array('error' => "Error 403 Forbidden: The auction has already started. You can't update it anymore.");
+      echo json_encode($reply);
+      return;
+    }
+
     $images = $_FILES['input24'];
     $nrImages = count($images['name']);
     $captions = $_POST['captions'];

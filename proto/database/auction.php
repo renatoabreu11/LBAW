@@ -281,6 +281,32 @@ function getRecentBidders($auctionId) {
 }
 
 /**
+ * Returns the current state of an auction
+ * @param $auctionId
+ */
+function getAuctionState($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT state
+                            FROM auction
+                            WHERE id = ?');
+  $stmt->execute(array($auctionId));
+  return $stmt->fetch()['state'];
+}
+
+/**
+ * Returns the qa section
+ * @param $auctionId
+ */
+function getQAstate($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT questions_section
+                            FROM auction
+                            WHERE id = ?');
+  $stmt->execute(array($auctionId));
+  return $stmt->fetch()['questions_section'];
+}
+
+/**
  * Returns the total number of bids placed in an auction
  * @param $auctionId
  * @return mixed
