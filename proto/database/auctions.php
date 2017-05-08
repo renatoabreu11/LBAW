@@ -15,7 +15,7 @@ function getMostPopularAuctions() {
                             INNER JOIN auction ON bid.auction_id = auction.id
                             INNER JOIN product ON auction.product_id = product.id
                             INNER JOIN "user" ON auction.user_id = "user".id
-                            WHERE now() < auction.end_date
+                            WHERE state = \'Open\'
                             GROUP BY auction.id, image, product.id, product.name, "user".username, "user".rating, auction.curr_bid, auction.end_date, "user".id, auction.num_bids
                             ORDER BY auction.num_bids DESC
                             LIMIT 10;');
@@ -30,7 +30,7 @@ function getNumActiveAuctions() {
   global $conn;
   $stmt = $conn->prepare('SELECT COUNT(*) 
     						FROM auction 
-    						WHERE now() < end_date;');
+    						WHERE state = \'Open\'');
   $stmt->execute();
   $result = $stmt->fetch();
   return $result['count'];
@@ -43,7 +43,7 @@ function getTotalValueOfActiveAuctions() {
   global $conn;
   $stmt = $conn->prepare('SELECT SUM(curr_bid) 
     						FROM auction 
-    						WHERE now() < end_date;');
+    						WHERE state = \'Open\'');
   $stmt->execute();
   $result = $stmt->fetch();
   return $result['sum'];
@@ -91,7 +91,7 @@ function searchAuctions($textSearch) {
                                   to_tsvector(\'english\', product.name || \' \' || product.description) AS textsearch
                             WHERE auction.product_id = product.id 
                             AND query @@ textsearch 
-                            AND now() < auction.end_date
+                            AND state IN (\'Created\', \'Open\')
                             AND auction.user_id = "user".id
                             ORDER BY rank DESC');
   $stmt->bindParam('textSearch', $textSearch);
@@ -116,7 +116,7 @@ function searchAuctionsByCategory($category) {
                             AND product.id = product_category.product_id
                             AND product_category.category_id = category.id
                             AND auction.user_id = "user".id
-                            AND now() < auction.end_date
+                            AND state IN (\'Created\', \'Open\')
                             AND :category = category.name');
   $stmt->bindParam('category', $category);
   $stmt->execute();
@@ -144,7 +144,7 @@ function searchAuctionsByCategoryAndName($textSearch, $category) {
                             AND product.id = product_category.product_id
                             AND product_category.category_id = category.id
                             AND query @@ textsearch 
-                            AND now() < auction.end_date
+                            AND state IN (\'Created\', \'Open\')
                             AND auction.user_id = "user".id
                             AND :category = category.name
                             ORDER BY rank DESC;');

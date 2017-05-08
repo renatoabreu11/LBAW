@@ -93,6 +93,12 @@ function getProductCategories($productId){
   return $result;
 }
 
+/**
+ * Returns the image record with the given id
+ * @param $imageId
+ *
+ * @return mixed
+ */
 function getImage($imageId){
   global $conn;
   $stmt = $conn->prepare('SELECT *
@@ -903,7 +909,12 @@ function updateProduct($productId, $productName, $description, $condition, $char
 
 /**
  * Delete auction.
+ *
  * @param $auctionId
+ *
+ * @param $productId
+ *
+ * @return array
  */
 function deleteAuction($auctionId, $productId){
   global $conn;
