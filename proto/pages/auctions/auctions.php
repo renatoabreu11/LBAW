@@ -40,6 +40,11 @@ if($_SESSION['user_id']){
   $smarty->assign('notifications', $notifications);
 }
 
+if($_GET['category']){
+  $categorySearch = $_GET['category'];
+  $smarty->assign('categorySearch', $categorySearch);
+}
+
 $items = 8; 
 $nr_pages = ceil(count($auctions) / $items);
 
