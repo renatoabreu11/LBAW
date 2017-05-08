@@ -419,7 +419,6 @@ function bid($amount, $bidderId, $auctionId) {
   $conn->beginTransaction();
   $conn->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
 
-  // IS NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // BEATED USER.
   // Return the money spent to the current winning user.
   $stmt = $conn->prepare('SELECT bid.amount, bid.user_id
@@ -432,11 +431,17 @@ function bid($amount, $bidderId, $auctionId) {
   $stmt->execute();
   $lastBidder = $stmt->fetch();
 
+  if($lastBidder['user_id'] == $bidderId) {
+    $conn->commit();
+    return "Error 403 Forbidden: You currently have the highest bid.";
+  }
+
   $stmt = $conn->prepare('UPDATE "user"
                           SET amount = amount + :bidded_amount
-                          WHERE "user".id = :user_id');
+                          WHERE id = :user_id');
   $stmt->bindParam('bidded_amount', $lastBidder['amount']);
   $stmt->bindParam('user_id', $lastBidder['user_id']);
+  $stmt->execute();
 
   // NEW WINNING USER.
   $stmt = $conn->prepare('SELECT amount as balance
