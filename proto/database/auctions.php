@@ -318,7 +318,7 @@ function getWatchlistAuctionsOfUser($userId){
                           auction.end_date, 
                           "user".id as user_id, 
                           auction.num_bids as numbids, 
-                          auction.start_date,
+                          auction.start_date, auction.state,
                           watchlist.date as date_added
                           FROM watchlist
                           JOIN auction ON auction.id = watchlist.auction_id

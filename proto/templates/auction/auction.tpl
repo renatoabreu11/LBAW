@@ -117,7 +117,10 @@
                 </h4>
                 <i style="color: #ffe13c" class="fa fa-trophy fa-3x" aria-hidden="true"></i>
                 <h4 class="current-bid">Final bid: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
-
+                {else}
+                <h4><strong>Auction closed</strong></h4>
+                <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
+                <h4>No one has bid on this auction.</h4>
               {/if}
             {elseif $auction['state'] == 'Open'}
               <h4 class="current-bid">Current price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>

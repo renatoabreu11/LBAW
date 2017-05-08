@@ -32,10 +32,26 @@
       </div>
       <h4 style="height: 25px;">{$auction.product_name}</h4>
       <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
-      <h4>Current bid: {$auction.curr_bid} €</h4>
-      <div class="countdown">
-          <h3 class="clock"><span hidden>{$auction.end_date}</span></h3>
-      </div>
+      {if $auction['state'] == 'Closed'}
+        {if $auction.winner != NULL}
+          <h4>Auction won by
+            <br>
+            <a href="{$BASE_URL}pages/user/user.php?id={$winningUser.id}"><strong style="font-size: 20px">{$winningUser.username}</strong></a>
+          </h4>
+          <h4 class="current-bid">Final bid: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+          {else}
+          <h4><strong>Auction closed</strong></h4>
+          <h4>No one has bid on this auction.</h4>
+        {/if}
+      {elseif $auction['state'] == 'Open'}
+        <h4 class="current-bid">Current price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+        <div class="countdown" style="padding-bottom: 1em;">
+          <div class="clock" style="font-weight: bolder; font-size: 20px;"><p hidden>{$auction.end_date}</p></div>
+        </div>
+      {elseif $auction['state'] == 'Created'}
+        <h4 class="current-bid">Initial price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+        <h4>Offer starts <br><strong>{$auction.start_date}</strong></h4>
+      {/if}
       <div class="row text-center" style="padding-top: 4px; padding-bottom: 10px;">
         <a class="btn btn-primary btn-sm" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a>
       </div>

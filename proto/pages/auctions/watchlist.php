@@ -20,19 +20,17 @@ if(!validUser($username, $id)){
 }
 
 $auctions = getWatchlistAuctionsOfUser($id);
-$now = strtotime(date('Y/m/d h:i:s a', time()));
 
 // add 'active' and 'myAuction' attributes to each auction
 foreach ($auctions as &$auction) {
 	$seller_id = $auction['user_id'];
-	$end_date = strtotime($auction['end_date']);
-
+	$auction['winner'] = getWinningUser($auction['id']);
 	if ($seller_id == $id)
 		$auction['myAuction'] = 1;
 	else
 		$auction['myAuction'] = 0;
 
-	if ($end_date > $now)
+	if ($auction['state'] == 'Open' || $auction['state'] == 'Created')
 		$auction['active'] = 1;
 	else
 		$auction['active'] = 0;
