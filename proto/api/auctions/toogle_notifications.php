@@ -4,7 +4,7 @@ include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auctions.php");
 
 if(!$_POST['token'] || !$_POST['userId'] || !$_POST['auctionId']) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request. Fields missing.";
+  echo "Error 400 Bad Request: Invalid request. Some fields are missing.";
   return;
 }
 
@@ -36,7 +36,7 @@ try {
 
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => "Toggle notifications."));
-  echo "Error 500 Internal Server: Error removing auction from watchlist.";
+  echo "Error 500 Internal Server: Error updating auction notifications.";
   return;
 }
 

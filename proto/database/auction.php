@@ -84,7 +84,7 @@ function getProductName($productId){
  */
 function getProductCategories($productId){
   global $conn;
-  $stmt = $conn->prepare('SELECT category.name
+  $stmt = $conn->prepare('SELECT category.*
                             FROM category
                             INNER JOIN product_category ON category.id = product_category.category_id 
                             WHERE product_category.product_id = ?');

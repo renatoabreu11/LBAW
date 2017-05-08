@@ -401,8 +401,7 @@ function getUserAuctions($userId){
   $stmt = $conn->prepare('SELECT auction.product_id, auction.id
                           FROM auction
                           WHERE user_id = ?');
-  $stmt->bindParam('user_id', $userId);
-  $stmt->execute();
+  $stmt->execute(array($userId));
   return $stmt->fetchAll();
 }
 

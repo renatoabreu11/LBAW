@@ -4,7 +4,7 @@ include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auctions.php");
 
 if(!$_POST['token'] || !$_POST['userId'] || !$_POST['auctionId'] || !$_POST['notifications']) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request. Fields missing.";
+  echo "Error 400 Bad Request: Invalid request. Some fields are missing.";
   return;
 }
 
