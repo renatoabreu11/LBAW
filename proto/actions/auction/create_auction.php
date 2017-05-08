@@ -21,7 +21,7 @@ function to_pg_array($set) {
   return '{' . implode(",", $result) . '}'; // format
 }
 
-if (!empty($_POST['token'])) {
+if (!empty($_POST['token']) || !$_SESSION['token']) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
     if (!$_POST['product_name'] || !$_POST['category']
       | !$_POST['quantity'] || !$_POST['description']

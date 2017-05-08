@@ -5,7 +5,7 @@ include_once($BASE_DIR . "database/auction.php");
 
 use Intervention\Image\ImageManager;
 
-if (!empty($_POST['token'])) {
+if (!empty($_POST['token']) || !$_SESSION['token']) {
   if (hash_equals($_SESSION['token'], $_POST['token'])) {
     $token = $_SESSION['token'];
     $userId = $_POST['userId'];

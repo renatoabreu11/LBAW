@@ -5,7 +5,7 @@ include_once($BASE_DIR . "database/auction.php");
 include_once($BASE_DIR . "database/users.php");
 
 $reply = array();
-if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
   echo json_encode($reply);
   return;

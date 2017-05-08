@@ -3,7 +3,7 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/admins.php');
 
-if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   $reply = array('message' => "Error 403 Forbidden: You don't have permissions to make this request.");
   echo json_encode($reply);
   return;

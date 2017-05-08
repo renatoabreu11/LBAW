@@ -5,7 +5,7 @@ include_once($BASE_DIR . 'database/users.php');
 
 use Intervention\Image\ImageManager;
 
-if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   $_SESSION['error_messages'][] = "You don't have permissions to make this request. Generated token is different.";
   header("Location:"  . $BASE_URL);
   exit;

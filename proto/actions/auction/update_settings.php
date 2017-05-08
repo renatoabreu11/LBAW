@@ -4,7 +4,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/auction.php');
 include_once($BASE_DIR . 'database/users.php');
 
-if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   $_SESSION['error_messages'][] = "You don't have permissions to make this request.";
   header("Location:"  . $BASE_URL);
   exit;

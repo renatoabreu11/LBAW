@@ -8,7 +8,7 @@ if(!$_POST['token'] || !$_POST['userId'] || !$_POST['auctionId'] || !$_POST['not
   return;
 }
 
-if (!hash_equals($_SESSION['token'], $_POST['token'])) {
+if (!$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }

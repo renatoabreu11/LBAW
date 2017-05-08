@@ -6,7 +6,7 @@ include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/auctions.php');
 
-if (!$_POST['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
