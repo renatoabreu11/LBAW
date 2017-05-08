@@ -148,6 +148,10 @@ ul {
   display: inline-block;
 }
 
+.about-site:hover {
+  cursor: pointer;
+}
+
 /* =============== index.html =============== */
 
 .table-best-users p {

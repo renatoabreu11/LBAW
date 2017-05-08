@@ -299,7 +299,7 @@
                 <div class="row">
                   <div class="col-lg-3 col-md-3 win-wrapper">
                     <div id="win-info-image">
-                      <a href="{$BASE_URL}pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="{$BASE_URL}images/products/{$win.image_filename}" alt="Product image"></a>
+                      <a href="{$BASE_URL}pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="{$BASE_URL}images/auctions/thumbnails/{if ($win.image_filename)}{$win.image_filename}{else}default.jpeg{/if}" alt="Product image"></a>
                     </div>
                     <div id="win-info-text">
                       <div class="text-right win-info">

@@ -1,7 +1,7 @@
 <div id="footer">
   <div class="container">
     <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
-    <a class="pull-right" data-toggle="modal" data-target="#about-modal">About</a>
+    <a class="pull-right about-site" data-toggle="modal" data-target="#about-modal">About</a>
 
     <div id="about-modal" class="modal fade" role="dialog">
       <div class="modal-dialog">
