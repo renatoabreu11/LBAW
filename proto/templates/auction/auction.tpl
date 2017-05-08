@@ -87,8 +87,10 @@
               <div class="modal-content">
                 <div class="modal-body">
                   <p>Do you want to receive notifications regarding this auction?</p>
-                  <button class="btn btn-primary btn-add-watchlist">No</button>
-                  <button class="btn btn-primary btn-add-watchlist pull-right">Yes</button>
+                  <div class="text-center">
+                    <button class="btn btn-primary btn-add-watchlist" style="margin-right: 10px">Yes</button>
+                    <button class="btn btn-primary btn-add-watchlist" style="margin-left: 10px">No</button>
+                  </div>
                 </div>
               </div>
             </div>
