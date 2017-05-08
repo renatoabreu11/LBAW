@@ -6,8 +6,8 @@ include_once ($BASE_DIR . 'database/auctions.php');
 include_once ($BASE_DIR . 'database/users.php');
 
 if (!$_GET['search'] && !$_GET['category']) {
-  $_SESSION['error_messages'][] = "Fields of search category not specified!";
-  header("Location:"  . $_SERVER['HTTP_REFERER']);
+  $_SESSION['error_messages'][] = "Field of search not specified!";
+  header("Location: $BASE_URL");
   exit;
 }
 

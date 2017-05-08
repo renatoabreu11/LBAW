@@ -82,7 +82,7 @@ function getClosedAuctions(){
  */
 function searchAuctions($textSearch) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.num_bids as numBids, auction.start_date
@@ -107,7 +107,7 @@ function searchAuctions($textSearch) {
  */
 function searchAuctionsByCategory($category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
@@ -132,7 +132,7 @@ function searchAuctionsByCategory($category) {
  */
 function searchAuctionsByCategoryAndName($textSearch, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.num_bids as numBids, auction.start_date
@@ -165,7 +165,7 @@ function searchAuctionsByCategoryAndName($textSearch, $category) {
  */
 function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
@@ -196,7 +196,7 @@ function searchAuctionsByDatePrice($fromDate, $toDate, $fromPrice, $toPrice) {
  */
 function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice, $textSearch) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date
@@ -232,7 +232,7 @@ function searchAuctionsByDatePriceText($fromDate, $toDate, $fromPrice, $toPrice,
  */
 function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPrice, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, auction.start_date
@@ -268,7 +268,7 @@ function searchAuctionsByDatePriceCategory($fromDate, $toDate, $fromPrice, $toPr
  */
 function searchAuctionsByDatePriceTextCategory($fromDate, $toDate, $fromPrice, $toPrice, $textSearch, $category) {
   global $conn;
-  $stmt = $conn->prepare('SELECT auction.id, (SELECT filename
+  $stmt = $conn->prepare('SELECT auction.start_bid, auction.state, auction.id, (SELECT filename
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.name as product_name, product.description, "user".username, "user".rating as user_rating, auction.num_bids as numBids, auction.curr_bid, auction.end_date, "user".id as user_id, ts_rank_cd(textsearch, query) AS rank, auction.start_date

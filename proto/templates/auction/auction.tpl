@@ -224,9 +224,8 @@
         </div>
       </div>
 
-      <hr>
-
       {if (($seller.id == $USER_ID && count($questions) > 0) || ($seller.id != $USER_ID && $USER_ID) || (!$USER_ID && count($questions) > 0))}
+        <hr>
         <div class="row product-questions">
           <div class="col-md-12">
             <h2>Product Q&A</h2>
@@ -295,10 +294,10 @@
             </div>
           </div>
         </div>
-        <hr>
       {/if}
 
       {if (count($similarAuctions) > 0)}
+        <hr>
         <div class="row suggestions">
           <div class='col-md-12 col-centered'>
             <h2>Similar Auctions</h2>
