@@ -12,7 +12,7 @@ if (!$_POST['username'] || !$_POST['name'] || !$_POST['password'] || !$_POST['co
 $name = trim(strip_tags($_POST["name"]));
 $invalidCharacters = false;
 if ( !preg_match ("/^[a-zA-Z\s]+$/", $name)) {
-  $_SESSION['field_errors']['name'] = 'Invalid name characters';
+  $_SESSION['field_errors']['name'] = 'Invalid name characters.';
   $invalidCharacters = true;
 }
 
@@ -24,7 +24,7 @@ if(strlen($name) > 64){
 $username = trim(strip_tags($_POST["username"]));
 if ( !preg_match ("/^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$/", $username)) {
   $invalidCharacters = true;
-  $_SESSION['field_errors']['username'] = 'Invalid username characters';
+  $_SESSION['field_errors']['username'] = 'Invalid username characters. ';
 }
 
 if(strlen($username) > 64){

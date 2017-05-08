@@ -26,7 +26,7 @@ function setCountdown() {
         $(this).html(event.strftime(format));
       })
       .on('finish.countdown', function(event) {
-        $(this).html('This offer has expired!')
+        $(this).html('Offer expired!')
           .parent().addClass('disabled');
       });
   });

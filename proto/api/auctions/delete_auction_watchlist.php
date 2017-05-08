@@ -2,6 +2,7 @@
 
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auctions.php");
+include_once($BASE_DIR . "database/auction.php");
 
 if(!$_POST['token'] || !$_SESSION['token'] || !$_POST['userId'] || !$_POST['auctionId']) {
   echo "Error 400 Bad Request: Invalid request. Some fields are missing.";
