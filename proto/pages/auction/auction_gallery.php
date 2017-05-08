@@ -32,7 +32,7 @@ if(!isOwner($id, $auctionId)){
 
 $auction = getAuction($auctionId);
 
-if(strtotime($auction['start_date']) - strtotime(date('Y-m-d H:i:s')) < 0){
+if($auction['state'] != 'Created'){
   header("Location:"  . $BASE_URL . 'pages/auction/auction.php?id=' . $auctionId);
   return;
 }

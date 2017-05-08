@@ -28,13 +28,13 @@ foreach ($similarAuctions as &$auction_) {
     $auction_['image'] = 'default.jpeg';
 }
 
-if(date('Y-m-d H:i:s') > $auction['end_date']) {
+if($auction['state'] == 'Closed') {
   $winningUser = getWinningUser($auctionId);
   $smarty->assign("winningUser", $winningUser);
 }
 
 $canEdit = true;
-if(strtotime($auction['start_date']) - strtotime(date('Y-m-d H:i:s')) < 0)
+if($auction['state'] == 'Created')
   $canEdit = false;
 
 if($_SESSION['user_id']){
