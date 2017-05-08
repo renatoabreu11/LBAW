@@ -604,6 +604,21 @@ function getPasswordRecoveryRequestId($email, $token) {
   return $stmt->fetch()['id'];
 }
 
+/**
+ * Verifies if the given email exists in the database
+ * @param $email
+ */
+function validEmail($email){
+  global $conn;
+  $stmt = $conn->prepare('SELECT EXISTS
+                            (SELECT id
+                            FROM "user"
+                            WHERE email = :email)');
+  $stmt->bindParam('email', $email);
+  $stmt->execute();
+  return $stmt->fetch()['exists'];
+}
+
 /* ========================== Inserts  ========================== */
 
 /**
@@ -680,92 +695,17 @@ function createUserReport($userId, $message) {
 /**
  * Creates a password request
  * @param $email
- *
- * @return string|void
  */
 function createRequestPasswordReset($email) {
-  $myEmail;
-  $myPassword;
-  $emailTo;
-  $htmlFileLocation;
-
-  $body = 'cenas mano!';
-
-  $mail = new PHPMailer;
-  //Tell PHPMailer to use SMTP
-  $mail->isSMTP();
-  //Enable SMTP debugging
-  // 0 = off (for production use)
-  // 1 = client messages
-  // 2 = client and server messages
-  $mail->SMTPDebug = 2;
-  //Ask for HTML-friendly debug output
-  $mail->Debugoutput = 'html';
-  //Set the hostname of the mail server
-  $mail->Host = 'tls://smtp.gmail.com';
-  //$mail->Host = gethostbyname('smtp.gmail.com');
-  // use
-  // $mail->Host = gethostbyname('smtp.gmail.com');
-  // if your network does not support SMTP over IPv6
-  //Set the SMTP port number - 587 for authenticated TLS, a.k.a. RFC4409 SMTP submission
-  $mail->Port = 587;
-  //Set the encryption system to use - ssl (deprecated) or tls
-  $mail->SMTPSecure = 'tls';
-  //Whether to use SMTP authentication
-  $mail->SMTPAuth = true;
-  //Username to use for SMTP authentication - use full email address for gmail
-  $mail->Username = $myEmail;
-  //Password to use for SMTP authentication
-  $mail->Password = $myPassword;
-  //Set who the message is to be sent from
-  $mail->setFrom('from@example.com', 'First Last');
-  //Set an alternative reply-to address
-  $mail->addReplyTo('replyto@example.com', 'First Last');
-  //Set who the message is to be sent to
-  $mail->addAddress($emailTo, 'John Doe');
-  //Set the subject line
-  $mail->Subject = 'PHPMailer GMail SMTP test';
-  //Read an HTML message body from an external file, convert referenced images to embedded,
-  //convert HTML into a basic plain-text alternative body
-  $mail->msgHTML(file_get_contents($htmlFileLocation), dirname(__FILE__));
-  //Replace the plain text body with one created manually
-  $mail->AltBody = 'This is a plain-text message body';
-  $mail->Body = $body;
-
-  if (!$mail->send()) {
-      return "Mailer Error: " . $mail->ErrorInfo;
-  } else {
-      return "Message sent!";
-  }
-
-/*
-  global $conn;
-  $stmt = $conn->prepare('SELECT EXISTS
-                            (SELECT id
-                            FROM "user"
-                            WHERE email = :email) as exists');
-  $stmt->bindParam('email', $email);
-  $stmt->execute();
-  $exists = $stmt->fetch()['exists'];
-
-  if(!($exists))
-    return;
-
   $token = bin2hex(openssl_random_pseudo_bytes(32));
 
+  global $conn;
   $stmt = $conn->prepare('INSERT INTO password_request(email, token)
                           VALUES(:email, :token)');
   $stmt->bindParam('email', $email);
   $stmt->bindParam('token', $token);
-  $stmt->execute();*/
-
-  // Mails are not sent using the local server.
-  /*$message = "Someone requested a password reset. Click on the following link to reset your password: http://localhost:8000/pages/authentication/password_reset.php?email=" . $email . "&token=" . $token;
-  $message = wordwrap($message, 70);
-  $subject = "SeekBid password reset request";
-  $headers = "From: seekbid@noreply.com";
-  mail($email, $subject, $message, $headers);
-*/}
+  $stmt->execute();
+}
 
 /* ========================== Deletes  ========================== */
 
@@ -956,7 +896,7 @@ function updateUserCredit($newCredit, $userId) {
 }
 
 /**
- * Adds credit to the user account
+ * Adds credit to the user ac
  * @param $userId
  * @param $amount
  */

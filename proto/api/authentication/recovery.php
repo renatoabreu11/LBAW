@@ -9,13 +9,45 @@ if(!$_GET['email']) {
 }
 
 $email = trim(strip_tags($_GET['email']));
+if(!validEmail($email)){
+  echo "Error 400 Bad Request: Invalid email.";
+  return;
+}
 
 try {
-  $link = createRequestPasswordReset($email);
+  createRequestPasswordReset($email);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('request' => "Recover password."));
   echo "Error 500 Internal Server: Error creating password recovery request.";
   return;
 }
 
-echo "Success: The password recovery request was successfully created.";
+$body = 'cenas mano!';
+
+$mail = new PHPMailer;
+$mail->isSMTP();
+$mail->SMTPDebug = 2;
+$mail->Debugoutput = 'html';
+$mail->Host = 'smtp.gmail.com';
+$mail->Mailer   = "gmail";
+$mail->Port = 465;
+$mail->SMTPSecure = 'tls';
+$mail->SMTPAuth = true;
+
+$mail->Username = "seekbid1617@gmail.com";
+$mail->Password = "oc86ve46";
+
+$mail->setFrom('seekbid1617@gmail.com', 'Seek Bid');
+$mail->addReplyTo('renatoabreu1196@gmail.com', 'Seek Bid');
+$mail->addAddress($email, 'Renato Abreu');
+
+$mail->IsHTML(true);
+$mail->Subject = 'PHPMailer GMail SMTP test';
+$mail->AltBody = 'This is a plain-text message body';
+$mail->Body = $body;
+
+if (!$mail->send()) {
+  $log->error($mail->ErrorInfo, array('request' => "Mailer password request."));
+} else {
+  echo "Success: The password recovery request was successfully created.";
+}
