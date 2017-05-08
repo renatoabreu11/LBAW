@@ -4,6 +4,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR .'database/auctions.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/users.php');
+include_once($BASE_DIR .'crontab/crontab.php');
 
 function to_pg_array($set) {
   settype($set, 'array'); // can be called with a scalar or array
@@ -169,6 +170,8 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       $invalidInfo = true;
     }
 
+    
+
     $notificationsEnabled = $_POST['notifications_enabled'];
     if($notificationsEnabled != "No" && $notificationsEnabled != "Yes"){
       $_SESSION['field_errors']['notifications_enabled'] = 'Invalid notifications option';
@@ -214,6 +217,9 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
         header("Location:"  . $_SERVER['HTTP_REFERER']);
         exit;
       }
+
+      createCrontabCommand($startDate, $OPEN_AUCTION_SCRIPT, $auctionId);
+      createCrontabCommand($endDate, $CLOSE_AUCTION_SCRIPT, $auctionId);
 
       $_SESSION['success_messages'][] = 'Auction created with success!';
       header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auctionId);

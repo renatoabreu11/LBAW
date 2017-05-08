@@ -873,6 +873,30 @@ function updateProduct($productId, $productName, $description, $condition, $char
   }
 }
 
+/**
+ * Set state of an auction to 'Open'.
+ * @param $auctionId
+ */
+function openAuction($auctionId) {
+  global $conn;
+  $stmt = $conn->prepare('UPDATE auction
+                            SET state = \'Open\'
+                            WHERE id = ?');
+  $stmt->execute(array($auctionId));
+}
+
+/**
+ * Set state of an auction to 'Closed'.
+ * @param $auctionId
+ */
+function closeAuction($auctionId) {
+  global $conn;
+  $stmt = $conn->prepare('UPDATE auction
+                            SET state = \'Closed\'
+                            WHERE id = ?');
+  $stmt->execute(array($auctionId));
+}
+
 /* ========================== DELETES  ========================== */
 
 /**
