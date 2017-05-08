@@ -617,6 +617,23 @@ function getNumberQuestions($auctionId, $userId){
   return $stmt->fetch()['count'];
 }
 
+/**
+ * Returns the users that have the respective auction in the watchlist and want
+ * to receive notifications
+ *
+ * @param $auctionId
+ *
+ * @return array
+ */
+function getUsersWithActiveNotifications($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT watchlist.user_id
+                          FROM watchlist
+                          WHERE auction_id = ? AND notifications = TRUE');
+  $stmt->execute(array($auctionId));
+  return $stmt->fetchAll();
+}
+
 /* ========================== INSERTS  ========================== */
 
 /**
