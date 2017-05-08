@@ -30,7 +30,7 @@ $watchlistUsers = getUsersWithActiveNotifications($auctionId);
 foreach ($watchlistUsers as $user){
   try {
     $message = "The auction " . $product['name'] . " is now open!<br>May the odds be ever in your favor! Good luck!";
-    notifyUser($user['id'], $message, "Auction");
+    notifyUser($user['user_id'], $message, "Auction");
   } catch(PDOException $e) {
     $log->error($e->getMessage(), array('request' => 'Open auction notification.'));
     return;

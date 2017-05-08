@@ -50,10 +50,10 @@ try {
 
 $watchlistUsers = getUsersWithActiveNotifications($auctionId);
 foreach ($watchlistUsers as $user){
-  if($user['id'] != $auction['user_id'] && $user['id'] != $winner['id'])
+  if($user['user_id'] != $auction['user_id'] && $user['user_id'] != $winner['id'])
   try {
     $message = "The auction " . $product['name'] . " is now closed! You cannot bid anymore.";
-    notifyUser($user['id'], $message, "Auction");
+    notifyUser($user['user_id'], $message, "Auction");
   } catch(PDOException $e) {
     $log->error($e->getMessage(), array('request' => 'Open auction notification.'));
     return;
