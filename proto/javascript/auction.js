@@ -93,7 +93,7 @@ $(document).ready(function() {
     let currBid = $('.current-bid');
     let bidderTableBody = $('.bidders-table-body');
     let username = $('input[name=user-username]').val();
-    let biddersDiv = $('.bidders');
+    let biddersDiv = $('.info');
     let auctionDetailsDiv = $('.auctionDetails');
     let hasBidders = $('html').has('.bidders-table-body').length;
 
@@ -136,7 +136,7 @@ $(document).ready(function() {
           } else {
             $.magnificPopup.open({
               items: {
-                src: '<div class="white-popup">' + data + '</div>',
+                src: '<div class="white-popup">' + response + '</div>',
                 type: 'inline',
               },
             });
