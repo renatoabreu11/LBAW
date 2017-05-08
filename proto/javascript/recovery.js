@@ -10,6 +10,10 @@ $(document).ready(function() {
     submitHandler: sendRecoveryRequest,
   });
 
+  /**
+   * Ajax call that creates a recovery request
+   * @param form
+   */
   function sendRecoveryRequest(form) {
     let email = $('#email').val();
 
@@ -24,15 +28,13 @@ $(document).ready(function() {
     request.done(function(response, textStatus, jqXHR) {
       if(response.includes('Success')) {
         $(form).trigger('reset');
-        $('.container').prepend('<p>We sent an email to <strong>' + email + '</strong></p>');
-      } else {
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + response + '</div>',
-            type: 'inline',
-          },
-        });
       }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {

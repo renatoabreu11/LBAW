@@ -22,8 +22,6 @@ try {
   return;
 }
 
-$body = 'cenas mano!';
-
 $mail = new PHPMailer;
 $mail->isSMTP();
 $mail->SMTPDebug = 2;
@@ -44,10 +42,11 @@ $mail->addAddress($email, 'Renato Abreu');
 $mail->IsHTML(true);
 $mail->Subject = 'PHPMailer GMail SMTP test';
 $mail->AltBody = 'This is a plain-text message body';
-$mail->Body = $body;
+$mail->Body = 'cenas mano!';
 
 if (!$mail->send()) {
   $log->error($mail->ErrorInfo, array('request' => "Mailer password request."));
+  echo "Error sending mail to " . $email;
 } else {
-  echo "Success: The password recovery request was successfully created.";
+  echo "Success: An email with the necessary steps to recover the password was sent to " . $email . ".";
 }
