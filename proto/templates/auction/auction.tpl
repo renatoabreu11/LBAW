@@ -108,10 +108,18 @@
           </div>
           <div class="col-md-{if (count($recentBidders) > 0)}6{else}12{/if} text-center auctionDetails">
             {if $auction['state'] == 'Closed'}
+              {if $winningUser != NULL}
+                <h4>Auction won by
+                  <br>
+                  <a href="{$BASE_URL}pages/user/user.php?id={$winningUser.id}"><strong style="font-size: 20px">{$winningUser.username}</strong></a>
+                </h4>
+                <i style="color: #ffe13c" class="fa fa-trophy fa-3x" aria-hidden="true"></i>
+                <h4 class="current-bid">Final bid: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
 
+              {/if}
             {elseif $auction['state'] == 'Open'}
-              <h3 class="current-bid">Current price: <br><strong>{$auction.curr_bid}€</strong></h3>
-              {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
+              <h4 class="current-bid">Current price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+              {if $seller.id != $USER_ID && $USER_ID}
                 <div class="section">
                   <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
                   <div id="bidOnAuction" class="white-popup mfp-hide">
@@ -134,17 +142,21 @@
                   </div>
                 </div>
               {/if}
-              <div class="countdown">
-                <div class="clock"><p>{$auction.end_date}</p></div>
+              <div class="countdown" style="padding-bottom: 1em;">
+                <div class="clock" style="font-weight: bolder; font-size: 20px;"><p hidden>{$auction.end_date}</p></div>
               </div>
-              <h4><strong>{$auction.end_data_readable}</strong></h4>
+              <h4>Offer ends {$auction.end_date_readable}</h4>
             {elseif $auction['state'] == 'Created'}
-
+              <h4 class="current-bid">Initial price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+              <h4>Offer starts <br><strong>{$auction.start_date_readable}</strong></h4>
+              <h4>Offer ends<br><strong>{$auction.end_date_readable}</strong></h4>
             {/if}
 
-            <div class="visitors">
-              <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
-            </div>
+            {if $auction['state'] != 'Created'}
+              <div class="visitors">
+                <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
+              </div>
+            {/if}
           </div>
           {include file='auction/list_bidders.tpl'}
         </div>
@@ -229,7 +241,7 @@
         </div>
       </div>
 
-      {if (($seller.id == $USER_ID && count($questions) > 0) || ($seller.id != $USER_ID && $USER_ID) || (!$USER_ID && count($questions) > 0))}
+      {if $auction['questions_section'] && count($questions) > 0}
         <hr>
         <div class="row product-questions">
           <div class="col-md-12">

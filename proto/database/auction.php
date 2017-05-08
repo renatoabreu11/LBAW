@@ -352,13 +352,15 @@ function getBidders($auctionId) {
  */
 function getWinningUser($auctionId) {
   global $conn;
-  $stmt = $conn->prepare('SELECT "user".username as user_username, "user".id as user_id
+  $stmt = $conn->prepare('SELECT "user".*
                             FROM "user"
-                            JOIN bid ON bid.user_id = "user".id
-                            JOIN auction ON auction.id = bid.auction_id
-                            WHERE auction.id = :auction_id');
-  $stmt->bindParam('auction_id', $auctionId);
-  $stmt->execute();
+                            WHERE "user".id = (SELECT bid.user_id
+                                        FROM bid
+                                        INNER JOIN auction ON state = \'Closed\'
+                                        WHERE bid.auction_id = ?
+                                        ORDER BY bid.DATE DESC
+                                        LIMIT 1)');
+  $stmt->execute(array($auctionId));
   return $stmt->fetch();
 }
 

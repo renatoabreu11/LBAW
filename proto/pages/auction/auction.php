@@ -8,7 +8,8 @@ include_once ($BASE_DIR . 'database/users.php');
 $auctionId = $_GET["id"];
 $auction = getAuction($auctionId);
 
-$auction['end_data_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
+$auction['end_date_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
+$auction['start_date_readable'] = date('d F Y, H:i:s', strtotime($auction['start_date']));
 $product = getAuctionProduct($auctionId);
 $productCategories = getProductCategories($product['id']);
 $images = getProductImages($product['id']);
