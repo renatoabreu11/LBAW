@@ -1,0 +1,2 @@
+36 19 17 5 3 /usr/bin/curl /crontab/open_auction.php?auctionId=22
+36 19 25 5 4 /usr/bin/curl /crontab/close_auction.php?auctionId=22

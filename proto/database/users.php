@@ -954,3 +954,16 @@ function updateUserCredit($newCredit, $userId) {
   $stmt->bindParam('userId', $userId);
   $stmt->execute();
 }
+
+/**
+ * Adds credit to the user account
+ * @param $userId
+ * @param $amount
+ */
+function addCredit($userId, $amount){
+  global $conn;
+  $stmt = $conn->prepare('UPDATE "user"
+                          SET amount = amount + ?
+                          WHERE "user".id = ?');
+  $stmt->execute(array($amount, $userId));
+}

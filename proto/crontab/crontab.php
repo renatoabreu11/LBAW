@@ -7,8 +7,10 @@ $CLOSE_AUCTION_SCRIPT = $BASE_URL . 'crontab/close_auction.php';
 
 /**
  * Create contrab command.
- * @param $date date the script will run
- * @param $script php script
+ *
+ * @param $date {date} the script will run
+ * @param $script {php script}
+ * @param $auctionId
  */
 function createCrontabCommand($date, $script, $auctionId) {
 	global $CRONTAB_FILE;
@@ -24,12 +26,13 @@ function createCrontabCommand($date, $script, $auctionId) {
   file_put_contents($CRONTAB_FILE, $newJobs);
   exec('crontab ' . $CRONTAB_FILE);
   $output = shell_exec('crontab -l');
-  $log->warning($output);
+  $log->info($output, array('request' => 'Crontab request.'));
 }
 
 /**
- * @param $date in php format
- * @return time in contrab format
+ * @param $date {date} in php format
+ *
+ * @return string {string} time in contrab format
  */
 function createCrontabTime($date) {
 	global $log;
@@ -41,8 +44,6 @@ function createCrontabTime($date) {
   $hour = date_format($date, 'G');
   $minute = (int)date_format($date, 'i'); // int because leading zeros...
   $timeCrontab = $minute.' '.$hour.' '.$dayMonth.' '.$month.' '.$dayWeek;
-  $log->warning('\n'.$timeCrontab);
+  $log->info($timeCrontab, array('request' => 'Crontab time.'));
   return $timeCrontab; 
 }
-
-?>

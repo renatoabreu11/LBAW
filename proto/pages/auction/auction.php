@@ -34,9 +34,9 @@ if($auction['state'] == 'Closed') {
   $smarty->assign("winningUser", $winningUser);
 }
 
-$canEdit = true;
+$canEdit = false;
 if($auction['state'] == 'Created')
-  $canEdit = false;
+  $canEdit = true;
 
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];

@@ -170,8 +170,6 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       $invalidInfo = true;
     }
 
-    
-
     $notificationsEnabled = $_POST['notifications_enabled'];
     if($notificationsEnabled != "No" && $notificationsEnabled != "Yes"){
       $_SESSION['field_errors']['notifications_enabled'] = 'Invalid notifications option';
