@@ -3,11 +3,12 @@ proto/templates_c/
 final/templates_c/
 .idea/
 proto/config/
+final/config/
 proto/.htaccess
+final/.htaccess
+proto/vendor/
+final/vendor/
 .eslintrc.js
 package.json
 node_modules
 .stylelintrc
-proto/vendor/
-final/vendor/
-proto/config/lbaw1662.log
