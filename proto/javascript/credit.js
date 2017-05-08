@@ -29,10 +29,19 @@ function setCreditInput() {
  */
 function setAddCredit() {
   $('#addCreditBtn').click(function() {
-    let userId = $('#userId').val();
     let creditToAdd = roundTo($('#creditToAdd').val().trim(), 2);
     if (isNaN(creditToAdd))
       return;
+
+    if(creditToAdd > 1000) {
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">Error 400 Bad Request: You cannot add this amount of money. The maximum is 1000€.</div>',
+          type: 'inline',
+        },
+      });
+      return;
+    }
 
     $.ajax({
       type: 'POST',

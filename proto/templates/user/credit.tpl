@@ -58,13 +58,12 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
 				</span>
-				<input type="text" name="userId" id="userId" value="{$userId}" hidden>
 				<input type="text" id="creditToAdd" class="form-control text-center" value="100">
 				<span class="input-group-btn">
 					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
 				</span>
 			</div>
-			<div class="col-xs-12 text-center"> 
+			<div class="col-xs-12 text-center" style="padding-top: 1em">
 				<button id="addCreditBtn" type="button" class="btn btn-primary active text-center">Add credit</button>
 			</div>
 		</div>

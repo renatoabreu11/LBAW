@@ -20,6 +20,12 @@ if (!is_numeric($_POST['creditToAdd']) || !is_numeric($userId)) {
 }
 
 $creditToAdd = round($_POST['creditToAdd'], 2);
+
+if($creditToAdd > 1000){
+  echo 'Error 400 Bad Request: You cannot add this amount of money. The maximum is 1000€.';
+  return;
+}
+
 $currCredit = getCreditOfUser($userId);
 $newCredit = $creditToAdd + $currCredit;
 

@@ -22,6 +22,8 @@ $numBetsOnGame = getBetsOnGame($userId);
 $valBetsOnGame = getValBetsOnGame($userId);
 if ($valBetsOnGame === null) $valBetsOnGame = 0;
 
+$notifications = getActiveNotifications($userId);
+$smarty->assign('notifications', $notifications);
 $smarty->assign('userId', $userId);
 $smarty->assign('currCredit', $currCredit);
 $smarty->assign('numBetsOnGame', $numBetsOnGame);

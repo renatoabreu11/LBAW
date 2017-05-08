@@ -40,18 +40,7 @@
   </div>
 
   <div id="auctionsThumbnails" class="row auctions" style="margin: auto;">
-    {if (count($auctions) >= 1) }
-      {include file='auctions/list_watchlist.tpl'}
-    {else}
-      <div class="container-fluid" style="padding-bottom: 2em;">
-        <div class="row-fluid">
-          <div class="empty-content text-center">
-            <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
-            <h3>No auctions in the watchlist.</h3>
-          </div>
-        </div>
-      </div>
-    {/if}
+    {include file='auctions/list_watchlist.tpl'}
   </div>
   <div class="row text-center result">
     <ul id="pagination" class="pagination-sm" data-nr_pages="{$nrPages}"></ul>
