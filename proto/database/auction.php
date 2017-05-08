@@ -110,6 +110,23 @@ function getImage($imageId){
 }
 
 /**
+ * Verifies if the info in the parameters is associated with any auction
+ *
+ * @param $auctionId
+ *
+ * @return bool
+ */
+function validAuction($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT *
+                                        FROM auction
+                                        WHERE id = ?');
+  $stmt->execute(array($auctionId));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+/**
  * Checks if the auction type given exists in the auction_type enum
  * @param $auctionType
  * @return mixed

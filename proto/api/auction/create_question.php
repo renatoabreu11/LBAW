@@ -2,6 +2,7 @@
 
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
+include_once($BASE_DIR . "database/auctions.php");
 include_once($BASE_DIR . "database/users.php");
 
 $reply = array();
@@ -26,7 +27,15 @@ if(!$_POST['comment'] || !$_POST['auctionId']) {
 }
 
 $auctionId = $_POST['auctionId'];
-$qaSection = getQAstate($auctionId);
+if(!is_numeric($auctionId) || !validAuction($auctionId)){
+  $reply['message'] = "Error 400 Bad Request: Invalid auction id.";
+  echo json_encode($reply);
+  return;
+}
+
+$auction = getAuction($auctionId);
+$seller = $auction['user_id'];
+$qaSection = $auction['questions_section'];
 
 if($qaSection == false){
   $reply['message'] = "Error 403 Forbidden: The auction owner doesn't allow questions!";
@@ -55,6 +64,15 @@ try {
   $reply['message'] = "Error 500 Internal Server: Error creating the question!";
   echo json_encode($reply);
   return;
+}
+
+if(getNotificationOption($seller, $auctionId)) {
+  try {
+    $message = "Someone posted a question in your auction.";
+    notifyUser($seller, $message, "Question");
+  } catch (PDOException $e) {
+    $log->error($e->getMessage(), ['request' => 'New question notification']);
+  }
 }
 
 $questions = getQuestionsAnswers($auctionId);

@@ -2,6 +2,7 @@
 
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
+include_once($BASE_DIR . "database/auctions.php");
 include_once($BASE_DIR . "database/users.php");
 
 $reply = array();
@@ -40,6 +41,12 @@ if(!$questionId || !is_numeric($questionId)){
   return;
 }
 
+if(!isOwner($userId, $auctionId)){
+  $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
+  echo json_encode($reply);
+  return;
+}
+
 try {
   if(!createAnswer($comment, $userId, $questionId)) {
     $reply['message'] = "Error 500 Internal Server: Question already has an answer!";
@@ -51,6 +58,16 @@ try {
   $reply['message'] = "Error 500 Internal Server: Couldn't create answer!";
   echo json_encode($reply);
   return;
+}
+
+$question = getQuestion($questionId);
+if(getNotificationOption($question['user_id'], $auctionId)) {
+  try {
+    $message = "The auction seller answered your question.";
+    notifyUser($question['user_id'], $message, "Answer");
+  } catch (PDOException $e) {
+    $log->error($e->getMessage(), ['request' => 'New answer notification']);
+  }
 }
 
 $seller = getUser($userId);
