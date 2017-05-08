@@ -24,7 +24,7 @@ $rating = trim(strip_tags($_POST['rating']));
 $message = trim(strip_tags($_POST['message']));
 $bidId = $_POST['bidId'];
 
-if(!is_numeric($rating)|| !is_numeric($message)) {
+if(!is_numeric($rating)) {
   echo 'Error 400 Bad Request: Invalid parameters!';
   return;
 }

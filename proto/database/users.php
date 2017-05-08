@@ -136,7 +136,7 @@ function getBetsOnGame($userId) {
                           WHERE bid.user_id = "user".id
                           AND bid.auction_id = auction.id
                           AND bid.amount = auction.curr_bid
-                          AND now() < auction.end_date
+                          AND state = \'Open\'
                           AND "user".id = :user_id');
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();
@@ -156,7 +156,7 @@ function getValBetsOnGame($userId) {
                           WHERE bid.user_id = "user".id
                           AND bid.auction_id = auction.id
                           AND bid.amount = auction.curr_bid
-                          AND now() < auction.end_date
+                          AND state = \'Open\'
                           AND "user".id = :user_id');
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();
@@ -193,11 +193,11 @@ function getActiveAuctions($userId) {
                                 FROM image
                                 WHERE image.product_id = product.id
                                 LIMIT 1
-                                ) AS image, product.description, auction.curr_bid, auction.id, auction.end_date - now() AS remaining_time
+                                ) AS image, product.description, auction.*
                                 FROM auction
                                 JOIN product ON auction.product_id = product.id
                                 JOIN "user" ON auction.user_id = "user".id
-                                WHERE now() < auction.end_date
+                                WHERE state IN (\'Open\', \'Closed\')
                                 AND "user".id = :user_id');
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();

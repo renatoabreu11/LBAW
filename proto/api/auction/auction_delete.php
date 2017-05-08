@@ -39,7 +39,7 @@ if(!isOwner($userId, $auctionId)){
 
 $auction = getAuction($auctionId);
 
-if($auction['start_date'] < date("Y-m-d H:i:s")){
+if($auction['state'] != 'Created'){
   echo "Error 400 Forbidden: The auction has already started. You can't delete it .";
   return;
 }

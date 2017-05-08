@@ -11,6 +11,24 @@ $(document).ready(function() {
     wins.find('.win-image').width(156);
   }
 
+  $('.clock').each(function() {
+    let date = $(this).find('p').text();
+    $(this).countdown(date)
+      .on('update.countdown', function(event) {
+        let format = '%Hh:%Mm:%Ss';
+        if(event.offset.totalDays > 0) {
+          format = '%-d day%!d ' + format;
+        }
+        if(event.offset.weeks > 0) {
+          format = '%-w week%!w ' + format;
+        }
+        $(this).html(event.strftime(format));
+      })
+      .on('finish.countdown', function(event) {
+        $(this).html('This offer has expired!').parent().addClass('disabled');
+      });
+  });
+
   // Used when an user clicks the reviews on an auction page. This way it will be redirected to the
   // review tab.
   let hash = document.location.hash;

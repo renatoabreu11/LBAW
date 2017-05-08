@@ -26,6 +26,14 @@ if(!$_POST['comment'] || !$_POST['auctionId']) {
 }
 
 $auctionId = $_POST['auctionId'];
+$qaSection = getQAstate($auctionId);
+
+if($qaSection == false){
+  $reply['message'] = "Error 403 Forbidden: The auction owner doesn't allow questions!";
+  echo json_encode($reply);
+  return;
+}
+
 $comment = strip_tags($_POST['comment']);
 if(strlen($comment) > 512){
   $reply['message'] = "Error 400 Bad Request: The field length exceeds the maximum!";

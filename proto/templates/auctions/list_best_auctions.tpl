@@ -100,7 +100,6 @@
             <div class="table-responsive" id="auctions">
               {include file='auctions/list.tpl'}
             </div>
-
           </div>
         </div>
       </div>

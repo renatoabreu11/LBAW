@@ -101,41 +101,46 @@
             <span>Auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}">{$seller.username}</a></span>
             {if ($numReviews != 0)}
               <span class="rateYo user-rating-stars" data-rating="{$seller.rating}"></span>
+              <span class="hidden-xs">
+                <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Review(s)</a>
+              </span>
             {/if}
-            <span class="hidden-xs">
-              <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}#reviews">{$numReviews} Review(s)</a>
-            </span>
           </div>
           <div class="col-md-{if (count($recentBidders) > 0)}6{else}12{/if} text-center auctionDetails">
-            <h3 style="padding-top: 1em; padding-bottom: 0.5em;" class="current-bid">Current Bid: {$auction.curr_bid}€</h3>
-            {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
-              <div class="section">
-                <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
-                <div id="bidOnAuction" class="white-popup mfp-hide">
-                  <div class="row" style="margin: 10px;">
-                    <h4 class="bid-title">Bid on auction</h4>
-                    <div class="input-group number-spinner">
+            {if $auction['state'] == 'Closed'}
+
+            {elseif $auction['state'] == 'Open'}
+              <h3 class="current-bid">Current price: <br><strong>{$auction.curr_bid}€</strong></h3>
+              {if ($seller.id != $USER_ID && $USER_ID && !$winningUser)}
+                <div class="section">
+                  <a class="btn btn-info binOnAuctionPopup" href="#bidOnAuction"> Bid</a>
+                  <div id="bidOnAuction" class="white-popup mfp-hide">
+                    <div class="row" style="margin: 10px;">
+                      <h4 class="bid-title">Bid on auction</h4>
+                      <div class="input-group number-spinner">
                         <span class="input-group-btn">
                             <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                         </span>
-                      <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
-                      <span class="input-group-btn">
+                        <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
+                        <span class="input-group-btn">
                             <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                         </span>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button class="btn btn-info bidOnAuction" style="width: 35%">Place bid</button>
+                      <button class="btn btn-info closePopup" style="width: 35%">Close</button>
                     </div>
                   </div>
-                  <div class="text-center">
-                    <button class="btn btn-info bidOnAuction" style="width: 35%">Place bid</button>
-                    <button class="btn btn-info closePopup" style="width: 35%">Close</button>
-                  </div>
                 </div>
+              {/if}
+              <div class="countdown">
+                <div class="clock"><p>{$auction.end_date}</p></div>
               </div>
-            {/if}
+              <h4><strong>{$auction.end_data_readable}</strong></h4>
+            {elseif $auction['state'] == 'Created'}
 
-            <div class="countdown">
-              <div class="clock"><p>{$auction.end_date}</p></div>
-            </div>
-            <h4>Ending date: {$auction.end_data_readable}</h4>
+            {/if}
 
             <div class="visitors">
               <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
@@ -224,9 +229,8 @@
         </div>
       </div>
 
-      <hr>
-
       {if (($seller.id == $USER_ID && count($questions) > 0) || ($seller.id != $USER_ID && $USER_ID) || (!$USER_ID && count($questions) > 0))}
+        <hr>
         <div class="row product-questions">
           <div class="col-md-12">
             <h2>Product Q&A</h2>
@@ -295,10 +299,10 @@
             </div>
           </div>
         </div>
-        <hr>
       {/if}
 
       {if (count($similarAuctions) > 0)}
+        <hr>
         <div class="row suggestions">
           <div class='col-md-12 col-centered'>
             <h2>Similar Auctions</h2>

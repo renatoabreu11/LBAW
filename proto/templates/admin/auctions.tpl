@@ -10,6 +10,7 @@
         <th>Type</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th>State</th>
       </tr>
       </thead>
       <tbody>
@@ -21,6 +22,7 @@
           <td>{$auction.type}</td>
           <td>{$auction.start_date}</td>
           <td>{$auction.end_date}</td>
+          <td>{$auction.state}</td>
         </tr>
       {/foreach}
       </tbody>

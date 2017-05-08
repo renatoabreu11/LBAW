@@ -93,6 +93,12 @@ function getProductCategories($productId){
   return $result;
 }
 
+/**
+ * Returns the image record with the given id
+ * @param $imageId
+ *
+ * @return mixed
+ */
 function getImage($imageId){
   global $conn;
   $stmt = $conn->prepare('SELECT *
@@ -278,6 +284,32 @@ function getRecentBidders($auctionId) {
   $stmt->bindParam('auction_id', $auctionId);
   $stmt->execute();
   return $stmt->fetchAll();
+}
+
+/**
+ * Returns the current state of an auction
+ * @param $auctionId
+ */
+function getAuctionState($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT state
+                            FROM auction
+                            WHERE id = ?');
+  $stmt->execute(array($auctionId));
+  return $stmt->fetch()['state'];
+}
+
+/**
+ * Returns the qa section
+ * @param $auctionId
+ */
+function getQAstate($auctionId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT questions_section
+                            FROM auction
+                            WHERE id = ?');
+  $stmt->execute(array($auctionId));
+  return $stmt->fetch()['questions_section'];
 }
 
 /**
@@ -901,7 +933,12 @@ function closeAuction($auctionId) {
 
 /**
  * Delete auction.
+ *
  * @param $auctionId
+ *
+ * @param $productId
+ *
+ * @return array
  */
 function deleteAuction($auctionId, $productId){
   global $conn;

@@ -16,9 +16,13 @@
 							<div class="collapse" id="categories">
 								<select class="form-control" id="category">
 									<option value="All" selected="selected">All</option>
-                  						{foreach $categories as $category}
-										<option value="{$category.name}">{$category.name}</option>
-                  						{/foreach}
+                  	{foreach $categories as $category}
+                      {if $category.name == $categorySearch}
+                        <option value="{$category.name}" selected>{$category.name}</option>
+                        {else}
+                        <option value="{$category.name}">{$category.name}</option>
+                      {/if}
+                  	{/foreach}
 								</select>
 								<br>
 							</div>
@@ -87,10 +91,10 @@
 								<div class="col-sm-8 col-xs-12">
 									<ul class="auctionSort">
 										<li id="popular" class="active"><a href="javascript:;">Popular</a></li>
-										<li id="newest"><a href="javascript:;">Newest</a></li>
-										<li id="ending"><a href="javascript:;">Ending</a></li>
-										<li id="priceLow"><a href="javascript:;">Price (low)</a></li>
-										<li id="priceHigh"><a href="javascript:;">Price (high)</a></li>
+										<li id="newest"><a href="javascript:">Newest</a></li>
+										<li id="ending"><a href="javascript:">Ending</a></li>
+										<li id="priceLow"><a href="javascript:">Price (low)</a></li>
+										<li id="priceHigh"><a href="javascript:">Price (high)</a></li>
 									</ul>
 								</div>
 
@@ -102,15 +106,15 @@
 								</div>
 							</div>
 
-							<div class="row table-responsive" id="auctions">
+              <div class="row table-responsive" id="auctions">
                 {include file='auctions/list.tpl'}
-							</div>
+              </div>
 
-							<div class="row collapse" id="auctionsThumbnails">
+              <div class="row collapse" id="auctionsThumbnails">
                 {include file='auctions/list_thumbnail.tpl'}
-							</div>
+              </div>
 
-							<div class="row text-center">
+              <div class="row text-center">
 								<ul id="pagination" class="pagination-sm" data-nr_pages="{$nrPages}" data-curr_page="1"></ul>
 							</div>
 						</div>

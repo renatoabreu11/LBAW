@@ -26,6 +26,11 @@ if(!is_numeric($auctionId)) {
   return;
 }
 
+if(isOwner($userId, $auctionId)){
+  echo "Error 403 Forbidden: You cannot remove your auction from the watchlist!";
+  return;
+}
+
 try {
   removeAuctionFromWatchlist($userId, $auctionId);
 } catch(PDOException $e) {
