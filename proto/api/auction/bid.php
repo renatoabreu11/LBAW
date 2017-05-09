@@ -59,12 +59,14 @@ try {
 }
 
 $getRecentBidders = getRecentBidders($auctionId);
+$numBidders = count(getBidders($auctionId));
 $smarty->assign("recentBidders", $getRecentBidders);
 $biddersDiv = $smarty->fetch('auction/list_bidders.tpl');
 
 $reply = array(
   'message' => $ret,
   'date' => date('d-m-Y H:m'),
+  'numBidders' => $numBidders,
   'biddersDiv' => $biddersDiv);
 
 echo json_encode($reply);
