@@ -96,6 +96,7 @@ $(document).ready(function() {
     let biddersDiv = $('.info');
     let auctionDetailsDiv = $('.auctionDetails');
     let hasBidders = $('html').has('.bidders-table-body').length;
+    let visitorsDiv = $('.visitors');
 
     $.ajax({
       type: 'POST',
@@ -143,6 +144,10 @@ $(document).ready(function() {
             auctionDetailsDiv.removeClass('col-md-12').addClass('col-md-6');
             biddersDiv.append(data['biddersDiv']);
           }
+
+          visitorsDiv.html('<span>'
+                           + '<i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> '
+                           + data['numBidders'] + ' bidders</span>');
         }
       },
     });
