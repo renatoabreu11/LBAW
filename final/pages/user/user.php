@@ -3,13 +3,11 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/users.php');
 
-$userId = null;
 $userId = $_GET['id'];
-
 $loggedUserId = $_SESSION['user_id'];
 
-if(!is_numeric($userId)) {
-  $_SESSION['error_messages'][] = "Invalid user id.";
+if(!is_numeric($userId) || !validUserId($userId)) {
+  $_SESSION['error_messages'][] = "Invalid user.";
   header("Location: $BASE_URL");
   exit;
 }

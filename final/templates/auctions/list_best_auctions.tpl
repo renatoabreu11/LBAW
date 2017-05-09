@@ -45,36 +45,38 @@
       <p class="index-info-details">{$totalValOfActiveAuctions} €</p>
     </div>
 
-    <table class="table table-hover table-best-users" style="margin-top: 60px;">
-      <tbody>
-      <tr>
-        <td class="col-md-3">
-          <p><strong>Rank</strong></p>
-        </td>
-        <td class="col-md-6">
-          <p><strong>User</strong></p>
-        </td>
-        <td class="col-md-3">
-          <p><strong>Review</strong></p>
-        </td>
-      </tr>
-
-      {foreach $topTenRankingUsers as $key => $user}
+    {if count($topTenRankingUsers) != 0}
+      <table class="table table-hover table-best-users" style="margin-top: 60px;">
+        <tbody>
         <tr>
           <td class="col-md-3">
-            <p>{$key+1}</p>
+            <p><strong>Rank</strong></p>
           </td>
           <td class="col-md-6">
-            <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
+            <p><strong>User</strong></p>
           </td>
           <td class="col-md-3">
-            <p>{$user.rating}/10</p>
+            <p><strong>Review</strong></p>
           </td>
         </tr>
-      {/foreach}
 
-      </tbody>
-    </table>
+        {foreach $topTenRankingUsers as $key => $user}
+          <tr>
+            <td class="col-md-3">
+              <p>{$key+1}</p>
+            </td>
+            <td class="col-md-6">
+              <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
+            </td>
+            <td class="col-md-3">
+              <p>{$user.rating}/10</p>
+            </td>
+          </tr>
+        {/foreach}
+
+        </tbody>
+      </table>
+    {/if}
   </div>
 
   <div class="col-md-8">

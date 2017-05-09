@@ -42,14 +42,14 @@
                 <div id="kv-avatar-errors-1" class="center-block" style="width: 75%; display:none"></div>
               </div>
               <div class="form-group">
-                <label class="col-md-3 control-label">Real name: </label>
+                <label for="real-name" class="col-md-3 control-label">Real name: </label>
                 <div class="col-md-6">
                   <input type="text" class="form-control" id="real-name" name="realName" value="{$user.name}">
                 </div>
                 <strong class="field_error">{$FIELD_ERRORS.realName}</strong>
               </div>
               <div class="form-group">
-                <label class="col-md-3 control-label">Small biography: </label>
+                <label for="small-bio" class="col-md-3 control-label">Small biography: </label>
                 <div class="col-md-6">
                   <textarea class="form-control" name="smallBio" rows="2" id="small-bio">{$user.short_bio}</textarea>
                 </div>
@@ -82,14 +82,14 @@
                 <strong class="field_error">{$FIELD_ERRORS.city-id}</strong>
               </div>
               <div class="form-group">
-                <label class="col-md-3 control-label">E-mail: </label>
+                <label for="e-mail" class="col-md-3 control-label">E-mail: </label>
                 <div class="col-md-6">
                   <input type="text" class="form-control" name="email" id="e-mail" value="{$user.email}">
                 </div>
                 <strong class="field_error">{$FIELD_ERRORS.email}</strong>
               </div>
               <div class="form-group">
-                <label class="col-md-3 control-label">Phone number: </label>
+                <label for="cellphone-number" class="col-md-3 control-label">Phone number: </label>
                 <div class="col-md-6">
                   <input type="number" class="form-control" name="phone" id="cellphone-number" value="{$user.phone}">
                 </div>
@@ -102,7 +102,7 @@
             <div class="panel-heading">Details Info</div>
             <div class="panel-body">
               <div class="form-group">
-                <label class="col-md-3 control-label">Who am I: </label>
+                <label for="who-am-I" class="col-md-3 control-label">Who am I: </label>
                 <div class="col-md-6">
                   <textarea class="form-control" rows="4" name="full-bio" id="who-am-I">{$user.full_bio}</textarea>
                 </div>
@@ -143,19 +143,19 @@
           <form class="form-horizontal" id="form-password" method="post" action="{$BASE_URL}actions/user/user_edit_password.php">
             <input type="hidden" name="user-id" value="{$user.id}">
             <div class="form-group">
-              <label class="col-md-3 control-label">Current password: </label>
+              <label for="curr-pass" class="col-md-3 control-label">Current password: </label>
               <div class="col-md-6">
                 <input type="password" class="form-control" name="currPass" id="curr-pass">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label">New password: </label>
+              <label for="new-pass-1" class="col-md-3 control-label">New password: </label>
               <div class="col-md-6">
                 <input type="password" class="form-control" name="newPass" id="new-pass-1">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label">Repeat password: </label>
+              <label for="new-pass-2" class="col-md-3 control-label">Repeat password: </label>
               <div class="col-md-6">
                 <input type="password" class="form-control" name="newPassRepeat" id="new-pass-2">
               </div>

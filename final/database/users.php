@@ -517,6 +517,23 @@ function validUser($username, $id){
 }
 
 /**
+ * Verifies if the given id is valid.
+ *
+ * @param $id
+ *
+ * @return bool
+ */
+function validUserId($id){
+  global $conn;
+  $stmt = $conn->prepare('SELECT *
+                                        FROM "user"
+                                        WHERE id = ?');
+  $stmt->execute(array($id));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+/**
  * Returns the active notifications (not read), with a limit of 5 elements.
  * @param $userId
  * @return array

@@ -21,6 +21,10 @@ foreach ($mostPopularAuctions as &$auction) {
 		$auction['image'] = 'default.jpeg';
 }
 
+if($totalValOfActiveAuctions == null){
+  $totalValOfActiveAuctions = 0;
+}
+
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
   $notifications = getActiveNotifications($id);

@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="col-lg-8 col-md-8 notificationsPage">
+  <div class="col-xs-12 notificationsPage">
     <div class="row heading">
       <h3 class="notification-page-title">Notifications</h3>
       <p>You’ll see here updates of your auctions, bids, questions, answers and warnings.</p>
