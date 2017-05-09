@@ -1,0 +1,1136 @@
+/* =============== General =============== */
+
+html,
+body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.searchHeader {
+  padding-top: 0.1em;
+}
+
+.modalLogin {
+  text-align: center;
+  padding: 0 !important;
+}
+
+.modalLogin::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.breadcrumb {
+  background: white;
+}
+
+.container a {
+  text-decoration: none;
+}
+
+.error {
+  border-color: red;
+}
+
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+.kv-avatar .file-input {
+  display: table-cell;
+  max-width: 220px;
+}
+
+/* =============== Header =============== */
+
+.notifications {
+  min-width: 420px;
+}
+
+.notifications-wrapper {
+  overflow: auto;
+  max-height: 350px;
+  padding-top: 0.5em;
+}
+
+.notifications a {
+  text-decoration: none;
+}
+
+.notification-footer > h4 {
+  padding: 0 0.2em;
+}
+
+.readNotification,
+.markRecentNotificationsAsRead {
+  cursor: pointer;
+}
+
+.menu-title {
+  color: #000;
+  font-size: large;
+  display: inline-block;
+}
+
+.dropdown .notifications-empty {
+  font-size: large;
+  text-align: center;
+}
+
+.dropdown .notifications-wrapper .notification-item-description {
+  font-size: small;
+}
+
+.dropdown .notifications-wrapper .notification-item-title {
+  font-size: medium;
+}
+
+.dropdown .notifications-wrapper .media-right {
+  padding-right: 20px;
+}
+
+.dropdown .dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown .dropdown-menu li a {
+  width: 100%;
+}
+
+.notifications-divider {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modal-header {
+  background-color: #f9f9f9;
+  color: black !important;
+  text-align: center;
+  font-size: 22px;
+}
+
+.modal-footer {
+  background-color: #f9f9f9;
+}
+
+.modal-dialog1 {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+#navbar-collapse-1 li {
+  display: inline;
+}
+
+#navbar-collapse-1 li a {
+  display: inline-block;
+}
+
+.about-site:hover {
+  cursor: pointer;
+}
+
+/* =============== index.html =============== */
+
+.table-best-users p {
+  margin-bottom: 2px;
+}
+
+.index-info-title {
+  padding-top: 20px;
+  font-size: large;
+}
+
+.index-info-details {
+  color: #666;
+}
+
+.panel-body .gridIndex {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 25px;
+  color: black;
+}
+
+/* =============== Product Auction =============== */
+
+.auction {
+  padding: 0.5em;
+}
+
+.current-bid {
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+}
+
+.share {
+  padding-top: 0.5em;
+}
+
+.sellerInfo {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid lightgrey;
+}
+
+.sellerInfo > span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.user-rating-stars {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+
+.auction .info {
+  color: black;
+}
+
+.auction .info h3 {
+  margin: 0;
+}
+
+.auctionDetails {
+  padding-top: 0.5em;
+}
+
+.auctionDetails .btn {
+  width: 100px;
+  margin-bottom: 2em;
+}
+
+.visitors {
+  padding: 1em;
+  margin: 1em;
+}
+
+.table-fixed td,
+th {
+  text-align: center;
+}
+
+.table-fixed thead {
+  width: 97%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
+  display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead > tr > th {
+  float: left;
+  border-bottom-width: 0;
+}
+
+.bidders .table td {
+  color: #999;
+}
+
+.tab-content {
+  color: black;
+  margin-top: 1em;
+}
+
+.tab-content h4 {
+  padding-top: 0.5em;
+}
+
+#auctionInformation {
+  padding-left: 1em;
+}
+
+#seller a {
+  text-decoration: none;
+  color: black;
+}
+
+.product-questions {
+  color: black;
+}
+
+.comment-list {
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.comment-list .thumbnail {
+  width: 64px;
+  height: 64px;
+}
+
+.comment-list .panel-body {
+  padding: 1em;
+}
+
+.comment-list .media-heading {
+  font-size: 12px;
+  color: grey;
+}
+
+.comment-list .media-heading a {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-size: 15px;
+  color: blue;
+}
+
+.comment-list .comment-meta a {
+  font-size: 12px;
+  color: grey;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+/* Portrait tablets and medium desktops */
+@media (min-width: 768px) {
+  .comment-list .arrow::after,
+  .comment-list .arrow::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+  }
+
+  .comment-list .panel.arrow.left::after,
+  .comment-list .panel.arrow.left::before {
+    border-left: 0;
+  }
+
+  /* Left Arrow
+     Outline effect style */
+  .comment-list .panel.arrow.left::before {
+    left: 0;
+    top: 30px;
+
+    /* Use boarder color of panel */
+    border-right-color: inherit;
+    border-width: 16px;
+  }
+
+  /* Background color effect */
+  .comment-list .panel.arrow.left::after {
+    left: 1px;
+    top: 31px;
+
+    /* Change for different outline color */
+    border-right-color: #fff;
+    border-width: 15px;
+  }
+
+  /* Right Arrow
+     Outline effect style */
+  .comment-list .panel.arrow.right::before {
+    right: -16px;
+    top: 30px;
+
+    /* Use boarder color of panel */
+    border-left-color: inherit;
+    border-width: 16px;
+  }
+
+  /* Background color effect */
+  .comment-list .panel.arrow.right::after {
+    right: -14px;
+    top: 31px;
+
+    /* Change for different outline color */
+    border-left-color: #fff;
+    border-width: 15px;
+  }
+}
+
+.empty-content {
+  padding: 4em;
+  background-color: #fafbfc;
+  border: 1px solid #e1e4e8;
+  -webkit-box-shadow: inset 0 0 10px rgba(27,31,35,0.05);
+  -moz-box-shadow: inset 0 0 10px rgba(27,31,35,0.05);
+  box-shadow: inset 0 0 10px rgba(27,31,35,0.05);
+  font-size:medium;
+}
+
+.suggestions {
+  padding: 1em;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .sellerInfo {
+    text-align: center;
+    font-size: 15px;
+  }
+}
+
+.bid-title {
+  padding-bottom: 0.5em;
+}
+
+/* =============== Footer =============== */
+
+#footer {
+  height: 60px;
+}
+
+#footer a {
+  padding-left: 2em;
+}
+
+
+
+/* =============== Auctions Page =============== */
+
+.btn {
+  margin-bottom: 5px;
+}
+
+.grid {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  margin-bottom: 25px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.grid .grid-body {
+  padding: 5px 1em 15px 1em;
+  font-size: 0.9em;
+  line-height: 1.9em;
+}
+
+.table-responsive .product-title {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+#auctions table tr td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+#auctions table tr td.product {
+  text-align: left;
+}
+
+#auctions table tr td.seller span {
+  color: #ffe422;
+}
+
+#auctions table tr td.image {
+  width: 84px;
+}
+
+#auctions table tr td img {
+  width: 84px;
+  height: 64px;
+}
+
+#auctionsList small {
+  font-size: 15px;
+}
+
+#auctionsThumbnails small {
+  font-size: 15px;
+}
+
+.thumbnail .watchAuction {
+  padding-bottom: 1em;
+}
+
+.thumbnail .seller {
+  border-top: solid 1px lightgrey;
+  padding-top: 1em;
+}
+
+.auctionSort {
+  list-style: none;
+  padding-left: 0;
+  margin-top: -20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.auctionSort > li {
+  display: inline-block;
+}
+
+.auctionSort > li > a {
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-left: 10px;
+  border-bottom: 2px solid transparent;
+  color: #757575;
+  -webkit-transition: all 0.05s linear;
+  -o-transition: all 0.05s linear;
+  transition: all 0.05s linear;
+}
+
+.auctionSort > li > a:hover,
+.auctionSort > li > a:focus {
+  color: #333;
+  text-decoration: none;
+}
+
+.auctionSort > li.active > a {
+  color: dodgerblue;
+  border-bottom-color: dodgerblue;
+}
+
+.xsFilter li.checkbox {
+  padding-left: 0.5em;
+}
+
+.stylish-input-group .input-group-addon {
+  background: white !important;
+}
+
+.stylish-input-group .form-control {
+  border-right: 0;
+  box-shadow: 0 0 0;
+  border-color: #ccc;
+}
+
+.stylish-input-group button {
+  border: 0;
+  background: transparent;
+}
+
+/* =============== Credit page ================*/
+
+.hero-widget { text-align: center; padding-top: 20px; padding-bottom: 20px; }
+.hero-widget .icon { display: block; font-size: 96px; line-height: 96px; margin-bottom: 10px; text-align: center; }
+.hero-widget var { display: block; height: 64px; font-size: 64px; line-height: 64px; font-style: normal; }
+.hero-widget label { font-size: 17px; }
+.hero-widget .options { margin-top: 10px; }
+
+/* =============== profile.html =============== */
+
+.col-sm-3 {
+  padding-bottom: 20px;
+}
+
+.info-name .user-real-name {
+  padding-top: 15px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.info-name .user-nick-name {
+  font-size: 18px;
+  font-weight: 200;
+  color: #5d5d56;
+}
+
+.info-name .user-overview {
+  color: #5d5d56;
+}
+
+.info-name p:first-child {
+  font-weight: bold;
+}
+
+.info-zone span {
+  padding-right: 8px;
+}
+
+.user-rating .user-rating-stars {
+  display: block;
+  text-align: center;
+}
+
+.user-rating .user-rating-numeric {
+  padding-top: 8px;
+}
+
+#recent-activity {
+  padding-top: 20px;
+}
+
+#recent-activity .recent-activity-type {
+  display: inline-block;
+}
+
+#recent-activity .recent-activity-date {
+  float: right;
+  text-align: center;
+  font-size: 12px;
+}
+
+#details {
+  padding-top: 20px;
+}
+
+#details .details-description {
+  color: dimgrey;
+  font-size: x-large;
+}
+
+#details .details-short-info {
+  padding-top: 50px;
+  text-align: center;
+  display: block;
+}
+
+#details .details-short-info .glyphicon {
+  font-size: 40px;
+}
+
+#details .details-short-info-title {
+  padding-top: 10px;
+  color: dimgrey;
+  font-size: large;
+}
+
+#selling .selling-wrapper {
+  padding-top: 1em;
+}
+
+#reviews {
+  padding-top: 1em;
+}
+
+#reviews .review-image {
+  padding-top: 8px;
+}
+
+#reviews .row .review-rating {
+  padding-top: 15px;
+  vertical-align: middle;
+}
+
+#reviews .reviewer-info {
+  padding-top: 7px;
+}
+
+#reviews .review-rating {
+  color: #ffc82c;
+}
+
+#reviews .review-product-name p {
+  padding-top: 8px;
+  color: dimgrey;
+  font-size: x-large;
+}
+
+#reviews .review-comment {
+  color: #1f1f14;
+  padding-right: 10px;
+}
+
+#wins {
+  padding-top: 20px;
+}
+
+#wins .win-image {
+  padding-top: 8px;
+}
+
+#wins .win-product-name p {
+  padding-top: 8px;
+  color: dimgrey;
+  font-size: x-large;
+}
+
+.title-comment-divider {
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+#wins .win-comment {
+  color: #1f1f14;
+  padding-right: 10px;
+}
+
+#wins .win-info {
+  padding-top: 8px;
+}
+
+#wins .win-info-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: dimgrey;
+}
+
+#wins .win-review-rating-title {
+  padding-top: 10px;
+  font-size: larger;
+  font-weight: bold;
+  color: dimgrey;
+}
+
+#wins .win-review-rating-stars {
+  padding-left: 15px;
+  padding-bottom: 13px;
+}
+
+#wins .win-review-question {
+  padding-bottom: 10px;
+}
+
+#wins .win-review-question p {
+  display: inline;
+}
+
+#wins .win-review-comment {
+  padding-bottom: 15px;
+}
+
+#following {
+  padding-top: 20px;
+}
+
+#following .media .media-body a {
+  text-decoration: none;
+}
+
+#following .media .media-body a:first-child {
+  color: dimgray;
+}
+
+#following .media .media-body a:first-child + a {
+  color: #ccc;
+}
+
+#following .media .media-body a:hover p {
+  color: navy;
+}
+
+#following .media .media-left img {
+  width: 60px;
+  height: 60px;
+}
+
+/* =============== signup.html =============== */
+
+.main {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+  font-size: 11px;
+  padding-top: 3px;
+}
+
+.main-login {
+  background-color: #fff;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border-color: rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.main-center {
+  margin: 0 auto;
+  margin-bottom: 70px;
+  max-width: 500px;
+  padding: 40px;
+}
+
+.panel-heading {
+  margin: 0;
+}
+
+/* =============== admin =============== */
+
+.userOptions a.btn {
+  margin-right: 0.5em;
+}
+
+.navlink {
+  float: left;
+  height: 50px;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+a.navlink {
+  text-decoration: none;
+  color: grey;
+}
+
+.adminOption {
+  padding: 1em;
+}
+
+.box-body .btn {
+  padding: 10px;
+}
+
+.adminPageHeader {
+  border-bottom: 1px lightgrey solid;
+}
+
+.adminOption strong > i {
+  padding-bottom: 1em;
+}
+
+.adminOption td {
+  text-align: center;
+}
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+  padding-left: 200px;
+}
+
+#sidebar-wrapper {
+  box-shadow: inset -1px 0 0 0 #ddd;
+  z-index: 1000;
+  position: fixed;
+  left: 200px;
+  width: 0;
+  height: 100%;
+  margin-left: -200px;
+  overflow-y: auto;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 200px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -200px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: dodgerblue;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand {
+  padding: 18px 0;
+  margin: 0 20px;
+  border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+@media (min-width: 768px) {
+  #wrapper {
+    padding-left: 200px;
+  }
+
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 200px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+.reportSelection {
+  padding-top: 2em;
+}
+
+/* =============== watchList.html =============== */
+
+.watchList {
+  padding: 0.5em 1.5em;
+}
+
+.watchList .heading {
+  border-bottom: 1px lightgrey solid;
+}
+
+.watchList .auctions {
+  padding: 1em;
+}
+
+.watchList .auctions .thumbnail .dropdown {
+  padding-top: 0.25em;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  border-radius: 50% !important;
+  margin: 0 5px;
+}
+
+/* =============== notifications.html =============== */
+
+.notification-page-title {
+  margin-top: 0;
+}
+
+.notification-page-container h5 {
+  color: dodgerblue;
+  margin: 0;
+  padding-bottom: 0.5em;
+}
+
+.notification-page-container small {
+  color: grey;
+}
+
+.notification-page-container .heading {
+  border-bottom: 1px lightgrey solid;
+  margin-bottom: 1.5em;
+}
+
+.notification-page-container .notifications-wrapper .notification-options a {
+  font-size: 13px;
+  color: grey;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+
+/* =============== Create Auction ================= */
+
+.newAuctionH {
+  padding: 0.5em 1.5em 2em 2em;
+}
+
+.index .breadcrumb {
+  padding-left: 0;
+  padding-bottom: 2em;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .index .breadcrumb {
+    padding-left: 0;
+    padding-bottom: 1em;
+    margin: 0;
+  }
+}
+
+.addon-icon{
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.newAuctionH .heading {
+  border-bottom: 1px lightgrey solid;
+}
+
+.stepWizard {
+  padding-top: 1.5em;
+}
+
+.well > h3 {
+  text-align: left;
+  padding-bottom: 0.5em;
+}
+
+.well .apiProduct {
+  margin-left: 1em;
+}
+
+@media (max-width: 768px) {
+  .well .apiProduct {
+    display: block;
+    margin: 1em auto;
+  }
+}
+
+.image_upload {
+  padding-bottom: 2em;
+}
+
+/* =============== Admin sign in =============== */
+
+#adminLogin {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+#adminLogin .form-wrap {
+  width: 30%;
+  margin: 0 auto;
+}
+
+#adminLogin h1 {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+#adminLogin .form-group {
+  margin-bottom: 25px;
+}
+
+#adminLogin .btn.btn-info {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+#adminLogin .forget {
+  font-size: 13px;
+  text-align: center;
+  display: block;
+}
+
+.white-popup {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.selected {
+  background-color: lightsteelblue;
+}
+
+#fof {
+  display: block;
+  width: 100%;
+  padding: 150px 0;
+  line-height: 1.6em;
+  text-align: center;
+}
+
+#fof .hgroup {
+  margin-bottom: 15px;
+}
+
+#fof .hgroup h1,
+#fof .hgroup h2 {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+#fof .hgroup h1 {
+  margin-bottom: 15px;
+  font-size: 40px;
+}
+
+#fof .hgroup h2 {
+  display: inline-block;
+  padding: 0 0 15px;
+  font-size: 80px;
+  border: solid #ccc;
+  border-width: 1px 0;
+  text-transform: lowercase;
+}
+
+#fof p {
+  display: block;
+  margin: 15px 0 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+#fof p:first-child {
+  margin-top: 0;
+}

@@ -1,0 +1,10 @@
+{
+  "require": {
+    "monolog/monolog": "^1.22",
+    "smarty/smarty": "~3.1",
+    "facebook/graph-sdk": "^5.5",
+    "aws/aws-sdk-php": "^3.26",
+    "intervention/image": "^2.3",
+    "phpmailer/phpmailer": "~5.2"
+  }
+}
