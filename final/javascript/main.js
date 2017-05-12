@@ -86,6 +86,7 @@ $(document).ready(function() {
     $('.leaveFeedbackPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
   });
 

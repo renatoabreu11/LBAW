@@ -46,7 +46,7 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       return;
     }
 
-    if(count($productImages) + $nrImages >= 10){
+    if(count($productImages) + $nrImages > 10){
       $reply = array('error' =>  "Error 400 Bad Request: You can't upload so many images. The maximum number of images per product is 10!");
       echo json_encode($reply);
       return;
@@ -72,6 +72,8 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       }
     }
 
+    $error;
+    $errorKeys = array();
     $names = $images['name'];
     $types = $images['type'];
     $tmp_names = $images['tmp_name'];
@@ -81,9 +83,8 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
     $i = 0;
     foreach($sizes as $size){
       if($size > 5000000){
-        $reply = array('error' =>  "Error file " . $sizes[$i] . ": The maximum size of each image is 5MB.");
-        echo json_encode($reply);
-        return;
+        array_push($errorKeys, $i);
+        $error .= 'The file ' . $names[$i] . ' exceeds the maximum size of each 5Mb.<br/>';
       }
       $i++;
     }
@@ -92,49 +93,51 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
     $i = 0;
     foreach ($names as $name){
       if(in_array($name, $currentImagesNames)){
-        $reply = array('error' =>  "Error file " . $names[$i] . ": This image is already stored.");
-        echo json_encode($reply);
-        return;
+        array_push($errorKeys, $i);
+        $error .= 'The file ' . $names[$i] . ' already is stored.<br/>';
       }
+      $i++;
     }
 
-    $reply;
     $p1 = $p2 = $p3 = [];
     $manager = new ImageManager();
     for($i = 0; $i < $nrImages; $i++) {
-      if ($errors[$i]) {
-        $reply['error'] .= "Picture " . $names[$i] . ": Invalid file!<br/>";
-      }else {
-        $imageId;
-        $extension = end(explode("/", $types[$i]));
-        $caption;
-        try {
-          $caption = trim(strip_tags($captionsArr[$i]));
-          $imageId = addProductPicture($productId, $extension, $caption, $names[$i]);
-        } catch(PDOException $e) {
-          $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Upload auction image.'));
-          $reply['error'] .= "Error 500 Internal Server: Error storing the association between the product and " . $names[$i] . ".<br/>";
+      if(!in_array($i, $errorKeys)){
+        if ($errors[$i]) {
+          $error .= "Picture " . $names[$i] . ": Invalid file!<br/>";
+          array_push($errorKeys, $i);
+        }else {
+          $extension = end(explode("/", $types[$i]));
+          try {
+            $caption = trim(strip_tags($captionsArr[$i]));
+            $imageId = addProductPicture($productId, $extension, $caption, $names[$i]);
+            $picturePath = $BASE_DIR . "images/auctions/" . $imageId . "." . $extension;
+            $thumbnailPath = $BASE_DIR . "images/auctions/thumbnails/" . $imageId . "." . $extension;
+            $img = $manager->make($tmp_names[$i]);
+            $img->save($picturePath);
+            $img->fit(460, 300);
+            $img->save($thumbnailPath);
+            $key = $imageId;
+            $extra = array();
+            $extra['userId'] = $userId;
+            $extra['productId'] = $productId;
+            $extra['token'] = $token;
+            $extra['originalName'] = $names[$i];
+            $url = $BASE_URL . 'api/auction/remove_image.php';
+            $p1[$i] = $BASE_URL . "images/auctions/" . $imageId . "." . $extension;
+            $p2[$i] = ['caption' => $caption, 'url' => $url, 'key' => $key, 'extra' => $extra];
+            $p3[$i] = ['{TAG_VALUE}' => $caption, '{TAG_CSS_NEW}' => 'hide', '{TAG_CSS_INIT}' => ''];
+          } catch(PDOException $e) {
+            $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Upload auction image.'));
+            $error .= "Picture " . $names[$i] . ": Internal server error while association image to product.<br/>";
+            array_push($errorKeys, $i);
+          }
         }
-
-        $picturePath = $BASE_DIR . "images/auctions/" . $imageId . "." . $extension;
-        $thumbnailPath = $BASE_DIR . "images/auctions/thumbnails/" . $imageId . "." . $extension;
-        $img = $manager->make($tmp_names[$i]);
-        $img->save($picturePath);
-        $img->fit(460, 300);
-        $img->save($thumbnailPath);
-        $key = $imageId;
-        $extra = array();
-        $extra['userId'] = $userId;
-        $extra['productId'] = $productId;
-        $extra['token'] = $token;
-        $extra['originalName'] = $names[$i];
-        $url = $BASE_URL . 'api/auction/remove_image.php';
-        $p1[$i] = $BASE_URL . "images/auctions/" . $imageId . "." . $extension;
-        $p2[$i] = ['caption' => $caption, 'url' => $url, 'key' => $key, 'extra' => $extra];
-        $p3[$i] = ['{TAG_VALUE}' => $caption, '{TAG_CSS_NEW}' => 'hide', '{TAG_CSS_INIT}' => ''];
       }
     }
     echo json_encode([
+      'error' => $error,
+      'errorkeys' => $errorKeys,
       'initialPreview' => $p1,
       'initialPreviewConfig' => $p2,
       'initialPreviewThumbTags' => $p3,

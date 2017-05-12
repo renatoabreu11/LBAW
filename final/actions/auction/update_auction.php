@@ -103,5 +103,6 @@ if($invalidInfo){
     exit;
   }
 
+  $_SESSION['success_messages'][] = 'Auction updated with success.';
   header("Location:"  . $BASE_URL . "pages/auction/auction.php?id=" . $auction['id']);
 }

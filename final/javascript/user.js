@@ -230,6 +230,7 @@ $(document).ready(function() {
       $('.removeNotificationPopup').magnificPopup({
         type: 'inline',
         midClick: true,
+        mainClass: 'mfp-fade',
       }).magnificPopup('open');
 
       $('.removeNotification').off();
@@ -290,6 +291,7 @@ $(document).ready(function() {
   $('.reportUserPopup').magnificPopup({
     type: 'inline',
     midClick: true,
+    mainClass: 'mfp-fade',
   });
 
   $('#reportUserForm').validate({

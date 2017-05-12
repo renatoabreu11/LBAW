@@ -12,7 +12,8 @@
         </li>
       </ul>
     </div>
-    <h3>Watchlist</h3>
+    <h3 class="notification-page-title">Watchlist</h3>
+    <p>As a bidder, you can track here your favorite auctions. You also can overview your own auctions.</p>
   </div>
   <div class="row" style="padding-left: 1.5em; padding-right: 1.5em;">
     <div class="col-xs-6" style="padding-top: 1.5em;">

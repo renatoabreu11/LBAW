@@ -61,7 +61,7 @@
               <div class="form-group">
                 <label class="col-md-3 control-label">Country and city: </label>
                 <div class="col-md-6 col-xs-12">
-                  <select class="input-md form-control selectpicker show-tick" id="country-city" name="city-id" data-max-options="1" data-live-search="true" title="Define your location">
+                  <select class="input-md form-control selectpicker show-tick" id="country-city" name="cityId" data-max-options="1" data-live-search="true" title="Define your location">
                     {foreach $countries as $country}
                       <optgroup label="{$country.name}">
                         {foreach $cities as $city}
@@ -76,7 +76,7 @@
                     {/foreach}
                   </select>
                 </div>
-                <strong class="field_error">{$FIELD_ERRORS.city-id}</strong>
+                <strong class="field_error">{$FIELD_ERRORS.cityId}</strong>
               </div>
               <div class="form-group">
                 <label for="e-mail" class="col-md-3 control-label">E-mail: </label>
@@ -100,9 +100,9 @@
               <div class="form-group">
                 <label for="who-am-I" class="col-md-3 control-label">Who am I: </label>
                 <div class="col-md-6">
-                  <textarea class="form-control" rows="4" name="full-bio" id="who-am-I">{$user.full_bio}</textarea>
+                  <textarea class="form-control" rows="4" name="fullBio" id="who-am-I">{$user.full_bio}</textarea>
                 </div>
-                <strong class="field_error">{$FIELD_ERRORS.full-bio}</strong>
+                <strong class="field_error">{$FIELD_ERRORS.fullBio}</strong>
               </div>
             </div>
           </div>
@@ -139,20 +139,22 @@
               <div class="col-md-6">
                 <input type="password" class="form-control" name="currPass" id="curr-pass">
               </div>
+              <strong class="field_error">{$FIELD_ERRORS.currPass}</strong>
             </div>
             <div class="form-group">
               <label for="new-pass-1" class="col-md-3 control-label">New password: </label>
               <div class="col-md-6">
                 <input type="password" class="form-control" name="newPass" id="new-pass-1">
               </div>
+              <strong class="field_error">{$FIELD_ERRORS.newPass}</strong>
             </div>
             <div class="form-group">
               <label for="new-pass-2" class="col-md-3 control-label">Repeat password: </label>
               <div class="col-md-6">
                 <input type="password" class="form-control" name="newPassRepeat" id="new-pass-2">
               </div>
+              <strong class="field_error">{$FIELD_ERRORS.newPassRepeat}</strong>
             </div>
-
             <div class="row">
               <div class="col-xs-6 text-left">
                 <div class="previous">

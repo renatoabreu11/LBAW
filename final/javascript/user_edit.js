@@ -35,6 +35,9 @@ $(document).ready(function() {
             required: true,
             maxlength: 255,
         },
+        fullBio: {
+          maxlength: 512,
+        },
         email: {
             required: true,
         },

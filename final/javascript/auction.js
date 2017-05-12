@@ -75,6 +75,7 @@ $(document).ready(function() {
     $('.binOnAuctionPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.bidOnAuction').off();
@@ -437,6 +438,7 @@ $(document).ready(function() {
     $('.removeQuestionPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeQuestion').off();
@@ -495,6 +497,7 @@ $(document).ready(function() {
     $('.removeAnswerPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
     $('.removeAnswer').off();
 
@@ -547,6 +550,7 @@ $(document).ready(function() {
     $('.reportQuestionPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     reportQuestionId = $(this).closest('.questionArticle').find('input[name=question-id]').val();
@@ -605,6 +609,7 @@ $(document).ready(function() {
     $('.reportAnswerPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     reportAnswerId = $(this).closest('.answerArticle').find('input[name=answer-id]').val();
@@ -661,6 +666,7 @@ $(document).ready(function() {
   $('.reportAuctionPopup').magnificPopup({
     type: 'inline',
     midClick: true,
+    mainClass: 'mfp-fade',
   });
 
   $('#reportAuctionForm').validate({
@@ -712,6 +718,7 @@ $(document).ready(function() {
     $('.removeAuctionPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeAuction').off();
@@ -726,7 +733,7 @@ $(document).ready(function() {
    * @param auctionId
    */
   function deleteAuction(auctionId) {
-    let productId = $("input[name=product-id]").val();
+    let productId = $('input[name=product-id]').val();
 
     let request = $.ajax({
       type: 'POST',

@@ -28,10 +28,10 @@ if(!$_POST['realName'] || !$_POST['smallBio'] || !$_POST['email']) {
 
 $realName = trim(strip_tags($_POST['realName']));
 $smallBio = trim(strip_tags($_POST['smallBio']));
-$cityId = trim(strip_tags($_POST['city-id']));
+$cityId = trim(strip_tags($_POST['cityId']));
 $email = trim(strip_tags($_POST['email']));
 $phone = trim(strip_tags($_POST['phone']));
-$fullBio = trim(strip_tags($_POST['full-bio']));
+$fullBio = trim(strip_tags($_POST['fullBio']));
 
 $invalidChars = false;
 
@@ -51,13 +51,13 @@ if(strlen($smallBio) > 255){
 }
 
 if(strlen($fullBio) > 512){
-  $_SESSION['field_errors']['full-bio'] = 'Invalid full bio length.';
+  $_SESSION['field_errors']['fullBio'] = 'Invalid full bio length.';
   $invalidChars = true;
 }
 
 if($phone) {
   if(!is_numeric($phone)) {
-    $_SESSION['field_errors']['phone'] = 'Invalid numeric characters';
+    $_SESSION['field_errors']['phone'] = 'Invalid phone characters';
     $invalidChars = true;
   }
 }
@@ -66,7 +66,7 @@ $isCityNull = true;
 if($cityId) {
   $isCityNull = false;
   if(!(is_numeric($cityId))) {
-    $_SESSION['field_errors']['city-id'] = 'Invalid city id.';
+    $_SESSION['field_errors']['cityId'] = 'Invalid city id.';
     $invalidChars = true;
   }
 }

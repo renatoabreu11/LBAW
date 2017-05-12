@@ -20,4 +20,5 @@ if (!empty($_SESSION['facebook_access_token'])) {
     unset($_SESSION['facebook_access_token']);
 }
 
+$_SESSION['success_messages'][] = 'You have successfully logged out!';
 header("Location: $BASE_URL" . 'index.php');

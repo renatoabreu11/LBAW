@@ -39,8 +39,10 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
     }
 
     $path = realpath($BASE_DIR . 'images/auctions/' . $image['filename']);
-    if(is_writable($path)){
+    $thumbnailPath = realpath($BASE_DIR . 'images/auctions/thumbnails/' . $image['filename']);
+    if(is_writable($path) && is_writable($thumbnailPath)){
       unlink($path);
+      unlink($thumbnailPath);
     }
 
     echo json_encode([]);

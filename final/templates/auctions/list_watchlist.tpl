@@ -1,5 +1,5 @@
 {if count($auctions) == 0}
-  <div class="container-fluid" style="padding-top: 2em;" hidden>
+  <div class="container-fluid" style="padding-top: 1em;">
     <div class="row-fluid">
       <div class="empty-content text-center">
         <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>

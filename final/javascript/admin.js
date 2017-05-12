@@ -183,6 +183,7 @@ $(document).ready(function() {
     $('.removeCategoryPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeCategory').off();
@@ -372,6 +373,7 @@ $(document).ready(function() {
     $('.removePopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeAuction').off();
@@ -390,6 +392,7 @@ $(document).ready(function() {
     $('.removeUserPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeUser').off();
@@ -408,6 +411,7 @@ $(document).ready(function() {
     $('.notifyUserPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
   });
 
@@ -425,6 +429,7 @@ $(document).ready(function() {
     $('.removeReportPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeReport').off();
@@ -534,6 +539,7 @@ $(document).ready(function() {
     $('.removeFeedbackPopup').magnificPopup({
       type: 'inline',
       midClick: true,
+      mainClass: 'mfp-fade',
     }).magnificPopup('open');
 
     $('.removeFeedback').off();

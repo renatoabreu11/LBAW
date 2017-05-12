@@ -70,12 +70,23 @@
   </div>
 </nav>
 {if (count($ERROR_MESSAGES) > 0)}
-  <div class="col-xs-12">
-    <div class="alert alert-danger fade in col-xs-6 col-xs-offset-3">
+  <div class="row col-md-12">
+    <div class="alert alert-danger fade in col-md-6 col-md-offset-3">
       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       <strong>Warning!</strong>
       {foreach $ERROR_MESSAGES as $error}
         <p>{$error}</p>
+      {/foreach}
+    </div>
+  </div>
+{/if}
+{if (count($SUCCESS_MESSAGES) > 0)}
+  <div class="row col-md-12">
+    <div class="alert alert-success fade in col-md-6 col-md-offset-3">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong>
+      {foreach $SUCCESS_MESSAGES as $success}
+        <p>{$success}</p>
       {/foreach}
     </div>
   </div>

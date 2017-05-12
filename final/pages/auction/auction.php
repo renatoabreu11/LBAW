@@ -6,7 +6,7 @@ include_once ($BASE_DIR . 'database/auctions.php');
 include_once ($BASE_DIR . 'database/users.php');
 
 $auctionId = $_GET["id"];
-if(!is_numeric($auctionId) || validAuction($auctionId)){
+if(!is_numeric($auctionId) || !validAuction($auctionId)){
   $_SESSION['error_messages'][] = "Invalid auction.";
   header("Location: $BASE_URL");
   exit;

@@ -7,8 +7,8 @@ $(document).ready(function() {
       return;
 
     let select = $('#characteristics');
-    let nrElements = select.children('option').length - 1;
-    if(nrElements >= 10)
+    let nrElements = select.find('> option').length;
+    if(nrElements >= 20)
       return;
 
     let option = '<option>' + value + '</option>';

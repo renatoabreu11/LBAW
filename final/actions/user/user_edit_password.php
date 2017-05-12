@@ -30,14 +30,15 @@ $newPassRepeat = $_POST['newPassRepeat'];
 
 // Checks if the password repeat is the same as the password.
 if($newPass != $newPassRepeat) {
-  $_SESSION['error_messages'][] = "The new password must be equal to the confirmation.";
+  $_SESSION['field_errors']['newPass'] = "The new password must be equal to the confirmation.";
+  $_SESSION['field_errors']['newPassRepeat'] = "The confirmation password must be equal to the new password.";
   $_SESSION['form_values'] = $_POST;
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
 }
 
 if(strlen($newPass) > 64){
-  $_SESSION['error_messages'][] = "The new password length exceeds the maximum.";
+  $_SESSION['field_errors']['newPass'] = "The new password length exceeds the maximum of 64 characters.";
   $_SESSION['form_values'] = $_POST;
   header("Location:"  . $_SERVER['HTTP_REFERER']);
   exit;
@@ -46,7 +47,7 @@ if(strlen($newPass) > 64){
 $storedHashPass = getPassword($userId);
 // Checks if the stored password is the same.
 if(!password_verify($currPass, $storedHashPass)) {
-  $_SESSION['error_messages'][] = "Invalid current password.";
+  $_SESSION['field_errors']['currPass'] = "Invalid current password.";
   $_SESSION['form_values'] = $_POST;
   header("Location:" . $_SERVER['HTTP_REFERER']);
   exit;
@@ -54,7 +55,7 @@ if(!password_verify($currPass, $storedHashPass)) {
 
 // Checks if the new introduced password is equal to the current one.
 if(password_verify($newPass, $storedHashPass)) {
-  $_SESSION['error_messages'] = 'Your current password and new password can\'t be the same!';
+  $_SESSION['field_errors']['newPass'] = 'Your current password and new password can\'t be the same!';
   $_SESSION['form_values'] = $_POST;
   header("Location: $BASE_URL" . "pages/user/user_edit.php?id=" . $userId);
   exit;
