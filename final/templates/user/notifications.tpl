@@ -1,7 +1,6 @@
 {include file = 'common/header.tpl'}
 
 <div class="container notification-page-container">
-
   <div class="row">
     <div class="col-md-12">
       <ul class="breadcrumb">
@@ -14,7 +13,6 @@
       </ul>
     </div>
   </div>
-
   <div class="col-xs-12 notificationsPage">
     <div class="row heading">
       <h3 class="notification-page-title">Notifications</h3>
@@ -66,7 +64,6 @@
         <hr class="divider">
       </div>
     {/foreach}
-
     <div id="removeNotification" class="white-popup mfp-hide">
       <h4>Are you sure that you want to delete this notification?</h4>
       <p>You will not be able to undo this action!</p>
@@ -75,7 +72,6 @@
         <button class="btn btn-info closePopup">No, go back</button>
       </div>
     </div>
-
     {if $nrPages > 1}
       <div class="row text-center">
         <ul class="pagination">

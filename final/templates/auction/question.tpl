@@ -11,7 +11,7 @@
         <div class="panel panel-default arrow left">
           <div class="panel-body">
             <div class="media-heading">
-              <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseComment{$question.id}">
+              <button class="btn btn-default btn-xs" data-toggle="collapse" data-target="#collapseComment{$question.id}">
                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
               </button>
               <a href="{$BASE_URL}pages/user/user.php?id={$question.user_id}"><strong>{$question.user_username}</strong></a> {$question.date}

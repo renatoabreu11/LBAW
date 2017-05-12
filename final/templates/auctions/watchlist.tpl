@@ -14,35 +14,33 @@
     </div>
     <h3>Watchlist</h3>
   </div>
-
   <div class="row" style="padding-left: 1.5em; padding-right: 1.5em;">
     <div class="col-xs-6" style="padding-top: 1.5em;">
       <ul class="auctionSort">
-        <li id="popular" class="active"><a href="javascript:;">Popular</a></li>
-        <li id="newest"><a href="javascript:;">Newest</a></li>
-        <li id="ending"><a href="javascript:;">Ending</a></li>
-        <li id="priceLow"><a href="javascript:;">Price (low)</a></li>
-        <li id="priceHigh"><a href="javascript:;">Price (high)</a></li>
-        <li id="recentlyAdded"><a href="javascript:;">Recently added</a></li>
+        <li id="popular" class="active"><a href="javascript:">Popular</a></li>
+        <li id="newest"><a href="javascript:">Newest</a></li>
+        <li id="ending"><a href="javascript:">Ending</a></li>
+        <li id="priceLow"><a href="javascript:">Price (low)</a></li>
+        <li id="priceHigh"><a href="javascript:">Price (high)</a></li>
+        <li id="recentlyAdded"><a href="javascript:">Recently added</a></li>
       </ul>
     </div>
     <div class="controls col-xs-6" style="padding-top: 1.5em;">
-      <select class="selectpicker input-md textinput textInput form-control">
-        <option selected="selected">All auctions</option>
+      <label class="sr-only" for="watchlistFilter">Filter</label>
+      <select class="selectpicker input-md textinput textInput form-control" id="watchlistFilter">
+        <option selected>All auctions</option>
         <option>My auctions</option>
         <option>Closed auctions</option>
         <option>Open auctions</option>
       </select>
     </div>
   </div>
-
   <div id="auctionsThumbnails" class="row auctions" style="margin: auto;">
     {include file='auctions/list_watchlist.tpl'}
   </div>
   <div class="row text-center result">
     <ul id="pagination" class="pagination-sm" data-nr_pages="{$nrPages}"></ul>
   </div>
-
 </div>
 
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>

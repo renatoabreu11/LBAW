@@ -27,12 +27,10 @@
       </tbody>
     </table>
   </div>
-
   <div class="text-center userOptions">
     <a class="btn btn-info removeUserPopup" href="#removeUserConfirmation">Remove selected user</a>
     <a class="btn btn-info notifyUserPopup" href="#notifyUserConfirmation">Notify selected user</a>
   </div>
-
   <div id="removeUserConfirmation" class="white-popup mfp-hide">
     <h4>Are you sure that you want to delete this user?</h4>
     <p>You will not be able to undo this action!</p>
@@ -41,7 +39,6 @@
       <button class="btn btn-info closePopup">No, go back</button>
     </div>
   </div>
-
   <div id="notifyUserConfirmation" class="white-popup mfp-hide">
     <form action="{$BASE_URL}api/admin/notify_user.php" method="post" id="notificationForm">
       <div class="form-group">

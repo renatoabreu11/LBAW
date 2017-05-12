@@ -1,6 +1,5 @@
 <div class="adminOption">
   <h4><i class="fa fa-comments" aria-hidden="true"></i> User Feedback</h4>
-
   {if count($feedback) == 0}
     <div class="container-fluid" style="padding-top: 2em;">
       <div class="row-fluid">
@@ -29,7 +28,6 @@
       <hr class="divider">
     </div>
   {/foreach}
-
   <div id="removeFeedbackConfirmation" class="white-popup mfp-hide">
     <h4>Are you sure that you want to delete this feedback?</h4>
     <p>You will not be able to undo this action!</p>

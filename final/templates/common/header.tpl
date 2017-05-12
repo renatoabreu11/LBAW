@@ -25,7 +25,6 @@
   <script src="{$BASE_URL}javascript/main.js"></script>
 </head>
 <body>
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -37,7 +36,6 @@
       </button>
       <a class="navbar-brand" href="{$BASE_URL}index.php">Seek Bid</a>
     </div>
-
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       {if !$ADMIN_USERNAME}
         <div class="searchHeader">
@@ -45,7 +43,7 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search" name="search">
               <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
               </div>
             </div>
           </form>
@@ -65,14 +63,12 @@
           {include file='common/menu_logged_in.tpl'}
         {/if}
       </ul>
-
       {if !$USERNAME && !$ADMIN_USERNAME}
         {include file='authentication/signin.tpl'}
       {/if}
     </div>
   </div>
 </nav>
-
 {if (count($ERROR_MESSAGES) > 0)}
   <div class="col-xs-12">
     <div class="alert alert-danger fade in col-xs-6 col-xs-offset-3">
@@ -84,7 +80,6 @@
     </div>
   </div>
 {/if}
-
 {if $ADMIN_USERNAME}
   <input type="hidden" name="admin_id" value="{$ADMIN_ID}">
 {elseif $USERNAME}

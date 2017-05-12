@@ -8,7 +8,6 @@
         <h2 class="title" id="title-signup" style="display: inline;">Join Seek Bid for free!</h2>
       </div>
     </div>
-
     <div class="main-login main-center">
       <form class="form-horizontal" id="signUpForm" action="{$BASE_URL}actions/authentication/signup.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
@@ -21,7 +20,6 @@
             <strong class="field_error">{$FIELD_ERRORS.name}</strong>
           </div>
         </div>
-
         <div class="form-group">
           <label for="username" class="cols-sm-2 control-label">Username</label>
           <div class="cols-sm-10">
@@ -32,7 +30,6 @@
             <strong class="field_error">{$FIELD_ERRORS.username}</strong>
           </div>
         </div>
-
         <div class="form-group">
           <label for="email" class="cols-sm-2 control-label">Email</label>
           <div class="cols-sm-10">
@@ -43,7 +40,6 @@
             <strong class="field_error">{$FIELD_ERRORS.email}</strong>
           </div>
         </div>
-
         <div class="form-group">
           <label for="password" class="cols-sm-2 control-label">Password</label>
           <div class="cols-sm-10">
@@ -53,7 +49,6 @@
             </div>
           </div>
         </div>
-
         <div class="form-group">
           <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
           <div class="cols-sm-10">
@@ -63,16 +58,14 @@
             </div>
           </div>
         </div>
-
         <div class="form-group" id="textarea-signup">
           <div class="form-group" style="padding:12px">
             <label for="description" class="cols-sm-2 control-label">Short bio</label>
             <textarea class="form-control" id="description" name="description" rows="5" placeholder="Talk a little about you..." >{$FORM_VALUES.description}</textarea>
           </div>
         </div>
-
         <div class="form-group text-center" id="signup-btn">
-          <button type="submit" class="btn btn-info">Sign up</button>
+          <button class="btn btn-info">Sign up</button>
         </div>
       </form>
     </div>

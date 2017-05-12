@@ -1,7 +1,6 @@
 {include file='common/header.tpl'}
 
 <div id="wrapper" class="toggled">
-  <!-- Sidebar -->
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
@@ -27,14 +26,9 @@
       </li>
     </ul>
   </div>
-  <!-- /#sidebar-wrapper -->
-
-  <!-- Page Content -->
   <div id="page-content-wrapper">
     <div class="container-fluid">
-
       <h2>Website Administration</h2>
-
       {if $adminSection === "users"}
         {include file='admin/users.tpl'}
       {elseif $adminSection === "auctions"}
@@ -48,7 +42,6 @@
       {elseif $adminSection === "feedback"}
         {include file='admin/feedback.tpl'}
       {/if}
-
     </div>
     <div id="footer" style="margin-top: 65px">
       <div class="container">
@@ -62,5 +55,6 @@
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 <script src="{$BASE_URL}javascript/admin.js"></script>
+
 </body>
 </html>

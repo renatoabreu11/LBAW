@@ -19,17 +19,13 @@
       Auction images
     </h3>
     <p>Choose here the images to show to potential bidders.</p>
-
     <hr class="divider">
-
     <input type="hidden" name="product_id" id="product_id" value="{$product.id}">
-
     <div class="image_upload">
       <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
     </div>
   </div>
 </div>
-
 
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
 <script src="{$BASE_URL}javascript/auction_gallery.js"></script>

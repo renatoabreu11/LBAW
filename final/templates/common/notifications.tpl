@@ -23,7 +23,6 @@
     </div>
   </div>
 {/foreach}
-
 <hr class="divider">
 <div class="notification-footer">
   <h4 class="menu-title"><a href="{$BASE_URL}pages/user/notifications.php?page=1">View all notifications</a></h4>

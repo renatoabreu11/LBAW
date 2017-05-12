@@ -1,6 +1,5 @@
 <div class="adminOption">
   <h4><i class="fa fa-users" aria-hidden="true"></i> {$reportType} reports</h4>
-
   <div class="table-responsive">
     <table id="reportsTable" class="table row-border">
       <thead>
@@ -29,7 +28,6 @@
       </tbody>
     </table>
   </div>
-
   <div>
     <a class="btn btn-info removeReportPopup" href="#removeReportConfirmation">Remove selected report</a>
     <div id="removeReportConfirmation" class="white-popup mfp-hide">
@@ -41,7 +39,6 @@
       </div>
     </div>
   </div>
-
   <div class="form-group reportSelection">
     <label for="report_type">Select the type of report that you want to analyse</label>
     <br>
@@ -50,7 +47,7 @@
         {foreach $reportTypes as $type}
           {if $reportType == $type}
             <option value="{$type}" selected>{$type} Reports</option>
-            {else}
+          {else}
             <option value="{$type}">{$type} Reports</option>
           {/if}
         {/foreach}

@@ -13,7 +13,6 @@
       </ul>
     </div>
   </div>
-
   <div class="grid">
     <div class="grid-body">
       <div class="row auction">
@@ -31,7 +30,6 @@
                 {/for}
               </ol>
             {/if}
-
             <div class="carousel-inner popup-gallery" role="listbox">
               {for $i = 0; $i < count($images); $i++}
                 <div class="item{if $i == 0} active{/if}">
@@ -96,7 +94,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-md-8 col-xs-12 info">
           <h3 class="hidden-xs">{$product.name}</h3>
           <div class="sellerInfo">
@@ -117,7 +114,7 @@
                 </h4>
                 <i style="color: #ffe13c" class="fa fa-trophy fa-3x" aria-hidden="true"></i>
                 <h4 class="current-bid">Final bid: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
-                {else}
+              {else}
                 <h4><strong>Auction closed</strong></h4>
                 <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
                 <h4>No one has bid on this auction.</h4>
@@ -134,7 +131,8 @@
                         <span class="input-group-btn">
                             <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
                         </span>
-                        <input type="number" class="form-control text-center bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
+                        <label for="bid-amount" class="sr-only">Bid</label>
+                        <input type="number" class="form-control text-center bid-amount" id="bid-amount" min={$auction.curr_bid + 0.01} value="{$auction.curr_bid+1}">
                         <span class="input-group-btn">
                             <button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
                         </span>
@@ -156,7 +154,6 @@
               <h4>Offer starts <br><strong>{$auction.start_date_readable}</strong></h4>
               <h4>Offer ends<br><strong>{$auction.end_date_readable}</strong></h4>
             {/if}
-
             {if $auction['state'] != 'Created'}
               <div class="visitors">
                 <span><i class="fa fa-lg fa-shopping-cart" aria-hidden="true"></i> {$numBidders} bidders</span>
@@ -166,13 +163,10 @@
           {include file='auction/list_bidders.tpl'}
         </div>
       </div>
-
-      <!-- Accessible information -->
       <input type="hidden" name="auction-id" value="{$auction.id}">
       <input type="hidden" name="product-id" value="{$product.id}">
       <input type="hidden" name="user-username" value="{$username}">
       <input type="hidden" name="seller" value="{$seller.username}">
-
       <div>
         <div id="reportAuctionConfirmation" class="white-popup mfp-hide">
           <form action="{$BASE_URL}api/admin/report_auction.php" method="post" id="reportAuctionForm">
@@ -186,7 +180,6 @@
           </form>
         </div>
       </div>
-
       <div id="removeAuctionConfirmation" class="white-popup mfp-hide">
         <h4>Are you sure that you want to delete this auction?</h4>
         <p>You will not be able to undo this action!</p>
@@ -195,9 +188,7 @@
           <button class="btn btn-info closePopup">No, go back</button>
         </div>
       </div>
-
       <hr>
-
       <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-tabs">
@@ -205,7 +196,6 @@
             <li><a data-toggle="tab" href="#auctionInformation">Auction</a></li>
             <li><a data-toggle="tab" href="#seller">Seller</a></li>
           </ul>
-
           <div class="tab-content">
             <div id="product" class="tab-pane fade in active">
               <p>{$product.description}</p>
@@ -245,7 +235,6 @@
           </div>
         </div>
       </div>
-
       {if $auction['questions_section'] && count($questions) > 0}
         <hr>
         <div class="row product-questions">
@@ -260,11 +249,9 @@
                 <button type="submit" class="btn btn-default">Send</button>
               </form>
             {/if}
-
             <div id="qaSection" class="comment-list">
               {include file='auction/question.tpl'}
             </div>
-
             <div>
               <div id="removeQuestion" class="white-popup mfp-hide">
                 <h4>Are you sure that you want to delete this answer?</h4>
@@ -275,7 +262,6 @@
                 </div>
               </div>
             </div>
-
             <div>
               <div id="removeAnswer" class="white-popup mfp-hide">
                 <h4>Are you sure that you want to delete this answer?</h4>
@@ -286,7 +272,6 @@
                 </div>
               </div>
             </div>
-
             <div>
               <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
                 <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
@@ -300,7 +285,6 @@
                 </form>
               </div>
             </div>
-
             <div>
               <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
                 <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
@@ -317,7 +301,6 @@
           </div>
         </div>
       {/if}
-
       {if (count($similarAuctions) > 0)}
         <hr>
         <div class="row suggestions">
@@ -339,7 +322,6 @@
       {/if}
     </div>
   </div>
-
   <script src="{$BASE_URL}lib/bxslider/jquery.bxslider.min.js"></script>
   <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
   <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>

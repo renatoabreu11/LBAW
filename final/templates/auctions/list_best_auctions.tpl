@@ -1,7 +1,6 @@
 {include file='common/header.tpl'}
 
 <div class="container">
-
   <div class="col-lg-12 col-md-12">
     <div class="panel panel-info">
       <div class="panel-heading">
@@ -20,31 +19,26 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-4 col-md-4 col-sm-4">
-
     <div class="item active">
-        <div class="thumbnail text-center">
-          <h4>{$mostRecentAuction.product_name}</h4>
-          {if ($mostRecentAuctionImage)}
-            <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuctionImage}" class="animated bounce infinite" alt="Product image">
-          {else}
-            <img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" class="animated bounce infinite" alt="Product image">
-          {/if}
-          <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;margin: 0.5em;">Watch Auction</a>
-        </div>
+      <div class="thumbnail text-center">
+        <h4>{$mostRecentAuction.product_name}</h4>
+        {if ($mostRecentAuctionImage)}
+          <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuctionImage}" class="animated bounce infinite" alt="Product image">
+        {else}
+          <img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" class="animated bounce infinite" alt="Product image">
+        {/if}
+        <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;margin: 0.5em;">Watch Auction</a>
+      </div>
     </div>
-
     <div class="text-center">
       <p class="index-info-title"><strong>Active auctions</strong></p>
       <p class="index-info-details">{$numActiveAuctions}</p>
     </div>
-
     <div class="text-center">
       <p class="index-info-title"><strong>Value of all the active auctions</strong></p>
       <p class="index-info-details">{$totalValOfActiveAuctions} €</p>
     </div>
-
     {if count($topTenRankingUsers) != 0}
       <table class="table table-hover table-best-users" style="margin-top: 60px;">
         <tbody>
@@ -59,7 +53,6 @@
             <p><strong>Review</strong></p>
           </td>
         </tr>
-
         {foreach $topTenRankingUsers as $key => $user}
           <tr>
             <td class="col-md-3">
@@ -73,12 +66,10 @@
             </td>
           </tr>
         {/foreach}
-
         </tbody>
       </table>
     {/if}
   </div>
-
   <div class="col-md-8">
     <div class="panel panel-primary">
       <div class="panel-heading" style="vertical-align: middle; padding-bottom: 2px;">
@@ -98,8 +89,7 @@
                 </ul>
               </div>
             </div>
-
-            <div class="table-responsive" id="auctions">
+            <div id="auctions">
               {include file='auctions/list.tpl'}
             </div>
           </div>

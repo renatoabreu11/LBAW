@@ -13,10 +13,7 @@
       </ul>
     </div>
   </div>
-
   <div class="row">
-
-    <!-- ****************** Left Information ****************** -->
     <div class="col-sm-3">
       <div class="info-name">
         <img src="{$profile_pic}" class="img-rounded center-block" alt="User Avatar" width="156">
@@ -40,7 +37,6 @@
           {if ($user.rating == null)}
             <p>No rating.</p>
           {else}
-            <!--<br>-->
             <div class="rateYo" data-rating="{$user.rating}" style="margin: auto;"></div>
             <p class="user-rating-numeric text-center"><strong>{$user.rating}</strong>/10</p>
           {/if}
@@ -57,7 +53,6 @@
             {/if}
           {/if}
         {/if}
-
         {if ($USER_ID == $user.id)}
           <a href="{$BASE_URL}pages/user/user_edit.php?id={$user.id}" class="btn btn-info btn-block" role="button">Edit profile</a>
         {/if}
@@ -66,7 +61,6 @@
         {/if}
       </div>
     </div>
-
     <div>
       <div id="reportUserConfirmation" class="white-popup mfp-hide">
         <form action="{$BASE_URL}api/admin/report_user.php" method="post" id="reportUserForm">
@@ -81,7 +75,6 @@
         </form>
       </div>
     </div>
-
     <div class="col-sm-9">
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#recent-activity">Recent Activity</a></li>
@@ -93,8 +86,6 @@
       </ul>
 
       <div class="tab-content">
-
-        <!-- ****************** Recent Activity ****************** -->
         <div id="recent-activity" class="tab-pane fade in active">
           {if !($lastReviews || $lastBids || $lastFollowing || $lastWins || $lastQuestions || $lastWatchlistAuctions)}
             <p>No recent activities available.</p>
@@ -170,8 +161,6 @@
             </div>
           {/for}
         </div>
-
-        <!-- ****************** Details ****************** -->
         <div id="details" class="tab-pane fade">
           <p class="details-description">Who am I</p>
           {if ($user.full_bio != null)}
@@ -197,8 +186,6 @@
             </div>
           </div>
         </div>
-
-        <!-- ****************** Selling ****************** -->
         {if ($totalAuctions > 0)}
           <div id="selling" class="tab-pane fade">
             <div class="selling-wrapper">
@@ -244,8 +231,6 @@
             </div>
           </div>
         {/if}
-
-        <!-- ****************** Reviews ****************** -->
         {if ($totalAuctions > 0)}
           <div id="reviews" class="tab-pane fade">
             {if ($reviews == null)}
@@ -281,8 +266,6 @@
             {/if}
           </div>
         {/if}
-
-        <!-- ****************** Wins ****************** -->
         <div id="wins" class="tab-pane fade">
           {if ($wins == null)}
             <div class="container-fluid" style="padding-bottom: 2em;">
@@ -339,7 +322,7 @@
                               <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
                               <textarea class="form-control" rows="3" placeholder="Comment..."></textarea>
                             </div>
-                            <button type="submit" class="btn btn-info btn-block btn-review-submit" value="Submit">Submit</button>
+                            <button class="btn btn-info btn-block btn-review-submit" value="Submit">Submit</button>
                           </form>
                         </div>
                       {/if}
@@ -351,8 +334,6 @@
             {/foreach}
           {/if}
         </div>
-
-        <!-- ****************** Following ****************** -->
         <div id="following" class="tab-pane fade">
           {if ($followingUsers == null)}
             <div class="container-fluid" style="padding-bottom: 2em;">
@@ -383,7 +364,6 @@
             {/foreach}
           {/if}
         </div>
-
       </div>
     </div>
   </div>

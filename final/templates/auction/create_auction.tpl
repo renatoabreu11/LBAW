@@ -1,7 +1,6 @@
 {include file='common/header.tpl'}
 
 <div class="container newAuctionH">
-
   <div class="row heading">
     <div class="col-md-12 index">
       <ul class="breadcrumb">

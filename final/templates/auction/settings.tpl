@@ -8,7 +8,7 @@
           <select class="selectpicker input-md form-control" name="qa_section" id="qa_section" title="Do you want to answer questions about the auction?">
             {if $FORM_VALUES.qa_section == "Yes"}
               <option selected>Yes</option>
-              {else}
+            {else}
               <option>Yes</option>
             {/if}
             {if $FORM_VALUES.qa_section == "No"}
@@ -25,9 +25,9 @@
         <div class="input-group col-md-8 col-xs-12">
           <select class="selectpicker input-md form-control" name="notifications_enabled" id="notifications_enabled" title="Choose if you want to receive notifications relative of this auction">
             {if $FORM_VALUES.notifications_enabled == "Yes"}
-            <option selected>Yes</option>
+              <option selected>Yes</option>
             {else}
-            <option>Yes</option>
+              <option>Yes</option>
             {/if}
             {if $FORM_VALUES.notifications_enabled == "No"}
               <option selected>No</option>

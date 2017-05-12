@@ -5,7 +5,6 @@
         <img src="{$BASE_URL}images/assets/favicon.jpg" class="img-rounded" Alt="Seek Bid logo" width="64" height="64">
         <h4>Sign in to Seek Bid</h4>
       </div>
-
       <div class="modal-body">
         <strong class="field_error"></strong>
         <form action="{$BASE_URL}api/authentication/signin.php" method="post" id="signInForm">
@@ -17,16 +16,15 @@
             <label for="psw">Password</label>
             <input type="password" name="password" class="form-control" id="psw">
           </div>
-          <button type="submit" class="btn btn-default btn-success btn-block">Sign in</button>
+          <button class="btn btn-default btn-success btn-block">Sign in</button>
           <a class="btn btn-primary btn-block" href="{$FB_LOGIN_URL}">
             <span><i class="fa fa-facebook"> </i></span> Sign in with Facebook
           </a>
         </form>
       </div>
-
       <div class="modal-footer">
         <div class="col-xs-3 pull-left" style="padding-top: 0.5em;">
-          <button type="submit" class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
         </div>
         <div class="col-xs-9 pull-right">
           <p>Not a member? <a href="{$BASE_URL}pages/authentication/signup.php">Sign Up</a></p>

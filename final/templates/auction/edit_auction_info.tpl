@@ -21,7 +21,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.auction_type}</strong>
         </div>
-
         <div class="form-group">
           <label for="base_price" class="control-label col-md-4"> Base Price<span>*</span> </label>
           <div class="col-md-8 col-xs-12 input-group">
@@ -29,7 +28,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.base_price}</strong>
         </div>
-
         <div class="form-group">
           <label for="quantity" class="control-label col-md-4"> Quantity of products<span>*</span> </label>
           <div class="col-md-8 input-group col-xs-12">
@@ -37,7 +35,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.quantity}</strong>
         </div>
-
         <div class="form-group">
           <label for="start_date" class="control-label col-md-4"> Starting Date<span>*</span> </label>
           <div class='col-md-8 col-xs-12 input-group date' id='startDatePicker'>
@@ -48,7 +45,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.start_date}</strong>
         </div>
-
         <div class="form-group">
           <label for="end_date" class="control-label col-md-4"> Ending Date<span>*</span> </label>
           <div class='col-md-8 col-xs-12 input-group date' id='endDatePicker'>

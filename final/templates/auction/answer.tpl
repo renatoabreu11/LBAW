@@ -9,7 +9,7 @@
     <div class="panel panel-default arrow left">
       <div class="panel-body">
         <div class="media-heading">
-          <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseReply{$question.answer_id}">
+          <button class="btn btn-default btn-xs" data-toggle="collapse" data-target="#collapseReply{$question.answer_id}">
             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
           </button>
           <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><strong>{$seller.username}</strong></a>{$question.answer_date}

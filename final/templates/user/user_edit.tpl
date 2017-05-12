@@ -16,8 +16,6 @@
       </ul>
     </div>
   </div>
-
-  <!-- ****************** General information ****************** -->
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -57,7 +55,6 @@
               </div>
             </div>
           </div>
-
           <div class="panel panel-info">
             <div class="panel-heading">Contact Info</div>
             <div class="panel-body">
@@ -97,7 +94,6 @@
               </div>
             </div>
           </div>
-
           <div class="panel panel-info">
             <div class="panel-heading">Details Info</div>
             <div class="panel-body">
@@ -110,11 +106,10 @@
               </div>
             </div>
           </div>
-
           <div class="row">
             <div class="col-xs-6 text-left">
               <div class="previous">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button class="btn btn-primary">Save Changes</button>
               </div>
             </div>
             <div class="col-xs-6 text-right">
@@ -127,8 +122,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ****************** Password ****************** -->
   <div class="panel-group">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -139,7 +132,6 @@
       </div>
       <div id="password-edit" class="panel-collapse collapse">
         <div class="panel-body">
-
           <form class="form-horizontal" id="form-password" method="post" action="{$BASE_URL}actions/user/user_edit_password.php">
             <input type="hidden" name="user-id" value="{$user.id}">
             <div class="form-group">
@@ -164,7 +156,7 @@
             <div class="row">
               <div class="col-xs-6 text-left">
                 <div class="previous">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <button class="btn btn-primary">Save Changes</button>
                 </div>
               </div>
               <div class="col-xs-6 text-right">
@@ -174,7 +166,6 @@
               </div>
             </div>
           </form>
-
         </div>
       </div>
     </div>

@@ -9,7 +9,6 @@
         </div>
         <strong class="field_error">{$FIELD_ERRORS.product_name}</strong>
       </div>
-
       <div class="form-group">
         <label class="control-label col-md-4 col-xs-12"> Information<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
@@ -18,7 +17,6 @@
           <button class="btn btn-primary apiProduct hidden">Choose a product from Amazon</button>
         </div>
       </div>
-
       <div class="form-group">
         <label class="control-label col-md-4"> Category<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
@@ -26,7 +24,7 @@
             {foreach $categories as $category}
               {if $category.name == $FORM_VALUES.category[0] || $category.name == $FORM_VALUES.category[1]}
                 <option selected>{$category.name}</option>
-                {else}
+              {else}
                 <option>{$category.name}</option>
               {/if}
             {/foreach}
@@ -34,7 +32,6 @@
         </div>
         <strong class="field_error">{$FIELD_ERRORS.category}</strong>
       </div>
-
       <div class="form-group">
         <label class="control-label col-md-4"> Description<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
@@ -42,7 +39,6 @@
         </div>
         <strong class="field_error">{$FIELD_ERRORS.description}</strong>
       </div>
-
       <div class="form-group">
         <label class="control-label col-md-4"> Condition<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
@@ -50,7 +46,6 @@
         </div>
         <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
       </div>
-
       <div class="form-group">
         <label class="control-label col-md-4"> Characteristics</label>
         <div class="col-md-8 input-group col-xs-12" style="padding-bottom: 0.5em;">
@@ -68,7 +63,6 @@
         </div>
         <strong class="field_error">{$FIELD_ERRORS.characteristics}</strong>
       </div>
-
       <button id="activate-step-2" class="btn btn-primary pull-right">Next Step</button>
     </div>
   </div>

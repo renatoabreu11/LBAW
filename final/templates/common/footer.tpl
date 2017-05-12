@@ -2,7 +2,6 @@
   <div class="container">
     <p class="pull-left"> © Seek Bid 2017. All rights reserved. </p>
     <a class="pull-right about-site" data-toggle="modal" data-target="#about-modal">About</a>
-
     <div id="about-modal" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content"> 
@@ -22,7 +21,6 @@
         </div>
       </div>
     </div>
-
     {if $USERNAME}
       <a class="pull-right leaveFeedbackPopup" href="#leaveFeedback">Leave a Feedback</a>
       <div id="leaveFeedback" class="white-popup mfp-hide">

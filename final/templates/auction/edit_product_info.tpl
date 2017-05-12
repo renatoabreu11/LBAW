@@ -13,7 +13,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.product_name}</strong>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4"> Category<span>*</span> </label>
           <div class="col-md-8 input-group col-xs-12">
@@ -29,7 +28,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.category}</strong>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4"> Description<span>*</span> </label>
           <div class="col-md-8 input-group col-xs-12">
@@ -37,7 +35,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.description}</strong>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4"> Condition<span>*</span> </label>
           <div class="col-md-8 input-group col-xs-12">
@@ -45,7 +42,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
         </div>
-
         <div class="form-group">
           <label class="control-label col-md-4"> Characteristics</label>
           <div class="col-md-8 input-group col-xs-12" style="padding-bottom: 0.5em;">
@@ -63,7 +59,6 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.characteristics}</strong>
         </div>
-
         <button type="submit" class="btn btn-primary pull-right">Update product</button>
       </div>
     </div>
