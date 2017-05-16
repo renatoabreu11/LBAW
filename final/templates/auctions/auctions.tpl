@@ -75,7 +75,7 @@
 						<span class="input-group-btn">
 						<button class="btn btn-secondary" id="searchBtn">Search</button>
 						</span>
-								<input type="text" class="form-control" placeholder="Search for auction..." id="inputSearch">
+								<input type="text" class="form-control" placeholder="Select your filters and then hit search..." id="inputSearch">
 							</div>
 							<h6 style="color: darkgray;">Showing all results matching "{$textSearch}"</h6>
 							<div class="row">

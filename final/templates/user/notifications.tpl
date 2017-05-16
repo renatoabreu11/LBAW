@@ -16,7 +16,7 @@
   <div class="col-xs-12 notificationsPage">
     <div class="row heading">
       <h3 class="notification-page-title">Notifications</h3>
-      <p>You’ll see here updates of your auctions, bids, questions, answers and warnings.</p>
+      <p>You’ll see here notifications of your auctions, bids, questions, answers and warnings.</p>
     </div>
     {if count($pageNotifications) == 0}
       <div class="container-fluid" style="padding-bottom: 2em;">

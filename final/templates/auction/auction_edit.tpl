@@ -18,7 +18,7 @@
     <h3>
       Edit auction
     </h3>
-    <p>An auction is a process of buying and selling goods or services by offering them up for bid, taking bids, and then selling the item to the highest bidder.</p>
+    <p>You only can edit the auction while it has not yet started.</p>
   </div>
   <div class="row form-group stepWizard">
     <div class="col-xs-12">

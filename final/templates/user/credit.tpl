@@ -62,7 +62,7 @@
 				</span>
 			</div>
 			<div class="col-xs-12 text-center" style="padding-top: 1em">
-				<button id="addCreditBtn" class="btn btn-primary active text-center">Add credit</button>
+				<button id="addCreditBtn" class="btn btn-primary active text-center">Add credit to your account</button>
 			</div>
 		</div>
 		<div class="col-xs-4"></div>
