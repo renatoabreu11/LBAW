@@ -9,13 +9,19 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="{$BASE_URL}lib/bxslider/jquery.bxslider.min.css">
   <link rel="stylesheet" href="{$BASE_URL}lib/magnific-popup/magnific-popup.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+
+  {if $module == "Auction"}
+    <link rel="stylesheet" href="{$BASE_URL}lib/bxslider/jquery.bxslider.min.css">
+    <link rel="stylesheet" href="{$BASE_URL}lib/fileinput/fileinput.css">
+    <link rel="stylesheet" href="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.css"/>
+  {elseif $module == "Admin"}
+    <link rel="stylesheet" href="{$BASE_URL}lib/datatables/dataTables.bootstrap.min.css">
+  {elseif $module == "User"}
+    <link rel="stylesheet" href="{$BASE_URL}lib/fileinput/fileinput.css">
+  {/if}
   <link rel="stylesheet" href="{$BASE_URL}lib/select/bootstrap-select.css">
-  <link rel="stylesheet" href="{$BASE_URL}lib/fileinput/fileinput.css">
   <link rel="stylesheet" href="{$BASE_URL}lib/star-rating/jquery.rateyo.min.css"/>
-  <link rel="stylesheet" href="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.css"/>
   <link rel="stylesheet" href="{$BASE_URL}css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -28,7 +34,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+      <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>

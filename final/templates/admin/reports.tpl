@@ -28,31 +28,33 @@
       </tbody>
     </table>
   </div>
-  <div>
-    <a class="btn btn-info removeReportPopup" href="#removeReportConfirmation">Remove selected report</a>
-    <div id="removeReportConfirmation" class="white-popup mfp-hide">
-      <h4>Are you sure that you want to delete this report?</h4>
-      <p>You will not be able to undo this action!</p>
-      <div class="text-center">
-        <button class="btn btn-info removeReport">Yes, I'm sure</button>
-        <button class="btn btn-info closePopup">No, go back</button>
+  {if count($reports) != 0}
+    <div>
+      <a class="btn btn-info removeReportPopup" href="#removeReportConfirmation">Remove selected report</a>
+      <div id="removeReportConfirmation" class="white-popup mfp-hide">
+        <h4>Are you sure that you want to delete this report?</h4>
+        <p>You will not be able to undo this action!</p>
+        <div class="text-center">
+          <button class="btn btn-info removeReport">Yes, I'm sure</button>
+          <button class="btn btn-info closePopup">No, go back</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="form-group reportSelection">
-    <label for="report_type">Select the type of report that you want to analyse</label>
-    <br>
-    <div class="col-sm-3">
-      <select class="form-control" id="report_type" name="report_type">
-        {foreach $reportTypes as $type}
-          {if $reportType == $type}
-            <option value="{$type}" selected>{$type} Reports</option>
-          {else}
-            <option value="{$type}">{$type} Reports</option>
-          {/if}
-        {/foreach}
-      </select>
+    <div class="form-group reportSelection">
+      <label for="report_type">Select the type of report that you want to analyse</label>
+      <br>
+      <div class="col-sm-3">
+        <select class="form-control" id="report_type" name="report_type">
+          {foreach $reportTypes as $type}
+            {if $reportType == $type}
+              <option value="{$type}" selected>{$type} Reports</option>
+            {else}
+              <option value="{$type}">{$type} Reports</option>
+            {/if}
+          {/foreach}
+        </select>
+      </div>
+      <a class="btn btn-info showReports">Show reports</a>
     </div>
-    <a class="btn btn-info showReports">Show reports</a>
-  </div>
+  {/if}
 </div>

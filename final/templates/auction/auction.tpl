@@ -172,7 +172,7 @@
           <form action="{$BASE_URL}api/admin/report_auction.php" method="post" id="reportAuctionForm">
             <div class="form-group">
               <label for="reportAuctionMessage">Report:</label>
-              <textarea class="form-control" rows="5" id="reportAuctionMessage" name="reportAuctionMessage"></textarea>
+              <textarea class="form-control" required maxlength="512" rows="5" id="reportAuctionMessage" name="reportAuctionMessage"></textarea>
             </div>
             <div class="text-center">
               <input type="submit" id="reportAuction" class="btn btn-info" value="Report Auction">
@@ -244,7 +244,7 @@
               <form id="newQuestionForm" action="{$BASE_URL}api/auction/create_question.php" method="post">
                 <div class="form-group">
                   <label for="commentQuestion">Your question</label>
-                  <textarea id="commentQuestion" name="comment" class="form-control question-area" rows="3"></textarea>
+                  <textarea id="commentQuestion" required maxlength="512" name="comment" class="form-control question-area" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-default">Send</button>
               </form>
@@ -277,7 +277,7 @@
                 <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
                   <div class="form-group">
                     <label for="reportQuestionMessage">Report:</label>
-                    <textarea class="form-control" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                    <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
                   </div>
                   <div class="text-center">
                     <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
@@ -290,7 +290,7 @@
                 <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
                   <div class="form-group">
                     <label for="reportAnswerMessage">Report:</label>
-                    <textarea class="form-control" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
+                    <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
                   </div>
                   <div class="text-center">
                     <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">

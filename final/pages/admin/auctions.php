@@ -42,6 +42,7 @@ foreach ($auctionsIDs as $auctionArr){
   array_push($auctions, $auction);
 }
 
+$smarty->assign("module", "Admin");
 $smarty->assign("auctions", $auctions);
 $smarty->assign("adminSection", "auctions");
 $smarty->display('admin/admin_page.tpl');

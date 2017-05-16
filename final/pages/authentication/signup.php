@@ -11,4 +11,5 @@ if($username && $userId && $token){
   exit;
 }
 
+$smarty->assign("module", "Auth");
 $smarty->display('authentication/signup.tpl');

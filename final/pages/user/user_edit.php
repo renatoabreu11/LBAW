@@ -24,10 +24,10 @@ $userCurrLocation = getCityAndCountry($userId);
 $countries = getAllCountries();
 $cities = getAllCities();
 
+$smarty->assign("module", "User");
 $smarty->assign('notifications', $notifications);
 $smarty->assign('user', $user);
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('countries', $countries);
 $smarty->assign('cities', $cities);
-
 $smarty->display('user/user_edit.tpl');

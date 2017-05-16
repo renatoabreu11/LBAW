@@ -1,4 +1,5 @@
 <?php
 
-    include_once ('../../config/init.php');
-    $smarty->display('authentication/recovery.tpl');
+include_once ('../../config/init.php');
+$smarty->assign("module", "Auth");
+$smarty->display('authentication/recovery.tpl');

@@ -27,27 +27,29 @@
       </tbody>
     </table>
   </div>
-  <div class="text-center userOptions">
-    <a class="btn btn-info removeUserPopup" href="#removeUserConfirmation">Remove selected user</a>
-    <a class="btn btn-info notifyUserPopup" href="#notifyUserConfirmation">Notify selected user</a>
-  </div>
-  <div id="removeUserConfirmation" class="white-popup mfp-hide">
-    <h4>Are you sure that you want to delete this user?</h4>
-    <p>You will not be able to undo this action!</p>
-    <div class="text-center">
-      <button class="btn btn-info removeUser">Yes, I'm sure</button>
-      <button class="btn btn-info closePopup">No, go back</button>
+  {if count($users) != 0}
+    <div class="text-center userOptions">
+      <a class="btn btn-info removeUserPopup" href="#removeUserConfirmation">Remove selected user</a>
+      <a class="btn btn-info notifyUserPopup" href="#notifyUserConfirmation">Notify selected user</a>
     </div>
-  </div>
-  <div id="notifyUserConfirmation" class="white-popup mfp-hide">
-    <form action="{$BASE_URL}api/admin/notify_user.php" method="post" id="notificationForm">
-      <div class="form-group">
-        <label for="notification">Notification:</label>
-        <textarea class="form-control" rows="5" id="notification" name="notification"></textarea>
-      </div>
+    <div id="removeUserConfirmation" class="white-popup mfp-hide">
+      <h4>Are you sure that you want to delete this user?</h4>
+      <p>You will not be able to undo this action!</p>
       <div class="text-center">
-        <input type="submit" id="notifyUser" class="btn btn-info" value="Notify User">
+        <button class="btn btn-info removeUser">Yes, I'm sure</button>
+        <button class="btn btn-info closePopup">No, go back</button>
       </div>
-    </form>
-  </div>
+    </div>
+    <div id="notifyUserConfirmation" class="white-popup mfp-hide">
+      <form action="{$BASE_URL}api/admin/notify_user.php" method="post" id="notificationForm">
+        <div class="form-group">
+          <label for="notification">Notification:</label>
+          <textarea class="form-control" rows="5" id="notification" name="notification" required maxlength="256"></textarea>
+        </div>
+        <div class="text-center">
+          <input type="submit" id="notifyUser" class="btn btn-info" value="Notify User">
+        </div>
+      </form>
+    </div>
+  {/if}
 </div>

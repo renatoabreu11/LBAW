@@ -31,6 +31,7 @@ $page_notifications = getPageNotifications($id, $items, $offset);
 $notifications = getActiveNotifications($id);
 $nr_pages = ceil(countNotifications($id) / $items);
 
+$smarty->assign("module", "User");
 $smarty->assign('currPage', $page);
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);

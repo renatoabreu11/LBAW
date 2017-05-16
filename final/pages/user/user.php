@@ -44,6 +44,7 @@ if($user['oauth_id']!=null)
 else
     $smarty->assign('profile_pic', $BASE_URL . "images/users/" . $user['profile_pic']);
 
+$smarty->assign("module", "User");
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('isFollowing', $isFollowing);
 $smarty->assign('totalAuctions', $totalAuctions);
@@ -51,7 +52,6 @@ $smarty->assign('activeAuctions', $activeAuctions);
 $smarty->assign('reviews', $reviews);
 $smarty->assign('wins', $wins);
 $smarty->assign('followingUsers', $followingUsers);
-
 $smarty->assign('lastReviews', $lastReviews);
 $smarty->assign('lastBids', $lastBids);
 $smarty->assign('lastFollowing', $lastFollowing);

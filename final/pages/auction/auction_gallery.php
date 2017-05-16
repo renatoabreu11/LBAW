@@ -40,6 +40,7 @@ if($auction['state'] != 'Created'){
 $product = getAuctionProduct($auctionId);
 $notifications = getActiveNotifications($id);
 
+$smarty->assign("module", "Auction");
 $smarty->assign('notifications', $notifications);
 $smarty->assign("product", $product);
 $smarty->assign("auction", $auction);

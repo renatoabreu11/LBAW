@@ -17,5 +17,6 @@ if(!($requestId)) {
   exit;
 }
 
+$smarty->assign("module", "Auth");
 $smarty->assign('email', $email);
 $smarty->display('authentication/reset_password.tpl');

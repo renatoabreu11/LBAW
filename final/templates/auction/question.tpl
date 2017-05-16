@@ -49,7 +49,7 @@
                   <form class="newAnswerForm" action="{$BASE_URL}api/auction/create_answer.php" method="post" hidden>
                     <div class="form-group">
                       <label></label>
-                      <textarea name="comment" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
+                      <textarea name="comment" required maxlength="512" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn btn-default">Send</button>
                   </form>

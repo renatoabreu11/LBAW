@@ -5,7 +5,7 @@
       <div class="form-group">
         <label for="product_name" class="control-label col-md-4"> Name<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
-          <input class="input-md form-control" id="product_name" name="product_name" placeholder="Define the product name" type="text" value="{$FORM_VALUES.product_name}"/>
+          <input class="input-md form-control" id="product_name" required maxlength="64" name="product_name" placeholder="Define the product name" type="text" value="{$FORM_VALUES.product_name}"/>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.product_name}</strong>
       </div>
@@ -35,14 +35,14 @@
       <div class="form-group">
         <label class="control-label col-md-4"> Description<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
-          <textarea maxlength="512" class="form-control" id="description" name="description" placeholder="Tell us about your product" >{$FORM_VALUES.description}</textarea>
+          <textarea maxlength="512" required class="form-control" id="description" name="description" placeholder="Tell us about your product" >{$FORM_VALUES.description}</textarea>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.description}</strong>
       </div>
       <div class="form-group">
         <label class="control-label col-md-4"> Condition<span>*</span> </label>
         <div class="col-md-8 input-group col-xs-12">
-          <textarea maxlength="512" class="form-control" id="condition" name="condition" placeholder="Tell us about the product condition" >{$FORM_VALUES.condition}</textarea>
+          <textarea maxlength="512" required class="form-control" id="condition" name="condition" placeholder="Tell us about the product condition" >{$FORM_VALUES.condition}</textarea>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
       </div>

@@ -9,11 +9,11 @@
           <input type="hidden" id="email" value="{$email}">
           <div class="form-group">
             <label class="sr-only" for="newPassword">New password:</label>
-            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New password">
+            <input type="password" class="form-control" required maxlength="64" id="newPassword" name="newPassword" placeholder="New password">
           </div>
           <div class="form-group">
             <label class="sr-only" for="repeatPassword">Repeat password:</label>
-            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="Repeat your new password">
+            <input type="password" class="form-control" required maxlength="64" id="repeatPassword" name="repeatPassword" placeholder="Repeat your new password">
           </div>
           <div class="text-center">
             <button class="btn btn-primary">Update password</button>

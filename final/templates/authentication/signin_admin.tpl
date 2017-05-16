@@ -9,12 +9,12 @@
         <form action="{$BASE_URL}actions/authentication/signin_admin.php" method="post" id="adminSignInForm">
           <div class="form-group">
             <label for="username" class="sr-only">Username</label>
-            <input type="text" name="username" id="username" class="form-control" placeholder="Your username" value="{$FORM_VALUES.username}">
+            <input type="text" name="username" id="username" class="form-control" placeholder="Your username" value="{$FORM_VALUES.username}" required maxlength="64">
             <strong class="field_error">{$FIELD_ERRORS.username}</strong>
           </div>
           <div class="form-group">
             <label for="password" class="sr-only">Password</label>
-            <input type="password" name="password" id="password" class="form-control" placeholder="Your password">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Your password" required maxlength="64">
           </div>
           <div class="text-center">
             <input type="submit" id="btn-login" class="btn btn-lg btn-info" value="Sign in">

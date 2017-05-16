@@ -31,6 +31,7 @@ if($_SESSION['user_id']){
   $smarty->assign('notifications', $notifications);
 }
 
+$smarty->assign("module", "Auctions");
 $smarty->assign('categories', $categories);
 $smarty->assign('numActiveAuctions', $numActiveAuctions);
 $smarty->assign('totalValOfActiveAuctions', $totalValOfActiveAuctions);

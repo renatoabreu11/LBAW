@@ -44,6 +44,7 @@ $notifications = getActiveNotifications($id);
 $items = 4;
 $nr_pages = ceil(count($auctions) / $items);
 
+$smarty->assign("module", "Auctions");
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);
 $smarty->assign('auctions', $auctions);

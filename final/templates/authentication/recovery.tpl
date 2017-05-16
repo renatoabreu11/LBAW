@@ -8,7 +8,7 @@
         <form action="{$BASE_URL}api/authentication/recovery.php" id="recoveryForm">
           <div class="form-group">
             <label class="sr-only" for="email">Email address</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Email address" required maxlength="64">
           </div>
           <div class="text-center">
             <button class="btn btn-primary">Send me a recovery email</button>

@@ -22,6 +22,7 @@ $notifications = getActiveNotifications($id);
 $categories = getCategories();
 $auctionTypes = getAuctionTypes();
 
+$smarty->assign("module", "Auction");
 $smarty->assign('auctionTypes', $auctionTypes);
 $smarty->assign('notifications', $notifications);
 $smarty->assign("categories", $categories);

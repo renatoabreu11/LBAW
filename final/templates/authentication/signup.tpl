@@ -15,7 +15,7 @@
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name" value="{$FORM_VALUES.name}"/>
+              <input type="text" class="form-control" required maxlength="64" name="name" id="name"  placeholder="Enter your Name" value="{$FORM_VALUES.name}"/>
             </div>
             <strong class="field_error">{$FIELD_ERRORS.name}</strong>
           </div>
@@ -25,7 +25,7 @@
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" value="{$FORM_VALUES.username}"/>
+              <input type="text" class="form-control" required maxlength="64" name="username" id="username"  placeholder="Enter your Username" value="{$FORM_VALUES.username}"/>
             </div>
             <strong class="field_error">{$FIELD_ERRORS.username}</strong>
           </div>
@@ -35,7 +35,7 @@
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" value="{$FORM_VALUES.email}"/>
+              <input type="text" class="form-control" required maxlength="64" name="email" id="email"  placeholder="Enter your Email" value="{$FORM_VALUES.email}"/>
             </div>
             <strong class="field_error">{$FIELD_ERRORS.email}</strong>
           </div>
@@ -45,7 +45,7 @@
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-              <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+              <input type="password" class="form-control" required maxlength="64" name="password" id="password"  placeholder="Enter your Password"/>
             </div>
           </div>
         </div>
@@ -54,14 +54,14 @@
           <div class="cols-sm-10">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-              <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+              <input type="password" class="form-control" required maxlength="64" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
             </div>
           </div>
         </div>
         <div class="form-group" id="textarea-signup">
           <div class="form-group" style="padding:12px">
             <label for="description" class="cols-sm-2 control-label">Short bio</label>
-            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Talk a little about you..." >{$FORM_VALUES.description}</textarea>
+            <textarea class="form-control" id="description" required maxlength="256" name="description" rows="5" placeholder="Talk a little about you..." >{$FORM_VALUES.description}</textarea>
           </div>
         </div>
         <div class="form-group text-center" id="signup-btn">

@@ -53,6 +53,7 @@ $characteristics = getProductCharacteristics($product['id']);
 $auction['start_date'] = date('d/m/y h:m', strtotime($auction['start_date']));
 $auction['end_date'] = date('d/m/y h:m', strtotime($auction['end_date']));
 
+$smarty->assign("module", "Auction");
 $smarty->assign('productTypes', $productTypes);
 $smarty->assign('watchlist', $watchlist);
 $smarty->assign('categories', $categories);

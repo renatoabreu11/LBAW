@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="username" id="username"  placeholder="Enter the new admin username" value="{$FORM_VALUES.username}"/>
+          <input type="text" class="form-control" name="username" id="username" required maxlength="64" placeholder="Enter the new admin username" value="{$FORM_VALUES.username}"/>
         </div>
         <strong class="field_error username">{$FIELD_ERRORS.username}</strong>
       </div>
@@ -16,7 +16,7 @@
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="email" id="email"  placeholder="Enter the new admin email" value="{$FORM_VALUES.email}"/>
+          <input type="text" class="form-control" name="email" id="email" required maxlength="64" placeholder="Enter the new admin email" value="{$FORM_VALUES.email}"/>
         </div>
         <strong class="field_error email">{$FIELD_ERRORS.email}</strong>
       </div>
@@ -26,7 +26,7 @@
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" name="password" id="password"  placeholder="Enter password"/>
+          <input type="password" class="form-control" name="password" required id="password"  placeholder="Enter password"/>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm password"/>
+          <input type="password" class="form-control" name="confirm" required id="confirm"  placeholder="Confirm password"/>
         </div>
       </div>
     </div>

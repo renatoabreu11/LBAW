@@ -34,6 +34,7 @@ switch ($reportType){
     $reports = getUserReports();
 }
 
+$smarty->assign("module", "Admin");
 $smarty->assign("reportTypes", $reportTypes);
 $smarty->assign("reportType", $reportType);
 $smarty->assign("reports", $reports);

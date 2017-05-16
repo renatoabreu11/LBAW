@@ -57,6 +57,7 @@ if(count($images) == 0){
   $images = array(['description' => 'Image not available', 'filename' => 'default.jpeg']);
 }
 
+$smarty->assign("module", "Auction");
 $smarty->assign("canEdit", $canEdit);
 $smarty->assign("images", $images);
 $smarty->assign("product", $product);
@@ -69,5 +70,4 @@ $smarty->assign("numBids", $numBids);
 $smarty->assign("numBidders", $numBidders);
 $smarty->assign("questions", $questions);
 $smarty->assign("similarAuctions", $similarAuctions);
-
 $smarty->display('auction/auction.tpl');

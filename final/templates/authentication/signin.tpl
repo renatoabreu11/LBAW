@@ -10,11 +10,11 @@
         <form action="{$BASE_URL}api/authentication/signin.php" method="post" id="signInForm">
           <div class="form-group">
             <label for="usrname">Username</label>
-            <input type="text" name="username" class="form-control" id="usrname">
+            <input type="text" name="username" class="form-control" id="usrname" required maxlength="64">
           </div>
           <div class="form-group">
             <label for="psw">Password</label>
-            <input type="password" name="password" class="form-control" id="psw">
+            <input type="password" name="password" class="form-control" id="psw" required maxlength="64">
           </div>
           <button class="btn btn-default btn-success btn-block">Sign in</button>
           <a class="btn btn-primary btn-block" href="{$FB_LOGIN_URL}">

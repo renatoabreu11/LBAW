@@ -47,9 +47,9 @@
         {if ($USER_ID)}
           {if ($USER_ID != $user.id)}
             {if ($isFollowing.count == 0)}
-              <button type="button" id="follow-btn" class="btn btn-primary btn-block">Follow</button>
+              <button id="follow-btn" class="btn btn-primary btn-block">Follow</button>
             {else}
-              <button type="button" id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
+              <button id="follow-btn" class="btn btn-primary btn-block">Unfollow</button>
             {/if}
           {/if}
         {/if}
@@ -67,7 +67,7 @@
           <input type="hidden" name="reportedUserId" value="{$user.id}">
           <div class="form-group">
             <label for="reportUserMessage">Report:</label>
-            <textarea class="form-control" rows="5" id="reportUserMessage" name="reportUserMessage"></textarea>
+            <textarea class="form-control" rows="5" id="reportUserMessage" required maxlength="512" name="reportUserMessage"></textarea>
           </div>
           <div class="text-center">
             <input type="submit" id="reportUser" class="btn btn-info" value="Report user">
@@ -286,10 +286,10 @@
                     </div>
                     <div id="win-info-text">
                       <div class="text-right win-info">
-                        <span class="win-info-title">Base price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
-                        <span class="win-info-title">Bought price: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
-                        <span class="win-info-title">Date: </span><button type="button" class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
-                        <span class="win-info-title">Seller: </span><button type="button" class="btn btn-link btn-sm active win-info-value"><a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a></button><br>
+                        <span class="win-info-title">Base price: </span><button class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
+                        <span class="win-info-title">Bought price: </span><button class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
+                        <span class="win-info-title">Date: </span><button class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
+                        <span class="win-info-title">Seller: </span><button class="btn btn-link btn-sm active win-info-value"><a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a></button><br>
                       </div>
                     </div>
                   </div>
@@ -307,7 +307,7 @@
                       {/foreach}
                       {if (!$isReviewed)}
                         <div class="form-wrapper">
-                          <button type="button" data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
+                          <button data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
                           <form id="win-review-form" class="collapse" action="javascript:void(0);">
                             <input type="hidden" class="bid-id" value="{$win.bid_id}">
                             <div class="win-review-rating">
@@ -356,7 +356,7 @@
                 </div>
                 {if ($USER_ID == $user.id)}
                   <div class="media-right">
-                    <button type="button" class="btn btn-danger">Unfollow</button>
+                    <button class="btn btn-danger">Unfollow</button>
                   </div>
                 {/if}
                 <hr>
@@ -371,6 +371,6 @@
 
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
-<script type="text/javascript" src="{$BASE_URL}javascript/user.js"></script>
+<script src="{$BASE_URL}javascript/user.js"></script>
 
 {include file='common/footer.tpl'}

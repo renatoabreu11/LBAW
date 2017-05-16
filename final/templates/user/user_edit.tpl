@@ -42,14 +42,14 @@
               <div class="form-group">
                 <label for="real-name" class="col-md-3 control-label">Real name: </label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" id="real-name" name="realName" value="{$user.name}">
+                  <input type="text" class="form-control" id="real-name" name="realName" value="{$user.name}" required maxlength="64">
                 </div>
                 <strong class="field_error">{$FIELD_ERRORS.realName}</strong>
               </div>
               <div class="form-group">
                 <label for="small-bio" class="col-md-3 control-label">Small biography: </label>
                 <div class="col-md-6">
-                  <textarea class="form-control" name="smallBio" rows="2" id="small-bio">{$user.short_bio}</textarea>
+                  <textarea class="form-control" name="smallBio" rows="2" required maxlength="255" id="small-bio">{$user.short_bio}</textarea>
                 </div>
                 <strong class="field_error">{$FIELD_ERRORS.smallBio}</strong>
               </div>
@@ -81,7 +81,7 @@
               <div class="form-group">
                 <label for="e-mail" class="col-md-3 control-label">E-mail: </label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="email" id="e-mail" value="{$user.email}">
+                  <input type="text" class="form-control" required maxlength="64" name="email" id="e-mail" value="{$user.email}">
                 </div>
                 <strong class="field_error">{$FIELD_ERRORS.email}</strong>
               </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="col-xs-6 text-right">
               <div class="next">
-                <button type="button" class="btn btn-primary btn-discard">Discard</button>
+                <button class="btn btn-primary btn-discard">Discard</button>
               </div>
             </div>
           </div>
@@ -137,21 +137,21 @@
             <div class="form-group">
               <label for="curr-pass" class="col-md-3 control-label">Current password: </label>
               <div class="col-md-6">
-                <input type="password" class="form-control" name="currPass" id="curr-pass">
+                <input type="password" required maxlength="64" class="form-control" name="currPass" id="curr-pass">
               </div>
               <strong class="field_error">{$FIELD_ERRORS.currPass}</strong>
             </div>
             <div class="form-group">
               <label for="new-pass-1" class="col-md-3 control-label">New password: </label>
               <div class="col-md-6">
-                <input type="password" class="form-control" name="newPass" id="new-pass-1">
+                <input type="password" required maxlength="64" class="form-control" name="newPass" id="new-pass-1">
               </div>
               <strong class="field_error">{$FIELD_ERRORS.newPass}</strong>
             </div>
             <div class="form-group">
               <label for="new-pass-2" class="col-md-3 control-label">Repeat password: </label>
               <div class="col-md-6">
-                <input type="password" class="form-control" name="newPassRepeat" id="new-pass-2">
+                <input type="password" required maxlength="64" class="form-control" name="newPassRepeat" id="new-pass-2">
               </div>
               <strong class="field_error">{$FIELD_ERRORS.newPassRepeat}</strong>
             </div>
@@ -163,7 +163,7 @@
               </div>
               <div class="col-xs-6 text-right">
                 <div class="next">
-                  <button type="button" class="btn btn-primary btn-discard">Discard</button>
+                  <button class="btn btn-primary btn-discard">Discard</button>
                 </div>
               </div>
             </div>

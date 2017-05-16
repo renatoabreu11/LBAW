@@ -27,7 +27,7 @@
         <form action="{$BASE_URL}api/user/feedback.php" method="post" id="feedbackForm">
           <div class="form-group">
             <label for="feedback">Feedback:</label>
-            <textarea class="form-control" rows="5" name="feedback" id="feedback"></textarea>
+            <textarea class="form-control" rows="5" name="feedback" id="feedback" required maxlength="256"></textarea>
           </div>
           <div class="text-center">
             <input type="submit" id="submitFeedback" class="btn btn-info" value="Submit feedback">
