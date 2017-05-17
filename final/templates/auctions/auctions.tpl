@@ -25,29 +25,13 @@
 							</div>
 							<div class="padding"></div>
 							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#price">Price</button>
-							<div class="collapse" id="price">
-								<label for="fromPrice">From:</label>
-								<select class="form-control" id="fromPrice">
-									<option value="0" selected>0 €</option>
-									<option value="10">10 €</option>
-									<option value="50">50 €</option>
-									<option value="100">100 €</option>
-									<option value="250">250 €</option>
-									<option value="500">500 €</option>
-									<option value="1000">1000 €</option>
-								</select>
-								<label for="toPrice">To:</label>
-								<select class="form-control" id="toPrice">
-									<option value="0">0 €</option>
-									<option value="10">10 €</option>
-									<option value="50">50 €</option>
-									<option value="100">100 €</option>
-									<option value="250">250 €</option>
-									<option value="500">500 €</option>
-									<option value="1000" selected>1000 €</option>
-								</select>
-								<br>
-							</div>
+							<div class="collapse" id="price" style="padding-top: 0.5em; padding-bottom: 1em">
+                <div id="slider-range" style="margin: 1em;"></div>
+                <div class="text-center">
+                  <label for="amount" class="sr-only">Price range</label>
+                  <input type="text" id="amount" readonly style="text-align:center; border:0; color:#f6931f; font-weight:bold;">
+                </div>
+              </div>
 							<div class="padding"></div>
 							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Time remaining</button>
 							<div class="collapse" id="timeRemaining">
@@ -116,6 +100,7 @@
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
+<script src="{$BASE_URL}lib/jqueryui/jquery-ui.min.js"></script>
 <script src="{$BASE_URL}javascript/auctions.js"></script>
 
 {include file='common/footer.tpl'}

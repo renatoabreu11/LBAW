@@ -561,11 +561,6 @@ th {
   background: transparent;
 }
 
-#price label{
-  display: block;
-  padding-top: 0.5em;
-}
-
 #timeRemaining label{
   display: block;
   padding-top: 0.5em;

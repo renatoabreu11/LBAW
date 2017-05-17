@@ -1,4 +1,17 @@
 $(document).ready(function() {
+  let sliderPrice = $('#slider-range');
+  sliderPrice.slider({
+    range: true,
+    values: [1, 1000],
+    min: 1,
+    max: 1000,
+    slide: function( event, ui ) {
+      $('#amount').val( ui.values[0] + '€ - ' + ui.values[1] + '€');
+    },
+  });
+  $( '#amount' ).val( sliderPrice.slider( 'values', 0 ) +
+    '€ - ' + sliderPrice.slider( 'values', 1 ) + '€');
+
   setChangeListType();
   setCountdown();
   setSearchRequest();
@@ -55,10 +68,11 @@ function setCountdown() {
  */
 function setSearchRequest() {
   $('#searchBtn').click(function() {
+    let sliderPrice = $('#slider-range');
     let name = $('#inputSearch').val();
     let category = $('#category').find('option:selected').val();
-    let fromPrice = $('#fromPrice').find('option:selected').val();
-    let toPrice = $('#toPrice').find('option:selected').val();
+    let fromPrice = sliderPrice.slider( 'values', 0);
+    let toPrice = sliderPrice.slider( 'values', 1);
     let fromTimeRem = $('#fromTimeRem').find('option:selected').val();
     let toTimeRem = $('#toTimeRem').find('option:selected').val();
 
