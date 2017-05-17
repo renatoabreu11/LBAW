@@ -21,7 +21,7 @@ $(document).ready(function() {
       type: 'GET',
       url: BASE_URL + 'api/authentication/recovery.php',
       data: {
-        'email': email,
+        'email': email
       },
     });
 

@@ -21,6 +21,9 @@ try {
   return;
 }
 
+/*echo "Success: " . $message;
+return;*/
+
 if(!$username) {
   echo "Success: An email with the necessary steps to recover the password was sent to " . $email . ".";
   return;
@@ -35,7 +38,7 @@ try {
   return;
 }
 
-$message = file_get_contents($BASE_URL . 'templates/authentication/email.html');// "<p><strong>" . $username . "</strong> hi there!</p>";
+$message = file_get_contents('http://gnomo.fe.up.pt/~lbaw1662/proto/' . 'templates/authentication/email.html');// "<p><strong>" . $username . "</strong> hi there!</p>";
 $message = str_replace('%email%', $email, $message);
 $message = str_replace('%token%', $token, $message);
 
