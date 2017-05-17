@@ -1,4 +1,4 @@
-BASE_URL = '/';
+BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1662/proto/';
 let userId = null;
 let token = null;
 let adminId = null;
