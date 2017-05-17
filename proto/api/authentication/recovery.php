@@ -22,6 +22,8 @@ try {
   return;
 }
 
+$message = "<p><strong>José Carlos</strong> hi there!</p>";
+
 $mail = new PHPMailer;
 $mail->isSMTP();
 $mail->SMTPDebug = 2;
@@ -36,13 +38,14 @@ $mail->Username = "seekbid1617@gmail.com";
 $mail->Password = "oc86ve46";
 
 $mail->setFrom('seekbid1617@gmail.com', 'Seek Bid');
-$mail->addReplyTo('renatoabreu1196@gmail.com', 'Seek Bid');
-$mail->addAddress($email, 'Renato Abreu');
+$mail->addReplyTo('evenilink@gmail.com', 'Seek Bid');
+$mail->addAddress($email, 'Jose Carlos');
 
 $mail->IsHTML(true);
+$mail->CharSet="utf-8";
 $mail->Subject = 'PHPMailer GMail SMTP test';
 $mail->AltBody = 'This is a plain-text message body';
-$mail->Body = 'cenas mano!';
+$mail->MsgHTML($message);
 
 if (!$mail->send()) {
   $log->error($mail->ErrorInfo, array('request' => "Mailer password request."));
