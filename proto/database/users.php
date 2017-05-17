@@ -44,8 +44,7 @@ function getUserUsername($userEmail){
                                 WHERE email=:user_email');
     $stmt->bindParam('user_email', $userEmail);
     $stmt->execute();
-    $result = $stmt->fetch();
-    return $result['username'];
+    return $stmt->fetch()['username'];
 }
 
 /**
@@ -696,9 +695,7 @@ function createUserReport($userId, $message) {
  * Creates a password request
  * @param $email
  */
-function createRequestPasswordReset($email) {
-  $token = bin2hex(openssl_random_pseudo_bytes(32));
-
+function createRequestPasswordReset($email, $token) {
   global $conn;
   $stmt = $conn->prepare('INSERT INTO password_request(email, token)
                           VALUES(:email, :token)');
