@@ -36,9 +36,10 @@ try {
   return;
 }
 
-$message = file_get_contents($BASE_DIR . 'templates/authentication/email.tpl');// "<p><strong>" . $username . "</strong> hi there!</p>";
-$message = str_replace('%seek-bid-logo%', $BASE_URL . 'images/assets/favicon.jpg', $message);
-$message = str_replace('%base-url%', $BASE_URL, $message);
+$gnomo = 'gnomo.fe.up.pt';
+$message = file_get_contents($gnomo . $BASE_URL . 'templates/authentication/email.tpl');// "<p><strong>" . $username . "</strong> hi there!</p>";
+$message = str_replace('%seek-bid-logo%', $gnomo . $BASE_URL . 'images/assets/favicon.jpg', $message);
+$message = str_replace('%base-url%', $gnomo . $BASE_URL, $message);
 $message = str_replace('%email%', $email, $message);
 $message = str_replace('%token%', $token, $message);
 
