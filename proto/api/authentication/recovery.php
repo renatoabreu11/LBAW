@@ -9,10 +9,10 @@ if(!$_GET['email']) {
 }
 
 $email = trim(strip_tags($_GET['email']));
-/*if(!validEmail($email)){
+if(!validEmail($email)){
   echo "Error 400 Bad Request: Invalid email.";
   return;
-}*/
+}
 
 try {
   $username = getUserUsername($email);
@@ -21,13 +21,12 @@ try {
   return;
 }
 
-/*if(!$username) {
+if(!$username) {
   echo "Success: An email with the necessary steps to recover the password was sent to " . $email . ".";
   return;
-}*/
+}
 
 $token = bin2hex(openssl_random_pseudo_bytes(32));
-
 try {
   createRequestPasswordReset($email, $token);
 } catch(PDOException $e) {
