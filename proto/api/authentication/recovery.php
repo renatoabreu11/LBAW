@@ -9,10 +9,10 @@ if(!$_GET['email']) {
 }
 
 $email = trim(strip_tags($_GET['email']));
-if(!validEmail($email)){
+/*if(!validEmail($email)){
   echo "Error 400 Bad Request: Invalid email.";
   return;
-}
+}*/
 
 try {
   $username = getUserUsername($email);
@@ -21,15 +21,22 @@ try {
   return;
 }
 
-/*echo "Success: " . $message;
-return;*/
-
-if(!$username) {
+/*if(!$username) {
   echo "Success: An email with the necessary steps to recover the password was sent to " . $email . ".";
   return;
-}
+}*/
 
 $token = bin2hex(openssl_random_pseudo_bytes(32));
+
+$message = file_get_contents($BASE_DIR . 'templates/authentication/email.tpl');// "<p><strong>" . $username . "</strong> hi there!</p>";
+$message = str_replace('%seek-bid-logo%', $BASE_URL . 'images/assets/favicon.jpg', $message);
+$message = str_replace('%base-url%', $BASE_URL, $message);
+$message = str_replace('%email%', $email, $message);
+$message = str_replace('%token%', $token, $message);
+
+/*echo $message;
+return;*/
+
 try {
   createRequestPasswordReset($email, $token);
 } catch(PDOException $e) {
@@ -37,10 +44,6 @@ try {
   echo "Error 500 Internal Server: Error creating password recovery request.";
   return;
 }
-
-$message = file_get_contents('http://gnomo.fe.up.pt/~lbaw1662/proto/' . 'templates/authentication/email.html');// "<p><strong>" . $username . "</strong> hi there!</p>";
-$message = str_replace('%email%', $email, $message);
-$message = str_replace('%token%', $token, $message);
 
 $mail = new PHPMailer;
 $mail->isSMTP();
