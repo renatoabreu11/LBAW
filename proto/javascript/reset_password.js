@@ -41,7 +41,7 @@ $(document).ready(function() {
 
     let request = $.ajax({
       type: 'POST',
-      url: BASE_URL + 'api/authentication/reset_password.php',
+      url: BASE_URL + "api/authentication/reset_password.php",
       data: {
         'newPass': newPass,
         'newPassRepeat': newPassRepeat,

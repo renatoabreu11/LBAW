@@ -62,7 +62,7 @@ $mail->addAddress($email, 'Jose Carlos');
 $mail->IsHTML(true);
 $mail->CharSet='utf-8';
 $mail->Subject = 'Seek Bid password recovery';
-$mail->AltBody = 'This is a plain-text message body';
+$mail->AltBody = 'Recovery email request for Seek Bid';
 $mail->MsgHTML($message);
 
 if (!$mail->send()) {
