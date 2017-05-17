@@ -154,26 +154,43 @@ function setFilter() {
  * Show auctions based on the selected option of filter.
  */
 function showAuctionsSpecifiedInFilter(selected) {
+  let auctions = $('#auctionsThumbnails').find('.auction_row');
+  let noAuctions = true;
   if (selected == 'All auctions') {
-    showAllAuctions();
+    auctions.each(function() {
+      noAuctions = false;
+      $(this).show();
+    });
   } else if (selected == 'My auctions') {
-    $('#auctionsThumbnails .auction_row').each(function() {
+    auctions.each(function() {
       let myAuction = $(this).attr('data-myAuction');
-      if (myAuction == 1)
+      if (myAuction == 1){
+        noAuctions = false;
         $(this).show();
+      }
     });
   } else if (selected == 'Closed auctions') {
-    $('#auctionsThumbnails .auction_row').each(function() {
+    auctions.each(function() {
       let myAuction = $(this).attr('data-active');
-      if (myAuction == 0)
+      if (myAuction == 0) {
+        noAuctions = false;
         $(this).show();
+      }
     });
   } else if (selected == 'Open auctions') {
-    $('#auctionsThumbnails .auction_row').each(function() {
+    auctions.each(function() {
       let myAuction = $(this).attr('data-active');
-      if (myAuction == 1)
+      if (myAuction == 1){
+        noAuctions = false;
         $(this).show();
+      }
     });
+  }
+
+  if(noAuctions) {
+    $('.noAvailableAuctions').show();
+  }else{
+    $('.noAvailableAuctions').hide();
   }
 }
 
