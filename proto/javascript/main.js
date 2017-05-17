@@ -1,5 +1,5 @@
-//BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1662/proto/';
-BASE_URL = 'http://localhost:8000/';
+BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1662/proto/';
+//BASE_URL = 'http://localhost:8000/';
 let userId = null;
 let token = null;
 let adminId = null;
