@@ -15,8 +15,8 @@
     <h3 class="notification-page-title">Watchlist</h3>
     <p>As a bidder, you can track here your favorite auctions. You also can overview your own auctions.</p>
   </div>
-  <div class="row" style="padding-left: 1.5em; padding-right: 1.5em;">
-    <div class="col-xs-6" style="padding-top: 1.5em;">
+  <div class="row" style="padding-left: 1em; padding-right: 1em; padding-top: 1.5em;">
+    <div class="col-sm-6 col-xs-12">
       <ul class="auctionSort">
         <li id="popular" class="active"><a href="javascript:">Popular</a></li>
         <li id="newest"><a href="javascript:">Newest</a></li>
@@ -26,7 +26,7 @@
         <li id="recentlyAdded"><a href="javascript:">Recently added</a></li>
       </ul>
     </div>
-    <div class="controls col-xs-6" style="padding-top: 1.5em;">
+    <div class="controls col-sm-6 col-xs-12" style="padding-top: 0">
       <label class="sr-only" for="watchlistFilter">Filter</label>
       <select class="selectpicker input-md textinput textInput form-control" id="watchlistFilter">
         <option selected>All auctions</option>
@@ -36,7 +36,7 @@
       </select>
     </div>
   </div>
-  <div id="auctionsThumbnails" class="row auctions" style="margin: auto;">
+  <div id="auctionsThumbnails" class="row auctions">
     {include file='auctions/list_watchlist.tpl'}
   </div>
   <div class="row text-center result">
