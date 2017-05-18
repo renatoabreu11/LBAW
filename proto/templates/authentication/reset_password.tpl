@@ -5,7 +5,7 @@
     <div class="row">
       <div class="form-wrap">
         <h1>Password reset</h1>
-        <form action="{$BASE_URL}'api/authentication/reset_password.php" method="post" id="resetPasswordForm">
+        <form action="javascript:void(0);" method="post" id="resetPasswordForm">
           <input type="hidden" id="email" value="{$email}">
           <div class="form-group">
             <label class="sr-only" for="newPassword">New password:</label>

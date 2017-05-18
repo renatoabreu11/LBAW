@@ -27,14 +27,13 @@ $(document).ready(function() {
     errorPlacement: function(error, element) {
       $(element).closest('.form-group').append(error);
     },
-    submitHandler: resetPassword,
   });
 
   /**
    * Ajax call that reset the user password
-   * @param form
    */
-  function resetPassword(form) {
+  $(".btn").click(function() {
+    let form = $("#resetPasswordForm");
     let newPass = $('#newPassword').val();
     let newPassRepeat = $('#repeatPassword').val();
     let email = $('#email').val();
@@ -45,14 +44,14 @@ $(document).ready(function() {
       data: {
         'newPass': newPass,
         'newPassRepeat': newPassRepeat,
-        'email': email,
+        'email': email
       },
     });
 
     request.done(function(response, textStatus, jqXHR) {
       if(response.indexOf('Success') >= 0) {
-        $(form).trigger('reset');
-        $('.container').prepend('<p>Password updated with success.</p><a href="' + BASE_URL + '">Back to main page</a>');
+        $(form).remove();
+        $('.form-wrap').append('<p>Password updated with success.</p><a href="' + BASE_URL + '">Back to main page</a>');
       } else {
         $.magnificPopup.open({
           items: {
@@ -67,5 +66,5 @@ $(document).ready(function() {
       console.error('The following error occurred: '
         + textStatus + ': ' + errorThrown);
     });
-  }
+  });
 });
