@@ -24,13 +24,13 @@ if(isset($accessToken)) {
   try {
     $profileRequest = $fb->get('/me?fields=name,first_name,last_name,email,link,picture.width(400).height(400)');
     $fbUserProfile = $profileRequest->getGraphNode()->asArray();
-  } catch(FacebookResponseException $e) {
+  } catch(\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     session_destroy();
     // Redirect user back to app login page
     header("Location: $BASE_URL");
     exit;
-  } catch(FacebookSDKException $e) {
+  } catch(\Facebook\Exceptions\FacebookSDKException $e) {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
   }
@@ -42,11 +42,11 @@ if(isset($accessToken)) {
     'first_name' 	=> $fbUserProfile['first_name'],
     'last_name' 	=> $fbUserProfile['last_name'],
     'email' 		=> $fbUserProfile['email'],
-    'picture' 		=> $fbUserProfile['picture']['url'],
+    'picture' 		=> $fbUserProfile['picture']['url'], //TODO INSTEAD OF URL GET THE ACTUAL IMAGE
     'link' 			=> $fbUserProfile['link']
   );
 
-  // Unser Admin Session
+  // User Admin Session
   if($_SESSION['admin_username'] != null)
     unset($_SESSION['admin_username']);
   if($_SESSION['admin_id'] != null)
@@ -66,12 +66,13 @@ if(isset($accessToken)) {
     // Add link to facebook to user if not already linked
     $_SESSION['username'] = getUserUsername($_SESSION['facebook_user_data']['email']);
     $_SESSION['user_id'] = getUserID($_SESSION['username']);
+    //TODO get facebook picture instead of link
     if(!getUserByEmail($_SESSION['facebook_user_data']['email'])['oauth_id']) {
       updateUserFacebook($_SESSION['user_id'], $_SESSION['facebook_user_data']['oauth_uid'], $_SESSION['facebook_user_data']['picture']);
     }
-    if (empty($_SESSION['token'])) {
-      $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
-    }
+
+    $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+
     echo 'Login Successful!';
 
     header("Location: $BASE_URL" . "pages/auctions/best_auctions.php");
