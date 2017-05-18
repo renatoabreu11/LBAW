@@ -371,6 +371,6 @@
 
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
-<script src="{$BASE_URL}javascript/user.js"></script>
+<script src="{$BASE_URL}javascript/user.min.js"></script>
 
 {include file='common/footer.tpl'}

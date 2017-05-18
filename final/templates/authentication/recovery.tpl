@@ -20,5 +20,5 @@
   </div>
 </section>
 
-<script src="{$BASE_URL}javascript/recovery.js"></script>
+<script src="{$BASE_URL}javascript/recovery.min.js"></script>
 {include file='common/footer.tpl'}

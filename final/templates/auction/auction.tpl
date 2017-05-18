@@ -325,6 +325,6 @@
   <script src="{$BASE_URL}lib/bxslider/jquery.bxslider.min.js"></script>
   <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
   <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
-  <script src="{$BASE_URL}javascript/auction.js"></script>
+  <script src="{$BASE_URL}javascript/auction.min.js"></script>
 
 {include file='common/footer.tpl'}

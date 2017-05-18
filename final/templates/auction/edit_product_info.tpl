@@ -59,7 +59,7 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.characteristics}</strong>
         </div>
-        <button type="submit" class="btn btn-primary pull-right">Update product</button>
+        <button class="btn btn-primary pull-right">Update product</button>
       </div>
     </div>
   </div>

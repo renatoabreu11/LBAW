@@ -32,8 +32,8 @@ $(document).ready(function() {
   /**
    * Ajax call that reset the user password
    */
-  $(".btn").click(function() {
-    let form = $("#resetPasswordForm");
+  $('.btn').click(function() {
+    let form = $('#resetPasswordForm');
     let newPass = $('#newPassword').val();
     let newPassRepeat = $('#repeatPassword').val();
     let email = $('#email').val();
@@ -44,7 +44,7 @@ $(document).ready(function() {
       data: {
         'newPass': newPass,
         'newPassRepeat': newPassRepeat,
-        'email': email
+        'email': email,
       },
     });
 

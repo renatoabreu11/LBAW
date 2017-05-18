@@ -49,6 +49,6 @@
 <script src="{$BASE_URL}lib/select/bootstrap-select.min.js"></script>
 <script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
 <script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
-<script src="{$BASE_URL}javascript/watchlist.js"></script>
+<script src="{$BASE_URL}javascript/watchlist.min.js"></script>
 
 {include file = 'common/footer.tpl'}

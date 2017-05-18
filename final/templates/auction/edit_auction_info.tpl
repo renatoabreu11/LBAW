@@ -59,7 +59,7 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.end_date}</strong>
         </div>
-        <button type="submit" class="btn btn-primary pull-right">Update auction</button>
+        <button class="btn btn-primary pull-right">Update auction</button>
       </div>
     </div>
   </div>

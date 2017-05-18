@@ -176,6 +176,6 @@
 
 <script type="text/javascript" src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
 <script type="text/javascript" src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
-<script type="text/javascript" src="{$BASE_URL}javascript/user_edit.js"></script>
+<script type="text/javascript" src="{$BASE_URL}javascript/user_edit.min.js"></script>
 
 {include file = 'common/footer.tpl'}

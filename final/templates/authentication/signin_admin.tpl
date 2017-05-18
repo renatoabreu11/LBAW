@@ -26,6 +26,6 @@
   </div>
 </section>
 
-<script src="{$BASE_URL}javascript/auth.js"></script>
+<script src="{$BASE_URL}javascript/auth.min.js"></script>
 
 {include file='common/footer.tpl'}

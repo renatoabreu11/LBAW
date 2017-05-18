@@ -51,7 +51,7 @@
                       <label></label>
                       <textarea name="comment" required maxlength="512" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-default">Send</button>
+                    <button class="btn btn-default">Send</button>
                   </form>
                 {/if}
               </div>

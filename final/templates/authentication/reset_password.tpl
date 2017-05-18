@@ -16,7 +16,7 @@
             <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="Repeat your new password">
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary">Update password</button>
+            <button class="btn btn-primary">Update password</button>
           </div>
         </form>
         <hr>
@@ -25,6 +25,6 @@
   </div>
 </section>
 
-<script src="{$BASE_URL}javascript/reset_password.js"></script>
+<script src="{$BASE_URL}javascript/reset_password.min.js"></script>
 
 {include file='common/footer.tpl'}

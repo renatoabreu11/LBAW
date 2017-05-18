@@ -69,6 +69,6 @@
 	</div>
 </div>
 
-<script src="{$BASE_URL}javascript/credit.js"></script>
+<script src="{$BASE_URL}javascript/credit.min.js"></script>
 
 {include file = 'common/footer.tpl'}

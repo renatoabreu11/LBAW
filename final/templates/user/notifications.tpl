@@ -98,6 +98,6 @@
   </div>
 </div>
 
-<script type="text/javascript" src="{$BASE_URL}javascript/user.js"></script>
+<script type="text/javascript" src="{$BASE_URL}javascript/user.min.js"></script>
 
 {include file = 'common/footer.tpl'}

@@ -30,7 +30,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="{$BASE_URL}lib/magnific-popup/jquery.magnific-popup.js"></script>
-  <script src="{$BASE_URL}javascript/main.js"></script>
+  <script src="{$BASE_URL}javascript/main.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">

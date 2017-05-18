@@ -42,7 +42,7 @@
           </div>
           <strong class="field_error">{$FIELD_ERRORS.notifications_enabled}</strong>
         </div>
-        <button type="submit" class="btn btn-primary pull-right">Update settings</button>
+        <button class="btn btn-primary pull-right">Update settings</button>
       </div>
     </div>
   </div>

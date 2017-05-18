@@ -55,6 +55,6 @@
 <script src="{$BASE_URL}lib/datetimepicker/pt.js"></script>
 <script src="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="{$BASE_URL}lib/select/bootstrap-select.js"></script>
-<script src="{$BASE_URL}javascript/edit_auction.js"></script>
+<script src="{$BASE_URL}javascript/edit_auction.min.js"></script>
 
 {include file='common/footer.tpl'}
