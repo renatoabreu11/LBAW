@@ -84,7 +84,7 @@ function getUserID($username) {
 function getAllUsers(){
   global $conn;
   $stmt = $conn->prepare('SELECT *
-                                FROM "user" 
+                                FROM "user"
                                 ORDER BY id ASC');
   $stmt->execute();
   return $stmt->fetchAll();
@@ -210,10 +210,10 @@ function getActiveAuctions($userId) {
  */
 function getReviews($userId) {
   global $conn;
-  $stmt = $conn->prepare('SELECT review.rating, buyer.id as reviewer_id, buyer.username AS reviewer_username, review.date, product.name as product_name, review.message, auction.id as auction_id, 
-                                    (SELECT image.filename 
+  $stmt = $conn->prepare('SELECT review.rating, buyer.id as reviewer_id, buyer.username AS reviewer_username, review.date, product.name as product_name, review.message, auction.id as auction_id,
+                                    (SELECT image.filename
                                     FROM image
-                                    WHERE product.id = image.product_id 
+                                    WHERE product.id = image.product_id
                                     LIMIT 1) as image_filename
                                 FROM review
                                 INNER JOIN bid ON review.bid_id = bid.id
@@ -235,9 +235,9 @@ function getReviews($userId) {
 function getWins($userId) {
   global $conn;
   $stmt = $conn->prepare('SELECT product.name as product_name, product.description, auction.id as auction_id, auction.start_bid, auction.curr_bid, auction.end_date, seller.username as seller_username, seller.id as seller_id, bid.id as bid_id,
-                                    (SELECT image.filename 
+                                    (SELECT image.filename
                                     FROM image
-                                    WHERE product.id = image.product_id 
+                                    WHERE product.id = image.product_id
                                     LIMIT 1) as image_filename
                                 FROM auction
                                 JOIN product ON auction.product_id = product.id
@@ -508,9 +508,24 @@ function userExists($username, $password){
 function validUser($username, $id){
   global $conn;
   $stmt = $conn->prepare('SELECT *
-                                        FROM "user"
-                                        WHERE username = ? AND id = ?');
+                          FROM "user"
+                          WHERE username = ? AND id = ?');
   $stmt->execute(array($username, $id));
+  $result = $stmt->fetch();
+  return $result !== false;
+}
+
+/**
+ * Verifies if the id is associated with any user
+ * @param $id
+ * @return bool
+ */
+function validUserId($id){
+  global $conn;
+  $stmt = $conn->prepare('SELECT *
+                          FROM "user"
+                          WHERE id = ?');
+  $stmt->execute(array($id));
   $result = $stmt->fetch();
   return $result !== false;
 }
@@ -728,7 +743,7 @@ function unfollowUser($followingUserId, $followedUserId) {
  */
 function deleteUser($userId){
   global $conn;
-  $stmt = $conn->prepare('DELETE 
+  $stmt = $conn->prepare('DELETE
                           FROM "user"
                           WHERE id=?');
   $stmt->execute(array($userId));
@@ -740,7 +755,7 @@ function deleteUser($userId){
  */
 function deleteNotification($notificationId){
   global $conn;
-  $stmt = $conn->prepare('DELETE 
+  $stmt = $conn->prepare('DELETE
                                 FROM notification
                                 WHERE id=?');
   $stmt->execute(array($notificationId));

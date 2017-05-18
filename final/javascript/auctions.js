@@ -89,6 +89,16 @@ function setSearchRequest() {
       },
       dataType: 'json',
       success: function(data) {
+        if ((typeof data) == 'string' && data.includes('Error')) {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + data + '</div>',
+              type: 'inline',
+            },
+          });
+          return;
+        }
+
         $('#auctions').empty();
         $('#auctionsThumbnails').empty();
         $('#auctions').append(data['list']);
@@ -210,4 +220,3 @@ function showAuctionsOfAPage(page) {
       $(this).hide();
   });
 }
-
