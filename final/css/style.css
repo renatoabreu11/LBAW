@@ -16,6 +16,11 @@ body {
   padding-top: 0.1em;
 }
 
+.field_error {
+  color: red;
+  font-weight: bolder;
+}
+
 .modalLogin {
   text-align: center;
   padding: 0 !important;
@@ -46,10 +51,6 @@ ul {
   text-decoration: none;
 }
 
-.error {
-  border-color: red;
-}
-
 .kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
   margin: 0;
   padding: 0;
@@ -57,6 +58,7 @@ ul {
   box-shadow: none;
   text-align: center;
 }
+
 .kv-avatar .file-input {
   display: table-cell;
   max-width: 220px;

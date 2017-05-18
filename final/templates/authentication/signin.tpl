@@ -6,7 +6,7 @@
         <h4>Sign in to Seek Bid</h4>
       </div>
       <div class="modal-body">
-        <strong class="field_error"></strong>
+        <div class="field_error"></div>
         <form action="{$BASE_URL}api/authentication/signin.php" method="post" id="signInForm">
           <div class="form-group">
             <label for="usrname">Username</label>

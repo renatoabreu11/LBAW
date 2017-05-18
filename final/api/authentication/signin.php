@@ -28,6 +28,6 @@ if (userExists($username, $password)) {
   echo 'Success: Login Successful!';
   return;
 } else {
-  echo 'Error 400 Bad Request: Invalid username or password!';
+  echo 'Error: Invalid username or password!';
   return;
 }
