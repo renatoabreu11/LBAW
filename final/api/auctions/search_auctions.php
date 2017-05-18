@@ -4,18 +4,18 @@ include_once($BASE_DIR .'database/auctions.php');
 
 if (!is_numeric($_GET['fromPrice']) || !is_numeric($_GET['toPrice'])
   || !is_numeric($_GET['fromTimeRem']) || !is_numeric($_GET['toTimeRem'])) {
-  echo "Error 400 Bad Request: Invalid values. All of the values must be numbers.";
+  echo json_encode("Error 400 Bad Request: Invalid values. All of the values must be numbers.");
   return;
 }
 
 if (!isset($_GET['name']) || !$_GET['category']){
-  echo '"Error 400 Bad Request: All fields are mandatory!';
+  echo json_encode('Error 400 Bad Request: All fields are mandatory!');
   return;
 }
 
 $nameAuction = trim(strip_tags($_GET["name"]));
 if ( !preg_match ("/^[a-zA-Z0-9\s]*$/", $nameAuction)){
-  echo 'Error 400 Bad Request: Invalid auction name characters';
+  echo json_encode('Error 400 Bad Request: Invalid auction name characters');
   return;
 }
 
@@ -69,7 +69,7 @@ else {
 }
 
 foreach ($auctions as &$auction) {
-  if ($auction['image'] == null) 
+  if ($auction['image'] == null)
     $auction['image'] = 'default.jpeg';
 }
 
