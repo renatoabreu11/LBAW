@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#form-password-reset').validate({
+  $('#resetPasswordForm').validate({
     rules:
       {
         newPassword: {
@@ -51,7 +51,7 @@ $(document).ready(function() {
     request.done(function(response, textStatus, jqXHR) {
       if(response.indexOf('Success') >= 0) {
         $(form).remove();
-        $('.form-wrap').append('<p>Password updated with success.</p><a href="' + BASE_URL + '">Back to main page</a>');
+        $('.form-wrap').append('<p class="text-center">Password updated with success.</p><a href="' + BASE_URL + '">Back to main page</a>');
       } else {
         $.magnificPopup.open({
           items: {

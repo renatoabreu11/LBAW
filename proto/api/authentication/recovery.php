@@ -36,8 +36,8 @@ try {
 }
 
 $gnomo = 'gnomo.fe.up.pt';
-$message = file_get_contents($BASE_DIR . 'templates/authentication/email.tpl');// "<p><strong>" . $username . "</strong> hi there!</p>";
-$message = str_replace('%seek-bid-logo%', $gnomo . $BASE_URL . 'images/assets/favicon.jpg', $message);
+$message = file_get_contents($BASE_DIR . 'templates/authentication/email.tpl');
+//$message = str_replace('%seek-bid-logo%', $gnomo . $BASE_URL . 'images/assets/favicon.jpg', $message);
 $message = str_replace('%base-url%', $gnomo . $BASE_URL, $message);
 $message = str_replace('%email%', $email, $message);
 $message = str_replace('%token%', $token, $message);
@@ -63,6 +63,7 @@ $mail->IsHTML(true);
 $mail->CharSet='utf-8';
 $mail->Subject = 'Seek Bid password recovery';
 $mail->AltBody = 'Recovery email request for Seek Bid';
+$mail->AddEmbeddedImage($BASE_URL . 'images/assets/favicon.jpg', 'seekBidLogo');
 $mail->MsgHTML($message);
 
 if (!$mail->send()) {
