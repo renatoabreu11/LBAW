@@ -44,8 +44,7 @@ function getUserUsername($userEmail){
                                 WHERE email=:user_email');
     $stmt->bindParam('user_email', $userEmail);
     $stmt->execute();
-    $result = $stmt->fetch();
-    return $result['username'];
+    return $stmt->fetch()['username'];
 }
 
 /**
@@ -197,7 +196,7 @@ function getActiveAuctions($userId) {
                                 FROM auction
                                 JOIN product ON auction.product_id = product.id
                                 JOIN "user" ON auction.user_id = "user".id
-                                WHERE state IN (\'Open\', \'Created\')
+                                WHERE state IN (\'Open\', \'Closed\')
                                 AND "user".id = :user_id');
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();
@@ -517,23 +516,6 @@ function validUser($username, $id){
 }
 
 /**
- * Verifies if the given id is valid.
- *
- * @param $id
- *
- * @return bool
- */
-function validUserId($id){
-  global $conn;
-  $stmt = $conn->prepare('SELECT *
-                                        FROM "user"
-                                        WHERE id = ?');
-  $stmt->execute(array($id));
-  $result = $stmt->fetch();
-  return $result !== false;
-}
-
-/**
  * Returns the active notifications (not read), with a limit of 5 elements.
  * @param $userId
  * @return array
@@ -713,9 +695,7 @@ function createUserReport($userId, $message) {
  * Creates a password request
  * @param $email
  */
-function createRequestPasswordReset($email) {
-  $token = bin2hex(openssl_random_pseudo_bytes(32));
-
+function createRequestPasswordReset($email, $token) {
   global $conn;
   $stmt = $conn->prepare('INSERT INTO password_request(email, token)
                           VALUES(:email, :token)');
