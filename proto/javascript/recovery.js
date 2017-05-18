@@ -19,7 +19,7 @@ $(document).ready(function() {
 
     let request = $.ajax({
       type: 'GET',
-      url: BASE_URL + "api/authentication/recovery.php",
+      url: BASE_URL + 'api/authentication/recovery.php',
       data: {
         'email': email
       },
