@@ -9,11 +9,6 @@ if(!$_GET['email']) {
 }
 
 $email = trim(strip_tags($_GET['email']));
-if(!validEmail($email)){
-  echo "Error 400 Bad Request: Invalid email.";
-  return;
-}
-
 try {
   $username = getUserUsername($email);
 } catch(PDOException $e) {
@@ -36,8 +31,7 @@ try {
 }
 
 $gnomo = 'gnomo.fe.up.pt';
-$message = file_get_contents($BASE_DIR . 'templates/authentication/email.tpl');// "<p><strong>" . $username . "</strong> hi there!</p>";
-$message = str_replace('%seek-bid-logo%', $gnomo . $BASE_URL . 'images/assets/favicon.jpg', $message);
+$message = file_get_contents($BASE_DIR . 'templates/authentication/email.tpl');
 $message = str_replace('%base-url%', $gnomo . $BASE_URL, $message);
 $message = str_replace('%email%', $email, $message);
 $message = str_replace('%token%', $token, $message);
@@ -56,7 +50,6 @@ $mail->Username = "seekbid1617@gmail.com";
 $mail->Password = "oc86ve46";
 
 $mail->setFrom('seekbid1617@gmail.com', 'Seek Bid');
-$mail->addReplyTo($email, 'Seek Bid');
 $mail->addAddress($email, 'Jose Carlos');
 
 $mail->IsHTML(true);

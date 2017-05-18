@@ -9,11 +9,6 @@ if(!$_GET['email']) {
 }
 
 $email = trim(strip_tags($_GET['email']));
-if(!validEmail($email)){
-  echo "Error 400 Bad Request: Invalid email.";
-  return;
-}
-
 try {
   $username = getUserUsername($email);
 } catch(PDOException $e) {
