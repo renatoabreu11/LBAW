@@ -2,22 +2,15 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
-/*
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
   echo "Error 403 Forbidden: You don't have permissions to make this request.";
-  return;
-}*/
-
-
-if (!$_POST['token']) {
-  echo "Errors1 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
 $userId = $_POST['userId'];
 $loggedUserId = $_SESSION['user_id'];
 if($loggedUserId != $userId) {
-  echo "Error21 403 Forbidden: You don't have permissions to make this request.";
+  echo "Error 403 Forbidden: You don't have permissions to make this request.";
   return;
 }
 
