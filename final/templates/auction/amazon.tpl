@@ -20,7 +20,11 @@
             <label for="search_index">Category</label>
             <select class="form-control" name="search_index" id="search_index">
               {foreach $search_indices as $index}
-                <option value="{$index}">{$index}</option>
+                {if $index == $search_index}
+                  <option value="{$index}" selected>{$index}</option>
+                  {else}
+                  <option value="{$index}">{$index}</option>
+                {/if}
               {/foreach}
             </select>
           </div>
@@ -36,16 +40,17 @@
     {if $items}
     <div id="results-container">
       {foreach $items as $item}
+        {$item->ItemAttributes->Title}
       <div class="item">
         <div class="item-image-container">
-          <img src="{$item.MediumImage.URL}" alt="{$item.ItemAttributes.Title}" class="item-image">
+          <img src="{$item->MediumImage->URL}" alt="{$item->ItemAttributes->Title}" class="item-image">
         </div>
         <div class="item-details-container">
-          <a href="{$item.DetailPageURL}" class="item-title">
-            <strong>{$item.ItemAttributes.Title}</strong>
+          <a href="{$item->DetailPageURL}" class="item-title">
+            <strong>{$item->ItemAttributes->Title}</strong>
           </a>
-          <div class="item-brand">{$item.ItemAttributes.Brand}</div>
-          <div class="item-price">{$item.ItemAttributes.ListPrice.FormattedPrice}</div>
+          <div class="item-brand">{$item->ItemAttributes->Brand}</div>
+          <div class="item-price">{$item->ItemAttributes->ListPrice->FormattedPrice}</div>
         </div>
       </div>
       {/foreach}

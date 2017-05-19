@@ -7,7 +7,7 @@ $amazon = new Amazon();
 $search_indices = $amazon->getSearchIndices();
 
 $items = [];
-$keyword = 'Books';
+$keyword = 'Game of Thrones';
 $search_index = 'Books';
 $has_searched = false;
 

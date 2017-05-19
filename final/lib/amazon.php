@@ -9,7 +9,7 @@ class Amazon {
       'Service' => 'AWSECommerceService',
       'Operation' => 'ItemSearch',
       'ResponseGroup' => 'Medium',
-      'AssociateTag' => '/co8H40l+Du25rSh/Bn1oTNbxQL3WACs8uFPEwww', // coloca o valor correto cepa
+      'AssociateTag' => 'seekbid0e-20',
       'AWSAccessKeyId' => 'AKIAIIU2FF6IJUP33MRQ',
     ];
     $this->client = new GuzzleHttp\Client();
@@ -26,7 +26,7 @@ class Amazon {
 
     $string_to_sign = "{$request_method}\n{$base_url}\n{$endpoint}\n{$sign}";
     $signature = base64_encode(
-      hash_hmac("sha256", $string_to_sign, $this->common_params['AWSAccessKeyId'], true)
+      hash_hmac("sha256", $string_to_sign, '/co8H40l+Du25rSh/Bn1oTNbxQL3WACs8uFPEwww', true)
     );
     return $signature;
   }
@@ -44,9 +44,11 @@ class Amazon {
       );
       $contents = new \SimpleXMLElement($response->getBody()->getContents());
       return $contents;
-    } catch (Exception $e) {
+    } catch (GuzzleHttp\Exception\ClientException $e) {
+      $response = $e->getResponse();
+      $responseBodyAsString = $response->getBody()->getContents();
       return [
-        'error' => $e->getMessage()
+        'error' => $responseBodyAsString
       ];
     }
   }
