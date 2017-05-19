@@ -3,8 +3,9 @@
     "monolog/monolog": "^1.22",
     "smarty/smarty": "~3.1",
     "facebook/graph-sdk": "^5.5",
-    "aws/aws-sdk-php": "^3.26",
+    "aws/aws-sdk-php": "^3.28",
     "intervention/image": "^2.3",
-    "phpmailer/phpmailer": "~5.2"
+    "phpmailer/phpmailer": "~5.2",
+    "guzzlehttp/guzzle": "~6.0"
   }
 }

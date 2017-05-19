@@ -4,20 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc436c9b42d6f12dcf8430fcf20c3cc9",
+    "hash": "0ea82a2ee80a1dd347808d7d0e48dbc0",
+    "content-hash": "16ce8cbd36b04c3b218d72d72fa09b2a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.27.5",
+            "version": "3.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1eece595cdcac0f10616d6b631d0db0878de4f53"
+                "reference": "af653f256d99ff372ce3e3be3048e7e5373ab1bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1eece595cdcac0f10616d6b631d0db0878de4f53",
-                "reference": "1eece595cdcac0f10616d6b631d0db0878de4f53",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/af653f256d99ff372ce3e3be3048e7e5373ab1bc",
+                "reference": "af653f256d99ff372ce3e3be3048e7e5373ab1bc",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-05-17T22:37:49+00:00"
+            "time": "2017-05-18 20:44:27"
         },
         {
             "name": "facebook/graph-sdk",
@@ -142,7 +143,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2017-04-20T14:15:02+00:00"
+            "time": "2017-04-20 14:15:02"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -204,7 +205,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-02-28T22:50:30+00:00"
+            "time": "2017-02-28 22:50:30"
         },
         {
             "name": "guzzlehttp/promises",
@@ -255,7 +256,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "time": "2016-12-20 10:07:11"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -320,7 +321,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-03-20T17:10:46+00:00"
+            "time": "2017-03-20 17:10:46"
         },
         {
             "name": "intervention/image",
@@ -382,7 +383,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2017-04-23T18:45:36+00:00"
+            "time": "2017-04-23 18:45:36"
         },
         {
             "name": "monolog/monolog",
@@ -460,7 +461,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-03-13T07:08:03+00:00"
+            "time": "2017-03-13 07:08:03"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -515,7 +516,7 @@
                 "json",
                 "jsonpath"
             ],
-            "time": "2016-12-03T22:08:25+00:00"
+            "time": "2016-12-03 22:08:25"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -591,7 +592,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-03-15T19:32:56+00:00"
+            "time": "2017-03-15 19:32:56"
         },
         {
             "name": "psr/http-message",
@@ -641,7 +642,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -688,7 +689,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "smarty/smarty",
@@ -741,7 +742,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-12-14T21:57:25+00:00"
+            "time": "2016-12-14 21:57:25"
         }
     ],
     "packages-dev": [],
