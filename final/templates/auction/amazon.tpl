@@ -1,64 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Amazon</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
-<div id="wrapper" class="container">
-  <header>
-    <h1>Amazon Search</h1>
-  </header>
-  <main>
-    <div>
-      <form>
-        <div class="row">
-          <div class="form-group col-md-2">
-            <label for="search_index">Category</label>
-            <select class="form-control" name="search_index" id="search_index">
-              {foreach $search_indices as $index}
-                {if $index == $search_index}
-                  <option value="{$index}" selected>{$index}</option>
-                  {else}
-                  <option value="{$index}">{$index}</option>
-                {/if}
-              {/foreach}
-            </select>
-          </div>
-          <div class="input-group col-md-8">
-            <input type="text" class="form-control" name="keyword" id="keyword" value="{{$keyword}}" placeholder="Product search">
-            <div class="input-group-btn">
-              <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-    {if $items}
-    <div id="results-container">
-      {foreach $items as $item}
-        {$item->ItemAttributes->Title}
-      <div class="item">
-        <div class="item-image-container">
-          <img src="{$item->MediumImage->URL}" alt="{$item->ItemAttributes->Title}" class="item-image">
-        </div>
-        <div class="item-details-container">
-          <a href="{$item->DetailPageURL}" class="item-title">
-            <strong>{$item->ItemAttributes->Title}</strong>
-          </a>
-          <div class="item-brand">{$item->ItemAttributes->Brand}</div>
-          <div class="item-price">{$item->ItemAttributes->ListPrice->FormattedPrice}</div>
+<div class="row heading">
+  <h3 class="notification-page-title">Amazon Search</h3>
+  <p>Search and select here the product that you want to sell, directly from the amazon catalog!</p>
+</div>
+<div class="input-group col-md-12" style="padding-top: 1em">
+  <div class="col-md-7 col-xs-12">
+    <input type="text" class="form-control" name="keyword" id="keyword" value="{{$keyword}}" placeholder="Product keyword">
+  </div>
+  <div class="col-md-3 col-xs-12">
+    <select class="selectpicker" data-max-options="1" data-live-search="true" title="Product category..." name="search_index" id="search_index">
+      {foreach $searchIndices as $index}
+        {if $index == $searchIndex}
+          <option value="{$index}" selected>{$index}</option>
+        {else}
+          <option value="{$index}">{$index}</option>
+        {/if}
+      {/foreach}
+    </select>
+  </div>
+  <div class="col-md-2 col-xs-12">
+    <button type="button" class="btn btn-default searchAmazon"><i class="glyphicon glyphicon-search"></i>  Search</button>
+  </div>
+</div>
+<div class="row">
+  {if count($items) == 0}
+    <div class="container-fluid" style="padding: 1.5em;">
+      <div class="row-fluid">
+        <div class="empty-content text-center">
+          <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
+          <h3>There are no results that match your search</h3>
         </div>
       </div>
-      {/foreach}
     </div>
-    {elseif $has_searched}
-    No results found
-    {/if}
-  </main>
+  {else}
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        {foreach $items as $item}
+          <tr>
+            <td class="col-md-2"><img src="" alt="{$item['ItemAttributes']['Title']}"></td>
+            <td class="col-md-3">{$item['ItemAttributes']['Title']}<br></td>
+          </tr>
+        {/foreach}
+        </tbody>
+      </table>
+    </div>
+  {/if}
 </div>
-</body>
-</html>

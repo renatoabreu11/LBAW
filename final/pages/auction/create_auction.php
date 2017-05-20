@@ -18,12 +18,54 @@ if(!validUser($username, $id)){
   return;
 }
 
+$amazonSearchIndices = array(
+  'Apparel',
+  'Appliances',
+  'Automotive',
+  'Baby',
+  'Beauty',
+  'Blended',
+  'Books',
+  'Classical',
+  'DVD',
+  'Electronics',
+  'Grocery',
+  'HealthPersonalCare',
+  'HomeGarden',
+  'HomeImprovement',
+  'Jewelry',
+  'KindleStore',
+  'Kitchen',
+  'Lighting',
+  'Marketplace',
+  'MP3Downloads',
+  'Music',
+  'MusicTracks',
+  'MusicalInstruments',
+  'OfficeProducts',
+  'OutdoorLiving',
+  'Outlet',
+  'PetSupplies',
+  'PCHardware',
+  'Shoes',
+  'Software',
+  'SoftwareVideoGames',
+  'SportingGoods',
+  'Tools','Toys',
+  'VHS',
+  'Video',
+  'VideoGames',
+  'Watches'
+);
+
 $notifications = getActiveNotifications($id);
 $categories = getCategories();
 $auctionTypes = getAuctionTypes();
 
+$smarty->assign("searchIndex", "Books");
 $smarty->assign("module", "Auction");
 $smarty->assign('auctionTypes', $auctionTypes);
 $smarty->assign('notifications', $notifications);
 $smarty->assign("categories", $categories);
+$smarty->assign("searchIndices", $amazonSearchIndices);
 $smarty->display('auction/create_auction.tpl');

@@ -1,4 +1,49 @@
 $(document).ready(function() {
+  let amazonASIN;
+  $('input[type=radio][name=optradio]').change(function() {
+    if(this.value === 'api') {
+      $('#amazonSearch').fadeIn('slow');
+    }else if(this.value === 'personalized') {
+      $('#amazonSearch').fadeOut('slow');
+      amazonASIN = null;
+    }
+  });
+
+  $('#amazonSearch').on('change', '#keyword', function() {
+    $(this).css('border', '');
+  });
+
+  $('#amazonSearch').on('click', '.searchAmazon', function(event) {
+    event.stopPropagation();
+    let keyword = $('#keyword').val();
+    if(keyword == '') {
+      $('#keyword').css('border', '1px solid red');
+      return;
+    }
+    let category = $('#search_index').val();
+
+    $.ajax({
+      type: 'GET',
+      url: BASE_URL + 'api/auction/amazon.php',
+      dataType: 'json',
+      data: {
+        'keyword': keyword,
+        'category': category,
+      },
+      success: function(data) {
+        if (data['message'].includes('Success')) {
+          let amazonDiv = $('#amazonSearch');
+          amazonDiv.empty();
+          amazonDiv.append(data['amazonDiv']);
+          amazonDiv.show();
+        }
+      },
+      error: function(data) {
+        console.log(data);
+      },
+    });
+  });
+
   $('#step-1').on('click', '.input-group span.addCharacteristic', function() {
     let input = $(this).closest('.input-group').find('input[name=newCharacteristic]');
     let value = input.val();

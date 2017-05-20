@@ -74,4 +74,7 @@
       <button id="activate-step-2" class="btn btn-primary pull-right">Next Step</button>
     </div>
   </div>
+  <div class="col-md-12" id="amazonSearch" style="display: none">
+    {include file="auction/amazon.tpl"}
+  </div>
 </div>
