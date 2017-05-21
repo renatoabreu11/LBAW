@@ -4,6 +4,11 @@ $(document).ready(function() {
     $('#wrapper').toggleClass('toggled');
   });
 
+  $(window).on('resize', function(){
+    $('#wrapper').removeClass('toggled');
+  });
+
+
   $('#newAdmin').validate({
     rules:
       {

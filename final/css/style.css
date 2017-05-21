@@ -979,11 +979,12 @@ a.navlink {
 /* =============== watchList.html =============== */
 
 .watchList {
-  padding: 0.5em 1.5em;
+  padding: 0.5em 1.5em 2em 2em;
 }
 
 .watchList .heading {
   border-bottom: 1px lightgrey solid;
+  margin-bottom: 1.5em;
 }
 
 .watchList .auctions {
@@ -1002,26 +1003,20 @@ a.navlink {
 
 /* =============== notifications.html =============== */
 
-.notification-page-title {
-  margin-top: 0;
+.notificationsPageContainer {
+  padding: 0.5em 1.5em 2em 2em;
 }
 
-.notification-page-container h5 {
-  color: dodgerblue;
-  margin: 0;
-  padding-bottom: 0.5em;
-}
-
-.notification-page-container small {
+.notificationsPageContainer small {
   color: grey;
 }
 
-.notification-page-container .heading {
+.notificationsPageContainer .heading {
   border-bottom: 1px lightgrey solid;
   margin-bottom: 1.5em;
 }
 
-.notification-page-container .notifications-wrapper .notification-options a {
+.notificationsPageContainer .notifications-wrapper .notification-options a {
   font-size: 13px;
   color: grey;
   font-weight: bolder;

@@ -243,6 +243,7 @@ function setRemoveAuctionFromWatchlist() {
           items: {
             src: '<div class="white-popup">' + data + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
         if(data.includes('Success')) {
@@ -302,6 +303,7 @@ function setToogleNotifications() {
           items: {
             src: '<div class="white-popup">' + data + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
 

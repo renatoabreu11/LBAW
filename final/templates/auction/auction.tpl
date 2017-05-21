@@ -235,12 +235,12 @@
           </div>
         </div>
       </div>
-      {if $auction['questions_section'] && count($questions) > 0}
+      {if ($seller.id != $USER_ID || (count($questions) > 0 && $seller.id == $USER_ID)) && ($auction['questions_section'] || count($questions) > 0)}
         <hr>
         <div class="row product-questions">
           <div class="col-md-12">
             <h2>Product Q&A</h2>
-            {if ($seller.id != $USER_ID) && $USER_ID}
+            {if ($seller.id != $USER_ID) && $USER_ID && $auction['questions_section']}
               <form id="newQuestionForm" action="{$BASE_URL}api/auction/create_question.php" method="post">
                 <div class="form-group">
                   <label for="commentQuestion">Your question</label>
@@ -249,55 +249,57 @@
                 <button type="submit" class="btn btn-default">Send</button>
               </form>
             {/if}
-            <div id="qaSection" class="comment-list">
-              {include file='auction/question.tpl'}
-            </div>
-            <div>
-              <div id="removeQuestion" class="white-popup mfp-hide">
-                <h4>Are you sure that you want to delete this answer?</h4>
-                <p>You will not be able to undo this action!</p>
-                <div class="text-center">
-                  <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
-                  <button class="btn btn-info closePopup">No, go back</button>
+            {if count($questions) > 0}
+              <div id="qaSection" class="comment-list">
+                {include file='auction/question.tpl'}
+              </div>
+              <div>
+                <div id="removeQuestion" class="white-popup mfp-hide">
+                  <h4>Are you sure that you want to delete this answer?</h4>
+                  <p>You will not be able to undo this action!</p>
+                  <div class="text-center">
+                    <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
+                    <button class="btn btn-info closePopup">No, go back</button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <div id="removeAnswer" class="white-popup mfp-hide">
-                <h4>Are you sure that you want to delete this answer?</h4>
-                <p>You will not be able to undo this action!</p>
-                <div class="text-center">
-                  <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
-                  <button class="btn btn-info closePopup">No, go back</button>
+              <div>
+                <div id="removeAnswer" class="white-popup mfp-hide">
+                  <h4>Are you sure that you want to delete this answer?</h4>
+                  <p>You will not be able to undo this action!</p>
+                  <div class="text-center">
+                    <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
+                    <button class="btn btn-info closePopup">No, go back</button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
-                <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
-                  <div class="form-group">
-                    <label for="reportQuestionMessage">Report:</label>
-                    <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
-                  </div>
-                  <div class="text-center">
-                    <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
-                  </div>
-                </form>
+              <div>
+                <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
+                  <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
+                    <div class="form-group">
+                      <label for="reportQuestionMessage">Report:</label>
+                      <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                    </div>
+                    <div class="text-center">
+                      <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
-            <div>
-              <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
-                <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
-                  <div class="form-group">
-                    <label for="reportAnswerMessage">Report:</label>
-                    <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
-                  </div>
-                  <div class="text-center">
-                    <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
-                  </div>
-                </form>
+              <div>
+                <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
+                  <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
+                    <div class="form-group">
+                      <label for="reportAnswerMessage">Report:</label>
+                      <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
+                    </div>
+                    <div class="text-center">
+                      <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
+            {/if}
           </div>
         </div>
       {/if}

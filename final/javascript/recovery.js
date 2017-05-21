@@ -33,6 +33,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
     });

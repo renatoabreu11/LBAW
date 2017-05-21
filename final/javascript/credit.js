@@ -38,6 +38,7 @@ function setAddCredit() {
         items: {
           src: '<div class="white-popup">Error 400 Bad Request: You cannot add this amount of money. The maximum is 1000€.</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
       return;
@@ -60,6 +61,7 @@ function setAddCredit() {
           items: {
             src: '<div class="white-popup">' + data + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
       },

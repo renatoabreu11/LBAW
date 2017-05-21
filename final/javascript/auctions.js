@@ -94,6 +94,7 @@ function setSearchRequest() {
             items: {
               src: '<div class="white-popup">' + data + '</div>',
               type: 'inline',
+              mainClass: 'mfp-fade',
             },
           });
           return;

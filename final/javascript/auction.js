@@ -322,6 +322,7 @@ $(document).ready(function() {
           items: {
             src: '<div class="white-popup">' + data['message'] + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
         if (data['message'].includes('Success')) {
@@ -414,6 +415,7 @@ $(document).ready(function() {
           items: {
             src: '<div class="white-popup">' + response + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
       }
@@ -475,6 +477,7 @@ $(document).ready(function() {
           items: {
             src: '<div class="white-popup">' + response + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
       }
@@ -534,6 +537,7 @@ $(document).ready(function() {
           items: {
             src: '<div class="white-popup">' + response + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
       }
@@ -594,6 +598,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
     });
@@ -653,6 +658,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
     });
@@ -704,6 +710,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
     });
@@ -754,6 +761,7 @@ $(document).ready(function() {
           items: {
             src: '<div class="white-popup">' + response + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
       }

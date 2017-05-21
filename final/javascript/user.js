@@ -215,6 +215,7 @@ $(document).ready(function() {
             items: {
               src: '<div class="white-popup">' + response + '</div>',
               type: 'inline',
+              mainClass: 'mfp-fade',
             },
           });
         }
@@ -266,6 +267,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
       if(response.includes('Success')) {
@@ -330,6 +332,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
     });

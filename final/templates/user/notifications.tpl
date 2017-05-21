@@ -1,8 +1,8 @@
 {include file = 'common/header.tpl'}
 
-<div class="container notification-page-container">
-  <div class="row">
-    <div class="col-md-12">
+<div class="container notificationsPageContainer">
+  <div class="row heading">
+    <div class="col-md-12 index">
       <ul class="breadcrumb">
         <li>
           <a href="{$BASE_URL}index.php">Home</a> <span class="divider"></span>
@@ -12,12 +12,10 @@
         </li>
       </ul>
     </div>
+    <h3>Notifications</h3>
+    <p>You’ll see here notifications of your auctions, bids, questions, answers and warnings.</p>
   </div>
   <div class="col-xs-12 notificationsPage">
-    <div class="row heading">
-      <h3 class="notification-page-title">Notifications</h3>
-      <p>You’ll see here notifications of your auctions, bids, questions, answers and warnings.</p>
-    </div>
     {if count($pageNotifications) == 0}
       <div class="container-fluid" style="padding-bottom: 2em;">
         <div class="row-fluid">

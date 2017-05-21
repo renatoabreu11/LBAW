@@ -124,6 +124,7 @@ $(document).ready(function() {
         items: {
           src: '<div class="white-popup">' + response + '</div>',
           type: 'inline',
+          mainClass: 'mfp-fade',
         },
       });
       feedbackForm.trigger('reset');
@@ -160,7 +161,6 @@ $(document).ready(function() {
     });
 
     numNotifications = notificationsWrapper.children().length;
-    console.log(numNotifications);
     if(numNotifications === 1) {
       $('<p class="notifications-empty">' +
         'You have no new notifications</p>')
@@ -205,6 +205,7 @@ $(document).ready(function() {
           items: {
             src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
+            mainClass: 'mfp-fade',
           },
         });
 

@@ -24,7 +24,7 @@
   {/if}
   <link rel="stylesheet" href="{$BASE_URL}lib/select/bootstrap-select.css">
   <link rel="stylesheet" href="{$BASE_URL}lib/star-rating/jquery.rateyo.min.css"/>
-  <link rel="stylesheet" href="{$BASE_URL}css/style.min.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -34,7 +34,7 @@
 </head>
 <body>
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -61,7 +61,7 @@
         {if !$USERNAME && !$ADMIN_USERNAME}
           <li><a href="#" data-toggle="modal" data-target="#loginModal">Sign in</a></li>
           <li><a href="{$BASE_URL}pages/authentication/signup.php">Sign up</a></li>
-        {elseif $ADMIN_USERNAME}
+        {elseif $ADMIN_USERNAME && $module == "Admin"}
           <li>
             <a href="#menu-toggle" id="menu-toggle" class="navlink">Admin Panel</a>
           </li>
