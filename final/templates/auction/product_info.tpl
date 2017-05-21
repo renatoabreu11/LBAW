@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-md-4"> Category<span> *</span> </label>
+        <label for="category" class="control-label col-md-4"> Category<span> *</span> </label>
         <div class="col-md-8 input-group col-xs-12">
           <select class="input-md form-control selectpicker" id="category" name="category[]" multiple data-max-options="2" data-live-search="true" title="Define the product category...">
             {foreach $categories as $category}
@@ -41,23 +41,24 @@
         <strong class="field_error">{$FIELD_ERRORS.category}</strong>
       </div>
       <div class="form-group">
-        <label class="control-label col-md-4"> Description<span> *</span> </label>
+        <label for="description" class="control-label col-md-4"> Description<span> *</span> </label>
         <div class="col-md-8 input-group col-xs-12">
           <textarea maxlength="512" required class="form-control" id="description" name="description" placeholder="Tell us about your product" >{$FORM_VALUES.description}</textarea>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.description}</strong>
       </div>
       <div class="form-group">
-        <label class="control-label col-md-4"> Condition<span> *</span> </label>
+        <label for="condition" class="control-label col-md-4"> Condition<span> *</span> </label>
         <div class="col-md-8 input-group col-xs-12">
           <textarea maxlength="512" required class="form-control" id="condition" name="condition" placeholder="Tell us about the product condition" >{$FORM_VALUES.condition}</textarea>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
       </div>
       <div class="form-group">
-        <label class="control-label col-md-4"> Characteristics</label>
+        <label for="newCharacteristic" class="sr-only">New characteristic</label>
+        <label for="characteristics" class="control-label col-md-4"> Characteristics</label>
         <div class="col-md-8 input-group col-xs-12" style="padding-bottom: 0.5em;">
-          <input class="input-md form-control" name="newCharacteristic" placeholder="Add a new characteristic" type="text"/>
+          <input class="input-md form-control" id="newCharacteristic" name="newCharacteristic" placeholder="Add a new characteristic" type="text"/>
           <span class="input-group-addon addon-icon addCharacteristic">
     				<span class="glyphicon glyphicon-plus"></span>
     			</span>

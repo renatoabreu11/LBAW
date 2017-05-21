@@ -87,7 +87,7 @@
 
 <script src="{$BASE_URL}lib/datatables/jquery.dataTables.min.js"></script>
 <script src="{$BASE_URL}lib/datatables/dataTables.bootstrap.min.js"></script>
-<script src="{$BASE_URL}javascript/admin.js"></script>
+<script src="{$BASE_URL}javascript/admin.min.js"></script>
 
 </body>
 </html>

@@ -56,10 +56,11 @@
 							<h2> Auctions</h2>
 							<hr>
 							<div class="input-group">
-						<span class="input-group-btn">
-						<button class="btn btn-secondary" id="searchBtn">Search</button>
-						</span>
-								<input type="text" class="form-control" placeholder="Select your filters and then hit search..." id="inputSearch">
+						    <span class="input-group-btn">
+							    <button class="btn btn-secondary" id="searchBtn">Search</button>
+						    </span>
+                <label class="sr-only" for="inputSearch">Search auctions with filters</label>
+                <input type="text" class="form-control" placeholder="Select your filters and then hit search..." id="inputSearch">
 							</div>
 							<h6 style="color: darkgray;">Showing all results matching "{$textSearch}"</h6>
 							<div class="row">
@@ -74,8 +75,14 @@
 								</div>
 								<div class="col-md-4 text-center pull-right col-xs-4" id="listType">
 									<div class="btn-group">
-										<button id="list_btn" class="btn btn-default btn-responsive active" data-target="#auctionsList"><i class="fa fa-list"></i></button>
-										<button id="list_thumbnail_btn" class="btn btn-default btn-responsive" data-target="#auctionsThumbnails"><i class="fa fa-th"></i></button>
+										<button id="list_btn" class="btn btn-default btn-responsive active" data-target="#auctionsList">
+                      <span class="sr-only">List display</span>
+                      <i class="fa fa-list"></i>
+                    </button>
+										<button id="list_thumbnail_btn" class="btn btn-default btn-responsive" data-target="#auctionsThumbnails">
+                      <span class="sr-only">Thumbnail display</span>
+                      <i class="fa fa-th"></i>
+                    </button>
 									</div>
 								</div>
 							</div>

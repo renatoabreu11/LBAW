@@ -47,9 +47,9 @@
                 </div>
                 {if ($seller.id == $USER_ID && !$question.answer_message)}
                   <form class="newAnswerForm" action="{$BASE_URL}api/auction/create_answer.php" method="post" hidden>
+                    <label class="sr-only" for="comment">New answer</label>
                     <div class="form-group">
-                      <label></label>
-                      <textarea name="comment" required maxlength="512" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
+                      <textarea name="comment" id="comment" required maxlength="512" placeholder="Your answer..." class="form-control answer-area" rows="3"></textarea>
                     </div>
                     <button class="btn btn-default">Send</button>
                   </form>

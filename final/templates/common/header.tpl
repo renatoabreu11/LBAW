@@ -24,7 +24,7 @@
   {/if}
   <link rel="stylesheet" href="{$BASE_URL}lib/select/bootstrap-select.css">
   <link rel="stylesheet" href="{$BASE_URL}lib/star-rating/jquery.rateyo.min.css"/>
-  <link rel="stylesheet" href="{$BASE_URL}css/style.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/style.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -48,10 +48,11 @@
       {if !$ADMIN_USERNAME}
         <div class="searchHeader">
           <form class="navbar-form navbar-left" action="{$BASE_URL}pages/auctions/auctions.php" method="get" role="search">
+            <label class="sr-only" for="search">Search auctions</label>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search auctions..." name="search">
+              <input type="text" class="form-control" placeholder="Search auctions..." name="search" id="search">
               <div class="input-group-btn">
-                <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn btn-default"><span class="sr-only">Search </span><i class="glyphicon glyphicon-search"></i></button>
               </div>
             </div>
           </form>

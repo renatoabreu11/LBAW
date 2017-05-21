@@ -48,7 +48,7 @@
             </a>
             <small style="padding-left: 1em; padding-right: 1em;">Feb 20th, 2017 at 9:37:41</small>
             {if !$notif.is_new}
-              <a href="#" data-toggle="tooltip" title="Notification read!"><i class="fa fa-eye" aria-hidden="true"></i></a>
+              <a href="javascript:void(0)" data-toggle="tooltip" title="Notification read!"><span class="sr-only">Notification read!</span><i class="fa fa-eye" aria-hidden="true"></i></a>
             {/if}
             <p style="padding-top: 1em;">{$notif.message}</p>
             <div class="notification-options">

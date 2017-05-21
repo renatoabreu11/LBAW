@@ -21,6 +21,7 @@
     <p>Choose here the images to show to potential bidders.</p>
     <hr class="divider">
     <input type="hidden" name="product_id" id="product_id" value="{$product.id}">
+    <label class="sr-only" for="input-24">Gallery upload</label>
     <div class="image_upload">
       <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
     </div>

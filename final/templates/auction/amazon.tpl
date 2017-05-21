@@ -3,10 +3,12 @@
   <p>Search and select here the product that you want to sell, directly from the amazon catalog!</p>
 </div>
 <div class="input-group col-md-12" style="padding-top: 1em">
+  <label class="sr-only" for="keyword">Product keyword</label>
   <div class="col-md-7 col-xs-12">
     <input type="text" class="form-control" name="keyword" id="keyword" value="{{$keyword}}" placeholder="Product keyword">
   </div>
   <div class="col-md-3 col-xs-12">
+    <label class="sr-only" for="search_index">Product category</label>
     <select class="selectpicker" data-max-options="1" data-live-search="true" title="Product category..." name="search_index" id="search_index">
       {foreach $searchIndices as $index}
         {if $index == $searchIndex}

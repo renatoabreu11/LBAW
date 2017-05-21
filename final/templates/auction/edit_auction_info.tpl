@@ -7,7 +7,7 @@
       <div class="col-md-12 well">
         <h3> Auction</h3>
         <div class="form-group">
-          <label class="control-label col-md-4"> Type<span> *</span> </label>
+          <label for="auction_type" class="control-label col-md-4"> Type<span> *</span> </label>
           <div class="col-md-8 col-xs-12 input-group">
             <select class="selectpicker input-md form-control" name="auction_type" id="auction_type" title="Define the auction type...">
               {foreach $auctionTypes as $key => $type}
@@ -20,7 +20,8 @@
             </select>
             <span class="input-group-addon">
             <a href="#" data-toggle="tooltip" title="Dutch - Begins with a high asking price which is lowered until some participant is willing to bid. Sealed Bid - All the bids are sealed.">
-              <span class="fa fa-question"></span>
+              <span class="sr-only">Auction type explanation</span>
+              <i class="fa fa-question"></i>
             </a>
           </div>
           <strong class="field_error">{$FIELD_ERRORS.auction_type}</strong>

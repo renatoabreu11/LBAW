@@ -2,7 +2,7 @@
   <h4><i class="fa fa-user-secret" aria-hidden="true"></i> New admin</h4>
   <form id="newAdmin" class="form-horizontal" style="padding-top: 2em;" action="{$BASE_URL}api/admin/add_admin.php" method="post" enctype="multipart/form-data">
     <div class="form-group">
-      <label for="username" class="col-md-2 control-label">Username</label>
+      <label for="username" class="col-md-4 control-label">Username</label>
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="email" class="col-md-2 control-label">Email</label>
+      <label for="email" class="col-md-4 control-label">Email</label>
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="password" class="col-md-2 control-label">Password</label>
+      <label for="password" class="col-md-4 control-label">Password</label>
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="confirm" class="col-md-2 control-label">Confirm Password</label>
+      <label for="confirm" class="col-md-4 control-label">Confirm Password</label>
       <div class="col-md-4">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6 text-center" style="padding-top: 1em;">
+    <div class="col-sm-10 text-center" style="padding-top: 1em;">
       <button name="saveBtn" class="btn btn-info">Add new admin</button>
     </div>
   </form>

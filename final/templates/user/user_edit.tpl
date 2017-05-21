@@ -33,7 +33,7 @@
             <div class="panel-heading">General Info</div>
             <div class="panel-body">
               <div class="form-group">
-                <label class="col-md-3 control-label">Avatar: </label>
+                <label for="picture" class="col-md-3 control-label">Avatar: </label>
                 <div class="kv-avatar center-block text-center" style="width:200px">
                   <input id="picture" name="picture" type="file" class="file-loading">
                 </div>

@@ -7,7 +7,7 @@
       <div class="col-md-12 well">
         <h3> Settings</h3>
         <div class="form-group">
-          <label class="control-label col-md-4"> Q&A section<span> *</span> </label>
+          <label for="qa_section" class="control-label col-md-4"> Q&A section<span> *</span> </label>
           <div class="input-group col-md-8 col-xs-12">
             <select class="selectpicker input-md form-control" name="qa_section" id="qa_section" title="Do you want to answer questions about this auction?">
               {if $auction.questions_section == 1}
@@ -25,7 +25,7 @@
           <strong class="field_error">{$FIELD_ERRORS.qa_section}</strong>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-4"> Notifications<span> *</span> </label>
+          <label for="notifications_enabled" class="control-label col-md-4"> Notifications<span> *</span> </label>
           <div class="input-group col-md-8 col-xs-12">
             <select class="selectpicker input-md form-control" name="notifications_enabled" id="notifications_enabled" title="Do you want to receive notifications about this auction?">
               {if $watchlist.notifications == 1}

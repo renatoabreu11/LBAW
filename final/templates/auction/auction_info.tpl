@@ -16,7 +16,8 @@
           </select>
           <span class="input-group-addon">
             <a href="#" data-toggle="tooltip" title="Dutch - Begins with a high asking price which is lowered until some participant is willing to bid. Sealed Bid - All the bids are sealed.">
-              <span class="fa fa-question"></span>
+              <span class="sr-only">Auction type explanation</span>
+              <i class="fa fa-question"></i>
             </a>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.auction_type}</strong>
