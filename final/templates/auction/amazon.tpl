@@ -34,12 +34,12 @@
       </div>
     </div>
   {else}
-    <div class="table-responsive">
+    <div class="table-responsive" style="margin: 0.5em">
       <table class="table table-hover">
         <tbody>
         {foreach $items as $item}
           <tr>
-            <td class="col-md-2"><img src="" alt="{$item['ItemAttributes']['Title']}"></td>
+            <td class="col-md-2"><img src="{$item['SmallImage']['URL']}" alt="{$item['ItemAttributes']['Title']}"></td>
             <td class="col-md-3">{$item['ItemAttributes']['Title']}<br></td>
           </tr>
         {/foreach}

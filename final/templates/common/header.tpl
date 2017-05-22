@@ -21,10 +21,11 @@
     <link rel="stylesheet" href="{$BASE_URL}lib/fileinput/fileinput.css">
   {elseif $module == "Auctions"}
     <link rel="stylesheet" href="{$BASE_URL}lib/jqueryui/jquery-ui.min.css">
+    <link rel="stylesheet" href="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.css"/>
   {/if}
   <link rel="stylesheet" href="{$BASE_URL}lib/select/bootstrap-select.css">
   <link rel="stylesheet" href="{$BASE_URL}lib/star-rating/jquery.rateyo.min.css"/>
-  <link rel="stylesheet" href="{$BASE_URL}css/style.min.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/style.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

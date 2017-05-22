@@ -48,17 +48,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-4"></div>
-		<div class="col-xs-4">
+	<div class="row text-center">
+		<div class="col-xs-12">
 			<label class="sr-only" for="creditToAdd">Credit</label>
-			<div class="input-group number-spinner">
+			<div class="input-group number-spinner col-sm-4 col-sm-offset-4">
 				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+					<button class="btn btn-default" data-dir="dwn">
+            <span class="sr-only">Decrease credit</span>
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
 				</span>
 				<input type="text" id="creditToAdd" class="form-control text-center" value="100">
 				<span class="input-group-btn">
-					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+					<button class="btn btn-default" data-dir="up">
+            <span class="sr-only">Increase credit</span>
+						<span class="glyphicon glyphicon-plus"></span>
+          </button>
 				</span>
 			</div>
 			<div class="col-xs-12 text-center" style="padding-top: 1em">

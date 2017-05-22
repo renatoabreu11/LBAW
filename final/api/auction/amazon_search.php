@@ -29,6 +29,8 @@ if(!$keyword)
 $search = new Search();
 $search->setCategory($category);
 $search->setKeywords($keyword);
+$search->setPage(1);
+$search->setResponseGroup(array('Medium'));
 $response = $apaiIO->runOperation($search);
 $items = $response['Items']['Item'];
 
@@ -38,7 +40,6 @@ $amazonSearchIndices = array(
   'Automotive',
   'Baby',
   'Beauty',
-  'Blended',
   'Books',
   'Classical',
   'DVD',
@@ -51,10 +52,7 @@ $amazonSearchIndices = array(
   'KindleStore',
   'Kitchen',
   'Lighting',
-  'Marketplace',
-  'MP3Downloads',
   'Music',
-  'MusicTracks',
   'MusicalInstruments',
   'OfficeProducts',
   'OutdoorLiving',
@@ -63,10 +61,9 @@ $amazonSearchIndices = array(
   'PCHardware',
   'Shoes',
   'Software',
-  'SoftwareVideoGames',
   'SportingGoods',
-  'Tools','Toys',
-  'VHS',
+  'Tools',
+  'Toys',
   'Video',
   'VideoGames',
   'Watches'

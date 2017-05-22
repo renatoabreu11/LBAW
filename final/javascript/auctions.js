@@ -12,6 +12,28 @@ $(document).ready(function() {
   $( '#amount' ).val( sliderPrice.slider( 'values', 0 ) +
     '€ - ' + sliderPrice.slider( 'values', 1 ) + '€');
 
+  $(function() {
+    $('#fromDatePicker').datetimepicker({
+      minDate: moment(),
+      defaultDate: moment(),
+      locale: 'pt',
+    });
+
+    $('#toDatePicker').datetimepicker({
+      minDate: moment(),
+      defaultDate: moment().add(1, 'week'),
+      locale: 'pt',
+      useCurrent: false,
+    });
+
+    $('#fromDatePicker').on('dp.change', function(e) {
+      $('#toDatePicker').data('DateTimePicker').minDate(e.date);
+    });
+    $('#toDatePicker').on('dp.change', function(e) {
+      $('#fromDatePicker').data('DateTimePicker').maxDate(e.date);
+    });
+  });
+
   setChangeListType();
   setCountdown();
   setSearchRequest();
@@ -73,8 +95,8 @@ function setSearchRequest() {
     let category = $('#category').find('option:selected').val();
     let fromPrice = sliderPrice.slider( 'values', 0);
     let toPrice = sliderPrice.slider( 'values', 1);
-    let fromTimeRem = $('#fromTimeRem').find('option:selected').val();
-    let toTimeRem = $('#toTimeRem').find('option:selected').val();
+    let fromTimeRem = $('#fromTimeRem').val();
+    let toTimeRem = $('#toTimeRem').val();
 
     $.ajax({
       type: 'GET',

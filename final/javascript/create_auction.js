@@ -21,10 +21,11 @@ $(document).ready(function() {
       return;
     }
     let category = $('#search_index').val();
+    $(this).prop('disabled', true);
 
     $.ajax({
       type: 'GET',
-      url: BASE_URL + 'api/auction/amazon.php',
+      url: BASE_URL + 'api/auction/amazon_search.php',
       dataType: 'json',
       data: {
         'keyword': keyword,
@@ -37,9 +38,11 @@ $(document).ready(function() {
           amazonDiv.append(data['amazonDiv']);
           amazonDiv.show();
         }
+        $(this).prop('disabled', false);
       },
       error: function(data) {
         console.log(data);
+        $(this).prop('disabled', false);
       },
     });
   });
@@ -64,13 +67,23 @@ $(document).ready(function() {
 
   $(function() {
     $('#startDatePicker').datetimepicker({
-      minDate: moment(),
+      minDate: moment().add(12, 'hours'),
+      defaultDate: moment().add(12, 'hours'),
       locale: 'pt',
     });
 
     $('#endDatePicker').datetimepicker({
-      minDate: moment(),
+      minDate: moment().add(12, 'hours'),
+      defaultDate: moment().add(2, 'days'),
       locale: 'pt',
+      useCurrent: false,
+    });
+
+    $('#startDatePicker').on('dp.change', function(e) {
+      $('#endDatePicker').data('DateTimePicker').minDate(e.date);
+    });
+    $('#endDatePicker').on('dp.change', function(e) {
+      $('#startDatePicker').data('DateTimePicker').maxDate(e.date);
     });
   });
 

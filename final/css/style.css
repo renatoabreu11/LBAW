@@ -1084,9 +1084,17 @@ a.navlink {
   padding-bottom: 50px;
 }
 
-#adminLogin .form-wrap {
-  width: 30%;
-  margin: 0 auto;
+@media (min-width: 768px) {
+  #adminLogin .form-wrap {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  #adminLogin .form-wrap {
+    margin: 1em;
+  }
 }
 
 #adminLogin h1 {

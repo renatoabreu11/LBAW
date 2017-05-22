@@ -54,7 +54,7 @@
           {/if}
         {/if}
         {if ($USER_ID == $user.id)}
-          <a href="{$BASE_URL}pages/user/user_edit.php?id={$user.id}" class="btn btn-info btn-block" role="button">Edit profile</a>
+          <a href="{$BASE_URL}pages/user/user_edit.php?id={$user.id}" class="btn btn-primary btn-block" role="button">Edit profile</a>
         {/if}
         {if !$ADMIN_ID && $USER_ID && $USER_ID != $user.id}
           <span><a class="reportUserPopup btn btn-primary btn-block" href="#reportUserConfirmation">Report</a></span>

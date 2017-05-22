@@ -17,7 +17,7 @@
             <input type="password" name="password" id="password" class="form-control" placeholder="Your password" required maxlength="64">
           </div>
           <div class="text-center">
-            <input type="submit" id="btn-login" class="btn btn-lg btn-info" value="Sign in">
+            <input type="submit" id="btn-login" class="btn btn-md btn-primary" value="Sign in">
           </div>
         </form>
         <hr>

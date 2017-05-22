@@ -28,7 +28,7 @@
         {else}
           <img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" class="animated bounce infinite" alt="Product image">
         {/if}
-        <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;margin: 0.5em;">Watch Auction</a>
+        <a class="btn btn-primary" href="{$BASE_URL}pages/auction/auction.php?id={$mostRecentAuction.auction_id}" style="color: white;margin: 0.5em;">Watch Auction</a>
       </div>
     </div>
     <div class="text-center">

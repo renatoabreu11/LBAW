@@ -235,7 +235,7 @@
           </div>
         </div>
       </div>
-      {if ($seller.id != $USER_ID || (count($questions) > 0 && $seller.id == $USER_ID)) && ($auction['questions_section'] || count($questions) > 0)}
+      {if ($seller.id != $USER_ID || (count($questions) > 0 && $seller.id == $USER_ID)) && (($USER_ID && $auction['questions_section']) || count($questions) > 0)}
         <hr>
         <div class="row product-questions">
           <div class="col-md-12">

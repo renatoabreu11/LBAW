@@ -4,7 +4,7 @@ $(document).ready(function() {
     $('#wrapper').toggleClass('toggled');
   });
 
-  $(window).on('resize', function(){
+  $(window).on('resize', function() {
     $('#wrapper').removeClass('toggled');
   });
 

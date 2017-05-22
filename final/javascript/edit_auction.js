@@ -27,6 +27,14 @@ $(document).ready(function() {
     $('#endDatePicker').datetimepicker({
       minDate: moment(),
       locale: 'pt',
+      useCurrent: false,
+    });
+
+    $('#startDatePicker').on('dp.change', function(e) {
+      $('#endDatePicker').data('DateTimePicker').minDate(e.date);
+    });
+    $('#endDatePicker').on('dp.change', function(e) {
+      $('#startDatePicker').data('DateTimePicker').maxDate(e.date);
     });
   });
 

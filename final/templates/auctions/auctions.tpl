@@ -34,22 +34,21 @@
               </div>
 							<div class="padding"></div>
 							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Time remaining</button>
-							<div class="collapse" id="timeRemaining">
-								<label for="fromTimeRem">From:</label>
-								<select class="form-control" id="fromTimeRem">
-									<option value="0" selected>now</option>
-									<option value="1800">30 minutes</option>
-									<option value="3600">1 hour</option>
-									<option value="86400">1 day</option>
-									<option value="604800">1 week</option>
-								</select>
-								<label for="toTimeRem">To:</label>
-								<select class="form-control" id="toTimeRem">
-									<option value="1800">30 minutes</option>
-									<option value="3600">1 hour</option>
-									<option value="86400">1 day</option>
-									<option value="604800" selected>1 week</option>
-								</select>
+              <div class="collapse" id="timeRemaining">
+                <label for="fromTimeRem">From:</label>
+                <div class='input-group date' id='fromDatePicker'>
+                  <input type='text' class="form-control" name="fromTimeRem" id="fromTimeRem"/>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+                <label for="toTimeRem">To:</label>
+                <div class='input-group date' id='toDatePicker'>
+                  <input type='text' class="form-control" name="toTimeRem" id="toTimeRem"/>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
 							</div>
 						</div>
 						<div class="col-md-9 col-xs-12 col-sm-12">
@@ -103,11 +102,14 @@
 	</div>
 </div>
 
+<script src="{$BASE_URL}lib/datetimepicker/moment.js"></script>
+<script src="{$BASE_URL}lib/datetimepicker/pt.js"></script>
+<script src="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="{$BASE_URL}lib/pagination/jquery.twbsPagination.min.js"></script>
 <script src="{$BASE_URL}lib/countdown/jquery.countdown.min.js"></script>
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
 <script src="{$BASE_URL}lib/jqueryui/jquery-ui.min.js"></script>
-<script src="{$BASE_URL}javascript/auctions.min.js"></script>
+<script src="{$BASE_URL}javascript/auctions.js"></script>
 
 {include file='common/footer.tpl'}

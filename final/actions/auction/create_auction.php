@@ -6,6 +6,10 @@ include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'crontab/crontab.php');
 
+use ApaiIO\Configuration\GenericConfiguration;
+use ApaiIO\ApaiIO;
+use ApaiIO\Operations\Lookup;
+
 function to_pg_array($set) {
   settype($set, 'array'); // can be called with a scalar or array
   $result = array();
@@ -218,6 +222,28 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
 
       createCrontabCommand($startDate, $OPEN_AUCTION_SCRIPT, $auctionId);
       createCrontabCommand($endDate, $CLOSE_AUCTION_SCRIPT, $auctionId);
+
+      $ASIN = $_POST['ASIN'];
+      if($ASIN){
+        $conf = new GenericConfiguration();
+        $client = new \GuzzleHttp\Client();
+        $request = new \ApaiIO\Request\GuzzleRequest($client);
+
+        $conf
+          ->setCountry('com')
+          ->setAccessKey('AKIAILCGVBOLCCWSTAZA')
+          ->setSecretKey('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')
+          ->setAssociateTag('seekbid0e-20')
+          ->setRequest($request)
+          ->setResponseTransformer(new \ApaiIO\ResponseTransformer\XmlToArray());
+        $apaiIO = new ApaiIO($conf);
+
+        $lookup = new Lookup();
+        $lookup->setItemId($ASIN);
+        $lookup->setResponseGroup(array('Images'));
+
+        $response = $apaiIO->runOperation($lookup);
+      }
 
       $_SESSION['success_messages'][] = 'Auction created with success!';
       header("Location: $BASE_URL" . 'pages/auction/auction_gallery.php?id=' . $auctionId);

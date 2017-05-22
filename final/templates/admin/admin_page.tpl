@@ -41,7 +41,6 @@
       <h3>
         Website administration
       </h3>
-      <p>Here you can manage all the content of the website.</p>
     </div>
     {if $adminSection === "users"}
       {include file='admin/users.tpl'}
