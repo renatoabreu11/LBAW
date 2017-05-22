@@ -65,9 +65,6 @@ try {
   header("Location: $BASE_URL" . 'pages/authentication/signup.php');
   exit;
 }
-// facebook info
-if(isset($_SESSION['facebook_user_data']))
-    updateUserFacebook(getUserID($username), $_SESSION['facebook_user_data']['oauth_uid'], $_SESSION['facebook_user_data']['picture']);
 
 // Session
 
@@ -84,6 +81,14 @@ $_SESSION['username'] = $username;
 $_SESSION['user_id'] = getUserID($username);
 if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
+}
+// facebook info
+if(isset($_SESSION['facebook_user_data'])) {
+    $image = file_get_contents($_SESSION['facebook_user_data']['picture']);
+    $name = $_SESSION['username'] . '.jpg';
+    $dir = $BASE_URL . "images/users/" . $name;
+    file_put_contents($dir, $image);
+    updateUserFacebook($_SESSION['user_id'], $_SESSION['facebook_user_data']['oauth_uid'], $name);
 }
 
 $_SESSION['success_messages'][] = 'User successfully registered';
