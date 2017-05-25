@@ -66,6 +66,7 @@ if(count($images) == 0){
 }
 
 $smarty->assign('characteristics', $characteristics);
+$smarty->assign("isAuctionPage",true);
 $smarty->assign("module", "Auction");
 $smarty->assign("canEdit", $canEdit);
 $smarty->assign("images", $images);
