@@ -3,8 +3,11 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/users.php");
 
+$reply = array();
 if(!$_GET['email']) {
-  echo "Error 400 Bad Request: You didn't specify the email.";
+  $reply['response'] = 'Error 400 Bad Request';
+  $reply['message'] = "You didn't specify the email!";
+  echo json_encode($reply);
   return;
 }
 
@@ -12,12 +15,16 @@ $email = trim(strip_tags($_GET['email']));
 try {
   $username = getUserUsername($email);
 } catch(PDOException $e) {
-  echo "Error 500 Internal Server: Error getting the username.";
+  $reply['response'] = 'Error 500 Internal Server';
+  $reply['message'] = "Error sending email.";
+  echo json_encode($reply);
   return;
 }
 
 if(!$username) {
-  echo "Success: An email with the necessary steps to recover the password was sent to " . $email . ".";
+  $reply['response'] = 'Success 200';
+  $reply['message'] = "An email with the necessary steps to recover the password was sent to " . $email . ".";
+  echo json_encode($reply);
   return;
 }
 
@@ -26,7 +33,9 @@ try {
   createRequestPasswordReset($email, $token);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('request' => "Recover password."));
-  echo "Error 500 Internal Server: Error creating password recovery request.";
+  $reply['response'] = 'Error 500 Internal Server';
+  $reply['message'] = "Error creating password recovery request.";
+  echo json_encode($reply);
   return;
 }
 
@@ -60,7 +69,13 @@ $mail->MsgHTML($message);
 
 if (!$mail->send()) {
   $log->error($mail->ErrorInfo, array('request' => "Mailer password request."));
-  echo "Error sending mail to " . $email;
+  $reply['response'] = 'Success 202 Accepted';
+  $reply['message'] = "Error sending email to " . $email . ".";
+  echo json_encode($reply);
+  return;
 } else {
-  echo "Success: An email with the necessary steps to recover the password was sent to " . $email . ".";
+  $reply['response'] = 'Success 200';
+  $reply['message'] = "An email with the necessary steps to recover the password was sent to " . $email . ".";
+  echo json_encode($reply);
+  return;
 }

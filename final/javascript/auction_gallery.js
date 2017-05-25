@@ -18,10 +18,11 @@ function getInitialPreview() {
     dataType: 'json',
   });
 
-  request.done(function(response, textStatus, jqXHR) {
-    let message = response['message'];
-    if(message.includes('Success')) {
-      initFileInput(response);
+  request.done(function(data, textStatus, jqXHR) {
+    let message = data['message'];
+    let response = data['response'];
+    if(response.includes('Success')) {
+      initFileInput(data);
     }
   });
 

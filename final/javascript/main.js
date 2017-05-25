@@ -61,15 +61,17 @@ $(document).ready(function() {
         'username': username,
         'password': password,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         window.location.href=window.location.href;
       }else {
-        $('#loginModal').find('.field_error').text(response);
+        $('#loginModal').find('.field_error').text(message);
       }
     });
 
@@ -115,19 +117,22 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },
       });
-      feedbackForm.trigger('reset');
+      if(response.includes('Success'))
+        feedbackForm.trigger('reset');
     });
 
     // Callback handler that will be called on failure
@@ -199,8 +204,9 @@ $(document).ready(function() {
       });
 
       // Callback handler that will be called on success
-      request.done(function(response, textStatus, jqXHR) {
-        let message = response['message'];
+      request.done(function(data, textStatus, jqXHR) {
+        let message = data['message'];
+        let response = data['response'];
         $.magnificPopup.open({
           items: {
             src: '<div class="white-popup">' + message + '</div>',
@@ -209,10 +215,10 @@ $(document).ready(function() {
           },
         });
 
-        if (message.includes('Success')) {
-          let nrNotifications = response['nrNotifications'];
+        if (response.includes('Success')) {
+          let nrNotifications = data['nrNotifications'];
           $('.dropdown-menu.notifications').empty();
-          $('.dropdown-menu.notifications').append(response['notificationsDiv']);
+          $('.dropdown-menu.notifications').append(data['notificationsDiv']);
           updateNotificationBadge(nrNotifications);
         }
       });

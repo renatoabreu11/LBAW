@@ -3,8 +3,11 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
+$reply = array();
 if (!$_POST['username'] || !$_POST['password']) {
-  echo 'Error 400 Bad Request: All fields are mandatory!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "All input fields are mandatory!";
+  echo json_encode($reply);
   return;
 }
 
@@ -25,9 +28,12 @@ if (userExists($username, $password)) {
   if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
   }
-  echo 'Success: Login Successful!';
-  return;
+  $reply['response'] = "Success 200";
+  $reply['message'] = "Login successful!";
 } else {
-  echo 'Error: Invalid username or password!';
-  return;
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid username or password!";
 }
+
+echo json_encode($reply);
+return;

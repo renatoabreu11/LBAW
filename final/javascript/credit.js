@@ -36,7 +36,7 @@ function setAddCredit() {
     if(creditToAdd > 1000) {
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">Error 400 Bad Request: You cannot add this amount of money. The maximum is 1000€.</div>',
+          src: '<div class="white-popup">You cannot add this amount of money. The maximum allowed is 1000€.</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },
@@ -52,14 +52,19 @@ function setAddCredit() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
       success: function(data) {
-        let currCredit = $('#currCredit').attr('data-currCredit');
-        currCredit = parseFloat(currCredit) + parseFloat(creditToAdd);
-        $('#currCredit').attr('data-currCredit', currCredit);
-        $('#currCredit').text(currCredit + ' €');
+        let message = data['message'];
+        let response = data['response'];
+        if(response.includes('Success')){
+          let currCredit = $('#currCredit').attr('data-currCredit');
+          currCredit = parseFloat(currCredit) + parseFloat(creditToAdd);
+          $('#currCredit').attr('data-currCredit', currCredit);
+          $('#currCredit').text(currCredit + ' €');
+        }
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + data + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },

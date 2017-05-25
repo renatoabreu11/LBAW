@@ -164,7 +164,7 @@ function showAuctionsSpecifiedInFilter(selected) {
   } else if (selected == 'My auctions') {
     auctions.each(function() {
       let myAuction = $(this).attr('data-myAuction');
-      if (myAuction == 1){
+      if (myAuction == 1) {
         noAuctions = false;
         $(this).show();
       }
@@ -180,7 +180,7 @@ function showAuctionsSpecifiedInFilter(selected) {
   } else if (selected == 'Open auctions') {
     auctions.each(function() {
       let myAuction = $(this).attr('data-active');
-      if (myAuction == 1){
+      if (myAuction == 1) {
         noAuctions = false;
         $(this).show();
       }
@@ -238,15 +238,18 @@ function setRemoveAuctionFromWatchlist() {
         'userId': userId,
         'auctionId': auctionId,
       },
+      dataType: 'json',
       success: function(data) {
+        let message = data['message'];
+        let response = data['response'];
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + data + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },
         });
-        if(data.includes('Success')) {
+        if(response.includes('Success')) {
           remLinkElem.closest('.auction_row').remove();
 
           let numPages = getNumPagesNecessaryToAllAuctions();
@@ -298,25 +301,30 @@ function setToogleNotifications() {
         'userId': userId,
         'auctionId': auctionId,
       },
+      dataType: 'json',
       success: function(data) {
+        let message = data['message'];
+        let response = data['response'];
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + data + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },
         });
 
-        liElem.addClass('disabled');
-        liElem.children('a').removeClass('toogle-notif');
-        if (liElem.hasClass('disable-notif')) {
-          ulElem.children('.enable-notif').addClass('toogle-notif');
-          ulElem.children('.enable-notif').removeClass('disabled');
-        } else {
-          ulElem.children('.disable-notif').addClass('toogle-notif');
-          ulElem.children('.disable-notif').removeClass('disabled');
+        if(response.includes('Success')) {
+          liElem.addClass('disabled');
+          liElem.children('a').removeClass('toogle-notif');
+          if (liElem.hasClass('disable-notif')) {
+            ulElem.children('.enable-notif').addClass('toogle-notif');
+            ulElem.children('.enable-notif').removeClass('disabled');
+          } else {
+            ulElem.children('.disable-notif').addClass('toogle-notif');
+            ulElem.children('.disable-notif').removeClass('disabled');
+          }
+          setToogleNotifications();
         }
-        setToogleNotifications();
       },
       error: function(data) {
         alert(data);

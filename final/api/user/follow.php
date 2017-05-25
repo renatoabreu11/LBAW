@@ -3,26 +3,35 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/users.php");
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedUserId = $_SESSION['user_id'];
 $userId = $_POST['userId'];
 if($loggedUserId != $userId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $followedUserId = $_POST['followedUserId'];
 if(!$followedUserId || !is_numeric($followedUserId)) {
-  echo 'Error 400 Bad Request: Invalid followed user id!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid followed user!";
+  echo json_encode($reply);
   return;
 }
 
 if($followedUserId == $userId){
-  echo 'Error 400 Bad Request: You can\'t follow yourself!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "You can't follow yourself!";
+  echo json_encode($reply);
   return;
 }
 
@@ -30,8 +39,12 @@ try {
   followUser($userId, $followedUserId);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Follow user.'));
-  echo "Error 500 Internal Server: Error following user.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error following user.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: You have started to follow the user.";
+$reply['response'] = "Success 200";
+$reply['message'] = "You are now following the user!";
+echo json_encode($reply);

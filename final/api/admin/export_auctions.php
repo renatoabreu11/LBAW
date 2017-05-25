@@ -6,15 +6,20 @@ include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/auction.php');
 include_once($BASE_DIR .'database/auctions.php');
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedAdminId = $_SESSION['admin_id'];
 $adminId = $_POST['adminId'];
 if($loggedAdminId != $adminId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
@@ -91,4 +96,6 @@ foreach ($closedAuctions as $auction){
 $xml->appendChild($xml_root);
 $xml->save($BASE_DIR . "config/auctions.xml");
 
-echo "Auctions exported with success! The xml file is stored in the config folder.";
+$reply['response'] = "Success 200";
+$reply['message'] = "Auctions exported with success! The xml file is stored in the config folder.";
+echo json_encode($reply);

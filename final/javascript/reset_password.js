@@ -46,16 +46,19 @@ $(document).ready(function() {
         'newPassRepeat': newPassRepeat,
         'email': email,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.indexOf('Success') >= 0) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
+      if(response.includes('Success')) {
         $(form).remove();
         $('.form-wrap').append('<p class="text-center">Password updated with success.</p><a href="' + BASE_URL + '">Back to main page</a>');
       } else {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },

@@ -16,12 +16,10 @@
         </label>
         <div class="col-md-8 input-group col-xs-12">
           <label class="radio-inline active">
-            <input type="radio" name="optradio" checked="" value="personalized">
-            <a href="#" data-toggle="tooltip" title="Define the product information.">Personalized</a>
+            <input type="radio" name="optradio" checked="" value="personalized">Personalized
           </label>
           <label class="radio-inline">
-            <input type="radio" name="optradio" value="api">
-            <a href="#" data-toggle="tooltip" title="Select a product from the amazon store!">API information</a>
+            <input type="radio" name="optradio" value="api">API information
           </label>
         </div>
       </div>
@@ -43,7 +41,7 @@
       <div class="form-group">
         <label for="description" class="control-label col-md-4"> Description<span> *</span> </label>
         <div class="col-md-8 input-group col-xs-12">
-          <textarea maxlength="512" required class="form-control" id="description" name="description" placeholder="Tell us about your product" >{$FORM_VALUES.description}</textarea>
+          <textarea rows="5" required class="form-control" id="description" name="description" placeholder="Tell us about your product" >{$FORM_VALUES.description}</textarea>
         </div>
         <strong class="field_error">{$FIELD_ERRORS.description}</strong>
       </div>
@@ -64,7 +62,7 @@
     			</span>
         </div>
         <div class="col-md-8 input-group col-xs-12 col-md-offset-4">
-          <select class="input-md form-control selectpicker" id="characteristics" multiple data-max-options="10" data-live-search="true" name="characteristics[]" title="Choose here the product characteristics">
+          <select class="selectpicker" size="auto" id="characteristics" multiple data-max-options="10" data-live-search="true" name="characteristics[]" title="Choose here the product characteristics">
             {foreach $FORM_VALUES.characteristics as $characteristic}
               <option>{$characteristic}</option>
             {/foreach}

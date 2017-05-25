@@ -3,27 +3,36 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/admins.php');
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedAdminId = $_SESSION['admin_id'];
 $adminId = $_POST['adminId'];
 if($loggedAdminId != $adminId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 if (!$_POST['id']){
-  echo 'Error 400 Bad Request: All fields are mandatory!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "All fields are mandatory!";
+  echo json_encode($reply);
   return;
 }
 
 $feedbackId = $_POST['id'];
 
 if(!is_numeric($feedbackId)){
-  echo 'Error 400 Bad Request: Invalid feedback id.';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid feedback id.";
+  echo json_encode($reply);
   return;
 }
 
@@ -31,8 +40,12 @@ try {
   deleteFeedback($feedbackId);
 } catch (PDOException $e) {
   $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Remove feedback.'));
-  echo "Error 500 Internal Server: Error deleting feedback.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error deleting feedback.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: Feedback successfully removed!";
+$reply['response'] = "Success 200";
+$reply['message'] = "Feedback successfully removed!";
+echo json_encode($reply);

@@ -40,6 +40,7 @@
   <form id="createAuctionForm" action="{$BASE_URL}actions/auction/create_auction.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="token" value="{$TOKEN}">
     <input type="hidden" name="user_id" value="{$USER_ID}">
+    <input type="hidden" name="ASIN" value="" id="ASIN">
     {include file='auction/product_info.tpl'}
     {include file='auction/auction_info.tpl'}
     {include file='auction/settings.tpl'}

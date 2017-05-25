@@ -29,6 +29,6 @@
 </div>
 
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
-<script src="{$BASE_URL}javascript/auction_gallery.min.js"></script>
+<script src="{$BASE_URL}javascript/auction_gallery.js"></script>
 
 {include file='common/footer.tpl'}

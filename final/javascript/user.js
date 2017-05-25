@@ -56,9 +56,12 @@ $(document).ready(function() {
           'userId': userId,
           'token': token,
         },
+        dataType: 'json',
       });
 
-      request.done(function(response, textStatus, jqXHR) {
+      request.done(function(data, textStatus, jqXHR) {
+        let message = data['message'];
+        let response = data['response'];
         if(response.includes('Success'))
           $('#follow-btn').html('Unfollow');
       });
@@ -76,9 +79,12 @@ $(document).ready(function() {
           'userId': userId,
           'token': token,
         },
+        dataType: 'json',
       });
 
-      request.done(function(response, textStatus, jqXHR) {
+      request.done(function(data, textStatus, jqXHR) {
+        let message = data['message'];
+        let response = data['response'];
         if(response.includes('Success'))
           $('#follow-btn').html('Follow');
       });
@@ -108,10 +114,12 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      console.info('Response: ' + response);
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         mediaObj.fadeOut(500, function() {
           mediaObj.remove();
@@ -166,12 +174,13 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      console.info('Insert review response: ' + response);
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
-        // Removes the form wrapper.
         formWrapper.fadeOut(500, function() {
           formWrapper.remove();
         });
@@ -203,17 +212,20 @@ $(document).ready(function() {
           'token': token,
           'userId': userId,
         },
+        dataType: 'json',
       });
 
       // Callback handler that will be called on success
-      request.done(function(response, textStatus, jqXHR) {
+      request.done(function(data, textStatus, jqXHR) {
+        let message = data['message'];
+        let response = data['response'];
         if (response.includes('Success')) {
           $('<a href="#" data-toggle="tooltip" title="Notification read!"><i class="fa fa-eye" aria-hidden="true"></i></a>').insertAfter(object.find('.media-body small'));
           object.find('span a.readNotification').remove();
         }else {
           $.magnificPopup.open({
             items: {
-              src: '<div class="white-popup">' + response + '</div>',
+              src: '<div class="white-popup">' + message + '</div>',
               type: 'inline',
               mainClass: 'mfp-fade',
             },
@@ -258,26 +270,30 @@ $(document).ready(function() {
         'token': token,
         'userId': userId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
-      $.magnificPopup.open({
-        items: {
-          src: '<div class="white-popup">' + response + '</div>',
-          type: 'inline',
-          mainClass: 'mfp-fade',
-        },
-      });
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         notificationsWrapper = $('.notificationsPage .notifications-wrapper');
-        object.hide('slow', function() {
-          object.remove();
-        });
         if(notificationsWrapper.length === 1) {
-          window.location.href=window.location.href;
+          window.location.reload(true);
+        }else {
+          object.hide('slow', function() {
+            object.remove();
+          });
         }
+      } else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + message + '</div>',
+            type: 'inline',
+            mainClass: 'mfp-fade',
+          },
+        });
       }
     });
 
@@ -322,15 +338,18 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         $(form).trigger('reset');
       }
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },

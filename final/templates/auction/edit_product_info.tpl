@@ -38,7 +38,7 @@
         <div class="form-group">
           <label for="condition" class="control-label col-md-4"> Condition<span> *</span> </label>
           <div class="col-md-8 input-group col-xs-12">
-            <textarea maxlength="512" required class="form-control" id="condition" name="condition" placeholder="Tell us about the product condition" >{$product.condition}</textarea>
+            <textarea required class="form-control" id="condition" name="condition" placeholder="Tell us about the product condition" >{$product.condition}</textarea>
           </div>
           <strong class="field_error">{$FIELD_ERRORS.condition}</strong>
         </div>

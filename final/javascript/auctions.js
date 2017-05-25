@@ -111,10 +111,12 @@ function setSearchRequest() {
       },
       dataType: 'json',
       success: function(data) {
-        if ((typeof data) == 'string' && data.includes('Error')) {
+        let message = data['message'];
+        let response = data['response'];
+        if (response.includes('Error')) {
           $.magnificPopup.open({
             items: {
-              src: '<div class="white-popup">' + data + '</div>',
+              src: '<div class="white-popup">' + message + '</div>',
               type: 'inline',
               mainClass: 'mfp-fade',
             },
@@ -139,7 +141,7 @@ function setSearchRequest() {
         $('#list_btn').trigger('click'); // update list type
       },
       error: function(data) {
-        alert(data);
+        console.log(data);
       },
     });
   });

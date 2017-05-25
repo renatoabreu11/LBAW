@@ -3,8 +3,11 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
@@ -13,33 +16,45 @@ $userId = $_POST['userId'];
 if(!$adminId) {
   $loggedAdminId = $_SESSION['admin_id'];
   if($loggedAdminId != $adminId) {
-    echo "Error 403 Forbidden: You don't have permissions to make this request.";
+    $reply['response'] = "Error 403 Forbidden";
+    $reply['message'] = "You don't have permissions to make this request.";
+    echo json_encode($reply);
     return;
   }
 }else if(!$userId) {
   $loggedUserId = $_SESSION['user_id'];
   if($loggedUserId != $userId) {
-    echo "Error 403 Forbidden: You don't have permissions to make this request.";
+    $reply['response'] = "Error 403 Forbidden";
+    $reply['message'] = "You don't have permissions to make this request.";
+    echo json_encode($reply);
     return;
   }
 }else {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 if(!$_POST['questionId']) {
-  echo 'Error 400 Bad Request: Invalid question id!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid question.";
+  echo json_encode($reply);
   return;
 }
 
 $questionId = $_POST['questionId'];
 if(!is_numeric($questionId)) {
-  echo 'Error 400 Bad Request: Invalid answer id!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid question.";
+  echo json_encode($reply);
   return;
 }
 
 if($userId && !isQuestionCreator($questionId, $userId)){
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
@@ -47,8 +62,12 @@ try {
   deleteQuestion($questionId);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'adminId' => $adminId, 'request' => 'Delete question.'));
-  echo "Error 500 Internal Server: Error deleting question.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error deleting question.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: Question deleted successfully.";
+$reply['response'] = "Success 200";
+$reply['message'] = "Question deleted successfully.";
+echo json_encode($reply);

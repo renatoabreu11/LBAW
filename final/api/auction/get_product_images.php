@@ -6,7 +6,8 @@ include_once($BASE_DIR . "database/auction.php");
 $reply = array();
 $token = $_POST['token'];
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
   echo json_encode($reply);
   return;
 }
@@ -14,21 +15,24 @@ if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], 
 $userId = $_POST['userId'];
 $loggedUserId = $_SESSION['user_id'];
 if($loggedUserId != $userId) {
-  $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
   echo json_encode($reply);
   return;
 }
 
 $productId = $_POST['productId'];
 if(!is_numeric($productId)) {
-  $reply['message'] = "Error 400 Bad Request: Invalid product id!";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid product.";
   echo json_encode($reply);
   return;
 }
 
 $auctionId = getAuctionIdFromProduct($productId);
 if(!isOwner($userId, $auctionId)){
-  $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
   echo json_encode($reply);
   return;
 }
@@ -38,7 +42,8 @@ try {
   $images = getProductImages($productId);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Get product images.'));
-  $reply['message'] = "Error 500 Internal Server: Error retrieving product images!";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error retrieving the product images.";
   echo json_encode($reply);
   return;
 }
@@ -63,5 +68,6 @@ echo json_encode([
   'initialPreview' => $p1,
   'initialPreviewConfig' => $p2,
   'initialPreviewThumbTags' => $p3,
-  'message' => "Success. Product images retrieved with success!"
+  'response' => "Success 200",
+  'message' => "Product images retrieved with success!"
 ]);

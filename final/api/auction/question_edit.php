@@ -3,37 +3,50 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auction.php");
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $userId = $_POST['userId'];
 $loggedUserId = $_SESSION['user_id'];
 if($loggedUserId != $userId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $questionId = trim(strip_tags($_POST['questionId']));
 if(!is_numeric($questionId)) {
-  echo "Error 400 Bad Request: Invalid question id!";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid question.";
+  echo json_encode($reply);
   return;
 }
 
 if(!isQuestionCreator($questionId, $userId)){
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 if(!$_POST['comment']) {
-  echo "Error 400 Bad Request: All fields are mandatory!";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "All fields are mandatory.";
+  echo json_encode($reply);
   return;
 }
 
 $comment = strip_tags($_POST['comment']);
 if(strlen($comment) > 512){
-  echo "Error 400 Bad Request: The field length exceeds the maximum!";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "The question length exceeds the maximum number of characters (512).";
+  echo json_encode($reply);
   return;
 }
 
@@ -41,7 +54,9 @@ $question = getQuestion($questionId);
 $elapsedQuestionSeconds = strtotime(date('Y-m-d H:i')) - strtotime($question['date']);
 $editTimeAllowed = 900;     //900 = 15 minutes * 60 seconds.
 if($elapsedQuestionSeconds > $editTimeAllowed){
-  echo "Error 403 Forbidden: The time to edit the question has expired.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "The time to edit the question has expired.";
+  echo json_encode($reply);
   return;
 }
 
@@ -49,8 +64,12 @@ try {
   editQuestion($questionId, $comment);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Edit question.'));
-  echo "Error 500 Internal Server: Couldn't edit question!";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Couldn't edit the question!";
+  echo json_encode($reply);
   return;
 }
 
-echo 'Success: Question successfully edited.';
+$reply['response'] = "Success 200";
+$reply['message'] = "Question successfully edited.";
+echo json_encode($reply);

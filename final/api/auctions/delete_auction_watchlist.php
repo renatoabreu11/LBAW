@@ -4,31 +4,35 @@ include_once("../../config/init.php");
 include_once($BASE_DIR . "database/auctions.php");
 include_once($BASE_DIR . "database/auction.php");
 
-if(!$_POST['token'] || !$_SESSION['token'] || !$_POST['userId'] || !$_POST['auctionId']) {
-  echo "Error 400 Bad Request: Invalid request. Some fields are missing.";
-  return;
-}
-
-if (!hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+$reply = array();
+if (!$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedUserId = $_SESSION['user_id'];
 $userId = $_POST['userId'];
 if($loggedUserId != $userId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $auctionId = $_POST['auctionId'];
 if(!is_numeric($auctionId)) {
-  echo "Error 400 Bad Request: Invalid auction id.";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid auction.";
+  echo json_encode($reply);
   return;
 }
 
 if(isOwner($userId, $auctionId)){
-  echo "Error 403 Forbidden: You cannot remove your auction from the watchlist!";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You cannot remove your auction from the watchlist!";
+  echo json_encode($reply);
   return;
 }
 
@@ -36,8 +40,12 @@ try {
   removeAuctionFromWatchlist($userId, $auctionId);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => "Remove auction from watchlist."));
-  echo "Error 500 Internal Server: Error removing auction from watchlist.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error removing auction from watchlist.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: Auction removed successfully from watchlist.";
+$reply['response'] = "Success 200";
+$reply['message'] = "Auction removed successfully from watchlist.";
+echo json_encode($reply);

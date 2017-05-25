@@ -7,7 +7,8 @@ include_once($BASE_DIR . "database/users.php");
 
 $reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
   echo json_encode($reply);
   return;
 }
@@ -15,20 +16,23 @@ if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], 
 $userId = $_POST['userId'];
 $loggedUserId = $_SESSION['user_id'];
 if($loggedUserId != $userId) {
-  $reply['message'] = "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
   echo json_encode($reply);
   return;
 }
 
 if(!$_POST['comment'] || !$_POST['auctionId']) {
-  $reply['message'] = "Error 400 Bad Request: All fields are mandatory!";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "All fields are mandatory.";
   echo json_encode($reply);
   return;
 }
 
 $auctionId = $_POST['auctionId'];
 if(!is_numeric($auctionId) || !validAuction($auctionId)){
-  $reply['message'] = "Error 400 Bad Request: Invalid auction id.";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid auction.";
   echo json_encode($reply);
   return;
 }
@@ -38,21 +42,24 @@ $seller = $auction['user_id'];
 $qaSection = $auction['questions_section'];
 
 if($qaSection == false){
-  $reply['message'] = "Error 403 Forbidden: The auction owner doesn't allow questions!";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "The auction owner doesn't allow questions!";
   echo json_encode($reply);
   return;
 }
 
 $comment = strip_tags($_POST['comment']);
 if(strlen($comment) > 512){
-  $reply['message'] = "Error 400 Bad Request: The field length exceeds the maximum!";
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "The question length exceeds the maximum number of characters (512).";
   echo json_encode($reply);
   return;
 }
 
 $nrQuestions = getNumberQuestions($auctionId, $userId);
 if($nrQuestions >= 3){
-  $reply['message'] = "Error 403 Forbidden: The number of questions allowed per user is three!";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "The number of questions allowed per user is three!";
   echo json_encode($reply);
   return;
 }
@@ -61,7 +68,8 @@ try {
   createQuestion($comment, $userId, $auctionId);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Create question'));
-  $reply['message'] = "Error 500 Internal Server: Error creating the question!";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error creating the question.";
   echo json_encode($reply);
   return;
 }
@@ -80,5 +88,6 @@ $smarty->assign("questions", $questions);
 $questionsDiv = $smarty->fetch('auction/question.tpl');
 $dataToRetrieve = array(
   'questionsDiv' => $questionsDiv,
-  'message' => "Success: Question successfully added!");
+  'response' => 'Success 200',
+  'message' => "Question successfully added!");
 echo json_encode($dataToRetrieve);

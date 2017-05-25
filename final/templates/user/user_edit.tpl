@@ -114,7 +114,7 @@
             </div>
             <div class="col-xs-6 text-right">
               <div class="next">
-                <button class="btn btn-primary btn-discard">Discard</button>
+                <button type="button" class="btn btn-primary btn-discard">Discard</button>
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@
               </div>
               <div class="col-xs-6 text-right">
                 <div class="next">
-                  <button class="btn btn-primary btn-discard">Discard</button>
+                  <button type="button" class="btn btn-primary btn-discard">Discard</button>
                 </div>
               </div>
             </div>

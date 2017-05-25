@@ -30,7 +30,7 @@ $search = new Search();
 $search->setCategory($category);
 $search->setKeywords($keyword);
 $search->setPage(1);
-$search->setResponseGroup(array('Medium'));
+$search->setResponseGroup(array('Small', 'Images'));
 $response = $apaiIO->runOperation($search);
 $items = $response['Items']['Item'];
 
@@ -76,5 +76,6 @@ $smarty->assign("items", $items);
 $amazonDiv = $smarty->fetch('auction/amazon.tpl');
 $dataToRetrieve = array(
   'amazonDiv' => $amazonDiv,
-  'message' => "Success: Search completed with success!");
+  'message' => "Search completed with success!",
+  'response' => "Success 200");
 echo json_encode($dataToRetrieve);

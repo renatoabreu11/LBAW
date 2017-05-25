@@ -450,7 +450,7 @@ function bid($amount, $bidderId, $auctionId) {
 
   if($lastBidder['user_id'] == $bidderId) {
     $conn->commit();
-    return "Error 403 Forbidden: You currently have the highest bid.";
+    return "Error 403 Forbidden";
   }
 
   $stmt = $conn->prepare('UPDATE "user"
@@ -500,11 +500,11 @@ function bid($amount, $bidderId, $auctionId) {
     $stmt->execute();
 
     $conn->commit();
-    return "Success 201 Created: Bet was correctly recorded.";
+    return "Success 201 Created";
   }
   else {
     $conn->commit();
-    return "Success 203: Insufficient funds. You don't have the necessary amount to place a new bid.";
+    return "Success 203";
   }
 }
 

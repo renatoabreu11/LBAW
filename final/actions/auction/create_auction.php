@@ -9,6 +9,7 @@ include_once($BASE_DIR .'crontab/crontab.php');
 use ApaiIO\Configuration\GenericConfiguration;
 use ApaiIO\ApaiIO;
 use ApaiIO\Operations\Lookup;
+use Intervention\Image\ImageManager;
 
 function to_pg_array($set) {
   settype($set, 'array'); // can be called with a scalar or array
@@ -96,11 +97,7 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       $invalidInfo = true;
     }
 
-    $description = trim(strip_tags($_POST["description"]));
-    if ( strlen($description) > 512) {
-      $_SESSION['field_errors']['description'] = 'Invalid description length.';
-      $invalidInfo = true;
-    }
+    $description = trim(strip_tags($_POST["description"], '<br>, </br>, <i></i>, <b></b>'));
 
     $condition = trim(strip_tags($_POST["condition"]));
     if ( strlen($condition) > 512) {
@@ -115,7 +112,7 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       $invalidInfo = true;
     }else if(count($tmpCharacteristics) > 0){
       $aux = array_map(function($v){
-        return trim(strip_tags($v));
+        return trim(strip_tags($v, '<i></i>, <b></b>'));
       }, $tmpCharacteristics);
 
       foreach ($aux as $c){
@@ -224,7 +221,7 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
       createCrontabCommand($endDate, $CLOSE_AUCTION_SCRIPT, $auctionId);
 
       $ASIN = $_POST['ASIN'];
-      if($ASIN){
+      if($ASIN != ""){
         $conf = new GenericConfiguration();
         $client = new \GuzzleHttp\Client();
         $request = new \ApaiIO\Request\GuzzleRequest($client);
@@ -243,6 +240,39 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
         $lookup->setResponseGroup(array('Images'));
 
         $response = $apaiIO->runOperation($lookup);
+        $item = $images = $response['Items']['Item'];
+        $imageSet = $item['ImageSets']['ImageSet'];
+        $mainImage = $item['LargeImage']['URL'];
+
+        $images = array();
+        array_push($images, $mainImage);
+
+        foreach ($imageSet as $image){
+          $imageURL = $image['LargeImage']['URL'];
+          array_push($images, $imageURL);
+        }
+
+        if(count($images) != 0){
+          $manager = new ImageManager();
+          $product = getAuctionProduct($auctionId);
+          foreach ($images as $image){
+            try {
+              $filename = basename($image);
+              $extension = pathinfo($filename, PATHINFO_EXTENSION);
+              $caption = "Amazon pic";
+              $imageId = addProductPicture($product['id'], $extension, $caption, $filename);
+              $picturePath = $BASE_DIR . "images/auctions/" . $imageId . "." . $extension;
+              $thumbnailPath = $BASE_DIR . "images/auctions/thumbnails/" . $imageId . "." . $extension;
+              $img = $manager->make($image);
+              $img->save($picturePath);
+              $img->resize(460, 360);
+              $img->save($thumbnailPath);
+            } catch(PDOException $e) {
+              $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Upload amazon image.'));
+              $_SESSION['error_messages'][] = "Internal server error while association amazon image to product.";
+            }
+          }
+        }
       }
 
       $_SESSION['success_messages'][] = 'Auction created with success!';

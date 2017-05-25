@@ -23,15 +23,18 @@ $(document).ready(function() {
       data: {
         'email': email,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         $(form).trigger('reset');
       }
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },

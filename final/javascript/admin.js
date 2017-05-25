@@ -8,7 +8,6 @@ $(document).ready(function() {
     $('#wrapper').removeClass('toggled');
   });
 
-
   $('#newAdmin').validate({
     rules:
       {
@@ -82,22 +81,27 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
+      dataType: 'json',
       success: function(data) {
         form.find('.field_error.username').text('');
         form.find('.field_error.email').text('');
-        if(data.includes('Invalid username characters.')
-            || data.includes('Username already exists.')) {
-          form.find('.field_error.username').text(data);
-        } else if(data.includes('Email already exists.'))
-          form.find('.field_error.email').text(data);
+
+        let message = data['message'];
+        let response = data['response'];
+
+        if(message.includes('Invalid username characters.')
+          || message.includes('Username already exists.')) {
+          form.find('.field_error.username').text(message);
+        } else if(message.includes('Email already exists.'))
+          form.find('.field_error.email').text(message);
         else {
           $.magnificPopup.open({
             items: {
-              src: '<div class="white-popup">' + data + '</div>',
+              src: '<div class="white-popup">' + message + '</div>',
               type: 'inline',
             },
           });
-          if(data.includes('Success'))
+          if(response.includes('Success'))
             form.trigger('reset');
         }
       },
@@ -139,8 +143,9 @@ $(document).ready(function() {
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
-      let message = response['message'];
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(message.includes('Category already exists')) {
         form.find('.field_error').text(message);
       } else if(message.includes('Success')) {
@@ -153,7 +158,7 @@ $(document).ready(function() {
         form.trigger('reset');
         let div = '<li class="list-group-item col-md-3">'
           +title+
-          '<a class="removeCategoryPopup id-' + response['id'] + '" href="#removeCategoryConfirmation">'+
+          '<a class="removeCategoryPopup id-' + data['id'] + '" href="#removeCategoryConfirmation">'+
           '<i class="fa fa-times pull-right" aria-hidden="true"></i>'+
           '</a></li>';
         $('.categories ul').append(div);
@@ -214,14 +219,16 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });
@@ -262,14 +269,16 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });
@@ -301,14 +310,16 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });
@@ -342,18 +353,19 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });
-      console.log(response);
       if(response.includes('Success')) {
         reportTable.DataTable().row('.selected').remove().draw(false);
       }
@@ -472,18 +484,21 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });
-      $('#notificationForm').trigger('reset');
+      if(response.includes('Success'))
+        $('#notificationForm').trigger('reset');
     });
 
     // Callback handler that will be called on failure
@@ -570,14 +585,16 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });
@@ -606,14 +623,16 @@ $(document).ready(function() {
         'token': token,
         'adminId': adminId,
       },
-      dataType: 'text',
+      dataType: 'json',
     });
 
     // Callback handler that will be called on success
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });

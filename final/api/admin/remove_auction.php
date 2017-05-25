@@ -3,21 +3,28 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/auction.php');
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedAdminId = $_SESSION['admin_id'];
 $adminId = $_POST['adminId'];
 if($loggedAdminId != $adminId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $auctionId = $_POST['id'];
 if(!is_numeric($auctionId)){
-  echo 'Error 400 Bad Request: Invalid auction id.';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid auction id.";
+  echo json_encode($reply);
   return;
 }
 $auction = getAuction($auctionId);
@@ -26,8 +33,12 @@ try {
   deleteAuction($auctionId, $auction['product_id']);
 } catch (PDOException $e) {
   $log->error($e->getMessage(), array('adminId' => $adminId, 'request' => 'Remove auction.'));
-  echo "Error 500 Internal Server: Error deleting auction.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error deleting auction.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: Auction successfully removed!";
+$reply['response'] = "Success 200";
+$reply['message'] = "Auction successfully removed!";
+echo json_encode($reply);

@@ -90,10 +90,6 @@ if(count($category) == 2){
 }
 
 $description = trim(strip_tags($_POST["description"]));
-if ( strlen($description) > 512) {
-  $_SESSION['field_errors']['description'] = 'Invalid description length.';
-  $invalidInfo = true;
-}
 
 $condition = trim(strip_tags($_POST["condition"]));
 if ( strlen($condition) > 512) {

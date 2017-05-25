@@ -4,7 +4,6 @@ $(document).ready(function() {
   });
 
   let profileUrl = $('input[name=picture]').val();
-  console.log(profileUrl);
   let profilePic =
     '<img src=' + profileUrl + ' alt="Your Avatar" style="width:160px">';
   $('#picture').fileinput({

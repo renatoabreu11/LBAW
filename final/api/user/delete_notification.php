@@ -3,26 +3,28 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedUserId = $_SESSION['user_id'];
 $userId = $_POST['userId'];
 if($loggedUserId != $userId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
-  return;
-}
-
-if (!$_POST['id']){
-  echo 'Error 400 Bad Request: Invalid notification id!';
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $notificationId = $_POST['id'];
-if(!is_numeric($notificationId)){
-  echo 'Error 400 Bad Request: Invalid notification id.';
+if (!$notificationId || !is_numeric($notificationId)){
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid notification.";
+  echo json_encode($reply);
   return;
 }
 
@@ -30,8 +32,12 @@ try {
   deleteNotification($notificationId);
 } catch (PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Remove notification'));
-  echo "Error 500 Internal Server: Error deleting notification.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error deleting notification.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: Notification successfully removed!";
+$reply['response'] = "Success 200";
+$reply['message'] = "Notification successfully removed!";
+echo json_encode($reply);

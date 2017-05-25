@@ -109,11 +109,12 @@ $(document).ready(function() {
         'token': token,
       },
       success: function(data) {
-        let response = data['message'];
+        let message = data['message'];
+        let response = data['response'];
         if(response.includes('Error') || response.includes('Success 203')) {
           $.magnificPopup.open({
             items: {
-              src: '<div class="white-popup">' + response + '</div>',
+              src: '<div class="white-popup">' + message + '</div>',
               type: 'inline',
             },
           });
@@ -137,7 +138,7 @@ $(document).ready(function() {
           } else {
             $.magnificPopup.open({
               items: {
-                src: '<div class="white-popup">' + response + '</div>',
+                src: '<div class="white-popup">' + message + '</div>',
                 type: 'inline',
               },
             });
@@ -164,20 +165,24 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       notificationsModal.modal('hide');
 
-      if(response.indexOf('Success') >= 0)
+      if(response.includes('Success'))
         watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default btn-remove-auction-watchlist" style="border: none;">Remove from watch list</button></h4>');
-
-      $.magnificPopup.open({
-        items: {
-          src: '<div class="white-popup">' + response + '</div>',
-          type: 'inline',
-        },
-      });
+      else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + message + '</div>',
+            type: 'inline',
+          },
+        });
+      }
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -198,18 +203,22 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
-      if(response.indexOf('Success') >= 0)
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
+      if(response.includes('Success'))
         watchlistBtnDiv.html('<h4 class="text-center"><span class="glyphicon glyphicon-heart-empty auction-watchlist-glyphicon" style="cursor:pointer;"></span> <button class="btn btn-default" data-toggle="modal" data-target="#watchlist-notification-modal" style="border: none;">Add to watch list</button></h4>');
-
-      $.magnificPopup.open({
-        items: {
-          src: '<div class="white-popup">' + response + '</div>',
-          type: 'inline',
-        },
-      });
+      else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + message + '</div>',
+            type: 'inline',
+          },
+        });
+      }
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -258,16 +267,19 @@ $(document).ready(function() {
         'userId': userId,
       },
       success: function(data) {
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + data['message'] + '</div>',
-            type: 'inline',
-          },
-        });
-        if (data['message'].includes('Success')) {
+        let message = data['message'];
+        let response = data['response'];
+        if (response.includes('Success')) {
           $('#newQuestionForm').trigger('reset');
           qaSection.empty();
           qaSection.append(data['questionsDiv']);
+        }else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+            },
+          });
         }
       },
       error: function(data) {
@@ -318,17 +330,20 @@ $(document).ready(function() {
         'auctionId': auctionId,
       },
       success: function(data) {
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + data['message'] + '</div>',
-            type: 'inline',
-            mainClass: 'mfp-fade',
-          },
-        });
-        if (data['message'].includes('Success')) {
+        let message = data['message'];
+        let response = data['response'];
+        if (response.includes('Success')) {
           $('.newAnswerForm').remove();
           qaSection.empty();
           qaSection.append(data['questionsDiv']);
+        }else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+              mainClass: 'mfp-fade',
+            },
+          });
         }
       },
       error: function(data) {
@@ -357,9 +372,12 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         let questionDisplay = parent.children('.question-display');
         parent.children('.question-edit-display').toggle();
@@ -368,7 +386,7 @@ $(document).ready(function() {
       } else {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
           },
         });
@@ -402,9 +420,12 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         let answerDisplay = parent.children('.answer-display');
         parent.children('.answer-edit-display').toggle();
@@ -413,7 +434,7 @@ $(document).ready(function() {
       } else {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },
@@ -465,9 +486,12 @@ $(document).ready(function() {
         'adminId': adminId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         questionDiv.fadeOut(500, function() {
           questionDiv.remove();
@@ -475,7 +499,7 @@ $(document).ready(function() {
       } else {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },
@@ -525,9 +549,12 @@ $(document).ready(function() {
         'adminId': adminId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         article.fadeOut(500, function() {
           article.remove();
@@ -535,7 +562,7 @@ $(document).ready(function() {
       } else {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },
@@ -587,16 +614,19 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         $('#reportQuestionForm').trigger('reset');
         reportQuestionId = -1;
       }
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },
@@ -647,16 +677,19 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         $('#reportAnswerForm').trigger('reset');
         reportAnswerId = -1;
       }
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },
@@ -700,15 +733,18 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success')) {
         $(form).trigger('reset');
       }
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
           mainClass: 'mfp-fade',
         },
@@ -751,15 +787,18 @@ $(document).ready(function() {
         'userId': userId,
         'token': token,
       },
+      dataType: 'json',
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let message = data['message'];
+      let response = data['response'];
       if(response.includes('Success'))
         window.location.replace(BASE_URL);
       else {
         $.magnificPopup.open({
           items: {
-            src: '<div class="white-popup">' + response + '</div>',
+            src: '<div class="white-popup">' + message + '</div>',
             type: 'inline',
             mainClass: 'mfp-fade',
           },

@@ -1,16 +1,58 @@
 $(document).ready(function() {
-  let amazonASIN;
   $('input[type=radio][name=optradio]').change(function() {
     if(this.value === 'api') {
       $('#amazonSearch').fadeIn('slow');
     }else if(this.value === 'personalized') {
       $('#amazonSearch').fadeOut('slow');
-      amazonASIN = null;
+      $('#ASIN').val('');
     }
   });
 
   $('#amazonSearch').on('change', '#keyword', function() {
     $(this).css('border', '');
+  });
+
+  $('#amazonSearch').on('click', 'td.selectAmazonItem', function() {
+    let row = $(this);
+    let ASIN = row.siblings('td.productASIN').html().trim();
+    let title = row.siblings('td.productTitle').html().trim();
+    $('#ASIN').val(ASIN);
+    $('#product_name').val(title);
+
+    $.ajax({
+      type: 'GET',
+      url: BASE_URL + 'api/auction/amazon_lookup.php',
+      dataType: 'json',
+      data: {
+        'ASIN': ASIN,
+      },
+      success: function(data) {
+        let message = data['message'];
+        let response = data['response'];
+        if (response.includes('Success')) {
+          $('#description').val(data['description']);
+          console.log(data['description'])
+          let attributes = data['attributes'];
+          let select = $('#characteristics');
+          for(let attribute of attributes){
+            let option = '<option>' + attribute + '</option>';
+            select.append(option);
+          }
+          select.selectpicker('refresh');
+        } else{
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+              mainClass: 'mfp-fade',
+            },
+          });
+        }
+      },
+      error: function(data) {
+        console.log(data);
+      },
+    });
   });
 
   $('#amazonSearch').on('click', '.searchAmazon', function(event) {
@@ -32,7 +74,9 @@ $(document).ready(function() {
         'category': category,
       },
       success: function(data) {
-        if (data['message'].includes('Success')) {
+        let message = data['message'];
+        let response = data['response'];
+        if (response.includes('Success')) {
           let amazonDiv = $('#amazonSearch');
           amazonDiv.empty();
           amazonDiv.append(data['amazonDiv']);
@@ -55,10 +99,6 @@ $(document).ready(function() {
       return;
 
     let select = $('#characteristics');
-    let nrElements = select.find('> option').length;
-    if(nrElements >= 20)
-      return;
-
     let option = '<option>' + value + '</option>';
     select.append(option);
     select.selectpicker('refresh');
@@ -109,10 +149,6 @@ $(document).ready(function() {
           required: true,
           digits: true,
         },
-        'description': {
-          required: true,
-          maxlength: 512,
-        },
         'condition': {
           required: true,
           maxlength: 512,
@@ -150,13 +186,8 @@ $(document).ready(function() {
         },
         condition: {
           required: 'Please, enter the product condition.',
-          maxlength: 'The product condition' +
-          'must be no more than 255 characters.',
-        },
-        description: {
-          required: 'Please, enter the product description.',
-          maxlength: 'The product condition' +
-          'must be no more than 255 characters.',
+          maxlength: 'The product condition ' +
+          'must be no more than 512 characters.',
         },
         category: {
           productCategoriesSelected: 'Please, select a category.',

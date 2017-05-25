@@ -28,7 +28,7 @@ if (adminExists($username, $password)) {
   if (empty($_SESSION['token'])) {
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
   }
-  $_SESSION['success_messages'][] = 'Login successful';
+  $_SESSION['success_messages'][] = 'Login successful.';
   header("Location: $BASE_URL" . 'pages/admin/users.php');
 } else {
   $_SESSION['error_messages'][] = 'Login failed.';

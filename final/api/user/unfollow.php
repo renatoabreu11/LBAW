@@ -3,26 +3,35 @@
 include_once("../../config/init.php");
 include_once($BASE_DIR . "database/users.php");
 
+$reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $loggedUserId = $_SESSION['user_id'];
 $userId = $_POST['userId'];
 if($loggedUserId != $userId) {
-  echo "Error 403 Forbidden: You don't have permissions to make this request.";
+  $reply['response'] = "Error 403 Forbidden";
+  $reply['message'] = "You don't have permissions to make this request.";
+  echo json_encode($reply);
   return;
 }
 
 $unfollowedUserId = $_POST['unfollowedUserId'];
 if(!$unfollowedUserId || !is_numeric($unfollowedUserId)) {
-  echo 'Error 400 Bad Request: Invalid unfollowed user id!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid unfollowed user!";
+  echo json_encode($reply);
   return;
 }
 
 if($unfollowedUserId == $userId){
-  echo 'Error 400 Bad Request: You can\'t unfollow yourself!';
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "You can't unfollow yourself!";
+  echo json_encode($reply);
   return;
 }
 
@@ -30,8 +39,12 @@ try {
   unfollowUser($userId, $unfollowedUserId);
 } catch(PDOException $e) {
   $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Unfollow user.'));
-  echo "Error 500 Internal Server: Error unfollowing user.";
+  $reply['response'] = "Error 500 Internal Server";
+  $reply['message'] = "Error unfollowing user.";
+  echo json_encode($reply);
   return;
 }
 
-echo "Success: Your are no longer following the user.";
+$reply['response'] = "Success 200";
+$reply['message'] = "You are no longer following the user!";
+echo json_encode($reply);
