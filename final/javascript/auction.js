@@ -818,11 +818,18 @@ $(document).ready(function() {
   });
 
   // Facebook Share
-  $('#social-fb').on('click', function() {
+  $('#social-fb').click(function() {
       FB.ui({
           method: 'share',
+          display: 'popup',
           hashtag: '#SeekBid',
-          href: window.location,
-      }, function(response) {});
+          href: 'http://gnomo.fe.up.pt/~lbaw1662/final/pages/auction/auction.php?id=10',
+      }, function(response) {
+          if (response && !response.error_message) {
+              alert('Posting completed.');
+          } else {
+              alert('Error while posting.');
+          }
+      });
   });
 });
