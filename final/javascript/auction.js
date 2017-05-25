@@ -823,13 +823,7 @@ $(document).ready(function() {
           method: 'share',
           display: 'popup',
           hashtag: '#SeekBid',
-          href: 'http://gnomo.fe.up.pt/~lbaw1662/final/pages/auction/auction.php?id=10',
-      }, function(response) {
-          if (response && !response.error_message) {
-              alert('Posting completed.');
-          } else {
-              alert('Error while posting.');
-          }
-      });
+          href: 'http://gnomo.fe.up.pt/~lbaw1662/final/pages/auction/auction.php?id=' + auctionId,
+      }, function(response) {});
   });
 });

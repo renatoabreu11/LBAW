@@ -60,6 +60,7 @@ if(count($images) == 0){
   $images = array(['description' => 'Image not available', 'filename' => 'default.jpeg']);
 }
 
+$smarty->assign("isAuctionPage",true);
 $smarty->assign("module", "Auction");
 $smarty->assign("canEdit", $canEdit);
 $smarty->assign("images", $images);

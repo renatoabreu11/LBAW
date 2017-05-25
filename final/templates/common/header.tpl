@@ -5,6 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {if $isAuctionPage}
+    <meta property="og:title" content="{$product.name}" />
+    <meta property="og:description" content="{$product.description}" />
+    <meta property="og:url" content="http://gnomo.fe.up.pt/~lbaw1662/final/pages/auction/auction.php?id={$auction.id}" />
+    <meta property="og:image" content="http://gnomo.fe.up.pt/~lbaw1662/final/images/auctions/thumbnails/{$images[0]}" />
+    <meta property="og:type" content="article" />
+  {/if}
   <title>Seek Bid</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

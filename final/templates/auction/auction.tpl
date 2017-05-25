@@ -56,7 +56,7 @@
           <h5 class="text-center" style="color: darkgray">Click on the image to expand it</h5>
           {if $USER_ID }
             <div class="share text-center" style="padding-bottom: 0.5em;">
-              <a href="" class="btn btn-primary"><i id="social-fb" class="fa fa-facebook"> Share on facebook</i></a>
+              <a href="" id="social-fb" class="btn btn-primary"><i class="fa fa-facebook"> Share on facebook</i></a>
             </div>
           {/if}
           {if $USER_ID && $USER_ID != $seller.id}
