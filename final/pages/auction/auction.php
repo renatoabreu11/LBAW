@@ -18,8 +18,10 @@ $auction['start_date_readable'] = date('d F Y, H:i:s', strtotime($auction['start
 $product = getAuctionProduct($auctionId);
 $productCategories = getProductCategories($product['id']);
 $images = getProductImages($product['id']);
+$characteristics = getProductCharacteristics($product['id']);
 
 $seller = getUser($auction['user_id']);
+$seller['register_date'] = date('d F Y, H:i:s', strtotime($seller['register_date']));
 $numReviews = count(getReviews($auction['user_id']));
 
 $recentBidders = getRecentBidders($auctionId);
@@ -27,6 +29,9 @@ $numBids = getTotalNumBids($auctionId);
 $numBidders = count(getBidders($auctionId));
 
 $questions = getQuestionsAnswers($auctionId);
+foreach ($questions as &$question){
+  $question['date'] = date('d F Y, H:i', strtotime( $question['date']));
+}
 $similarAuctions = getSimilarAuctions($auctionId);
 
 foreach ($similarAuctions as &$auction_) {
@@ -60,6 +65,7 @@ if(count($images) == 0){
   $images = array(['description' => 'Image not available', 'filename' => 'default.jpeg']);
 }
 
+$smarty->assign('characteristics', $characteristics);
 $smarty->assign("module", "Auction");
 $smarty->assign("canEdit", $canEdit);
 $smarty->assign("images", $images);

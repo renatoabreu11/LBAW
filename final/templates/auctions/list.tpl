@@ -28,7 +28,7 @@
             {if $auction.state == 'Created'}
               <small>Price: <strong>{$auction.start_bid}€</strong></small><br>
               <small>Starting date:</small><br>
-              <strong style="font-size: 14px">{$auction.start_date}</strong>
+              <strong style="font-size: 14px">{$auction.start_date_readable}</strong>
             {else}
               <small>Price: <strong>{$auction.curr_bid}€</strong></small><br>
               <small>Ends in</small>
@@ -38,7 +38,7 @@
             {/if}
           </td>
           <td class="watch col-md-2">
-            <a class="btn btn-info" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a>
+            <a class="btn btn-primary" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a>
           </td>
         </tr>
       {/foreach}

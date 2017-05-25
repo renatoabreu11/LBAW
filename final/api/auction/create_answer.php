@@ -80,6 +80,9 @@ if(getNotificationOption($question['user_id'], $auctionId)) {
 
 $seller = getUser($userId);
 $questions = getQuestionsAnswers($auctionId);
+foreach ($questions as &$question){
+  $question['date'] = date('d F Y, H:i', strtotime( $question['date']));
+}
 $smarty->assign("questions", $questions);
 $smarty->assign("seller", $seller);
 $questionsDiv = $smarty->fetch('auction/question.tpl');

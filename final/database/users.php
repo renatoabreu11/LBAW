@@ -196,7 +196,7 @@ function getActiveAuctions($userId) {
                                 FROM auction
                                 JOIN product ON auction.product_id = product.id
                                 JOIN "user" ON auction.user_id = "user".id
-                                WHERE state IN (\'Open\', \'Closed\')
+                                WHERE state IN (\'Open\', \'Created\')
                                 AND "user".id = :user_id');
   $stmt->bindParam('user_id', $userId);
   $stmt->execute();

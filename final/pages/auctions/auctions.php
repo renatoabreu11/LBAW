@@ -18,12 +18,10 @@ $textSearch = null;
 if ($_GET['search'] && !$_GET['category']) {
   $textSearch = trim(strip_tags($_GET['search']));
   $auctions = searchAuctions($textSearch);
-}
-else if (!$_GET['search'] && $_GET['category']) {
+} else if (!$_GET['search'] && $_GET['category']) {
   $category = trim(strip_tags($_GET['category']));
   $auctions = searchAuctionsByCategory($category);
-}
-else if ($_GET['search'] && !$_GET['category']) {
+}else if ($_GET['search'] && $_GET['category']) {
   $textSearch = trim(strip_tags($_GET['search']));
   $category = trim(strip_tags($_GET['category']));
   $auctions = searchAuctionsByCategoryAndName($textSearch, $category);
@@ -32,6 +30,8 @@ else if ($_GET['search'] && !$_GET['category']) {
 foreach ($auctions as &$auction) {
   if ($auction['image'] == null) 
     $auction['image'] = 'default.jpeg';
+  $auction['end_date_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
+  $auction['start_date_readable'] = date('d F Y, H:i:s', strtotime($auction['start_date']));
 }
 
 if($_SESSION['user_id']){

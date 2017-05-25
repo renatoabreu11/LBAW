@@ -68,12 +68,6 @@ if($startDate > $endDate){
   $invalidInfo = true;
 }
 
-if($startDate < date("Y-m-d H:i")){
-  $_POST['start_date'] = date("d/m/Y H:i", strtotime('+1 hour'));
-  $_SESSION['field_errors']['start_date'] = "The auction's starting date has to be after the current date.";
-  $invalidInfo = true;
-}
-
 if($endDate < date("Y-m-d H:i")){
   $_POST['end_date'] = date("d/m/Y H:i", strtotime('+2 hour'));
   $_SESSION['field_errors']['end_date'] = "The auction's ending date has to be after the current date.";

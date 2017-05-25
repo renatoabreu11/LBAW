@@ -49,6 +49,9 @@
   {include file='auction/edit_product_info.tpl'}
   {include file='auction/edit_auction_info.tpl'}
   {include file='auction/edit_settings.tpl'}
+  <div class="text-center">
+    <a type="button" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" class="btn btn-info">Return to auction</a>
+  </div>
 </div>
 
 <script src="{$BASE_URL}lib/datetimepicker/moment.js"></script>

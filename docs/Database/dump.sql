@@ -68,6 +68,7 @@ ALTER TABLE ONLY final.question_report DROP CONSTRAINT question_report_pkey;
 ALTER TABLE ONLY final.question DROP CONSTRAINT question_pkey;
 ALTER TABLE ONLY final.product DROP CONSTRAINT product_pkey;
 ALTER TABLE ONLY final.product_category DROP CONSTRAINT product_category_pkey;
+ALTER TABLE ONLY final.password_request DROP CONSTRAINT password_request_token_uindex;
 ALTER TABLE ONLY final.password_request DROP CONSTRAINT password_request_pkey;
 ALTER TABLE ONLY final.notification DROP CONSTRAINT notification_pkey;
 ALTER TABLE ONLY final.image DROP CONSTRAINT image_pkey;
@@ -1399,7 +1400,7 @@ INSERT INTO admin VALUES (2, 'lbaw1662', 'lbaw1662@fe.up.pt', '$2y$12$o6h7m8iuYa
 -- Name: admin_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('admin_id_seq', 2, true);
+SELECT pg_catalog.setval('admin_id_seq', 3, true);
 
 
 --
@@ -1432,13 +1433,16 @@ SELECT pg_catalog.setval('answer_report_id_seq', 1, false);
 -- Data for Name: auction; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO auction VALUES (5, 100, 100, '2017-05-25 09:28:00', '2017-05-25 09:30:00', 'Default', 4, 5, '2017-05-25 09:26:37.832878', 1, true, 0, 'Created');
+INSERT INTO auction VALUES (6, 12, 12, '2017-05-25 10:06:00', '2017-05-25 10:07:00', 'Default', 4, 6, '2017-05-25 10:03:45.802588', 1, true, 0, 'Closed');
+INSERT INTO auction VALUES (7, 12, 12, '2017-05-25 22:42:00', '2017-05-27 10:42:00', 'Default', 4, 7, '2017-05-25 10:43:18.213526', 1, true, 0, 'Created');
 
 
 --
 -- Name: auction_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('auction_id_seq', 1, false);
+SELECT pg_catalog.setval('auction_id_seq', 7, true);
 
 
 --
@@ -1494,91 +1498,133 @@ INSERT INTO category VALUES (17, 'Sexual Toys');
 -- Name: category_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('category_id_seq', 1, false);
+SELECT pg_catalog.setval('category_id_seq', 18, true);
 
 
 --
 -- Data for Name: city; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO city VALUES (1, 1, 'Buenos Aires');
+INSERT INTO city VALUES (2, 1, 'Córdoba');
+INSERT INTO city VALUES (3, 1, 'Rosario');
+INSERT INTO city VALUES (4, 2, 'Brussels');
+INSERT INTO city VALUES (5, 2, 'Antwerp');
+INSERT INTO city VALUES (6, 2, 'Ghent');
+INSERT INTO city VALUES (9, 3, 'São Paulo');
+INSERT INTO city VALUES (10, 3, 'Rio de Janeiro');
+INSERT INTO city VALUES (11, 3, 'Salvador');
+INSERT INTO city VALUES (12, 4, 'Toronto');
+INSERT INTO city VALUES (13, 4, 'Montreal');
+INSERT INTO city VALUES (14, 4, 'Calgary');
+INSERT INTO city VALUES (15, 5, 'Copenhagen');
+INSERT INTO city VALUES (16, 5, 'Aarhus');
+INSERT INTO city VALUES (17, 5, 'Odense');
+INSERT INTO city VALUES (18, 6, 'Helsinki');
+INSERT INTO city VALUES (19, 6, 'Espoo');
+INSERT INTO city VALUES (20, 6, 'Tampere');
+INSERT INTO city VALUES (21, 7, 'Paris');
+INSERT INTO city VALUES (22, 7, 'Marseille');
+INSERT INTO city VALUES (23, 7, 'Lyon');
+INSERT INTO city VALUES (24, 8, 'Berlin');
+INSERT INTO city VALUES (25, 8, 'Hamburg');
+INSERT INTO city VALUES (26, 8, 'Munich');
+INSERT INTO city VALUES (27, 9, 'Dublin');
+INSERT INTO city VALUES (28, 9, 'Cork');
+INSERT INTO city VALUES (29, 9, 'Dún Laoghaire');
+INSERT INTO city VALUES (30, 10, 'Rome');
+INSERT INTO city VALUES (31, 10, 'Milan');
+INSERT INTO city VALUES (32, 10, 'Naples');
+INSERT INTO city VALUES (33, 11, 'Amsterdam');
+INSERT INTO city VALUES (34, 11, 'Rotterdam');
+INSERT INTO city VALUES (35, 11, 'The Hague');
+INSERT INTO city VALUES (36, 12, 'Oslo');
+INSERT INTO city VALUES (37, 12, 'Bergen');
+INSERT INTO city VALUES (38, 12, 'Trondheim');
+INSERT INTO city VALUES (39, 13, 'Warsaw');
+INSERT INTO city VALUES (40, 13, 'Kraków');
+INSERT INTO city VALUES (41, 13, 'Łódź');
+INSERT INTO city VALUES (42, 15, 'Madrid');
+INSERT INTO city VALUES (43, 15, 'Barcelona');
+INSERT INTO city VALUES (44, 15, 'Valencia');
+INSERT INTO city VALUES (45, 16, 'Stockholm');
+INSERT INTO city VALUES (46, 16, 'Gothenburg');
+INSERT INTO city VALUES (47, 16, 'Malmo');
+INSERT INTO city VALUES (48, 17, 'Zürich');
+INSERT INTO city VALUES (49, 17, 'Geneva');
+INSERT INTO city VALUES (50, 17, 'Basel');
+INSERT INTO city VALUES (51, 18, 'London');
+INSERT INTO city VALUES (52, 18, 'Birmingham');
+INSERT INTO city VALUES (53, 18, 'Glasgow');
+INSERT INTO city VALUES (54, 19, 'New York');
+INSERT INTO city VALUES (55, 19, 'Los Angeles');
+INSERT INTO city VALUES (56, 19, 'Chicago');
+INSERT INTO city VALUES (57, 20, 'Moscow');
+INSERT INTO city VALUES (58, 20, 'Saint Petersburg');
+INSERT INTO city VALUES (59, 20, 'Novosibirsk');
+INSERT INTO city VALUES (60, 14, 'Lisbon');
+INSERT INTO city VALUES (61, 14, 'Porto');
+INSERT INTO city VALUES (62, 14, 'Amadora');
+INSERT INTO city VALUES (63, 14, 'Braga');
+INSERT INTO city VALUES (64, 14, 'Setúbal');
+INSERT INTO city VALUES (65, 14, 'Coimbra');
+INSERT INTO city VALUES (66, 14, 'Évora');
+INSERT INTO city VALUES (67, 14, 'Aveiro');
+INSERT INTO city VALUES (68, 14, 'Viana do Castelo');
 
 
 --
 -- Name: city_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('city_id_seq', 1, false);
+SELECT pg_catalog.setval('city_id_seq', 69, true);
 
 
 --
 -- Data for Name: country; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
-INSERT INTO country VALUES (1, 'Angola');
-INSERT INTO country VALUES (2, 'Argentina');
-INSERT INTO country VALUES (3, 'Australia');
-INSERT INTO country VALUES (4, 'Austria');
-INSERT INTO country VALUES (5, 'Belgium');
-INSERT INTO country VALUES (6, 'Brazil');
-INSERT INTO country VALUES (7, 'Bulgaria');
-INSERT INTO country VALUES (8, 'Canada');
-INSERT INTO country VALUES (9, 'China');
-INSERT INTO country VALUES (10, 'Czech Republic');
-INSERT INTO country VALUES (11, 'Denmark');
-INSERT INTO country VALUES (12, 'Estonia');
-INSERT INTO country VALUES (13, 'Finland');
-INSERT INTO country VALUES (14, 'France');
-INSERT INTO country VALUES (15, 'Germany');
-INSERT INTO country VALUES (16, 'Greece');
-INSERT INTO country VALUES (17, 'Hungary');
-INSERT INTO country VALUES (18, 'Iceland');
-INSERT INTO country VALUES (19, 'India');
-INSERT INTO country VALUES (20, 'Ireland');
-INSERT INTO country VALUES (21, 'Israel');
-INSERT INTO country VALUES (22, 'Italy');
-INSERT INTO country VALUES (23, 'Japan');
-INSERT INTO country VALUES (24, 'Lithuania');
-INSERT INTO country VALUES (25, 'Luxembourg');
-INSERT INTO country VALUES (26, 'Mexico');
-INSERT INTO country VALUES (27, 'Netherlands');
-INSERT INTO country VALUES (28, 'New Zealand');
-INSERT INTO country VALUES (29, 'Norway');
-INSERT INTO country VALUES (30, 'Poland');
-INSERT INTO country VALUES (31, 'Portugal');
-INSERT INTO country VALUES (32, 'Romania');
-INSERT INTO country VALUES (33, 'Russian Federation');
-INSERT INTO country VALUES (34, 'Serbia');
-INSERT INTO country VALUES (35, 'Slovakia');
-INSERT INTO country VALUES (36, 'Slovenia');
-INSERT INTO country VALUES (37, 'South Africa');
-INSERT INTO country VALUES (38, 'Spain');
-INSERT INTO country VALUES (39, 'Sweden');
-INSERT INTO country VALUES (40, 'Switzerland');
-INSERT INTO country VALUES (41, 'Tunisia');
-INSERT INTO country VALUES (42, 'Turkey');
-INSERT INTO country VALUES (43, 'Ukraine');
-INSERT INTO country VALUES (44, 'United Kingdom');
-INSERT INTO country VALUES (45, 'United States');
+INSERT INTO country VALUES (1, 'Argentina');
+INSERT INTO country VALUES (2, 'Belgium');
+INSERT INTO country VALUES (3, 'Brazil');
+INSERT INTO country VALUES (4, 'Canada');
+INSERT INTO country VALUES (5, 'Denmark');
+INSERT INTO country VALUES (6, 'Finland');
+INSERT INTO country VALUES (7, 'France');
+INSERT INTO country VALUES (8, 'Germany');
+INSERT INTO country VALUES (9, 'Ireland');
+INSERT INTO country VALUES (10, 'Italy');
+INSERT INTO country VALUES (11, 'Netherlands');
+INSERT INTO country VALUES (12, 'Norway');
+INSERT INTO country VALUES (13, 'Poland');
+INSERT INTO country VALUES (14, 'Portugal');
+INSERT INTO country VALUES (15, 'Spain');
+INSERT INTO country VALUES (16, 'Sweden');
+INSERT INTO country VALUES (17, 'Switzerland');
+INSERT INTO country VALUES (18, 'United Kingdom');
+INSERT INTO country VALUES (19, 'United States');
+INSERT INTO country VALUES (20, 'Russia');
 
 
 --
 -- Name: country_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('country_id_seq', 45, true);
+SELECT pg_catalog.setval('country_id_seq', 21, true);
 
 
 --
 -- Data for Name: feedback; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO feedback VALUES (1, 1, 'Hello, this site is really good. Keep up the good work!', '2017-05-22 15:44:09.291428');
 
 
 --
 -- Name: feedback_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('feedback_id_seq', 1, false);
+SELECT pg_catalog.setval('feedback_id_seq', 1, true);
 
 
 --
@@ -1591,26 +1637,36 @@ SELECT pg_catalog.setval('feedback_id_seq', 1, false);
 -- Data for Name: image; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO image VALUES (8, '8.png', 5, 'gridGraph.png', 'gridGraph.png');
+INSERT INTO image VALUES (9, '9.png', 6, 'gridGraph.png', 'gridGraph.png');
+INSERT INTO image VALUES (10, '10.png', 7, 'horario.PNG', 'horario.PNG');
 
 
 --
 -- Name: image_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('image_id_seq', 1, false);
+SELECT pg_catalog.setval('image_id_seq', 10, true);
 
 
 --
 -- Data for Name: notification; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO notification VALUES (1, 'Boas, @hant? Está tudo bem? Abraço à família. Estuda muito para COMP', 'Warning', 4, false, '2017-05-22 16:52:24.173989');
+INSERT INTO notification VALUES (2, 'Your auction A Game of Thrones (A Song of Ice and Fire, Book 1) was deleted.', 'Auction', 4, false, '2017-05-25 08:32:39.159452');
+INSERT INTO notification VALUES (4, 'Your auction bike was deleted.', 'Auction', 4, true, '2017-05-25 09:09:27.100951');
+INSERT INTO notification VALUES (5, 'Your auction biker was deleted.', 'Auction', 4, true, '2017-05-25 09:25:37.525926');
+INSERT INTO notification VALUES (6, 'Your auction bhjef is now open!<br>', 'Auction', 4, true, '2017-05-25 10:06:02.312908');
+INSERT INTO notification VALUES (7, 'The auction bhjef is now open!<br>May the odds be ever in your favor! Good luck!', 'Auction', 4, true, '2017-05-25 10:06:02.318631');
+INSERT INTO notification VALUES (8, 'Your auction bhjef is now closed.<br>No one placed a bid in your auction :(. Better luck next time!', 'Auction', 4, true, '2017-05-25 10:07:01.870681');
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 1, false);
+SELECT pg_catalog.setval('notification_id_seq', 8, true);
 
 
 --
@@ -1623,26 +1679,36 @@ SELECT pg_catalog.setval('notification_id_seq', 1, false);
 -- Name: password_request_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('password_request_id_seq', 1, false);
+SELECT pg_catalog.setval('password_request_id_seq', 1, true);
 
 
 --
 -- Data for Name: product; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO product VALUES (3, 'bike', 'good bike.', 'good.', '{good.}');
+INSERT INTO product VALUES (4, 'biker', 'dsf', 'dsf', '{sdf}');
+INSERT INTO product VALUES (5, 'fsdf', 'dsf', 'sdfsd', '{dsf}');
+INSERT INTO product VALUES (6, 'bhjef', 'dsfs', 'fdssdf', '{fdsf}');
+INSERT INTO product VALUES (7, 'bfcxvcv', 'xcv', 'xcvxc', '{vcxvx,bvbvb}');
 
 
 --
 -- Data for Name: product_category; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO product_category VALUES (3, 5);
+INSERT INTO product_category VALUES (4, 2);
+INSERT INTO product_category VALUES (5, 12);
+INSERT INTO product_category VALUES (6, 5);
+INSERT INTO product_category VALUES (7, 3);
 
 
 --
 -- Name: product_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('product_id_seq', 1, false);
+SELECT pg_catalog.setval('product_id_seq', 7, true);
 
 
 --
@@ -1689,13 +1755,16 @@ SELECT pg_catalog.setval('review_id_seq', 1, false);
 --
 
 INSERT INTO "user" VALUES (1, 'renatoabreu', 'renatoabreu1196@gmail.com', 'Renato Abreu', 'Hello. I sell a lot of stuff. Come and see. I have the best things and everything costs 25 Schmeckles.', NULL, '$2y$12$FDpZPDSCltFqIKMi8ATxjeHAgacr1VuX91vWfJiZ1JCX.4N9z7sAO', NULL, '2017-05-09 00:56:32.755805', 'default.png', NULL, 0, NULL, NULL);
+INSERT INTO "user" VALUES (2, 'jlopes', 'jlopes@fe.up.pt', 'John Doe', 'Bio really short.', NULL, '$2y$12$gQCytOCmMLPQF93MYTk/ye/Z83gosOcO8sgcblBOnUOTiEpIgAkW.', NULL, '2017-05-22 09:48:06.239041', 'default.png', NULL, 0, NULL, NULL);
+INSERT INTO "user" VALUES (4, 'hant', 'up201406163@fe.up.pt', 'Helder Antunes', 'Hello! I sell things I no longer need. Maybe you need it!', 'I just know that I AM.', '$2y$12$Yx9P.HKAZ6l/R/f55x8QQenEhv7ecblfXEN/uVwyaE0KxVFLSyejy', '921212122', '2017-05-22 15:24:39.421975', 'default.png', NULL, 1000, 61, NULL);
+INSERT INTO "user" VALUES (6, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'Talk a little about me?', NULL, '$2y$12$ejcRc5zXM2xmog6DW0XMBOtfZ1ep6wEl4DfXmJ/TjPOjPkOKVvFmu', NULL, '2017-05-25 08:29:51.082072', 'default.png', NULL, 0, NULL, NULL);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('user_id_seq', 1, true);
+SELECT pg_catalog.setval('user_id_seq', 7, true);
 
 
 --
@@ -1715,6 +1784,9 @@ SELECT pg_catalog.setval('user_report_id_seq', 1, false);
 -- Data for Name: watchlist; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO watchlist VALUES (5, 4, true, '2017-05-25 09:26:37.832878');
+INSERT INTO watchlist VALUES (6, 4, true, '2017-05-25 10:03:45.802588');
+INSERT INTO watchlist VALUES (7, 4, true, '2017-05-25 10:43:18.213526');
 
 
 --
@@ -1835,6 +1907,14 @@ ALTER TABLE ONLY notification
 
 ALTER TABLE ONLY password_request
     ADD CONSTRAINT password_request_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: password_request_token_uindex; Type: CONSTRAINT; Schema: final; Owner: lbaw1662; Tablespace: 
+--
+
+ALTER TABLE ONLY password_request
+    ADD CONSTRAINT password_request_token_uindex UNIQUE (token);
 
 
 --

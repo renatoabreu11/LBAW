@@ -198,12 +198,22 @@
           </ul>
           <div class="tab-content">
             <div id="product" class="tab-pane fade in active">
+              <h4>Description</h4>
               <p>{$product.description}</p>
+              <h4>Condition</h4>
+              <p>{$product.condition}</p>
+              {if $characteristics }
+                <h4>Characteristics</h4>
+                <ul style="list-style-type: disc">
+                  {foreach $characteristics as $characteristic}
+                    <li>{$characteristic}</li>
+                  {/foreach}
+                </ul>
+              {/if}
             </div>
             <div id="auctionInformation" class="tab-pane fade">
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Type of Auction:</strong><p class="col-md-4"> {$auction.type}</p>
-                <strong class="col-md-2 col-xs-5">Fixed Price:</strong><p class="col-md-4"> {if ($auction.type == 'Dutch')}Yes{else}No{/if}</p>
               </div>
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Initial Price:</strong><p class="col-md-4"> {$auction.start_bid}€</p>
@@ -223,17 +233,19 @@
               </div>
             </div>
             <div id="seller" class="tab-pane fade">
-              <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}"><h3 >{$seller.username}</h3></a>
-              {if ($seller.full_bio)}
+              {if $seller.full_bio}
                 <p>{$seller.full_bio}</p>
               {else}
                 <p>{$seller.short_bio}</p>
               {/if}
               <br>
-              <p>{$seller.username} has {$numReviews} reviews
-                {if $seller.rating}
-                , and an average of <strong>{$seller.rating}</strong>/10 points.</p>
-                {else}.
+              <p>
+                <a href="{$BASE_URL}pages/user/user.php?id={$seller.id}" style="color: #0f38ff; font-size:14px">
+                  {$seller.username}
+                </a>
+                is a member since  {$seller.register_date} and has {$numReviews}
+                {if $seller.rating}reviews, with an average of <strong>{$seller.rating}</strong>/10 stars.</p>
+                {else}reviews.
                 {/if}
             </div>
           </div>
@@ -253,57 +265,57 @@
                 <button type="submit" class="btn btn-default">Send</button>
               </form>
             {/if}
-            {if count($questions) > 0}
-              <div id="qaSection" class="comment-list">
+            <div id="qaSection" class="comment-list">
+              {if count($questions) > 0}
                 {include file='auction/question.tpl'}
-              </div>
-              <div>
-                <div id="removeQuestion" class="white-popup mfp-hide">
-                  <h4>Are you sure that you want to delete this answer?</h4>
-                  <p>You will not be able to undo this action!</p>
-                  <div class="text-center">
-                    <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
-                    <button class="btn btn-info closePopup">No, go back</button>
+                <div>
+                  <div id="removeQuestion" class="white-popup mfp-hide">
+                    <h4>Are you sure that you want to delete this answer?</h4>
+                    <p>You will not be able to undo this action!</p>
+                    <div class="text-center">
+                      <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
+                      <button class="btn btn-info closePopup">No, go back</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <div id="removeAnswer" class="white-popup mfp-hide">
-                  <h4>Are you sure that you want to delete this answer?</h4>
-                  <p>You will not be able to undo this action!</p>
-                  <div class="text-center">
-                    <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
-                    <button class="btn btn-info closePopup">No, go back</button>
+                <div>
+                  <div id="removeAnswer" class="white-popup mfp-hide">
+                    <h4>Are you sure that you want to delete this answer?</h4>
+                    <p>You will not be able to undo this action!</p>
+                    <div class="text-center">
+                      <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
+                      <button class="btn btn-info closePopup">No, go back</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
-                  <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
-                    <div class="form-group">
-                      <label for="reportQuestionMessage">Report:</label>
-                      <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
-                    </div>
-                    <div class="text-center">
-                      <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
-                    </div>
-                  </form>
+                <div>
+                  <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
+                    <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
+                      <div class="form-group">
+                        <label for="reportQuestionMessage">Report:</label>
+                        <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                      </div>
+                      <div class="text-center">
+                        <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
+                      </div>
+                    </form>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
-                  <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
-                    <div class="form-group">
-                      <label for="reportAnswerMessage">Report:</label>
-                      <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
-                    </div>
-                    <div class="text-center">
-                      <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
-                    </div>
-                  </form>
+                <div>
+                  <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
+                    <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
+                      <div class="form-group">
+                        <label for="reportAnswerMessage">Report:</label>
+                        <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
+                      </div>
+                      <div class="text-center">
+                        <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
+                      </div>
+                    </form>
+                  </div>
                 </div>
-              </div>
-            {/if}
+              {/if}
+            </div>
           </div>
         </div>
       {/if}

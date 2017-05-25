@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   $(function() {
     $('#startDatePicker').datetimepicker({
-      minDate: moment(),
+      minDate: $('#start_date').val(),
       locale: 'pt',
     });
 

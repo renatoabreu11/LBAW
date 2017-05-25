@@ -25,10 +25,13 @@
     <div class="image_upload">
       <input id="input-24" name="input24[]" type="file" multiple class="file-loading">
     </div>
+    <div class="text-center">
+      <a type="button" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" class="btn btn-info">Return to auction</a>
+    </div>
   </div>
 </div>
 
 <script src="{$BASE_URL}lib/fileinput/fileinput.js"></script>
-<script src="{$BASE_URL}javascript/auction_gallery.js"></script>
+<script src="{$BASE_URL}javascript/auction_gallery.min.js"></script>
 
 {include file='common/footer.tpl'}

@@ -110,6 +110,6 @@
 <script src="{$BASE_URL}lib/star-rating/jquery.rateyo.min.js"></script>
 <script src="{$BASE_URL}lib/tinysort/tinysort.js"></script>
 <script src="{$BASE_URL}lib/jqueryui/jquery-ui.min.js"></script>
-<script src="{$BASE_URL}javascript/auctions.js"></script>
+<script src="{$BASE_URL}javascript/auctions.min.js"></script>
 
 {include file='common/footer.tpl'}

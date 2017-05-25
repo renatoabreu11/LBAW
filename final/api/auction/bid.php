@@ -82,6 +82,6 @@ else if($ret == "Success 203")
 $reply = array(
   'response' => $ret,
   'message' => $message,
-  'date' => date('d-m-Y H:m'),
+  'date' => date('d F Y, H:i'),
   'biddersDiv' => $biddersDiv);
 echo json_encode($reply);

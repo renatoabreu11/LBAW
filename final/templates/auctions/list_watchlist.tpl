@@ -38,7 +38,7 @@
           </h4>
           <h4 class="current-bid">Final bid: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
         {else}
-          <h4><strong>Auction closed</strong></h4>
+          <h4 class="current-bid"><strong>Auction closed</strong></h4>
           <h4>No one has bid on this auction.</h4>
         {/if}
       {elseif $auction['state'] == 'Open'}
@@ -48,7 +48,7 @@
         </div>
       {elseif $auction['state'] == 'Created'}
         <h4 class="current-bid">Initial price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
-        <h4>Offer starts <br><strong>{$auction.start_date}</strong></h4>
+        <h4>Offer starts <br><strong>{$auction.start_date_readable}</strong></h4>
       {/if}
       <div class="row text-center" style="padding-top: 4px; padding-bottom: 10px;">
         <a class="btn btn-primary btn-sm" href="{$BASE_URL}pages/auction/auction.php?id={$auction.id}" style="color: white;">Watch Auction</a>

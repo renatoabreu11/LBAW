@@ -18,7 +18,10 @@
         <p class="notification-item-date"><small>{$notification.date}</small></p>
       </div>
       <div class="media-right">
-        <button class="notification-item-remove btn btn-default btn-xs hideNotification"><i class="glyphicon glyphicon-remove"></i></button>
+        <button class="notification-item-remove btn btn-default btn-xs hideNotification">
+          <span class="sr-only">Hide notification</span>
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
       </div>
     </div>
   </div>

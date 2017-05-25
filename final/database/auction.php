@@ -546,7 +546,7 @@ function getQuestionsAnswers($auctionId){
     $answer = $stmt->fetch();
 
     $questions[$i]["answer_message"] = $answer['message'];
-    $questions[$i]["answer_date"] = $answer['date'];
+    $questions[$i]["answer_date"] = date('d F Y, H:i', strtotime($answer['date']));
     $questions[$i]["answer_id"] = $answer['id'];
 
     // Determines if an answer can be edited.

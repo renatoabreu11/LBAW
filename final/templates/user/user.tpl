@@ -24,7 +24,10 @@
       <hr>
       <div class="info-zone">
         {if ($userCurrLocation)}
-          <p><span class="glyphicon glyphicon-map-marker"></span>{$userCurrLocation.city_name}, {$userCurrLocation.country_name}</p>
+          <p>
+            <span class="glyphicon glyphicon-map-marker"></span>
+            {$userCurrLocation.city_name}, {$userCurrLocation.country_name}
+          </p>
         {/if}
         <p><span class="glyphicon glyphicon-envelope"></span><a href="mailto:{$user.email}"> {$user.email}</a></p>
         {if ($user.phone)}
@@ -202,17 +205,17 @@
                         {else}
                           <td class="image col-md-2"><img src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" alt="Product image"></td>
                         {/if}
-                        <td class="product col-md-5">
+                        <td class="product col-md-2">
                           <strong>{$auction.name}</strong><br>
-                          {$auction.description}
+                        </td>
+                        <td class="price col-md-2">
+                          <small>Price: <strong>{$auction.start_bid}€</strong></small><br>
                         </td>
                         <td class="price col-md-3">
                           {if $auction.state == 'Created'}
-                            <small>Price: <strong>{$auction.start_bid}€</strong></small><br>
                             <small>Starting date:</small><br>
-                            <strong style="font-size: 14px">{$auction.start_date}</strong>
+                            <strong style="font-size: 14px">{$auction.start_date_readable}</strong>
                           {else}
-                            <small>Price: <strong>{$auction.curr_bid}€</strong></small><br>
                             <small>Ends in</small>
                             <div class="countdown">
                               <div class="clock" style="font-weight: bolder; font-size: 14px;"><p hidden>{$auction.end_date}</p></div>

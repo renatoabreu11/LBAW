@@ -74,6 +74,8 @@ else {
 foreach ($auctions as &$auction) {
   if ($auction['image'] == null)
     $auction['image'] = 'default.jpeg';
+  $auction['end_date_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
+  $auction['start_date_readable'] = date('d F Y, H:i:s', strtotime($auction['start_date']));
 }
 
 $items = 8;
