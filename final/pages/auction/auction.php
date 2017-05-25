@@ -47,6 +47,9 @@ if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
   $username = $_SESSION['username'];
   $notifications = getActiveNotifications($id);
+  foreach ($notifications as &$n){
+    $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+  }
   $isOnWatchlist = isOnWatchlist($id, $auctionId);
   $smarty->assign('username', $username);
   $smarty->assign('notifications', $notifications);

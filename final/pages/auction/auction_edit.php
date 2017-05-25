@@ -45,6 +45,9 @@ if($auction['state'] != 'Created'){
 $categories = getCategories();
 $product = getAuctionProduct($auctionId);
 $notifications = getActiveNotifications($id);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 $auctionTypes = getAuctionTypes();
 $watchlist = getWatchlistInfo($id, $auctionId);
 $productTypes = getProductCategories($product['id']);

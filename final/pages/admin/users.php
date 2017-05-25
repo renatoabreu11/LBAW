@@ -8,21 +8,22 @@ $id = $_SESSION['admin_id'];
 $token = $_SESSION['token'];
 
 if(!$username || !$id || !$token){
-    $smarty->display('common/404.tpl');
-    return;
+  $smarty->display('common/404.tpl');
+  return;
 }
 
 if(!validAdmin($username, $id)){
-    $smarty->display('common/404.tpl');
-    return;
+  $smarty->display('common/404.tpl');
+  return;
 }
 
 $users = getAllUsers();
 $nrOfAuctionsByUser = array();
 
-foreach ($users as $user){
-    $nrAuctions = getNumTotalAuctions($user["id"]);
-    array_push($nrOfAuctionsByUser, $nrAuctions);
+foreach ($users as &$user){
+  $user['register_date'] = date('d F Y, H:i:s', strtotime($user['register_date']));
+  $nrAuctions = getNumTotalAuctions($user["id"]);
+  array_push($nrOfAuctionsByUser, $nrAuctions);
 }
 
 $smarty->assign("module", "Admin");

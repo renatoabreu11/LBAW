@@ -19,6 +19,9 @@ if(!is_numeric($userId)) {
 }
 
 $notifications = getActiveNotifications($userId);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 $user = getUser($userId);
 $userCurrLocation = getCityAndCountry($userId);
 $countries = getAllCountries();

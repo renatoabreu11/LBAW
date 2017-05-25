@@ -29,6 +29,12 @@ $items = 10;
 $offset = ($page * $items) - $items;
 $page_notifications = getPageNotifications($id, $items, $offset);
 $notifications = getActiveNotifications($id);
+foreach ($page_notifications as &$notif){
+  $notif['date'] = date('d F Y, H:i:s', strtotime($notif['date']));
+}
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 $nr_pages = ceil(countNotifications($id) / $items);
 
 $smarty->assign("module", "User");

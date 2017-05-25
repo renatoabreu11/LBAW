@@ -13,6 +13,7 @@ if(!is_numeric($userId) || !validUserId($userId)) {
 }
 
 $user = getUser($userId);
+$user['register_date'] = date('d F Y, H:i:s', strtotime($user['register_date']));
 $userCurrLocation = getCityAndCountry($userId);
 $isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user not logged in.
 $totalAuctions = getNumTotalAuctions($userId);
@@ -34,12 +35,38 @@ if($userId == $loggedUserId)
 
 if($loggedUserId){
   $notifications = getActiveNotifications($loggedUserId);
+  foreach ($notifications as &$n){
+    $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+  }
   $smarty->assign('notifications', $notifications);
+}
+
+foreach ($lastReviews as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+}
+
+foreach ($lastBids as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+}
+
+foreach ($lastFollowing as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+}
+
+foreach ($lastWins as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+}
+
+foreach ($lastQuestion as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+}
+
+foreach ($lastWatchlistAuctions as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
 }
 
 $smarty->assign('user', $user);
 $smarty->assign('profile_pic', $BASE_URL . "images/users/" . $user['profile_pic']);
-
 $smarty->assign("module", "User");
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('isFollowing', $isFollowing);

@@ -39,6 +39,9 @@ if($auction['state'] != 'Created'){
 
 $product = getAuctionProduct($auctionId);
 $notifications = getActiveNotifications($id);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 
 $smarty->assign("module", "Auction");
 $smarty->assign('notifications', $notifications);

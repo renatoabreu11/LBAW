@@ -59,6 +59,9 @@ $amazonSearchIndices = array(
 );
 
 $notifications = getActiveNotifications($id);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 $categories = getCategories();
 $auctionTypes = getAuctionTypes();
 

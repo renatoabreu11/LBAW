@@ -37,6 +37,9 @@ foreach ($auctions as &$auction) {
 if($_SESSION['user_id']){
   $id = $_SESSION['user_id'];
   $notifications = getActiveNotifications($id);
+  foreach ($notifications as &$n){
+    $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+  }
   $smarty->assign('notifications', $notifications);
 }
 

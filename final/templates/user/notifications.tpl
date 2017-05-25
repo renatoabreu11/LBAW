@@ -46,7 +46,7 @@
                 You are the winner of an auction. Congratulations!
               {/if}
             </a>
-            <small style="padding-left: 1em; padding-right: 1em;">Feb 20th, 2017 at 9:37:41</small>
+            <small style="padding-left: 1em; padding-right: 1em;">{$notif.date}</small>
             {if !$notif.is_new}
               <a href="javascript:void(0)" data-toggle="tooltip" title="Notification read!"><span class="sr-only">Notification read!</span><i class="fa fa-eye" aria-hidden="true"></i></a>
             {/if}

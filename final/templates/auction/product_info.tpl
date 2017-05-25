@@ -21,6 +21,7 @@
           <label class="radio-inline">
             <input type="radio" name="optradio" value="api">API information
           </label>
+          <a href="#" data-toggle="tooltip" data-placement="top" title="By selecting a product amazon, the name, description and characteristics of the product will be automatically filled."> <i class="fa fa-question-circle" aria-hidden="true"></i></a>
         </div>
       </div>
       <div class="form-group">

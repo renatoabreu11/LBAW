@@ -23,6 +23,9 @@ $valBetsOnGame = getValBetsOnGame($userId);
 if ($valBetsOnGame === null) $valBetsOnGame = 0;
 
 $notifications = getActiveNotifications($userId);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 
 $smarty->assign("module", "User");
 $smarty->assign('notifications', $notifications);

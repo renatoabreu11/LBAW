@@ -40,6 +40,9 @@ foreach ($auctions as &$auction) {
 }
 
 $notifications = getActiveNotifications($id);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 
 $items = 4;
 $nr_pages = ceil(count($auctions) / $items);

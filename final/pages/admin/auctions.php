@@ -36,8 +36,8 @@ foreach ($auctionsIDs as $auctionArr){
     "seller" => $seller,
     "seller_id" => $sellerId,
     "type" => $type,
-    "start_date" => $start_date,
-    "end_date" => $end_date,
+    "start_date" => date('d F Y, H:i:s', strtotime($start_date)),
+    "end_date" => date('d F Y, H:i:s', strtotime($end_date)),
   );
   array_push($auctions, $auction);
 }

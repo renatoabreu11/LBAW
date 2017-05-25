@@ -28,7 +28,7 @@
           {/if}
         </ul>
       </div>
-      <h4 style="height: 25px;">{$auction.product_name}</h4>
+      <h4>{$auction.product_name}</h4>
       <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
       {if $auction['state'] == 'Closed'}
         {if $auction.winner != NULL}

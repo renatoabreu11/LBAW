@@ -18,6 +18,10 @@ if(!validAdmin($username, $id)){
 
 $feedback = getFeedback();
 
+foreach($feedback as &$feed){
+  $feed['date'] = date('d F Y, H:i:s', strtotime($feed['date']));
+}
+
 $smarty->assign("module", "Admin");
 $smarty->assign("feedback", $feedback);
 $smarty->assign("adminSection", "feedback");

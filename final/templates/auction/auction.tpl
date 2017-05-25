@@ -210,8 +210,8 @@
                 <strong class="col-md-2 col-xs-5">Current Price:</strong><p class="col-md-4"> {$auction.curr_bid}€</p>
               </div>
               <div class="row">
-                <strong class="col-md-2 col-xs-5">Starting Date:</strong><p class="col-md-4"> {$auction.start_date}</p>
-                <strong class="col-md-2 col-xs-5">Ending Date:</strong><p class="col-md-4"> {$auction.end_date}</p>
+                <strong class="col-md-2 col-xs-5">Starting Date:</strong><p class="col-md-4"> {$auction.start_date_readable}</p>
+                <strong class="col-md-2 col-xs-5">Ending Date:</strong><p class="col-md-4"> {$auction.end_date_readable}</p>
               </div>
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Bids:</strong><p class="col-md-4"> {$numBids}</p>
@@ -230,7 +230,11 @@
                 <p>{$seller.short_bio}</p>
               {/if}
               <br>
-              <p>{$seller.username} has {$numReviews} reviews, and an average of <strong>{$seller.rating}</strong>/10 points.</p>
+              <p>{$seller.username} has {$numReviews} reviews
+                {if $seller.rating}
+                , and an average of <strong>{$seller.rating}</strong>/10 points.</p>
+                {else}.
+                {/if}
             </div>
           </div>
         </div>

@@ -34,6 +34,10 @@ switch ($reportType){
     $reports = getUserReports();
 }
 
+foreach($reports as &$report){
+  $report['date'] = date('d F Y, H:i:s', strtotime($report['date']));
+}
+
 $smarty->assign("module", "Admin");
 $smarty->assign("reportTypes", $reportTypes);
 $smarty->assign("reportType", $reportType);
