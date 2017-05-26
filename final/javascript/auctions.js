@@ -18,10 +18,6 @@ $(document).ready(function() {
       defaultDate: moment().add(1, 'week'),
       locale: 'pt',
     });
-
-    $('#endDate').on('dp.change', function(e) {
-      $('#endDate').data('DateTimePicker').minDate(e.date);
-    });
   });
 
   setChangeListType();

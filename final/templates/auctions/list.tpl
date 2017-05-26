@@ -14,7 +14,11 @@
       {foreach $auctions as $auction}
         <tr class="auction_row" data-page="{floor($auction@index/8+1)}" data-priceLow="{$auction.curr_bid}" data-priceHigh="-{$auction.curr_bid}" data-popular="-{$auction.numbids}" data-newest="-{strtotime($auction.start_date)}" data-ending="{strtotime($auction.end_date)}" hidden>
           <td class="image col-md-2"><img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image"></td>
+          {if strlen($auction.product_name) > 30}
+          <td class="product_name product col-md-3">{substr($auction.product_name, 0, 27)}...<br></td>
+          {else}
           <td class="product_name product col-md-3">{$auction.product_name}<br></td>
+          {/if}
           <td class="seller col-md-2">
             <a href="{$BASE_URL}pages/user/user.php?id={$auction.user_id}">{$auction.username}</a>
             <div>

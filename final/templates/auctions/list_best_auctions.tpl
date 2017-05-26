@@ -22,7 +22,11 @@
   <div class="col-lg-4 col-md-4 col-sm-4">
     <div class="item active">
       <div class="thumbnail text-center">
-        <h4>{$mostRecentAuction.product_name}</h4>
+        {if strlen($mostRecentAuction.product_name) > 29}
+        <h4 class="text-center">{substr($mostRecentAuction.product_name, 0, 26)}...</h4>
+        {else}
+        <h4 class="text-center">{$mostRecentAuction.product_name}</h4>
+        {/if}
         {if ($mostRecentAuctionImage)}
           <img src="{$BASE_URL}images/auctions/thumbnails/{$mostRecentAuctionImage}" class="animated bounce infinite" alt="Product image">
         {else}
