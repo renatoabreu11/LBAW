@@ -223,6 +223,37 @@ $(document).ready(function() {
     $('#categories-wrapper').removeClass('in');
 
   setRankings();
+
+  $('#btn-contact-us').click(function() {
+    let contactEmail = $(this).closest("form").find("#user-email").val();
+    let message = $(this).closest("form").find("#user-message").val();
+
+    let request = $.ajax({
+      type: 'POST',
+      url: BASE_URL + 'api/user/contact_us.php',
+      data: {
+        'contactEmail': contactEmail,
+        'message': message
+      },
+    });
+
+    request.done(function(response, textStatus, jqXHR) {
+      $("#contact-us-modal").modal('hide');
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + response + '</div>',
+          type: 'inline',
+        },
+      });
+    });
+
+    request.fail(function(jqXHR, textStatus, errorThrown) {
+      console.error(
+        'The following error occurred: '+
+        textStatus, errorThrown
+      );
+    });
+  });
 });
 
 /**
