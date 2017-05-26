@@ -52,6 +52,9 @@ foreach ($notifications as $notification){
 }
 
 $notifications = getActiveNotifications($userId);
+foreach ($notifications as &$n){
+  $n['date'] = date('d F Y, H:i:s', strtotime($n['date']));
+}
 $nrNotifications = count($notifications);
 $smarty->assign("notifications", $notifications);
 $notificationsDiv = $smarty->fetch('common/notifications.tpl');

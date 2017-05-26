@@ -31,10 +31,10 @@ $(document).ready(function() {
         let response = data['response'];
         if (response.includes('Success')) {
           $('#description').val(data['description']);
-          console.log(data['description'])
           let attributes = data['attributes'];
           let select = $('#characteristics');
-          for(let attribute of attributes){
+          select.empty();
+          for(let attribute of attributes) {
             let option = '<option>' + attribute + '</option>';
             select.append(option);
           }

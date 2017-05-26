@@ -1,4 +1,4 @@
-BASE_URL = '/~lbaw1662/final/';
+BASE_URL = '/';
 let userId = null;
 let token = null;
 let adminId = null;
@@ -207,19 +207,20 @@ $(document).ready(function() {
       request.done(function(data, textStatus, jqXHR) {
         let message = data['message'];
         let response = data['response'];
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + message + '</div>',
-            type: 'inline',
-            mainClass: 'mfp-fade',
-          },
-        });
 
         if (response.includes('Success')) {
           let nrNotifications = data['nrNotifications'];
           $('.dropdown-menu.notifications').empty();
           $('.dropdown-menu.notifications').append(data['notificationsDiv']);
           updateNotificationBadge(nrNotifications);
+        } else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+              mainClass: 'mfp-fade',
+            },
+          });
         }
       });
     }else updateNotificationBadge(0);

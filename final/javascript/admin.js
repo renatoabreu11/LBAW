@@ -149,12 +149,6 @@ $(document).ready(function() {
       if(message.includes('Category already exists')) {
         form.find('.field_error').text(message);
       } else if(message.includes('Success')) {
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + message + '</div>',
-            type: 'inline',
-          },
-        });
         form.trigger('reset');
         let div = '<li class="list-group-item col-md-3">'
           +title+

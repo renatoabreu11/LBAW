@@ -268,53 +268,53 @@
             <div id="qaSection" class="comment-list">
               {if count($questions) > 0}
                 {include file='auction/question.tpl'}
-                <div>
-                  <div id="removeQuestion" class="white-popup mfp-hide">
-                    <h4>Are you sure that you want to delete this answer?</h4>
-                    <p>You will not be able to undo this action!</p>
-                    <div class="text-center">
-                      <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
-                      <button class="btn btn-info closePopup">No, go back</button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div id="removeAnswer" class="white-popup mfp-hide">
-                    <h4>Are you sure that you want to delete this answer?</h4>
-                    <p>You will not be able to undo this action!</p>
-                    <div class="text-center">
-                      <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
-                      <button class="btn btn-info closePopup">No, go back</button>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
-                    <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
-                      <div class="form-group">
-                        <label for="reportQuestionMessage">Report:</label>
-                        <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
-                      </div>
-                      <div class="text-center">
-                        <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div>
-                  <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
-                    <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
-                      <div class="form-group">
-                        <label for="reportAnswerMessage">Report:</label>
-                        <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
-                      </div>
-                      <div class="text-center">
-                        <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
-                      </div>
-                    </form>
-                  </div>
-                </div>
               {/if}
+            </div>
+            <div>
+              <div id="removeQuestion" class="white-popup mfp-hide">
+                <h4>Are you sure that you want to delete this answer?</h4>
+                <p>You will not be able to undo this action!</p>
+                <div class="text-center">
+                  <button class="btn btn-info removeQuestion">Yes, I'm sure</button>
+                  <button class="btn btn-info closePopup">No, go back</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div id="removeAnswer" class="white-popup mfp-hide">
+                <h4>Are you sure that you want to delete this answer?</h4>
+                <p>You will not be able to undo this action!</p>
+                <div class="text-center">
+                  <button class="btn btn-info removeAnswer">Yes, I'm sure</button>
+                  <button class="btn btn-info closePopup">No, go back</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div id="reportQuestionConfirmation" class="white-popup mfp-hide">
+                <form action="{$BASE_URL}api/admin/report_question.php" method="post" id="reportQuestionForm">
+                  <div class="form-group">
+                    <label for="reportQuestionMessage">Report:</label>
+                    <textarea class="form-control" required maxlength="512" rows="5" id="reportQuestionMessage" name="reportQuestionMessage"></textarea>
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" id="reportQuestion" class="btn btn-info" value="Report question">
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div>
+              <div id="reportAnswerConfirmation" class="white-popup mfp-hide">
+                <form action="{$BASE_URL}api/admin/report_answer.php" method="post" id="reportAnswerForm">
+                  <div class="form-group">
+                    <label for="reportAnswerMessage">Report:</label>
+                    <textarea class="form-control" required maxlength="512" rows="5" id="reportAnswerMessage" name="reportAnswerMessage"></textarea>
+                  </div>
+                  <div class="text-center">
+                    <input type="submit" id="reportAnswer" class="btn btn-info" value="Report answer">
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>

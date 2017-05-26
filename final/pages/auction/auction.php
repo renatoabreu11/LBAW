@@ -25,6 +25,9 @@ $seller['register_date'] = date('d F Y, H:i:s', strtotime($seller['register_date
 $numReviews = count(getReviews($auction['user_id']));
 
 $recentBidders = getRecentBidders($auctionId);
+foreach ($recentBidders as &$bidder){
+  $bidder['date'] = date('d F Y, H:i:s', strtotime($bidder['date']));
+}
 $numBids = getTotalNumBids($auctionId);
 $numBidders = count(getBidders($auctionId));
 

@@ -61,14 +61,15 @@ function setAddCredit() {
           currCredit = parseFloat(currCredit) + parseFloat(creditToAdd);
           $('#currCredit').attr('data-currCredit', currCredit);
           $('#currCredit').text(currCredit + ' €');
+        }else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+              mainClass: 'mfp-fade',
+            },
+          });
         }
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + message + '</div>',
-            type: 'inline',
-            mainClass: 'mfp-fade',
-          },
-        });
       },
       error: function(data) {
         alert(data);
