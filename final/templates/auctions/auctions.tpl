@@ -33,18 +33,11 @@
                 </div>
               </div>
 							<div class="padding"></div>
-							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Time remaining</button>
+							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Maximum end date</button>
               <div class="collapse" id="timeRemaining">
-                <label for="fromTimeRem">From:</label>
+                <label for="endDate">End date:</label>
                 <div class='input-group date' id='fromDatePicker'>
-                  <input type='text' class="form-control" name="fromTimeRem" id="fromTimeRem"/>
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-                </div>
-                <label for="toTimeRem">To:</label>
-                <div class='input-group date' id='toDatePicker'>
-                  <input type='text' class="form-control" name="toTimeRem" id="toTimeRem"/>
+                  <input type='text' class="form-control" name="endDate" id="endDate"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>

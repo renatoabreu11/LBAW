@@ -13,24 +13,14 @@ $(document).ready(function() {
     '€ - ' + sliderPrice.slider( 'values', 1 ) + '€');
 
   $(function() {
-    $('#fromDatePicker').datetimepicker({
-      minDate: moment(),
-      defaultDate: moment(),
-      locale: 'pt',
-    });
-
-    $('#toDatePicker').datetimepicker({
+    $('#endDate').datetimepicker({
       minDate: moment(),
       defaultDate: moment().add(1, 'week'),
       locale: 'pt',
-      useCurrent: false,
     });
 
-    $('#fromDatePicker').on('dp.change', function(e) {
-      $('#toDatePicker').data('DateTimePicker').minDate(e.date);
-    });
-    $('#toDatePicker').on('dp.change', function(e) {
-      $('#fromDatePicker').data('DateTimePicker').maxDate(e.date);
+    $('#endDate').on('dp.change', function(e) {
+      $('#endDate').data('DateTimePicker').minDate(e.date);
     });
   });
 
@@ -95,8 +85,8 @@ function setSearchRequest() {
     let category = $('#category').find('option:selected').val();
     let fromPrice = sliderPrice.slider( 'values', 0);
     let toPrice = sliderPrice.slider( 'values', 1);
-    let fromTimeRem = $('#fromTimeRem').val();
-    let toTimeRem = $('#toTimeRem').val();
+    let endDate = $('#endDate').val();
+    console.log(endDate);
 
     $.ajax({
       type: 'GET',
@@ -106,8 +96,7 @@ function setSearchRequest() {
         'category': category,
         'fromPrice': fromPrice,
         'toPrice': toPrice,
-        'fromTimeRem': fromTimeRem,
-        'toTimeRem': toTimeRem,
+        'endDate': endDate,
       },
       dataType: 'json',
       success: function(data) {

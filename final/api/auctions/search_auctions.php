@@ -35,9 +35,8 @@ if ($toPrice < $fromPrice) {
   $fromPrice = $fromPrice - $toPrice;
 }
 
-$getStartDate = strtr($_GET['fromTimeRem'], '/', '-');
-$getEndDate = strtr($_GET['toTimeRem'], '/', '-');
-$fromDate = date("Y-m-d H:i", strtotime($getStartDate));
+$getEndDate = strtr($_GET['endDate'], '/', '-');
+$fromDate = date("Y-m-d H:i");
 $toDate = date("Y-m-d H:i", strtotime($getEndDate));
 if(!$fromDate || !$toDate){
   $reply['response'] = "Error 400 Bad Request";
@@ -48,7 +47,7 @@ if(!$fromDate || !$toDate){
 
 if($fromDate > $toDate){
   $reply['response'] = "Error 400 Bad Request";
-  $reply['message'] = "Invalid remaining time interval.";
+  $reply['message'] = "Invalid remaining time interval.". $fromDate. "  " . $toDate;
   echo json_encode($reply);
   return;
 }
