@@ -38,16 +38,16 @@ if ($toPrice < $fromPrice) {
 $getEndDate = strtr($_GET['endDate'], '/', '-');
 $fromDate = date("Y-m-d H:i");
 $toDate = date("Y-m-d H:i", strtotime($getEndDate));
-if(!$fromDate || !$toDate){
+if(!$toDate){
   $reply['response'] = "Error 400 Bad Request";
-  $reply['message'] = "Invalid remaining time date.";
+  $reply['message'] = "Invalid end date limit.";
   echo json_encode($reply);
   return;
 }
 
 if($fromDate > $toDate){
   $reply['response'] = "Error 400 Bad Request";
-  $reply['message'] = "Invalid remaining time interval.";
+  $reply['message'] = "Invalid end date limit.";
   echo json_encode($reply);
   return;
 }

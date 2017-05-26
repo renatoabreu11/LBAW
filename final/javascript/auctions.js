@@ -15,7 +15,7 @@ $(document).ready(function() {
   $(function() {
     $('#endDate').datetimepicker({
       minDate: moment(),
-      defaultDate: moment().add(1, 'week'),
+      defaultDate: moment().add(1, 'weeks'),
       locale: 'pt',
     });
   });

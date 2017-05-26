@@ -33,7 +33,7 @@
                 </div>
               </div>
 							<div class="padding"></div>
-							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Maximum end date</button>
+							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Auction end date</button>
               <div class="collapse" id="timeRemaining">
                 <label for="endDate">End date:</label>
                 <div class='input-group date' id='fromDatePicker'>
