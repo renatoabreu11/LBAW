@@ -11,8 +11,7 @@ function getMostPopularAuctions() {
                                               FROM image
                                               WHERE product_id = product.id
                                               LIMIT 1) as image, product.id, product.name as product_name, "user".username, "user".rating as user_rating, auction.curr_bid, auction.end_date, "user".id as user_id, auction.num_bids as numBids, auction.start_date 
-                            FROM bid
-                            INNER JOIN auction ON bid.auction_id = auction.id
+                            FROM auction
                             INNER JOIN product ON auction.product_id = product.id
                             INNER JOIN "user" ON auction.user_id = "user".id
                             WHERE state = \'Open\'
