@@ -243,13 +243,17 @@ $(document).ready(function() {
         'contactEmail': contactEmail,
         'message': message
       },
+      dataType: 'json'
     });
 
-    request.done(function(response, textStatus, jqXHR) {
+    request.done(function(data, textStatus, jqXHR) {
+      let response = data['response'];
+      let message = data['message'];
+
       $("#contact-us-modal").modal('hide');
       $.magnificPopup.open({
         items: {
-          src: '<div class="white-popup">' + response + '</div>',
+          src: '<div class="white-popup">' + message + '</div>',
           type: 'inline',
         },
       });

@@ -2,14 +2,19 @@
 
 include_once("../../config/init.php");
 
+$reply = array();
 if(!$_POST['contactEmail']) {
-    echo "Error 400 Bad Request: Please write your email.";
+    $reply['response'] = "Error 400 Bad Request.";
+    $reply['message'] = "Please type your email.";
+    echo json_encode($reply);
     return;
 }
 $contactEmail = trim(strip_tags($_POST['contactEmail']));
 
 if(!$_POST['message']) {
-    echo "Error 400 Bad Request: Please describe your problem";
+    $reply['response'] = "Error 400 Bad Request.";
+    $reply['message'] = "Please describe your problem.";
+    echo json_encode($reply);
     return;
 }
 $message = $_POST['message'];
@@ -39,5 +44,11 @@ $mail->Body = $message;
 
 if (!$mail->send()) {
   $log->error($mail->ErrorInfo, array('request' => "Mailer password request."));
-  echo "Error sending mail to " . $email;
-} else echo "Success: Your message was successfully sent. We'll answer you as fast as we can.";
+  $reply['response'] = 'Success 202 Accepted';
+  $reply['message'] = "Error sending email.";
+} else {
+  $reply['response'] = 'Success 200';
+  $reply['message'] = "Your message was successfully sent. We'll answer you as fast as we can.";
+}
+
+echo json_encode($reply);
