@@ -47,7 +47,7 @@ if(!$fromDate || !$toDate){
 
 if($fromDate > $toDate){
   $reply['response'] = "Error 400 Bad Request";
-  $reply['message'] = "Invalid remaining time interval.". $fromDate. "  " . $toDate;
+  $reply['message'] = "Invalid remaining time interval.";
   echo json_encode($reply);
   return;
 }

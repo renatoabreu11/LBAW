@@ -86,7 +86,6 @@ function setSearchRequest() {
     let fromPrice = sliderPrice.slider( 'values', 0);
     let toPrice = sliderPrice.slider( 'values', 1);
     let endDate = $('#endDate').val();
-    console.log(endDate);
 
     $.ajax({
       type: 'GET',
