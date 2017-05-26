@@ -242,16 +242,12 @@ function setRemoveAuctionFromWatchlist() {
       success: function(data) {
         let message = data['message'];
         let response = data['response'];
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + message + '</div>',
-            type: 'inline',
-            mainClass: 'mfp-fade',
-          },
-        });
         if(response.includes('Success')) {
-          remLinkElem.closest('.auction_row').remove();
-
+          let auctionRow = remLinkElem.closest('.auction_row');
+          auctionRow.fadeOut(500, function() {
+            auctionRow.remove();
+          });
+          
           let numPages = getNumPagesNecessaryToAllAuctions();
           let currPage = 1;
           $('#pagination').attr('data-nr_pages', numPages);
@@ -263,6 +259,14 @@ function setRemoveAuctionFromWatchlist() {
           showAuctionsOfAPage(currPage);
           setSorting();
           setFilter();
+        }else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+              mainClass: 'mfp-fade',
+            },
+          });
         }
       },
       error: function(data) {
@@ -305,14 +309,6 @@ function setToogleNotifications() {
       success: function(data) {
         let message = data['message'];
         let response = data['response'];
-        $.magnificPopup.open({
-          items: {
-            src: '<div class="white-popup">' + message + '</div>',
-            type: 'inline',
-            mainClass: 'mfp-fade',
-          },
-        });
-
         if(response.includes('Success')) {
           liElem.addClass('disabled');
           liElem.children('a').removeClass('toogle-notif');
@@ -324,6 +320,14 @@ function setToogleNotifications() {
             ulElem.children('.disable-notif').removeClass('disabled');
           }
           setToogleNotifications();
+        }else {
+          $.magnificPopup.open({
+            items: {
+              src: '<div class="white-popup">' + message + '</div>',
+              type: 'inline',
+              mainClass: 'mfp-fade',
+            },
+          });
         }
       },
       error: function(data) {

@@ -138,7 +138,7 @@ $(document).ready(function() {
           } else {
             $.magnificPopup.open({
               items: {
-                src: '<div class="white-popup">' + message + '</div>',
+                src: '<div class="white-popup">Congratulations. You\'re the first bidder of this auction</div>',
                 type: 'inline',
               },
             });

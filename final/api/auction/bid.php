@@ -67,8 +67,11 @@ try {
   return;
 }
 
-$getRecentBidders = getRecentBidders($auctionId);
-$smarty->assign("recentBidders", $getRecentBidders);
+$recentBidders = getRecentBidders($auctionId);
+foreach ($recentBidders as &$bidder){
+  $bidder['date'] = date('d F Y, H:i:s', strtotime($bidder['date']));
+}
+$smarty->assign("recentBidders", $recentBidders);
 $biddersDiv = $smarty->fetch('auction/list_bidders.tpl');
 
 $message;
