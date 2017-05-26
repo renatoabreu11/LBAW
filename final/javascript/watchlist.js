@@ -246,19 +246,25 @@ function setRemoveAuctionFromWatchlist() {
           let auctionRow = remLinkElem.closest('.auction_row');
           auctionRow.fadeOut(500, function() {
             auctionRow.remove();
-          });
-          
-          let numPages = getNumPagesNecessaryToAllAuctions();
-          let currPage = 1;
-          $('#pagination').attr('data-nr_pages', numPages);
-          $('#pagination').attr('data-curr_page', currPage);
 
-          setPagesOfAuctions();
-          $('#pagination').twbsPagination('destroy');
-          setPagination();
-          showAuctionsOfAPage(currPage);
-          setSorting();
-          setFilter();
+            let numPages = getNumPagesNecessaryToAllAuctions();
+            let currPage = 1;
+            $('#pagination').attr('data-nr_pages', numPages);
+            $('#pagination').attr('data-curr_page', currPage);
+            
+            setPagesOfAuctions();
+            if (getNumAuctions() == 0) {
+              $('#pagination').twbsPagination('destroy');
+              let selected = $(this).find('option:selected').val();
+              showAuctionsSpecifiedInFilter(selected);
+            }
+            else {
+              setPagination();
+              showAuctionsOfAPage(currPage);
+              setSorting();
+              setFilter();
+            }
+          });
         }else {
           $.magnificPopup.open({
             items: {
@@ -285,6 +291,17 @@ function getNumPagesNecessaryToAllAuctions() {
     numAuctions++;
   });
   return Math.ceil(numAuctions/4.0);
+}
+
+/**
+ * Get number of auctions.
+ */
+function getNumAuctions() {
+  let numAuctions = 0;
+  $('#auctionsThumbnails .auction_row').each(function() {
+    numAuctions++;
+  });
+  return numAuctions;
 }
 
 /**
