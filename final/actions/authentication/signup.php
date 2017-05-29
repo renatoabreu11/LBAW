@@ -86,11 +86,10 @@ if (empty($_SESSION['token'])) {
 }
 // facebook info
 if(isset($_SESSION['facebook_user_data'])) {
-    $manager = new ImageManager();
-    $image = $manager->make($_SESSION['facebook_user_data']['picture']);
+    $image = file_get_contents($_SESSION['facebook_user_data']['picture']);
     $name = $_SESSION['username'] . '.jpg';
     $dir = $BASE_DIR . "images/users/" . $name;
-    $image->save($dir);
+    file_put_contents($dir,$image);
     updateUserFacebook($_SESSION['user_id'], $_SESSION['facebook_user_data']['oauth_uid'], $name);
 }
 
