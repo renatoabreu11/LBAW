@@ -49,6 +49,8 @@
           <td class="col-md-4">
             <p><strong>User</strong></p>
           </td>
+          <td class="col-md-3">
+            <p><strong>Rating</strong></p>
           <td class="col-md-5">
             <p><strong>Rating</strong></p>
           </td>

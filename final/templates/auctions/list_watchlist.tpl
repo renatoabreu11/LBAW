@@ -29,9 +29,9 @@
         </ul>
       </div>
       {if strlen($auction.product_name) > 20}
-      <h4 class="text-center">{substr($auction.product_name, 0, 17)}<a href="javascript:void(0)" data-toggle="tooltip" title="{$auction.product_name}">...</a></h4>
+      <h4 class="text-center" style="height: 30px;">{substr($auction.product_name, 0, 17)}<a href="javascript:void(0)" data-toggle="tooltip" title="{$auction.product_name}">...</a></h4>
       {else}
-      <h4 class="text-center">{$auction.product_name}</h4>
+      <h4 class="text-center" style="height: 30px;">{$auction.product_name}</h4>
       {/if}
       <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
       {if $auction['state'] == 'Closed'}
@@ -46,12 +46,12 @@
           <h4>No one has bid on this auction.</h4>
         {/if}
       {elseif $auction['state'] == 'Open'}
-        <h4 class="current-bid">Current price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
-        <div class="countdown" style="padding-bottom: 1em;">
+        <h4 class="current-bid" style="height: 60px;">Current price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+        <div class="countdown" style="padding-bottom: 1em; height: 60px; display: flex; justify-content: center;align-items: center;">
           <div class="clock" style="font-weight: bolder; font-size: 20px;"><p hidden>{$auction.end_date}</p></div>
         </div>
       {elseif $auction['state'] == 'Created'}
-        <h4 class="current-bid">Initial price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
+        <h4 class="current-bid" style="height: 50px;>Initial price: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
         <h4>Offer starts <br><strong>{$auction.start_date_readable}</strong></h4>
       {/if}
       <div class="row text-center" style="padding-top: 4px; padding-bottom: 10px;">
