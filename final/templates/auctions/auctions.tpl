@@ -10,7 +10,7 @@
 							<h2 class="grid-title"> Filters</h2>
 							<hr>
 							<label for="category" class="btn btn-info btn-block" data-toggle="collapse" data-target="#categories">Category</label>
-							<div class="collapse" id="categories">
+							<div class="collapse" id="categories" style="padding-top: 0.5em;">
 								<select class="form-control" id="category">
 									<option value="All">All</option>
                   {foreach $categories as $category}
@@ -34,9 +34,9 @@
               </div>
 							<div class="padding"></div>
 							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Auction end date</button>
-              <div class="collapse" id="timeRemaining">
-                <label for="endDate">End date:</label>
-                <div class='input-group date' id='fromDatePicker'>
+              <div class="form-group collapse" id="timeRemaining">
+                <label for="endDate" class="sr-only">End date:</label>
+                <div class='input-group date' id='fromDatePicker' style="padding-top: 0.5em;">
                   <input type='text' class="form-control" name="endDate" id="endDate"/>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>

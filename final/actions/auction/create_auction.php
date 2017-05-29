@@ -240,16 +240,19 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
         $lookup->setResponseGroup(array('Images'));
 
         $response = $apaiIO->runOperation($lookup);
-        $item = $images = $response['Items']['Item'];
+        $item = $response['Items']['Item'];
         $imageSet = $item['ImageSets']['ImageSet'];
         $mainImage = $item['LargeImage']['URL'];
-
         $images = array();
-        array_push($images, $mainImage);
 
         foreach ($imageSet as $image){
           $imageURL = $image['LargeImage']['URL'];
-          array_push($images, $imageURL);
+          if($imageURL != NULL && strlen($imageURL) > 0)
+            array_push($images, $imageURL);
+        }
+
+        if(count($images) == 0){
+          array_push($images, $mainImage);
         }
 
         if(count($images) != 0){
