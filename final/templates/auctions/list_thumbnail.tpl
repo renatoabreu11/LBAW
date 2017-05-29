@@ -18,7 +18,7 @@
         </div>
         <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
         {if $auction.state == 'Created'}
-          <h4 style="height: 50px;">Initial price: <strong>{$auction.start_bid}€</strong></h4><br><br>
+          <h4 style="height: 50px;">Initial price: <strong>{$auction.start_bid}€</strong></h4>
           <small>Starting date:</small><br>
           <strong style="margin-top: 0; font-size: 14px; height: 60px; display: flex; justify-content: center;align-items: center;">{$auction.start_date_readable}</strong>
         {else}
