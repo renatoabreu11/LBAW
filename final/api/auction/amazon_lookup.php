@@ -41,7 +41,8 @@ if($item == null){
   return;
 }
 
-$description = $item['EditorialReviews']['EditorialReview'][0]['Content'];
+$description = $item['EditorialReviews']['EditorialReview']['Content'];
+
 $itemAttributes = $item['ItemAttributes'];
 
 $attributes = array();
@@ -49,7 +50,7 @@ $regex = '/(?<!^)((?<![[:upper:]])[[:upper:]]|[[:upper:]](?![[:upper:]]))/';
 foreach($itemAttributes as $key => $value){
   if(!is_array($value) && strlen($key) > 5){
     $key = preg_replace( $regex, ' $1', $key );
-    $characteristic = '<b>' . $key . ': </b>' . $value;
+    $characteristic = $key . ": " . $value;
     array_push($attributes, $characteristic);
   }
 }
