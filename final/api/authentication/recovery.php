@@ -59,7 +59,7 @@ $mail->Username = "seekbid1617@gmail.com";
 $mail->Password = "oc86ve46";
 
 $mail->setFrom('seekbid1617@gmail.com', 'Seek Bid');
-$mail->addAddress($email, 'Jose Carlos');
+$mail->addAddress($email, $username);
 
 $mail->IsHTML(true);
 $mail->CharSet='utf-8';

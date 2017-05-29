@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+  {/if}
     <div class="form-group reportSelection">
       <label for="report_type">Select the type of report that you want to analyse</label>
       <br>
@@ -56,5 +57,4 @@
       </div>
       <a class="btn btn-info showReports">Show reports</a>
     </div>
-  {/if}
 </div>

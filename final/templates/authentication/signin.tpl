@@ -16,7 +16,7 @@
             <label for="psw">Password</label>
             <input type="password" name="password" class="form-control" id="psw" required maxlength="64">
           </div>
-          <button class="btn btn-default btn-success btn-block">Sign in</button>
+          <button class="btn btn-info btn-block">Sign in</button>
           <a class="btn btn-primary btn-block" href="{$FB_LOGIN_URL}">
             <span><i class="fa fa-facebook"> </i></span> Sign in with Facebook
           </a>
@@ -24,7 +24,7 @@
       </div>
       <div class="modal-footer">
         <div class="col-xs-3 pull-left" style="padding-top: 0.5em;">
-          <button class="btn btn-info pull-left" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
         </div>
         <div class="col-xs-9 pull-right">
           <p>Not a member? <a href="{$BASE_URL}pages/authentication/signup.php">Sign Up</a></p>
