@@ -1,4 +1,4 @@
-BASE_URL = '/~lbaw1662/final/';
+BASE_URL = '/';
 let userId = null;
 let token = null;
 let adminId = null;
