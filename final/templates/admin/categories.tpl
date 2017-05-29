@@ -30,7 +30,9 @@
         <div class="col-md-6">
           <input name="title" type="text" maxlength="64" placeholder="Enter a new category" class="form-control input-md"
                  required id="title">
-          <strong class="field_error"></strong>
+          <div class="text-center">
+            <strong class="field_error"></strong>
+          </div>
         </div>
       </div>
       <div class="form-group">

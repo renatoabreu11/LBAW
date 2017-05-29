@@ -4,10 +4,6 @@ $(document).ready(function() {
     $('#wrapper').toggleClass('toggled');
   });
 
-  $(window).on('resize', function() {
-    $('#wrapper').removeClass('toggled');
-  });
-
   $('#newAdmin').validate({
     rules:
       {
@@ -155,7 +151,7 @@ $(document).ready(function() {
           '<a class="removeCategoryPopup id-' + data['id'] + '" href="#removeCategoryConfirmation">'+
           '<i class="fa fa-times pull-right" aria-hidden="true"></i>'+
           '</a></li>';
-        $('.categories ul').append(div);
+        $('.categories ul').append(div).fadeIn(1000);
       }else{
         $.magnificPopup.open({
           items: {
@@ -220,15 +216,16 @@ $(document).ready(function() {
     request.done(function(data, textStatus, jqXHR) {
       let message = data['message'];
       let response = data['response'];
-      $.magnificPopup.open({
-        items: {
-          src: '<div class="white-popup">' + message + '</div>',
-          type: 'inline',
-        },
-      });
       if(response.includes('Success')) {
         object.hide('slow', function() {
           object.remove();
+        });
+      }else {
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + message + '</div>',
+            type: 'inline',
+          },
         });
       }
     });
