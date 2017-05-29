@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
+use Intervention\Image\ImageManager;
+
 if (!$_POST['username'] || !$_POST['name'] || !$_POST['password'] || !$_POST['confirm'] || !$_POST['email'] || !$_POST['description']) {
   $_SESSION['error_messages'][] = "All fields are mandatory!";
   $_SESSION['form_values'] = $_POST;
