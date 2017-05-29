@@ -232,31 +232,66 @@ $(document).ready(function() {
 
   setRankings();
 
-  $('#btn-contact-us').click(function() {
-    let contactEmail = $(this).closest("form").find("#user-email").val();
-    let message = $(this).closest("form").find("#user-message").val();
+  $('#sendContactEmailForm').validate({
+    errorElement: 'div',
+    rules:
+      {
+        user_name: {
+          required: true,
+          maxlength: 32,
+        },
+        user_email: {
+          required: true,
+          email: true,
+        },
+        user_message: {
+          required: true,
+          maxlength: 1024,
+        },
+      },
+    errorPlacement: function(error, element) {
+      error.insertAfter(element);
+    },
+    submitHandler: contactUs,
+  });
+
+  /**
+   *
+   * @param form
+   */
+  function contactUs(form) {
+    let contactName = $(form).find('#user_name').val();
+    let contactEmail = $(form).find('#user_email').val();
+    let message = $(form).find('#user_message').val();
 
     let request = $.ajax({
       type: 'POST',
       url: BASE_URL + 'api/user/contact_us.php',
       data: {
         'contactEmail': contactEmail,
-        'message': message
+        'message': message,
+        'contactName': contactName,
       },
-      dataType: 'json'
+      dataType: 'json',
     });
 
     request.done(function(data, textStatus, jqXHR) {
       let response = data['response'];
       let message = data['message'];
 
-      $("#contact-us-modal").modal('hide');
-      $.magnificPopup.open({
-        items: {
-          src: '<div class="white-popup">' + message + '</div>',
-          type: 'inline',
-        },
-      });
+      if(response.includes('Success 200')) {
+        $('#contact-us-modal').modal('hide');
+        $(form).trigger('reset');
+        $.magnificPopup.open({
+          items: {
+            src: '<div class="white-popup">' + message + '</div>',
+            type: 'inline',
+            mainClass: 'mfp-fade',
+          },
+        });
+      } else {
+        $(form).find('.field_error').text(message);
+      }
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {
@@ -265,7 +300,7 @@ $(document).ready(function() {
         textStatus, errorThrown
       );
     });
-  });
+  }
 });
 
 /**

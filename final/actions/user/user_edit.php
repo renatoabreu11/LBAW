@@ -115,8 +115,8 @@ if($picture['size'] > 0) {
 
   // Resize the image.
   $manager = new ImageManager();
-  $img = $manager->make($picturePath);
-  $img->fit(156, 156);
+  $img = $manager->make($picture['tmp_name']);
+  $img->resize(156, 156);
   $img->save($picturePath);
 
   try {

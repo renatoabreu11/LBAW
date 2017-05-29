@@ -11,6 +11,14 @@ if(!$_POST['contactEmail']) {
 }
 $contactEmail = trim(strip_tags($_POST['contactEmail']));
 
+if(!$_POST['contactName']) {
+  $reply['response'] = "Error 400 Bad Request.";
+  $reply['message'] = "Please type your name.";
+  echo json_encode($reply);
+  return;
+}
+$contactName = $_POST['contactName'];
+
 if(!$_POST['message']) {
     $reply['response'] = "Error 400 Bad Request.";
     $reply['message'] = "Please describe your problem.";
@@ -22,7 +30,7 @@ $message = $_POST['message'];
 $gnomo = 'gnomo.fe.up.pt';
 $mail = new PHPMailer;
 $mail->isSMTP();
-$mail->SMTPDebug = 2;
+$mail->SMTPDebug = 0;
 $mail->Debugoutput = 'html';
 $mail->Host = 'smtp.gmail.com';
 $mail->Mailer = "gmail";
@@ -33,10 +41,10 @@ $mail->SMTPAuth = true;
 $mail->Username = "seekbid1617@gmail.com";
 $mail->Password = "oc86ve46";
 
-$mail->setFrom($contactEmail, '');
+$mail->setFrom($contactEmail, $contactName);
 $mail->addAddress('seekbid1617@gmail.com', 'Seek Bid');
 
-$mail->IsHTML(false);
+$mail->IsHTML(true);
 $mail->CharSet='utf-8';
 $mail->Subject = 'User contact';
 $mail->AltBody = 'User contact';
