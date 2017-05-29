@@ -6,7 +6,7 @@
 			<div class="grid search">
 				<div class="grid-body">
 					<div class="row">
-						<div class="col-md-3 hidden-xs">
+						<div class="col-md-3 ">
 							<h2 class="grid-title"> Filters</h2>
 							<hr>
 							<label for="category" class="btn btn-info btn-block" data-toggle="collapse" data-target="#categories">Category</label>
@@ -26,12 +26,13 @@
 							<div class="padding"></div>
 							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#price">Price</button>
 							<div class="collapse" id="price" style="padding-top: 0.5em; padding-bottom: 1em">
-                <div id="slider-range" style="margin: 1em;"></div>
-                <div class="text-center">
-                  <label for="amount" class="sr-only">Price range</label>
-                  <input type="text" id="amount" readonly style="text-align:center; border:0; color:#f6931f; font-weight:bold;">
-                </div>
-              </div>
+							  <div id="slider-range" style="margin: 1em;"></div>
+							  <div class="text-center">
+							    <label for="amount" class="sr-only">Price range</label>
+							    <input type="text" id="amount" readonly style="text-align:center; border:0; color:#f6931f; font-weight:bold;">
+							  </div>
+							</div>
+
 							<div class="padding"></div>
 							<button class="btn btn-info btn-block" data-toggle="collapse" data-target="#timeRemaining">Auction end date</button>
               <div class="form-group collapse" id="timeRemaining">
