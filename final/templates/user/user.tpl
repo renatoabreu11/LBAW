@@ -297,7 +297,6 @@
                     </h4>
                     <hr class="title-comment-divider">
                     <p class="win-comment text-justify">{$win.description}</p>
-                    <hr>
                     {if ($USER_ID == $user.id)}
                       {$isReviewed = false}
                       {foreach from=$reviewsPosted key=k item=a}
@@ -335,7 +334,8 @@
                     </div>
                   {/if}
                   <div class="text-center col-md-12" style="padding: 1em;">
-                      Product auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a> with a base price of {$win.start_bid}€
+                    <hr style="margin: 1em;">
+                    Product auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a> with a base price of {$win.start_bid}€
                       and bought by a price of {$win.curr_bid}€ on {$win.end_date}.
                   </div>
                 </div>
