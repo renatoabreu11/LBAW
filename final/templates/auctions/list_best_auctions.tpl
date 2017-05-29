@@ -50,7 +50,7 @@
             <p><strong>User</strong></p>
           </td>
           <td class="col-md-3">
-            <p><strong>Review</strong></p>
+            <p><strong>Rating</strong></p>
           </td>
         </tr>
         {foreach $topTenRankingUsers as $key => $user}
@@ -62,7 +62,7 @@
               <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
             </td>
             <td class="col-md-3">
-              <p>{$user.rating}/10</p>
+              <div class="rateYo text-center" data-rating="{$user.rating}" style="margin: auto; height: 17px;"></div>
             </td>
           </tr>
         {/foreach}
