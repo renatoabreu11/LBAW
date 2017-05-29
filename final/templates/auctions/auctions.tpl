@@ -54,8 +54,14 @@
                 <label class="sr-only" for="inputSearch">Search auctions with filters</label>
                 <input type="text" class="form-control" placeholder="Select your filters and then hit search..." id="inputSearch">
 							</div>
-							<h6 style="color: darkgray;">Showing all results matching "{$textSearch}"</h6>
-							<div class="row">
+              <h6 style="color: darkgray;" id="textSearch">
+                {if $textSearch == null}
+                  No text search specified
+                  {else}
+                  Showing all results matching "{$textSearch}"
+                {/if}
+              </h6>
+              <div class="row">
 								<div class="col-sm-8 col-xs-8">
 									<ul class="auctionSort">
 										<li id="popular" class="active"><a href="javascript:">Popular</a></li>

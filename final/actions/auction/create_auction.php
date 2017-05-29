@@ -258,7 +258,10 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
         if(count($images) != 0){
           $manager = new ImageManager();
           $product = getAuctionProduct($auctionId);
+          $i = 1;
           foreach ($images as $image){
+            if($i > 10)
+              break;
             try {
               $filename = basename($image);
               $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -270,6 +273,7 @@ if (!empty($_POST['token']) || !$_SESSION['token']) {
               $img->save($picturePath);
               $img->resize(460, 360);
               $img->save($thumbnailPath);
+              $i++;
             } catch(PDOException $e) {
               $log->error($e->getMessage(), array('userId' => $userId, 'request' => 'Upload amazon image.'));
               $_SESSION['error_messages'][] = "Internal server error while association amazon image to product.";

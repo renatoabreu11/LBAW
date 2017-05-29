@@ -27,8 +27,8 @@
   {elseif $module == "User"}
     <link rel="stylesheet" href="{$BASE_URL}lib/fileinput/fileinput.css">
   {elseif $module == "Auctions"}
-    <link rel="stylesheet" href="{$BASE_URL}lib/jqueryui/jquery-ui.min.css">
     <link rel="stylesheet" href="{$BASE_URL}lib/datetimepicker/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" href="{$BASE_URL}lib/jqueryui/jquery-ui.min.css">
   {/if}
   <link rel="stylesheet" href="{$BASE_URL}lib/select/bootstrap-select.css">
   <link rel="stylesheet" href="{$BASE_URL}lib/star-rating/jquery.rateyo.min.css"/>

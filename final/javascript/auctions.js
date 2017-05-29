@@ -78,6 +78,7 @@ function setSearchRequest() {
   $('#searchBtn').click(function() {
     let sliderPrice = $('#slider-range');
     let name = $('#inputSearch').val();
+    console.log(name);
     let category = $('#category').find('option:selected').val();
     let fromPrice = sliderPrice.slider( 'values', 0);
     let toPrice = sliderPrice.slider( 'values', 1);
@@ -108,6 +109,11 @@ function setSearchRequest() {
           return;
         }
 
+        if(name == '') {
+          $('#textSearch').text('No text search specified');
+        }else {
+          $('#textSearch').text('Showing all results matching "' + name + '"');
+        }
         $('#auctions').empty();
         $('#auctionsThumbnails').empty();
         $('#auctions').append(data['list']);
