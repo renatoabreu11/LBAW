@@ -107,14 +107,14 @@ $(document).ready(function() {
 
   $(function() {
     $('#startDatePicker').datetimepicker({
-      minDate: moment().add(12, 'hours'),
-      defaultDate: moment().add(12, 'hours'),
+      minDate: moment(),
+      defaultDate: moment(),
       locale: 'pt',
     });
 
     $('#endDatePicker').datetimepicker({
-      minDate: moment().add(12, 'hours'),
-      defaultDate: moment().add(2, 'days'),
+      minDate: moment().add(15, 'minutes'),
+      defaultDate: moment().add(15, 'minutes'),
       locale: 'pt',
       useCurrent: false,
     });
