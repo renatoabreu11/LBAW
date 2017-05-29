@@ -80,7 +80,7 @@
               <span><a class="btn btn-default removeAuctionPopup" href="#removeAuctionConfirmation">Delete Auction</a></span>
             </div>
           {/if}
-          <div id="watchlist-notification-modal modalDefault" class="modal fade" role="dialog">
+          <div id="watchlist-notification-modal" class="modal fade modalDefault" role="dialog">
             <div class="modal-dialog1">
               <div class="modal-content">
                 <div class="modal-body">
