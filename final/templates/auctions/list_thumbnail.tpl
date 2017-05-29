@@ -16,7 +16,7 @@
             {$auction.product_name}
           </h5>
         </div>
-        <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
+        <img src="{$BASE_URL}images/auctions/thumbnails/{if $auction.image}{$auction.image}{else}default.jpeg{/if}" alt="Product image">
         {if $auction.state == 'Created'}
           <h4 style="height: 50px;">Initial price: <strong>{$auction.start_bid}€</strong></h4>
           <small>Starting date:</small><br>
