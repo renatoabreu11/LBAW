@@ -13,7 +13,7 @@ $(document).ready(function() {
     '€ - ' + sliderPrice.slider( 'values', 1 ) + '€');
 
   $(function() {
-    $('#endDate').datetimepicker({
+    $('#fromDatePicker').datetimepicker({
       minDate: moment(),
       defaultDate: moment().add(1, 'weeks'),
       locale: 'pt',
