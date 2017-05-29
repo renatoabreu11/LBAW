@@ -40,7 +40,7 @@
       <p class="index-info-details">{$totalValOfActiveAuctions} €</p>
     </div>
     {if count($topTenRankingUsers) != 0}
-      <table class="table table-hover table-best-users table-fixed" style="margin-top: 3.5em;">
+      <table class="table table-hover table-best-users text-center" style="margin-top: 3.5em;">
         <tbody>
         <tr>
           <td class="col-md-3">
@@ -51,8 +51,20 @@
           </td>
           <td class="col-md-5">
             <p><strong>Rating</strong></p>
+          </td>
         </tr>
         {foreach $topTenRankingUsers as $key => $user}
+          <tr>
+            <td class="col-md-3">
+              <p>{$key+1}</p>
+            </td>
+            <td class="col-md-4">
+              <a href="{$BASE_URL}pages/user/user.php?id={$user.id}">{$user.username}</a>
+            </td>
+            <td class="col-md-5">
+              <div class="rateYo text-center" data-rating="{$user.rating}" style="margin: auto;"></div>
+            </td>
+          </tr>
           <tr>
             <td class="col-md-3">
               <p>{$key+1}</p>
