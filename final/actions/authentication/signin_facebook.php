@@ -82,5 +82,5 @@ if(isset($accessToken)) {
   }
 }else{
   // Alert of signin with facebook failed
-  header("Location: $BASE_URL" . "pages/authentication/signup");
+  header("Location: $BASE_URL" . "pages/authentication/signup.php");
 }
