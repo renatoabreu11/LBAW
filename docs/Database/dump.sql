@@ -1408,13 +1408,15 @@ SELECT pg_catalog.setval('admin_id_seq', 3, true);
 --
 
 INSERT INTO answer VALUES (1, '2017-05-29 14:21:28.199662', 'Yeah, that''s not enough. Sorry, my friend.', 1, 7);
+INSERT INTO answer VALUES (2, '2017-05-29 22:01:47.773076', 'Now I can not lower the price! Too late, my friend!', 7, 4);
+INSERT INTO answer VALUES (3, '2017-05-29 22:07:44.783188', 'Yes, it''s quad core, yes sir.', 8, 4);
 
 
 --
 -- Name: answer_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('answer_id_seq', 1, true);
+SELECT pg_catalog.setval('answer_id_seq', 3, true);
 
 
 --
@@ -1435,15 +1437,15 @@ SELECT pg_catalog.setval('answer_report_id_seq', 1, false);
 --
 
 INSERT INTO auction VALUES (23, 30, 30, '2017-05-29 18:45:00', '2017-06-02 19:46:00', 'Default', 11, 23, '2017-05-29 15:48:45.51018', 1, true, 0, 'Open');
+INSERT INTO auction VALUES (12, 22, 22, '2017-05-29 14:04:00', '2017-05-29 19:11:00', 'Default', 1, 12, '2017-05-29 13:58:29.790396', 1, true, 0, 'Closed');
+INSERT INTO auction VALUES (25, 21, 21, '2017-05-29 21:36:00', '2017-06-06 21:46:00', 'Default', 4, 25, '2017-05-29 21:34:01.978553', 10, true, 0, 'Open');
 INSERT INTO auction VALUES (2, 10, 10, '2017-05-29 13:05:00', '2017-06-03 13:11:00', 'Default', 6, 2, '2017-05-29 12:58:19.209684', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (3, 120, 120, '2017-05-29 13:08:00', '2017-06-03 13:17:00', 'Default', 4, 3, '2017-05-29 13:04:07.661988', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (4, 14, 14, '2017-05-29 13:13:00', '2017-06-03 13:22:00', 'Default', 4, 4, '2017-05-29 13:09:01.68881', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (5, 20, 20, '2017-05-29 13:17:00', '2017-05-29 13:20:00', 'Default', 4, 5, '2017-05-29 13:16:05.237026', 1, true, 0, 'Closed');
 INSERT INTO auction VALUES (6, 15, 15, '2017-05-29 13:30:00', '2017-06-04 13:38:00', 'Default', 4, 6, '2017-05-29 13:25:31.747', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (7, 80, 80, '2017-05-29 13:38:00', '2017-06-03 13:43:00', 'Default', 4, 7, '2017-05-29 13:30:37.012986', 1, true, 0, 'Open');
-INSERT INTO auction VALUES (8, 50, 50, '2017-05-29 13:38:00', '2017-05-29 22:49:00', 'Default', 6, 8, '2017-05-29 13:36:34.059664', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (9, 60, 60, '2017-05-29 13:44:00', '2017-06-29 21:58:00', 'Default', 1, 9, '2017-05-29 13:41:05.424465', 1, false, 0, 'Open');
-INSERT INTO auction VALUES (12, 22, 22, '2017-05-29 14:04:00', '2017-05-29 19:11:00', 'Default', 1, 12, '2017-05-29 13:58:29.790396', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (13, 34, 34, '2017-05-29 14:05:00', '2017-06-07 14:14:00', 'Default', 1, 13, '2017-05-29 14:01:07.565063', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (16, 900, 900, '2017-05-31 10:05:00', '2017-06-03 14:05:00', 'Default', 7, 16, '2017-05-29 14:09:41.758057', 1, true, 0, 'Created');
 INSERT INTO auction VALUES (17, 99, 99, '2017-05-29 14:12:00', '2017-06-03 14:23:00', 'Default', 4, 17, '2017-05-29 14:09:56.938925', 1, true, 0, 'Open');
@@ -1455,6 +1457,9 @@ INSERT INTO auction VALUES (20, 18, 18, '2017-05-29 14:29:00', '2017-06-03 20:35
 INSERT INTO auction VALUES (21, 250, 250, '2017-05-29 14:36:00', '2017-06-03 14:42:00', 'Default', 9, 21, '2017-05-29 14:32:47.411668', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (22, 98, 98, '2017-05-29 14:41:00', '2017-06-02 14:48:00', 'Default', 9, 22, '2017-05-29 14:35:03.35022', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (14, 21, 23, '2017-05-29 14:10:00', '2017-05-29 17:17:00', 'Default', 1, 14, '2017-05-29 14:03:52.174944', 1, true, 2, 'Closed');
+INSERT INTO auction VALUES (26, 200, 202, '2017-05-29 22:00:00', '2017-05-29 22:20:00', 'Default', 4, 26, '2017-05-29 21:56:52.837139', 1, true, 2, 'Closed');
+INSERT INTO auction VALUES (27, 400, 401, '2017-05-29 22:05:00', '2017-05-29 22:25:00', 'Default', 4, 27, '2017-05-29 22:04:35.91019', 1, true, 1, 'Closed');
+INSERT INTO auction VALUES (8, 50, 50, '2017-05-29 13:38:00', '2017-05-29 22:49:00', 'Default', 6, 8, '2017-05-29 13:36:34.059664', 1, true, 0, 'Closed');
 INSERT INTO auction VALUES (11, 69, 94, '2017-05-29 13:53:00', '2017-05-29 17:50:00', 'Default', 1, 11, '2017-05-29 13:51:38.192161', 1, true, 2, 'Closed');
 INSERT INTO auction VALUES (10, 46, 123, '2017-05-29 13:46:00', '2017-05-29 18:00:00', 'Default', 1, 10, '2017-05-29 13:45:08.34157', 1, true, 3, 'Closed');
 
@@ -1463,20 +1468,21 @@ INSERT INTO auction VALUES (10, 46, 123, '2017-05-29 13:46:00', '2017-05-29 18:0
 -- Name: auction_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('auction_id_seq', 24, true);
+SELECT pg_catalog.setval('auction_id_seq', 27, true);
 
 
 --
 -- Data for Name: auction_report; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO auction_report VALUES (1, '2017-05-29 23:03:18.509371', 'What a rip off. Be careful with this user', 27);
 
 
 --
 -- Name: auction_report_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('auction_report_id_seq', 1, false);
+SELECT pg_catalog.setval('auction_report_id_seq', 1, true);
 
 
 --
@@ -1491,13 +1497,16 @@ INSERT INTO bid VALUES (5, 76, '2017-05-29 17:46:08.281369', 8, 10);
 INSERT INTO bid VALUES (6, 94, '2017-05-29 17:47:41.693977', 7, 11);
 INSERT INTO bid VALUES (7, 85, '2017-05-29 17:48:48.408943', 7, 10);
 INSERT INTO bid VALUES (8, 123, '2017-05-29 17:50:41.357205', 10, 10);
+INSERT INTO bid VALUES (9, 201, '2017-05-29 22:00:30.577877', 10, 26);
+INSERT INTO bid VALUES (10, 401, '2017-05-29 22:06:40.086275', 10, 27);
+INSERT INTO bid VALUES (11, 202, '2017-05-29 22:08:26.892001', 9, 26);
 
 
 --
 -- Name: bid_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('bid_id_seq', 8, true);
+SELECT pg_catalog.setval('bid_id_seq', 11, true);
 
 
 --
@@ -1646,13 +1655,14 @@ SELECT pg_catalog.setval('country_id_seq', 21, true);
 -- Data for Name: feedback; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO feedback VALUES (1, 7, 'This site is very good. Congratulations for the awesome work!', '2017-05-29 22:53:53.274333');
 
 
 --
 -- Name: feedback_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('feedback_id_seq', 1, false);
+SELECT pg_catalog.setval('feedback_id_seq', 1, true);
 
 
 --
@@ -1660,6 +1670,7 @@ SELECT pg_catalog.setval('feedback_id_seq', 1, false);
 --
 
 INSERT INTO follow VALUES (1, 10, '2017-05-29 19:05:20.636478');
+INSERT INTO follow VALUES (6, 1, '2017-05-29 21:38:12.434348');
 
 
 --
@@ -1732,13 +1743,20 @@ INSERT INTO image VALUES (65, '65.jpg', 22, 'Amazon pic', '51hCragyzXL.jpg');
 INSERT INTO image VALUES (80, '80.jpg', 23, 'Amazon pic', '41l7TKGQ8OL.jpg');
 INSERT INTO image VALUES (81, '81.jpg', 23, 'Amazon pic', '41vRw5nnQ5L.jpg');
 INSERT INTO image VALUES (82, '82.jpg', 23, 'Amazon pic', '41scGyraoeL.jpg');
+INSERT INTO image VALUES (108, '108.jpeg', 25, 'cd.jpg', 'cd.jpg');
+INSERT INTO image VALUES (109, '109.jpg', 26, 'Amazon pic', '41K5%2B3a0JWL.jpg');
+INSERT INTO image VALUES (110, '110.jpg', 27, 'Amazon pic', '51e4tvjOZ6L.jpg');
+INSERT INTO image VALUES (111, '111.jpg', 27, 'Amazon pic', '51%2BGyJGl3pL.jpg');
+INSERT INTO image VALUES (112, '112.jpg', 27, 'Amazon pic', '518v-BwVkyL.jpg');
+INSERT INTO image VALUES (113, '113.jpg', 27, 'Amazon pic', '51uJjW5gC%2BL.jpg');
+INSERT INTO image VALUES (114, '114.jpg', 27, 'Amazon pic', '51hilHPVDbL.jpg');
 
 
 --
 -- Name: image_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('image_id_seq', 107, true);
+SELECT pg_catalog.setval('image_id_seq', 114, true);
 
 
 --
@@ -1785,13 +1803,34 @@ INSERT INTO notification VALUES (65, 'The user gandalf has bid on the auction Bi
 INSERT INTO notification VALUES (67, 'Your auction Billabong Women''s Bella Beach Crossback Bikini Top is now closed.<br>The user gandalf had the highest bid (123€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 1, false, '2017-05-29 18:00:02.497226');
 INSERT INTO notification VALUES (69, 'Your auction Mass Effect Andromeda - PlayStation 4 is now open!<br>', 'Auction', 11, true, '2017-05-29 18:45:02.660761');
 INSERT INTO notification VALUES (66, 'You''ve won the auction Billabong Women''s Bella Beach Crossback Bikini Top with a bid of 123€. Congratulations!', 'Win', 10, false, '2017-05-29 18:00:02.48989');
+INSERT INTO notification VALUES (70, 'Your auction The Hobbit is now closed.<br>No one placed a bid in your auction :(. Better luck next time!', 'Auction', 1, true, '2017-05-29 19:11:01.948276');
+INSERT INTO notification VALUES (71, 'Your auction 1967 - Sunshine Tomorrow [2 CD] is now open!<br>', 'Auction', 4, true, '2017-05-29 21:36:01.60957');
+INSERT INTO notification VALUES (72, 'Someone posted a question in the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080.', 'Question', 4, true, '2017-05-29 21:59:11.353008');
+INSERT INTO notification VALUES (73, 'Your auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 is now open!<br>', 'Auction', 4, true, '2017-05-29 22:00:02.074314');
+INSERT INTO notification VALUES (74, 'The auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 is now open!<br>May the odds be ever in your favor! Good luck!', 'Auction', 10, true, '2017-05-29 22:00:02.080246');
+INSERT INTO notification VALUES (75, 'The user gandalf has bid on the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080.', 'Auction', 4, true, '2017-05-29 22:00:30.577877');
+INSERT INTO notification VALUES (76, 'The auction seller answered your question in the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080.', 'Answer', 10, true, '2017-05-29 22:01:47.785501');
+INSERT INTO notification VALUES (77, 'Your auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz is now open!<br>', 'Auction', 4, true, '2017-05-29 22:05:01.80791');
+INSERT INTO notification VALUES (78, 'Someone posted a question in the auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz.', 'Question', 4, true, '2017-05-29 22:05:44.901922');
+INSERT INTO notification VALUES (79, 'The user gandalf has bid on the auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz.', 'Auction', 4, true, '2017-05-29 22:06:40.086275');
+INSERT INTO notification VALUES (80, 'Your bid on the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 was surpassed.', 'Auction', 10, true, '2017-05-29 22:08:26.892001');
+INSERT INTO notification VALUES (81, 'The user Rick has bid on the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080.', 'Auction', 4, false, '2017-05-29 22:08:26.892001');
+INSERT INTO notification VALUES (83, 'Your question Goodbye gandalf :) has been reported.', 'Warning', 9, true, '2017-05-29 22:16:20.974819');
+INSERT INTO notification VALUES (84, 'You''ve won the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 with a bid of 202€. Congratulations!', 'Win', 9, true, '2017-05-29 22:20:02.085945');
+INSERT INTO notification VALUES (86, 'The auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 is now closed! You cannot bid anymore.', 'Auction', 10, true, '2017-05-29 22:20:02.103059');
+INSERT INTO notification VALUES (87, 'You''ve won the auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz with a bid of 401€. Congratulations!', 'Win', 10, true, '2017-05-29 22:25:02.444237');
+INSERT INTO notification VALUES (89, 'Your auction Game of Thrones: Season 5 [Blu-ray + Digital HD] is now closed.<br>No one placed a bid in your auction :(. Better luck next time!', 'Auction', 6, true, '2017-05-29 22:49:02.162282');
+INSERT INTO notification VALUES (90, 'Your auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz has been reported.', 'Warning', 4, false, '2017-05-29 23:03:18.509371');
+INSERT INTO notification VALUES (88, 'Your auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz is now closed.<br>The user gandalf had the highest bid (401€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 4, false, '2017-05-29 22:25:02.453843');
+INSERT INTO notification VALUES (85, 'Your auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 is now closed.<br>The user Rick had the highest bid (202€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 4, false, '2017-05-29 22:20:02.095919');
+INSERT INTO notification VALUES (82, 'Someone posted a question in the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080.', 'Question', 4, false, '2017-05-29 22:08:54.54849');
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 69, true);
+SELECT pg_catalog.setval('notification_id_seq', 90, true);
 
 
 --
@@ -1804,7 +1843,7 @@ SELECT pg_catalog.setval('notification_id_seq', 69, true);
 -- Name: password_request_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('password_request_id_seq', 1, true);
+SELECT pg_catalog.setval('password_request_id_seq', 3, true);
 
 
 --
@@ -1857,6 +1896,13 @@ INSERT INTO product VALUES (21, 'Cordoba Mini SM-CE Travel Acoustic-Electric', '
 INSERT INTO product VALUES (22, 'Pioneer DJ DDJ-SB2 Portable 2-channel controller for Serato DJ', 'Portable 2-channel controller for Serato DJ. DDJ-SB2 boasts all popular features from DDJ-SB, and adds some amazing new functions. This controller has been upgraded with 4-deck control and dedicated buttons to switch between channels effortlessly, plus a trim knob and level meters to master the input volume, and Pad Trans beat effects will uplift your DJ skills.', 'Use, but New!', '{"Binding: Electronics","Is Autographed: 0","Is Memorabilia: 0","Manufacturer: Pioneer Pro DJ","Package Quantity: 1","Part Number: DDJ-SB2","Product Group: Musical Instruments","Product Type Name: SOUND_AND_RECORDING_EQUIPMENT","Publisher: Pioneer Pro DJ","Studio: Pioneer Pro DJ"}');
 INSERT INTO product VALUES (23, 'Mass Effect Andromeda - PlayStation 4', 'Mass Effect: Andromeda takes players to the Andromeda galaxy, far beyond the Milky Way. There, players will lead our fight for a new home in hostile territory as the Pathfinder-a leader of military-trained explorers. This is the story of humanity''s next chapter, and player choices throughout the game will ultimately determine our survival.', 'Excelent, still in the plastic.', NULL);
 INSERT INTO product VALUES (24, 'Mass Effect Andromeda - PlayStation 4', 'Mass Effect: Andromeda takes players to the Andromeda galaxy, far beyond the Milky Way. There, players will lead our fight for a new home in hostile territory as the Pathfinder-a leader of military-trained explorers. This is the story of humanity''s next chapter, and player choices throughout the game will ultimately determine our survival.', 'Excelent, still in the plastic.', NULL);
+INSERT INTO product VALUES (25, '1967 - Sunshine Tomorrow [2 CD]', '1967 - Sunshine Tomorrow [2 CD]', 'New.', NULL);
+INSERT INTO product VALUES (26, 'Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080', 'Ultra smooth action with 144Hz rapid refresh rate and 1ms (GTG) response time
+Ergonomically-designed stand with Tilt,Swivel,Pivot,Height adjustment plus wall-mount capability for comfortable viewing position
+A comfortable viewing experience with ergonomic tilt, swivel pivot, and height adjustment
+Built-in 2W stereo speakers for an immersive home entertainment experience
+Featuring DisplayPort, Dual-link DVI-D, and HDMI ports for multi device connections', 'New.', '{"Binding: Unknown Binding","Manufacturer: ASUS product","Package Quantity: 1","Product Group: Book","Product Type Name: BOOKS_1973_AND_LATER","Publisher: ASUS product","Studio: ASUS product","24\" Full HD (1920 x 1080) resolution"}');
+INSERT INTO product VALUES (27, 'Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz', 'Are you amazed by the things you can do with your computer? . If you bought your computer more than a handful of years ago, you''re missing more than you know - uncompromised gaming, while you stream, chat and share with your community - stunning visuals of 4K HDR premium content - transport into a great VR experience. With premium performance and new & enhanced features, a desktop computer based on an 7th Gen Intel Core processor is always ready for real-life productivity, creativity and entertainment. With a range of smart, stylish designs and sizes, there is a 7th Gen Intel Core Desktop powered computer to fit a wide range of budgets and needs.', 'New.', '{"Binding: Personal Computers","Is Autographed: 0","Is Memorabilia: 0","Manufacturer: Intel","Number Of Items: 1","Part Number: BX80677I77700","Platform: No Operating System","Product Group: Personal Computer","Product Type Name: COMPUTER_PROCESSOR","Studio: Intel"}');
 
 
 --
@@ -1889,13 +1935,16 @@ INSERT INTO product_category VALUES (21, 11);
 INSERT INTO product_category VALUES (22, 11);
 INSERT INTO product_category VALUES (23, 16);
 INSERT INTO product_category VALUES (24, 16);
+INSERT INTO product_category VALUES (25, 1);
+INSERT INTO product_category VALUES (26, 9);
+INSERT INTO product_category VALUES (27, 9);
 
 
 --
 -- Name: product_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('product_id_seq', 24, true);
+SELECT pg_catalog.setval('product_id_seq', 27, true);
 
 
 --
@@ -1907,26 +1956,30 @@ INSERT INTO question VALUES (3, '2017-05-29 14:43:25.391867', 'What is the range
 INSERT INTO question VALUES (4, '2017-05-29 15:05:15.747521', 'If I use a Wingardium Leviosa, does it ride for me?', 11, 1);
 INSERT INTO question VALUES (5, '2017-05-29 16:49:14.317064', 'Did you enjoyed the book? I really don''t know if it''s good. Help me please. And that''s why I always say, ''Shumshumschilpiddydah!''', 9, 14);
 INSERT INTO question VALUES (6, '2017-05-29 17:50:32.362348', 'I really want this. Awesome product. Do you think it will suit me?', 10, 10);
+INSERT INTO question VALUES (7, '2017-05-29 21:59:11.341483', 'Hello, could you lower the price?', 10, 26);
+INSERT INTO question VALUES (8, '2017-05-29 22:05:44.879282', 'The processor is quad core?', 10, 27);
+INSERT INTO question VALUES (9, '2017-05-29 22:08:54.531952', 'Goodbye gandalf :)', 9, 26);
 
 
 --
 -- Name: question_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('question_id_seq', 6, true);
+SELECT pg_catalog.setval('question_id_seq', 9, true);
 
 
 --
 -- Data for Name: question_report; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO question_report VALUES (2, '2017-05-29 22:16:20.974819', 'It is not a question.', 9);
 
 
 --
 -- Name: question_report_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('question_report_id_seq', 1, true);
+SELECT pg_catalog.setval('question_report_id_seq', 2, true);
 
 
 --
@@ -1934,36 +1987,41 @@ SELECT pg_catalog.setval('question_report_id_seq', 1, true);
 --
 
 INSERT INTO review VALUES (1, 10, 'Great deal I made with this buddy.', '2017-05-29 19:04:29.11129', 8);
+INSERT INTO review VALUES (2, 6, 'This is really a great product. I''m so happy for this purchase!!!', '2017-05-29 22:31:21.301911', 6);
+INSERT INTO review VALUES (3, 5, 'I liked.', '2017-05-29 22:43:31.200466', 11);
+INSERT INTO review VALUES (4, 8, 'Very good book.', '2017-05-29 22:44:00.475787', 3);
+INSERT INTO review VALUES (5, 6, 'I liked.', '2017-05-29 23:58:44.378256', 10);
 
 
 --
 -- Name: review_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('review_id_seq', 1, true);
+SELECT pg_catalog.setval('review_id_seq', 5, true);
 
 
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: final; Owner: lbaw1662
 --
 
+INSERT INTO "user" VALUES (15, 'dcepa', 'digbenfiquista@hotmail.com', 'Diogo Cepa', 'I''m a facebook user', NULL, '$2y$12$0Xbrm2xYZufBDU/D3hPkVundtGS6YcgkkJ2UY1kkIZX5nig1L1dP6', NULL, '2017-05-29 23:53:23.708852', 'default.png', NULL, 0, NULL, NULL);
+INSERT INTO "user" VALUES (4, 'hant', 'up201406163@fe.up.pt', 'Hélder Antunes', 'Hello! I sell things I no longer need. Maybe you need it!', 'I just know that I AM.', '$2y$12$Yx9P.HKAZ6l/R/f55x8QQenEhv7ecblfXEN/uVwyaE0KxVFLSyejy', '921212122', '2017-05-22 15:24:39.421975', 'default.png', 6, 1603, 61, NULL);
+INSERT INTO "user" VALUES (10, 'gandalf', 'gandalf@hotmail.com', 'Gandalf the White', 'All we have to decide is what to do with the time that is given us. My advice is to buy the things that i sell.', '', '$2y$12$JkkekkZ6rAoz6q5UrTL/YOrm3T7rMoByygIMPwcCTxmYq8Szf/90a', '', '2017-05-29 11:11:51.673123', '10.jpg', NULL, 402, 53, NULL);
 INSERT INTO "user" VALUES (8, 'Heisenberg', 'heisenberg@hotmail.com', 'Walter White', 'No, you clearly don''t know who you''re talking to, so let me clue you in. I am not in danger. I am the danger! A guy opens his door and gets shot and you think that of me? No. I am the one who knocks!', '', '$2y$12$pN6x0Jg4..02TThfn7EblOy.DWPCICHQbSx0l4sDtSSHIJbW6gihW', '987654321', '2017-05-29 10:52:49.414417', '8.jpg', NULL, 489, 56, NULL);
 INSERT INTO "user" VALUES (2, 'jlopes', 'jlopes@fe.up.pt', 'João Lopes', 'Bio really short.', NULL, '$2y$12$gQCytOCmMLPQF93MYTk/ye/Z83gosOcO8sgcblBOnUOTiEpIgAkW.', NULL, '2017-05-22 09:48:06.239041', 'default.png', NULL, 0, NULL, NULL);
 INSERT INTO "user" VALUES (3, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'Talk a little about me?', NULL, '$2y$12$ejcRc5zXM2xmog6DW0XMBOtfZ1ep6wEl4DfXmJ/TjPOjPkOKVvFmu', NULL, '2017-05-25 08:29:51.082072', 'default.png', NULL, 0, NULL, NULL);
-INSERT INTO "user" VALUES (4, 'hant', 'up201406163@fe.up.pt', 'Hélder Antunes', 'Hello! I sell things I no longer need. Maybe you need it!', 'I just know that I AM.', '$2y$12$Yx9P.HKAZ6l/R/f55x8QQenEhv7ecblfXEN/uVwyaE0KxVFLSyejy', '921212122', '2017-05-22 15:24:39.421975', 'default.png', NULL, 1000, 61, NULL);
+INSERT INTO "user" VALUES (9, 'Rick', 'ricksanchez@gmail.com', 'Rick Sanchez', 'Wubba-lubba-dub-dub!', 'I''m a grumpy old men who likes to sell stuff.', '$2y$12$BquGZeFoQObgyoYG9.evA.LpvRp22u6Pn1pSs5WqJTt1b2EOI1UcC', '', '2017-05-29 10:59:48.819301', '9.png', NULL, 219, 54, NULL);
 INSERT INTO "user" VALUES (7, 'thedonald', 'donaldtrump@gmail.com', 'Donald Trump', 'I am the most successful person ever to run for president. Nobody’s ever been more successful than me. I have the best words. I am the best builder. Nobody builds walls better than me.', '', '$2y$12$hkZuQEac5i1FokdlwkVsqufqIblcuMWSE8GH2bMSXeI5ThHTv9yNO', '912121222', '2017-05-26 20:45:07.817477', '7.jpg', NULL, 106, 54, NULL);
-INSERT INTO "user" VALUES (10, 'gandalf', 'gandalf@hotmail.com', 'Gandalf the White', 'All we have to decide is what to do with the time that is given us. My advice is to buy the things that i sell.', '', '$2y$12$JkkekkZ6rAoz6q5UrTL/YOrm3T7rMoByygIMPwcCTxmYq8Szf/90a', '', '2017-05-29 11:11:51.673123', '10.jpg', NULL, 3, 53, NULL);
 INSERT INTO "user" VALUES (6, 'dakingindanorf', 'jonsnow@hotmail.com', 'Jon Snow', 'I''m the son of Lady Lyanna Stark and Rhaegar Targaryen, the Prince of Dragonstone. And i do know some things.', '', '$2y$12$vcwf0pkM5dIqwfoftNUOkuwsEKjj2sECAIO0Opd8ADkmDTztThUqy', '917592123', '2017-05-26 20:34:28.12354', '6.jpg', NULL, 0, 12, NULL);
 INSERT INTO "user" VALUES (11, 'harry_potter', 'hp17@gmail.com', 'James', 'Avedra Kadabra to my prices!', 'I''m a wizard who deals in the best stuff!', '$2y$12$1Eb4IqWXqPQbnpALLMXX3.7bBEcShPGZh//b655NvG23k2Mfdy7bC', '', '2017-05-29 13:04:18.044892', '11.jpg', NULL, 500, 51, NULL);
-INSERT INTO "user" VALUES (9, 'Rick', 'ricksanchez@gmail.com', 'Rick Sanchez', 'Wubba-lubba-dub-dub!', 'I''m a grumpy old men who likes to sell stuff.', '$2y$12$BquGZeFoQObgyoYG9.evA.LpvRp22u6Pn1pSs5WqJTt1b2EOI1UcC', '', '2017-05-29 10:59:48.819301', '9.png', NULL, 421, 54, NULL);
-INSERT INTO "user" VALUES (1, 'renatoabreu', 'renatoabreu1196@gmail.com', 'Renato Abreu', 'Hello. I sell a lot of stuff. Come and see. I have the best things and everything costs 25 Schmeckles.', NULL, '$2y$12$FDpZPDSCltFqIKMi8ATxjeHAgacr1VuX91vWfJiZ1JCX.4N9z7sAO', NULL, '2017-05-09 00:56:32.755805', 'default.png', 10, 327, NULL, NULL);
+INSERT INTO "user" VALUES (1, 'renatoabreu', 'renatoabreu1196@gmail.com', 'Renato Abreu', 'Hello. I sell a lot of stuff. Come and see. I have the best things and everything costs 25 Schmeckles.', NULL, '$2y$12$FDpZPDSCltFqIKMi8ATxjeHAgacr1VuX91vWfJiZ1JCX.4N9z7sAO', NULL, '2017-05-09 00:56:32.755805', 'default.png', 8, 327, NULL, NULL);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('user_id_seq', 11, true);
+SELECT pg_catalog.setval('user_id_seq', 15, true);
 
 
 --
@@ -2012,6 +2070,12 @@ INSERT INTO watchlist VALUES (23, 11, true, '2017-05-29 15:48:45.51018');
 INSERT INTO watchlist VALUES (23, 1, false, '2017-05-29 16:38:53.108272');
 INSERT INTO watchlist VALUES (14, 9, true, '2017-05-29 16:45:34.317702');
 INSERT INTO watchlist VALUES (1, 4, true, '2017-05-29 17:54:05.843875');
+INSERT INTO watchlist VALUES (18, 10, true, '2017-05-29 19:11:00.331153');
+INSERT INTO watchlist VALUES (25, 4, true, '2017-05-29 21:34:01.978553');
+INSERT INTO watchlist VALUES (26, 4, true, '2017-05-29 21:56:52.837139');
+INSERT INTO watchlist VALUES (26, 10, true, '2017-05-29 21:58:19.953343');
+INSERT INTO watchlist VALUES (27, 4, true, '2017-05-29 22:04:35.91019');
+INSERT INTO watchlist VALUES (11, 7, false, '2017-05-29 23:02:12.688634');
 
 
 --
