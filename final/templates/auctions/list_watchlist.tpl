@@ -33,7 +33,7 @@
           {$auction.product_name}
         </h5>
       </div>
-      <img src="{$BASE_URL}images/auctions/thumbnails/12124" alt="Product image">
+      <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
       {if $auction['state'] == 'Closed'}
         {if $auction.winner != NULL}
           <h4 style="height: 60px;">Auction won by

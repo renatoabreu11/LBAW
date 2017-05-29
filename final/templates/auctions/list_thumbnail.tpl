@@ -22,7 +22,7 @@
           <small>Starting date:</small><br>
           <strong style="margin-top: 0; font-size: 14px; height: 60px; display: flex; justify-content: center;align-items: center;">{$auction.start_date_readable}</strong>
         {else}
-          <small style="height: 50px;">Current price: <strong>{$auction.curr_bid}€</strong></small><br><br>
+          <h4 style="height: 50px;">Current price: <strong>{$auction.curr_bid}€</strong></h4><br><br>
           <small>Ends in</small>
           <div class="countdown counterThumbnail">
             <div class="clock" style="font-weight: bolder; font-size: 14px;"><p hidden>{$auction.end_date}</p></div>
