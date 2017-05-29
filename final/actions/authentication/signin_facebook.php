@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
+use Intervention\Image\ImageManager;
+
 if(isset($accessToken)) {
   if (isset($_SESSION['facebook_access_token'])) {
     $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
@@ -67,10 +69,11 @@ if(isset($accessToken)) {
     $_SESSION['username'] = getUserUsername($_SESSION['facebook_user_data']['email']);
     $_SESSION['user_id'] = getUserID($_SESSION['username']);
     if(!getUserByEmail($_SESSION['facebook_user_data']['email'])['oauth_id']) {
-      $image = file_get_contents($_SESSION['facebook_user_data']['picture']);
+      $manager = new ImageManager();
+      $image = $manager->make($_SESSION['facebook_user_data']['picture']);
       $name = $_SESSION['username'] . '.jpg';
       $dir = $BASE_URL . "images/users/" . $name;
-      file_put_contents($dir,$image);
+      $image->save($dir);
       updateUserFacebook($_SESSION['user_id'], $_SESSION['facebook_user_data']['oauth_uid'], $name);
     }
     if (empty($_SESSION['token'])) {
