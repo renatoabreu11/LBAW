@@ -694,6 +694,32 @@ th {
   padding-top: 20px;
 }
 
+.auctionTitleThumbnail {
+  height: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .auctionTitleThumbnail {
+    height: 75px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.counterThumbnail {
+  padding-bottom: 1em;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #wins .win-image {
   padding-top: 8px;
 }

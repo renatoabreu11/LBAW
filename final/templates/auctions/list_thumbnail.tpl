@@ -11,20 +11,20 @@
   {foreach $auctions as $auction}
     <div class="col-md-3 col-sm-6 col-xs-6 auction_row" data-page="{floor($auction@index/8+1)}" data-priceLow="{$auction.curr_bid}" data-priceHigh="-{$auction.curr_bid}" data-popular="-{$auction.numbids}" data-newest="-{strtotime($auction.start_date)}" data-ending="{strtotime($auction.end_date)}" hidden>
       <div class="thumbnail text-center">
-        {if strlen($auction.product_name) > 17}
-        <h4 class="text-center" style="height: 15px;">{substr($auction.product_name, 0, 14)}<a href="javascript:void(0)" data-toggle="tooltip" title="{$auction.product_name}">...</a></h4>
-        {else}
-        <h4 class="text-center" style="height: 15px;">{$auction.product_name}</h4>
-        {/if}
+        <div class="auctionTitleThumbnail">
+          <h5>
+            {$auction.product_name}
+          </h5>
+        </div>
         <img src="{$BASE_URL}images/auctions/thumbnails/{$auction.image}" alt="Product image">
         {if $auction.state == 'Created'}
           <small style="height: 50px;">Initial price: <strong>{$auction.start_bid}€</strong></small><br><br>
           <small>Starting date:</small><br>
-          <strong style="font-size: 14px; height: 60px; display: flex; justify-content: center;align-items: center;">{$auction.start_date_readable}</strong>
+          <strong style="margin-top: 0; font-size: 14px; height: 60px; display: flex; justify-content: center;align-items: center;">{$auction.start_date_readable}</strong>
         {else}
           <small style="height: 50px;">Current price: <strong>{$auction.curr_bid}€</strong></small><br><br>
           <small>Ends in</small>
-          <div class="countdown" style="padding-bottom: 1em; height: 60px; display: flex; justify-content: center;align-items: center;">
+          <div class="countdown counterThumbnail">
             <div class="clock" style="font-weight: bolder; font-size: 14px;"><p hidden>{$auction.end_date}</p></div>
           </div>
         {/if}
