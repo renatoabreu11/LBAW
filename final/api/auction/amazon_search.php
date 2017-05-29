@@ -32,7 +32,15 @@ $search->setKeywords($keyword);
 $search->setPage(1);
 $search->setResponseGroup(array('Small', 'Images'));
 $response = $apaiIO->runOperation($search);
-$items = $response['Items']['Item'];
+$totalResults = $response['Items']['TotalResults'];
+
+$items = array();
+if($totalResults == 1){
+  $aux = $response['Items']['Item'];
+  array_push($items, $aux);
+}
+else
+  $items = $response['Items']['Item'];
 
 $amazonSearchIndices = array(
   'Apparel',

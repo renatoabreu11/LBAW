@@ -7,7 +7,7 @@ include_once ($BASE_DIR . 'database/users.php');
 
 if (!$_GET['search'] && !$_GET['category']) {
   $_SESSION['error_messages'][] = "Field of search not specified!";
-  header("Location: $BASE_URL");
+  header("Location: auctions.php?category=all");
   exit;
 }
 
@@ -28,7 +28,7 @@ if ($_GET['search'] && !$_GET['category']) {
 }
 
 foreach ($auctions as &$auction) {
-  if ($auction['image'] == null) 
+  if ($auction['image'] == null)
     $auction['image'] = 'default.jpeg';
   $auction['end_date_readable'] = date('d F Y, H:i:s', strtotime($auction['end_date']));
   $auction['start_date_readable'] = date('d F Y, H:i:s', strtotime($auction['start_date']));
@@ -48,7 +48,7 @@ if($_GET['category']){
   $smarty->assign('categorySearch', $categorySearch);
 }
 
-$items = 8; 
+$items = 8;
 $nr_pages = ceil(count($auctions) / $items);
 
 $smarty->assign("module", "Auctions");

@@ -74,9 +74,10 @@ try {
   return;
 }
 
+$auction = getAuctionProduct($auctionId);
 if(getNotificationOption($seller, $auctionId)) {
   try {
-    $message = "Someone posted a question in your auction.";
+    $message = "Someone posted a question in the auction " . $auction['name'] . ".";
     notifyUser($seller, $message, "Question");
   } catch (PDOException $e) {
     $log->error($e->getMessage(), ['request' => 'New question notification']);

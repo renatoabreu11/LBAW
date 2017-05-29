@@ -68,10 +68,11 @@ try {
   return;
 }
 
+$auction = getAuctionProduct($auctionId);
 $question = getQuestion($questionId);
 if(getNotificationOption($question['user_id'], $auctionId)) {
   try {
-    $message = "The auction seller answered your question.";
+    $message = "The auction seller answered your question in the auction " . $auction['name'] . ".";
     notifyUser($question['user_id'], $message, "Answer");
   } catch (PDOException $e) {
     $log->error($e->getMessage(), ['request' => 'New answer notification']);
