@@ -148,7 +148,7 @@ $(document).ready(function() {
       let response = data['response'];
       if(message.includes('Category already exists')) {
         form.find('.field_error').text(message);
-      } else if(message.includes('Success')) {
+      } else if(response.includes('Success')) {
         form.trigger('reset');
         let div = '<li class="list-group-item col-md-3">'
           +title+

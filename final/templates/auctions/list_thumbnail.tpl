@@ -12,7 +12,7 @@
     <div class="col-md-3 col-sm-6 col-xs-6 auction_row" data-page="{floor($auction@index/8+1)}" data-priceLow="{$auction.curr_bid}" data-priceHigh="-{$auction.curr_bid}" data-popular="-{$auction.numbids}" data-newest="-{strtotime($auction.start_date)}" data-ending="{strtotime($auction.end_date)}" hidden>
       <div class="thumbnail text-center">
         {if strlen($auction.product_name) > 17}
-        <h4 class="text-center">{substr($auction.product_name, 0, 14)}...</h4>
+        <h4 class="text-center">{substr($auction.product_name, 0, 14)}<a href="javascript:void(0)" data-toggle="tooltip" title="{$auction.product_name}">...</a></h4>
         {else}
         <h4 class="text-center">{$auction.product_name}</h4>
         {/if}

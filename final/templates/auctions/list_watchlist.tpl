@@ -29,7 +29,7 @@
         </ul>
       </div>
       {if strlen($auction.product_name) > 20}
-      <h4 class="text-center">{substr($auction.product_name, 0, 17)}...</h4>
+      <h4 class="text-center">{substr($auction.product_name, 0, 17)}<a href="javascript:void(0)" data-toggle="tooltip" title="{$auction.product_name}">...</a></h4>
       {else}
       <h4 class="text-center">{$auction.product_name}</h4>
       {/if}
