@@ -52,7 +52,7 @@
     			</span>
           </div>
           <div class="col-md-8 input-group col-xs-12 col-md-offset-4">
-            <select class="input-md form-control selectpicker" id="characteristics" multiple data-max-options="10" data-live-search="true" name="characteristics[]" title="Choose here the product characteristics">
+            <select class="input-md form-control selectpicker" id="characteristics" multiple data-max-options="10" data-selected-text-format="count" data-live-search="true" name="characteristics[]" title="Choose here the product characteristics">
               {foreach $characteristics as $c}
                 <option selected>{$c}</option>
               {/foreach}
