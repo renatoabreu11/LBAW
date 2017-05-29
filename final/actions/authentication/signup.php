@@ -87,7 +87,7 @@ if(isset($_SESSION['facebook_user_data'])) {
     $manager = new ImageManager();
     $image = $manager->make($_SESSION['facebook_user_data']['picture']);
     $name = $_SESSION['username'] . '.jpg';
-    $dir = $BASE_URL . "images/users/" . $name;
+    $dir = $BASE_DIR . "images/users/" . $name;
     $image->save($dir);
     updateUserFacebook($_SESSION['user_id'], $_SESSION['facebook_user_data']['oauth_uid'], $name);
 }
