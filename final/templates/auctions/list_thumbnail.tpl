@@ -20,7 +20,7 @@
         {if $auction.state == 'Created'}
           <small style="height: 50px;">Initial price: <strong>{$auction.start_bid}€</strong></small><br><br>
           <small>Starting date:</small><br>
-          <strong style="font-size: 14px;">{$auction.start_date_readable}</strong>
+          <strong style="font-size: 14px; height: 60px; display: flex; justify-content: center;align-items: center;">{$auction.start_date_readable}</strong>
         {else}
           <small style="height: 50px;">Current price: <strong>{$auction.curr_bid}€</strong></small><br><br>
           <small>Ends in</small>
