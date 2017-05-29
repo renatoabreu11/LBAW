@@ -127,14 +127,15 @@ $(document).ready(function() {
           if (hasBidders) {
             if (bidderTableBody.children().length === 5)
               bidderTableBody.children().last().remove();
-            bidderTableBody.prepend('' +
+            bidderTableBody.prepend(
               '<tr>' +
               '<td class="col-xs-5">' +
               '<a href="' + BASE_URL + 'pages/user/user.php?id=' + userId + '">' + username + '</a>' +
               '</td>' +
-              '<td class="col-xs-2">' + amount + '</td>' +
-              '<td class="col-xs-5">' + data['date'] + '</td>' +
-              '</tr>');
+              '<td class="col-xs-1">' + amount + '</td>' +
+              '<td class="col-xs-6">' + data['date'] + '</td>' +
+              '</tr>'
+              );
           } else {
             $.magnificPopup.open({
               items: {
