@@ -306,9 +306,11 @@
                         {/if}
                       {/foreach}
                     {/if}
-                    <div class="text-center reviewAuction-{$win.bid_id}">
-                      <button data-toggle="collapse" data-target="#win-review-form-{$win.bid_id}" class="win-review-button-form btn btn-info">Review auction</button>
-                    </div>
+                    {if !$isReviewed}
+                      <div class="text-center reviewAuction-{$win.bid_id}">
+                        <button data-toggle="collapse" data-target="#win-review-form-{$win.bid_id}" class="win-review-button-form btn btn-info">Review auction</button>
+                      </div>
+                    {/if}
                   </div>
                   {if !$isReviewed}
                     <div class="form-wrapper col-md-12">
