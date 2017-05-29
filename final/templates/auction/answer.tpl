@@ -31,7 +31,7 @@
               {if ($USER_ID)}
                 {if ($seller.id == $USER_ID)}
                   {if ($question.answer_can_edit)}
-                    <span><a class="edit-answer underline-text-hover">edit</a></span>
+                    <span><a class="edit-answer underline-text-hover" href="javascript:void(0)">edit</a></span>
                   {/if}
                   <span><a class="underline-text-hover removeAnswerPopup id-{$question.answer_id}" href="#removeAnswer">delete</a></span>
                 {/if}

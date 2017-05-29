@@ -12,9 +12,9 @@
         <img src="{$BASE_URL}images/assets/{$notification.type}.png" Alt="{$notification.type}" width="64">
       </div>
       <div class="media-body">
-        <a class="notifications-item-title hideNotification">
+        <span class="notifications-item-title hideNotification" style="color: #323fff; cursor: pointer;">
           {$notification.message}
-        </a>
+        </span>
         <p class="notification-item-date"><small>{$notification.date}</small></p>
       </div>
       <div class="media-right">

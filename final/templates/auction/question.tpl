@@ -33,7 +33,7 @@
                   {if ($USER_ID)}
                     {if ($question.user_id == $USER_ID)}
                       {if ($question.can_edit)}
-                        <span><a class="edit-question underline-text-hover">edit</a></span>
+                        <span><a class="edit-question underline-text-hover" href="javascript:void(0)">edit</a></span>
                       {/if}
                       <span><a class="underline-text-hover removeQuestionPopup id-{$question.id}" href="#removeQuestion">delete</a></span>
                     {/if}
@@ -41,7 +41,7 @@
                       <span><a class="reportQuestionPopup underline-text-hover" href="#reportQuestionConfirmation">report</a></span>
                     {/if}
                     {if ($seller.id == $USER_ID && !$question.answer_message)}
-                      <span><a class="reply-question underline-text-hover">reply</a></span>
+                      <span><a class="reply-question underline-text-hover" href="javascript:void(0)">reply</a></span>
                     {/if}
                   {/if}
                 </div>

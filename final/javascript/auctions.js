@@ -4,7 +4,7 @@ $(document).ready(function() {
     range: true,
     values: [1, 1000],
     min: 1,
-    max: 1000,
+    max: 10000,
     slide: function( event, ui ) {
       $('#amount').val( ui.values[0] + '€ - ' + ui.values[1] + '€');
     },
