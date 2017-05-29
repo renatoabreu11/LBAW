@@ -69,7 +69,7 @@
         </div>
         <div class="form-group text-center">
           <a class="btn btn-primary" href="{$FB_LOGIN_URL}" style="width: 180px">
-            <span><i class="fa fa-facebook"> </i></span> Sign in with Facebook
+            <span><i class="fa fa-facebook"> </i></span> Sign up with Facebook
           </a>
         </div>
       </form>
