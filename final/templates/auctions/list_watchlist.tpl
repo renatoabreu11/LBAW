@@ -38,7 +38,7 @@
         {if $auction.winner != NULL}
           <h4 style="height: 60px;">Auction won by
             <br>
-            <a href="{$BASE_URL}pages/user/user.php?id={$winningUser.id}"><strong style="font-size: 20px">{$winningUser.username}</strong></a>
+            <a href="{$BASE_URL}pages/user/user.php?id={$auction.winner.id}"><strong style="font-size: 20px">{$auction.winner.username}</strong></a>
           </h4>
           <h4 class="current-bid" style="height: 60px;">Final bid: <strong style="font-size: 20px">{$auction.curr_bid}€</strong></h4>
         {else}

@@ -718,12 +718,6 @@ th {
   padding-top: 8px;
 }
 
-#wins .win-info-title {
-  font-size: 14px;
-  font-weight: bold;
-  color: dimgrey;
-}
-
 #wins .win-review-rating-title {
   padding-top: 10px;
   font-size: larger;

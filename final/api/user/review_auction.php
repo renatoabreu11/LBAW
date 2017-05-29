@@ -2,6 +2,7 @@
 
 include_once('../../config/init.php');
 include_once($BASE_DIR . 'database/users.php');
+include_once($BASE_DIR . 'database/auction.php');
 
 $reply = array();
 if (!$_POST['token'] || !$_SESSION['token'] || !hash_equals($_SESSION['token'], $_POST['token'])) {
@@ -41,6 +42,24 @@ if(!is_numeric($rating)) {
 if(strlen($message) > 512){
   $reply['response'] = "Error 400 Bad Request";
   $reply['message'] = "The message length exceeds the maximum (512 characters)";
+  echo json_encode($reply);
+  return;
+}
+
+$bid = getBid($bidId);
+if($bid != null){
+  $bidder = $bid['user_id'];
+  $auctionId = $bid['auction_id'];
+  $winner = getWinningUser($auctionId);
+  if(!($winner['id'] == $bidder)){
+    $reply['response'] = "Error 403 Forbidden";
+    $reply['message'] = "You don't have permissions to make this request. You can only review auctions that you have won.";
+    echo json_encode($reply);
+    return;
+  }
+}else {
+  $reply['response'] = "Error 400 Bad Request";
+  $reply['message'] = "Invalid bid " . $bidId;
   echo json_encode($reply);
   return;
 }

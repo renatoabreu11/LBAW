@@ -255,11 +255,13 @@
                       {else}
                         <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}"><img class="review-image" src="{$BASE_URL}images/auctions/thumbnails/default.jpeg" Alt="Product image"></a>
                       {/if}
-                      <div class="rateYo" data-rating="{$review.rating}" style="margin: auto;"></div>
-                      <p class="text-center reviewer-info">By <a href="{$BASE_URL}pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> on {$review.date}</p>
+                      <span class="rateYo" data-rating="{$review.rating}" style="margin: auto;"></span>
+                      <p class="text-center reviewer-info">By <a href="{$BASE_URL}pages/user/user.php?id={$review.reviewer_id}">{$review.reviewer_username}</a> <br>on {$review.date}</p>
                     </div>
                     <div class="col-md-9 col-sm-9">
-                      <a href="#" class="review-product-name"><p>{$review.product_name}</p></a>
+                      <h4>
+                        <a href="{$BASE_URL}pages/auction/auction.php?id={$review.auction_id}" class="review-product-name">{$review.product_name}</a>
+                      </h4>
                       <hr class="title-comment-divider">
                       <p class="review-comment text-justify">{$review.message}</p>
                     </div>
@@ -282,22 +284,17 @@
           {else}
             {foreach $wins as $win}
               <div class="thumbnail win-item">
+                <input type="hidden" class="bid-id" value="{$win.bid_id}">
                 <div class="row">
                   <div class="col-lg-3 col-md-3 win-wrapper">
-                    <div id="win-info-image">
-                      <a href="{$BASE_URL}pages/auction/auction?id={$win.auction_id}"><img class="win-image img-rounded" src="{$BASE_URL}images/auctions/thumbnails/{if ($win.image_filename)}{$win.image_filename}{else}default.jpeg{/if}" alt="Product image"></a>
-                    </div>
-                    <div id="win-info-text">
-                      <div class="text-right win-info">
-                        <span class="win-info-title">Base price: </span><button class="btn btn-info btn-sm active win-info-value">{$win.start_bid}€</button><br>
-                        <span class="win-info-title">Bought price: </span><button class="btn btn-info btn-sm active win-info-value">{$win.curr_bid}€</button><br>
-                        <span class="win-info-title">Date: </span><button class="btn btn-info btn-sm active win-info-value">{$win.end_date}</button><br>
-                        <span class="win-info-title">Seller: </span><button class="btn btn-link btn-sm active win-info-value"><a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a></button><br>
-                      </div>
+                    <div class="win-info-image">
+                      <a href="{$BASE_URL}pages/auction/auction.php?id={$win.auction_id}"><img class="win-image img-rounded" src="{$BASE_URL}images/auctions/thumbnails/{if ($win.image_filename)}{$win.image_filename}{else}default.jpeg{/if}" alt="Product image"></a>
                     </div>
                   </div>
                   <div class="col-lg-9 col-md-9">
-                    <a href="#" class="win-product-name"><p>{$win.product_name}</p></a>
+                    <h4>
+                      <a href="{$BASE_URL}pages/auction/auction.php?id={$win.auction_id}" class="win-product-name">{$win.product_name}</a>
+                    </h4>
                     <hr class="title-comment-divider">
                     <p class="win-comment text-justify">{$win.description}</p>
                     <hr>
@@ -308,29 +305,36 @@
                           {$isReviewed = true}
                         {/if}
                       {/foreach}
-                      {if (!$isReviewed)}
-                        <div class="form-wrapper">
-                          <button data-toggle="collapse" data-target="#win-review-form" class="win-review-button-form btn btn-info btn-block">Review auction</button>
-                          <form id="win-review-form" class="collapse" action="javascript:void(0);">
-                            <input type="hidden" class="bid-id" value="{$win.bid_id}">
-                            <div class="win-review-rating">
-                              <p class="win-review-rating-title">Rating: </p>
-                              <div class="win-review-rating-stars">
-                                {for $var=0 to 9 step 1}
-                                  <span class="glyphicon glyphicon-star-empty"></span>
-                                {/for}
-                              </div>
-                            </div>
-                            <div class="input-group win-review-comment">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
-                              <textarea class="form-control" rows="3" placeholder="Comment..."></textarea>
-                            </div>
-                            <button class="btn btn-info btn-block btn-review-submit" value="Submit">Submit</button>
-                          </form>
-                        </div>
-                      {/if}
                     {/if}
-
+                    <div class="text-center reviewAuction-{$win.bid_id}">
+                      <button data-toggle="collapse" data-target="#win-review-form-{$win.bid_id}" class="win-review-button-form btn btn-info">Review auction</button>
+                    </div>
+                  </div>
+                  {if !$isReviewed}
+                    <div class="form-wrapper col-md-12">
+                      <form id="win-review-form-{$win.bid_id}" class="collapse" action="javascript:void(0);">
+                        <div class="win-review-rating">
+                          <p class="win-review-rating-title">Rating: </p>
+                          <div class="win-review-rating-stars">
+                            {for $var=0 to 9 step 1}
+                              <span class="glyphicon glyphicon-star-empty"></span>
+                            {/for}
+                          </div>
+                        </div>
+                        <div class="input-group win-review-comment">
+                          <label for="reviewComment-{$win.bid_id}" class="sr-only">Review comment</label>
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                          <textarea class="form-control" rows="3" id="reviewComment-{$win.bid_id}" placeholder="Comment..."></textarea>
+                        </div>
+                        <div class="text-center">
+                          <button class="btn btn-info btn-review-submit" value="Submit">Submit review</button>
+                        </div>
+                      </form>
+                    </div>
+                  {/if}
+                  <div class="text-center col-md-12" style="padding: 1em;">
+                      Product auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a> with a base price of {$win.start_bid}€
+                      and bought by a price of {$win.curr_bid}€ on {$win.end_date}.
                   </div>
                 </div>
               </div>

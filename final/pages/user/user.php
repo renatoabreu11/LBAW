@@ -19,7 +19,17 @@ $isFollowing = getIsFollowing($loggedUserId, $userId);        // handle if user 
 $totalAuctions = getNumTotalAuctions($userId);
 $activeAuctions = getActiveAuctions($userId);
 $reviews = getReviews($userId);
+
+foreach ($reviews as &$aux) {
+  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+}
+
 $wins = getWins($userId);
+
+foreach ($wins as &$aux) {
+  $aux['end_date'] = date('d F Y, H:i', strtotime($aux['end_date']));
+}
+
 $followingUsers = getFollowingUsers($userId);
 
 // Recent Activity.
@@ -54,7 +64,7 @@ foreach ($lastFollowing as &$aux) {
 }
 
 foreach ($lastWins as &$aux) {
-  $aux['date'] = date('d F Y, H:i', strtotime($aux['date']));
+  $aux['end_date'] = date('d F Y, H:i', strtotime($aux['end_date']));
 }
 
 foreach ($lastQuestion as &$aux) {

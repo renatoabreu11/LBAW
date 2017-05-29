@@ -158,11 +158,18 @@ $(document).ready(function() {
    * Review submit button.
    */
   $('.btn-review-submit').click(function() {
-    let rating = $(this).prev().prev().children('.win-review-rating-stars')
-      .children('.glyphicon-star').length;
-    let message = $(this).prev().children('textarea').val();
-    let bidId = $(this).prev().prev().prev().val();
-    let formWrapper = $(this).parent().parent();
+    let parent = $(this).closest('.win-item');
+    let bidId = parent.find('input.bid-id').val();
+    let buttonWrapper = parent.find('.reviewAuction-' + bidId);
+
+    if(isNaN(bidId))
+      return;
+
+    let form = $('#win-review-form-' + bidId);
+
+    let rating = form.find('.win-review-rating-stars').children('.glyphicon-star').length;
+    let message = form.find('#reviewComment-' + bidId).val();
+    let formWrapper = form.parent();
 
     let request = $.ajax({
       type: 'POST',
@@ -184,7 +191,17 @@ $(document).ready(function() {
         formWrapper.fadeOut(500, function() {
           formWrapper.remove();
         });
+        buttonWrapper.fadeOut(500, function() {
+          buttonWrapper.remove();
+        });
       }
+      $.magnificPopup.open({
+        items: {
+          src: '<div class="white-popup">' + message + '</div>',
+          type: 'inline',
+          mainClass: 'mfp-fade',
+        },
+      });
     });
 
     request.fail(function(jqXHR, textStatus, errorThrown) {

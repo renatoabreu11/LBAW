@@ -382,6 +382,21 @@ function getWinningUser($auctionId) {
 }
 
 /**
+ * Returns a bid
+ * @param $bidId
+ *
+ * @return mixed
+ */
+function getBid($bidId){
+  global $conn;
+  $stmt = $conn->prepare('SELECT *
+                            FROM bid
+                            WHERE bid.id = ?');
+  $stmt->execute(array($bidId));
+  return $stmt->fetch();
+}
+
+/**
  * Returns similar auctions to the given one
  * @param $auctionId
  * @return array
