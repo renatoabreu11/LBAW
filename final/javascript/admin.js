@@ -593,8 +593,13 @@ $(document).ready(function() {
         },
       });
       if(response.includes('Success')) {
+        let feedbackDiv = $('#feedbackDiv');
+        let feedbackCount = feedbackDiv.children('.notifications-wrapper').length;
         object.hide('slow', function() {
           object.remove();
+          if(feedbackCount - 1 === 0) {
+            $('#noFeedback').show();
+          }
         });
       }
     });

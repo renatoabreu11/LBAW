@@ -1,15 +1,13 @@
-<div class="adminOption">
+<div class="adminOption" id="feedbackDiv">
   <h4><i class="fa fa-comments" aria-hidden="true"></i> User Feedback</h4>
-  {if count($feedback) == 0}
-    <div class="container-fluid" style="padding-top: 2em;">
-      <div class="row-fluid">
-        <div class="empty-content text-center">
-          <i class="fa fa-rss fa-3x" aria-hidden="true"></i>
-          <h3>No feedback available.</h3>
-        </div>
+  <div class="container-fluid" id="noFeedback" style="padding-top: 2em;{if !(count($feedback) == 0)}display: none{/if}">
+    <div class="row-fluid">
+      <div class="empty-content text-center">
+        <i class="fa fa-rss fa-3x" aria-hidden="true"></i>
+        <h3>No feedback available.</h3>
       </div>
     </div>
-  {/if}
+  </div>
   {foreach $feedback as $feed}
     <div class="notifications-wrapper">
       <div class="media notification-media">
