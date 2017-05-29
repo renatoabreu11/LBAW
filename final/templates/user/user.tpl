@@ -306,13 +306,13 @@
                         {/if}
                       {/foreach}
                     {/if}
-                    {if !$isReviewed}
+                    {if $USER_ID == $user.id && !$isReviewed}
                       <div class="text-center reviewAuction-{$win.bid_id}">
                         <button data-toggle="collapse" data-target="#win-review-form-{$win.bid_id}" class="win-review-button-form btn btn-info">Review auction</button>
                       </div>
                     {/if}
                   </div>
-                  {if !$isReviewed}
+                  {if $USER_ID == $user.id && !$isReviewed}
                     <div class="form-wrapper col-md-12">
                       <form id="win-review-form-{$win.bid_id}" class="collapse" action="javascript:void(0);">
                         <div class="win-review-rating">
