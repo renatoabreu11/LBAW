@@ -157,7 +157,7 @@
                     <span class="recent-activity-date">{$lastWatchlistAuctions[$var].date}</span>
                   </div>
                   <div class="panel-body">
-                    <p><a href="#">{$user.username}</a> added an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastWatchlistAuctions[$var].id}">auction</a> to his <a href="#">watchlist</a>.</p>
+                    <p><a href="#">{$user.username}</a> added an <a href="{$BASE_URL}pages/auction/auction.php?id={$lastWatchlistAuctions[$var].id}">auction</a> to his watchlist.</p>
                   </div>
                 </div>
               {/if}
@@ -333,8 +333,8 @@
                       </form>
                     </div>
                   {/if}
-                  <div class="text-center col-md-12" style="padding: 1em;">
-                    <hr style="margin: 1em;">
+                  <div class="text-center col-md-12" style="padding: 0.25em 1em 1em 1em;">
+                    <hr style="margin: 1em">
                     Product auctioned by <a href="{$BASE_URL}pages/user/user.php?id={$win.seller_id}">{$win.seller_username}</a> with a base price of {$win.start_bid}€
                       and bought by a price of {$win.curr_bid}€ on {$win.end_date}.
                   </div>
