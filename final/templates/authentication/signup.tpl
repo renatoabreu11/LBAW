@@ -65,7 +65,12 @@
           </div>
         </div>
         <div class="form-group text-center" id="signup-btn">
-          <button class="btn btn-info">Sign up</button>
+          <button class="btn btn-info" style="width: 180px">Sign up</button>
+        </div>
+        <div class="form-group text-center">
+          <a class="btn btn-primary" href="{$FB_LOGIN_URL}" style="width: 180px">
+            <span><i class="fa fa-facebook"> </i></span> Sign in with Facebook
+          </a>
         </div>
       </form>
     </div>
