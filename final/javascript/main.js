@@ -12,6 +12,10 @@ $(document).ready(function() {
     selector: '[data-toggle=tooltip]',
   });
 
+  $('body').popover({
+    selector: '[data-toggle=popover]',
+  });
+
   $('#signInForm').validate({
     rules:
       {
