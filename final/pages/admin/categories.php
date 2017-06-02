@@ -21,4 +21,5 @@ $categories = getCategories();
 $smarty->assign("module", "Admin");
 $smarty->assign("categories", $categories);
 $smarty->assign("adminSection", "categories");
+$smarty->assign("title", "SeekBid - Administration");
 $smarty->display('admin/admin_page.tpl');

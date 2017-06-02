@@ -53,4 +53,5 @@ $smarty->assign("module", "Auctions");
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);
 $smarty->assign('auctions', $auctions);
+$smarty->assign("title", "Seek Bid - " . $username . "'s watchlist");
 $smarty->display('auctions/watchlist.tpl');

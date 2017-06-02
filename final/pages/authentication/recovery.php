@@ -12,4 +12,5 @@ if($username && $userId && $token){
 }
 
 $smarty->assign("module", "Auth");
+$smarty->assign("title", "Seek Bid - Password recovery");
 $smarty->display('authentication/recovery.tpl');

@@ -225,7 +225,7 @@
               </div>
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Bids:</strong><p class="col-md-4"> {$numBids}</p>
-                <strong class="col-md-2 col-xs-5">Winner:</strong><p class="col-md-4"> {if ($winningUser)}<a href="{$BASE_URL}pages/user/user.php?id={$winningUser.user_id}">{$winningUser.user_username}</a>{else}N/A{/if}</p>
+                <strong class="col-md-2 col-xs-5">Winner:</strong><p class="col-md-4"> {if $winningUser}<a href="{$BASE_URL}pages/user/user.php?id={$winningUser.id}">{$winningUser.username}</a>{else}N/A{/if}</p>
               </div>
               <div class="row">
                 <strong class="col-md-2 col-xs-5">Bidders:</strong><p class="col-md-4"> {$numBidders}</p>

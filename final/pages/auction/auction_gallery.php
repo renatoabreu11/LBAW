@@ -47,4 +47,5 @@ $smarty->assign("module", "Auction");
 $smarty->assign('notifications', $notifications);
 $smarty->assign("product", $product);
 $smarty->assign("auction", $auction);
+$smarty->assign("title", "Seek Bid - Edit " . $product['name']);
 $smarty->display('auction/auction_gallery.tpl');

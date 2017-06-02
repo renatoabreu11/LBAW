@@ -30,4 +30,5 @@ $smarty->assign("module", "Admin");
 $smarty->assign("auctionsUser", $nrOfAuctionsByUser);
 $smarty->assign("users", $users);
 $smarty->assign("adminSection", "users");
+$smarty->assign("title", "SeekBid - Administration");
 $smarty->display('admin/admin_page.tpl');

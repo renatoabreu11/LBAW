@@ -123,7 +123,7 @@ $(document).ready(function() {
           $('input.bid-amount').attr({
             'min': amount + 1,
           });
-          currBid.text('Current Bid: ' + amount + '€');
+          currBid.text('Current price: <strong style="font-size: 20px">' + amount + '€</strong>');
           if (hasBidders) {
             if (bidderTableBody.children().length === 5)
               bidderTableBody.children().last().remove();

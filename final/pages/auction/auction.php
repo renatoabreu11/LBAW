@@ -83,4 +83,5 @@ $smarty->assign("numBids", $numBids);
 $smarty->assign("numBidders", $numBidders);
 $smarty->assign("questions", $questions);
 $smarty->assign("similarAuctions", $similarAuctions);
+$smarty->assign("title", "Seek Bid - " . $product['name']);
 $smarty->display('auction/auction.tpl');

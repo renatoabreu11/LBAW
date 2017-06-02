@@ -12,4 +12,5 @@ if($username && $userId && $token){
 }
 
 $smarty->assign("module", "Auth");
+$smarty->assign("title", "Seek Bid - Admin sign in");
 $smarty->display('authentication/signin_admin.tpl');

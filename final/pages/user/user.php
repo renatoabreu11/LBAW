@@ -100,4 +100,5 @@ $smarty->assign('lastWatchlistAuctions', $lastWatchlistAuctions);
 if($userId == $loggedUserId)
   $smarty->assign('reviewsPosted', $reviewsPosted);
 
+$smarty->assign("title", "Seek Bid - " . $user['name']);
 $smarty->display('user/user.tpl');

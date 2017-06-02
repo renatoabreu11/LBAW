@@ -71,4 +71,5 @@ $smarty->assign('auctionTypes', $auctionTypes);
 $smarty->assign('notifications', $notifications);
 $smarty->assign("categories", $categories);
 $smarty->assign("searchIndices", $amazonSearchIndices);
+$smarty->assign("title", "Seek Bid - Auction creation");
 $smarty->display('auction/create_auction.tpl');

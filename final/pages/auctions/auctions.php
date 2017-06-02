@@ -56,4 +56,5 @@ $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('textSearch', $textSearch);
 $smarty->assign('auctions', $auctions);
 $smarty->assign('categories', $categories);
+$smarty->assign("title", "Seek Bid - Auction search");
 $smarty->display('auctions/auctions.tpl');

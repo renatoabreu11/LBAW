@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-4 col-md-4 col-sm-4">
+  <div class="col-md-4 col-xs-12">
     <div class="item active">
       <div class="thumbnail text-center">
         <h4 class="text-center">{$mostRecentAuction.product_name}</h4>
@@ -70,7 +70,7 @@
       </table>
     {/if}
   </div>
-  <div class="col-md-8">
+  <div class="col-md-8 col-xs-12">
     <div class="panel panel-primary">
       <div class="panel-heading" style="vertical-align: middle; padding-bottom: 2px;">
         <p><i class="fa fa-legal"></i> Hottest deals on Seek Bid!</p>

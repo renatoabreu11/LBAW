@@ -45,4 +45,5 @@ foreach ($auctionsIDs as $auctionArr){
 $smarty->assign("module", "Admin");
 $smarty->assign("auctions", $auctions);
 $smarty->assign("adminSection", "auctions");
+$smarty->assign("title", "SeekBid - Administration");
 $smarty->display('admin/admin_page.tpl');

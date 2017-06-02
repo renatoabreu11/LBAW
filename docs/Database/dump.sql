@@ -1410,13 +1410,15 @@ SELECT pg_catalog.setval('admin_id_seq', 3, true);
 INSERT INTO answer VALUES (1, '2017-05-29 14:21:28.199662', 'Yeah, that''s not enough. Sorry, my friend.', 1, 7);
 INSERT INTO answer VALUES (2, '2017-05-29 22:01:47.773076', 'Now I can not lower the price! Too late, my friend!', 7, 4);
 INSERT INTO answer VALUES (3, '2017-05-29 22:07:44.783188', 'Yes, it''s quad core, yes sir.', 8, 4);
+INSERT INTO answer VALUES (4, '2017-06-02 00:34:20.371385', 'Pretty good if you ask me!', 13, 11);
+INSERT INTO answer VALUES (5, '2017-06-02 01:53:52.314833', 'More or less 10 meters.', 14, 11);
 
 
 --
 -- Name: answer_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('answer_id_seq', 3, true);
+SELECT pg_catalog.setval('answer_id_seq', 5, true);
 
 
 --
@@ -1445,30 +1447,39 @@ INSERT INTO auction VALUES (4, 14, 14, '2017-05-29 13:13:00', '2017-06-03 13:22:
 INSERT INTO auction VALUES (5, 20, 20, '2017-05-29 13:17:00', '2017-05-29 13:20:00', 'Default', 4, 5, '2017-05-29 13:16:05.237026', 1, true, 0, 'Closed');
 INSERT INTO auction VALUES (6, 15, 15, '2017-05-29 13:30:00', '2017-06-04 13:38:00', 'Default', 4, 6, '2017-05-29 13:25:31.747', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (7, 80, 80, '2017-05-29 13:38:00', '2017-06-03 13:43:00', 'Default', 4, 7, '2017-05-29 13:30:37.012986', 1, true, 0, 'Open');
-INSERT INTO auction VALUES (9, 60, 60, '2017-05-29 13:44:00', '2017-06-29 21:58:00', 'Default', 1, 9, '2017-05-29 13:41:05.424465', 1, false, 0, 'Open');
+INSERT INTO auction VALUES (39, 15, 33, '2017-06-02 02:49:00', '2017-06-02 13:49:00', 'Default', 11, 39, '2017-06-02 01:51:58.406147', 1, true, 7, 'Closed');
 INSERT INTO auction VALUES (13, 34, 34, '2017-05-29 14:05:00', '2017-06-07 14:14:00', 'Default', 1, 13, '2017-05-29 14:01:07.565063', 1, true, 0, 'Open');
-INSERT INTO auction VALUES (16, 900, 900, '2017-05-31 10:05:00', '2017-06-03 14:05:00', 'Default', 7, 16, '2017-05-29 14:09:41.758057', 1, true, 0, 'Created');
+INSERT INTO auction VALUES (22, 98, 100, '2017-05-29 14:41:00', '2017-06-02 14:48:00', 'Default', 9, 22, '2017-05-29 14:35:03.35022', 1, true, 1, 'Closed');
 INSERT INTO auction VALUES (17, 99, 99, '2017-05-29 14:12:00', '2017-06-03 14:23:00', 'Default', 4, 17, '2017-05-29 14:09:56.938925', 1, true, 0, 'Open');
-INSERT INTO auction VALUES (15, 67, 67, '2017-05-29 14:14:00', '2017-06-08 14:21:00', 'Default', 4, 15, '2017-05-29 14:07:19.406098', 4, true, 0, 'Open');
-INSERT INTO auction VALUES (18, 160, 160, '2017-05-31 02:13:00', '2017-06-02 17:13:00', 'Default', 7, 18, '2017-05-29 14:17:16.398221', 1, false, 0, 'Created');
-INSERT INTO auction VALUES (1, 550, 556, '2017-05-29 13:00:00', '2017-06-03 13:06:00', 'Default', 6, 1, '2017-05-29 12:54:37.018899', 1, true, 1, 'Open');
 INSERT INTO auction VALUES (19, 30, 30, '2017-05-29 14:26:00', '2017-06-04 18:35:00', 'Default', 10, 19, '2017-05-29 14:19:37.593389', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (20, 18, 18, '2017-05-29 14:29:00', '2017-06-03 20:35:00', 'Default', 10, 20, '2017-05-29 14:23:27.08597', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (21, 250, 250, '2017-05-29 14:36:00', '2017-06-03 14:42:00', 'Default', 9, 21, '2017-05-29 14:32:47.411668', 1, true, 0, 'Open');
-INSERT INTO auction VALUES (22, 98, 98, '2017-05-29 14:41:00', '2017-06-02 14:48:00', 'Default', 9, 22, '2017-05-29 14:35:03.35022', 1, true, 0, 'Open');
+INSERT INTO auction VALUES (40, 70, 70, '2017-06-02 16:53:00', '2017-06-03 03:53:00', 'Default', 4, 40, '2017-06-02 15:56:31.403986', 1, true, 0, 'Open');
 INSERT INTO auction VALUES (14, 21, 23, '2017-05-29 14:10:00', '2017-05-29 17:17:00', 'Default', 1, 14, '2017-05-29 14:03:52.174944', 1, true, 2, 'Closed');
 INSERT INTO auction VALUES (26, 200, 202, '2017-05-29 22:00:00', '2017-05-29 22:20:00', 'Default', 4, 26, '2017-05-29 21:56:52.837139', 1, true, 2, 'Closed');
 INSERT INTO auction VALUES (27, 400, 401, '2017-05-29 22:05:00', '2017-05-29 22:25:00', 'Default', 4, 27, '2017-05-29 22:04:35.91019', 1, true, 1, 'Closed');
 INSERT INTO auction VALUES (8, 50, 50, '2017-05-29 13:38:00', '2017-05-29 22:49:00', 'Default', 6, 8, '2017-05-29 13:36:34.059664', 1, true, 0, 'Closed');
 INSERT INTO auction VALUES (11, 69, 94, '2017-05-29 13:53:00', '2017-05-29 17:50:00', 'Default', 1, 11, '2017-05-29 13:51:38.192161', 1, true, 2, 'Closed');
 INSERT INTO auction VALUES (10, 46, 123, '2017-05-29 13:46:00', '2017-05-29 18:00:00', 'Default', 1, 10, '2017-05-29 13:45:08.34157', 1, true, 3, 'Closed');
+INSERT INTO auction VALUES (16, 900, 900, '2017-05-31 10:05:00', '2017-06-03 14:05:00', 'Default', 7, 16, '2017-05-29 14:09:41.758057', 1, true, 0, 'Open');
+INSERT INTO auction VALUES (15, 67, 67, '2017-05-29 14:14:00', '2017-06-08 14:21:00', 'Default', 4, 15, '2017-05-29 14:07:19.406098', 4, true, 0, 'Closed');
+INSERT INTO auction VALUES (9, 60, 60, '2017-05-29 13:44:00', '2017-06-29 21:58:00', 'Default', 1, 9, '2017-05-29 13:41:05.424465', 1, false, 0, 'Closed');
+INSERT INTO auction VALUES (29, 20, 20, '2017-06-01 23:39:00', '2017-06-03 00:03:00', 'Default', 11, 29, '2017-06-01 23:38:48.326366', 1, true, 0, 'Open');
+INSERT INTO auction VALUES (18, 160, 170, '2017-05-31 02:13:00', '2017-06-02 17:13:00', 'Default', 7, 18, '2017-05-29 14:17:16.398221', 1, false, 1, 'Closed');
+INSERT INTO auction VALUES (41, 60, 60, '2017-06-02 17:23:00', '2017-06-03 04:23:00', 'Default', 4, 41, '2017-06-02 16:25:32.537633', 1, true, 0, 'Open');
+INSERT INTO auction VALUES (30, 45, 60, '2017-06-01 23:45:00', '2017-06-02 00:10:00', 'Default', 11, 30, '2017-06-01 23:42:44.361728', 1, true, 1, 'Closed');
+INSERT INTO auction VALUES (28, 450, 450, '2017-06-02 00:45:00', '2017-06-06 00:46:00', 'Default', 16, 28, '2017-05-30 23:49:06.489205', 1, true, 0, 'Open');
+INSERT INTO auction VALUES (38, 23, 23, '2017-06-03 02:05:00', '2017-06-04 02:06:00', 'Default', 4, 38, '2017-06-02 01:06:00.769808', 1, true, 0, 'Created');
+INSERT INTO auction VALUES (32, 35, 35, '2017-06-02 01:06:00', '2017-06-02 01:20:00', 'Default', 11, 32, '2017-06-02 00:33:03.61822', 1, true, 0, 'Closed');
+INSERT INTO auction VALUES (1, 550, 571, '2017-05-29 13:00:00', '2017-06-03 13:06:00', 'Default', 6, 1, '2017-05-29 12:54:37.018899', 1, true, 4, 'Open');
+INSERT INTO auction VALUES (42, 74, 74, '2017-06-02 18:25:00', '2017-06-03 05:25:00', 'Default', 4, 42, '2017-06-02 17:27:02.381307', 1, true, 0, 'Open');
 
 
 --
 -- Name: auction_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('auction_id_seq', 27, true);
+SELECT pg_catalog.setval('auction_id_seq', 42, true);
 
 
 --
@@ -1500,13 +1511,26 @@ INSERT INTO bid VALUES (8, 123, '2017-05-29 17:50:41.357205', 10, 10);
 INSERT INTO bid VALUES (9, 201, '2017-05-29 22:00:30.577877', 10, 26);
 INSERT INTO bid VALUES (10, 401, '2017-05-29 22:06:40.086275', 10, 27);
 INSERT INTO bid VALUES (11, 202, '2017-05-29 22:08:26.892001', 9, 26);
+INSERT INTO bid VALUES (12, 60, '2017-06-02 00:00:04.495428', 4, 30);
+INSERT INTO bid VALUES (13, 100, '2017-06-02 01:53:05.172284', 4, 22);
+INSERT INTO bid VALUES (14, 20, '2017-06-02 02:53:02.109661', 4, 39);
+INSERT INTO bid VALUES (15, 21, '2017-06-02 02:54:42.549366', 7, 39);
+INSERT INTO bid VALUES (16, 25, '2017-06-02 02:57:07.836074', 4, 39);
+INSERT INTO bid VALUES (17, 26, '2017-06-02 02:59:22.845788', 7, 39);
+INSERT INTO bid VALUES (18, 30, '2017-06-02 03:00:32.264372', 4, 39);
+INSERT INTO bid VALUES (19, 31, '2017-06-02 03:01:45.926093', 7, 39);
+INSERT INTO bid VALUES (20, 33, '2017-06-02 03:02:15.901033', 4, 39);
+INSERT INTO bid VALUES (21, 170, '2017-06-02 13:49:49.662379', 4, 18);
+INSERT INTO bid VALUES (22, 561, '2017-06-02 16:02:00.503641', 4, 1);
+INSERT INTO bid VALUES (23, 562, '2017-06-02 16:29:12.854242', 11, 1);
+INSERT INTO bid VALUES (24, 571, '2017-06-02 17:29:00.458224', 4, 1);
 
 
 --
 -- Name: bid_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('bid_id_seq', 11, true);
+SELECT pg_catalog.setval('bid_id_seq', 24, true);
 
 
 --
@@ -1671,6 +1695,8 @@ SELECT pg_catalog.setval('feedback_id_seq', 1, true);
 
 INSERT INTO follow VALUES (1, 10, '2017-05-29 19:05:20.636478');
 INSERT INTO follow VALUES (6, 1, '2017-05-29 21:38:12.434348');
+INSERT INTO follow VALUES (6, 4, '2017-06-01 14:41:36.699587');
+INSERT INTO follow VALUES (7, 4, '2017-06-02 17:31:23.710239');
 
 
 --
@@ -1700,46 +1726,67 @@ INSERT INTO image VALUES (7, '7.png', 5, 'Amazon pic', 'E1xxFbiCYlS.png');
 INSERT INTO image VALUES (49, '49.jpg', 19, 'Amazon pic', '71WFYaAGoPL.jpg');
 INSERT INTO image VALUES (50, '50.jpg', 19, 'Amazon pic', '41CTeTrsJOL.jpg');
 INSERT INTO image VALUES (9, '9.jpg', 6, 'Amazon pic', '41t4-USdbUL.jpg');
+INSERT INTO image VALUES (178, '178.jpg', 38, 'Amazon pic', '41DEP7wmZ6L.jpg');
 INSERT INTO image VALUES (10, '10.jpg', 6, 'Amazon pic', '41QcMSpHRRL.jpg');
 INSERT INTO image VALUES (51, '51.jpg', 20, 'Amazon pic', '41S6QJcFiYL.jpg');
 INSERT INTO image VALUES (11, '11.jpg', 6, 'Amazon pic', '519ehywatHL.jpg');
 INSERT INTO image VALUES (12, '12.jpg', 6, 'Amazon pic', '61y0-igfDSL.jpg');
 INSERT INTO image VALUES (52, '52.jpeg', 18, 'Swiss watch', '41Yz3Y9JiTL.jpg');
 INSERT INTO image VALUES (13, '13.jpg', 6, 'Amazon pic', '61QgmR6OYEL.jpg');
+INSERT INTO image VALUES (179, '179.jpg', 38, 'Amazon pic', '51xRfJSBA7L.jpg');
 INSERT INTO image VALUES (14, '14.jpg', 6, 'Amazon pic', '41t4-USdbUL.jpg');
 INSERT INTO image VALUES (53, '53.jpg', 21, 'Amazon pic', '410XpEnPZML.jpg');
 INSERT INTO image VALUES (15, '15.jpg', 7, 'Amazon pic', '61OyazrD4cL.jpg');
 INSERT INTO image VALUES (54, '54.jpg', 21, 'Amazon pic', '41tJkeJMwUL.jpg');
+INSERT INTO image VALUES (180, '180.jpg', 38, 'Amazon pic', '51hWEM5wb9L.jpg');
 INSERT INTO image VALUES (17, '17.jpeg', 8, 'got1.jpg', 'got1.jpg');
 INSERT INTO image VALUES (55, '55.jpg', 21, 'Amazon pic', '41O9l732WpL.jpg');
 INSERT INTO image VALUES (18, '18.jpeg', 8, 'got2.jpg', 'got2.jpg');
 INSERT INTO image VALUES (19, '19.jpeg', 9, 'oil.jpg', 'oil.jpg');
 INSERT INTO image VALUES (56, '56.jpg', 21, 'Amazon pic', '316UZy5BGDL.jpg');
 INSERT INTO image VALUES (20, '20.jpeg', 10, 'top.jpg', 'top.jpg');
+INSERT INTO image VALUES (181, '181.jpg', 38, 'Amazon pic', '41u84WT1%2BvL.jpg');
 INSERT INTO image VALUES (21, '21.jpeg', 12, 'hobbit.jpg', 'hobbit.jpg');
 INSERT INTO image VALUES (57, '57.jpg', 21, 'Amazon pic', '41Fk17yWFqL.jpg');
 INSERT INTO image VALUES (22, '22.jpg', 13, 'Amazon pic', '515W-N7Rl7L.jpg');
 INSERT INTO image VALUES (23, '23.jpg', 13, 'Amazon pic', '414b%2Bd%2BOF4L.jpg');
 INSERT INTO image VALUES (58, '58.jpg', 21, 'Amazon pic', '41Ic1meTeQL.jpg');
 INSERT INTO image VALUES (24, '24.jpg', 13, 'Amazon pic', '51BfYSYSfxL.jpg');
+INSERT INTO image VALUES (182, '182.jpg', 38, 'Amazon pic', '41Sj03Uk9YL.jpg');
 INSERT INTO image VALUES (25, '25.jpg', 14, 'Amazon pic', '41-W%2B88iTZL.jpg');
 INSERT INTO image VALUES (59, '59.jpg', 21, 'Amazon pic', '41Xb-%2BbVVAL.jpg');
 INSERT INTO image VALUES (26, '26.jpg', 15, 'Amazon pic', '41kK7SYo48L.jpg');
 INSERT INTO image VALUES (27, '27.jpg', 15, 'Amazon pic', '51jjbnjfygL.jpg');
 INSERT INTO image VALUES (60, '60.jpg', 22, 'Amazon pic', '41T508I4xrL.jpg');
 INSERT INTO image VALUES (28, '28.jpg', 15, 'Amazon pic', '51z4stxR4YL.jpg');
+INSERT INTO image VALUES (183, '183.jpg', 38, 'Amazon pic', '41bdShFxXzL.jpg');
 INSERT INTO image VALUES (29, '29.jpg', 16, 'Amazon pic', '41TQSYa9bML.jpg');
 INSERT INTO image VALUES (61, '61.jpg', 22, 'Amazon pic', '31qsrSAe4SL.jpg');
 INSERT INTO image VALUES (30, '30.jpg', 16, 'Amazon pic', '51uIekFQyrL.jpg');
 INSERT INTO image VALUES (31, '31.jpg', 16, 'Amazon pic', '51kSxvyQVlL.jpg');
 INSERT INTO image VALUES (62, '62.jpg', 22, 'Amazon pic', '31XeX15NbcL.jpg');
 INSERT INTO image VALUES (32, '32.jpg', 16, 'Amazon pic', '51vGvFqBQmL.jpg');
+INSERT INTO image VALUES (184, '184.jpg', 38, 'Amazon pic', '41gWSBJVvzL.jpg');
 INSERT INTO image VALUES (33, '33.jpg', 16, 'Amazon pic', '31I%2Bl0NatCL.jpg');
 INSERT INTO image VALUES (63, '63.jpg', 22, 'Amazon pic', '51QpmIKFy9L.jpg');
 INSERT INTO image VALUES (34, '34.jpg', 16, 'Amazon pic', '51IkthL143L.jpg');
 INSERT INTO image VALUES (35, '35.jpg', 16, 'Amazon pic', '41iT7VNkcsL.jpg');
 INSERT INTO image VALUES (64, '64.jpg', 22, 'Amazon pic', '31FEyNr89oL.jpg');
+INSERT INTO image VALUES (192, '192.jpg', 40, 'Amazon pic', '316pmdPzqUL.jpg');
 INSERT INTO image VALUES (65, '65.jpg', 22, 'Amazon pic', '51hCragyzXL.jpg');
+INSERT INTO image VALUES (193, '193.jpg', 40, 'Amazon pic', '41UqHY7dOAL.jpg');
+INSERT INTO image VALUES (194, '194.jpg', 40, 'Amazon pic', '31qwJdq1-mL.jpg');
+INSERT INTO image VALUES (195, '195.jpg', 40, 'Amazon pic', '41jnvmgINvL.jpg');
+INSERT INTO image VALUES (196, '196.jpg', 40, 'Amazon pic', '31Q9yoiiz8L.jpg');
+INSERT INTO image VALUES (197, '197.jpg', 40, 'Amazon pic', '519L6UTNfZL.jpg');
+INSERT INTO image VALUES (205, '205.jpg', 42, 'Amazon pic', '51%2BwvidJhqL.jpg');
+INSERT INTO image VALUES (206, '206.jpg', 42, 'Amazon pic', '41ax3DdhalL.jpg');
+INSERT INTO image VALUES (207, '207.jpg', 42, 'Amazon pic', '51idrwFXoqL.jpg');
+INSERT INTO image VALUES (208, '208.jpg', 42, 'Amazon pic', '512gbK0pFOL.jpg');
+INSERT INTO image VALUES (209, '209.jpg', 42, 'Amazon pic', '51N4AI62EgL.jpg');
+INSERT INTO image VALUES (210, '210.jpg', 42, 'Amazon pic', '51Z-PnNrm5L.jpg');
+INSERT INTO image VALUES (211, '211.jpg', 42, 'Amazon pic', '51iwLLp0QLL.jpg');
+INSERT INTO image VALUES (212, '212.jpg', 42, 'Amazon pic', '41wXnXwZ6FL.jpg');
 INSERT INTO image VALUES (80, '80.jpg', 23, 'Amazon pic', '41l7TKGQ8OL.jpg');
 INSERT INTO image VALUES (81, '81.jpg', 23, 'Amazon pic', '41vRw5nnQ5L.jpg');
 INSERT INTO image VALUES (82, '82.jpg', 23, 'Amazon pic', '41scGyraoeL.jpg');
@@ -1750,13 +1797,36 @@ INSERT INTO image VALUES (111, '111.jpg', 27, 'Amazon pic', '51%2BGyJGl3pL.jpg')
 INSERT INTO image VALUES (112, '112.jpg', 27, 'Amazon pic', '518v-BwVkyL.jpg');
 INSERT INTO image VALUES (113, '113.jpg', 27, 'Amazon pic', '51uJjW5gC%2BL.jpg');
 INSERT INTO image VALUES (114, '114.jpg', 27, 'Amazon pic', '51hilHPVDbL.jpg');
+INSERT INTO image VALUES (115, '115.jpg', 28, 'Amazon pic', '5119Cg443IL.jpg');
+INSERT INTO image VALUES (116, '116.jpg', 28, 'Amazon pic', '418cLqSz%2BQL.jpg');
+INSERT INTO image VALUES (142, '142.jpg', 32, 'Amazon pic', '51GDFYADbUL.jpg');
+INSERT INTO image VALUES (117, '117.jpg', 28, 'Amazon pic', '41Aqgd3y2-L.jpg');
+INSERT INTO image VALUES (118, '118.jpg', 29, 'Amazon pic', '41LK02-fg8L.jpg');
+INSERT INTO image VALUES (143, '143.jpg', 32, 'Amazon pic', '51cPA09THmL.jpg');
+INSERT INTO image VALUES (119, '119.jpg', 29, 'Amazon pic', '5160arzMcDL.jpg');
+INSERT INTO image VALUES (144, '144.jpg', 32, 'Amazon pic', '51dEESAal2L.jpg');
+INSERT INTO image VALUES (185, '185.jpg', 39, 'Amazon pic', '51Nn7hg5YyL.jpg');
+INSERT INTO image VALUES (145, '145.jpg', 32, 'Amazon pic', '51qe1Y2nO-L.jpg');
+INSERT INTO image VALUES (124, '124.jpg', 30, 'Amazon pic', '518ioPXsZ6L.jpg');
+INSERT INTO image VALUES (125, '125.jpg', 30, 'Amazon pic', '51ViHXGV4DL.jpg');
+INSERT INTO image VALUES (126, '126.jpg', 30, 'Amazon pic', '41Hcdf7PRuL.jpg');
+INSERT INTO image VALUES (189, '189.jpg', 39, 'Amazon pic', '31HoEK6iMfL.jpg');
+INSERT INTO image VALUES (127, '127.jpg', 30, 'Amazon pic', '41vHq2XU3FL.jpg');
+INSERT INTO image VALUES (191, '191.jpg', 39, 'Amazon pic', '41ukiEj9hOL.jpg');
+INSERT INTO image VALUES (198, '198.jpg', 41, 'Amazon pic', '51WN-DFjhhL.jpg');
+INSERT INTO image VALUES (199, '199.jpg', 41, 'Amazon pic', '51SrcBuv7EL.jpg');
+INSERT INTO image VALUES (200, '200.jpg', 41, 'Amazon pic', '51yImkeNEDL.jpg');
+INSERT INTO image VALUES (201, '201.jpg', 41, 'Amazon pic', '61tp4mmMSaL.jpg');
+INSERT INTO image VALUES (202, '202.jpg', 41, 'Amazon pic', '61EBFaAR%2BKL.jpg');
+INSERT INTO image VALUES (203, '203.jpg', 41, 'Amazon pic', '61Lk-%2BK5wQL.jpg');
+INSERT INTO image VALUES (204, '204.jpg', 41, 'Amazon pic', '5140rzBCX2L.jpg');
 
 
 --
 -- Name: image_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('image_id_seq', 114, true);
+SELECT pg_catalog.setval('image_id_seq', 212, true);
 
 
 --
@@ -1824,13 +1894,75 @@ INSERT INTO notification VALUES (90, 'Your auction Intel Core i7-7700 Desktop Pr
 INSERT INTO notification VALUES (88, 'Your auction Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz is now closed.<br>The user gandalf had the highest bid (401€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 4, false, '2017-05-29 22:25:02.453843');
 INSERT INTO notification VALUES (85, 'Your auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080 is now closed.<br>The user Rick had the highest bid (202€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 4, false, '2017-05-29 22:20:02.095919');
 INSERT INTO notification VALUES (82, 'Someone posted a question in the auction Asus VG248QE 24in Widescreen 3d LCD Monitor - 1920x1080.', 'Question', 4, false, '2017-05-29 22:08:54.54849');
+INSERT INTO notification VALUES (91, 'Your auction Wenger Swiss Military Elite Two-Tone Stainless Date Watch is now open!<br>', 'Auction', 7, true, '2017-05-31 02:13:02.184259');
+INSERT INTO notification VALUES (92, 'The auction Wenger Swiss Military Elite Two-Tone Stainless Date Watch is now open!<br>May the odds be ever in your favor! Good luck!', 'Auction', 10, true, '2017-05-31 02:13:02.196074');
+INSERT INTO notification VALUES (93, 'Your auction SkyTech ArchAngel GTX 1050 Ti Gaming Computer Desktop PC is now open!<br>', 'Auction', 7, true, '2017-05-31 10:05:01.759276');
+INSERT INTO notification VALUES (94, 'The auction SkyTech ArchAngel GTX 1050 Ti Gaming Computer Desktop PC is now open!<br>May the odds be ever in your favor! Good luck!', 'Auction', 4, true, '2017-05-31 10:05:01.766308');
+INSERT INTO notification VALUES (95, 'Your auction Cooper Starfire RS-C 2.0 All-Season Radial Tire is now closed.<br>No one placed a bid in your auction :(. Better luck next time!', 'Auction', 4, true, '2017-06-01 14:21:01.571752');
+INSERT INTO notification VALUES (96, 'Someone posted a question in the auction SkyTech ArchAngel GTX 1050 Ti Gaming Computer Desktop PC.', 'Question', 7, true, '2017-06-01 15:09:08.869572');
+INSERT INTO notification VALUES (97, 'Your auction Best Peppermint Oil (Large 4 Ounce) 100% Pure is now closed.<br>No one placed a bid in your auction :(. Better luck next time!', 'Auction', 1, true, '2017-06-01 21:58:01.856056');
+INSERT INTO notification VALUES (98, 'Your auction Tunnels (Book 1) is now open!<br>', 'Auction', 11, true, '2017-06-01 23:39:01.868588');
+INSERT INTO notification VALUES (99, 'Someone posted a question in the auction Tunnels (Book 1).', 'Question', 11, true, '2017-06-01 23:40:15.634091');
+INSERT INTO notification VALUES (100, 'Your auction VicTsing MM057 2.4G Wireless Portable Mobile Mouse is now open!<br>', 'Auction', 11, true, '2017-06-01 23:45:02.522627');
+INSERT INTO notification VALUES (101, 'Someone posted a question in the auction VicTsing MM057 2.4G Wireless Portable Mobile Mouse.', 'Question', 11, true, '2017-06-01 23:46:35.088065');
+INSERT INTO notification VALUES (102, 'The user hant has bid on the auction VicTsing MM057 2.4G Wireless Portable Mobile Mouse.', 'Auction', 11, true, '2017-06-02 00:00:04.495428');
+INSERT INTO notification VALUES (103, 'You''ve won the auction VicTsing MM057 2.4G Wireless Portable Mobile Mouse with a bid of 60€. Congratulations!', 'Win', 4, true, '2017-06-02 00:10:02.408188');
+INSERT INTO notification VALUES (104, 'Your auction VicTsing MM057 2.4G Wireless Portable Mobile Mouse is now closed.<br>The user hant had the highest bid (60€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 11, true, '2017-06-02 00:10:02.421026');
+INSERT INTO notification VALUES (105, 'Someone posted a question in the auction Nerf Modulus Tri-Strike.', 'Question', 11, true, '2017-06-02 00:33:52.432405');
+INSERT INTO notification VALUES (106, 'Your auction MSI GTX 1080 Ti Founders Edition is now open!<br>', 'Auction', 16, true, '2017-06-02 00:45:01.932896');
+INSERT INTO notification VALUES (107, 'Your auction Nerf N-Strike Elite Strongarm Blaster was deleted.', 'Auction', 4, true, '2017-06-02 00:49:45.215138');
+INSERT INTO notification VALUES (108, 'Your auction Nerf N-Strike Elite AccuStrike Series AlphaHawk was deleted.', 'Auction', 4, true, '2017-06-02 00:49:48.805181');
+INSERT INTO notification VALUES (109, 'Your auction Nerf Walkie Talkies was deleted.', 'Auction', 4, true, '2017-06-02 00:49:50.754069');
+INSERT INTO notification VALUES (110, 'Your auction Nerf N-Strike Elite Triad EX-3 Blaster was deleted.', 'Auction', 4, true, '2017-06-02 00:49:52.813612');
+INSERT INTO notification VALUES (111, 'Your auction Nerf CS-18 N-Strike Elite Rapidstrike (Colors may vary) was deleted.', 'Auction', 4, true, '2017-06-02 01:00:32.067363');
+INSERT INTO notification VALUES (112, 'Your auction Nerf CS-18 N-Strike Elite Rapidstrike (Colors may vary) was deleted.', 'Auction', 4, true, '2017-06-02 01:05:09.388674');
+INSERT INTO notification VALUES (113, 'Your auction Nerf Modulus Tri-Strike is now open!<br>', 'Auction', 11, true, '2017-06-02 01:31:01.425501');
+INSERT INTO notification VALUES (114, 'Your auction Nerf Modulus Tri-Strike is now closed.<br>No one placed a bid in your auction :(. Better luck next time!', 'Auction', 11, true, '2017-06-02 01:40:01.815663');
+INSERT INTO notification VALUES (115, 'Someone posted a question in the auction Nerf Walkie Talkies.', 'Question', 11, true, '2017-06-02 01:52:41.395662');
+INSERT INTO notification VALUES (116, 'The user hant has bid on the auction Pioneer DJ DDJ-SB2 Portable 2-channel controller for Serato DJ.', 'Auction', 9, true, '2017-06-02 01:53:05.172284');
+INSERT INTO notification VALUES (117, 'Your auction Nerf Walkie Talkies is now open!<br>', 'Auction', 11, true, '2017-06-02 02:49:02.050947');
+INSERT INTO notification VALUES (118, 'The user hant has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 02:53:02.109661');
+INSERT INTO notification VALUES (119, 'Your bid on the auction Nerf Walkie Talkies was surpassed.', 'Auction', 4, true, '2017-06-02 02:54:42.549366');
+INSERT INTO notification VALUES (120, 'The user thedonald has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 02:54:42.549366');
+INSERT INTO notification VALUES (121, 'Someone posted a question in the auction Nerf Walkie Talkies.', 'Question', 11, true, '2017-06-02 02:57:00.204634');
+INSERT INTO notification VALUES (122, 'Your bid on the auction Nerf Walkie Talkies was surpassed.', 'Auction', 7, true, '2017-06-02 02:57:07.836074');
+INSERT INTO notification VALUES (123, 'The user hant has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 02:57:07.836074');
+INSERT INTO notification VALUES (124, 'Your bid on the auction Nerf Walkie Talkies was surpassed.', 'Auction', 4, true, '2017-06-02 02:59:22.845788');
+INSERT INTO notification VALUES (125, 'The user thedonald has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 02:59:22.845788');
+INSERT INTO notification VALUES (126, 'Someone posted a question in the auction Nerf Walkie Talkies.', 'Question', 11, true, '2017-06-02 03:00:25.149873');
+INSERT INTO notification VALUES (127, 'Your bid on the auction Nerf Walkie Talkies was surpassed.', 'Auction', 7, true, '2017-06-02 03:00:32.264372');
+INSERT INTO notification VALUES (128, 'The user hant has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 03:00:32.264372');
+INSERT INTO notification VALUES (129, 'Your bid on the auction Nerf Walkie Talkies was surpassed.', 'Auction', 4, true, '2017-06-02 03:01:45.926093');
+INSERT INTO notification VALUES (130, 'The user thedonald has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 03:01:45.926093');
+INSERT INTO notification VALUES (131, 'Someone posted a question in the auction Nerf Walkie Talkies.', 'Question', 11, true, '2017-06-02 03:02:08.932697');
+INSERT INTO notification VALUES (132, 'Your bid on the auction Nerf Walkie Talkies was surpassed.', 'Auction', 7, true, '2017-06-02 03:02:15.901033');
+INSERT INTO notification VALUES (133, 'The user hant has bid on the auction Nerf Walkie Talkies.', 'Auction', 11, true, '2017-06-02 03:02:15.901033');
+INSERT INTO notification VALUES (134, 'You''ve won the auction Nerf Walkie Talkies with a bid of 33€. Congratulations!', 'Win', 4, true, '2017-06-02 13:49:02.317199');
+INSERT INTO notification VALUES (135, 'Your auction Nerf Walkie Talkies is now closed.<br>The user hant had the highest bid (33€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 11, true, '2017-06-02 13:49:02.330483');
+INSERT INTO notification VALUES (136, 'The user hant has bid on the auction Wenger Swiss Military Elite Two-Tone Stainless Date Watch.', 'Auction', 7, true, '2017-06-02 13:49:49.662379');
+INSERT INTO notification VALUES (137, 'You''ve won the auction Pioneer DJ DDJ-SB2 Portable 2-channel controller for Serato DJ with a bid of 100€. Congratulations!', 'Win', 4, true, '2017-06-02 14:48:02.235702');
+INSERT INTO notification VALUES (138, 'Your auction Pioneer DJ DDJ-SB2 Portable 2-channel controller for Serato DJ is now closed.<br>The user hant had the highest bid (100€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 9, true, '2017-06-02 14:48:02.243991');
+INSERT INTO notification VALUES (139, 'Your bid on the auction Rockrider 9.1 was surpassed.', 'Auction', 9, true, '2017-06-02 16:02:00.503641');
+INSERT INTO notification VALUES (140, 'The user hant has bid on the auction Rockrider 9.1.', 'Auction', 6, true, '2017-06-02 16:02:00.503641');
+INSERT INTO notification VALUES (141, 'Someone posted a question in the auction Rockrider 9.1.', 'Question', 6, true, '2017-06-02 16:04:13.554739');
+INSERT INTO notification VALUES (142, 'Your bid on the auction Rockrider 9.1 was surpassed.', 'Auction', 4, true, '2017-06-02 16:29:12.854242');
+INSERT INTO notification VALUES (143, 'The user harry_potter has bid on the auction Rockrider 9.1.', 'Auction', 6, true, '2017-06-02 16:29:12.854242');
+INSERT INTO notification VALUES (144, 'Your auction Gigabyte Geforce GTX 1050 G1Gaming is now open!<br>', 'Auction', 4, true, '2017-06-02 16:53:01.970912');
+INSERT INTO notification VALUES (145, 'You''ve won the auction Wenger Swiss Military Elite Two-Tone Stainless Date Watch with a bid of 170€. Congratulations!', 'Win', 4, true, '2017-06-02 17:13:01.809366');
+INSERT INTO notification VALUES (146, 'Your auction Wenger Swiss Military Elite Two-Tone Stainless Date Watch is now closed.<br>The user hant had the highest bid (170€) and won the auction.<br>The money will be shortly transferred to your account.', 'Auction', 7, true, '2017-06-02 17:13:01.817479');
+INSERT INTO notification VALUES (147, 'The auction Wenger Swiss Military Elite Two-Tone Stainless Date Watch is now closed! You cannot bid anymore.', 'Auction', 10, true, '2017-06-02 17:13:01.823628');
+INSERT INTO notification VALUES (148, 'Your auction Nerf N-Strike Mega Mega Mastodon is now open!<br>', 'Auction', 4, true, '2017-06-02 17:23:01.963847');
+INSERT INTO notification VALUES (149, 'Your bid on the auction Rockrider 9.1 was surpassed.', 'Auction', 11, true, '2017-06-02 17:29:00.458224');
+INSERT INTO notification VALUES (150, 'The user hant has bid on the auction Rockrider 9.1.', 'Auction', 6, true, '2017-06-02 17:29:00.458224');
+INSERT INTO notification VALUES (151, 'Someone posted a question in the auction Rockrider 9.1.', 'Question', 6, true, '2017-06-02 17:29:45.643547');
+INSERT INTO notification VALUES (152, 'Your auction Nerf N-Strike Elite AccuStrike Series AlphaHawk is now open!<br>', 'Auction', 4, true, '2017-06-02 18:25:01.601761');
 
 
 --
 -- Name: notification_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('notification_id_seq', 90, true);
+SELECT pg_catalog.setval('notification_id_seq', 152, true);
 
 
 --
@@ -1887,11 +2019,14 @@ LOVE THE SMELL AND FEEL GREAT - Fatigue and irritability are often a result of m
 SUN makes the BEST quality PREMIUM Aromatherapy oils and has OVER 100 SCENTS', 'Peppermint in a 4oz glass essential oil bottle. Comes with pipette for your convenience.', '{"Product Dimensions: 1.8 x 1.8 x 4.5 inches","Shipping Weight: 7.2 ounces"}');
 INSERT INTO product VALUES (14, '[The Book Thief] (By: Markus Zusak) [published: October, 2013]', 'Will be shipped from US. Used books may not include companion materials, may have some shelf wear, may contain highlighting/notes, may not include CDs or access codes. 100% money back guarantee.', 'Good condition.', NULL);
 INSERT INTO product VALUES (15, 'Cooper Starfire RS-C 2.0 All-Season Radial Tire', 'The RS-C 2.0 has an aggressive design that performs great in all four seasons. This tire is designed for the budget conscious consumer that is looking for upscale performance. The RS-C 2.0 is offered in sizes to accommodate today''s most popular vehicles.', 'Perfect.', NULL);
+INSERT INTO product VALUES (40, 'Gigabyte Geforce GTX 1050 G1Gaming', 'Powered by GeForce GTX 1050 Ti and integrated with 4GB GDDR5 128bit memory. Featuring windforce 2X with blade fan design.', 'Good.', '{"Is Autographed: 0","Is Memorabilia: 0","Manufacturer: Gigabyte","Number Of Items: 1","Package Quantity: 1","Product Group: Personal Computer","Publisher: Gigabyte"}');
 INSERT INTO product VALUES (16, 'SkyTech ArchAngel GTX 1050 Ti Gaming Computer Desktop PC', 'Now you can turn your PC into a powerful gaming rig! With the newest technology from Nvidia GTX 1050 Ti, SkyTech PC provides you the newest and improved version of the Pascal architecture at a budget. Redeem your confidence while you raise your gaming experience and praise our SkyTech PC. The Skytech ArchAngel 1050 Ti offers a fast and powerful performance that all gamers will love. <br><br>SkyTech ArchAngel Gamers 1050 Ti uses AMD FX-6300 Processor that is fast and reliable. You won&rsquo;t know what&rsquo;s fast until you get your hands on one of these! SkyTech believes in FAST, RELIABILITY, QUALITY, and AFFORDABILITY! Unlike other gaming PC out in the market that sacrifice quality for price, Skytech does not compromise and only use quality & branded components such as higher grade power supply, gaming memory with heat spreader, and more! <br><br>** SkyTech PC uses only the best and branded components to ensure that your computer is reliable and durable. <br><br>**SkyTech PC power supplies have a 5 year warranty. <br><br>** SkyTech PC ONLY uses High Performance GAMING Memory for your PC. <br><br>System <br><br>Processor: AMD FX-6300 Vishera 6-Core 3.5 GHz / 4.1 GHz Turbo Unlocked <br>Motherboard:AM3+ 970 Chipset Gaming Motherboard (Not generic motherboard where other gaming companies will cut corners on)<br>Graphics: Nvidia Geforce GTX 1050 TI 4GB Pascal Engine <br>Memory: High Performance 8GB DDR3 1866 MHz Gaming Memory with Heat Spreader (We do not use generic memory that other companies will cut corners on)<br>Hard Disk: 1TB 7200 RPM Hard Drive <br>Power Supply: 430 Watts High Performance Power Supply<br>Operating System Windows 10 Professional 64-bit', 'Brand new. Perfect condition.', '{"Aspect Ratio: 16:9","Hardware Platform: PC","Manufacturer: Skytech Gaming","Operating System: Windows 10","Part Number: ST-ARCH-GTX1050TI-V1","Publisher: Skytech Gaming"}');
 INSERT INTO product VALUES (17, 'AUDEW Car Covers Waterproof /Windproof/Dustproof/Scratch', '<br> Applications:<br> Suitable for most SUV cars, but depending on the size of the product, please carefully comparing your car.<br> <br> <b>Specifications:</b><br> Material: 190T polyester fabric, with insulation effect a few digits.<br> Silver color<br> Size: 5.2 (W) x2 (W) x1.8m (H)<br> <br> <b>Characteristics:</b><br> This product has sun, heat, etc., with silver hardware, as long as you install the glass block after the latter block in front of the parking time you can make your car to keep in a cool state , Make you driving life more comfortable, safer and healthier.<br> 1. Car Cover Protection, capable of preventing harmful dust in wagons and machine parts, their resistance to aging and machine use and the inner tear of the wagon.<br> 2. Car Cover Protection, can effectively prevent snow from urban pollution in the acid conditions of the car surface brutally tortured.<br> 3. Car Cover Protection, can effectively withstand heavy ultraviolet radiation damage to paint the inside of the tire.<br> 4. Suitable for dust, rain, warm seasons of summer, or long-term use in the car.<br> <br> <b>The package includes:</b><br> 1 x Car Cover SUV<br> 1 x storage bag', 'New.', NULL);
 INSERT INTO product VALUES (18, 'Wenger Swiss Military Elite Two-Tone Stainless Date Watch', 'Wenger 79093 Military Elite women''s watch features a 30mm wide and 10mm thick two tone yellow gold plated solid stainless steel case with a fixed bezel and textured push-pull crown. Wenger 79093 is powered by a reliable Swiss Made quartz movement. This beautiful watch also features a sharp looking silver tone dial with white accents gold tone luminous hands and hour markers along with the date display function, scratch resistant mineral crystal and water resistant to 100 meters. Wenger 79093 is equipped with a 15mm wide two tone yellow gold plated solid stainless steel bracelet with a fold over safety lock clasp. Wenger 79093 women''s Military Elite silver dial two tone steel watch is brand new and comes in an original Wenger gift box and is backed by a 3 years limited warranty. Bracelet 7 1/4"', 'Brand new. Bought it a few days ago to my wife but she didn''t like it :(', NULL);
 INSERT INTO product VALUES (19, 'Little Tikes Gas ''n Go Mower', 'This toy lawn mower lets children mimic the activity they see every day in the world around them. The sounds and hands-on features of this kid’s lawn mower encourage pretend play and get kids moving – and mowing! It looks like the real thing!   Features:<br> - Sounds are mechanical, so no batteries are needed <br> - Push the toy mower and the beads pop <br> - Pull cord to hear engine sounds <br> - Clicking key and moveable throttle <br> - Removable gas can <br> - Kids can open the tethered gas cap and pretend to fill up the lawn mower <br> - 18+ months<br>', 'NEW.', NULL);
 INSERT INTO product VALUES (20, 'Daniel Tiger''s Neighborhood Daniel Tiger Mini Plush', 'How do you teach life''s little lessons with big fun? By giving your little one a Daniel Tiger mini plush, an adorable seven Inch of fuzzy, snuggly tiger-riffic cuddles. This sweet little stuffed tiger is based on the PBS show Daniel Tiger''s Neighborhood, inspired by the classic Mister Rogers neighborhood.', 'New and magic.', '{"Binding: Toy","Is Adult Product: 0","Item Part Number: WS-1026","Manufacturer: Tolly Tots - Domestic","Manufacturer Maximum Age: 72","Manufacturer Minimum Age: 36","Package Quantity: 1","Part Number: WS-1026","Product Group: Toy","Product Type Name: TOYS_AND_GAMES"}');
+INSERT INTO product VALUES (41, 'Nerf N-Strike Mega Mega Mastodon', 'The Mega Mastodon is the first ever motorized Nerf Mega blaster. This massive blaster has the power and size to take command of the battlefield. It boasts incredible rapid-fire speed to send Mega Whistler darts screaming through the air. Like its namesake, the Mega Mastodon dominates the action with its intimidating size. Storm into the action with this mighty Nerf blaster and launch 2 dozen Mega Whistler darts with the screaming fury of a rampaging beast!  Nerf and all related properties are trademarks of Hasbro.', 'Good.', '{"Manufacturer: Hasbro - Import","Manufacturer Maximum Age: 1188","Package Quantity: 1","Product Group: Toy"}');
+INSERT INTO product VALUES (42, 'Nerf N-Strike Elite AccuStrike Series AlphaHawk', 'Kids can strike with confidence as they blast darts designed for accuracy! The Nerf N-Strike AlphaHawk is part of the AccuStrike Series, which features darts designed for greater accuracy. Hit the mark with the precision of the most accurate Nerf darts. The AlphaHawk blaster fires 1 dart at a time from a revolving, easy-load drum that holds up to 5 darts. Take aim and strike like a hawk! Includes 10 Elite foam darts that are designed for greater accuracy. Compatible with Elite darts (sold separately).  Hasbro and all related propertiesare trademarks of Hasbro.', 'Good.', '{"Binding: Toy","Is Adult Product: 0","Manufacturer: Hasbro","Manufacturer Maximum Age: 1188","Package Quantity: 1","Part Number: B7784","Product Group: Toy","Product Type Name: TOYS_AND_GAMES"}');
 INSERT INTO product VALUES (21, 'Cordoba Mini SM-CE Travel Acoustic-Electric', 'Cordoba is proud to introduce the latest addition to the Cordoba Mini Series: the Mini SM-CE. At first glance, the Mini SM-CE clearly stands out from other travel sized guitars, with its solid cedar top and striking spalted maple back and sides accentuated by a padauk rosette and binding. The solid cedar top provides a warm tone that’s nicely complemented by the brightness of the spalted maple, resulting in an instrument that really projects its voice. For those who want to plug and play, the Cordoba Mini SM-CE features a soft cutaway and Cordoba 2Band pickup. The hallmark of Cordoba''s Mini guitars is the comfortable feel and string spacing of a full size guitar. The Mini SM-CE also includes a thin U-shaped neck outlined with padauk binding, 50mm (1.96”) nut width, and 510mm (20”) scale length. The Mini SM-CE comes with custom Aquila strings tuned to A, and a standard E tuning string set is also available. It includes a Cordoba gig bag, making it the ideal companion for road trips, vacations, and hanging out at home.', 'Perfect.', '{"Binding: Electronics","Is Autographed: 0","Is Memorabilia: 0","Manufacturer: Cordoba Music Group","Number Of Items: 1","Package Quantity: 1","Part Number: Mini SE-CE","Product Group: Musical Instruments","Product Type Name: GUITARS","Studio: Cordoba Music Group"}');
 INSERT INTO product VALUES (22, 'Pioneer DJ DDJ-SB2 Portable 2-channel controller for Serato DJ', 'Portable 2-channel controller for Serato DJ. DDJ-SB2 boasts all popular features from DDJ-SB, and adds some amazing new functions. This controller has been upgraded with 4-deck control and dedicated buttons to switch between channels effortlessly, plus a trim knob and level meters to master the input volume, and Pad Trans beat effects will uplift your DJ skills.', 'Use, but New!', '{"Binding: Electronics","Is Autographed: 0","Is Memorabilia: 0","Manufacturer: Pioneer Pro DJ","Package Quantity: 1","Part Number: DDJ-SB2","Product Group: Musical Instruments","Product Type Name: SOUND_AND_RECORDING_EQUIPMENT","Publisher: Pioneer Pro DJ","Studio: Pioneer Pro DJ"}');
 INSERT INTO product VALUES (23, 'Mass Effect Andromeda - PlayStation 4', 'Mass Effect: Andromeda takes players to the Andromeda galaxy, far beyond the Milky Way. There, players will lead our fight for a new home in hostile territory as the Pathfinder-a leader of military-trained explorers. This is the story of humanity''s next chapter, and player choices throughout the game will ultimately determine our survival.', 'Excelent, still in the plastic.', NULL);
@@ -1903,6 +2038,18 @@ A comfortable viewing experience with ergonomic tilt, swivel pivot, and height a
 Built-in 2W stereo speakers for an immersive home entertainment experience
 Featuring DisplayPort, Dual-link DVI-D, and HDMI ports for multi device connections', 'New.', '{"Binding: Unknown Binding","Manufacturer: ASUS product","Package Quantity: 1","Product Group: Book","Product Type Name: BOOKS_1973_AND_LATER","Publisher: ASUS product","Studio: ASUS product","24\" Full HD (1920 x 1080) resolution"}');
 INSERT INTO product VALUES (27, 'Intel Core i7-7700 Desktop Processor 8M Cache, 3.6GHz', 'Are you amazed by the things you can do with your computer? . If you bought your computer more than a handful of years ago, you''re missing more than you know - uncompromised gaming, while you stream, chat and share with your community - stunning visuals of 4K HDR premium content - transport into a great VR experience. With premium performance and new & enhanced features, a desktop computer based on an 7th Gen Intel Core processor is always ready for real-life productivity, creativity and entertainment. With a range of smart, stylish designs and sizes, there is a 7th Gen Intel Core Desktop powered computer to fit a wide range of budgets and needs.', 'New.', '{"Binding: Personal Computers","Is Autographed: 0","Is Memorabilia: 0","Manufacturer: Intel","Number Of Items: 1","Part Number: BX80677I77700","Platform: No Operating System","Product Group: Personal Computer","Product Type Name: COMPUTER_PROCESSOR","Studio: Intel"}');
+INSERT INTO product VALUES (28, 'MSI GTX 1080 Ti Founders Edition', 'The GeForce GTX 1080 Ti is NVIDIA''s new flagship gaming GPU, based on the NVIDIA Pascal architecture. The latest addition to the ultimate gaming platform, this card is packed with extreme gaming horsepower, next-gen 11 Gbps GDDR5X memory, and a massive 11 GB frame buffer.', 'In the original box', '{"Manufacturer: MSI COMPUTER","Part Number: GTX 1080 Ti Founders Edition","Warranty: 3 Years"}');
+INSERT INTO product VALUES (29, 'Tunnels (Book 1)', 'The New York Times Bestseller! The story of an outcast boy, his eccentric dad, and the scary underground world they discover through secret TUNNELS.<br><br>14-year-old Will Burrows has little in common with his strange, dysfunctional family. In fact, the only bond he shares with his eccentric father is a passion for archaeological excavation. So when Dad mysteriously vanishes, Will is compelled to dig up the truth behind his disappearance. He unearths the unbelievable: a secret subterranean society. "The Colony" has existed unchanged for a century, but it''s no benign time capsule of a bygone era--because the Colony is ruled by a cultlike overclass, the Styx. Before long--before he can find his father--Will is their prisoner....', 'Excelent', '{"Number Of Items: 1","Number Of Pages: 496"}');
+INSERT INTO product VALUES (30, 'VicTsing MM057 2.4G Wireless Portable Mobile Mouse', 'This is a new high-grade Wireless Mouse with 2400 DPI 5 adjustable levels 6 Buttons. Features reliability, ease-of-use, and user comfort, this wireless mouse gives you fast data transmission and no delay or dropouts. You deserve it! <br /><br />Energy-saving<br />If mouse is not used for over 8 minutes, it will turn to power saving mode to save energy. <br /><br />2.4 G Wireless Transmission Technology<br />Enjoy the fast data transmission at the convenience of the wireless technology. <br /><br />Compact Receiver<br />The wireless tiny receiver can be inserted into the slot next to the battery slot, allowing ease of storage when not used. <br /><br />Wide Compatibility<br />Compatible with most system including Windows, Mac and Linux. <br /><br />Comfortable Hand Feeling<br />With special processing and advanced material, this wireless mouse makes you feel comfortable. <br /><br />How to set CPI:<br />Press CPI button, if the red indicator light flashes once, its CPI is 800<br />Press CPI button, if the red indicator light flashes twice, its CPI is 1200<br />Press CPI button, if the red indicator light flashes three times, its CPI is 1600<br />Press CPI button, if the red indicator light flashes four times, its CPI is 2000<br />Press CPI button, if the red indicator light flashes five times, its CPI is 2400<br /><br />Be Safe with VicTsing<br />Every product from VicTsing enjoys 45 days money-back and 12-month warranty. We also have a professional after-sale service team to make things right within 24 hours.<br /><br />Specification:<br />Color: black<br />Mouse size: 103.5X 70.5 X 38.6mm<br />Number of the Key: 6 Buttons<br />DPI: 800-1200-1600-2000-2400<br />Power Source: 1*PCS AA Battery(Not included) <br /><br />NOTE:<br />The Back and Forward Buttons are not available for Mac OS because the system itself is a closed one, not open to the public, but the other function can be used normally.<br /><br />Package included:<br />1 X mouse<br />1 X USB receiver<br />', 'Excelent condition.', '{"Number Of Items: 1"}');
+INSERT INTO product VALUES (31, 'Nerf N-Strike Elite Strongarm Blaster', 'Speed and mobility are yours with the quick-draw fast firing of the Strongarm blaster! It has the same long-range power as other N-Strike Elite blasters (sold separately), firing the 6 Elite Darts up to 90 feet. Hold the trigger down and pump the Slam Fire handle repeatedly to rapid-fire all 6 of your darts at your target! Loading is easy and quick with the flip-open rotating barrel, and you can attach most N-Strike accessories (sold separately) to the blaster''s Tactical Rail for even more battle advantage. Add the Strongarm blaster to your arsenal and unleash a storm of darts at your target!  Nerf and all related characters are trademarks of Hasbro.', 'Excelent', NULL);
+INSERT INTO product VALUES (32, 'Nerf Modulus Tri-Strike', 'Build your own blaster for each mission with the Nerf Modulus Tri-Strike blaster from Hasbro! The Tri-Strike blaster featurs 3 different ways to blast that can all be used separately, or combined, for custom configurations. Bring an entire arsenal to the battlefield with the versatility and power of the Tri-Strike blaster! Start building with the Elite Dart Blaster and attachable 10-dart clip combo. Precision-fire Elite darts or fire 10 in a row using rapid-sliding-bolt-action! Extend the barrel with the Mega Barrel Extension. Then fire Mega darts with this big barrel’s increased range. Attach the Missile Launcher and Missile Launcher Stock to the Elite Dart Blaster for an even bigger blaster! Then, separate the Missile Launcher and Missile Launcher Stock, to clip them together for a stealthy back-up missile blaster. Expand the customizing options with Nerf Modulus Upgrade Kits (each sold separately). With the full Nerf Modulus system, over 1000 different combinations are possible! Nerf and all related properties are trademarks of Hasbro.', 'Excelent condition.', NULL);
+INSERT INTO product VALUES (33, 'Nerf N-Strike Elite AccuStrike Series AlphaHawk', 'Kids can strike with confidence as they blast darts designed for accuracy! The Nerf N-Strike AlphaHawk is part of the AccuStrike Series, which features darts designed for greater accuracy. Hit the mark with the precision of the most accurate Nerf darts. The AlphaHawk blaster fires 1 dart at a time from a revolving, easy-load drum that holds up to 5 darts. Take aim and strike like a hawk! Includes 10 Elite foam darts that are designed for greater accuracy. Compatible with Elite darts (sold separately).  Hasbro and all related propertiesare trademarks of Hasbro.', 'Excelent!', NULL);
+INSERT INTO product VALUES (34, 'Nerf Walkie Talkies', 'Use the two Nerf warlike talkies to communicate with your friends up to one thousand feet away. This warlike talkie set is great for trips to the park, playing in the woods, camping, or anywhere you want to keep in touch while playing. The extensive listening range makes it great for outdoor play and perfect for your next adventure. A Morse code button on the front lets you communicate when you can''t (or don''t want to) speak.', 'Excelent', NULL);
+INSERT INTO product VALUES (35, 'Nerf N-Strike Elite Triad EX-3 Blaster', 'Put some serious blasting power in your pocket with the Triad EX-3 blaster! Don''t let this 3-dart blaster''s micro size fool you – it''s small but mighty, with a range of up to 90 feet. Its smart technology tells it which barrel is loaded so you can fire it with confidence. And its small size lets you conceal the blaster in the palm of your hand or a pocket, then draw fast for the element of surprise! Pull down the cocking handle to ready your shot, then fire when it''s time to take down your target!   Nerf and all related characters are trademarks of Hasbro.', 'Excelent', NULL);
+INSERT INTO product VALUES (36, 'Nerf CS-18 N-Strike Elite Rapidstrike (Colors may vary)', 'Stay mobile with this streamlined, lightweight Rapidstrike CS-18 blaster! The Nerf N-Strike Elite RapidStrike CS-18 Blaster gives you serious rapid-strike firepower. Spray a blanket of cover fire or go on the move with an all-out blitz! The blaster''s Acceleration Trigger powers up the motor for super-speed firing. The clip holds all 18 of the included Elite Darts and it''s see-through so you can do instant firepower checks! With a range of up to 75 feet, you''ve got long-range striking power and a lightning rate of fire. Get maximum mission mobility with the Rapidstrike CS-18 blaster!', 'Excelent', NULL);
+INSERT INTO product VALUES (37, 'Nerf CS-18 N-Strike Elite Rapidstrike (Colors may vary)', 'Stay mobile with this streamlined, lightweight Rapidstrike CS-18 blaster! The Nerf N-Strike Elite RapidStrike CS-18 Blaster gives you serious rapid-strike firepower. Spray a blanket of cover fire or go on the move with an all-out blitz! The blaster''s Acceleration Trigger powers up the motor for super-speed firing. The clip holds all 18 of the included Elite Darts and it''s see-through so you can do instant firepower checks! With a range of up to 75 feet, you''ve got long-range striking power and a lightning rate of fire. Get maximum mission mobility with the Rapidstrike CS-18 blaster!', 'Excelent', NULL);
+INSERT INTO product VALUES (38, 'Nerf CS-18 N-Strike Elite Rapidstrike (Colors may vary)', 'Stay mobile with this streamlined, lightweight Rapidstrike CS-18 blaster! The Nerf N-Strike Elite RapidStrike CS-18 Blaster gives you serious rapid-strike firepower. Spray a blanket of cover fire or go on the move with an all-out blitz! The blaster''s Acceleration Trigger powers up the motor for super-speed firing. The clip holds all 18 of the included Elite Darts and it''s see-through so you can do instant firepower checks! With a range of up to 75 feet, you''ve got long-range striking power and a lightning rate of fire. Get maximum mission mobility with the Rapidstrike CS-18 blaster!', 'Excelent', NULL);
+INSERT INTO product VALUES (39, 'Nerf Walkie Talkies', 'Use the two Nerf warlike talkies to communicate with your friends up to one thousand feet away. This warlike talkie set is great for trips to the park, playing in the woods, camping, or anywhere you want to keep in touch while playing. The extensive listening range makes it great for outdoor play and perfect for your next adventure. A Morse code button on the front lets you communicate when you can''t (or don''t want to) speak.', 'Excelent condition.', NULL);
 
 
 --
@@ -1938,13 +2085,28 @@ INSERT INTO product_category VALUES (24, 16);
 INSERT INTO product_category VALUES (25, 1);
 INSERT INTO product_category VALUES (26, 9);
 INSERT INTO product_category VALUES (27, 9);
+INSERT INTO product_category VALUES (28, 9);
+INSERT INTO product_category VALUES (29, 13);
+INSERT INTO product_category VALUES (30, 9);
+INSERT INTO product_category VALUES (31, 4);
+INSERT INTO product_category VALUES (32, 4);
+INSERT INTO product_category VALUES (33, 4);
+INSERT INTO product_category VALUES (34, 4);
+INSERT INTO product_category VALUES (35, 4);
+INSERT INTO product_category VALUES (36, 4);
+INSERT INTO product_category VALUES (37, 4);
+INSERT INTO product_category VALUES (38, 4);
+INSERT INTO product_category VALUES (39, 4);
+INSERT INTO product_category VALUES (40, 9);
+INSERT INTO product_category VALUES (41, 4);
+INSERT INTO product_category VALUES (42, 9);
 
 
 --
 -- Name: product_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('product_id_seq', 27, true);
+SELECT pg_catalog.setval('product_id_seq', 42, true);
 
 
 --
@@ -1959,13 +2121,22 @@ INSERT INTO question VALUES (6, '2017-05-29 17:50:32.362348', 'I really want thi
 INSERT INTO question VALUES (7, '2017-05-29 21:59:11.341483', 'Hello, could you lower the price?', 10, 26);
 INSERT INTO question VALUES (8, '2017-05-29 22:05:44.879282', 'The processor is quad core?', 10, 27);
 INSERT INTO question VALUES (9, '2017-05-29 22:08:54.531952', 'Goodbye gandalf :)', 9, 26);
+INSERT INTO question VALUES (10, '2017-06-01 15:09:08.857839', 'Can it run Overwatch?', 4, 16);
+INSERT INTO question VALUES (11, '2017-06-01 23:40:15.621785', 'What''s the editor?', 4, 29);
+INSERT INTO question VALUES (12, '2017-06-01 23:46:35.07755', 'How many dps?', 4, 30);
+INSERT INTO question VALUES (13, '2017-06-02 00:33:52.420472', 'How''s the range?', 4, 32);
+INSERT INTO question VALUES (14, '2017-06-02 01:52:41.38398', 'What''s the range?', 4, 39);
+INSERT INTO question VALUES (17, '2017-06-02 03:02:08.92033', 'Does it come in yellow?
+
+', 4, 39);
+INSERT INTO question VALUES (19, '2017-06-02 17:29:45.63239', 'What is top speed?', 4, 1);
 
 
 --
 -- Name: question_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('question_id_seq', 9, true);
+SELECT pg_catalog.setval('question_id_seq', 19, true);
 
 
 --
@@ -1991,13 +2162,15 @@ INSERT INTO review VALUES (2, 6, 'This is really a great product. I''m so happy 
 INSERT INTO review VALUES (3, 5, 'I liked.', '2017-05-29 22:43:31.200466', 11);
 INSERT INTO review VALUES (4, 8, 'Very good book.', '2017-05-29 22:44:00.475787', 3);
 INSERT INTO review VALUES (5, 6, 'I liked.', '2017-05-29 23:58:44.378256', 10);
+INSERT INTO review VALUES (6, 5, 'Amazing product!', '2017-06-02 13:56:00.303164', 20);
+INSERT INTO review VALUES (7, 10, 'Good product!!!', '2017-06-02 17:30:58.586703', 21);
 
 
 --
 -- Name: review_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('review_id_seq', 5, true);
+SELECT pg_catalog.setval('review_id_seq', 7, true);
 
 
 --
@@ -2005,23 +2178,25 @@ SELECT pg_catalog.setval('review_id_seq', 5, true);
 --
 
 INSERT INTO "user" VALUES (15, 'dcepa', 'digbenfiquista@hotmail.com', 'Diogo Cepa', 'I''m a facebook user', NULL, '$2y$12$0Xbrm2xYZufBDU/D3hPkVundtGS6YcgkkJ2UY1kkIZX5nig1L1dP6', NULL, '2017-05-29 23:53:23.708852', 'default.png', NULL, 0, NULL, NULL);
-INSERT INTO "user" VALUES (4, 'hant', 'up201406163@fe.up.pt', 'Hélder Antunes', 'Hello! I sell things I no longer need. Maybe you need it!', 'I just know that I AM.', '$2y$12$Yx9P.HKAZ6l/R/f55x8QQenEhv7ecblfXEN/uVwyaE0KxVFLSyejy', '921212122', '2017-05-22 15:24:39.421975', 'default.png', 6, 1603, 61, NULL);
 INSERT INTO "user" VALUES (10, 'gandalf', 'gandalf@hotmail.com', 'Gandalf the White', 'All we have to decide is what to do with the time that is given us. My advice is to buy the things that i sell.', '', '$2y$12$JkkekkZ6rAoz6q5UrTL/YOrm3T7rMoByygIMPwcCTxmYq8Szf/90a', '', '2017-05-29 11:11:51.673123', '10.jpg', NULL, 402, 53, NULL);
 INSERT INTO "user" VALUES (8, 'Heisenberg', 'heisenberg@hotmail.com', 'Walter White', 'No, you clearly don''t know who you''re talking to, so let me clue you in. I am not in danger. I am the danger! A guy opens his door and gets shot and you think that of me? No. I am the one who knocks!', '', '$2y$12$pN6x0Jg4..02TThfn7EblOy.DWPCICHQbSx0l4sDtSSHIJbW6gihW', '987654321', '2017-05-29 10:52:49.414417', '8.jpg', NULL, 489, 56, NULL);
 INSERT INTO "user" VALUES (2, 'jlopes', 'jlopes@fe.up.pt', 'João Lopes', 'Bio really short.', NULL, '$2y$12$gQCytOCmMLPQF93MYTk/ye/Z83gosOcO8sgcblBOnUOTiEpIgAkW.', NULL, '2017-05-22 09:48:06.239041', 'default.png', NULL, 0, NULL, NULL);
 INSERT INTO "user" VALUES (3, 'dcepa95', 'dcepa95@gmail.com', 'Diogo Cepa', 'Talk a little about me?', NULL, '$2y$12$ejcRc5zXM2xmog6DW0XMBOtfZ1ep6wEl4DfXmJ/TjPOjPkOKVvFmu', NULL, '2017-05-25 08:29:51.082072', 'default.png', NULL, 0, NULL, NULL);
-INSERT INTO "user" VALUES (9, 'Rick', 'ricksanchez@gmail.com', 'Rick Sanchez', 'Wubba-lubba-dub-dub!', 'I''m a grumpy old men who likes to sell stuff.', '$2y$12$BquGZeFoQObgyoYG9.evA.LpvRp22u6Pn1pSs5WqJTt1b2EOI1UcC', '', '2017-05-29 10:59:48.819301', '9.png', NULL, 219, 54, NULL);
-INSERT INTO "user" VALUES (7, 'thedonald', 'donaldtrump@gmail.com', 'Donald Trump', 'I am the most successful person ever to run for president. Nobody’s ever been more successful than me. I have the best words. I am the best builder. Nobody builds walls better than me.', '', '$2y$12$hkZuQEac5i1FokdlwkVsqufqIblcuMWSE8GH2bMSXeI5ThHTv9yNO', '912121222', '2017-05-26 20:45:07.817477', '7.jpg', NULL, 106, 54, NULL);
+INSERT INTO "user" VALUES (16, 'abreu', 'renatoabreu__@hotmail.com', 'Renato Abreu', 'Just checking some things.', '', '$2y$12$BRah08qKA.DnlZ3hXDzcv.OZpaxrBg84Em7w3PuBeVfA6HeoNAXUm', '', '2017-05-30 15:56:49.468689', '16.png', NULL, 0, NULL, '10209197635231626');
+INSERT INTO "user" VALUES (17, 'hant2', 'helder_antunes-@hotmail.com', 'Helder Antunes', 'i am', NULL, '$2y$12$tvmt2i6kqDo4op.OxoygCed/V.j8LoVOJI2cgbf1KJ3JBqPfY9QW6', NULL, '2017-06-02 15:31:53.443116', 'hant2.jpg', NULL, 0, NULL, '1831615153825624');
 INSERT INTO "user" VALUES (6, 'dakingindanorf', 'jonsnow@hotmail.com', 'Jon Snow', 'I''m the son of Lady Lyanna Stark and Rhaegar Targaryen, the Prince of Dragonstone. And i do know some things.', '', '$2y$12$vcwf0pkM5dIqwfoftNUOkuwsEKjj2sECAIO0Opd8ADkmDTztThUqy', '917592123', '2017-05-26 20:34:28.12354', '6.jpg', NULL, 0, 12, NULL);
-INSERT INTO "user" VALUES (11, 'harry_potter', 'hp17@gmail.com', 'James', 'Avedra Kadabra to my prices!', 'I''m a wizard who deals in the best stuff!', '$2y$12$1Eb4IqWXqPQbnpALLMXX3.7bBEcShPGZh//b655NvG23k2Mfdy7bC', '', '2017-05-29 13:04:18.044892', '11.jpg', NULL, 500, 51, NULL);
 INSERT INTO "user" VALUES (1, 'renatoabreu', 'renatoabreu1196@gmail.com', 'Renato Abreu', 'Hello. I sell a lot of stuff. Come and see. I have the best things and everything costs 25 Schmeckles.', NULL, '$2y$12$FDpZPDSCltFqIKMi8ATxjeHAgacr1VuX91vWfJiZ1JCX.4N9z7sAO', NULL, '2017-05-09 00:56:32.755805', 'default.png', 8, 327, NULL, NULL);
+INSERT INTO "user" VALUES (11, 'harry_potter', 'hp17@gmail.com', 'James', 'Avedra Kadabra to my prices!', 'I''m a wizard who deals in the best stuff!', '$2y$12$1Eb4IqWXqPQbnpALLMXX3.7bBEcShPGZh//b655NvG23k2Mfdy7bC', '', '2017-05-29 13:04:18.044892', '11.jpg', 5, 593, 51, NULL);
+INSERT INTO "user" VALUES (4, 'hant', 'up201406163@fe.up.pt', 'Helder Antunes', 'Hello! I sell things I no longer need. Maybe you need it!', 'I just know that I AM.', '$2y$12$Yx9P.HKAZ6l/R/f55x8QQenEhv7ecblfXEN/uVwyaE0KxVFLSyejy', '921212122', '2017-05-22 15:24:39.421975', '4.png', 6, 1866, 60, NULL);
+INSERT INTO "user" VALUES (7, 'thedonald', 'donaldtrump@gmail.com', 'Donald Trump', 'I am the most successful person ever to run for president. Nobody’s ever been more successful than me. I have the best words. I am the best builder. Nobody builds walls better than me.', '', '$2y$12$hkZuQEac5i1FokdlwkVsqufqIblcuMWSE8GH2bMSXeI5ThHTv9yNO', '912121222', '2017-05-26 20:45:07.817477', '7.jpg', 10, 323, 54, NULL);
+INSERT INTO "user" VALUES (9, 'Rick', 'ricksanchez@gmail.com', 'Rick Sanchez', 'Wubba-lubba-dub-dub!', 'I''m a grumpy old men who likes to sell stuff.', '$2y$12$BquGZeFoQObgyoYG9.evA.LpvRp22u6Pn1pSs5WqJTt1b2EOI1UcC', '', '2017-05-29 10:59:48.819301', '9.png', NULL, 875, 54, NULL);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: final; Owner: lbaw1662
 --
 
-SELECT pg_catalog.setval('user_id_seq', 15, true);
+SELECT pg_catalog.setval('user_id_seq', 17, true);
 
 
 --
@@ -2059,7 +2234,6 @@ INSERT INTO watchlist VALUES (14, 1, true, '2017-05-29 14:03:52.174944');
 INSERT INTO watchlist VALUES (15, 4, true, '2017-05-29 14:07:19.406098');
 INSERT INTO watchlist VALUES (16, 7, true, '2017-05-29 14:09:41.758057');
 INSERT INTO watchlist VALUES (17, 4, true, '2017-05-29 14:09:56.938925');
-INSERT INTO watchlist VALUES (16, 4, true, '2017-05-29 14:13:04.726586');
 INSERT INTO watchlist VALUES (18, 7, true, '2017-05-29 14:17:16.398221');
 INSERT INTO watchlist VALUES (19, 10, true, '2017-05-29 14:19:37.593389');
 INSERT INTO watchlist VALUES (20, 10, true, '2017-05-29 14:23:27.08597');
@@ -2069,13 +2243,22 @@ INSERT INTO watchlist VALUES (1, 9, true, '2017-05-29 14:39:26.721465');
 INSERT INTO watchlist VALUES (23, 11, true, '2017-05-29 15:48:45.51018');
 INSERT INTO watchlist VALUES (23, 1, false, '2017-05-29 16:38:53.108272');
 INSERT INTO watchlist VALUES (14, 9, true, '2017-05-29 16:45:34.317702');
-INSERT INTO watchlist VALUES (1, 4, true, '2017-05-29 17:54:05.843875');
 INSERT INTO watchlist VALUES (18, 10, true, '2017-05-29 19:11:00.331153');
 INSERT INTO watchlist VALUES (25, 4, true, '2017-05-29 21:34:01.978553');
 INSERT INTO watchlist VALUES (26, 4, true, '2017-05-29 21:56:52.837139');
 INSERT INTO watchlist VALUES (26, 10, true, '2017-05-29 21:58:19.953343');
 INSERT INTO watchlist VALUES (27, 4, true, '2017-05-29 22:04:35.91019');
 INSERT INTO watchlist VALUES (11, 7, false, '2017-05-29 23:02:12.688634');
+INSERT INTO watchlist VALUES (28, 16, true, '2017-05-30 23:49:06.489205');
+INSERT INTO watchlist VALUES (29, 11, true, '2017-06-01 23:38:48.326366');
+INSERT INTO watchlist VALUES (30, 11, true, '2017-06-01 23:42:44.361728');
+INSERT INTO watchlist VALUES (30, 4, true, '2017-06-02 00:00:11.05427');
+INSERT INTO watchlist VALUES (32, 11, true, '2017-06-02 00:33:03.61822');
+INSERT INTO watchlist VALUES (38, 4, true, '2017-06-02 01:06:00.769808');
+INSERT INTO watchlist VALUES (39, 11, true, '2017-06-02 01:51:58.406147');
+INSERT INTO watchlist VALUES (40, 4, true, '2017-06-02 15:56:31.403986');
+INSERT INTO watchlist VALUES (41, 4, true, '2017-06-02 16:25:32.537633');
+INSERT INTO watchlist VALUES (42, 4, true, '2017-06-02 17:27:02.381307');
 
 
 --

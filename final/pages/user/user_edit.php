@@ -33,4 +33,5 @@ $smarty->assign('user', $user);
 $smarty->assign('userCurrLocation', $userCurrLocation);
 $smarty->assign('countries', $countries);
 $smarty->assign('cities', $cities);
+$smarty->assign("title", "Seek Bid - Edit " . $user['name'] . " account");
 $smarty->display('user/user_edit.tpl');

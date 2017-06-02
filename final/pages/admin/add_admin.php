@@ -18,4 +18,5 @@ if(!validAdmin($username, $id)){
 
 $smarty->assign("module", "Admin");
 $smarty->assign("adminSection", "addAdmin");
+$smarty->assign("title", "SeekBid - Administration");
 $smarty->display('admin/admin_page.tpl');

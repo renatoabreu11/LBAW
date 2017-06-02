@@ -65,4 +65,5 @@ $smarty->assign('notifications', $notifications);
 $smarty->assign('characteristics', $characteristics);
 $smarty->assign("auction", $auction);
 $smarty->assign("product", $product);
+$smarty->assign("title", "Seek Bid - Edit " . $product['name']);
 $smarty->display('auction/auction_edit.tpl');

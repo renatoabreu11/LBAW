@@ -12,4 +12,5 @@ if($username && $userId && $token){
 }
 
 $smarty->assign("module", "Auth");
+$smarty->assign("title", "Seek Bid - User sign up");
 $smarty->display('authentication/signup.tpl');

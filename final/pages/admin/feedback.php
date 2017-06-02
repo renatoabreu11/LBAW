@@ -25,4 +25,5 @@ foreach($feedback as &$feed){
 $smarty->assign("module", "Admin");
 $smarty->assign("feedback", $feedback);
 $smarty->assign("adminSection", "feedback");
+$smarty->assign("title", "SeekBid - Administration");
 $smarty->display('admin/admin_page.tpl');

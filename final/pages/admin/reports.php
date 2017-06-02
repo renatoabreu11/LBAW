@@ -43,4 +43,5 @@ $smarty->assign("reportTypes", $reportTypes);
 $smarty->assign("reportType", $reportType);
 $smarty->assign("reports", $reports);
 $smarty->assign("adminSection", "reports");
+$smarty->assign("title", "SeekBid - Administration");
 $smarty->display('admin/admin_page.tpl');

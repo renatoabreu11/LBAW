@@ -42,4 +42,5 @@ $smarty->assign('currPage', $page);
 $smarty->assign('nrPages', $nr_pages);
 $smarty->assign('notifications', $notifications);
 $smarty->assign('pageNotifications', $page_notifications);
+$smarty->assign("title", "Seek Bid - " . $username . " notifications");
 $smarty->display('user/notifications.tpl');

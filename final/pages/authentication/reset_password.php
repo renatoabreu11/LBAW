@@ -28,4 +28,5 @@ if(!($requestId)) {
 
 $smarty->assign("module", "Auth");
 $smarty->assign('email', $email);
+$smarty->assign("title", "Seek Bid - Password reset");
 $smarty->display('authentication/reset_password.tpl');

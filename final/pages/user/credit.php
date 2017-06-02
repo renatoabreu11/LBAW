@@ -33,4 +33,5 @@ $smarty->assign('userId', $userId);
 $smarty->assign('currCredit', $currCredit);
 $smarty->assign('numBetsOnGame', $numBetsOnGame);
 $smarty->assign('valBetsOnGame', $valBetsOnGame);
+$smarty->assign("title", "Seek Bid - " . $username . " credit");
 $smarty->display('user/credit.tpl');
