@@ -8,11 +8,11 @@ Seek Bid is an online auction platform, where users can buy and sell all type of
 
 The users can create auctions by choosing their own product or by selecting one from the amazon catalog. After that, the system automatically manages the bidding's and determines the winning bid, sending a notification to the respective winner and to the auction owner. The website also provides complex search options where users, authenticated or not, can search for their desired products.
 
-## Product Promotion
+### Promotion
 
-[Seek Bid](https://www.youtube.com/watch?v=VZ_m_z_PECU&feature=youtu.be)
+[Seek Bid promotional video](https://www.youtube.com/watch?v=VZ_m_z_PECU&feature=youtu.be)
 
-[Seek Bid flyer](https://www.youtube.com/watch?v=VZ_m_z_PECU&feature=youtu.be)
+[Seek Bid flyer](https://github.com/renatoabreu11/LBAW/blob/master/docs/Brochure.pdf)
 
 ## Features
 * Authentication
