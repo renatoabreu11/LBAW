@@ -18,21 +18,21 @@ The users can create auctions by choosing their own product or by selecting one 
 * Authentication
 * Password recovery
 * Advanced auction search with filtering and sorting
-* User profile with edit option
-* Follow and unfollow system
+* User profile with edit functionality
 * User watchlist
+* User credit
+* Follow and unfollow system
 * Facebook API integration (sign in, sign up and share auction)
 * Notification system
 * Report options
 * Online web assistance (feedback and contact us)
-* User credit
 * Questions and Answers section in each auction
-* Admin administration (ban and notify users, remove auctions, add admins, export auctions information and add new categories)
+* Website administration (ban and notify users, remove auctions, add admins, export auctions information and add new categories)
 * Automatic auction system that manages the current state of an auction
 * User reviews and ratings
 * Amazon API integration
 * Auction bids
-* Auction creation with personalized information or by selecting a product from the amazon catalog.
+* Auction creation with personalized information or by selecting a product from the amazon catalog
 * Update of auction information and the respective images
 
 ## Development
@@ -49,15 +49,15 @@ The users can create auctions by choosing their own product or by selecting one 
 * [APAI-io](https://github.com/Exeu/apai-io)
 * Several javascript libraries
 
-### Languages 
+### Technologies 
 * PHP
 * HTML
 * CSS
 * JavaScript
+* PostgreSQL
 
 ## How to run
-
-//TODO
+[Instructions](https://github.com/renatoabreu11/LBAW/blob/master/development%20environment/)
 
 ## How to use
 [Instructions](https://github.com/renatoabreu11/LBAW/blob/master/docs/Seek%20Bid%20-%20How%20To%20Use.pdf)
