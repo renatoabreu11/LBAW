@@ -3,6 +3,8 @@ Repository to host Database and Web Applications Laboratory project.
 
 LBAW is a course given at FEUP in the third year of the Master in Informatics and Computing Engineering.
 
+Final grade: 20/20
+
 ## The Product
 Seek Bid is an online auction platform, where users can buy and sell all type of products through auctions held by our services.
 
